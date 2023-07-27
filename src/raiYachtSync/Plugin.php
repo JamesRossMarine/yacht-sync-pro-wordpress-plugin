@@ -6,6 +6,7 @@
 		public function __construct() {
 			
 			$this->AdminDashboard = new raiYachtSync_AdminDashboard_SettingsPanel();
+			$this->StylesAndScripts = new raiYachtSync_StylesAndScripts();
 
 			$this->PostTypes = new raiYachtSync_PostTypes();
 			$this->RestApi = new raiYachtSync_RestApi();
@@ -13,7 +14,6 @@
 			$this->Yachts_WpQueryAddon = new raiYachtSync_Yachts_WpQueryAddon();
 
 			$this->Yachts_DetailOverride = new raiYachtSync_Yachts_DetailsOverride();
-
 
 			// $this->ImportBoatsCom = new rossWorld_ImportBoatsCom();
 			// $this->ImportYachtBrokerOrg = new rossWorld_ImportYachtBrokerOrg();

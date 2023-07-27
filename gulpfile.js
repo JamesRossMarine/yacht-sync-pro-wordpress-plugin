@@ -17,7 +17,7 @@ map = require('map-stream');
 
 var sassPaths=[];
 
-var client_script_files=[
+var global_script_files=[
     
 ];
 
@@ -34,7 +34,7 @@ var exitOnJshintError = map(function (file, cb) {
 
 // CLIENT TASKS
 gulp.task('client-sass', function() {
-    return gulp.src('scss/aplugin-style.scss')
+    return gulp.src('scss/app-style.scss')
         .pipe(sourcemaps.init())
         .pipe(sass({
             includePaths: sassPaths,
@@ -46,7 +46,7 @@ gulp.task('client-sass', function() {
 });
 
 gulp.task('client-sass-no-maps', function() {
-    return gulp.src('scss/client-side.scss')
+    return gulp.src('scss/app-style.scss')
         //.pipe(sourcemaps.init())
         .pipe(sass({
             includePaths: sassPaths,
@@ -54,7 +54,7 @@ gulp.task('client-sass-no-maps', function() {
         })
         .on('error', sass.logError))
         //.pipe(sourcemaps.write())
-        .pipe(rename("client-side.noMaps.css"))
+        .pipe(rename("app-style.noMaps.css"))
         .pipe(gulp.dest('build/css'));
 });
 
@@ -68,9 +68,9 @@ gulp.task('hint', function() {
 });
 
 gulp.task('client-js', function() {
-    return gulp.src(client_script_files)
+    return gulp.src(global_script_files)
         .pipe(sourcemaps.init())
-        .pipe(concat('client-side.js'))
+        .pipe(concat('globalPlugin.js'))
         .pipe(babel({
              presets: ['@babel/env']
         }))
@@ -79,8 +79,8 @@ gulp.task('client-js', function() {
 });
 
 gulp.task('client-minify-js', function() {
-    return gulp.src(client_script_files)
-        .pipe(concat('client-side.noMaps.js'))
+    return gulp.src(global_script_files)
+        .pipe(concat('globalPlugin.noMaps.js'))
         .pipe(babel({
              presets: ['@babel/env']
         }))
@@ -95,7 +95,7 @@ gulp.task('client-minify-js', function() {
 gulp.task('yacht-details-client-js', function() {
     return gulp.src(yacht_details_script_files)
         .pipe(sourcemaps.init())
-        .pipe(concat('yacht-details-client-side.js'))
+        .pipe(concat('single-yacht.js'))
         .pipe(babel({
              presets: ['@babel/env']
         }))
@@ -105,7 +105,7 @@ gulp.task('yacht-details-client-js', function() {
 
 gulp.task('yacht-details-client-minify-js', function() {
     return gulp.src(yacht_details_script_files)
-        .pipe(concat('yacht-details-client-side.noMaps.js'))
+        .pipe(concat('single-yacht.noMaps.js'))
         .pipe(babel({
              presets: ['@babel/env']
         }))
