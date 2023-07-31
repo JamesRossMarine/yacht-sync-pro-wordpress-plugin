@@ -28,9 +28,7 @@ var rai_ys_api={};
 
                     var _questionMark=searchParams.toString();
 
-                    console.log(_questionMark);
-
-                    xhttp.open("GET", rai_ys_wp_rest_url+"raiys/"+ path + ((_questionMark != '')?'?'+searchParams.toString():''), true);
+                    xhttp.open("GET", rai_yacht_sync.wp_rest_url+"raiys/"+ path + ((_questionMark != '')?'?'+searchParams.toString():''), true);
 
                     xhttp.send();
 
@@ -38,7 +36,7 @@ var rai_ys_api={};
 
                 case 'POST':
 
-                    xhttp.open("POST", rai_ys_wp_rest_url+"raiys/"+ path, true);
+                    xhttp.open("POST", rai_yacht_sync.wp_rest_url+"raiys/"+ path, true);
 
                     xhttp.setRequestHeader('Content-Type', 'application/json');
 

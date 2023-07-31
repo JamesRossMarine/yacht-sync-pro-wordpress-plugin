@@ -16,13 +16,11 @@
 			wp_register_style('yacht-sync-styles', RAI_YS_PLUGIN_ASSETS.'build/css/app-style.css', false, null, false);
 			wp_register_script('yacht-sync-script', RAI_YS_PLUGIN_ASSETS	.'build/js/globalPlugin.js', ['jquery'], null, true);
 
-			wp_localize_script('yacht-sync-script', 'rayis_wp_rest_url', get_rest_url());
-
-			$js_options = [
-				
+			$js_vars = [
+				'wp_rest_url' => get_rest_url(),
 			];
 
-			wp_localize_script('yatco-client-side', '_yacht_sync_wp_option', $js_options); 
+			wp_localize_script('yatco-client-side', 'rai_yacht_sync', $js_vars); 
 
 			wp_enqueue_script('yacht-sync-styles');
 			wp_enqueue_style('yacht-sync-script');

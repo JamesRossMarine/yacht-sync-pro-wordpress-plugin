@@ -17,12 +17,12 @@
 			register_post_type('rai_yatch', [
 
            		'labels' => array(
-					'name' => 'Ross Yachts',
+					'name' => 'Synced Yachts',
 					'singular_name' => 'Yacht',
 				),
 				
 				'has_archive' => false,
-				'query_var' => 'rai_yacht_id',
+				//'query_var' => 'rai_yacht_id',
 
 				'public' => true,
 				'publicly_queryable' => true,
@@ -33,12 +33,12 @@
 			register_post_type('rai_soldyatch', [
 
            		'labels' => array(
-					'name' => 'Ross - Sold Yachts',
+					'name' => 'Sold Yachts',
 					'singular_name' => 'Sold Yacht',
 				),
 				
 				'has_archive' => false,
-				'query_var' => 'rai_yacht_id',
+				//'query_var' => 'rai_yacht_id',
 
 				'public' => true,
 				'publicly_queryable' => true,

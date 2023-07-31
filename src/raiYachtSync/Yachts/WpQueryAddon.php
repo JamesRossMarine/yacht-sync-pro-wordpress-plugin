@@ -18,6 +18,7 @@
 
 			$vars[] = 'ys_offset';
 			$vars[] = 'ys_keyword';
+			$vars[] = 'boatname';
 
 			$vars[] = 'condition';
 			$vars[] = 'hullMaterial';
@@ -34,6 +35,10 @@
 
 			$vars[] = 'pricelo';
 			$vars[] = 'pricehi';
+
+			$vars[] = 'ys_country';
+			$vars[] = 'ys_state';
+			$vars[] = 'ys_city';
 
 			$vars[] = 'sortBy';
 
@@ -141,6 +146,30 @@
 				}
 			}
 
+			if ($this->if_query_var_check($query->get('ys_country'))) {
+				$yacht_sync_meta_query[]=[
+					'key' => 'Country',
+					'compare' => "=",
+					'value' => $query->get('ys_country')
+				];
+			}
+
+			if ($this->if_query_var_check($query->get('ys_state'))) {
+				$yacht_sync_meta_query[]=[
+					'key' => 'State',
+					'compare' => "=",
+					'value' => $query->get('ys_state')
+				];
+			}	
+
+			if ($this->if_query_var_check($query->get('ys_city'))) {
+				$yacht_sync_meta_query[]=[
+					'key' => 'City',
+					'compare' => "=",
+					'value' => $query->get('ys_city')
+				];
+			}	
+
 			if ($query->get('condition') == 'Used') {
 				$yacht_sync_meta_query[]=[
 					'key' => 'SaleClassCode',
@@ -191,6 +220,14 @@
 					'key' => 'MakeString',
 					'compare' => "=",
 					'value' => $query->get('make')
+				];
+			}		
+
+			if ($this->if_query_var_check($query->get('boatname'))) {
+				$yacht_sync_meta_query[]=[
+					'key' => 'MakeString',
+					'compare' => "=",
+					'value' => $query->get('boatname')
 				];
 			}			
 
