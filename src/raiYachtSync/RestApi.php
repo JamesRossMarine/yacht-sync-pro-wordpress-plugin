@@ -1,5 +1,9 @@
 <?php
 
+	require RAI_YS_PLUGIN_DIR .'/lib-dompdf/autoload.inc.php';
+
+   	use Dompdf\Dompdf;
+
 	class raiYachtSync_RestApi {
 
 		public function __construct() {
@@ -43,6 +47,16 @@
 		                'required' => false,
 		                'default' => [],
 		            ),
+		        )
+		    ) );
+
+		    // PDF 
+		    register_rest_route( 'raiys', '/yacht-pdf', array(
+		        'callback' => [$this, 'yacht_pdf'],
+		        'methods'  => [WP_REST_Server::READABLE, WP_REST_Server::CREATABLE],
+		        'permission_callback' => '__return_true',
+		        'args' => array(
+		            
 		        )
 		    ) );
 
@@ -124,6 +138,43 @@
 	   		return $return; 
 
 	   }
+
+	   public function yacht_pdf(WP_REST_Request $request) {
+
+			if ($request->get_param('yacht_post_id') != '') {
+	
+				$yacht_post_id = $request->get_param('yacht_post_id');
+
+				$yacht_post = get_post( $yacht_post_id );
+
+				$meta = get_post_meta( $yacht_post_id );
+
+				foreach ($meta as $indexM => $valM) {
+					if (is_array($valM) && ! isset($valM[1])) {
+						$meta[$indexM] = $valM[0];
+					}
+				}
+
+				$meta2=array_map("maybe_unserialize", $meta);
+
+				$filename='yacht-details.pdf';
+
+		   		$dompdf = new Dompdf();
+
+				$dompdf->loadHtml('hello world');
+
+				$dompdf->setPaper('A4', 'landscape');
+
+				$dompdf->render();
+
+				$dompdf->stream($filename);
+		   
+				return ['success' => 'Generated PDF'];
+
+			}
+
+			return ['success' => 'No YACHT ID'];
+	   } 
 
 
 	}
