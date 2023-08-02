@@ -20,7 +20,7 @@
 				'wp_rest_url' => get_rest_url(),
 			];
 
-			wp_localize_script('yatco-client-side', 'rai_yacht_sync', $js_vars); 
+			wp_localize_script('yacht-sync-script', 'rai_yacht_sync', $js_vars); 
 
 			wp_enqueue_script('yacht-sync-styles');
 			wp_enqueue_style('yacht-sync-script');
