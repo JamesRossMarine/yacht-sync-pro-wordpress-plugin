@@ -159,11 +159,20 @@
 
 				$filename='yacht-details.pdf';
 
+				// ----------------------
+
 		   		$dompdf = new Dompdf();
 
-				$dompdf->loadHtml('hello world');
+		   		ob_start();
 
-				$dompdf->setPaper('A4', 'landscape');
+		   			include RAI_YS_PLUGIN_TEMPLATES_DIR.'/pdf.php';
+
+		   		$html = ob_get_clean();
+
+				$dompdf->loadHtml($html);
+
+				//$dompdf->setPaper('A4', 'landscape');
+				$dompdf->set_paper('A4', 'portrait');
 
 				$dompdf->render();
 

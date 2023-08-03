@@ -8,8 +8,8 @@
 
 		public function add_actions_and_filters() {
 
-			add_filter('query_vars', [$this, 'addQueryVars'], 30, 1);
-			add_action('pre_get_posts', [$this, 'preGet'], 30, 1);
+			//add_filter('query_vars', [$this, 'addQueryVars'], 30, 1);
+			//add_action('pre_get_posts', [$this, 'preGet'], 30, 1);
 		
 		}
 
