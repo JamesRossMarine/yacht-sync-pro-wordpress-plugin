@@ -217,6 +217,15 @@
         .w-100 {
             width: 100%;
         }
+        .w-75 {
+            width: 75%;
+        }
+        .w-50 {
+            width: 50%;
+        }
+        .w-25 {
+            width: 25%;
+        }
         .padding-row {
             padding-bottom: 10px;
         }
@@ -264,62 +273,50 @@
                     <img src="<?php echo $imageUrl ?>" width="100%;">
                 </div>
                 <div class="yacht-main-info">
-                    <table>
-                        
+                    <table class="w-100">
+                        <tr class="w-100">
+                            <td class="w-25">
+                                <div>
+                                    <img src="<?php echo get_template_directory_uri(); ?>/images/yacht-location.svg"
+                                        class="align-self-center" alt="yacht-location">
+                                </div>
+                                <div class="flex-grow-1 ms-0 ms-md-4">
+                                    <h5 class="mt-0">Location</h5>
+                                    <p><?php echo $boatLocation ?></p>
+                                </div>
+                            </td>
+                            <td class="w-25">
+                                <div>
+                                    <img src="<?php echo get_template_directory_uri(); ?>/images/yacht-builder.svg"
+                                        class="align-self-center" alt="yacht-location">
+                                </div>
+                                <div class="flex-grow-1 ms-0 ms-md-4">
+                                    <h5 class="mt-0">Builder</h5>
+                                    <p><?php echo $make ?></p>
+                                </div>
+                            </td>
+                            <td class="w-25">
+                                <div>
+                                    <img src="<?php echo get_template_directory_uri(); ?>/images/yacht-cabins.svg"
+                                        class="align-self-center" alt="yacht-location">
+                                </div>
+                                <div class="flex-grow-1 ms-0 ms-md-4">
+                                    <h5 class="mt-0">Cabins</h5>
+                                    <p><?php echo $cabinCount ?></p>
+                                </div>
+                            </td>
+                            <td class="w-25">
+                                <div>
+                                    <img src="<?php echo get_template_directory_uri(); ?>/images/yacht-length.svg"
+                                        class="align-self-center" alt="yacht-location">
+                                </div>
+                                <div class="flex-grow-1 ms-0 ms-md-4">
+                                    <h5 class="mt-0">Length</h5>
+                                    <p><?php echo $lengthMeters ?> m / <?php echo $length ?></p>
+                                </div>
+                            </td>
+                        </tr>
                     </table>
-                    <div class="brochure-container">
-                        <div class="row align-items-center">
-                            <div class="col-lg-3 col-md-6 col-6">
-                                <div class="ymi-item d-flex align-items-center">
-                                    <div class="flex-shrink-0 d-none d-sm-block">
-                                        <img src="<?php echo get_template_directory_uri(); ?>/images/yacht-location.svg"
-                                            class="align-self-center" alt="yacht-location">
-                                    </div>
-                                    <div class="flex-grow-1 ms-0 ms-md-4">
-                                        <h5 class="mt-0">Location</h5>
-                                        <p><?php echo $boatLocation ?></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 col-6">
-                                <div class="ymi-item d-flex align-items-center">
-                                    <div class="flex-shrink-0 d-none d-sm-block">
-                                        <img src="<?php echo get_template_directory_uri(); ?>/images/yacht-builder.svg"
-                                            class="align-self-center" alt="yacht-location">
-                                    </div>
-                                    <div class="flex-grow-1 ms-0 ms-md-4">
-                                        <h5 class="mt-0">Builder</h5>
-                                        <p><?php echo $make ?></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 col-6">
-                                <div class="ymi-item d-flex align-items-center">
-                                    <div class="flex-shrink-0 d-none d-sm-block">
-                                        <img src="<?php echo get_template_directory_uri(); ?>/images/yacht-cabins.svg"
-                                            class="align-self-center" alt="yacht-location">
-                                    </div>
-                                    <div class="flex-grow-1 ms-0 ms-md-4">
-                                        <h5 class="mt-0">Cabins</h5>
-                                        <p><?php echo $cabinCount ?></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 col-6">
-                                <div class="ymi-item ymi-last-item d-flex align-items-center">
-                                    <div class="flex-shrink-0 d-none d-sm-block">
-                                        <img src="<?php echo get_template_directory_uri(); ?>/images/yacht-length.svg"
-                                            class="align-self-center" alt="yacht-location">
-                                    </div>
-                                    <div class="flex-grow-1 ms-0 ms-md-4">
-                                        <h5 class="mt-0">Length</h5>
-                                        <p><?php echo $lengthMeters ?> m / <?php echo $length ?></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="yoi-specifications">
                     <div class="brochure-container">
                         <div class="row specs-col">
