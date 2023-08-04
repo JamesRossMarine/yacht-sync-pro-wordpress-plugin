@@ -173,253 +173,349 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <style>
+        .page-break {
+            page-break-after: always
+        }
+        .first-page-container {
+            color: #C00020;
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: 400;
+            font-size: 16px;
+            height: 100vh;
+        }
+        .second-page-container {
+            color: #C00020;
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: 400;
+            font-size: 16px;
+            height: 100vh;
+        }
+        .first-table {
+            width: 100%;
+        }
+        .first-page-table-td {
+            text-align: center;
+        }
+        .second-page-table-td {
+            width: 50%;
+        }
+        .second-page-table-td h4{
+            margin: 0;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .text-right {
+            text-align: right;
+        }
+        .text-left {
+            text-align: left;
+        }
+        .w-100 {
+            width: 100%;
+        }
+        .padding-row {
+            padding-bottom: 10px;
+        }
 
-
+    </style>
 </head>
-<body>
+    <body>
+        <div class="print-ctnr">
 
-
-
-<div class="print-ctnr" style="max-width: 1050px !important;">
-    <!--PAGE 1-->
-    <div class="main-page-wrap" style="">
-        <div class="splash-inner">
-            <img src="<?php echo get_template_directory_uri(); ?>/images/brochure/logo-dark.svg" alt="">
-            <h6><?php echo $vesselH1 ?></h6>
-
-        </div>
-    </div>
-    <!--PAGE 2 Main Image and Specs-->
-    <div class="main-page-wrap" style="">
-        <div class="brochure-container">
-            <div class="sec-title">
-                <div class="row">
-                    <div class="col-xl-8 col-lg-8 col-md-8 mb-3 print-title">
-                        <h1><?php echo $vesselH1 ?></h1>
-                        <img src="<?php echo get_template_directory_uri(); ?>/images/separator.svg" alt="">
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-4 text-start text-md-end ">
-                        <div class="yacht-price">
-                            <h5><?php echo is_numeric($price[0]) ? '$'.$price : $price ?></h5>
-                        </div>
-
-                    </div>
-                </div>
+            <!--PAGE 1-->
+            <div class="first-page-container page-break">
+                <table class="first-table">
+                    <tr>
+                        <td class="first-page-table-td">
+                            <img src="<?php echo get_template_directory_uri(); ?>/pdf_images/IYG_Logo_PDF.png" alt="alt-logo">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="first-page-table-td">
+                            <h3><?php echo $vesselH1 ?></h3>
+                        </td>
+                    </tr>
+                </table>
             </div>
-            <!--MAIN IMAGE-->
-            <div class="row main-img">
-                <div class="col-lg-12">
+
+            <!--PAGE 2 Main Image and Specs-->
+            <div class="second-page-container page-break">
+                <table class="w-100">
+                    <tr class="w-100">
+                        <td class="second-page-table-td text-left" style="padding-bottom: 10px">
+                            <h4><?php echo $vesselH1 ?></h4>
+                        </td>
+                        <td class="second-page-table-td text-right" style="vertical-align: top; padding-bottom: 10px; color: #252F38;">
+                            <h4><?php echo is_numeric($price[0]) ? '$'.$price : $price ?></h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="<?php echo get_template_directory_uri(); ?>/pdf_images/separator.png" alt="italian-flag">
+                        </td>
+                    </tr>
+                </table>
+                    <!--MAIN IMAGE-->
+                <div class="main-image">
                     <img src="<?php echo $imageUrl ?>" width="100%;">
-                    <!--                    <img src="-->
-                    <?php //echo get_template_directory_uri(); ?><!--/images/brochure/yacht-img.jpg" width="100%;"-->
-                    <!--                         alt="">-->
                 </div>
-            </div>
-        </div>
-        <div class="yacht-main-info">
-            <div class="brochure-container">
-                <div class="row align-items-center">
-                    <div class="col-lg-3 col-md-6 col-6">
-                        <div class="ymi-item d-flex align-items-center">
-                            <div class="flex-shrink-0 d-none d-sm-block">
-                                <img src="<?php echo get_template_directory_uri(); ?>/images/yacht-location.svg"
-                                     class="align-self-center" alt="yacht-location">
+                <div class="yacht-main-info">
+                    <table>
+                        
+                    </table>
+                    <div class="brochure-container">
+                        <div class="row align-items-center">
+                            <div class="col-lg-3 col-md-6 col-6">
+                                <div class="ymi-item d-flex align-items-center">
+                                    <div class="flex-shrink-0 d-none d-sm-block">
+                                        <img src="<?php echo get_template_directory_uri(); ?>/images/yacht-location.svg"
+                                            class="align-self-center" alt="yacht-location">
+                                    </div>
+                                    <div class="flex-grow-1 ms-0 ms-md-4">
+                                        <h5 class="mt-0">Location</h5>
+                                        <p><?php echo $boatLocation ?></p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="flex-grow-1 ms-0 ms-md-4">
-                                <h5 class="mt-0">Location</h5>
-                                <p><?php echo $boatLocation ?></p>
+                            <div class="col-lg-3 col-md-6 col-6">
+                                <div class="ymi-item d-flex align-items-center">
+                                    <div class="flex-shrink-0 d-none d-sm-block">
+                                        <img src="<?php echo get_template_directory_uri(); ?>/images/yacht-builder.svg"
+                                            class="align-self-center" alt="yacht-location">
+                                    </div>
+                                    <div class="flex-grow-1 ms-0 ms-md-4">
+                                        <h5 class="mt-0">Builder</h5>
+                                        <p><?php echo $make ?></p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-6">
-                        <div class="ymi-item d-flex align-items-center">
-                            <div class="flex-shrink-0 d-none d-sm-block">
-                                <img src="<?php echo get_template_directory_uri(); ?>/images/yacht-builder.svg"
-                                     class="align-self-center" alt="yacht-location">
+                            <div class="col-lg-3 col-md-6 col-6">
+                                <div class="ymi-item d-flex align-items-center">
+                                    <div class="flex-shrink-0 d-none d-sm-block">
+                                        <img src="<?php echo get_template_directory_uri(); ?>/images/yacht-cabins.svg"
+                                            class="align-self-center" alt="yacht-location">
+                                    </div>
+                                    <div class="flex-grow-1 ms-0 ms-md-4">
+                                        <h5 class="mt-0">Cabins</h5>
+                                        <p><?php echo $cabinCount ?></p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="flex-grow-1 ms-0 ms-md-4">
-                                <h5 class="mt-0">Builder</h5>
-                                <p><?php echo $make ?></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-6">
-                        <div class="ymi-item d-flex align-items-center">
-                            <div class="flex-shrink-0 d-none d-sm-block">
-                                <img src="<?php echo get_template_directory_uri(); ?>/images/yacht-cabins.svg"
-                                     class="align-self-center" alt="yacht-location">
-                            </div>
-                            <div class="flex-grow-1 ms-0 ms-md-4">
-                                <h5 class="mt-0">Cabins</h5>
-                                <p><?php echo $cabinCount ?></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-6">
-                        <div class="ymi-item ymi-last-item d-flex align-items-center">
-                            <div class="flex-shrink-0 d-none d-sm-block">
-                                <img src="<?php echo get_template_directory_uri(); ?>/images/yacht-length.svg"
-                                     class="align-self-center" alt="yacht-location">
-                            </div>
-                            <div class="flex-grow-1 ms-0 ms-md-4">
-                                <h5 class="mt-0">Length</h5>
-                                <p><?php echo $lengthMeters ?> m / <?php echo $length ?></p>
+                            <div class="col-lg-3 col-md-6 col-6">
+                                <div class="ymi-item ymi-last-item d-flex align-items-center">
+                                    <div class="flex-shrink-0 d-none d-sm-block">
+                                        <img src="<?php echo get_template_directory_uri(); ?>/images/yacht-length.svg"
+                                            class="align-self-center" alt="yacht-location">
+                                    </div>
+                                    <div class="flex-grow-1 ms-0 ms-md-4">
+                                        <h5 class="mt-0">Length</h5>
+                                        <p><?php echo $lengthMeters ?> m / <?php echo $length ?></p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="yoi-specifications">
-            <div class="brochure-container">
-                <div class="row specs-col">
-                    <div class="col1 specs">
-                        <div class="col-lg-12">
-                            <div class="yoi-title">
-                                <h5>Specifications</h5>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 specs-col1">
-                            <ul class="specification-list list-unstyled">
-                                <li><h6>Yacht Type</h6>
-                                    <p><?php echo $category ?></p></li>
-                                <li><h6>Brand</h6>
-                                    <p><?php echo $make ?></p></li>
-                                <li><h6>Year</h6>
-                                    <p><?php echo $year ?></p></li>
-                                <li><h6>Hull</h6>
-                                    <p><?php echo $construction ?></p></li>
-                                <li><h6>Days Listed</h6>
-                                    <p><?php
-                                        $to_date = time();
-                                        $itemReceivedDate = $vessel->IMTTimeStamp;
-                                        $itemDate = substr($itemReceivedDate, 0, 10);
-                                        //console_log($itemReceivedDate);
-                                        $from_date = strtotime($vessel->IMTTimeStamp);
+                <div class="yoi-specifications">
+                    <div class="brochure-container">
+                        <div class="row specs-col">
+                            <div class="col1 specs">
+                                <div class="col-lg-12">
+                                    <div class="yoi-title">
+                                        <h5>Specifications</h5>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 specs-col1">
+                                    <ul class="specification-list list-unstyled">
+                                        <li><h6>Yacht Type</h6>
+                                            <p><?php echo $category ?></p></li>
+                                        <li><h6>Brand</h6>
+                                            <p><?php echo $make ?></p></li>
+                                        <li><h6>Year</h6>
+                                            <p><?php echo $year ?></p></li>
+                                        <li><h6>Hull</h6>
+                                            <p><?php echo $construction ?></p></li>
+                                        <li><h6>Days Listed</h6>
+                                            <p><?php
+                                                $to_date = time();
+                                                $itemReceivedDate = $vessel->IMTTimeStamp;
+                                                $itemDate = substr($itemReceivedDate, 0, 10);
+                                                //console_log($itemReceivedDate);
+                                                $from_date = strtotime($vessel->IMTTimeStamp);
 
-                                        //console_log('>>>>>>>>>>', $from_date);
-                                        $day_diff = $to_date - $from_date;
-                                        echo floor($day_diff / (60 * 60 * 24)) . "\n";
-                                        ?> days</p></li>
-                                <li><h6>Price</h6>
-                                    <p><?php echo $price ?></p></li>
-                            </ul>
+                                                //console_log('>>>>>>>>>>', $from_date);
+                                                $day_diff = $to_date - $from_date;
+                                                echo floor($day_diff / (60 * 60 * 24)) . "\n";
+                                                ?> days</p></li>
+                                        <li><h6>Price</h6>
+                                            <p><?php echo $price ?></p></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col2 specs">
+                                <ul class="specification-list list-unstyled">
+                                    <li><h6>Length Overall</h6>
+                                        <p><?php echo $lengthOverallMeters ?> m / <?php echo $lengthOverall ?></p></li>
+                                    <li><h6>Beam</h6>
+                                        <p><?php echo $beam ?></p></li>
+                                    <li><h6>Max Draft</h6>
+                                        <p><?php echo $draft ?></p></li>
+                                    <li><h6>Max Speed</h6>
+                                        <p><?php echo $maxSpeed ?> kn</p></li>
+                                    <li><h6>Cruising Speed</h6>
+                                        <p><?php echo $cruisingSpeed ?> kn</p></li>
+                                    <li><h6>Engines</h6>
+                                        <p><?php echo $engineQty ?> x <?php echo $engineFuel1 ?></p></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="col-lg-6 col2 specs">
-                        <ul class="specification-list list-unstyled">
-                            <li><h6>Length Overall</h6>
-                                <p><?php echo $lengthOverallMeters ?> m / <?php echo $lengthOverall ?></p></li>
-                            <li><h6>Beam</h6>
-                                <p><?php echo $beam ?></p></li>
-                            <li><h6>Max Draft</h6>
-                                <p><?php echo $draft ?></p></li>
-                            <li><h6>Max Speed</h6>
-                                <p><?php echo $maxSpeed ?> kn</p></li>
-                            <li><h6>Cruising Speed</h6>
-                                <p><?php echo $cruisingSpeed ?> kn</p></li>
-                            <li><h6>Engines</h6>
-                                <p><?php echo $engineQty ?> x <?php echo $engineFuel1 ?></p></li>
-                        </ul>
-                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="brochure-footer">
-            <div class="brochure-container">
-                <div class="row footer-row">
-                    <div class="col-lg-2 footer-col1">
-                        <img src="<?php echo get_template_directory_uri(); ?>/images/brochure/logo-dark.svg"
-                             class="img-fluid" alt="">
-                    </div>
-                    <div class="col-lg-4 ms-auto footer-col2">
-                        <div class="row footer-row2">
-                            <div class="col-lg-6 footer-col2-ctnr1">
-                                <div  class="b-footer-details">
-                                    <h6> Boomer Jousma | Sales Executive</h6>
-                                    <p>(954) 600-4966</p>
-                                    <p>boomer@theiyg.com</p>
-                                    <a href="/home">www.italianyachtgroup.com</a>
+                <div class="brochure-footer">
+                    <div class="brochure-container">
+                        <div class="row footer-row">
+                            <div class="col-lg-2 footer-col1">
+                                <img src="<?php echo get_template_directory_uri(); ?>/images/brochure/logo-dark.svg"
+                                    class="img-fluid" alt="">
+                            </div>
+                            <div class="col-lg-4 ms-auto footer-col2">
+                                <div class="row footer-row2">
+                                    <div class="col-lg-6 footer-col2-ctnr1">
+                                        <div  class="b-footer-details">
+                                            <h6> Boomer Jousma | Sales Executive</h6>
+                                            <p>(954) 600-4966</p>
+                                            <p>boomer@theiyg.com</p>
+                                            <a href="/home">www.italianyachtgroup.com</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="main-page-wrap" style="">
-        <div class="brochure-container">
-                <div class="row gy-3">
-                    <div class="col-lg-12">
-                        <div class="brochure-details">
-                            <p><?php echo $generalDescription ?></p>
+            <div class="main-page-wrap" style="">
+                <div class="brochure-container">
+                        <div class="row gy-3">
+                            <div class="col-lg-12">
+                                <div class="brochure-details">
+                                    <p><?php echo $generalDescription ?></p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
                 </div>
-        </div>
-        <div class="brochure-footer">
-            <div class="brochure-container">
-                <div class="row footer-row">
-                    <div class="col-lg-2 footer-col1">
-                        <img src="<?php echo get_template_directory_uri(); ?>/images/brochure/logo-dark.svg"
-                             class="img-fluid" alt="">
-                    </div>
-                    <div class="col-lg-4 ms-auto footer-col2">
-                        <div class="row footer-row2">
-                            <div class="col-lg-6 footer-col2-ctnr1">
-                                <div  class="b-footer-details">
-                                    <h6> Boomer Jousma | Sales Executive</h6>
-                                    <p>(954) 600-4966</p>
-                                    <p>boomer@theiyg.com</p>
-                                    <a href="/home">www.italianyachtgroup.com</a>
+                <div class="brochure-footer">
+                    <div class="brochure-container">
+                        <div class="row footer-row">
+                            <div class="col-lg-2 footer-col1">
+                                <img src="<?php echo get_template_directory_uri(); ?>/images/brochure/logo-dark.svg"
+                                    class="img-fluid" alt="">
+                            </div>
+                            <div class="col-lg-4 ms-auto footer-col2">
+                                <div class="row footer-row2">
+                                    <div class="col-lg-6 footer-col2-ctnr1">
+                                        <div  class="b-footer-details">
+                                            <h6> Boomer Jousma | Sales Executive</h6>
+                                            <p>(954) 600-4966</p>
+                                            <p>boomer@theiyg.com</p>
+                                            <a href="/home">www.italianyachtgroup.com</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <!--PAGE 3 Description and Gallery-->
-        <!--IMAGES-->
-        <!--PRINT LISTING FOOTER-->
 
-    <!--PAGE 4 Gallery-->
-    <div class="main-page-wrap" style="">
-        <div class="brochure-container">
-            <div class="brochure-images">
-                <div class="row gy-3">
+            <!--PAGE 3 Description and Gallery-->
+                <!--IMAGES-->
+                <!--PRINT LISTING FOOTER-->
+
+            <!--PAGE 4 Gallery-->
+            <div class="main-page-wrap" style="">
+                <div class="brochure-container">
                     <div class="brochure-images">
-                        <div class="row gy-3 images-ctnr" style="display: flex; flex-wrap: wrap;">
-                            <?php if ($imageData != null) { ?>
-                                <?php foreach (array_slice($imageData, 0, 6) as $image) { ?>
+                        <div class="row gy-3">
+                            <div class="brochure-images">
+                                <div class="row gy-3 images-ctnr" style="display: flex; flex-wrap: wrap;">
+                                    <?php if ($imageData != null) { ?>
+                                        <?php foreach (array_slice($imageData, 0, 6) as $image) { ?>
+                                            <div class="col-lg-6">
+                                                <img src="<?php echo $image['Uri']; ?>" class="img-fluid" width="100%" alt="">
+                                            </div>
+                                        <?php } ?>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="brochure-footer">
+                    <div class="brochure-container">
+                        <div class="row footer-row">
+                            <div class="col-lg-2 footer-col1">
+                                <img src="<?php echo get_template_directory_uri(); ?>/images/brochure/logo-dark.svg"
+                                    class="img-fluid" alt="">
+                            </div>
+                            <div class="col-lg-4 ms-auto footer-col2">
+                                <div class="row footer-row2">
+                                    <div class=" footer-col2-ctnr1">
+                                        <div class="b-footer-details">
+                                            <h6> Boomer Jousma | Sales Executive</h6>
+                                            <p>(954) 600-4966</p>
+                                            <p>boomer@theiyg.com</p>
+                                            <a href="/home">www.italianyachtgroup.com</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-page-wrap">
+                    <div class="brochure-container">
+                        <div class="brochure-images">
+                            <div class="row gy-3">
+                                <div class="brochure-images">
+                                    <div class="row gy-3 images-ctnr" style="display: flex; flex-wrap: wrap;">
+                <?php if ($imageData != null) { ?>
+                                <?php foreach (array_slice($imageData, 7, 8) as $image) { ?>
                                     <div class="col-lg-6">
                                         <img src="<?php echo $image['Uri']; ?>" class="img-fluid" width="100%" alt="">
                                     </div>
                                 <?php } ?>
                             <?php } ?>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="brochure-footer">
-            <div class="brochure-container">
-                <div class="row footer-row">
-                    <div class="col-lg-2 footer-col1">
-                        <img src="<?php echo get_template_directory_uri(); ?>/images/brochure/logo-dark.svg"
-                             class="img-fluid" alt="">
-                    </div>
-                    <div class="col-lg-4 ms-auto footer-col2">
-                        <div class="row footer-row2">
-                            <div class=" footer-col2-ctnr1">
-                                <div class="b-footer-details">
-                                    <h6> Boomer Jousma | Sales Executive</h6>
-                                    <p>(954) 600-4966</p>
-                                    <p>boomer@theiyg.com</p>
-                                    <a href="/home">www.italianyachtgroup.com</a>
+
+
+                <div class="brochure-footer">
+                    <div class="brochure-container">
+                        <div class="row footer-row">
+                            <div class="col-lg-2 footer-col1">
+                                <img src="<?php echo get_template_directory_uri(); ?>/images/brochure/logo-dark.svg"
+                                    class="img-fluid" alt="">
+                            </div>
+                            <div class="col-lg-4 ms-auto footer-col2">
+                                <div class="row footer-row2">
+                                    <div class=" footer-col2-ctnr1">
+                                        <div class="b-footer-details">
+                                                <h6> Boomer Jousma | Sales Executive</h6>
+                                                <p>(954) 600-4966</p>
+                                                <p>boomer@theiyg.com</p>
+                                                <a href="/home">www.italianyachtgroup.com</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -427,57 +523,8 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="main-page-wrap" style="">
-            <div class="brochure-container">
-                <div class="brochure-images">
-                    <div class="row gy-3">
-                        <div class="brochure-images">
-                            <div class="row gy-3 images-ctnr" style="display: flex; flex-wrap: wrap;">
-        <?php if ($imageData != null) { ?>
-                        <?php foreach (array_slice($imageData, 7, 8) as $image) { ?>
-                            <div class="col-lg-6">
-                                <img src="<?php echo $image['Uri']; ?>" class="img-fluid" width="100%" alt="">
-                            </div>
-                        <?php } ?>
-                    <?php } ?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-        <div class="brochure-footer">
-            <div class="brochure-container">
-                <div class="row footer-row">
-                    <div class="col-lg-2 footer-col1">
-                        <img src="<?php echo get_template_directory_uri(); ?>/images/brochure/logo-dark.svg"
-                             class="img-fluid" alt="">
-                    </div>
-                    <div class="col-lg-4 ms-auto footer-col2">
-                        <div class="row footer-row2">
-                            <div class=" footer-col2-ctnr1">
-                                <div class="b-footer-details">
-                                        <h6> Boomer Jousma | Sales Executive</h6>
-                                        <p>(954) 600-4966</p>
-                                        <p>boomer@theiyg.com</p>
-                                        <a href="/home">www.italianyachtgroup.com</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-</body>
+    </body>
 </html>
-
-
->
 
 
 <!--END PRINT LISTING-->

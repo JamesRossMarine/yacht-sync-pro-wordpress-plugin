@@ -171,12 +171,15 @@
 
 				$dompdf->loadHtml($html);
 
+				// Set option to enable remote images
+				$dompdf->set_option('isRemoteEnabled', TRUE);
+
 				//$dompdf->setPaper('A4', 'landscape');
 				$dompdf->set_paper('A4', 'portrait');
 
 				$dompdf->render();
 
-				$dompdf->stream($filename);
+				$dompdf->stream($filename, array("Attachment" => false));
 		   
 				return ['success' => 'Generated PDF'];
 
