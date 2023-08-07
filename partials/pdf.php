@@ -233,7 +233,15 @@ $boatClass = $vessel->BoatClassCode[0];
             text-transform: uppercase;
             font-weight: 400;
             font-size: 16px;
-            height: 100vh;
+            /* height: 100vh; */
+        }
+
+        .first-table {
+            width: 100%;
+        }
+
+        .first-page-table-td {
+            text-align: center;
         }
 
         .second-page-container {
@@ -243,14 +251,6 @@ $boatClass = $vessel->BoatClassCode[0];
             font-weight: 400;
             font-size: 16px;
             height: 100vh;
-        }
-
-        .first-table {
-            width: 100%;
-        }
-
-        .first-page-table-td {
-            text-align: center;
         }
 
         .second-page-table-td {
@@ -314,14 +314,18 @@ $boatClass = $vessel->BoatClassCode[0];
         <div class="first-page-container page-break">
             <table class="first-table">
                 <tr>
-                    <td class="first-page-table-td">
-                        <img src="<?php echo get_template_directory_uri(); ?>/pdf_images/IYG_Logo_PDF.png" alt="alt-logo">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="first-page-table-td">
-                        <h3><?php echo $vesselH1 ?></h3>
-                    </td>
+                    <table style="width: 100%">
+                        <tr>
+                            <td class="first-page-table-td">
+                                <img src="<?php echo get_template_directory_uri(); ?>/pdf_images/IYG_Logo_PDF.png" alt="alt-logo" height="60px">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td valign="bottom" class="first-page-table-td">
+                                <h3 style="font-family: 'Montserrat', sans-serif; font-weight: 400;"><?php echo $vesselH1 ?></h3>
+                            </td>
+                        </tr>
+                    </table>
                 </tr>
             </table>
         </div>
@@ -331,10 +335,10 @@ $boatClass = $vessel->BoatClassCode[0];
             <table class="w-100">
                 <tr class="w-100">
                     <td class="second-page-table-td text-left" style="padding-bottom: 10px">
-                        <h4><?php echo $vesselH1 ?></h4>
+                        <h4 style="font-family: 'Montserrat', sans-serif; font-weight: 400;"><?php echo $vesselH1 ?></h4>
                     </td>
                     <td class="second-page-table-td text-right" style="vertical-align: top; padding-bottom: 10px; color: #252F38;">
-                        <h4><?php echo is_numeric($price[0]) ? '$' . $price : $price ?></h4>
+                        <h4 style="font-family: 'Montserrat', sans-serif; font-weight: 400;"><?php echo is_numeric($price[0]) ? '$' . $price : $price ?></h4>
                     </td>
                 </tr>
                 <tr>
@@ -356,18 +360,18 @@ $boatClass = $vessel->BoatClassCode[0];
                                     <img src="<?php echo get_template_directory_uri(); ?>/pdf_images/y-location.png" alt="yacht-location" height="50px" width="50px">
                                 </td>
                                 <td style="padding-left: 10px">
-                                    <h5 style="color: #252F38; font-size: 14px; text-transform: uppercase; margin: 0;">Location</h5>
-                                    <p style="color: #252F38; font-size: 12px;"><?php echo $boatLocation ?></p>
+                                    <h5 style="color: #252F38; font-size: 14px; text-transform: uppercase; margin: 0; font-family: 'Montserrat', sans-serif; font-weight: 400;">Location</h5>
+                                    <p style="color: #252F38; font-size: 12px; font-family: 'Montserrat', sans-serif; font-weight: 400;"><?php echo $boatLocation ?></p>
                                 </td>
 
-                                <td style="background-color: #C00020; height: 50px; width: 0.25px; bord"></td>
+                                <td style="background-color: #C00020; height: 50px; width: 0.25px;"></td>
 
                                 <td style="padding-left: 15px">
                                     <img src="<?php echo get_template_directory_uri(); ?>/pdf_images/y-builder.png" alt="yacht-builder" height="50px" width="45px">
                                 </td>
                                 <td style="padding-left: 10px">
-                                    <h5 style="color: #252F38; font-size: 14px; text-transform: uppercase; margin: 0;">Builder</h5>
-                                    <p style="color: #252F38; font-size: 12px;"><?php echo $make ?></p>
+                                    <h5 style="color: #252F38; font-size: 14px; text-transform: uppercase; margin: 0; font-family: 'Montserrat', sans-serif; font-weight: 400;">Builder</h5>
+                                    <p style="color: #252F38; font-size: 12px; font-family: 'Montserrat', sans-serif; font-weight: 400;"><?php echo $make ?></p>
                                 </td>
 
                                 <td style="background-color: #C00020; height:50px; width: 0.25px;"></td>
@@ -376,8 +380,8 @@ $boatClass = $vessel->BoatClassCode[0];
                                     <img src="<?php echo get_template_directory_uri(); ?>/pdf_images/y-cabins.png" alt="yacht-cabins" height="50px" width="50px">
                                 </td>
                                 <td style="padding-left: 10px">
-                                    <h5 style="color: #252F38; font-size: 14px; text-transform: uppercase; margin: 0;">Cabins</h5>
-                                    <p style="color: #252F38; font-size: 12px;"><?php echo $cabinCount ?></p>
+                                    <h5 style="color: #252F38; font-size: 14px; text-transform: uppercase; margin: 0; font-family: 'Montserrat', sans-serif; font-weight: 400;">Cabins</h5>
+                                    <p style="color: #252F38; font-size: 12px; font-family: 'Montserrat', sans-serif; font-weight: 400;"><?php echo $cabinCount ?></p>
                                 </td>
 
                                 <td style="background-color: #C00020; height: 50px; width: 0.25px;"></td>
@@ -386,8 +390,8 @@ $boatClass = $vessel->BoatClassCode[0];
                                     <img src="<?php echo get_template_directory_uri(); ?>/pdf_images/y-length.png" alt="yacht-length" height="50px" width="80px">
                                 </td>
                                 <td style="padding-left: 10px">
-                                    <h5 style="color: #252F38; font-size: 14px; text-transform: uppercase; margin: 0;">Length</h5>
-                                    <p style="color: #252F38; font-size: 12px;"><?php echo $lengthMeters ?> m / <?php echo $length ?></p>
+                                    <h5 style="color: #252F38; font-size: 14px; text-transform: uppercase; margin: 0; font-family: 'Montserrat', sans-serif; font-weight: 400;">Length</h5>
+                                    <p style="color: #252F38; font-size: 12px; font-family: 'Montserrat', sans-serif; font-weight: 400;"><?php echo $lengthMeters ?> m / <?php echo $length ?></p>
                                 </td>
                             </tr>
                         </table>
@@ -396,14 +400,14 @@ $boatClass = $vessel->BoatClassCode[0];
                 </table>
                 <table class="yoi-specifications w-100">
                     <tr class="yoi-title w-100">
-                        <h4>Specifications</h4>
+                        <h4c>Specifications</h4>
                     </tr>
                     <tr class="w-100">
                         <td class="w-50">
                             <table class="w-100">
-                                <tr class="supporting-info-row">
-                                    <td class="supporting-info-title">YACHT TYPE</td>
-                                    <td class="supporting-info-description"><?php echo $category ?></td>
+                                <tr class="supporting-info-row" style="width: 100%">
+                                    <td class="supporting-info-title" style="width: 50%">YACHT TYPE</td>
+                                    <td class="supporting-info-description" style="width: 50%; float: right;"><?php echo $category ?></td>
                                 </tr>
                                 <tr class="supporting-info-row">
                                     <td class="supporting-info-title">BRAND</td>
@@ -469,7 +473,7 @@ $boatClass = $vessel->BoatClassCode[0];
                         </td>
                     </tr>
                 </table>
-                <table class="brochure footer w-100" style="margin-top: 23%;">
+                <table class="brochure footer w-100" style="margin-top: 25%;">
                     <tr class="w-100">
                         <td class="w-50">
                             <img src="<?php echo get_template_directory_uri(); ?>/pdf_images/IYG_Logo_PDF.png" class="img-fluid" alt="italian-flag" height="54px" width="150px">
@@ -503,116 +507,70 @@ $boatClass = $vessel->BoatClassCode[0];
                 </table>
             </div>
 
-            <!--PAGE 3 Description and Gallery-->
-            <!--IMAGES-->
-            <!--PRINT LISTING FOOTER-->
+            <!--PAGE 3 Gallery-->
 
-            <!--PAGE 4 Gallery-->
-            <div class="main-page-wrap page-break">
-                <div class="brochure-container">
-                    <div class="brochure-images">
-                        <div class="row gy-3">
-                            <div class="brochure-images">
-                                <div class="row gy-3 images-ctnr" style="display: flex; flex-wrap: wrap;">
-                                    <?php if ($imageData != null) { ?>
-                                        <?php foreach (array_slice($imageData, 0, 6) as $image) { ?>
-                                            <div class="col-lg-6">
-                                                <img src="<?php echo $image['Uri']; ?>" class="img-fluid" width="100%" alt="">
-                                            </div>
-                                        <?php } ?>
-                                    <?php } ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <table class="brochure footer w-100" style="margin-top: 23%;">
-                    <tr class="w-100">
-                        <td class="w-50">
-                            <img src="<?php echo get_template_directory_uri(); ?>/pdf_images/IYG_Logo_PDF.png" class="img-fluid" alt="italian-flag" height="54px" width="150px">
-                        </td>
-                        <td class="w-50">
-                            <table class="w-100">
-                                <tr>
-                                    <td>
-                                        <h5 style="margin-bottom: 0;"> Boomer Jousma | Sales Executive</h5>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="footer-phone">
-                                        (954) 600-4966
-                                    </td>
-                                </tr>
+            <?php if ($imageData != null) { ?>
+                <table style="width: 100%">
+                    <!-- for(array_slice($imageData, 0, 6) as $image) { -->
+                    <?php 
+                        $row_counter=0;
+                        $image_counter=0;
 
-                                <tr>
-                                    <td class="footer-email">
-                                        boomer@theiyg.com
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="footer-link">
-                                        <a href="/home" style="color: #C00020; text-decoration: none; font-size: 14px; text-transform: lowercase;">www.italianyachtgroup.com</a>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
+                        foreach ($imageData as $image) {
+                            $row_counter++;
+                            // if($image_counter >= 60){
+                            //     break;
+                            // }
+                            if ($row_counter==1) {echo "<tr>";}
+                            if (!$image['Uri']){
+                                break;
+                            }
+                        ?>
+                            <td>
+                                <img  src="<?php echo $image['Uri']; ?>" width="100%" height="25%" alt="" />
+                            </td>
+                        <?php 
+                        
+                            if ($row_counter == 2) {echo '</tr>'; $row_counter=0;} 
+                            $image_counter++;
+                        } 
+                    ?>
                 </table>
-            </div>
+            <?php } ?>
+            <table class="brochure footer w-100" style="margin-top: 15%;">
+                <tr class="w-100">
+                    <td class="w-50">
+                        <img src="<?php echo get_template_directory_uri(); ?>/pdf_images/IYG_Logo_PDF.png" class="img-fluid" alt="italian-flag" height="54px" width="150px">
+                    </td>
+                    <td class="w-50">
+                        <table class="w-100">
+                            <tr>
+                                <td>
+                                    <h5 style="margin-bottom: 0;"> Boomer Jousma | Sales Executive</h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="footer-phone">
+                                    (954) 600-4966
+                                </td>
+                            </tr>
 
-            <div class="main-page-wrap page-break">
-                <div class="brochure-container">
-                    <div class="brochure-images">
-                        <div class="row gy-3">
-                            <div class="brochure-images">
-                                <div class="row gy-3 images-ctnr" style="display: flex; flex-wrap: wrap;">
-                                    <?php if ($imageData != null) { ?>
-                                        <?php foreach (array_slice($imageData, 7, 8) as $image) { ?>
-                                            <div class="col-lg-6">
-                                                <img src="<?php echo $image['Uri']; ?>" class="img-fluid" width="100%" alt="">
-                                            </div>
-                                        <?php } ?>
-                                    <?php } ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <table class="brochure footer w-100" style="margin-top: 23%;">
-                    <tr class="w-100">
-                        <td class="w-50">
-                            <img src="<?php echo get_template_directory_uri(); ?>/pdf_images/IYG_Logo_PDF.png" class="img-fluid" alt="italian-flag" height="54px" width="150px">
-                        </td>
-                        <td class="w-50">
-                            <table class="w-100">
-                                <tr>
-                                    <td>
-                                        <h5 style="margin-bottom: 0;"> Boomer Jousma | Sales Executive</h5>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="footer-phone">
-                                        (954) 600-4966
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td class="footer-email">
-                                        boomer@theiyg.com
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="footer-link">
-                                        <a href="/home" style="color: #C00020; text-decoration: none; font-size: 14px; text-transform: lowercase;">www.italianyachtgroup.com</a>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+                            <tr>
+                                <td class="footer-email">
+                                    boomer@theiyg.com
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="footer-link">
+                                    <a href="/home" style="color: #C00020; text-decoration: none; font-size: 14px; text-transform: lowercase;">www.italianyachtgroup.com</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </body>
 
 </html>
