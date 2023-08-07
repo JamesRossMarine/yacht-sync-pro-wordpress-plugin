@@ -268,6 +268,7 @@ $boatClass = $vessel->BoatClassCode[0];
         .main-image {
             margin-bottom: 20px;
         }
+
         .supporting-info-title {
             color: #252F38;
             font-size: 14px;
@@ -275,6 +276,7 @@ $boatClass = $vessel->BoatClassCode[0];
             width: 50%;
             float: left;
         }
+
         .supporting-info-description {
             color: #252F38;
             font-size: 12px;
@@ -282,9 +284,25 @@ $boatClass = $vessel->BoatClassCode[0];
             width: 50%;
             float: right;
         }
+
         .supporting-info-row {
             margin-bottom: 10px;
             border-bottom: 1px solid #252F38;
+        }
+
+        .footer-phone {
+            color: #252F38;
+            font-size: 12px;
+        }
+
+        .footer-email {
+            color: #252F38;
+            font-size: 12px;
+            text-transform: lowercase;
+        }
+
+        .footer-link {
+            color: #C00020
         }
     </style>
 </head>
@@ -329,7 +347,7 @@ $boatClass = $vessel->BoatClassCode[0];
             <div class="main-image">
                 <img src="<?php echo $imageUrl ?>" width="100%;">
             </div>
-            <div class="yacht-main-info">
+            <div class="yacht-main-info page-break">
                 <table class="general-info-section w-100">
                     <tr class="w-100">
                         <table>
@@ -403,16 +421,16 @@ $boatClass = $vessel->BoatClassCode[0];
                                     <td class="supporting-info-title">DAYS LISTED</td>
                                     <td class="supporting-info-description">
                                         <?php
-                                                $to_date = time();
-                                                $itemReceivedDate = $vessel->IMTTimeStamp;
-                                                $itemDate = substr($itemReceivedDate, 0, 10);
-                                                //console_log($itemReceivedDate);
-                                                $from_date = strtotime($vessel->IMTTimeStamp);
+                                        $to_date = time();
+                                        $itemReceivedDate = $vessel->IMTTimeStamp;
+                                        $itemDate = substr($itemReceivedDate, 0, 10);
+                                        //console_log($itemReceivedDate);
+                                        $from_date = strtotime($vessel->IMTTimeStamp);
 
-                                                //console_log('>>>>>>>>>>', $from_date);
-                                                $day_diff = $to_date - $from_date;
-                                                echo floor($day_diff / (60 * 60 * 24)) . "\n";
-                                                ?> days
+                                        //console_log('>>>>>>>>>>', $from_date);
+                                        $day_diff = $to_date - $from_date;
+                                        echo floor($day_diff / (60 * 60 * 24)) . "\n";
+                                        ?> days
                                     </td>
                                 </tr>
                                 <tr class="supporting-info-row">
@@ -451,59 +469,38 @@ $boatClass = $vessel->BoatClassCode[0];
                         </td>
                     </tr>
                 </table>
-                <div class="brochure-footer">
-                    <div class="brochure-container">
-                        <div class="row footer-row">
-                            <div class="col-lg-2 footer-col1">
-                                <img src="<?php echo get_template_directory_uri(); ?>/images/brochure/logo-dark.svg" class="img-fluid" alt="">
-                            </div>
-                            <div class="col-lg-4 ms-auto footer-col2">
-                                <div class="row footer-row2">
-                                    <div class="col-lg-6 footer-col2-ctnr1">
-                                        <div class="b-footer-details">
-                                            <h6> Boomer Jousma | Sales Executive</h6>
-                                            <p>(954) 600-4966</p>
-                                            <p>boomer@theiyg.com</p>
-                                            <a href="/home">www.italianyachtgroup.com</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="main-page-wrap" style="">
-                <div class="brochure-container">
-                    <div class="row gy-3">
-                        <div class="col-lg-12">
-                            <div class="brochure-details">
-                                <p><?php echo $generalDescription ?></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="brochure-footer">
-                    <div class="brochure-container">
-                        <div class="row footer-row">
-                            <div class="col-lg-2 footer-col1">
-                                <img src="<?php echo get_template_directory_uri(); ?>/images/brochure/logo-dark.svg" class="img-fluid" alt="">
-                            </div>
-                            <div class="col-lg-4 ms-auto footer-col2">
-                                <div class="row footer-row2">
-                                    <div class="col-lg-6 footer-col2-ctnr1">
-                                        <div class="b-footer-details">
-                                            <h6> Boomer Jousma | Sales Executive</h6>
-                                            <p>(954) 600-4966</p>
-                                            <p>boomer@theiyg.com</p>
-                                            <a href="/home">www.italianyachtgroup.com</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <table class="brochure footer w-100" style="margin-top: 23%;">
+                    <tr class="w-100">
+                        <td class="w-50">
+                            <img src="<?php echo get_template_directory_uri(); ?>/pdf_images/IYG_Logo_PDF.png" class="img-fluid" alt="italian-flag" height="54px" width="150px">
+                        </td>
+                        <td class="w-50">
+                            <table class="w-100">
+                                <tr>
+                                    <td>
+                                        <h5 style="margin-bottom: 0;"> Boomer Jousma | Sales Executive</h5>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="footer-phone">
+                                        (954) 600-4966
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="footer-email">
+                                        boomer@theiyg.com
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="footer-link">
+                                        <a href="/home" style="color: #C00020; text-decoration: none; font-size: 14px; text-transform: lowercase;">www.italianyachtgroup.com</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
             </div>
 
             <!--PAGE 3 Description and Gallery-->
@@ -511,7 +508,7 @@ $boatClass = $vessel->BoatClassCode[0];
             <!--PRINT LISTING FOOTER-->
 
             <!--PAGE 4 Gallery-->
-            <div class="main-page-wrap" style="">
+            <div class="main-page-wrap page-break">
                 <div class="brochure-container">
                     <div class="brochure-images">
                         <div class="row gy-3">
@@ -529,30 +526,41 @@ $boatClass = $vessel->BoatClassCode[0];
                         </div>
                     </div>
                 </div>
-                <div class="brochure-footer">
-                    <div class="brochure-container">
-                        <div class="row footer-row">
-                            <div class="col-lg-2 footer-col1">
-                                <img src="<?php echo get_template_directory_uri(); ?>/images/brochure/logo-dark.svg" class="img-fluid" alt="">
-                            </div>
-                            <div class="col-lg-4 ms-auto footer-col2">
-                                <div class="row footer-row2">
-                                    <div class=" footer-col2-ctnr1">
-                                        <div class="b-footer-details">
-                                            <h6> Boomer Jousma | Sales Executive</h6>
-                                            <p>(954) 600-4966</p>
-                                            <p>boomer@theiyg.com</p>
-                                            <a href="/home">www.italianyachtgroup.com</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <table class="brochure footer w-100" style="margin-top: 23%;">
+                    <tr class="w-100">
+                        <td class="w-50">
+                            <img src="<?php echo get_template_directory_uri(); ?>/pdf_images/IYG_Logo_PDF.png" class="img-fluid" alt="italian-flag" height="54px" width="150px">
+                        </td>
+                        <td class="w-50">
+                            <table class="w-100">
+                                <tr>
+                                    <td>
+                                        <h5 style="margin-bottom: 0;"> Boomer Jousma | Sales Executive</h5>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="footer-phone">
+                                        (954) 600-4966
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="footer-email">
+                                        boomer@theiyg.com
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="footer-link">
+                                        <a href="/home" style="color: #C00020; text-decoration: none; font-size: 14px; text-transform: lowercase;">www.italianyachtgroup.com</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
             </div>
 
-            <div class="main-page-wrap">
+            <div class="main-page-wrap page-break">
                 <div class="brochure-container">
                     <div class="brochure-images">
                         <div class="row gy-3">
@@ -572,27 +580,38 @@ $boatClass = $vessel->BoatClassCode[0];
                 </div>
 
 
-                <div class="brochure-footer">
-                    <div class="brochure-container">
-                        <div class="row footer-row">
-                            <div class="col-lg-2 footer-col1">
-                                <img src="<?php echo get_template_directory_uri(); ?>/images/brochure/logo-dark.svg" class="img-fluid" alt="">
-                            </div>
-                            <div class="col-lg-4 ms-auto footer-col2">
-                                <div class="row footer-row2">
-                                    <div class=" footer-col2-ctnr1">
-                                        <div class="b-footer-details">
-                                            <h6> Boomer Jousma | Sales Executive</h6>
-                                            <p>(954) 600-4966</p>
-                                            <p>boomer@theiyg.com</p>
-                                            <a href="/home">www.italianyachtgroup.com</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <table class="brochure footer w-100" style="margin-top: 23%;">
+                    <tr class="w-100">
+                        <td class="w-50">
+                            <img src="<?php echo get_template_directory_uri(); ?>/pdf_images/IYG_Logo_PDF.png" class="img-fluid" alt="italian-flag" height="54px" width="150px">
+                        </td>
+                        <td class="w-50">
+                            <table class="w-100">
+                                <tr>
+                                    <td>
+                                        <h5 style="margin-bottom: 0;"> Boomer Jousma | Sales Executive</h5>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="footer-phone">
+                                        (954) 600-4966
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="footer-email">
+                                        boomer@theiyg.com
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="footer-link">
+                                        <a href="/home" style="color: #C00020; text-decoration: none; font-size: 14px; text-transform: lowercase;">www.italianyachtgroup.com</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
             </div>
 </body>
 
