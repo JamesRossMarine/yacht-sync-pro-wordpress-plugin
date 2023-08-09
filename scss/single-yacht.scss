@@ -1,0 +1,200 @@
+#single-rai_yacht {
+    min-height: 100vh;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+
+    .yacht-main-container {
+        width: 70%;
+        height: 100vh;
+
+        .yacht-general-info {
+
+            .yacht-name-price-info {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .yacht-title {
+                    font-size: $h1-size;
+                    font-weight: $h1-weight;
+                    color: $main-text-color;
+                    line-height: 36px;
+                    margin: 0;
+                }
+                .yacht-price {
+                    font-size: $h2-size;
+                    font-weight: $h1-weight;
+                    color: $secondary-text-color;
+                    line-height: 28px;
+                    margin: 0;
+                }
+            }
+
+            .yacht-make-year-info {
+                display: flex;
+                align-items: center;
+
+                .yacht-make {
+                    font-size: 14px;
+                    color: $secondary-text-color;
+                    line-height: 20px;
+                    margin: 10px 15px 26px 0px;
+                }
+                .yacht-year {
+                    font-size: 14px;
+                    color: $secondary-text-color;
+                    line-height: 20px;
+                    margin: 10px 0px 26px 15px;
+                }
+                .vertical-separator {
+                    margin: 8px 0px 26px 0px;
+                }
+            }
+        }
+        .yacht-image-container {
+            .yacht-main-image-container {
+                height: 537px;
+                width: 100%;
+    
+                .yacht-image {
+                    height: 537px;
+                    width: 100%;
+                }
+            }
+            .yacht-gallery-container {
+                display: flex;
+                justify-content: space-between;
+                margin-top: 20px;
+                margin-bottom: 75px;
+
+                .yacht-gallery-image {
+                    width: 102px;
+                    height: 102px;
+                }
+            }
+        }
+        .yacht-main-info-container {
+            width: 100%;
+            background-color: #F1F5F9;
+
+            .yacht-main-info {
+                display: flex;
+                justify-content: space-between;
+                padding: 25px 69px 20px 51px;
+
+                .yacht-length {
+                
+                    .yacht-length-text {
+                        display: flex;
+                        align-items: center;
+    
+                        p {
+                            color: $main-text-color;
+                            font-size: 12px;
+                            font-family: Inter;
+                            font-weight: 500;
+                            margin: 0px 0px 0px 5px;
+                        }
+                    }
+    
+                    .yacht-length-value {
+    
+                        p {
+                            color: $main-text-color;
+                            font-size: 18px;
+                            font-weight: 500;
+                            margin: 14px 0px 0px 0px
+                        }
+    
+                    }
+                }
+    
+                .yacht-beam {
+                    
+                    .yacht-beam-text {
+                        display: flex;
+                        align-items: center;
+    
+                        p {
+                            color: $main-text-color;
+                            font-size: 12px;
+                            font-family: Inter;
+                            font-weight: 500;
+                            margin: 0px 0px 0px 5px;
+                        }
+                    }
+    
+                    .yacht-beam-value {
+    
+                        p {
+                            color: $main-text-color;
+                            font-size: 18px;
+                            font-weight: 500;
+                            margin: 14px 0px 0px 0px
+                        }
+    
+                    }
+                }
+    
+                .yacht-cabins {
+                    
+                    .yacht-cabins-text {
+                        display: flex;
+                        align-items: center;
+    
+                        p {
+                            color: $main-text-color;
+                            font-size: 12px;
+                            font-family: Inter;
+                            font-weight: 500;
+                            margin: 0px 0px 0px 5px;
+                        }
+                    }
+    
+                    .yacht-cabins-value {
+    
+                        p {
+                            color: $main-text-color;
+                            font-size: 18px;
+                            font-weight: 500;
+                            margin: 14px 0px 0px 0px
+                        }
+    
+                    }
+                }
+    
+                .yacht-guests {
+                    
+                    .yacht-guests-text {
+                        display: flex;
+                        align-items: center;
+    
+                        p {
+                            color: $main-text-color;
+                            font-size: 12px;
+                            font-family: Inter;
+                            font-weight: 500;
+                            margin: 0px 0px 0px 5px;
+                        }
+                    }
+    
+                    .yacht-guests-value {
+    
+                        p {
+                            color: $main-text-color;
+                            font-size: 18px;
+                            font-weight: 500;
+                            margin: 14px 0px 0px 0px
+                        }
+    
+                    }
+                }
+            }
+        }
+    }
+    .secondary-container {
+        width: 30%;
+        height: 100vh;
+    }
+}

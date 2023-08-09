@@ -6,7 +6,7 @@
 
 		public function add_actions_and_filters() {
 
-			//add_filter('single_template', [$this, 'use_single_template'], 10, 1);
+			add_filter('single_template', [$this, 'use_single_template'], 10, 1);
 
 		}
 

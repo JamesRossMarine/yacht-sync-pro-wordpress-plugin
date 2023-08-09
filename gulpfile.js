@@ -6,14 +6,15 @@ sourcemaps = require('gulp-sourcemaps'),
 minify = require('gulp-minify'),
 terser = require('gulp-terser'),
 rename = require("gulp-rename"),
-fs = require('fs'),
+//fs = require('fs'),
 path = require("path"),
-multiDest = require('gulp-multi-dest'),
+//multiDest = require('gulp-multi-dest'),
 rename = require("gulp-rename"),
-zip = require('gulp-zip'),
+//zip = require('gulp-zip'),
 babel = require('gulp-babel'),
 jshint = require('gulp-jshint'),
-map = require('map-stream');
+map = require('map-stream'),
+watch = require('gulp-watch');
 
 var sassPaths=[];
 
@@ -117,4 +118,9 @@ gulp.task('yacht-details-client-minify-js', function() {
         .pipe(gulp.dest('build/js'));
 });
 
-gulp.task('render-client', gulp.series('client-sass', 'client-sass-no-maps', 'client-js', 'client-minify-js', 'yacht-details-client-js', 'yacht-details-client-minify-js', 'hint'));
+gulp.task('render-client', gulp.series('client-sass', 'client-sass-no-maps'));
+
+
+gulp.task('default', gulp.series('render-client'));
+
+watch('scss/*.scss', gulp.series('render-client'));

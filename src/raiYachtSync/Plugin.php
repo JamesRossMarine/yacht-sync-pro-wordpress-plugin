@@ -11,7 +11,7 @@
 			$this->PostTypes = new raiYachtSync_PostTypes();
 			$this->RestApi = new raiYachtSync_RestApi();
 
-			$this->Yachts_WpQueryAddon = new raiYachtSync_Yachts_WpQueryAddon();
+			// $this->Yachts_WpQueryAddon = new raiYachtSync_Yachts_WpQueryAddon();
 
 			$this->Yachts_DetailOverride = new raiYachtSync_Yachts_DetailsOverride();
 
