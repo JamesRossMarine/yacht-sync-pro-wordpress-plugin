@@ -1,12 +1,8 @@
 #single-rai_yacht {
-    min-height: 100vh;
     display: flex;
-    margin-left: auto;
-    margin-right: auto;
 
     .yacht-main-container {
         width: 70%;
-        height: 100vh;
 
         .yacht-general-info {
 
@@ -188,6 +184,132 @@
                             margin: 14px 0px 0px 0px
                         }
     
+                    }
+                }
+            }
+        }
+        .yacht-download-brochure-container {
+            margin-top: 23px;
+
+            .yacht-download-button {
+                background-color: $main-text-color;
+                padding: 8px 16px;
+                color: #FFFFFF;
+                display: flex;
+                align-items: center;
+                box-shadow: none;
+                border: none;
+
+                &:hover {
+                    background-color: darkgray;
+                }
+
+                img {
+                    margin-right: 8px;
+                }
+            }
+        }
+        .yacht-general-description-container {
+            display: flex;
+            margin-bottom: 94px;
+
+            .yacht-description-label {
+                width: 33%;
+                color: $main-text-color;
+                font-size: 18px;
+                font-weight: 600;
+                line-height: 28px;
+            }
+            .yacht-description-value {
+                width: 67%;
+
+                p, a, ul, ol, li {
+                    text-align: left !important;
+                    color: $main-text-color !important;
+                    font-size: 14px !important;
+                    font-weight: 400 !important;
+                }
+                strong, b {
+                    font-size: 14px !important;
+                }
+            }
+        }
+        .yacht-specs-container {
+            display: flex;
+            margin-bottom: 74px;
+
+            .yacht-specs-label {
+                width: 33%;
+                color: $main-text-color;
+                font-size: 18px;
+                font-weight: 600;
+                line-height: 28px;
+            }
+
+            .yacht-specs-value {
+                width: 67%;
+                .yacht-specs-item {
+                    display: flex;
+                    width: 100%;
+                    justify-content: space-between;
+                    border-bottom: 1px solid $divider-color;
+
+                    .specification-name {
+                        color: $main-text-color;
+                        font-size: 16px;
+                        font-weight: 500;
+                        line-height: 24px;
+                    }
+
+                    .specification-value {
+                        color: $secondary-text-color;
+                        font-size: 16px;
+                        font-weight: 400;
+                        line-height: 24px;
+                    }
+                }
+            }
+        }
+        .yacht-full-details-container {
+            width: 100%;
+
+            .yacht-details-label {
+                color: $main-text-color;
+                font-size: 18px;
+                font-weight: 600;
+                line-height: 28px;
+                margin-bottom: 30px;
+            }
+            .yacht-details-value {
+                width: 100%;
+
+                .yacht-accordion-item {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    border-bottom: 1px solid $divider-color;
+
+                    .yacht-accordion-name {
+                        color: $main-text-color;
+                        font-size: 16px;
+                        font-weight: 500;
+                        line-height: 24px;
+                        // margin: 0;
+                    }
+                    .yacht-accordion-arrow {
+                        // margin: 0;
+                    }
+                }
+
+                .yacht-accordion-display {
+
+                    border-bottom: 1px solid $divider-color;
+
+                    .yacht-accordion-display-item {
+                        color: $main-text-color;
+                        font-size: 16px;
+                        font-weight: 400;
+                        line-height: 24px;
                     }
                 }
             }
