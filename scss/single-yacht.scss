@@ -318,5 +318,129 @@
     .secondary-container {
         width: 30%;
         height: 100vh;
+
+        .secondary-sub-container {
+            margin-top: 98px;
+            margin-left: 39px;
+
+            .broker-info-container {
+                display: flex;
+                margin-bottom: 40px;
+
+                .broker-profile-image {
+                    height: 120px;
+                    width: 120px;
+                    background-color: #D9D9D9;
+                }
+                .broker-info {
+                    margin-left: 19px;
+
+                    p {
+                        margin: 0px;
+                    }
+                    .broker-name {
+                        color: $main-text-color;
+                        font-size: 16px;
+                        font-weight: 500;
+                        line-height: 24px;
+                    }
+                    .broker-title {
+                        color: $secondary-text-color;
+                        font-size: 16px;
+                        font-weight: 500;
+                        line-height: 24px;
+                        margin-bottom: 19px;
+                    }
+                    .broker-email {
+                        color: $main-text-color;
+                        font-size: 16px;
+                        font-weight: 400;
+                        line-height: 24px;
+                    }
+                    .broker-phone {
+                        color: $main-text-color;
+                        font-size: 16px;
+                        font-weight: 400;
+                        line-height: 24px;
+                    }
+                }
+            }
+
+            .yacht-form-container {
+
+                .yacht-form-title {
+                    color: $main-text-color;
+                    font-size: 20px;
+                    font-weight: 600;
+                    line-height: 28px;
+                    letter-spacing: -0.1px;
+                    margin-bottom: 30px;
+                }
+
+                form {
+                    width: 100%;
+                    div {
+                        display: block;
+
+                        label {
+                            display: block;
+                            color: $main-text-color;
+                            font-size: 12px;
+                            font-weight: 400;
+                            line-height: 11px;
+                            margin-bottom: 10px;
+                        }
+                        input {
+                            font-size: 14px;
+                            font-weight: 400;
+                            line-height: 24px;
+                            border-radius: 0px;
+                            margin-bottom: 14px;
+                            padding: 8px 12px;
+                            width: 100%;
+                            &:focus {
+                                border-radius: 0px;
+                            }
+                        }
+                        select {
+                            font-size: 14px;
+                            font-weight: 400;
+                            line-height: 24px;
+                            border-radius: 0px;
+                            margin-bottom: 14px;
+                            padding: 8px 12px;
+                            width: 100%;
+                        }
+                        textarea {
+                            font-size: 14px;
+                            font-weight: 400;
+                            line-height: 24px;
+                            border-radius: 0px;
+                            margin-bottom: 14px;
+                            padding: 8px 12px;
+                            width: 100%;
+
+                            &:focus {
+                                border-radius: 0px;
+                            }
+                        }
+
+                    }
+
+                    .yacht-form-submit {
+                        background-color: $main-text-color;
+                        box-shadow: none;
+                        border: 0;
+                        width: 100%;
+                        padding: 8px 12px;
+                        margin: auto;
+                        color: #FFFFFF;
+                    }
+                }
+
+            }
+
+        }
+
     }
 }

@@ -225,7 +225,53 @@ get_header();
                 </div>
             </div>
             <div class="secondary-container">
-                
+                <div class="secondary-sub-container">
+                    <div class="broker-info-container">
+                        <div class="broker-profile-image"></div>
+                        <div class="broker-info">
+                            <p class="broker-name">First Last Name</p>
+                            <p class="broker-title">Broker</p>
+                            <p class="broker-email">broker@gmail.com</p>
+                            <p class="broker-phone">+1 (305) 652-8000</p>
+                        </div>
+                    </div>
+                    <div class="yacht-form-container">
+                        <p class="yacht-form-title">Inquire Now</p>
+                        <form action="/submit" method="post">
+                            <div>
+                                <label for="fname">First name</label>
+                                <input type="text" id="fname" name="fname" placeholder="First name" required />
+                            </div>
+                            <div>
+                                <label for="lname">Last name</label>
+                                <input type="text" id="lname" name="lname" placeholder="Last name" required />
+                            </div>
+                            <div>
+                                <label for="email">E-mail</label>
+                                <input type="email" id="email" name="email" placeholder="name@email.com" required />
+                            </div>
+                            <div>
+                                <label for="phone">Phone number</label>
+                                <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="+1 (777) 777-7777" required />
+                            </div>
+                            <div>
+                                <label for="inquirytype">Inquiry type</label>
+                                <select>
+                                    <option value="Buying a yacht" selected>Buying a yacht</option>
+                                    <option value="Selling a yacht">Selling a yacht</option>
+                                    <option value="Trading a yacht">Trading a yacht</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" rows="4" cols="50" placeholder="Type your message">
+
+                                </textarea>
+                            </div>
+                            <input class="yacht-form-submit" type="submit" value="Send"/>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
 
