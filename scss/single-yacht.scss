@@ -73,12 +73,9 @@
                 }
     
                 .yacht-image {
-                    height: 537px;
+                    height: 100%;
                     width: 100%;
-                    @media screen and (max-width: $breakpoint-small){
-                        height: 202px;
-                        object-fit: cover;
-                    }
+                    object-fit: cover;
                 }
             }
             .yacht-gallery-container {

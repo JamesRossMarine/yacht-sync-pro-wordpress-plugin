@@ -2,46 +2,49 @@
 get_header();
 ?>
 
-	<main id="primary" class="site-main">
-		<?php
-		while ( have_posts() ) :
-			the_post();
+<main id="primary" class="site-main">
+    <?php
+    while (have_posts()) :
+        the_post();
 
-            $meta = get_post_meta($post->ID);
+        $meta = get_post_meta($post->ID);
 
-            foreach ($meta as $indexM => $valM) {
-                if (is_array($valM) && ! isset($valM[1])) {
-                    $meta[$indexM] = $valM[0];
-                }
+        foreach ($meta as $indexM => $valM) {
+            if (is_array($valM) && !isset($valM[1])) {
+                $meta[$indexM] = $valM[0];
             }
+        }
 
-            $vessel = array_map("maybe_unserialize", $meta);
+        $vessel = array_map("maybe_unserialize", $meta);
 
-            $vessel = (object) $vessel; ?>
-             <!-- <?php var_dump($vessel) ?> -->
+        $vessel = (object) $vessel; ?>
+        <!-- <?php var_dump($vessel) ?> -->
 
         <div id="single-rai_yacht">
             <div class="yacht-main-container">
                 <div class="yacht-general-info">
                     <div class="yacht-name-price-info">
                         <h1 class="yacht-title">
-                            <?php echo($vessel->ModelYear . ' ' . $vessel->MakeString . ' ' . $vessel->BoatName) ?>
+                            <?php echo ($vessel->ModelYear . ' ' . $vessel->MakeString . ' ' . $vessel->BoatName) ?>
                         </h1>
                         <h2 class="yacht-price">
-                            <?php echo('$' . $vessel->Price) ?>
+                            <?php echo ('$' . $vessel->Price) ?>
                         </h2>
                     </div>
                     <div class="yacht-make-year-info">
-                        <h3 class="yacht-make"><?php echo($vessel->MakeString); ?></h3><p class="vertical-separator">|<p><h3 class="yacht-year"><?php echo($vessel->ModelYear) ?></h3>
+                        <h3 class="yacht-make"><?php echo ($vessel->MakeString); ?></h3>
+                        <p class="vertical-separator">|
+                        <p>
+                        <h3 class="yacht-year"><?php echo ($vessel->ModelYear) ?></h3>
                     </div>
                 </div>
                 <div class="yacht-image-container">
                     <div class="yacht-main-image-container">
-                        <img class="yacht-image" src="<?php echo($vessel->Images[0]->Uri); ?>" alt="yacht-image"/>
+                        <img class="yacht-image" src="<?php echo ($vessel->Images[0]->Uri); ?>" alt="yacht-image" />
                     </div>
                     <div class="yacht-gallery-container">
-                        <?php for ($x = 1; $x < 9; $x++){ ?>
-                            <img class="yacht-gallery-image" src="<?php echo($vessel->Images[$x]->Uri); ?>" alt="<?php echo($vessel->Images[$x]->Caption); ?>" />
+                        <?php for ($x = 1; $x < 9; $x++) { ?>
+                            <img class="yacht-gallery-image" src="<?php echo ($vessel->Images[$x]->Uri); ?>" alt="<?php echo ($vessel->Images[$x]->Caption); ?>" />
                         <?php } ?>
                     </div>
                 </div>
@@ -101,41 +104,41 @@ get_header();
                     </div>
                 </div>
                 <div class="yacht-mobile-form-container">
-                <p class="yacht-form-title">Inquire Now</p>
-                        <form action="/submit" method="post">
-                            <div>
-                                <label for="fname">First name</label>
-                                <input type="text" id="fname" name="fname" placeholder="First name" required />
-                            </div>
-                            <div>
-                                <label for="lname">Last name</label>
-                                <input type="text" id="lname" name="lname" placeholder="Last name" required />
-                            </div>
-                            <div>
-                                <label for="email">E-mail</label>
-                                <input type="email" id="email" name="email" placeholder="name@email.com" required />
-                            </div>
-                            <div>
-                                <label for="phone">Phone number</label>
-                                <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="+1 (777) 777-7777" required />
-                            </div>
-                            <div>
-                                <label for="inquirytype">Inquiry type</label>
-                                <select>
-                                    <option value="Buying a yacht" selected>Buying a yacht</option>
-                                    <option value="Selling a yacht">Selling a yacht</option>
-                                    <option value="Trading a yacht">Trading a yacht</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label for="message">Message</label>
-                                <textarea id="message" name="message" placeholder="Type your message"></textarea>
-                            </div>
-                            <div>
-                                <p class="form-disclaimer">Your privacy is important to us; to learn about how we protect it, read our <a href="#">privacy policy.</a></p>
-                            </div>
-                            <input class="yacht-form-submit" type="submit" value="Send"/>
-                        </form>
+                    <p class="yacht-form-title">Inquire Now</p>
+                    <form action="/submit" method="post">
+                        <div>
+                            <label for="fname">First name</label>
+                            <input type="text" id="fname" name="fname" placeholder="First name" required />
+                        </div>
+                        <div>
+                            <label for="lname">Last name</label>
+                            <input type="text" id="lname" name="lname" placeholder="Last name" required />
+                        </div>
+                        <div>
+                            <label for="email">E-mail</label>
+                            <input type="email" id="email" name="email" placeholder="name@email.com" required />
+                        </div>
+                        <div>
+                            <label for="phone">Phone number</label>
+                            <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="+1 (777) 777-7777" required />
+                        </div>
+                        <div>
+                            <label for="inquirytype">Inquiry type</label>
+                            <select>
+                                <option value="Buying a yacht" selected>Buying a yacht</option>
+                                <option value="Selling a yacht">Selling a yacht</option>
+                                <option value="Trading a yacht">Trading a yacht</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" placeholder="Type your message"></textarea>
+                        </div>
+                        <div>
+                            <p class="form-disclaimer">Your privacy is important to us; to learn about how we protect it, read our <a href="#">privacy policy.</a></p>
+                        </div>
+                        <input class="yacht-form-submit" type="submit" value="Send" />
+                    </form>
                 </div>
                 <div class="yacht-general-description-container">
                     <p class="yacht-description-label">
@@ -215,7 +218,7 @@ get_header();
                             <p class="yacht-accordion-display-item">Length Overall: <?php echo empty($vessel->LengthOverall) ? "N/A" : $vessel->LengthOverall . " / " . round((float)$vessel->LengthOverall * 0.3048, 2) . ' m'; ?></p>
                             <p class="yacht-accordion-display-item">Beam: <?php echo empty($vessel->BeamMeasure) ? "N/A" : $vessel->BeamMeasure . " / " . round((float)$vessel->BeamMeasure * 0.3048, 2) . ' m'; ?></p>
                         </div>
-                        <?php if (!empty($vessel->Engines[0])){ ?>
+                        <?php if (!empty($vessel->Engines[0])) { ?>
                             <div class="yacht-accordion-item">
                                 <p class="yacht-accordion-name">
                                     Engine 1
@@ -232,7 +235,8 @@ get_header();
                                 <p class="yacht-accordion-display-item">Type: <?php echo empty($vessel->Engines[0]->Type) ? "N/A" : $vessel->Engines[0]->Type; ?></p>
                                 <p class="yacht-accordion-display-item">Engine Hours: <?php echo empty($vessel->Engines[0]->Hours) ? "N/A" : $vessel->Engines[0]->Hours; ?></p>
                             </div>
-                        <?php } if (!empty($vessel->Engines[1])){ ?>
+                        <?php }
+                        if (!empty($vessel->Engines[1])) { ?>
                             <div class="yacht-accordion-item">
                                 <p class="yacht-accordion-name">
                                     Engine 2
@@ -249,7 +253,8 @@ get_header();
                                 <p class="yacht-accordion-display-item">Type: <?php echo empty($vessel->Engines[1]->Type) ? "N/A" : $vessel->Engines[1]->Type; ?></p>
                                 <p class="yacht-accordion-display-item">Engine Hours: <?php echo empty($vessel->Engines[1]->Hours) ? "N/A" : $vessel->Engines[1]->Hours; ?></p>
                             </div>
-                        <?php } if (!empty($vessel->Engines[2])) { ?>
+                        <?php }
+                        if (!empty($vessel->Engines[2])) { ?>
                             <div class="yacht-accordion-item">
                                 <p class="yacht-accordion-name">
                                     Engine 3
@@ -315,7 +320,7 @@ get_header();
                             <div>
                                 <p class="form-disclaimer">Your privacy is important to us; to learn about how we protect it, read our <a href="#">privacy policy.</a></p>
                             </div>
-                            <input class="yacht-form-submit" type="submit" value="Send"/>
+                            <input class="yacht-form-submit" type="submit" value="Send" />
                         </form>
                     </div>
                 </div>
@@ -323,23 +328,23 @@ get_header();
         </div>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-            const accordions = document.querySelectorAll('.yacht-accordion-item');
-            accordions.forEach(function(accordion, index) {
-                accordion.addEventListener('click', function() {
-                const arrowElement = document.querySelectorAll('.yacht-arrow')[index];
-                const displayElement = document.querySelectorAll('.yacht-accordion-display')[index];
-                arrowElement.style.transform = (displayElement.style.display === 'none' || displayElement.style.display === '') ? 'rotate(180deg)' : 'rotate(0deg)';
-                displayElement.style.display = (displayElement.style.display === 'none' || displayElement.style.display === '') ? 'block' : 'none';
+                const accordions = document.querySelectorAll('.yacht-accordion-item');
+                accordions.forEach(function(accordion, index) {
+                    accordion.addEventListener('click', function() {
+                        const arrowElement = document.querySelectorAll('.yacht-arrow')[index];
+                        const displayElement = document.querySelectorAll('.yacht-accordion-display')[index];
+                        arrowElement.style.transform = (displayElement.style.display === 'none' || displayElement.style.display === '') ? 'rotate(180deg)' : 'rotate(0deg)';
+                        displayElement.style.display = (displayElement.style.display === 'none' || displayElement.style.display === '') ? 'block' : 'none';
+                    });
                 });
-            });
             });
         </script>
 
-        <?php
-		    endwhile; // End of the loop.
-		?>
+    <?php
+    endwhile; // End of the loop.
+    ?>
 
-	</main><!-- #main -->
+</main><!-- #main -->
 
 <?php
 //get_sidebar();
