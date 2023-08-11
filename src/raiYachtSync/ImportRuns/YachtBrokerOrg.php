@@ -68,6 +68,7 @@
 		                'EngineQty' => 'NumberOfEngines',
 		                'PriceUSD' => 'Price',
 		                'Year' => 'ModelYear',
+		                'Model' => 'Model',
 		                'PriceHidden' => 'PriceHideInd',
 		                'Manufacturer' => 'MakeString',
 		                'Type' => 'BoatCategoryCode',
@@ -86,7 +87,7 @@
 		                'HullIdentificationNumber' => 'BoatHullID',
 		                'LOAFeet' => 'DisplayLengthFeet',
 		                'TaxStatus' => 'TaxStatusCode',
-		                'LOAMeters' => 'NormNominalLength',
+		                'LOAMeters' => 'NominalLength',
 		                'Description' => 'AdditionalDetailDescription'
 
 		           	];
@@ -96,6 +97,83 @@
 		           			$theBoat[ $newKey ] = $row[ $key ];
 		           		}
 		           	}
+
+		           	if (isset($row['gallery'])) {
+		                $images = [];
+		            
+		                foreach ($row['gallery'] as $key => $img) {
+		                    $images[] = [
+		                        'Priority' => $img['Sort'],
+		                        'Caption'  => $img['Title'],
+		                        'Uri'      => $img['HD']
+		                    ];
+		                }
+		            }
+
+		            $theBoat['Images'] = $images;
+
+		            $row['CruisingSpeedMeasure'] .= ' '.str_replace('Knots', 'kn', $row['SpeedUnit']);
+		            $theBoat['CruisingSpeedMeasure']=$row['CruisingSpeedMeasure'];
+
+
+		            $row['MaximumSpeedMeasure']  .= ' '.str_replace('Knots', 'kn', $row['SpeedUnit']);
+		            $theBoat['MaximumSpeedMeasure']=$row['MaximumSpeedMeasure'];
+
+		            if ($row['BeamMeasure']) {
+		                $row['BeamMeasure'] .= ' ft';
+		                $theBoat['BeamMeasure']=$row['BeamMeasure'];
+		            }
+
+		            if ($row['WaterTankCapacityMeasure']) {
+		                $row['WaterTankCapacityMeasure'] .= '|gallon';
+
+		                $theBoat['WaterTankCapacityMeasure']=$row['WaterTankCapacityMeasure'];
+		            }
+		            
+		            if ($row['FuelTankCapacityMeasure']) {
+		                $row['FuelTankCapacityMeasure'] .= '|gallon';
+
+		                $theBoat['FuelTankCapacityMeasure'] = $row['FuelTankCapacityMeasure'];
+		            }
+		            
+		            if ($row['DryWeightMeasure']) {
+		                $row['DryWeightMeasure'] .= ' lb';
+
+		                $theBoat['DryWeightMeasure'] = $row['DryWeightMeasure'];
+		            }
+
+		            if ($row['Category']) {
+		                $theBoat['BoatClassCode'] = [$row['Category']];
+		            }
+
+		            // if there is no additional description and TextBlocks has description then let's grab it from there.
+		            if ( ! $row['AdditionalDetailDescription'] && isset($row['Textblocks']) && is_array($row['Textblocks'])) {
+		                $row['AdditionalDetailDescription'] = '';
+		                foreach ($row['Textblocks'] as $block) {
+		                    $theBoat['AdditionalDetailDescription'] .= '<h3>'.$block['Title'].'</h3>';
+		                    $theBoat['AdditionalDetailDescription'] .= $block['Description'];
+		                }
+		            }
+
+		            if (isset($row['Engines']) && is_array($row['Engines'])) {
+		                $engines     = [];
+		                $enginePower = 0;
+		                foreach ($row['Engines'] as $engine) {
+		                    $enginePower += $engine['PowerHP'];
+		                    
+		                    $engines[]   = [
+		                        'Make'        => $engine['EngineMake'],
+		                        'Model'       => $engine['EngineModel'],
+		                        'Fuel'        => $engine['FuelType'],
+		                        'EnginePower' => $engine['PowerHP'],
+		                        'Type'        => $engine['EngineType'],
+		                        'Hours'       => $engine['Hours'],
+		                    ];
+		                }
+		                $theBoat['Engines']                  = $engines;
+		                $theBoat['TotalEnginePowerQuantity'] = number_format($enginePower, 2).' hp';
+		            }
+
 
 		           	if (! empty($theBoat['BoatHullID'])) {
 		                $find_post=get_posts([
