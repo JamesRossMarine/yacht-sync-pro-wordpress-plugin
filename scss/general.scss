@@ -3,4 +3,7 @@
     padding: 50px 40px 72px 50px;
     margin-left: auto;
     margin-right: auto;
+    @media screen and (max-width: $breakpoint-small){
+        padding: 29px 15px 60px 15px;
+    }
 }

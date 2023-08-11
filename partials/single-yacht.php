@@ -53,7 +53,7 @@ get_header();
                                 <p>Length</p>
                             </div>
                             <div class="yacht-length-value">
-                                <p><?php echo ($vessel->LengthOverall . '/' . (number_format((substr($vessel->LengthOverall, 0, -3) * 0.3048), 1) . ' m')); ?></p>
+                                <p><?php echo (empty($vessel->MakeString) ? 'N/A' : ($vessel->LengthOverall . '/' . (number_format((substr($vessel->LengthOverall, 0, -3) * 0.3048), 1) . ' m'))); ?></p>
                             </div>
                         </div>
                         <div class="yacht-beam">
@@ -62,7 +62,7 @@ get_header();
                                 <p>Beam</p>
                             </div>
                             <div class="yacht-beam-value">
-                                <p><?php echo ($vessel->BeamMeasure . '/' . (number_format((substr($vessel->BeamMeasure, 0, -3) * 0.3048), 1) . ' m')); ?></p>
+                                <p><?php echo (empty($vessel->BeamMeasure) ? 'N/A' : ($vessel->BeamMeasure . '/' . (number_format((substr($vessel->BeamMeasure, 0, -3) * 0.3048), 1) . ' m'))); ?></p>
                             </div>
                         </div>
                         <div class="yacht-cabins">
@@ -71,7 +71,7 @@ get_header();
                                 <p>Cabins</p>
                             </div>
                             <div class="yacht-cabins-value">
-                                <p><?php echo ($vessel->CabinsCountNumeric); ?></p>
+                                <p><?php echo (empty($vessel->CabinsCountNumeric) ? 'N/A' : $vessel->CabinsCountNumeric); ?></p>
                             </div>
                         </div>
                         <div class="yacht-guests">
@@ -90,6 +90,52 @@ get_header();
                         <img src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/download.png" alt="download-icon" />
                         Download Brochure
                     </button>
+                </div>
+                <div class="yacht-mobile-broker-container">
+                    <div class="broker-profile-image"></div>
+                    <div class="broker-info">
+                        <p class="broker-name">First Last Name</p>
+                        <p class="broker-title">Broker</p>
+                        <p class="broker-email">broker@gmail.com</p>
+                        <p class="broker-phone">+1 (305) 652-8000</p>
+                    </div>
+                </div>
+                <div class="yacht-mobile-form-container">
+                <p class="yacht-form-title">Inquire Now</p>
+                        <form action="/submit" method="post">
+                            <div>
+                                <label for="fname">First name</label>
+                                <input type="text" id="fname" name="fname" placeholder="First name" required />
+                            </div>
+                            <div>
+                                <label for="lname">Last name</label>
+                                <input type="text" id="lname" name="lname" placeholder="Last name" required />
+                            </div>
+                            <div>
+                                <label for="email">E-mail</label>
+                                <input type="email" id="email" name="email" placeholder="name@email.com" required />
+                            </div>
+                            <div>
+                                <label for="phone">Phone number</label>
+                                <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="+1 (777) 777-7777" required />
+                            </div>
+                            <div>
+                                <label for="inquirytype">Inquiry type</label>
+                                <select>
+                                    <option value="Buying a yacht" selected>Buying a yacht</option>
+                                    <option value="Selling a yacht">Selling a yacht</option>
+                                    <option value="Trading a yacht">Trading a yacht</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" placeholder="Type your message"></textarea>
+                            </div>
+                            <div>
+                                <p class="form-disclaimer">Your privacy is important to us; to learn about how we protect it, read our <a href="#">privacy policy.</a></p>
+                            </div>
+                            <input class="yacht-form-submit" type="submit" value="Send"/>
+                        </form>
                 </div>
                 <div class="yacht-general-description-container">
                     <p class="yacht-description-label">
@@ -144,7 +190,7 @@ get_header();
                                 General Info
                             </p>
                             <p class="yacht-accordion-arrow">
-                                <img src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/chevron-down.png" alt="down-arrow-icon" />
+                                <img class="yacht-arrow" src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/chevron-down.png" alt="down-arrow-icon" />
                             </p>
                         </div>
                         <div class="yacht-accordion-display">
@@ -161,7 +207,7 @@ get_header();
                                 Measurements
                             </p>
                             <p class="yacht-accordion-arrow">
-                                <img src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/chevron-down.png" alt="down-arrow-icon" />
+                                <img class="yacht-arrow" src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/chevron-down.png" alt="down-arrow-icon" />
                             </p>
                         </div>
                         <div class="yacht-accordion-display">
@@ -175,7 +221,7 @@ get_header();
                                     Engine 1
                                 </p>
                                 <p class="yacht-accordion-arrow">
-                                    <img src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/chevron-down.png" alt="down-arrow-icon" />
+                                    <img class="yacht-arrow" src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/chevron-down.png" alt="down-arrow-icon" />
                                 </p>
                             </div>
                             <div class="yacht-accordion-display">
@@ -192,7 +238,7 @@ get_header();
                                     Engine 2
                                 </p>
                                 <p class="yacht-accordion-arrow">
-                                    <img src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/chevron-down.png" alt="down-arrow-icon" />
+                                    <img class="yacht-arrow" src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/chevron-down.png" alt="down-arrow-icon" />
                                 </p>
                             </div>
                             <div class="yacht-accordion-display">
@@ -209,7 +255,7 @@ get_header();
                                     Engine 3
                                 </p>
                                 <p class="yacht-accordion-arrow">
-                                    <img src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/chevron-down.png" alt="down-arrow-icon" />
+                                    <img class="yacht-arrow" src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/chevron-down.png" alt="down-arrow-icon" />
                                 </p>
                             </div>
                             <div class="yacht-accordion-display">
@@ -264,9 +310,10 @@ get_header();
                             </div>
                             <div>
                                 <label for="message">Message</label>
-                                <textarea id="message" name="message" rows="4" cols="50" placeholder="Type your message">
-
-                                </textarea>
+                                <textarea id="message" name="message" placeholder="Type your message"></textarea>
+                            </div>
+                            <div>
+                                <p class="form-disclaimer">Your privacy is important to us; to learn about how we protect it, read our <a href="#">privacy policy.</a></p>
                             </div>
                             <input class="yacht-form-submit" type="submit" value="Send"/>
                         </form>
@@ -274,6 +321,19 @@ get_header();
                 </div>
             </div>
         </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+            const accordions = document.querySelectorAll('.yacht-accordion-item');
+            accordions.forEach(function(accordion, index) {
+                accordion.addEventListener('click', function() {
+                const arrowElement = document.querySelectorAll('.yacht-arrow')[index];
+                const displayElement = document.querySelectorAll('.yacht-accordion-display')[index];
+                arrowElement.style.transform = (displayElement.style.display === 'none' || displayElement.style.display === '') ? 'rotate(180deg)' : 'rotate(0deg)';
+                displayElement.style.display = (displayElement.style.display === 'none' || displayElement.style.display === '') ? 'block' : 'none';
+                });
+            });
+            });
+        </script>
 
         <?php
 		    endwhile; // End of the loop.
