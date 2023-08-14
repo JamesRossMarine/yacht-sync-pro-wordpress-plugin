@@ -43,7 +43,7 @@
 
 				foreach ($json['V-Data'] as $row) {
 		            $yachtSynced ++;
-		           		
+		           	
 		           	$theBoat=[
 		           		'BoatLocation' => [
 		           			'BoatCityName' => $row['City'],
@@ -67,7 +67,9 @@
 		                'Summary' => 'GeneralBoatDescription',
 		                'EngineQty' => 'NumberOfEngines',
 		                'PriceUSD' => 'Price',
+		                'PriceUSD' => 'NormPrice',
 		                'Year' => 'ModelYear',
+		                'Model' => 'Model',
 		                'PriceHidden' => 'PriceHideInd',
 		                'Manufacturer' => 'MakeString',
 		                'Type' => 'BoatCategoryCode',
@@ -86,7 +88,7 @@
 		                'HullIdentificationNumber' => 'BoatHullID',
 		                'LOAFeet' => 'DisplayLengthFeet',
 		                'TaxStatus' => 'TaxStatusCode',
-		                'LOAMeters' => 'NormNominalLength',
+		                'LOAMeters' => 'NominalLength',
 		                'Description' => 'AdditionalDetailDescription'
 
 		           	];
@@ -95,7 +97,96 @@
 		           		if (isset($row[ $key ])) {
 		           			$theBoat[ $newKey ] = $row[ $key ];
 		           		}
+		           		else {
+		           			$theBoat[$newKey] = '';
+		           		}
+
 		           	}
+
+		           	if (isset($row['gallery'])) {
+		                $images = [];
+		            
+		                foreach ($row['gallery'] as $key => $img) {
+		                    $images[] = [
+		                        'Priority' => $img['Sort'],
+		                        'Caption'  => $img['Title'],
+		                        'Uri'      => $img['HD']
+		                    ];
+		                }
+		            }
+
+		            $theBoat['Images'] = $images;
+
+		            if (isset($row['CruisingSpeedMeasure'])) {
+			            $row['CruisingSpeedMeasure'] .= ' '.str_replace('Knots', 'kn', $row['SpeedUnit']);
+			            $theBoat['CruisingSpeedMeasure']=$row['CruisingSpeedMeasure'];		            	
+		            }
+
+		            if (isset($row['MaximumSpeedMeasure'])) {
+			            $row['MaximumSpeedMeasure']  .= ' '.str_replace('Knots', 'kn', $row['SpeedUnit']);
+			            $theBoat['MaximumSpeedMeasure']=$row['MaximumSpeedMeasure'];
+		            }
+
+
+		            if (isset($row['BeamMeasure'])) {
+		                $row['BeamMeasure'] .= ' ft';
+		                $theBoat['BeamMeasure']=$row['BeamMeasure'];
+		            }
+
+		            if (isset($row['WaterTankCapacityMeasure'])) {
+		                $row['WaterTankCapacityMeasure'] .= '|gallon';
+
+		                $theBoat['WaterTankCapacityMeasure']=$row['WaterTankCapacityMeasure'];
+		            }
+		            
+		            if (isset($row['FuelTankCapacityMeasure'])) {
+		                $row['FuelTankCapacityMeasure'] .= '|gallon';
+
+		                $theBoat['FuelTankCapacityMeasure'] = $row['FuelTankCapacityMeasure'];
+		            }
+		            
+		            if (isset($row['DryWeightMeasure'])) {
+		                $row['DryWeightMeasure'] .= ' lb';
+
+		                $theBoat['DryWeightMeasure'] = $row['DryWeightMeasure'];
+		            }
+
+		            if (isset($row['Category'])) {
+		                $theBoat['BoatClassCode'] = [$row['Category']];
+		            }
+
+		            // if there is no additional description and TextBlocks has description then let's grab it from there.
+		            if (isset($row['AdditionalDetailDescription']) && ! empty($row['AdditionalDetailDescription']) 
+		            	&& 
+		            	isset($row['Textblocks']) && is_array($row['Textblocks'])
+		            ) {
+		                $theBoat['AdditionalDetailDescription'] = '';
+
+		                foreach ($row['Textblocks'] as $block) {
+		                    $theBoat['AdditionalDetailDescription'] .= '<h3>'.$block['Title'].'</h3>';
+		                    $theBoat['AdditionalDetailDescription'] .= $block['Description'];
+		                }
+		            }
+
+		            if (isset($row['Engines']) && is_array($row['Engines'])) {
+		                $engines     = [];
+		                $enginePower = 0;
+		                foreach ($row['Engines'] as $engine) {
+		                    $enginePower += $engine['PowerHP'];
+		                    
+		                    $engines[]   = [
+		                        'Make'        => $engine['EngineMake'],
+		                        'Model'       => $engine['EngineModel'],
+		                        'Fuel'        => $engine['FuelType'],
+		                        'EnginePower' => $engine['PowerHP'],
+		                        'Type'        => $engine['EngineType'],
+		                        'Hours'       => $engine['Hours'],
+		                    ];
+		                }
+		                $theBoat['Engines']                  = $engines;
+		                $theBoat['TotalEnginePowerQuantity'] = number_format($enginePower, 2).' hp';
+		            }
+
 
 		           	if (! empty($theBoat['BoatHullID'])) {
 		                $find_post=get_posts([
