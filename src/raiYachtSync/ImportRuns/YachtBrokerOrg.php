@@ -62,7 +62,8 @@
 
 		           	$MapToBoatOrg=[
 		           		'ID' => 'DocumentID',
-		                'Condition' => 'SalesStatus',
+		                'Status' => 'SalesStatus',
+		                'Condition' => 'SaleClassCode',
 		                'ListingOwnerBrokerageName' => 'CompanyName',
 		                'Summary' => 'GeneralBoatDescription',
 		                'EngineQty' => 'NumberOfEngines',
