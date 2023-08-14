@@ -47,19 +47,18 @@
            ]);
 
            register_post_type('rai_broker', [
-
            		'labels' => array(
 					'name' => 'Ross Brokers',
 					'singular_name' => 'Broker',
 				),
 				
 				'has_archive' => false,
-				'query_var' => 'rai_broker_id',
+				//'query_var' => 'rai_broker_id',
 
-				'public' => false,
+				'public' => true,
 				'publicly_queryable' => true,
 				'can_export' => false,
-
+				'supports' => array('title', 'editor', 'thumbnail')
            ]);
 
 		}

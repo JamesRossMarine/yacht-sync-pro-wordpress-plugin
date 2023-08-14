@@ -1,0 +1,694 @@
+#single-rai_yacht {
+    display: flex;
+
+    .yacht-main-container {
+        width: 70%;
+        
+        @media screen and (max-width: $breakpoint-large){
+            width: 100%;
+        }
+
+        .yacht-general-info {
+
+            .yacht-name-price-info {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                @media screen and (max-width: $breakpoint-med){
+                    display: block;
+                }
+
+                .yacht-title {
+                    font-size: $h1-size;
+                    font-weight: $h1-weight;
+                    color: $main-text-color;
+                    line-height: 36px;
+                    margin: 0;
+                    @media screen and (max-width: $breakpoint-med){
+                        font-size: 20px;
+                        font-weight: 600;
+                        line-height: 28px;
+                        letter-spacing: -0.1px;
+                    }
+                }
+                .yacht-price {
+                    font-size: $h2-size;
+                    font-weight: $h1-weight;
+                    color: $secondary-text-color;
+                    line-height: 28px;
+                    margin: 0;
+                }
+            }
+
+            .yacht-make-year-info {
+                display: flex;
+                align-items: center;
+
+                .yacht-make {
+                    font-size: 14px;
+                    color: $secondary-text-color;
+                    line-height: 20px;
+                    margin: 10px 15px 26px 0px;
+                }
+                .yacht-year {
+                    font-size: 14px;
+                    color: $secondary-text-color;
+                    line-height: 20px;
+                    margin: 10px 0px 26px 15px;
+                }
+                .vertical-separator {
+                    margin: 8px 0px 26px 0px;
+                }
+            }
+        }
+        .yacht-image-container {
+            .yacht-main-image-container {
+                height: 537px;
+                width: 100%;
+                margin-bottom: 75px;
+
+                @media screen and (max-width: $breakpoint-large){
+                    height: 475px;
+                    margin-bottom: 29px;
+                }
+
+                @media screen and (max-width: $breakpoint-med){
+                    height: 360px;
+                }
+
+                @media screen and (max-width: $breakpoint-small){
+                    height: 230px;
+                }
+    
+                .yacht-image {
+                    height: 100%;
+                    width: 100%;
+                    object-fit: cover;
+                }
+            }
+            .yacht-gallery-container {
+                // display: flex;
+                display: none;
+                justify-content: space-between;
+                margin-top: 20px;
+                margin-bottom: 75px;
+
+                @media screen and (max-width: $breakpoint-med) {
+                    display: none;
+                }
+
+                .yacht-gallery-image {
+                    width: 102px;
+                    height: 102px;
+                }
+            }
+        }
+        .yacht-main-info-container {
+            width: 100%;
+            background-color: #F1F5F9;
+
+            .yacht-main-info {
+                display: flex;
+                justify-content: space-between;
+                padding: 25px 69px 20px 51px;
+
+                @media screen and (max-width: $breakpoint-med){
+                    padding: 21px 15px;
+                    display: grid;
+                    grid-template-rows: 1fr 1fr;
+                    grid-template-columns: 1fr 1fr;
+                    row-gap: 10px;
+                }
+
+                .yacht-length {
+                
+                    .yacht-length-text {
+                        display: flex;
+                        align-items: center;
+    
+                        p {
+                            color: $main-text-color;
+                            font-size: 12px;
+                            font-family: Inter;
+                            font-weight: 500;
+                            margin: 0px 0px 0px 5px;
+                        }
+                    }
+    
+                    .yacht-length-value {
+    
+                        p {
+                            color: $main-text-color;
+                            font-size: 18px;
+                            font-weight: 500;
+                            margin: 14px 0px 0px 0px
+                        }
+    
+                    }
+                }
+    
+                .yacht-beam {
+                    
+                    .yacht-beam-text {
+                        display: flex;
+                        align-items: center;
+    
+                        p {
+                            color: $main-text-color;
+                            font-size: 12px;
+                            font-family: Inter;
+                            font-weight: 500;
+                            margin: 0px 0px 0px 5px;
+                        }
+                    }
+    
+                    .yacht-beam-value {
+    
+                        p {
+                            color: $main-text-color;
+                            font-size: 18px;
+                            font-weight: 500;
+                            margin: 14px 0px 0px 0px
+                        }
+    
+                    }
+                }
+    
+                .yacht-cabins {
+                    
+                    .yacht-cabins-text {
+                        display: flex;
+                        align-items: center;
+    
+                        p {
+                            color: $main-text-color;
+                            font-size: 12px;
+                            font-family: Inter;
+                            font-weight: 500;
+                            margin: 0px 0px 0px 5px;
+                        }
+                    }
+    
+                    .yacht-cabins-value {
+    
+                        p {
+                            color: $main-text-color;
+                            font-size: 18px;
+                            font-weight: 500;
+                            margin: 14px 0px 0px 0px
+                        }
+    
+                    }
+                }
+    
+                .yacht-guests {
+                    
+                    .yacht-guests-text {
+                        display: flex;
+                        align-items: center;
+    
+                        p {
+                            color: $main-text-color;
+                            font-size: 12px;
+                            font-family: Inter;
+                            font-weight: 500;
+                            margin: 0px 0px 0px 5px;
+                        }
+                    }
+    
+                    .yacht-guests-value {
+    
+                        p {
+                            color: $main-text-color;
+                            font-size: 18px;
+                            font-weight: 500;
+                            margin: 14px 0px 0px 0px
+                        }
+    
+                    }
+                }
+            }
+        }
+        .yacht-download-brochure-container {
+            margin-top: 23px;
+
+            @media screen and (max-width: $breakpoint-large){
+                margin-bottom: 40px;
+            }
+
+            .yacht-download-button {
+                background-color: $main-text-color;
+                padding: 10px 16px;
+                color: #FFFFFF;
+                display: flex;
+                align-items: center;
+                box-shadow: none;
+                border: none;
+
+                &:hover {
+                    background-color: darkgray;
+                }
+
+                img {
+                    margin-right: 8px;
+                }
+            }
+        }
+        .yacht-mobile-broker-container {
+                display: none;
+
+                @media  screen and (max-width: $breakpoint-large) {
+                    display: flex;
+                    margin-bottom: 40px;
+                }
+
+                .broker-profile-image {
+                    height: 120px;
+                    width: 120px;
+                    background-color: #D9D9D9;
+                }
+                .broker-info {
+                    margin-left: 19px;
+
+                    p {
+                        margin: 0px;
+                    }
+                    .broker-name {
+                        color: $main-text-color;
+                        font-size: 16px;
+                        font-weight: 500;
+                        line-height: 24px;
+                    }
+                    .broker-title {
+                        color: $secondary-text-color;
+                        font-size: 16px;
+                        font-weight: 500;
+                        line-height: 24px;
+                        margin-bottom: 19px;
+                    }
+                    .broker-email {
+                        color: $main-text-color;
+                        font-size: 16px;
+                        font-weight: 400;
+                        line-height: 24px;
+                    }
+                    .broker-phone {
+                        color: $main-text-color;
+                        font-size: 16px;
+                        font-weight: 400;
+                        line-height: 24px;
+                    }
+                }
+        }
+        .yacht-mobile-form-container {
+            display: none;
+
+            @media screen and (max-width: $breakpoint-large){
+                display: block;
+            }
+
+            .yacht-form-title {
+                color: $main-text-color;
+                font-size: 20px;
+                font-weight: 600;
+                line-height: 28px;
+                letter-spacing: -0.1px;
+                margin-bottom: 30px;
+            }
+
+            form {
+                width: 100%;
+                div {
+                    display: block;
+
+                    label {
+                        display: block;
+                        color: $main-text-color;
+                        font-size: 12px;
+                        font-weight: 400;
+                        line-height: 11px;
+                        margin-bottom: 10px;
+                    }
+                    input {
+                        font-size: 14px;
+                        font-weight: 400;
+                        line-height: 24px;
+                        border-radius: 0px;
+                        margin-bottom: 14px;
+                        padding: 8px 12px;
+                        border: 1px solid #CBD5E1;
+                        width: 93%;
+                        &:focus {
+                            border-radius: 0px;
+                        }
+                    }
+                    select {
+                        font-size: 14px;
+                        font-weight: 400;
+                        line-height: 24px;
+                        border-radius: 0px;
+                        margin-bottom: 14px;
+                        padding: 8px 12px;
+                        width: 100%;
+                        border: 1px solid #CBD5E1;
+                    }
+                    textarea {
+                        font-size: 14px;
+                        font-weight: 400;
+                        line-height: 24px;
+                        border-radius: 0px;
+                        margin-bottom: 14px;
+                        padding: 8px 12px;
+                        height: 135px;
+                        width: 93%;
+                        border: 1px solid #CBD5E1;
+                        resize: none;
+                        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+                        &:focus {
+                            border-radius: 0px;
+                        }
+                    }
+                    p {
+                        font-size: 10px;
+                        font-weight: 400;
+                        line-height: 15px;
+                        color: #94A3B8;
+                        margin: 0;
+                        margin-bottom: 14px;
+                        a {
+                            font-size: 10px;
+                            font-weight: 400;
+                            color: #94A3B8
+                        }
+                    }
+
+                }
+
+                .yacht-form-submit {
+                    background-color: $main-text-color;
+                    box-shadow: none;
+                    border: 0;
+                    width: 100%;
+                    padding: 8px 12px;
+                    margin: auto;
+                    color: #FFFFFF;
+
+                    &:hover {
+                        background-color: #a9a9a9;
+                    }
+                }
+            }
+
+        }
+        .yacht-general-description-container {
+            display: flex;
+            margin-bottom: 94px;
+
+            @media screen and (max-width: $breakpoint-med){
+                display: block;
+                margin-bottom: 40px;
+            }
+
+            .yacht-description-label {
+                width: 33%;
+                color: $main-text-color;
+                font-size: 18px;
+                font-weight: 600;
+                line-height: 28px;
+                @media screen and (max-width: $breakpoint-med) {
+                    margin-bottom: 30px;
+                }
+            }
+            .yacht-description-value {
+                width: 67%;
+
+                @media screen and (max-width: $breakpoint-med){
+                    width: 100%;
+                }
+
+                p, a, ul, ol, li {
+                    text-align: left !important;
+                    color: $main-text-color !important;
+                    font-size: 16px !important;
+                    font-weight: 400 !important;
+                }
+                strong, b {
+                    font-size: 16px !important;
+                }
+            }
+        }
+        .yacht-specs-container {
+            display: flex;
+            margin-bottom: 74px;
+
+            @media screen and (max-width: $breakpoint-med){
+                display: block;
+                margin-bottom: 40px;
+            }
+
+            .yacht-specs-label {
+                width: 33%;
+                color: $main-text-color;
+                font-size: 18px;
+                font-weight: 600;
+                line-height: 28px;
+            }
+
+            .yacht-specs-value {
+                width: 67%;
+
+                @media screen and (max-width: $breakpoint-med){
+                    width: 100%;
+                }
+
+                .yacht-specs-item {
+                    display: flex;
+                    width: 100%;
+                    justify-content: space-between;
+                    border-bottom: 1px solid $divider-color;
+
+                    .specification-name {
+                        color: $main-text-color;
+                        font-size: 16px;
+                        font-weight: 500;
+                        line-height: 24px;
+                    }
+
+                    .specification-value {
+                        color: $secondary-text-color;
+                        font-size: 16px;
+                        font-weight: 400;
+                        line-height: 24px;
+                    }
+                }
+            }
+        }
+        .yacht-full-details-container {
+            width: 100%;
+
+            .yacht-details-label {
+                color: $main-text-color;
+                font-size: 18px;
+                font-weight: 600;
+                line-height: 28px;
+                margin-bottom: 30px;
+                @media screen and (max-width: $breakpoint-med) {
+                    margin-bottom: 15px;
+                }
+            }
+            .yacht-details-value {
+                width: 100%;
+
+                .yacht-accordion-item {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    border-bottom: 1px solid $divider-color;
+
+                    .yacht-accordion-name {
+                        color: $main-text-color;
+                        font-size: 16px;
+                        font-weight: 500;
+                        line-height: 24px;
+                    }
+                }
+
+                .yacht-accordion-display {
+                    display: none;
+                    border-bottom: 1px solid $divider-color;
+
+                    .yacht-accordion-display-item {
+                        color: $main-text-color;
+                        font-size: 16px;
+                        font-weight: 400;
+                        line-height: 24px;
+                    }
+                }
+            }
+        }
+    }
+    .secondary-container {
+        width: 30%;
+
+        @media screen and (max-width: $breakpoint-large){
+            display: none;
+        }
+
+        .secondary-sub-container {
+            margin-top: 98px;
+            margin-left: 39px;
+
+            .broker-info-container {
+                display: flex;
+                margin-bottom: 40px;
+
+                @media screen and (max-width: $breakpoint-x-large) {
+                    display: block;
+                }
+
+                .broker-profile-image {
+                    height: 120px;
+                    width: 120px;
+                    background-color: #D9D9D9;
+                }
+                .broker-info {
+                    margin-left: 19px;
+
+                    @media screen and (max-width: $breakpoint-x-large) {
+                        margin-left: 0px;
+                        margin-top: 19px;
+                    }
+
+                    p {
+                        margin: 0px;
+                    }
+                    .broker-name {
+                        color: $main-text-color;
+                        font-size: 16px;
+                        font-weight: 500;
+                        line-height: 24px;
+                    }
+                    .broker-title {
+                        color: $secondary-text-color;
+                        font-size: 16px;
+                        font-weight: 500;
+                        line-height: 24px;
+                        margin-bottom: 19px;
+                    }
+                    .broker-email {
+                        color: $main-text-color;
+                        font-size: 16px;
+                        font-weight: 400;
+                        line-height: 24px;
+                    }
+                    .broker-phone {
+                        color: $main-text-color;
+                        font-size: 16px;
+                        font-weight: 400;
+                        line-height: 24px;
+                    }
+                }
+            }
+
+            .yacht-form-container {
+
+                .yacht-form-title {
+                    color: $main-text-color;
+                    font-size: 20px;
+                    font-weight: 600;
+                    line-height: 28px;
+                    letter-spacing: -0.1px;
+                    margin-bottom: 30px;
+                }
+
+                form {
+                    width: 100%;
+                    div {
+                        display: block;
+
+                        label {
+                            display: block;
+                            color: $main-text-color;
+                            font-size: 12px;
+                            font-weight: 400;
+                            line-height: 11px;
+                            margin-bottom: 10px;
+                        }
+                        input {
+                            font-size: 14px;
+                            font-weight: 400;
+                            line-height: 24px;
+                            border-radius: 0px;
+                            margin-bottom: 14px;
+                            padding: 8px 12px;
+                            border: 1px solid #CBD5E1;
+                            width: 93%;
+                            &:focus {
+                                border-radius: 0px;
+                            }
+                        }
+                        select {
+                            font-size: 14px;
+                            font-weight: 400;
+                            line-height: 24px;
+                            border-radius: 0px;
+                            margin-bottom: 14px;
+                            padding: 8px 12px;
+                            width: 100%;
+                            border: 1px solid #CBD5E1;
+                        }
+                        textarea {
+                            font-size: 14px;
+                            font-weight: 400;
+                            line-height: 24px;
+                            border-radius: 0px;
+                            margin-bottom: 14px;
+                            padding: 8px 12px;
+                            height: 135px;
+                            width: 93%;
+                            border: 1px solid #CBD5E1;
+                            resize: none;
+                            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+                            &:focus {
+                                border-radius: 0px;
+                            }
+                        }
+                        p {
+                            font-size: 10px;
+                            font-weight: 400;
+                            line-height: 15px;
+                            color: #94A3B8;
+                            margin: 0;
+                            margin-bottom: 14px;
+                            a {
+                                font-size: 10px;
+                                font-weight: 400;
+                                color: #94A3B8
+                            }
+                        }
+
+                    }
+
+                    .yacht-form-submit {
+                        background-color: $main-text-color;
+                        box-shadow: none;
+                        border: 0;
+                        width: 100%;
+                        padding: 8px 12px;
+                        margin: auto;
+                        color: #FFFFFF;
+
+                        &:hover {
+                            background-color: #a9a9a9;
+                        }
+                    }
+                }
+
+            }
+
+        }
+
+    }
+}

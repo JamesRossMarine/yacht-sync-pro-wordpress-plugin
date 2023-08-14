@@ -1,5 +1,5 @@
 <?php
-	class raiYachtSync_Yachts_DetailsOverride {
+	class raiYachtSync_Brokers_DetailsOverride {
 		public function __construct() {
 
 		}
@@ -14,8 +14,8 @@
 
 			global $post, $wp_query;
 
-			if (is_singular('rai_yatch')) {
-				$single_template = RAI_YS_PLUGIN_TEMPLATES_DIR.'/single-yacht.php';
+			if (is_singular('rai_broker')) {
+				$single_template = RAI_YS_PLUGIN_TEMPLATES_DIR.'/single-broker.php';
 
 			}
 

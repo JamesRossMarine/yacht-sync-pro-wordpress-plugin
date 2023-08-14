@@ -1,3 +1,3 @@
 <?php
 
-	// slince
+	// I said silence
