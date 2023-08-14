@@ -22,7 +22,9 @@ get_header();
                 <h2 class="our-team">Our Team</h2>
                 <div class="broker-info-container">
                     <div class="broker-image-general-container">
-                        <div class="broker-image"></div>
+                        <div class="broker-image">
+                            <img src="<?php echo esc_url(get_the_post_thumbnail_url())?>" alt="profile-picture" />
+                        </div>
                         <div class="broker-general-info">
                             <p class="broker-name"><?php echo($meta["rai_broker_fname"] . " " . $meta["rai_broker_lname"]); ?></p>
                             <p class="broker-title">Broker</p>
