@@ -4,7 +4,7 @@
     .yacht-main-container {
         width: 70%;
         
-        @media screen and (max-width: $breakpoint-small){
+        @media screen and (max-width: $breakpoint-large){
             width: 100%;
         }
 
@@ -14,7 +14,7 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                @media screen and (max-width: $breakpoint-small){
+                @media screen and (max-width: $breakpoint-med){
                     display: block;
                 }
 
@@ -24,7 +24,7 @@
                     color: $main-text-color;
                     line-height: 36px;
                     margin: 0;
-                    @media screen and (max-width: $breakpoint-small){
+                    @media screen and (max-width: $breakpoint-med){
                         font-size: 20px;
                         font-weight: 600;
                         line-height: 28px;
@@ -65,11 +65,19 @@
             .yacht-main-image-container {
                 height: 537px;
                 width: 100%;
+                margin-bottom: 75px;
+
+                @media screen and (max-width: $breakpoint-large){
+                    height: 475px;
+                    margin-bottom: 29px;
+                }
+
+                @media screen and (max-width: $breakpoint-med){
+                    height: 360px;
+                }
 
                 @media screen and (max-width: $breakpoint-small){
-                    height: 202px;
-                    margin-bottom: 29px;
-                    object-fit: cover;
+                    height: 230px;
                 }
     
                 .yacht-image {
@@ -79,12 +87,13 @@
                 }
             }
             .yacht-gallery-container {
-                display: flex;
+                // display: flex;
+                display: none;
                 justify-content: space-between;
                 margin-top: 20px;
                 margin-bottom: 75px;
 
-                @media screen and (max-width: $breakpoint-small) {
+                @media screen and (max-width: $breakpoint-med) {
                     display: none;
                 }
 
@@ -103,8 +112,12 @@
                 justify-content: space-between;
                 padding: 25px 69px 20px 51px;
 
-                @media screen and (max-width: $breakpoint-small){
+                @media screen and (max-width: $breakpoint-med){
                     padding: 21px 15px;
+                    display: grid;
+                    grid-template-rows: 1fr 1fr;
+                    grid-template-columns: 1fr 1fr;
+                    row-gap: 10px;
                 }
 
                 .yacht-length {
@@ -219,7 +232,7 @@
         .yacht-download-brochure-container {
             margin-top: 23px;
 
-            @media screen and (max-width: $breakpoint-small){
+            @media screen and (max-width: $breakpoint-large){
                 margin-bottom: 40px;
             }
 
@@ -244,7 +257,7 @@
         .yacht-mobile-broker-container {
                 display: none;
 
-                @media  screen and (max-width: $breakpoint-small) {
+                @media  screen and (max-width: $breakpoint-large) {
                     display: flex;
                     margin-bottom: 40px;
                 }
@@ -290,7 +303,7 @@
         .yacht-mobile-form-container {
             display: none;
 
-            @media screen and (max-width: $breakpoint-small){
+            @media screen and (max-width: $breakpoint-large){
                 display: block;
             }
 
@@ -392,7 +405,7 @@
             display: flex;
             margin-bottom: 94px;
 
-            @media screen and (max-width: $breakpoint-small){
+            @media screen and (max-width: $breakpoint-med){
                 display: block;
                 margin-bottom: 40px;
             }
@@ -403,14 +416,14 @@
                 font-size: 18px;
                 font-weight: 600;
                 line-height: 28px;
-                @media screen and (max-width: $breakpoint-small) {
+                @media screen and (max-width: $breakpoint-med) {
                     margin-bottom: 30px;
                 }
             }
             .yacht-description-value {
                 width: 67%;
 
-                @media screen and (max-width: $breakpoint-small){
+                @media screen and (max-width: $breakpoint-med){
                     width: 100%;
                 }
 
@@ -429,7 +442,7 @@
             display: flex;
             margin-bottom: 74px;
 
-            @media screen and (max-width: $breakpoint-small){
+            @media screen and (max-width: $breakpoint-med){
                 display: block;
                 margin-bottom: 40px;
             }
@@ -445,7 +458,7 @@
             .yacht-specs-value {
                 width: 67%;
 
-                @media screen and (max-width: $breakpoint-small){
+                @media screen and (max-width: $breakpoint-med){
                     width: 100%;
                 }
 
@@ -480,7 +493,7 @@
                 font-weight: 600;
                 line-height: 28px;
                 margin-bottom: 30px;
-                @media screen and (max-width: $breakpoint-small) {
+                @media screen and (max-width: $breakpoint-med) {
                     margin-bottom: 15px;
                 }
             }
@@ -518,7 +531,7 @@
     .secondary-container {
         width: 30%;
 
-        @media screen and (max-width: $breakpoint-small){
+        @media screen and (max-width: $breakpoint-large){
             display: none;
         }
 
@@ -530,6 +543,10 @@
                 display: flex;
                 margin-bottom: 40px;
 
+                @media screen and (max-width: $breakpoint-x-large) {
+                    display: block;
+                }
+
                 .broker-profile-image {
                     height: 120px;
                     width: 120px;
@@ -537,6 +554,11 @@
                 }
                 .broker-info {
                     margin-left: 19px;
+
+                    @media screen and (max-width: $breakpoint-x-large) {
+                        margin-left: 0px;
+                        margin-top: 19px;
+                    }
 
                     p {
                         margin: 0px;
