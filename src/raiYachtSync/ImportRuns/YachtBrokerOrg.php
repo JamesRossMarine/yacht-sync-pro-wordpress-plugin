@@ -45,13 +45,13 @@
 		            $yachtSynced ++;
 		           	
 		           	$theBoat=[
-		           		'BoatLocation' => [
+		           		'BoatLocation' => (object) [
 		           			'BoatCityName' => $row['City'],
 		           			'BoatCountryID' => $row['Country'],
 		           			'BoatStateCode' => $row['State']
 		           		],
 
-		           		'SalesRep' => [
+		           		'SalesRep' => (object)  [
 		           			'PartyId' => $row['ListingOwnerID'],
 		           			'Name' => $row['ListingOwnerEmail'],
 		           			'Email' => $row['ListingOwnerEmail'],
@@ -108,7 +108,7 @@
 		                $images = [];
 		            
 		                foreach ($row['gallery'] as $key => $img) {
-		                    $images[] = [
+		                    $images[] = (object) [
 		                        'Priority' => $img['Sort'],
 		                        'Caption'  => $img['Title'],
 		                        'Uri'      => $img['HD']
@@ -175,7 +175,7 @@
 		                foreach ($row['Engines'] as $engine) {
 		                    $enginePower += $engine['PowerHP'];
 		                    
-		                    $engines[]   = [
+		                    $engines[]   = (object)  [
 		                        'Make'        => $engine['EngineMake'],
 		                        'Model'       => $engine['EngineModel'],
 		                        'Fuel'        => $engine['FuelType'],
