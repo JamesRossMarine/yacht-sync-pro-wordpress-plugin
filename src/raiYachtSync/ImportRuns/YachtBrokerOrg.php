@@ -224,7 +224,10 @@
 		                [
 		                    'ID' => $post_id,
 							'post_type' => 'rai_yatch',
-							'post_title' => $theBoat['BoatName'],
+							'post_title' =>  $theBoat['ModelYear'].' '.$theBoat['MakeString'].' '.$theBoat['Model'].' '.$theBoat['BoatName'],
+							'post_name' => sanitize_title(
+								$theBoat['ModelYear'].'-'.$theBoat['MakeString'].'-'.$theBoat['Model']
+							),
 							'post_contnet' => $theBoat['GeneralBoatDescription'],
 							'post_status' => 'publish',
 							'meta_input' => $theBoat,
