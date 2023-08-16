@@ -161,28 +161,15 @@
 
 				// ----------------------
 
-		   		$dompdf = new Dompdf();
+				header('Content-Type: text/html; charset=UTF-8');
 
-		   		ob_start();
+		   		include RAI_YS_PLUGIN_TEMPLATES_DIR.'/pdf.php';
 
-		   			include RAI_YS_PLUGIN_TEMPLATES_DIR.'/pdf.php';
-
-		   		$html = ob_get_clean();
-
-				$dompdf->loadHtml($html);
-
-				//$dompdf->setPaper('A4', 'landscape');
-				$dompdf->set_paper('A4', 'portrait');
-
-				$dompdf->render();
-
-				$dompdf->stream($filename);
-		   
-				return ['success' => 'Generated PDF'];
 
 			}
 
-			return ['success' => 'No YACHT ID'];
+			// return ['success' => 'No YACHT ID'];
+			return;
 	   } 
 
 
