@@ -1,9 +1,5 @@
 <?php
 
-	require RAI_YS_PLUGIN_DIR .'/lib-dompdf/autoload.inc.php';
-
-   	use Dompdf\Dompdf;
-
 	class raiYachtSync_RestApi {
 
 		public function __construct() {
@@ -120,7 +116,7 @@
 				AND p.post_status = '%s' 
 				AND p.post_type = '%s' 
 				AND pmm.meta_key = 'SalesStatus' 
-				AND pmm.meta_value != 'Sold'
+				AND pmm.meta_value != 'Sold' AND pmm.meta_value != 'Suspend'
 				ORDER BY pm.meta_value ASC
 				", $key, $status, $type ) );
 
@@ -141,48 +137,6 @@
 
 	   public function yacht_pdf(WP_REST_Request $request) {
 
-			if ($request->get_param('yacht_post_id') != '') {
-	
-				$yacht_post_id = $request->get_param('yacht_post_id');
-
-				$yacht_post = get_post( $yacht_post_id );
-
-				$meta = get_post_meta( $yacht_post_id );
-
-				foreach ($meta as $indexM => $valM) {
-					if (is_array($valM) && ! isset($valM[1])) {
-						$meta[$indexM] = $valM[0];
-					}
-				}
-
-				$meta2=array_map("maybe_unserialize", $meta);
-
-				$filename='yacht-details.pdf';
-
-				// ----------------------
-
-		   		$dompdf = new Dompdf();
-
-		   		ob_start();
-
-		   			include RAI_YS_PLUGIN_TEMPLATES_DIR.'/pdf.php';
-
-		   		$html = ob_get_clean();
-
-				$dompdf->loadHtml($html);
-
-				//$dompdf->setPaper('A4', 'landscape');
-				$dompdf->set_paper('A4', 'portrait');
-
-				$dompdf->render();
-
-				$dompdf->stream($filename);
-		   
-				return ['success' => 'Generated PDF'];
-
-			}
-
-			return ['success' => 'No YACHT ID'];
 	   } 
 
 

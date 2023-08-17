@@ -35,7 +35,7 @@
 
             ]);
 
-			register_post_type('rai_soldyatch', [
+			/*register_post_type('rai_soldyatch', [
 
            		'labels' => array(
 					'name' => 'Sold Yachts',
@@ -50,7 +50,7 @@
 				'can_export' => false,
 
            ]);
-
+*/
            register_post_type('rai_broker', [
            		'labels' => array(
 					'name' => 'Ross Brokers',

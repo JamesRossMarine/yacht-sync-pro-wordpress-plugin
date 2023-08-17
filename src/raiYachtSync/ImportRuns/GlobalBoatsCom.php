@@ -71,6 +71,20 @@
 		                $wpdb->delete($wpdb->postmeta, ['post_id' => $find_post[0]->ID], ['%d']);
 		            }
 
+				  	$url = 'https://services.boats.com/pls/boats/details?id=' . $boat['DocumentID'] . '&key=e97cdb91056f';
+
+					$response = file_get_contents($url);
+
+					$data = json_decode($response, true);
+
+					$plsDisclaimer = $data['data']['PlsDisclaimer'];
+
+					$newDisclaimer = substr($plsDisclaimer, 3, -4);
+
+					$finalDisclaimer = "We provide this yacht listing in good faith, and although we cannot guarantee its accuracy or the condition of the boat. The " . $newDisclaimer . " She is subject to prior sale, price change, or withdrawal without notice and does not imply a direct representation of a specific yacht for sale.";
+
+				    $boatC->MOD_DIS = $finalDisclaimer;
+
 		            $y_post_id=wp_insert_post(
 		                [
 		                    'ID' => $post_id,

@@ -1,4 +1,4 @@
-function get_form_data(form_ele) {
+function raiys_get_form_data(form_ele) {
     console.log(form_ele);
 
     var formData = new FormData( form_ele );
@@ -11,4 +11,17 @@ function get_form_data(form_ele) {
     return fd;
 }
 
+function raiys_push_history( data = {}) {
+    var searchParams = new URLSearchParams();
+    var strpath='';
 
+    for (const property in data) {
+        var it = data[ property ];
+
+        if (it != '' && typeof it != 'undefined' && property != 'OnFirstLoad' && typeof it != 'object') {
+            searchParams.set(property, it);
+        }
+    }
+    
+    history.pushState(data, '', '/all-yacht-search?'+searchParams.toString());
+}

@@ -1,6 +1,6 @@
-var rai_ys_api={};
+var rai_ysp_api={};
 
-    rai_ys_api.call_api=function(method, path, passing_data) {
+    rai_ysp_api.call_api=function(method, path, passing_data) {
         var xhttp = new XMLHttpRequest();
 
         return new Promise(function(resolve, reject) {
