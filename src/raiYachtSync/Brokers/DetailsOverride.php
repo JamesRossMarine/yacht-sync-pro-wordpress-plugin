@@ -15,7 +15,9 @@
 			global $post, $wp_query;
 
 			if (is_singular('rai_broker')) {
-				$single_template = RAI_YS_PLUGIN_TEMPLATES_DIR.'/single-broker.php';
+				if ( ! file_exists(get_template_directory().'/single-rai_broker.php')) {
+					$single_template = RAI_YS_PLUGIN_TEMPLATES_DIR.'/single-broker.php';
+				}
 
 			}
 

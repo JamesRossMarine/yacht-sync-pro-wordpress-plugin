@@ -24,7 +24,16 @@
 	        foreach ($pt_yachts as $yID) {
 	            wp_delete_post($yID, true);
 	        }
-		
+
+	        /* 
+				DELETE wp FROM wp_posts wp 
+				LEFT JOIN wp_postmeta pm ON pm.post_id = wp.ID 
+				WHERE wp.post_type = 'rai_yatch'
+
+				DELETE pm FROM wp_postmeta pm 
+				LEFT JOIN wp_posts wp ON wp.ID = pm.post_id 
+				WHERE wp.ID IS NULL
+	         */
 		}
 
 		public function run() {
