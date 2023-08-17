@@ -62,6 +62,8 @@
 
     $address = $vessel->Office->PostalAddress;
     $beam = $vessel->BeamMeasure;
+    $beamMeters = $beam * 0.3048;
+    $beamMeters = sprintf("%0.2f", $beamMeters);
     $boatHullID = $vessel->BoatHullID;
     $boatCity = $vessel->BoatLocation->BoatCityName;
     $boatState = $vessel->BoatLocation->BoatStateCode;
@@ -85,6 +87,8 @@
     $dryWeight = $vessel->DryWeightMeasure;
     $int_var = (int)filter_var($dryWeight, FILTER_SANITIZE_NUMBER_INT);
     $draft = $vessel->MaxDraft;
+    $draftMeters = $draft * 0.3048;
+    $draftMeters = sprintf("%0.2f", $draftMeters);
     $length = $vessel->NominalLength;
     $lengthMeters = $length * 0.3048;
     $lengthMeters = sprintf("%0.2f", $lengthMeters);
@@ -104,6 +108,9 @@
 
     //Broker Variables
     $broker = $vessel->SalesRep->Name;
+    if ($broker == ""){
+        $broker = "Italian Yacht Group";
+    }
     $brokerLocation = $city . ', ' . $state;
     //        console_log($brokerLocation, '$brokerLocation');
     $phone = $vessel->Office->Phone; //Broker Phone
@@ -111,8 +118,11 @@
     //        $phoneNoDashes = ReplaceDash($phone);
     //        console_log($phoneNoDashes, '$phoneNoDashes');
     $email = $vessel->Office->Email;
+    if($phone == ""){
+        $phone = "(954) 533-3145";
+    }
     if ($email == "") {
-        $email = "boomer@theiyg.com";
+        $email = "info@theiyg.com";
     }
     $muh_shareUri_facebook = get_permalink();
     $social_link = "www.facebook.com/sharer/sharer.php?u=$muh_shareUri_facebook";
@@ -175,16 +185,17 @@
 <head>
 
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
         #pdf-page-template {
             width: 100%;
             max-width: 1440px;
             margin: auto;
+            font-family: 'Montserrat', sans-serif;
 
         }
 
-        .cover-page-container {
-
-        }
+        /* COVER PAGE */
 
         .cover-page-container-logo {
             width: 100%;
@@ -211,6 +222,9 @@
             font-weight: 400;
             text-transform: uppercase;
         }
+
+        /* MAIN PAGE TITLE AND IMAGE */
+
         .main-title-container {
             margin-bottom: 40px;
         }
@@ -242,12 +256,42 @@
         .main-hero-image-container {
             margin-bottom: 40px;
         }
+
+         /* MAIN INFO SECTION */
+
         .main-info-container {
             display: flex;
+            justify-content: space-between;
+            margin-bottom: 100px;
         }
 
         .main-location-container, .main-builder-container, .main-cabins-container, .main-length-container {
             display: flex;
+            flex: 0 0 calc(25% - 3px);
+            position: relative;
+            padding-left: 2px;
+        }
+
+        .main-builder-container img, .main-cabins-container img, .main-length-container img {
+           margin-left: 30px;
+        }
+
+        .main-location-container::before, .main-builder-container::before, .main-cabins-container::before, .main-length-container::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #C00020;
+        }
+        
+        .main-location-container::before {
+            display: none;
+        }
+
+        .main-length-container {
+            margin-right: 0;
         }
         .main-location, .main-builder, .main-cabins, .main-length {
             margin-left: 20px;
@@ -255,10 +299,113 @@
         .location-name, .builder-name, .cabins-name, .length-name {
             margin-bottom: 10px;
         }
+        .location-value, .builder-value, .cabins-value, .length-value {
+            color: #252F38;
+        }
+
+         /* MAIN SPECIFICATIONS */
+
+        .main-specifications-container {
+            margin-bottom: 300px;
+        }
+
+        .main-specifications-container .main-specifications-title {
+            color: #C00020;
+            font-weight: 400;
+        }
+        .main-specifications-container .specifications-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        .specifications-container .specification-column {
+            flex-basis: calc(50% - 20px);
+        }
+        .specification-column .individual-specification-group {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #252F38
+        }
+        .individual-specification-group .specification-title {
+            text-transform: uppercase;
+            color: #252F38;
+            font-weight: 600;
+        }
+
+        /* FOOTER CONTAINER */
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 200px;
+        }
+
+        .footer-broker-info p {
+            margin: 0;
+            margin-bottom: 10px;
+        }
+
+        .footer-container .footer-img {
+            height: 100px;
+            width: auto;
+        }
+
+        .footer-container .footer-broker-info .footer-broker-website {
+            color: #C00020;
+        }
+
+        .main-description-container {
+            line-height: 30px;
+            margin-bottom: 100px;
+        }
+
+        .other-specs-group .other-specs-title {
+            color: #C00020;
+            font-weight: 400;
+        }
+
+        .other-specs-group-container .individual-specs-group {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #252F38;
+        }
+
+        .individual-specs-group .other-specs-name {
+            color: #252F38;
+            font-weight: 600;
+        }
+
+        .individual-specs-group .other-specs-value {
+            color: #252F38;
+            font-weight: 400;
+        }
+
+        .other-specs-group .other-specs-group-container {
+            margin-bottom: 45px;
+        }
+
+        .additional-description {
+            line-height: 30px;
+        }
+
+        .image-gallery-container {
+            display: flex;
+            justify-content: space-between;
+            row-gap: 40px;
+            margin-bottom: 100px;
+        }
+        .image-gallery-container .individual-image-container {
+            /* flex-basis: 0 0 calc(50% - 20px); */
+            width: 400px;
+        }
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
     </style>
 </head>
 <body>
-    <!-- <?php var_dump($meta); ?> -->
     <div id="pdf-page-template">
         <div class="cover-page-container">
             <div class="cover-page-container-logo">
@@ -307,9 +454,187 @@
                     <img src="<?php echo get_template_directory_uri(); ?>/images/yacht-length.svg" alt="" />
                     <div class="main-length">
                         <p class="length-name">LENGTH</p>
-                        <p class="length-value"><?= $length ?> / <?= $lengthMeters ?></p>
+                        <p class="length-value"><?= $length ?> / <?= $lengthMeters ?> m</p>
                     </div>
                 </div>
+            </div>
+            <div class="main-specifications-container">
+                <h3 class="main-specifications-title">SPECIFICATIONS</h3>
+                <div class="specifications-container">
+                    <div class="specification-column">
+                        <div class="individual-specification-group">
+                            <p class="specification-title">YACHT TYPE</p>
+                            <p class="specification-value"><?= $category ? $category : 'N/A' ?></p>
+                        </div>
+                        <div class="individual-specification-group">
+                            <p class="specification-title">BRAND</p>
+                            <p class="specification-value"><?= $make ? $make : 'N/A' ?></p>
+                        </div>
+                        <div class="individual-specification-group">
+                            <p class="specification-title">YEAR</p>
+                            <p class="specification-value"><?= $year ? $year : 'N/A' ?></p>
+                        </div>
+                        <div class="individual-specification-group">
+                            <p class="specification-title">HULL</p>
+                            <p class="specification-value"><?= $construction ? $construction : 'N/A' ?></p>
+                        </div>
+                        <div class="individual-specification-group">
+                            <p class="specification-title">DAYS LISTED</p>
+                            <p class="specification-value"><?= $itemDate ? $itemDate : 'N/A' ?></p>
+                        </div>
+                        <div class="individual-specification-group">
+                            <p class="specification-title">PRICE</p>
+                            <p class="specification-value">$<?= $price ? $price : 'N/A' ?></p>
+                        </div>
+                    </div>
+                    <div class="specification-column">
+                        <div class="individual-specification-group">
+                            <p class="specification-title">LENGTH OVERALL</p>
+                            <p class="specification-value"><?= (isset($lengthOverall) && isset($lengthOverallMeters)) ? $lengthOverall . " / " . $lengthOverallMeters . " m" : "N/A" ?></p>
+                        </div>
+                        <div class="individual-specification-group">
+                            <p class="specification-title">BEAM</p>
+                            <p class="specification-value"><?= (isset($beam) && isset($beamMeters)) ? $beam . " / " . $beamMeters . " m" : "N/A" ?></p>
+                        </div>
+                        <div class="individual-specification-group">
+                            <p class="specification-title">MAX DRAFT</p>
+                            <p class="specification-value"><?= (isset($draft) && isset($draftMeters)) ? $draft . " / " . $draftMeters . " m" : "N/A" ?></p>
+                        </div>
+                        <div class="individual-specification-group">
+                            <p class="specification-title">MAX SPEED</p>
+                            <p class="specification-value"><?= $maxSpeed ? $maxSpeed : 'N/A' ?></p>
+                        </div>
+                        <div class="individual-specification-group">
+                            <p class="specification-title">CRUISING SPEED</p>
+                            <p class="specification-value"><?= $cruisingSpeed ? $cruisingSpeed : 'N/A' ?></p>
+                        </div>
+                        <div class="individual-specification-group">
+                            <p class="specification-title">ENGINES</p>
+                            <p class="specification-value"><?= $engineQty ? $engineQty . ' X ' . ucfirst($engineFuel1) : 'N/A' ?></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-container">
+                <img class="footer-img" src="<?php echo get_template_directory_uri(); ?>/images/pdf-img/IYG_Logo.png" alt="" />
+                <div class="footer-broker-info">
+                    <p class="footer-broker-name"><?= $broker ?></p>
+                    <p class="footer-broker-phone"><?= $phone ?></p>
+                    <p class="footer-broker-email"><?= $email ?></p>
+                    <p class="footer-broker-website">www.italianyachtgroup.com</p>
+                </div>
+            </div>
+            <div class="main-description-container">
+                <p><?= $generalDescription ?></p>
+            </div>
+            <div class="other-info-container">
+                <div class="other-specs-group">
+                    <h3 class="other-specs-title">BASIC INFO</h3>
+                    <div class="other-specs-group-container">
+                        <div class="individual-specs-group">
+                            <p class="other-specs-name">MAKE</p>
+                            <p class="other-specs-value"><?= $make ? $make : 'N/A' ?></p>
+                        </div>
+                        <div class="individual-specs-group">
+                            <p class="other-specs-name">MODEL</p>
+                            <p class="other-specs-value"><?= $model ? $model : 'N/A' ?></p>
+                        </div>
+                        <div class="individual-specs-group">
+                            <p class="other-specs-name">CONDITION</p>
+                            <p class="other-specs-value"><?= $condition ? $condition : 'N/A' ?></p>
+                        </div>
+                        <div class="individual-specs-group">
+                            <p class="other-specs-name">CONSTRUCTION</p>
+                            <p class="other-specs-value"><?= $construction ? $construction : 'N/A' ?></p>
+                        </div>
+                        <div class="individual-specs-group">
+                            <p class="other-specs-name">BOAT HULL ID</p>
+                            <p class="other-specs-value"><?= $boatHullID ? $boatHullID : 'N/A' ?></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="other-specs-group">
+                    <h3 class="other-specs-title">DIMENSIONS</h3>
+                    <div class="other-specs-group-container">
+                        <div class="individual-specs-group">
+                            <p class="other-specs-name">LENGTH</p>
+                            <p class="other-specs-value"><?= (isset($length) && isset($lengthMeters)) ? $length . " / " . $lengthMeters . " m" : "N/A" ?></p>
+                        </div>
+                        <div class="individual-specs-group">
+                            <p class="other-specs-name">OVERALL</p>
+                            <p class="other-specs-value"><?= (isset($lengthOverall) && isset($lengthOverallMeters)) ? $lengthOverall . " / " . $lengthOverallMeters . " m" : "N/A" ?></p>
+                        </div>
+                        <div class="individual-specs-group">
+                            <p class="other-specs-name">BEAM</p>
+                            <p class="other-specs-value"><?= (isset($beam) && isset($beamMeters)) ? $beam . " / " . $beamMeters . " m" : "N/A" ?></p>
+                        </div>
+                        <div class="individual-specs-group">
+                            <p class="other-specs-name">DRY WEIGHT</p>
+                            <p class="other-specs-value"><?= $dryWeight ? $dryWeight : 'N/A' ?></p>
+                        </div>
+                        <div class="individual-specs-group">
+                            <p class="other-specs-name">CABINS COUNT</p>
+                            <p class="other-specs-value"><?= $cabinCount ? $cabinCount : 'N/A' ?></p>
+                        </div>
+                    </div>
+                </div>
+                <?php 
+                    $counter = 1;
+                    foreach($vessel->Engines as $engine){
+                     ?>
+                    <div class="other-specs-group">
+                        <h3 class="other-specs-title"><?= 'ENGINE ' . $counter ?></h3>
+                        <div class="other-specs-group-container">
+                            <div class="individual-specs-group">
+                                <p class="other-specs-name">MAKE</p>
+                                <p class="other-specs-value"><?= $engine->Make ? $engine->Make : "N/A" ?></p>
+                            </div>
+                            <div class="individual-specs-group">
+                                <p class="other-specs-name">MODEL</p>
+                                <p class="other-specs-value"><?= $engine->Model ? $engine->Model : "N/A" ?></p>
+                            </div>
+                            <div class="individual-specs-group">
+                                <p class="other-specs-name">DRIVE TYPE</p>
+                                <p class="other-specs-value"><?= $engine->Type ? $engine->Type : "N/A" ?></p>
+                            </div>
+                            <div class="individual-specs-group">
+                                <p class="other-specs-name">FUEL</p>
+                                <p class="other-specs-value"><?= $engine->Fuel ? ucfirst($engine->Fuel) : 'N/A' ?></p>
+                            </div>
+                            <div class="individual-specs-group">
+                                <p class="other-specs-name">ENGINE POWER</p>
+                                <p class="other-specs-value"><?= $engine->EnginePower ? $engine->EnginePower : 'N/A' ?></p>
+                            </div>
+                        </div>
+                    </div>
+                <?php 
+                    $counter++;
+                    } 
+                ?>
+                 <div class="other-specs-group">
+                    <h3 class="other-specs-title">OTHER</h3>
+                    <div class="other-specs-group-container">
+                        <div class="additional-description">
+                            <?= $additionalDescription ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="image-gallery-container">
+            <?php foreach($vessel->Images as $image){ ?>
+                <div class="individual-image-container">
+                    <img class="gallery-image" src="<?= $image->Uri ?>" alt="boat-image" />
+                </div>
+            <?php } ?>
+        </div>
+        <div class="footer-container">
+            <img class="footer-img" src="<?php echo get_template_directory_uri(); ?>/images/pdf-img/IYG_Logo.png" alt="" />
+            <div class="footer-broker-info">
+                <p class="footer-broker-name"><?= $broker ?></p>
+                <p class="footer-broker-phone"><?= $phone ?></p>
+                <p class="footer-broker-email"><?= $email ?></p>
+                <p class="footer-broker-website">www.italianyachtgroup.com</p>
             </div>
         </div>
     </div>
