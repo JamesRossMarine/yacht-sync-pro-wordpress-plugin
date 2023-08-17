@@ -14,7 +14,7 @@
 			$this->YoastFun_OgImage = new raiYachtSync_YoastFun_ogImage();
 
 			// $this->Yachts_WpQueryAddon = new raiYachtSync_Yachts_WpQueryAddon();
-			$this->Yachts_DetailOverride = new raiYachtSync_Yachts_DetailsOverride();
+			// $this->Yachts_DetailOverride = new raiYachtSync_Yachts_DetailsOverride();
 
 			$this->Brokers_DetailOverride = new raiYachtSync_Brokers_DetailsOverride();
 			$this->Brokers_MetaFields = new raiYachtSync_Brokers_MetaSections();

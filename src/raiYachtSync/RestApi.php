@@ -137,6 +137,35 @@
 
 	   public function yacht_pdf(WP_REST_Request $request) {
 
+			if ($request->get_param('yacht_post_id') != '') {
+	
+				$yacht_post_id = $request->get_param('yacht_post_id');
+
+				$yacht_post = get_post( $yacht_post_id );
+
+				$meta = get_post_meta( $yacht_post_id );
+
+				foreach ($meta as $indexM => $valM) {
+					if (is_array($valM) && ! isset($valM[1])) {
+						$meta[$indexM] = $valM[0];
+					}
+				}
+
+				$meta2=array_map("maybe_unserialize", $meta);
+
+				$filename='yacht-details.pdf';
+
+				// ----------------------
+
+				header('Content-Type: text/html; charset=UTF-8');
+
+		   		include RAI_YS_PLUGIN_TEMPLATES_DIR.'/pdf.php';
+
+
+			}
+
+			// return ['success' => 'No YACHT ID'];
+			return;
 	   } 
 
 
