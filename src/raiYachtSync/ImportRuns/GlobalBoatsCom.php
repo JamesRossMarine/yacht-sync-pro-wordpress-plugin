@@ -21,7 +21,7 @@
 
 	        $total = $apiCall['body']['data']['numResults'];
 
-			$apiCallInventory = $apiCall['body']['data']['results'];
+			//$apiCallInventory = $apiCall['body']['data']['results'];
 
 			while ($total > ($offset)) {
 				$apiUrl = $this->globalInventoryUrl;
@@ -40,16 +40,22 @@
 					$record=$boat;
 					$boatC = json_decode(json_encode($boat));
 
-		            if (! empty($record['BoatHullID'])) {
+					$find_post=get_posts([
+	                    'post_type' => 'rai_yatch',
+	                    'meta_query' => [
+
+	                        array(
+	                           'key' => 'DocumentID',
+	                           'value' => $boat['DocumentID'],
+	                           'compare' => '=',
+	                       )
+	                    ],
+	                ]);                
+		           	
+		            if (! isset($find_post[0]->ID)  && ! empty($record['BoatHullID'])) {
 		                $find_post=get_posts([
 		                    'post_type' => 'rai_yatch',
 		                    'meta_query' => [
-
-		                        /*array(
-		                           'key' => 'DocumentID',
-		                           'value' => $record['DocumentID'],
-		                           'compare' => '=',
-		                        ),*/
 
 		                        array(
 		                           'key' => 'BoatHullID',
@@ -68,22 +74,28 @@
 		            if (isset($find_post[0]->ID)) {
 		                $post_id=$find_post[0]->ID;
 
-		                $wpdb->delete($wpdb->postmeta, ['post_id' => $find_post[0]->ID], ['%d']);
+		                //$wpdb->delete($wpdb->postmeta, ['post_id' => $find_post[0]->ID], ['%d']);
 		            }
 
 				  	$url = 'https://services.boats.com/pls/boats/details?id=' . $boat['DocumentID'] . '&key=e97cdb91056f';
+					
+					$apiCall = wp_remote_get($url, ['timeout' => 300]);
 
-					$response = file_get_contents($url);
+					$response = $apiCall['body'];
 
-					$data = json_decode($response, true);
+						$apiCall['body']=json_decode($apiCall['body'], true);
 
-					$plsDisclaimer = $data['data']['PlsDisclaimer'];
+					$data = $apiCall['body'];
 
-					$newDisclaimer = substr($plsDisclaimer, 3, -4);
+					if (isset($data['data']['PlsDisclaimer'])) {
+						$plsDisclaimer = $data['data']['PlsDisclaimer'];
 
-					$finalDisclaimer = "We provide this yacht listing in good faith, and although we cannot guarantee its accuracy or the condition of the boat. The " . $newDisclaimer . " She is subject to prior sale, price change, or withdrawal without notice and does not imply a direct representation of a specific yacht for sale.";
+						$newDisclaimer = substr($plsDisclaimer, 3, -4);
 
-				    $boatC->MOD_DIS = $finalDisclaimer;
+						$finalDisclaimer = "We provide this yacht listing in good faith, and although we cannot guarantee its accuracy or the condition of the boat. The " . $newDisclaimer . " She is subject to prior sale, price change, or withdrawal without notice and does not imply a direct representation of a specific yacht for sale.";
+
+					    $boatC->MOD_DIS = $finalDisclaimer;
+					}
 
 		            $y_post_id=wp_insert_post(
 		                [

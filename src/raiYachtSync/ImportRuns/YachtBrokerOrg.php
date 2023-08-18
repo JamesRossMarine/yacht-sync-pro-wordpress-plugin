@@ -20,9 +20,9 @@
 	            ]
 	        ];
 
-	        $apiUrl  = 'https://api.yachtbroker.org/listings?key='.$this->yachtBrokerAPIKey.'&id='. $this->yachtClientId .'&gallery=true&engines=true&generators=true&textblocks=true&media=true&limit='.$this->yachtBrokerLimit;
+	        $apiUrlOne  = 'https://api.yachtbroker.org/listings?key='.$this->yachtBrokerAPIKey.'&id='. $this->yachtClientId .'&gallery=true&engines=true&generators=true&textblocks=true&media=true&limit='.$this->yachtBrokerLimit;
 
-	        $apiCall = wp_remote_get($apiUrl, $headers);
+	        $apiCall = wp_remote_get($apiUrlOne, $headers);
 
 	        $json = json_decode($apiCall['body'], true);
 
@@ -31,17 +31,18 @@
 	        $page = 1;
 
 	        while ($total > $yachtSynced) {
+	        	$apiUrl  = 'https://api.yachtbroker.org/listings?key='.$this->yachtBrokerAPIKey.'&id='. $this->yachtClientId .'&gallery=true&engines=true&generators=true&textblocks=true&media=true&limit='.$this->yachtBrokerLimit;
+
 	        	$apiUrl .='&page='.$page;
 
 		        $apiCallWhile = wp_remote_get($apiUrl, $headers);
 		        $apiBody = json_decode($apiCallWhile['body'], true);
 
-
 		        if (isset($apiBody['next_page_url'])) {
 		        	$page++;
 		        }
 
-				foreach ($json['V-Data'] as $row) {
+				foreach ($apiBody['V-Data'] as $row) {
 		            $yachtSynced ++;
 		           	
 		           	$theBoat=[
@@ -61,7 +62,8 @@
 		           	];
 
 		           	$MapToBoatOrg=[
-		           		'ID' => 'DocumentID',
+		           		//'ID' => 'DocumentID',
+		           		'ID' => 'YBDocumentID',
 		                'Status' => 'SalesStatus',
 		                'Condition' => 'SaleClassCode',
 		                'ListingOwnerBrokerageName' => 'CompanyName',
@@ -188,17 +190,22 @@
 		                $theBoat['TotalEnginePowerQuantity'] = number_format($enginePower, 2).' hp';
 		            }
 
+	                $find_post=get_posts([
+	                    'post_type' => 'rai_yatch',
+	                    'meta_query' => [
 
-		           	if (! empty($theBoat['BoatHullID'])) {
+	                        array(
+	                           'key' => 'YBDocumentID',
+	                           'value' => $row['ID'],
+	                           'compare' => '=',
+	                       )
+	                    ],
+	                ]);                
+		           	
+		            if (! isset($find_post[0]->ID)  && ! empty($theBoat['BoatHullID'])) {
 		                $find_post=get_posts([
 		                    'post_type' => 'rai_yatch',
 		                    'meta_query' => [
-
-		                        /*array(
-		                           'key' => 'DocumentID',
-		                           'value' => $record['DocumentID'],
-		                           'compare' => '=',
-		                        ),*/
 
 		                        array(
 		                           'key' => 'BoatHullID',

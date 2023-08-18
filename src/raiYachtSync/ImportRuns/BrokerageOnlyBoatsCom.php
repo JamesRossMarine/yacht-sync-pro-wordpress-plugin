@@ -21,10 +21,12 @@
 
 	        $total = $apiCall['body']['numResults'];
 
-			$apiCallInventory = $apiCall['body']['results'];
+			//$apiCallInventory = $apiCall['body']['results'];
 
 			while ($total > ($offset)) {
+
 				$apiUrl = $this->brokerageInventoryUrl;
+
 				$apiUrl = $apiUrl.'&start='. $offset .'&rows='. $this->limit;
 
 				// Sync broker inventory
@@ -39,18 +41,13 @@
 				foreach ($apiCallInventory as $boat) {
 					$record=$boat;
 					$boatC = json_decode(json_encode($boat));
+
+					//$boatC->CompanyName = 'Italian Yacht Group';
 					
 		            if (! empty($record['BoatHullID'])) {
 		                $find_post=get_posts([
 		                    'post_type' => 'rai_yatch',
 		                    'meta_query' => [
-
-		                        /*array(
-		                           'key' => 'DocumentID',
-		                           'value' => $record['DocumentID'],
-		                           'compare' => '=',
-		                        ),*/
-
 		                        array(
 		                           'key' => 'BoatHullID',
 		                           'value' => $record['BoatHullID'],
