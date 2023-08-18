@@ -96,7 +96,7 @@
 
 							'post_contnet' => $boat['GeneralBoatDescription'],
 							'post_status' => 'publish',
-							'meta_input' => $boatC,
+							'meta_input' => apply_filters('raiys_yacht_meta_sync', $boatC),
 
 						]
 					);

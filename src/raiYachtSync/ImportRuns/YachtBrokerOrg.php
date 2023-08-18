@@ -225,7 +225,7 @@
 							),
 							'post_contnet' => $theBoat['GeneralBoatDescription'],
 							'post_status' => 'publish',
-							'meta_input' => $theBoat,
+							'meta_input' => apply_filters('raiys_yacht_meta_sync', $theBoat),
 
 						]
 					);
