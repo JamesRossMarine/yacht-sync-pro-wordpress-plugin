@@ -31,7 +31,7 @@
 
 				'public' => true,
 				'publicly_queryable' => true,
-				'can_export' => false
+				'can_export' => true
 
             ]);
 

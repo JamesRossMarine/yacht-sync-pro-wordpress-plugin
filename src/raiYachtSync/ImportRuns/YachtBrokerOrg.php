@@ -190,19 +190,7 @@
 		                $theBoat['TotalEnginePowerQuantity'] = number_format($enginePower, 2).' hp';
 		            }
 
-	                $find_post=get_posts([
-	                    'post_type' => 'rai_yatch',
-	                    'meta_query' => [
-
-	                        array(
-	                           'key' => 'YBDocumentID',
-	                           'value' => $row['ID'],
-	                           'compare' => '=',
-	                       )
-	                    ],
-	                ]);                
-		           	
-		            if (! isset($find_post[0]->ID)  && ! empty($theBoat['BoatHullID'])) {
+		            if (! empty($theBoat['BoatHullID'])) {
 		                $find_post=get_posts([
 		                    'post_type' => 'rai_yatch',
 		                    'meta_query' => [

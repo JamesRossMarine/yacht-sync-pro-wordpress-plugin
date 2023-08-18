@@ -41,11 +41,13 @@
 			$this->cleanup();
 
 			// @ToDo For Loop the Runs  
-
-			$this->ImportBrokerageOnlyBoatsCom->run();
+			// KEEP THIS IN THIS ORDER
 			$this->ImportGlobalBoatsCom->run();
 
 			$this->ImportYachtBrokerOrg->run();
+
+			$this->ImportBrokerageOnlyBoatsCom->run();
+
 
 		}
        

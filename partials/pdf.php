@@ -33,17 +33,6 @@
     }
 
     $price = ($vessel->Price && $vessel->Price != "0.00 USD" && $vessel->Price != "1.00 USD") ? number_format(ReplaceStr(trim(str_replace(['EUR', 'USD'], '', $vessel->Price)))) : "Contact Us For Price";
-
-    $imageArray = json_encode($vessel->Images);
-    $imageData = json_decode($imageArray, true);
-
-    // Check if the array is not empty
-    if (!empty($imageData)) {
-        $firstImage = $imageData[0];
-        $imageUrl = $firstImage['Uri'];
-
-    }
-    $firstImage = $imageArray[0];
     
     /*$url = 'https://services.boats.com/pls/boats/details?id=' . $vessel->DocumentID . '&key=e97cdb91056f';
     
@@ -63,6 +52,7 @@
     $address = $vessel->Office->PostalAddress;
     $beam = $vessel->BeamMeasure;
     $beamMeters = $beam * 0.3048;
+    
     $beamMeters = sprintf("%0.2f", $beamMeters);
     $boatHullID = $vessel->BoatHullID;
     $boatCity = $vessel->BoatLocation->BoatCityName;

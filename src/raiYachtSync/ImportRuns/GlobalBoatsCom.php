@@ -51,30 +51,32 @@
 	                       )
 	                    ],
 	                ]);                
-		           	
-		            if (! isset($find_post[0]->ID)  && ! empty($record['BoatHullID'])) {
-		                $find_post=get_posts([
-		                    'post_type' => 'rai_yatch',
-		                    'meta_query' => [
 
-		                        array(
-		                           'key' => 'BoatHullID',
-		                           'value' => $record['BoatHullID'],
-		                           'compare' => '=',
-		                       )
-		                    ],
-		                ]);                
-		            }
-		            else {
-		                $find_post=[];
-		            }
+		           	if (! isset($find_post[0]->ID)) {
+			            if (! empty($record['BoatHullID'])) {
+			                $find_post=get_posts([
+			                    'post_type' => 'rai_yatch',
+			                    'meta_query' => [
+
+			                        array(
+			                           'key' => 'BoatHullID',
+			                           'value' => $record['BoatHullID'],
+			                           'compare' => '=',
+			                       )
+			                    ],
+			                ]);                
+			            }
+			            else {
+			                $find_post=[];
+			            }
+		           	}
 
 		            $post_id=0;
 
 		            if (isset($find_post[0]->ID)) {
 		                $post_id=$find_post[0]->ID;
 
-		                //$wpdb->delete($wpdb->postmeta, ['post_id' => $find_post[0]->ID], ['%d']);
+		                $wpdb->delete($wpdb->postmeta, ['post_id' => $find_post[0]->ID], ['%d']);
 		            }
 
 				  	$url = 'https://services.boats.com/pls/boats/details?id=' . $boat['DocumentID'] . '&key=e97cdb91056f';
