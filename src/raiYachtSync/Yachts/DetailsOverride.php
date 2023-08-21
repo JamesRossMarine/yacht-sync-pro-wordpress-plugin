@@ -14,8 +14,8 @@
 
 			global $post, $wp_query;
 
-			if (is_singular('rai_yatch')) {
-				if ( ! file_exists(get_template_directory().'/single-rai_yatch.php')) {
+			if (is_singular('rai_yacht')) {
+				if ( ! file_exists(get_template_directory().'/single-rai_yacht.php')) {
 					$single_template = RAI_YS_PLUGIN_TEMPLATES_DIR.'/single-yacht.php';
 				}
 

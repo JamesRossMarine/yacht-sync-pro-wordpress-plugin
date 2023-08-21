@@ -14,7 +14,7 @@
 
 		public function addPostTypes() {
 	
-			register_post_type('rai_yatch', [
+			register_post_type('rai_yacht', [
 
            		'labels' => array(
 					'name' => 'Synced Yachts',

@@ -126,9 +126,9 @@
 	   	public function yacht_dropdown_options(WP_REST_Request $request) {
 
 	   		$return = [
-	   			'Builders' => $this->get_unique_yacht_meta_values('MakeString', 'rai_yatch'),
+	   			'Builders' => $this->get_unique_yacht_meta_values('MakeString', 'rai_yacht'),
 
-	   			'HullMaterials' => $this->get_unique_yacht_meta_values('BoatHullMaterialCode', 'rai_yatch'),
+	   			'HullMaterials' => $this->get_unique_yacht_meta_values('BoatHullMaterialCode', 'rai_yacht'),
 	   		];
 
 	   		return $return; 

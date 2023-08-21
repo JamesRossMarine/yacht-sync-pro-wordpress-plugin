@@ -14,7 +14,7 @@
 			global $wp_query, $post;
 
 
-			if (is_singular('rai_yatch')) {
+			if (is_singular('rai_yacht')) {
 				$VesselImages=get_post_meta($post->ID, 'Images', true);
 
 				$image = ['url' => $VesselImages[0]->Uri];

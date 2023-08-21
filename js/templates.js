@@ -1,10 +1,10 @@
 var ysp_templates={};
 
-	ysp.yacht.grid=function(vessel) {
+	ysp_templates.yacht.grid=function(vessel) {
 
 	};
 
-	ysp.yacht.list=function(vessel) {
+	ysp_templates.yacht.list=function(vessel) {
 
  
 	};

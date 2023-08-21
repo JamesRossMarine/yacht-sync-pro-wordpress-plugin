@@ -41,7 +41,7 @@
 					$boatC = json_decode(json_encode($boat));
 
 					$find_post=get_posts([
-	                    'post_type' => 'rai_yatch',
+	                    'post_type' => 'rai_yacht',
 	                    'meta_query' => [
 
 	                        array(
@@ -55,7 +55,7 @@
 		           	if (! isset($find_post[0]->ID)) {
 			            if (! empty($record['BoatHullID'])) {
 			                $find_post=get_posts([
-			                    'post_type' => 'rai_yatch',
+			                    'post_type' => 'rai_yacht',
 			                    'meta_query' => [
 
 			                        array(
@@ -102,7 +102,7 @@
 		            $y_post_id=wp_insert_post(
 		                [
 		                    'ID' => $post_id,
-							'post_type' => 'rai_yatch',
+							'post_type' => 'rai_yacht',
 							'post_title' =>  $boat['ModelYear'].' '.$boat['MakeString'].' '.$boat['Model'].' '.$boat['BoatName'],
 							
 							'post_name' => sanitize_title(

@@ -13,7 +13,7 @@
 		public function yacht_description($description) {
 			global $wp_query, $post;
 
-				if (is_singular('rai_yatch')) {
+				if (is_singular('rai_yacht')) {
 					$meta = get_post_meta($post->ID);
 
 			        foreach ($meta as $indexM => $valM) {

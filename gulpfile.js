@@ -19,11 +19,18 @@ watch = require('gulp-watch');
 var sassPaths=[];
 
 var global_script_files=[
-    
-];
+    'js/threeP/jquery-pagination.js',
 
-var yacht_details_script_files=[
+    'js/threeP/lightgallery-dist/lightgallery.umd.js',
+    'js/threeP/lightgallery-dist/plugins/thumbnail/lg-thumbnail.umd.js',
+    'js/threeP/lightgallery-dist/plugins/zoom/lg-zoom.umd.js',
+    'js/threeP/lightgallery-dist/plugins/video/lg-video.umd.js',
+    'js/threeP/lightgallery-dist/plugins/rotate/lg-rotate.umd.js',
 
+    'js/common.js',
+    'js/api-client.js',
+    'js/templates.js',
+    'js/yachtSearch.js'
 ];
 
 var exitOnJshintError = map(function (file, cb) {
@@ -93,34 +100,9 @@ gulp.task('client-minify-js', function() {
         .pipe(gulp.dest('build/js'));
 });
 
-gulp.task('yacht-details-client-js', function() {
-    return gulp.src(yacht_details_script_files)
-        .pipe(sourcemaps.init())
-        .pipe(concat('single-yacht.js'))
-        .pipe(babel({
-             presets: ['@babel/env']
-        }))
-        .pipe(sourcemaps.write())
-        .pipe(gulp.dest('build/js'));
-});
-
-gulp.task('yacht-details-client-minify-js', function() {
-    return gulp.src(yacht_details_script_files)
-        .pipe(concat('single-yacht.noMaps.js'))
-        .pipe(babel({
-             presets: ['@babel/env']
-        }))
-        .pipe(terser({ 
-            compress: {drop_console: false,},
-            output: {comments: false},
-            //ie8: true,
-        }))
-        .pipe(gulp.dest('build/js'));
-});
-
-gulp.task('render-client', gulp.series('client-sass', 'client-sass-no-maps'));
+gulp.task('render-client', gulp.series('client-sass', 'client-sass-no-maps', 'client-js', 'client-minify-js'));
 
 
 gulp.task('default', gulp.series('render-client'));
 
-watch('scss/*.scss', gulp.series('render-client'));
+watch(['scss/*.scss', 'js/*.js'], gulp.series('render-client'));

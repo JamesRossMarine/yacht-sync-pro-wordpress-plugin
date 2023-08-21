@@ -15,7 +15,7 @@
 		
 			$yArgs=[
 	            'fields' => "ids",
-	            'post_type' => 'rai_yatch',
+	            'post_type' => 'rai_yacht',
 	            'posts_per_page' => -1,
 	        ];
 
@@ -28,7 +28,7 @@
 	        /* 
 				DELETE wp FROM wp_posts wp 
 				LEFT JOIN wp_postmeta pm ON pm.post_id = wp.ID 
-				WHERE wp.post_type = 'rai_yatch'
+				WHERE wp.post_type = 'rai_yacht'
 
 				DELETE pm FROM wp_postmeta pm 
 				LEFT JOIN wp_posts wp ON wp.ID = pm.post_id 
