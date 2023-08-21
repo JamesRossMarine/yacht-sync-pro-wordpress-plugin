@@ -12,6 +12,7 @@
 			$this->RestApi = new raiYachtSync_RestApi();
 			
 			$this->YoastFun_OgImage = new raiYachtSync_YoastFun_ogImage();
+			$this->YoastFun_Descriptions = new raiYachtSync_YoastFun_Descriptions();
 
 			// $this->Yachts_WpQueryAddon = new raiYachtSync_Yachts_WpQueryAddon();
 			// $this->Yachts_DetailOverride = new raiYachtSync_Yachts_DetailsOverride();
