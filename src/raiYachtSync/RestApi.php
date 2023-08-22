@@ -36,10 +36,10 @@
 
 			register_rest_route( 'raiys', '/dropdown-options', array(
 		        'callback' => 'ross_yacht_dropdown_options',
-		        'methods'  => [WP_REST_Server::READABLE],
+		        'methods'  => [WP_REST_Server::CREATABLE],
 		        'permission_callback' => '__return_true',
 		        'args' => array(
-		            'label' => array(
+		            'labels' => array(
 		                'required' => false,
 		                'default' => [],
 		            ),
@@ -70,7 +70,8 @@
 		public function yachts(WP_REST_Request $request) {
 
 			$yArgs = [
-
+				'post_type' => 'rai_yacht',
+				'posts_per_page' => 12,
 			];
 
 			$yachts_query=new WP_Query($yArgs);
@@ -125,11 +126,20 @@
 
 	   	public function yacht_dropdown_options(WP_REST_Request $request) {
 
-	   		$return = [
-	   			'Builders' => $this->get_unique_yacht_meta_values('MakeString', 'rai_yacht'),
+	   		$labels = $request->get_param('labels');
 
-	   			'HullMaterials' => $this->get_unique_yacht_meta_values('BoatHullMaterialCode', 'rai_yacht'),
+	   		$labelsToMetaField = [
+	   			"Builders" => "MakeString",
+	   			"HullMaterials" => "BoatHullMaterialCode"
 	   		];
+
+	   		$return=[];
+
+	   		foreach ($label as $labels) {
+
+	   			$return[ $labels ] = $this->get_unique_yacht_meta_values( $labelsToMetaField[ $label ], 'rai_yacht');
+
+	   		}
 
 	   		return $return; 
 
@@ -146,7 +156,6 @@
 				header('Content-Type: text/html; charset=UTF-8');
 
 		   		include RAI_YS_PLUGIN_TEMPLATES_DIR.'/pdf.php';
-
 
 			}
 

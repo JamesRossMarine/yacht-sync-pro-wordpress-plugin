@@ -31,8 +31,7 @@
 		    	include apply_filters('rai_ys_v_yacht_search_template', $file_to_include);
 
 		    return ob_get_clean();
-
-
+		    
         }
 
         public function h_searchform($atts = array(), $content = null) {

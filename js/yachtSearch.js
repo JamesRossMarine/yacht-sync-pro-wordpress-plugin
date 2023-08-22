@@ -64,7 +64,9 @@ function ysp_yacht_search_and_reader(data) {
 
 document.addEventListener("DOMContentLoaded", function() {
     // Restore Fields
-    var urlPARAMs=decodeURI(window.location.search)
+    let URLREF=new URL(location.href); // maybe for a re-do
+    
+    let urlPARAMs=decodeURI(window.location.search)
         .replace('?', '')
         .split('&')
         .map(param => param.split('='))
@@ -73,8 +75,7 @@ document.addEventListener("DOMContentLoaded", function() {
             return values;
         }, {});
 
-
-    for (param in urlPARAMs) {
+    for (let param in urlPARAMs) {
         if (param != '' && urlPARAMs[ param ] != '') {
             let input = document.querySelector('#search-yacht-sec *[name='+ param +']');
              
@@ -103,7 +104,52 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
+    // Fill options
+    let FillOptions=[];
+    let selectorElements = document.querySelectorAll("select[data-fill-label]");
+
+    selectorElements.forEach((ele) => {
+        FillOptions.push(ele.getAttribute('data-fill-label'));
+    });
+   
+    rai_ysp_api.call_api('POST', 'dropdown-options', {labels: FillOptions}).then(function(rOptions) {
+        console.log(rOptions);
+
+        for (let label in rOptions) {
+
+            let SelectorEle = document.querySelectorAll("select[data-fill-label='"+ label +"']");
+
+            rOptions[label].forEach(function(b) {
+
+                let option = document.createElement("OPTION");
+
+                    option.text = b;
+                    option.value = b;
+
+                SelectorEle.forEach((ele) => {
+                    ele.add(option);
+                });
+            });
+
+            let URLREF = new URL(location.href);
+            let UrlVal = URLREF.searchParams.get( label );
+            
+            if (UrlVal != '' && UrlVal != null) {
+                SelectorEle.forEach((ele) => {
+                    ele.value = UrlVal; 
+                });
+            }
+        }
+    }).then(function () {
+
+        let params = raiys_get_form_data(document.querySelector('.ysp-yacht-search-form'));
+
+        ysp_yacht_search_and_reader( params );
+
+    });
+
     // Render Yachts For Page Load
+
 
 
 });

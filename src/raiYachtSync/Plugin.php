@@ -16,6 +16,7 @@
 
 			// $this->Yachts_WpQueryAddon = new raiYachtSync_Yachts_WpQueryAddon();
 			// $this->Yachts_DetailOverride = new raiYachtSync_Yachts_DetailsOverride();
+			$this->Yachts_Shortcode = new raiYachtSync_Shortcodes_YachtSearch();
 
 			$this->Brokers_DetailOverride = new raiYachtSync_Brokers_DetailsOverride();
 			$this->Brokers_MetaFields = new raiYachtSync_Brokers_MetaSections();

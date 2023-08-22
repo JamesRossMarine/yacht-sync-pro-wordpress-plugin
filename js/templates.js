@@ -1,5 +1,6 @@
 var ysp_templates={};
-
+	ysp_templates.yacht={};
+	
 	ysp_templates.yacht.grid=function(vessel) {
 
 	};

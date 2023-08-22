@@ -102,7 +102,8 @@ gulp.task('client-minify-js', function() {
 
 gulp.task('render-client', gulp.series('client-sass', 'client-sass-no-maps', 'client-js', 'client-minify-js'));
 
-
 gulp.task('default', gulp.series('render-client'));
-
-watch(['scss/*.scss', 'js/*.js'], gulp.series('render-client'));
+/*
+watch('scss/*.scss', gulp.series('render-client'));
+watch('js/*.js', gulp.series('render-client'));
+*/
