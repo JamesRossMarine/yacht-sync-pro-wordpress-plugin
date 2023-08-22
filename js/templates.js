@@ -3,12 +3,14 @@ var ysp_templates={};
 	
 	ysp_templates.yacht.grid=function(vessel) {
 		return `
-			<p>HEELOO ${ vessel.DocumentID }</p>
+			<p>Grid Hello: ${ vessel.DocumentID }</p>
 		`;
 	};
 
 	ysp_templates.yacht.list=function(vessel) {
-
+		return `
+			<p>List Hello; ${ vessel.DocumentID }</p>
+		`;
 	};
 
 	ysp_templates.noResults=function() {
