@@ -45,7 +45,7 @@ function ysp_yacht_search_and_reader(data) {
             });
 
 
-        }
+        } 
         else {
             jQuery('#yachts-pagination').html('');
             jQuery('#search-result-row').append(__templates.noResults());
