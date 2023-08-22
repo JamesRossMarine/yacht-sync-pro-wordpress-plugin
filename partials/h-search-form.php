@@ -1,4 +1,8 @@
 <form role="search" class="ysp-yacht-search-form" action="https://superiygdev.wpengine.com/all-yacht-search" method="get" id="ysp-yacht-search-form">
+
+    <input type="hidden" name="page_index">
+
+
             <div class="search-yacht">
                 <div class="row">
 
