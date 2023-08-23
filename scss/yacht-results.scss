@@ -1,0 +1,65 @@
+#search-result-section {
+    max-width: $max-width;
+
+    .yacht-search-total {
+        padding-bottom: 15px;
+        border-bottom: 1px solid #CBD5E1;
+        margin-bottom: 10px;
+        
+        .total-results-title {
+            color: #334155;
+        }
+    }
+
+    .yacht-search-options {
+        display: flex;
+        justify-content: space-between;
+
+        .brand-listing-container {
+            display: flex;
+            align-items: center;
+
+            label {
+                margin-left: 10px;
+                color: #334155;
+                font-size: 14px;
+                font-weight: 500;
+                line-height: 14px;
+            }
+        }
+        .list-view-and-sort-container {
+            display: flex;
+            justify-content: space-between;
+
+            .list-view-group {
+                display: flex;
+                margin-right: 130px;
+                .grid-view {
+                    display: flex;
+                    background-color: #FFFFFF;
+                    border: none;
+                    color: #334155;
+    
+                    svg {
+                        margin-right: 5px;
+                    }
+                }
+                .list-view {
+                    display: flex;
+                    background-color: #FFFFFF;
+                    border: none;
+                    color: #94A3B8;
+    
+                    svg {
+                        margin-right: 5px;
+                    }
+                }
+            }
+
+            select {
+                border: none;
+                width: 75px;
+            }
+        }
+    }
+}

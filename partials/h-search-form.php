@@ -75,5 +75,9 @@
                 <option value="Used">Used</option>
             </select>
         </div>
+        <div class="ys-h-row-item submit-container">
+            <label>Submit</label>
+            <input type="submit" name="submit" value="Submit"/>
+        </div>
     </form>
 </div>
