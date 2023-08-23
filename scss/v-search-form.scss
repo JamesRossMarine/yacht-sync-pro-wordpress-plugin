@@ -1,0 +1,60 @@
+#v-search-container {
+    max-width: 260px;
+    margin-right: auto;
+    margin-left: auto;
+
+    .ys-v-row {
+        display: block;
+        width: 100%;
+
+        .ys-v-row-item {
+            margin-bottom: 15px;
+
+            label {
+                display: block;
+                font-size: 12px;
+                font-weight: 400;
+                line-height: 11px;
+                margin-bottom: 10px;
+            }
+
+            select {
+                padding: 8px 12px;
+                width: 100%;
+                border-radius: 0px;
+                border: 1px solid #D9D9D9;
+            }
+
+            input {
+                padding: 8px 12px;
+                width: 90%;
+                border-radius: 0px;
+                border: 1px solid #D9D9D9;
+
+                @media screen and (max-width: $breakpoint-small){
+                    width: 94%;
+                }
+            }
+            input[type="submit"] {
+                background-color: #252F38;
+                color: #FFFFFF;
+                width: 100%;
+                align-self: end !important;
+                padding: 8px 12px;
+            }
+            .min-max-container {
+                display: flex;
+                justify-content: space-between;
+                
+                input {
+                    width: 36%;
+                    border: 1px solid #D9D9D9;
+                }
+
+                span {
+                    color: #D9D9D9;
+                }
+            }
+        }
+    }
+}
