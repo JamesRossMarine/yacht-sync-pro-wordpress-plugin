@@ -9,8 +9,8 @@
 
 		public function add_actions_and_filters() {
 
-			add_shortcode('ys-v-yacht-searh-form', [$this, 'v_searchform']);
-			add_shortcode('ys-h-yacht-searh-form', [$this, 'h_searchform']);
+			add_shortcode('ys-v-yacht-search-form', [$this, 'v_searchform']);
+			add_shortcode('ys-h-yacht-search-form', [$this, 'h_searchform']);
 			add_shortcode('ys-yacht-results', [$this, 'yacht_results']);
 
 		}
