@@ -1,6 +1,6 @@
 <section id="search-result-section" class="search-result-section">
 	<h5 class="yacht-search-total">
-        <span class="total-results-title"><span id="total-results">320</span> YACHTS FOUND</span>
+        <span class="total-results-title"><span id="total-results"></span> YACHTS FOUND</span>
     </h5>
      
     <div class="yacht-search-options">
@@ -26,7 +26,7 @@
                     <path d="M2.66699 4H13.3337" stroke="#94A3B8" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M2.66699 12H13.3337" stroke="#94A3B8" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-                List
+                    List
                 </button>
             </div>
             <select name="sort">

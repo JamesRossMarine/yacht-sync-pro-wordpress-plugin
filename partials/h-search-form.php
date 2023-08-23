@@ -1,5 +1,5 @@
 <div id="h-search-container">
-    <form id="h-search-form" class="ys-h-row">
+    <form id="h-search-form" class="ys-h-row ysp-yacht-search-form">
         <div class="ys-h-row-item">
             <label>Keyword</label>
             <input type="text" name="keyword" placeholder="Search by Name" />
