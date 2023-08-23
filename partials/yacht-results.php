@@ -17,7 +17,7 @@
                     <path d="M2 10H14" stroke="#334155" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M6 2V14" stroke="#334155" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M10 2V14" stroke="#334155" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg> 
+                </svg>
                     Gallery
                 </button>
                 <button name="list-view" class="list-view">

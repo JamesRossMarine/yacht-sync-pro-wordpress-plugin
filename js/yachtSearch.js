@@ -13,12 +13,10 @@ function ysp_yacht_search_and_reader(data) {
             data_result.results.forEach(function(item) {
 
                 if (typeof data.featured != 'undefined' && data.featured == 'on') {
-                    jQuery('#search-result-row').append( ysp_templates.yacht.grid(item, data) );
-                    // jQuery('#search-result-row').append( ysp_templates.yacht.list(item, data) );
+                    jQuery('#search-result-row').append( ysp_templates.yacht.list(item, data) );
                 }
                 else {
-                    jQuery('#search-result-row').append( ysp_templates.yacht.list(item, data) );
-                    // jQuery('#search-result-row').append( ysp_templates.yacht.grid(item, data) );
+                    jQuery('#search-result-row').append( ysp_templates.yacht.grid(item, data) );
                 }
             });
 
