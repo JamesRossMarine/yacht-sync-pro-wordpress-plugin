@@ -157,48 +157,9 @@
 	   		if ($request->get_param('yacht_post_id') != '') {
 	   			header('Content-Type: text/html; charset=UTF-8');
 
-	   			echo "<div style=' margin: auto; margin-top: 49vh; text-align: center;'>LOADDING PDF</div>";
+	   			$file_to_include=RAI_YS_PLUGIN_TEMPLATES_DIR.'/pdf-loader.php';
 
-	   			ob_start();
-
-	   			?>
-	   				<script type="text/javascript">
-   					
-					        var xhttp = new XMLHttpRequest();
-
-					        new Promise(function(resolve, reject) {
-					            
-					            xhttp.onreadystatechange = function() {
-					                if (this.readyState == 4 && this.status == 200) {
-
-					                    //var responseData = JSON.parse( this.responseText );
-
-					                    resolve();
-
-					                }
-					            };					            
-
-			                    xhttp.open("GET", "https://api.urlbox.io/v1/0FbOuhgmL1s2bINM/pdf?&url=https://superiygdev.wpengine.com/wp-json/raiys/yacht-pdf?yacht_post_id=<?php echo $request->get_param('yacht_post_id'); ?>", true);
-
-			                    xhttp.setRequestHeader('Content-Type', 'application/pdf');
-
-			                    xhttp.send();
-					            
-					        }).then(function( rData) {
-
-					        	window.location.href="https://api.urlbox.io/v1/0FbOuhgmL1s2bINM/pdf?&url=https://superiygdev.wpengine.com/wp-json/raiys/yacht-pdf?yacht_post_id=<?php echo $request->get_param('yacht_post_id'); ?>";
-
-						  	});
-
-
-	   				</script>
-
-	   			<?php
-
-	   			echo ob_get_clean();
-
-
-
+		    	include apply_filters('rai_ys_yacht_pdf_loader_template', $file_to_include);
 
 	   		}
 

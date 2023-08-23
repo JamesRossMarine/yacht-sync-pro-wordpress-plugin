@@ -18,7 +18,7 @@
 		public function v_searchform($atts = array(), $content = null) {
 			// normalize attribute keys, lowercase
 		    $atts = array_change_key_case((array)$atts, CASE_LOWER);
-		 
+		 	
 		    // override default attributes with user attributes
 		    $attributes = shortcode_atts([
             	
