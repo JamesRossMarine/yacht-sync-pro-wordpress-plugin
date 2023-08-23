@@ -35,7 +35,7 @@
 		    ) );
 
 			register_rest_route( 'raiys', '/dropdown-options', array(
-		        'callback' => 'ross_yacht_dropdown_options',
+		        'callback' => [$this, 'yacht_dropdown_options'],
 		        'methods'  => [WP_REST_Server::CREATABLE],
 		        'permission_callback' => '__return_true',
 		        'args' => array(

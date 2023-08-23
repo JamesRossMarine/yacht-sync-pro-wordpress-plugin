@@ -84,7 +84,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     input.value = urlPARAMs[ param ];
                 }
             }
-
         });
 
         // Fill options
