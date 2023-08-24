@@ -56,7 +56,14 @@
 		        )
 		    ) );
 
-
+		    register_rest_route( 'raiys', '/yacht-pdf-loader', array(
+		        'callback' => [$this, 'yacht_pdf_loader'],
+		        'methods'  => [WP_REST_Server::READABLE, WP_REST_Server::CREATABLE],
+		        'permission_callback' => '__return_true',
+		        'args' => array(
+		            
+		        )
+		    ) );
 		}
 
 		public function sync_yachts(WP_REST_Request $request) {
@@ -145,6 +152,19 @@
 
 	   }
 
+	   public function yacht_pdf_loader(WP_REST_Request $request) {
+
+	   		if ($request->get_param('yacht_post_id') != '') {
+	   			header('Content-Type: text/html; charset=UTF-8');
+
+	   			$file_to_include=RAI_YS_PLUGIN_TEMPLATES_DIR.'/pdf-loader.php';
+
+		    	include apply_filters('rai_ys_yacht_pdf_loader_template', $file_to_include);
+
+	   		}
+
+	   }
+
 	   public function yacht_pdf(WP_REST_Request $request) {
 
 			if ($request->get_param('yacht_post_id') != '') {
@@ -155,11 +175,13 @@
 
 				header('Content-Type: text/html; charset=UTF-8');
 
-		   		include RAI_YS_PLUGIN_TEMPLATES_DIR.'/pdf.php';
+				$file_to_include=RAI_YS_PLUGIN_TEMPLATES_DIR.'/pdf.php';
 
+		    	include apply_filters('rai_ys_yacht_pdf_template', $file_to_include);
+		    	
 			}
 
-			// return ['success' => 'No YACHT ID'];
+			return ['success' => 'No YACHT ID'];
 	   } 
 
 

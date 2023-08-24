@@ -9,8 +9,8 @@
 
 		public function add_actions_and_filters() {
 
-			add_shortcode('ys-v-yacht-searh-form', [$this, 'v_searchform']);
-			add_shortcode('ys-h-yacht-searh-form', [$this, 'h_searchform']);
+			add_shortcode('ys-v-yacht-search-form', [$this, 'v_searchform']);
+			add_shortcode('ys-h-yacht-search-form', [$this, 'h_searchform']);
 			add_shortcode('ys-yacht-results', [$this, 'yacht_results']);
 
 		}
@@ -18,7 +18,7 @@
 		public function v_searchform($atts = array(), $content = null) {
 			// normalize attribute keys, lowercase
 		    $atts = array_change_key_case((array)$atts, CASE_LOWER);
-		 
+		 	
 		    // override default attributes with user attributes
 		    $attributes = shortcode_atts([
             	
