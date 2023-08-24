@@ -1,0 +1,92 @@
+#h-search-container{
+    max-width: $max-width;
+    margin-right: auto;
+    margin-left: auto;
+
+    .ys-h-row {
+        display: flex !important;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        width: 100%;
+        gap: 10px;
+
+        .ys-h-row-item {
+            flex: 0 0 calc(20% - 10px);
+            box-sizing: border-box;
+            width: 100%;
+
+            @media screen and (max-width: $breakpoint-x-large) {
+                flex: 0 0 calc(25% - 10px);
+            }
+
+            @media screen and (max-width: $breakpoint-large) {
+                flex: 0 0 calc(33% - 10px);
+            }
+
+            @media screen and (max-width: $breakpoint-med) {
+                flex: 0 0 calc(50% - 10px);
+            }
+
+            @media screen and (max-width: $breakpoint-small) {
+                flex: 0 0 100%;
+            }
+
+            label {
+                display: block;
+                font-size: 12px;
+                font-weight: 400;
+                line-height: 11px;
+                margin-bottom: 10px;
+            }
+
+            select {
+                padding: 8px 12px;
+                width: 100%;
+                border-radius: 0px;
+                border: 1px solid #D9D9D9;
+            }
+
+            input {
+                padding: 8px 12px;
+                width: 90%;
+                border-radius: 0px;
+                border: 1px solid #D9D9D9;
+
+                @media screen and (max-width: $breakpoint-small){
+                    width: 94%;
+                }
+            }
+
+            input[type="submit"] {
+                background-color: #252F38;
+                color: #FFFFFF;
+                width: 100%;
+                align-self: end !important;
+                padding: 8px 12px;
+            }
+            .min-max-container {
+                display: flex;
+                justify-content: space-between;
+                
+                input {
+                    width: 36%;
+                    border: 1px solid #D9D9D9;
+                }
+
+                span {
+                    color: #D9D9D9;
+                }
+            }
+        }
+
+        .submit-container {
+            label {
+                color: #FFFFFF;
+            }
+
+            @media screen and (max-width: $breakpoint-med) {
+                flex: 0 0 100%;
+            }
+        }
+    }
+}
