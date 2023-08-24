@@ -2,9 +2,7 @@
 	class raiYachtSync_Shortcodes_YachtSearch {
 
 		public function __construct() {
-
-			
-			
+			$this->options = new raiYachtSync_Options();
 		}
 
 		public function add_actions_and_filters() {

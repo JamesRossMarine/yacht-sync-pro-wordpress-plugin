@@ -2,6 +2,8 @@
 	class raiYachtSync_StylesAndScripts {
 
 		public function __construct() {
+			
+			$this->options = new raiYachtSync_Options();
 
 		}
 
@@ -18,6 +20,8 @@
 
 			$js_vars = [
 				'wp_rest_url' => get_rest_url(),
+				'assets_url' => RAI_YS_PLUGIN_ASSETS,
+				'yacht_search_url' => get_permalink($this->options->get('yacht_search_page_id'))
 			];
 
 			wp_localize_script('yacht-sync-script', 'rai_yacht_sync', $js_vars); 

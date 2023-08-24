@@ -10,10 +10,10 @@
 	    ];
 
 	    public function __construct() {
-	       	        
+	    	
 	    }
 
-	    public function getOption($optionName) 
+	    public function get($optionName) 
 	    {
 	        global $rai_yS_gotten_options;
 
@@ -30,7 +30,7 @@
 	        return $retVal;
 	    }
 
-	    public function updateOption($optionName, $value) 
+	    public function update($optionName, $value) 
 	    {
 	        global $rai_yS_gotten_options;
 
@@ -41,7 +41,7 @@
 	        return update_option($prefixedOptionName, $value);
 	    }
 
-	    public function deleteOption($optionName) 
+	    public function delete($optionName) 
 	    {
 	        $prefixedOptionName = SELF::PREFIX.$optionName; 
 
@@ -50,16 +50,16 @@
 
 	    public function isInstalled() 
 	    {
-	      return $this->getOption(self::OPTION_INSTALLED);
+	      return $this->get(self::OPTION_INSTALLED);
 	    }
 
 	    public function markAsInstalled() 
 	    {
-	      return $this->updateOption(self::OPTION_INSTALLED, true);
+	      return $this->update(self::OPTION_INSTALLED, true);
 	    }
 
 	    public function markAsUnInstalled() 
 	    {
-	      return $this->deleteOption(self::OPTION_INSTALLED);
+	      return $this->delete(self::OPTION_INSTALLED);
 	    }
 	}

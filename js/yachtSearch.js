@@ -106,44 +106,6 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
 
-        // Fill options
-        let FillOptions=[];
-        let selectorElements = document.querySelectorAll("select[data-fill-options]");
-
-        selectorElements.forEach((ele) => {
-            FillOptions.push(ele.getAttribute('data-fill-options'));
-        });
-        
-        rai_ysp_api.call_api('POST', 'dropdown-options', {labels: FillOptions}).then(function(rOptions) {
-            console.log(rOptions);
-
-            for (let label in rOptions) {
-
-                let SelectorEle = document.querySelectorAll("select[data-fill-options='"+ label +"']");
-
-                rOptions[label].forEach(function(b) {
-
-                    let option = document.createElement("OPTION");
-
-                        option.text = b;
-                        option.value = b;
-
-                    SelectorEle.forEach((ele) => {
-                        ele.add(option);
-                    });
-                });
-
-                let URLREF = new URL(location.href);
-                let UrlVal = URLREF.searchParams.get( label );
-                
-                if (UrlVal != '' && UrlVal != null) {
-                    SelectorEle.forEach((ele) => {
-                        ele.value = UrlVal; 
-                    });
-                }
-            }
-        })
-
         // Fill List Options
         let FillLists=[];
         let listElements = document.querySelectorAll("datalist[data-fill-list]");
@@ -169,14 +131,49 @@ document.addEventListener("DOMContentLoaded", function() {
                     });
                 });
             }
-        }).then(function () {
+        });
+        
+        // Fill options
+        let FillOptions=[];
+        let selectorElements = document.querySelectorAll("select[data-fill-options]");
 
+        selectorElements.forEach((ele) => {
+            FillOptions.push(ele.getAttribute('data-fill-options'));
+        });
+        
+        rai_ysp_api.call_api('POST', 'dropdown-options', {labels: FillOptions}).then(function(rOptions) {
+            for (let label in rOptions) {
+
+                let SelectorEle = document.querySelectorAll("select[data-fill-options='"+ label +"']");
+
+                rOptions[label].forEach(function(b) {
+
+                    let option = document.createElement("OPTION");
+
+                        option.text = b;
+                        option.value = b;
+
+                    SelectorEle.forEach((ele) => {
+                        ele.add(option);
+                    });
+                });
+
+                let URLREF = new URL(location.href);
+                let UrlVal = URLREF.searchParams.get( label );
+                
+                if (UrlVal != '' && UrlVal != null) {
+                    SelectorEle.forEach((ele) => {
+                        ele.value = UrlVal; 
+                    });
+                }
+            }
+        }).then(function () {
             // Render Yachts For Page Load
             let params = raiys_get_form_data(document.querySelector('.ysp-yacht-search-form'));
 
-            ysp_yacht_search_and_reader( params );
+            ysp_yacht_search_and_reader( params );       
+        });
 
-        });        
     }
 
 });

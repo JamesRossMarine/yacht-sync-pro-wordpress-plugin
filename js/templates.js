@@ -7,7 +7,7 @@ var ysp_templates={};
 		return `
 			<div class="yacht-result-grid-item">
 				<div class="yacht-main-image-container">
-					<img class="yacht-main-image" src="${vessel.Images[0] ? vessel.Images[0].Uri : ''}" alt="yacht-image"/>
+					<img class="yacht-main-image" src="${vessel.Images[0] ? vessel.Images[0].Uri : ''}" alt="yacht-image" loading="lazy" />
 				</div>
 				<div class="yacht-general-info-container">
 					<div class="yacht-title-container">
@@ -52,7 +52,7 @@ var ysp_templates={};
 		return `
 			<div class="yacht-result-grid-item list-view">
 				<div class="yacht-main-image-container">
-					<img class="yacht-main-image" src="${ vessel.Images[0] ? vessel.Images[0].Uri : '' }" alt="yacht-image"/>
+					<img class="yacht-main-image" src="${ vessel.Images[0] ? vessel.Images[0].Uri : '' }" alt="yacht-image" loading="lazy" />
 				</div>
 				<div class="yacht-general-info-container">
 					<div class="yacht-title-container">
