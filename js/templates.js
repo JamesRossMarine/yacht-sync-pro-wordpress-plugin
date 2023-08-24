@@ -2,6 +2,8 @@ var ysp_templates={};
 	ysp_templates.yacht={};
 	
 	ysp_templates.yacht.grid=function(vessel) {
+		let meters=parseInt(vessel.LengthOverall) * 0.3048;
+
 		return `
 			<div class="yacht-result-grid-item">
 				<div class="yacht-main-image-container">
@@ -27,7 +29,7 @@ var ysp_templates={};
 							</div>
 							<div class="yacht-individual-container">
 								<p class="yacht-individual-title">Length</p>
-								<p class="yacht-individual-value">${vessel.LengthOverall ? vessel.LengthOverall + " / " + (parseInt(vessel.LengthOverall) * 0.3048).toFixed(2) + ' m' : 'N/A'}</p>
+								<p class="yacht-individual-value">${vessel.LengthOverall ? vessel.LengthOverall + " / " + meters.toFixed(2) + ' m' : 'N/A'}</p>
 							</div>
 						</div>
 					</div>
@@ -35,7 +37,7 @@ var ysp_templates={};
 						<div class="yacht-price-container">
 							<p class="yacht-price">${vessel.Price ? '$' + vessel.Price.slice(0, -3) : 'Contact Us For Price'}</p>
 						</div>
-						<a class="yacht-details" href="#">
+						<a class="yacht-details" href="${ vessel._link }">
 							Details
 						</a>
 					</div>
@@ -45,10 +47,12 @@ var ysp_templates={};
 	};
 
 	ysp_templates.yacht.list=function(vessel) {
+		let meters=parseInt(vessel.LengthOverall) * 0.3048;
+
 		return `
 			<div class="yacht-result-grid-item list-view">
 				<div class="yacht-main-image-container">
-					<img class="yacht-main-image" src="${vessel.Images[0] ? vessel.Images[0].Uri : ''}" alt="yacht-image"/>
+					<img class="yacht-main-image" src="${ vessel.Images[0] ? vessel.Images[0].Uri : '' }" alt="yacht-image"/>
 				</div>
 				<div class="yacht-general-info-container">
 					<div class="yacht-title-container">
@@ -70,7 +74,7 @@ var ysp_templates={};
 							</div>
 							<div class="yacht-individual-container">
 								<p class="yacht-individual-title">Length</p>
-								<p class="yacht-individual-value">${vessel.LengthOverall ? vessel.LengthOverall + " / " + (parseInt(vessel.LengthOverall) * 0.3048).toFixed(2) + ' m' : 'N/A'}</p>
+								<p class="yacht-individual-value">${vessel.LengthOverall ? vessel.LengthOverall + " / " + meters.toFixed(2) + ' m' : 'N/A'}</p>
 							</div>
 						</div>
 					</div>
@@ -78,7 +82,7 @@ var ysp_templates={};
 						<div class="yacht-price-container">
 							<p class="yacht-price">${vessel.Price ? '$' + vessel.Price.slice(0, -3) : 'Contact Us For Price'}</p>
 						</div>
-						<a class="yacht-details" href="#">
+						<a class="yacht-details" href="${ vessel._link }">
 							Details
 						</a>
 					</div>

@@ -20,7 +20,7 @@ get_header();
         $vessel = (object) $vessel; ?>
         <!-- <?php var_dump($vessel) ?> -->
 
-        <div id="single-rai_yacht">
+        <div id="ysp-yacht-details">
             <div class="yacht-main-container">
                 <div class="yacht-general-info">
                     <div class="yacht-name-price-info">

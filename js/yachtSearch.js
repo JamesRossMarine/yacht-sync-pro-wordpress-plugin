@@ -11,8 +11,7 @@ function ysp_yacht_search_and_reader(data) {
         if (data_result.total > 0) {
 
             data_result.results.forEach(function(item) {
-
-                if (typeof data.featured != 'undefined' && data.featured == 'on') {
+                if (typeof data.view != 'undefined' && data.view == 'list') {
                     jQuery('#search-result-row').append( ysp_templates.yacht.list(item, data) );
                 }
                 else {
@@ -48,7 +47,8 @@ function ysp_yacht_search_and_reader(data) {
         } 
         else {
             jQuery('#yachts-pagination').html('');
-            jQuery('#search-result-row').append(__templates.noResults());
+
+            jQuery('#search-result-row').append(ysp_templates.noResults());
 
         }
 
@@ -64,34 +64,54 @@ function ysp_yacht_search_and_reader(data) {
 document.addEventListener("DOMContentLoaded", function() {
     let yachtSearchAndResults=document.querySelector('.ysp-yacht-search-form');
 
+
     if (yachtSearchAndResults) {
+        yachtSearchAndResults.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            let params = raiys_get_form_data(event.target);
+
+            ysp_yacht_search_and_reader( params );
+        }); 
+        
+        document.querySelectorAll('input[name=view][form=ysp-yacht-search-form], select[name=sortBy][form=ysp-yacht-search-form]').forEach((eeee) => {
+            eeee.addEventListener('change', function(e) {
+                let params = raiys_get_form_data( e.target.form );
+
+                ysp_yacht_search_and_reader( params );
+
+            });
+
+        });
+
         // Restore Fields
         let URLREF=new URL(location.href); // maybe for a re-do
 
         let formInputs=document.querySelectorAll('.ysp-yacht-search-form *[name], *[name][form="ysp-yacht-search-form"]');
 
         formInputs.forEach((ele) => {
+            let input = ele;
 
             let name = ele.getAttribute('name');
 
             let urlVal = URLREF.searchParams.get( name );
 
             if (urlVal != '' && urlVal != null) {
-                if (input.type == 'checkbox' && input.value == urlVal ) {
+                if (typeof input.type != 'undefined' && input.type == 'checkbox' && input.value == urlVal ) {
                     input.checked=true;
                 }
                 else {
-                    input.value = urlPARAMs[ param ];
+                    input.value = urlVal;
                 }
             }
         });
 
         // Fill options
         let FillOptions=[];
-        let selectorElements = document.querySelectorAll("select[data-fill-label]");
+        let selectorElements = document.querySelectorAll("select[data-fill-options]");
 
         selectorElements.forEach((ele) => {
-            FillOptions.push(ele.getAttribute('data-fill-label'));
+            FillOptions.push(ele.getAttribute('data-fill-options'));
         });
         
         rai_ysp_api.call_api('POST', 'dropdown-options', {labels: FillOptions}).then(function(rOptions) {
@@ -99,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             for (let label in rOptions) {
 
-                let SelectorEle = document.querySelectorAll("select[data-fill-label='"+ label +"']");
+                let SelectorEle = document.querySelectorAll("select[data-fill-options='"+ label +"']");
 
                 rOptions[label].forEach(function(b) {
 
@@ -121,6 +141,33 @@ document.addEventListener("DOMContentLoaded", function() {
                         ele.value = UrlVal; 
                     });
                 }
+            }
+        })
+
+        // Fill List Options
+        let FillLists=[];
+        let listElements = document.querySelectorAll("datalist[data-fill-list]");
+
+        listElements.forEach((ele) => {
+            FillLists.push(ele.getAttribute('data-fill-list'));
+        });
+        
+        rai_ysp_api.call_api('POST', 'list-options', {labels: FillLists}).then(function(rOptions) {
+            for (let label in rOptions) {
+
+                let SelectorEle = document.querySelectorAll("datalist[data-fill-list='"+ label +"']");
+
+                rOptions[label].forEach(function(b) {
+
+                    let option = document.createElement("OPTION");
+
+                        option.text = b;
+                        option.value = b;
+
+                    SelectorEle.forEach((ele) => {
+                        ele.append(option);
+                    });
+                });
             }
         }).then(function () {
 

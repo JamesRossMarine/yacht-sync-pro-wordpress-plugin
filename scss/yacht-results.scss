@@ -35,24 +35,34 @@
             .list-view-group {
                 display: flex;
                 margin-right: 130px;
-                .grid-view {
-                    display: flex;
-                    background-color: #FFFFFF;
-                    border: none;
-                    color: #334155;
-    
-                    svg {
-                        margin-right: 5px;
+                font-size: 12px;
+
+                > label{
+                    cursor: pointer;
+                    margin-right: 20px;
+
+                    span{
+                        display: flex;
+                        background-color: #FFFFFF;
+                        border: none;
+                        color: #94A3B8;
                     }
-                }
-                .list-view {
-                    display: flex;
-                    background-color: #FFFFFF;
-                    border: none;
-                    color: #94A3B8;
-    
+
                     svg {
                         margin-right: 5px;
+                        path{
+                            stroke: #94A3B8;
+                        }
+
+                    }
+
+                    input:checked + span{
+                        color: #334155;
+                        
+                        svg path{
+                            stroke: #334155;
+                        }
+
                     }
                 }
             }
