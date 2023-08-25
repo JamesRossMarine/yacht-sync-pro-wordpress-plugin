@@ -1,8 +1,9 @@
-.single-broker {
+.ysp-single-broker {
     max-width: 1440px;
     margin-left: auto;
     margin-right: auto;
     display: flex;
+
     @media screen and (max-width: $breakpoint-med){
         display: block;
     }

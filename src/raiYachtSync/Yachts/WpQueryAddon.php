@@ -8,11 +8,10 @@
 
 		public function add_actions_and_filters() {
 
-			//add_filter('query_vars', [$this, 'addQueryVars'], 30, 1);
-			//add_action('pre_get_posts', [$this, 'preGet'], 30, 1);
+			add_filter('query_vars', [$this, 'addQueryVars'], 30, 1);
+			add_action('pre_get_posts', [$this, 'preGet'], 30, 1);
 		
 		}
-
 
 		public function addQueryVars($vars) {
 
@@ -21,7 +20,7 @@
 			$vars[] = 'boatname';
 
 			$vars[] = 'condition';
-			$vars[] = 'hullMaterial';
+			$vars[] = 'hull';
 			$vars[] = 'staterooms';
 			$vars[] = 'make';
 
@@ -39,6 +38,8 @@
 			$vars[] = 'ys_country';
 			$vars[] = 'ys_state';
 			$vars[] = 'ys_city';
+
+			$vars[] = 'page_index';
 
 			$vars[] = 'sortBy';
 
@@ -89,225 +90,267 @@
 			}
 
 		}
-
-
-
+		
 		public function preGet($query) {
 
 			$yacht_sync_meta_query=[];
 
-			if ($this->if_query_var_check($query->get('ys_offset'))) {
+			if (is_page(6) || $query->get('post_type') == "rai_yacht") {
 
-				$query->set('offset', $query->get('ys_offset'));
+				if ($this->if_query_var_check($query->get('ys_offset'))) {
 
-			}
+					$query->set('offset', $query->get('ys_offset'));
 
-			if ($this->if_query_var_check($query->get('ys_keyword'))) {
+				}
+	
+				if ($this->if_query_var_check( $query->get('page_index') ) >= 2 ) {
 
-				$keywords=explode(' ', $query->get('ys_keyword'));
+					$query->set('offset', 12 * ( $query->get('page_index') - 1));
 
-				$yacht_sync_meta_query['ys_keyword']=[];
+				}
 
-				foreach ($keywords as $keyword) {
+				if ($this->if_query_var_check($query->get('ys_keyword'))) {
 
-					$yacht_sync_meta_query['ys_keyword'][]=[
-						'relation' => "OR",
+					$keywords=explode(' ', $query->get('ys_keyword'));
 
-						[
-							'key' => 'MakeString',
-							'compare' => "LIKE",
-							'value' => $keyword
-						],
-						
-						[	
-							'key' => 'ModelYear',
-							'compare' => "LIKE",
-							'value' => $keyword
-						],
-						
-						[
-							'key' => 'Model',
-							'compare' => "LIKE",
-							'value' => $keyword
-						],
-						
-						[
-							'key' => 'BoatName',
-							'compare' => "LIKE",
-							'value' => $keyword
-						],
-			
-						[
-							'key' => 'LengthOverall',
-							'compare' => "LIKE",
-							'value' => $keyword
-						]
+					$yacht_sync_meta_query['ys_keyword']=[];
+
+					foreach ($keywords as $keyword) {
+
+						$yacht_sync_meta_query['ys_keyword'][]=[
+							'relation' => "OR",
+
+							[
+								'key' => 'MakeString',
+								'compare' => "LIKE",
+								'value' => $keyword
+							],
+							
+							[	
+								'key' => 'ModelYear',
+								'compare' => "LIKE",
+								'value' => $keyword
+							],
+							
+							[
+								'key' => 'Model',
+								'compare' => "LIKE",
+								'value' => $keyword
+							],
+							
+							[
+								'key' => 'BoatName',
+								'compare' => "LIKE",
+								'value' => $keyword
+							],
+				
+							[
+								'key' => 'LengthOverall',
+								'compare' => "LIKE",
+								'value' => $keyword
+							]
+						];
+					}
+				}
+
+				if ($this->if_query_var_check($query->get('ys_country'))) {
+					$yacht_sync_meta_query[]=[
+						'key' => 'Country',
+						'compare' => "=",
+						'value' => $query->get('ys_country')
 					];
 				}
-			}
 
-			if ($this->if_query_var_check($query->get('ys_country'))) {
-				$yacht_sync_meta_query[]=[
-					'key' => 'Country',
-					'compare' => "=",
-					'value' => $query->get('ys_country')
-				];
-			}
+				if ($this->if_query_var_check($query->get('ys_state'))) {
+					$yacht_sync_meta_query[]=[
+						'key' => 'State',
+						'compare' => "=",
+						'value' => $query->get('ys_state')
+					];
+				}	
 
-			if ($this->if_query_var_check($query->get('ys_state'))) {
-				$yacht_sync_meta_query[]=[
-					'key' => 'State',
-					'compare' => "=",
-					'value' => $query->get('ys_state')
-				];
-			}	
+				if ($this->if_query_var_check($query->get('ys_city'))) {
+					$yacht_sync_meta_query[]=[
+						'key' => 'City',
+						'compare' => "=",
+						'value' => $query->get('ys_city')
+					];
+				}	
 
-			if ($this->if_query_var_check($query->get('ys_city'))) {
-				$yacht_sync_meta_query[]=[
-					'key' => 'City',
-					'compare' => "=",
-					'value' => $query->get('ys_city')
-				];
-			}	
+				if ($query->get('condition') == 'Used') {
+					$yacht_sync_meta_query[]=[
+						'key' => 'SaleClassCode',
+						'compare' => "=",
+						'value' => 'Used'				
+					];
 
-			if ($query->get('condition') == 'Used') {
-				$yacht_sync_meta_query[]=[
-					'key' => 'SaleClassCode',
-					'compare' => "=",
-					'value' => 'Used'				
-				];
+				}
+				elseif ($query->get('condition') == 'New') {
+					$yacht_sync_meta_query=[
+						'relation' => 'AND',
+						
+						[
+							'key' => 'ModelYear',
+							'compare' => ">=",
+							'type' => 'NUMERIC',
+							'value' => date('Y')
+						],
 
-			}
-			elseif ($query->get('condition') == 'New') {
-				$yacht_sync_meta_query=[
-					'relation' => 'AND',
-					
-					[
+						[
+							'key' => 'SaleClassCode',
+							'compare' => "=",
+							'value' => 'New'
+						]
+						
+					];
+				}
+
+				if ($this->if_query_var_check($query->get('hull'))) {
+					$yacht_sync_meta_query[]=[
+						'key' => 'BoatHullMaterialCode',
+						'compare' => "=",
+						'value' => $query->get('hull')
+					];
+				}
+
+				if ($this->if_query_var_check($query->get('staterooms'))) {
+					$yacht_sync_meta_query[]=[
+						'key' => 'CabinsCountNumeric',
+						'compare' => "=",
+						'type' => 'NUMERIC',
+						'value' => $query->get('staterooms')
+					];
+				}
+
+				if ($this->if_query_var_check($query->get('make'))) {
+					$yacht_sync_meta_query[]=[
+						'key' => 'MakeString',
+						'compare' => "=",
+						'value' => $query->get('make')
+					];
+				}		
+
+				if ($this->if_query_var_check($query->get('boatname'))) {
+					$yacht_sync_meta_query[]=[
+						'key' => 'MakeString',
+						'compare' => "=",
+						'value' => $query->get('boatname')
+					];
+				}			
+
+				if ($this->if_query_var_check($query->get('yearlo'))) {
+					$yacht_sync_meta_query[]=[
 						'key' => 'ModelYear',
 						'compare' => ">=",
 						'type' => 'NUMERIC',
-						'value' => date('Y')
-					],
-
-					[
-						'key' => 'SaleClassCode',
-						'compare' => "=",
-						'value' => 'New'
-					]
-					
-				];
-			}
-
-			if ($this->if_query_var_check($query->get('hullMaterial'))) {
-				$yacht_sync_meta_query[]=[
-					'key' => 'BoatHullMaterialCode',
-					'compare' => "=",
-					'value' => $query->get('hullMaterial')
-				];
-			}
-
-			if ($this->if_query_var_check($query->get('staterooms'))) {
-				$yacht_sync_meta_query[]=[
-					'key' => 'CabinsCountNumeric',
-					'compare' => "=",
-					'type' => 'NUMERIC',
-					'value' => $query->get('staterooms')
-				];
-			}
-
-			if ($this->if_query_var_check($query->get('make'))) {
-				$yacht_sync_meta_query[]=[
-					'key' => 'MakeString',
-					'compare' => "=",
-					'value' => $query->get('make')
-				];
-			}		
-
-			if ($this->if_query_var_check($query->get('boatname'))) {
-				$yacht_sync_meta_query[]=[
-					'key' => 'MakeString',
-					'compare' => "=",
-					'value' => $query->get('boatname')
-				];
-			}			
-
-			if ($this->if_query_var_check($query->get('yearlo'))) {
-				$yacht_sync_meta_query[]=[
-					'key' => 'ModelYear',
-					'compare' => ">=",
-					'type' => 'NUMERIC',
-					'value' => $query->get('yearlo')
-				];
-			}
-
-			if ($this->if_query_var_check($query->get('yearhi'))) {
-				$yacht_sync_meta_query[]=[
-					'key' => 'ModelYear',
-					'compare' => "<=",
-					'type' => 'NUMERIC',
-					'value' => $query->get('yearhi')
-				];
-			}
-
-			if ($this->if_query_var_check($query->get('pricelo'))) {
-				$yacht_sync_meta_query[]=[
-					'key' => 'NormPrice',
-					'compare' => ">=",
-					'type' => 'NUMERIC',
-					'value' => $query->get('pricelo')
-				];
-			}
-
-			if ($this->if_query_var_check($query->get('pricehi'))) {
-				$yacht_sync_meta_query[]=[
-					'key' => 'NormPrice',
-					'compare' => "<=",
-					'type' => 'NUMERIC',
-					'value' => $query->get('pricehi')
-				];
-			}
-
-			if ($query->get('lengthUnit') == 'meter') {
-				if ($this->if_query_var_check($query->get('lengthlo'))) {
-					$yArgs['meta_query'][]=[
-						'key' => 'NominalLength',
-						'compare' => ">=",
-						'type' => 'NUMERIC',
-						'value' => $query->get('lengthlo') * 3.048,
+						'value' => $query->get('yearlo')
 					];
 				}
 
-				if ($this->if_query_var_check($query->get('lengthhi'))) {
-					$yArgs['meta_query'][]=[
-						'key' => 'NominalLength',
+				if ($this->if_query_var_check($query->get('yearhi'))) {
+					$yacht_sync_meta_query[]=[
+						'key' => 'ModelYear',
 						'compare' => "<=",
 						'type' => 'NUMERIC',
-						'value' => $query->get('lengthhi') * 3.048
+						'value' => $query->get('yearhi')
 					];
 				}
-			}
-			else {
-				if ($this->if_query_var_check($query->get('lengthlo'))) {
-					$yArgs['meta_query'][]=[
-						'key' => 'NominalLength',
+
+				if ($this->if_query_var_check($query->get('pricelo'))) {
+					$yacht_sync_meta_query[]=[
+						'key' => 'NormPrice',
 						'compare' => ">=",
 						'type' => 'NUMERIC',
-						'value' => $query->get('lengthlo')
+						'value' => $query->get('pricelo')
 					];
 				}
 
-				if ($this->if_query_var_check($query->get('lengthhi'))) {
-					$yArgs['meta_query'][]=[
-						'key' => 'NominalLength',
+				if ($this->if_query_var_check($query->get('pricehi'))) {
+					$yacht_sync_meta_query[]=[
+						'key' => 'NormPrice',
 						'compare' => "<=",
 						'type' => 'NUMERIC',
-						'value' => $query->get('lengthhi')
+						'value' => $query->get('pricehi')
 					];
 				}
 
-			}
+				if ($query->get('lengthUnit') == 'meter') {
+					if ($this->if_query_var_check($query->get('lengthlo'))) {
+						$yArgs['meta_query'][]=[
+							'key' => 'NominalLength',
+							'compare' => ">=",
+							'type' => 'NUMERIC',
+							'value' => $query->get('lengthlo') * 3.048,
+						];
+					}
 
-			$this->apply_meta_query_to_query($query, $yacht_sync_meta_query, 'prop_meta');
+					if ($this->if_query_var_check($query->get('lengthhi'))) {
+						$yArgs['meta_query'][]=[
+							'key' => 'NominalLength',
+							'compare' => "<=",
+							'type' => 'NUMERIC',
+							'value' => $query->get('lengthhi') * 3.048
+						];
+					}
+				}
+				else {
+					if ($this->if_query_var_check($query->get('lengthlo'))) {
+						$yArgs['meta_query'][]=[
+							'key' => 'NominalLength',
+							'compare' => ">=",
+							'type' => 'NUMERIC',
+							'value' => $query->get('lengthlo')
+						];
+					}
+
+					if ($this->if_query_var_check($query->get('lengthhi'))) {
+						$yArgs['meta_query'][]=[
+							'key' => 'NominalLength',
+							'compare' => "<=",
+							'type' => 'NUMERIC',
+							'value' => $query->get('lengthhi')
+						];
+					}
+
+				}
+
+				if ($this->if_query_var_check($query->get('sortBy'))) {
+
+					$sort_split=explode(':', $query->get('sortBy'));
+
+					$sort_label = $sort_split[0];
+					$sort_order = $sort_split[1];
+
+					$query->set('orderby', 'meta_value_num');
+					$query->set('order', $sort_order);
+
+					switch ($sort_label) {
+						case 'length':
+							$query->set('meta_key', 'NominalLength');
+							break;
+
+						case 'price':
+							$query->set('meta_key', 'Price');
+							break;
+
+						case 'year':
+							$query->set('meta_key', 'ModelYear');
+							break;
+
+						case 'timeon':
+							$query->set('meta_key', 'IMTTimeStamp');
+							break;
+					}
+				}
+				else {
+					$query->set('orderby', 'meta_value_num');
+					$query->set('order', 'DESC');
+					$query->set('meta_key', 'NominalLength');
+				}
+
+				$this->apply_meta_query_to_query($query, $yacht_sync_meta_query, 'prop_meta');
+
+			}
 
 			return $query;
 

@@ -46,6 +46,18 @@
 		        )
 		    ) );
 
+		    register_rest_route( 'raiys', '/list-options', array(
+		        'callback' => [$this, 'yacht_list_options'],
+		        'methods'  => [WP_REST_Server::CREATABLE],
+		        'permission_callback' => '__return_true',
+		        'args' => array(
+		            'labels' => array(
+		                'required' => false,
+		                'default' => [],
+		            ),
+		        )
+		    ) );
+
 		    // PDF 
 		    register_rest_route( 'raiys', '/yacht-pdf', array(
 		        'callback' => [$this, 'yacht_pdf'],
@@ -81,6 +93,8 @@
 				'posts_per_page' => 12,
 			];
 
+			$yArgs=array_merge($yArgs, $request->get_params());
+
 			$yachts_query=new WP_Query($yArgs);
 
 			$return = [
@@ -100,6 +114,8 @@
 				}
 
 				$meta2=array_map("maybe_unserialize", $meta);
+
+					$meta2['_link']=get_permalink($yachts_query->post->ID);
 				
 				$return['results'][] = $meta2;
 
@@ -142,14 +158,45 @@
 
 	   		$return=[];
 
-	   		foreach ($label as $labels) {
+	   		foreach ($labels as $label) {
 
-	   			$return[ $labels ] = $this->get_unique_yacht_meta_values( $labelsToMetaField[ $label ], 'rai_yacht');
+	   			$return[ $label ] = $this->get_unique_yacht_meta_values( $labelsToMetaField[ $label ], 'rai_yacht');
 
 	   		}
 
 	   		return $return; 
 
+	   }
+
+	   public function yacht_list_options(WP_REST_Request $request) {
+
+	   		$labels = $request->get_param('labels');
+
+	   		$labelsKey=[
+	   			'Keywords' => function() {
+	   				$makes=$this->get_unique_yacht_meta_values('MakeString', 'rai_yacht');
+	   				//$years=$this->get_unique_yacht_meta_values('ModelYear', 'rai_yacht');
+	   				$models=$this->get_unique_yacht_meta_values('Model', 'rai_yacht');
+	   				$boat_names=$this->get_unique_yacht_meta_values('BoatName', 'rai_yacht');
+	   				//$lengths=$this->get_unique_yacht_meta_values('LengthOverall', 'rai_yacht');
+
+	   				$list = array_merge($makes, $models, $boat_names);
+
+	   				return $list;
+
+	   			}
+
+	   		];
+
+	   		$return=[];
+
+	   		foreach ($labels as $label) {
+
+	   			$return[ $label ] = $labelsKey[ $label ]();
+	   		
+	   		}
+
+	   		return $return;
 	   }
 
 	   public function yacht_pdf_loader(WP_REST_Request $request) {

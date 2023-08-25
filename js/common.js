@@ -1,6 +1,4 @@
 function raiys_get_form_data(form_ele) {
-    console.log(form_ele);
-
     var formData = new FormData( form_ele );
           
     var fd = Array.from(formData.entries()).reduce((memo, pair) => ({

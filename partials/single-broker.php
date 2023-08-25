@@ -17,7 +17,7 @@ get_header();
         // var_dump($meta);
     ?>
 
-        <div class="single-broker">
+        <div class="ysp-single-broker">
             <div class="broker-main-container">
                 <h2 class="our-team">Our Team</h2>
                 <div class="broker-info-container">
