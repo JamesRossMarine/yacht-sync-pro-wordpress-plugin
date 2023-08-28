@@ -12,7 +12,6 @@
                     <path id="Vector_2" d="M14.0001 14.0001L11.1001 11.1001" stroke="#334155" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </g>
             </svg>
-
         </div>
         <div class="ys-h-row-item">
             <label>Builder</label>
