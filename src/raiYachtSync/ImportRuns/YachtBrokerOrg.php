@@ -8,6 +8,8 @@
 
 		public function __construct() {
 
+			$this->options = new raiYachtSync_Options();
+			
 		}
 
 		public function run() {

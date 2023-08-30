@@ -182,6 +182,12 @@
 
 	   				$list = array_merge($makes, $models, $boat_names);
 
+	   				$list = array_filter($list, function($item) {
+	   					return (! is_numeric($item));
+	   				});
+
+	   				$list=array_values($list);
+
 	   				return $list;
 
 	   			}
@@ -209,6 +215,9 @@
 		    	include apply_filters('rai_ys_yacht_pdf_loader_template', $file_to_include);
 
 	   		}
+	   		else {
+				return ['success' => 'No YACHT ID'];
+			}
 
 	   }
 
@@ -227,8 +236,10 @@
 		    	include apply_filters('rai_ys_yacht_pdf_template', $file_to_include);
 		    	
 			}
+			else {
+				return ['success' => 'No YACHT ID'];
+			}
 
-			return ['success' => 'No YACHT ID'];
 	   } 
 
 

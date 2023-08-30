@@ -2,7 +2,9 @@
 	class raiYachtSync_RunImports {
 
 		public function __construct() {
-			
+						
+			$this->options = new raiYachtSync_Options();
+
 			$this->ImportGlobalBoatsCom = new raiYachtSync_ImportRuns_GlobalBoatsCom();
 			$this->ImportBrokerageOnlyBoatsCom = new raiYachtSync_ImportRuns_BrokerageOnlyBoatsCom();
 

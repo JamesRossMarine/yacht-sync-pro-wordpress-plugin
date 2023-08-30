@@ -315,7 +315,6 @@
 				}
 
 				if ($this->if_query_var_check($query->get('sortBy'))) {
-
 					$sort_split=explode(':', $query->get('sortBy'));
 
 					$sort_label = $sort_split[0];
@@ -340,12 +339,17 @@
 						case 'timeon':
 							$query->set('meta_key', 'IMTTimeStamp');
 							break;
+
+						default:
+							$query->set('orderby', 'meta_value_num');
+							$query->set('order', 'DESC');
+							$query->set('meta_key', 'NominalLength');
+
+							break;
 					}
 				}
 				else {
-					$query->set('orderby', 'meta_value_num');
-					$query->set('order', 'DESC');
-					$query->set('meta_key', 'NominalLength');
+					// ONE DAY MOVE DEFAULT HERE... 
 				}
 
 				$this->apply_meta_query_to_query($query, $yacht_sync_meta_query, 'prop_meta');
