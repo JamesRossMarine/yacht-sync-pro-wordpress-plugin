@@ -1,13 +1,16 @@
 <?php
 	class raiYachtSync_ImportRuns_BrokerageOnlyBoatsCom {
-   		protected $limit = 200;
-		protected $yachtBrokerLimit = 30;
+   		protected $limit = 53;
 		
-		public $brokerageInventoryUrl = 'https://api.boats.com/inventory/search?key=5rz42z95sp3q93vpjup99v993bewke';
+		public $brokerageInventoryUrl = 'https://api.boats.com/inventory/search?key=';
 
 		public function __construct() {
 
 			$this->options = new raiYachtSync_Options();
+
+			$this->key=$this->options->get('boats_com_api_brokerage_key');
+
+			$this->brokerageInventoryUrl .= $this->key;
 
 		}
 		
@@ -15,6 +18,7 @@
 			global $wpdb;
 
 			$offset = 0;
+			$yachtsSynced = 0;
 
 			// Sync broker inventory
 			$apiCall = wp_remote_get($this->brokerageInventoryUrl, ['timeout' => 300]);
@@ -25,7 +29,9 @@
 
 			//$apiCallInventory = $apiCall['body']['results'];
 
-			while ($total > ($offset)) {
+			var_dump($total);
+
+			while ($total > ($yachtsSynced)) {
 
 				$apiUrl = $this->brokerageInventoryUrl;
 
@@ -41,6 +47,7 @@
 				$apiCallInventory = $apiCallForWhile['body']['results'];
 
 				foreach ($apiCallInventory as $boat) {
+					$yachtsSynced++;
 					$record=$boat;
 					$boatC = json_decode(json_encode($boat));
 
@@ -111,6 +118,8 @@
 
 
 			}
+
+			var_dump($yachtsSynced);
 
 		}
 

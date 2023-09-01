@@ -1,13 +1,16 @@
 <?php
 	class raiYachtSync_ImportRuns_GlobalBoatsCom {
-   		protected $limit = 200;
-		protected $yachtBrokerLimit = 30;
+   		protected $limit = 53;
 	
-		protected $globalInventoryUrl = 'https://services.boats.com/pls/boats/search?key=e97cdb91056f&fields=SalesStatus,MakeString,Model,ModelYear,BoatCategoryCode,SaleClassCode,StockNumber,BoatLocation,BoatName,BoatClassCode,BoatHullMaterialCode,BoatHullID,DesignerName,RegistrationCountryCode,NominalLength,LengthOverall,BeamMeasure,MaxDraft,BridgeClearanceMeasure,DryWeightMeasure,Engines,CruisingSpeedMeasure,RangeMeasure,AdditionalDetailDescription,DriveTypeCode,MaximumSpeedMeasure,FuelTankCountNumeric,FuelTankCapacityMeasure,WaterTankCountNumeric,WaterTankCapacityMeasure,HoldingTankCountNumeric,HoldingTankCapacityMeasure,CabinsCountNumeric,SingleBerthsCountNumeric,DoubleBerthsCountNumeric,TwinBerthsCountNumeric,HeadsCountNumeric,GeneralBoatDescription,AdditionalDetailDescription,EmbeddedVideoPresent,Videos,Images,NormPrice,Price,CompanyName,SalesRep,DocumentID,BuilderName,IMTTimeStamp,PlsDisclaimer';
+		public $globalInventoryUrl = 'https://services.boats.com/pls/boats/search?fields=SalesStatus,MakeString,Model,ModelYear,BoatCategoryCode,SaleClassCode,StockNumber,BoatLocation,BoatName,BoatClassCode,BoatHullMaterialCode,BoatHullID,DesignerName,RegistrationCountryCode,NominalLength,LengthOverall,BeamMeasure,MaxDraft,BridgeClearanceMeasure,DryWeightMeasure,Engines,CruisingSpeedMeasure,RangeMeasure,AdditionalDetailDescription,DriveTypeCode,MaximumSpeedMeasure,FuelTankCountNumeric,FuelTankCapacityMeasure,WaterTankCountNumeric,WaterTankCapacityMeasure,HoldingTankCountNumeric,HoldingTankCapacityMeasure,CabinsCountNumeric,SingleBerthsCountNumeric,DoubleBerthsCountNumeric,TwinBerthsCountNumeric,HeadsCountNumeric,GeneralBoatDescription,AdditionalDetailDescription,EmbeddedVideoPresent,Videos,Images,NormPrice,Price,CompanyName,SalesRep,DocumentID,BuilderName,IMTTimeStamp,PlsDisclaimer&key=';
 
 		public function __construct() {
 
 			$this->options = new raiYachtSync_Options();
+
+			$this->key=$this->options->get('boats_com_api_global_key');
+
+			$this->globalInventoryUrl .= $this->key;
 
 		}
 
@@ -15,6 +18,7 @@
 			global $wpdb;
 			
 			$offset = 0;
+			$yachtsSynced = 0;
 
 			// Sync broker inventory
 			$apiCall = wp_remote_get($this->globalInventoryUrl, ['timeout' => 300]);
@@ -23,9 +27,11 @@
 
 	        $total = $apiCall['body']['data']['numResults'];
 
+	        var_dump($total);
+
 			//$apiCallInventory = $apiCall['body']['data']['results'];
 
-			while ($total > ($offset)) {
+			while ($total > ($yachtsSynced)) {
 				$apiUrl = $this->globalInventoryUrl;
 				$apiUrl = $apiUrl.'&start='. $offset .'&rows='. $this->limit;
 
@@ -39,13 +45,14 @@
 				$apiCallInventory = $apiCallForWhile['body']['data']['results'];
 
 				foreach ($apiCallInventory as $boat) {
+					$yachtsSynced++;
+
 					$record=$boat;
 					$boatC = json_decode(json_encode($boat));
 
 					$find_post=get_posts([
 	                    'post_type' => 'rai_yacht',
 	                    'meta_query' => [
-
 	                        array(
 	                           'key' => 'DocumentID',
 	                           'value' => $boat['DocumentID'],
@@ -81,15 +88,15 @@
 		                $wpdb->delete($wpdb->postmeta, ['post_id' => $find_post[0]->ID], ['%d']);
 		            }
 
-				  	$url = 'https://services.boats.com/pls/boats/details?id=' . $boat['DocumentID'] . '&key=e97cdb91056f';
+				  	$url = 'https://services.boats.com/pls/boats/details?id=' . $boat['DocumentID'] . '&key='.$this->key;
 					
 					$apiCall = wp_remote_get($url, ['timeout' => 300]);
 
 					$response = $apiCall['body'];
 
-						$apiCall['body']=json_decode($apiCall['body'], true);
+						$response=json_decode($response, true);
 
-					$data = $apiCall['body'];
+					$data = $response;
 
 					if (isset($data['data']['PlsDisclaimer'])) {
 						$plsDisclaimer = $data['data']['PlsDisclaimer'];
@@ -132,7 +139,8 @@
 
 
 			
-
+			var_dump($offset);
+			var_dump($yachtsSynced);
 
 
 

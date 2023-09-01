@@ -21,6 +21,9 @@
 			$this->Brokers_DetailOverride = new raiYachtSync_Brokers_DetailsOverride();
 			$this->Brokers_MetaFields = new raiYachtSync_Brokers_MetaSections();
 			$this->Brokers_Shortcodes = new raiYachtSync_Shortcodes_Brokers();
+
+			$this->Commands = new raiYachtSync_AddCommands();
+			$this->Crons = new raiYachtSync_Cron();
 		}
 
 		public function isInstalled() {
