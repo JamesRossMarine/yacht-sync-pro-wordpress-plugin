@@ -1,6 +1,6 @@
 <?php
 	class raiYachtSync_ImportRuns_GlobalBoatsCom {
-   		protected $limit = 53;
+   		protected $limit = 200;
 	
 		public $globalInventoryUrl = 'https://services.boats.com/pls/boats/search?fields=SalesStatus,MakeString,Model,ModelYear,BoatCategoryCode,SaleClassCode,StockNumber,BoatLocation,BoatName,BoatClassCode,BoatHullMaterialCode,BoatHullID,DesignerName,RegistrationCountryCode,NominalLength,LengthOverall,BeamMeasure,MaxDraft,BridgeClearanceMeasure,DryWeightMeasure,Engines,CruisingSpeedMeasure,RangeMeasure,AdditionalDetailDescription,DriveTypeCode,MaximumSpeedMeasure,FuelTankCountNumeric,FuelTankCapacityMeasure,WaterTankCountNumeric,WaterTankCapacityMeasure,HoldingTankCountNumeric,HoldingTankCapacityMeasure,CabinsCountNumeric,SingleBerthsCountNumeric,DoubleBerthsCountNumeric,TwinBerthsCountNumeric,HeadsCountNumeric,GeneralBoatDescription,AdditionalDetailDescription,EmbeddedVideoPresent,Videos,Images,NormPrice,Price,CompanyName,SalesRep,DocumentID,BuilderName,IMTTimeStamp,PlsDisclaimer&key=';
 
@@ -31,9 +31,11 @@
 
 			//$apiCallInventory = $apiCall['body']['data']['results'];
 
-			while ($total > ($yachtsSynced)) {
+			while ($total > $yachtsSynced) {
 				$apiUrl = $this->globalInventoryUrl;
 				$apiUrl = $apiUrl.'&start='. $offset .'&rows='. $this->limit;
+
+				sleep(60);
 
 				// Sync broker inventory
 				$apiCallForWhile = wp_remote_get($apiUrl, ['timeout' => 300]);
