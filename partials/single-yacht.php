@@ -107,6 +107,9 @@ get_header();
                     <p class="yacht-form-title">Inquire Now</p>
                     <form class="single-yacht-detils-lead" action="/submit" method="post">
                         <div>
+                        <input type="hidden" id="yatchHidden" name="yatchHidden" value="<?php echo ($vessel->ModelYear . ' ' . $vessel->MakeString . ' ' . $vessel->BoatName) ?>">
+                        </div>
+                        <div>
                             <label for="fname">First name</label>
                             <input type="text" id="fname" name="fname" placeholder="First name" required />
                         </div>
@@ -295,6 +298,9 @@ get_header();
                     <div class="yacht-form-container">
                         <p class="yacht-form-title">Inquire Now</p>
                         <form class="single-yacht-detils-lead" action="/submit" method="post">
+                            <div>
+                            <input type="hidden" id="yatchHidden" name="yatchHidden" value="<?php echo ($vessel->ModelYear . ' ' . $vessel->MakeString . ' ' . $vessel->BoatName) ?>">
+                            </div>
                             <div>
                                 <label for="fname">First name</label>
                                 <input type="text" id="fname" name="fname" placeholder="First name" required />

@@ -300,11 +300,13 @@
 		$message = $request->get_param('message');
 		$email = $request->get_param('email');
 		$phone = $request->get_param('phone');
+		$vesselHidden = $request->get_param('yatchHidden');
 
 		$subject = $fname . " " . $lname . " " . 'submitted an inquiry' ;
 		
 		$fullMessage = '<!DOCTYPE html><html><body>';
 		$fullMessage .= '<h1>' . $subject . '</h1>';
+		$fullMessage .= '<p><strong>Vessel:</strong> ' . $vesselHidden . '</p>';
 		$fullMessage .= '<p><strong>Name:</strong> ' . "$fname $lname" . '</p>';
 		$fullMessage .= '<p><strong>Email:</strong> ' . $email . '</p>';
 		$fullMessage .= '<p><strong>Phone:</strong> ' . $phone . '</p>';
