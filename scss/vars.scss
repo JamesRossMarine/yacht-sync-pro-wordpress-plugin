@@ -1,12 +1,14 @@
+
 $h1-size: 30px;
 $h2-size: 18px;
 $h3-size: 14px;
 
 $h1-weight: 600;
 
-$main-text-color: #334155;
-$secondary-text-color: #94A3B8;
+$main-text-color: var(--main-color);
+$secondary-text-color: var(--secondary-color);
 $divider-color: #CBD5E1;
+$border-color: #D9D9D9;
 
 $breakpoint-small: 540px; // 540px
 $breakpoint-med: 720px; // 720px
@@ -17,3 +19,8 @@ $broker-column-gap: 19px;
 $broker-row-gap: 40px;
 
 $max-width: 1440px;
+
+:root {
+    --main-color: #334155;
+    --secondary-color: #94A3B8;
+}

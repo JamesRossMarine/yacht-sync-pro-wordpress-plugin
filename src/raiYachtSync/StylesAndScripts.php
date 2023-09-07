@@ -12,7 +12,20 @@
 
 			add_action( 'wp_enqueue_scripts' , [$this, 'enqueueYachtDetails']);
 		}
+		
+		public function pickedColorsFromWpAdmin() {
 
+			$colorOne = $this->options->get('color_one');
+			$colorTwo = $this->options->get('color_two');
+
+			return "
+				:root {
+					--main-color: $colorOne;
+					--secondary-color: $colorTwo;
+				}
+			";
+
+		}
 		public function enqueueGlobal() {
 
 			wp_register_style('yacht-sync-styles', RAI_YS_PLUGIN_ASSETS.'build/css/app-style.css', false, null, false);
@@ -28,6 +41,8 @@
 
 			wp_enqueue_script('yacht-sync-script');
 			wp_enqueue_style('yacht-sync-styles');
+
+			// wp_add_inline_style('yacht-sync-styles', $this->pickedColorsFromWpAdmin());
 
 		}
 
