@@ -165,13 +165,17 @@
 	   			"HullMaterials" => "BoatHullMaterialCode"
 	   		];
 
-	   		$return=[];
+	   		$return = get_transient('rai_yacht_dropdown_options_'.join('_', $labels));
 
-	   		foreach ($labels as $label) {
+			if (! $return) {
+				$return = [];
 
-	   			$return[ $label ] = $this->get_unique_yacht_meta_values( $labelsToMetaField[ $label ], 'rai_yacht');
-
-	   		}
+				foreach ($labels as $label) {
+					$return[ $label ] = $this->get_unique_yacht_meta_values( $labelsToMetaField[ $label ], 'rai_yacht');
+				}
+	
+				set_transient('rai_yacht_dropdown_options_'.join('_', $labels), $return, 4 * HOUR_IN_SECONDS);
+			}
 
 	   		return $return; 
 
@@ -203,13 +207,14 @@
 
 	   		];
 
-	   		$return=[];
+	   		$return = get_transient('rai_yacht_list_options_'.join('_', $labels));
 
-	   		foreach ($labels as $label) {
-
-	   			$return[ $label ] = $labelsKey[ $label ]();
-	   		
-	   		}
+			if (! $return){
+				foreach ($labels as $label) {
+					$return[ $label ] = $labelsKey[ $label ]();
+				}
+				set_transient('rai_yacht_list_options'.join('_', $labels), $return, 4 * HOUR_IN_SECONDS);
+			}
 
 	   		return $return;
 	   }
