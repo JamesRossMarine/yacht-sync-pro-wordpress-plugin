@@ -291,7 +291,10 @@
 	   }
 
 	   public function yacht_leads(WP_REST_Request $request) {
-		$to = 'hauk@jamesrossadvertising.com';
+
+		$to = $this->options->get('send_lead_to_this_email');
+		
+		//$to = 'hauk@jamesrossadvertising.com';
 		$fname = $request->get_param('fname');
 		$lname = $request->get_param('lname');
 		$message = $request->get_param('message');
