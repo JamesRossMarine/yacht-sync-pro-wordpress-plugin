@@ -51,6 +51,7 @@ get_header();
                     <div class="carousel carousel-nav">
                         <?php foreach($vessel->Images as $imageObject) { ?>
                             <div class="carousel-cell">
+                                <div class="carousel-nav-overlay"></div>
                                 <img class="yacht-image" src="<?php echo ($imageObject->Uri); ?>" alt="yacht-image"/>
                             </div>
                         <?php } ?>

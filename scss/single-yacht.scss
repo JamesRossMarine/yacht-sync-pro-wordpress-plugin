@@ -62,38 +62,22 @@
             }
         }
         .yacht-image-container {
-            height: 537px;
-            @media screen and (max-width: $breakpoint-large){
-                height: 475px;
-                margin-bottom: 29px;
-
-            }
-
-            @media screen and (max-width: $breakpoint-med){
-                height: 360px;
-            }
-
-            @media screen and (max-width: $breakpoint-small){
-                height: 230px;
-            }
 
             .yacht-main-image-container {
                 height: 537px;
                 width: 100%;
-                margin-bottom: 75px;
 
                 @media screen and (max-width: $breakpoint-large){
                     height: 475px;
-                    margin-bottom: 29px;
                 }
 
                 @media screen and (max-width: $breakpoint-med){
                     height: 360px;
                 }
 
-                @media screen and (max-width: $breakpoint-small){
-                    height: 230px;
-                }
+                // @media screen and (max-width: $breakpoint-small){
+                //     height: 230px;
+                // }
                
                 .carousel-cell {
                     height: 100%;
@@ -120,11 +104,28 @@
                     width: 100px;
                     position: relative;
                     margin-right: 10px;
+
+                    .carousel-nav-overlay {
+                        width: 100%;
+                        height: 100%;
+                        position: absolute;
+                        background: transparent;
+                        z-index: 3;
+                    }
     
                     .yacht-image {
                         height: 100%;
                         width: 100%;
                         object-fit: cover;
+                    }
+                }
+                .carousel-cell.is-nav-selected {
+                    .carousel-nav-overlay {
+                        width: 100%;
+                        height: 100%;
+                        position: absolute;
+                        background: rgba(0, 0, 0, 0.4);;
+                        z-index: 3;
                     }
                 }
             }
