@@ -132,13 +132,15 @@
 		                    'ID' => $post_id,
 							'post_type' => 'rai_yacht',
 							
-							'post_title' =>  $boat['ModelYear'].' '.$boat['MakeString'].' '.$boat['Model'].' '.$boat['BoatName'],
+							'post_title' => addslashes(  $boat['ModelYear'].' '.$boat['MakeString'].' '.$boat['Model'].' '.$boat['BoatName'] ),
 							
 							'post_name' => sanitize_title(
 								$boat['ModelYear'].'-'.$boat['MakeString'].'-'.$boat['Model']
 							),
 
-							'post_contnet' => $boat['GeneralBoatDescription'],
+							//'post_contnet' => $boat['GeneralBoatDescription'],
+							'post_contnet' => '',
+							
 							'post_status' => 'publish',
 							'meta_input' => apply_filters('raiys_yacht_meta_sync', $boatC),
 

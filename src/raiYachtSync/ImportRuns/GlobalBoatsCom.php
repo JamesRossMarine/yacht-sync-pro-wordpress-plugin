@@ -154,7 +154,7 @@
 							
 							'post_contnet' => '',
 							'post_status' => 'publish',
-							//'meta_input' => apply_filters('raiys_yacht_meta_sync', $boatC),
+							'meta_input' => apply_filters('raiys_yacht_meta_sync', $boatC),
 						]
 					);
 
