@@ -45,7 +45,7 @@
 		        }
 
 				foreach ($apiBody['V-Data'] as $row) {
-		            $yachtSynced ++;
+		            $yachtSynced++;
 		           	
 		           	$theBoat=[
 		           		'BoatLocation' => (object) [

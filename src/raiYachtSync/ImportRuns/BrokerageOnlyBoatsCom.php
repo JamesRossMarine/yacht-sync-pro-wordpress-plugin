@@ -77,7 +77,7 @@
 			                           'compare' => '=',
 			                       )
 			                    ],
-			                ]);                
+			                ]);
 			            }
 			            else {
 			                $find_post=[];
@@ -91,6 +91,41 @@
 
 		                $wpdb->delete($wpdb->postmeta, ['post_id' => $find_post[0]->ID], ['%d']);
 		            }
+
+		            if (isset($boat['Images']) && is_array($boat['Images']) && count($boat['Images']) > 0) {
+                        $reducedImages = array_slice($boat['Images'], 0, 50);
+                        
+                        $reducedImages = array_map(
+                        	function($img) {
+                        		$reimg=[
+                        			'Uri' => $img['Uri']
+                        		];
+
+                        		if (! empty($img['Caption'])) {
+                        			$reimg['Caption']=$img['Caption'];
+                        		}
+
+                        		return (object) $reimg;
+                        	}, 
+                        	$reducedImages
+                        );
+
+                        $boatC->Images = $reducedImages;
+                    }
+
+		            if (isset($boat['BoatLocation'])) {
+	                    $boatC->YSP_Country = $boat['BoatLocation']['BoatCountryID'];
+	                    $boatC->YSP_City = $boat['BoatLocation']['BoatCityName'];
+	                    $boatC->YSP_State = $boat['BoatLocation']['BoatStateCode'];
+                    }
+
+                    if (isset($boat['SalesRep'])) {
+                    	$boatC->YSP_BrokerName=$boat['SalesRep']['Name'];
+                    }
+
+                    if (isset($boatC->AdditionalDetailDescription)) {
+	                    unset($boatC->AdditionalDetailDescription);
+	                }
 
 		            $y_post_id=wp_insert_post(
 		                [
@@ -109,6 +144,15 @@
 
 						]
 					);
+					
+					if ( defined( 'WP_CLI' ) && WP_CLI ) {
+                        if (is_wp_error($y_post_id)) {
+                            WP_CLI::log( 'Document ID - '. $boat['DocumentID']);
+
+                            var_dump($boat);
+                        }
+                    }
+
 
 
 				}

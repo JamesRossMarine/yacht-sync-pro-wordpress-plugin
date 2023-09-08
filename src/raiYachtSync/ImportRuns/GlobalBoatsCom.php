@@ -1,6 +1,6 @@
 <?php
 	class raiYachtSync_ImportRuns_GlobalBoatsCom {
-   		protected $limit = 200;
+   		protected $limit = 153;
 	
 		public $globalInventoryUrl = 'https://services.boats.com/pls/boats/search?fields=SalesStatus,MakeString,Model,ModelYear,BoatCategoryCode,SaleClassCode,StockNumber,BoatLocation,BoatName,BoatClassCode,BoatHullMaterialCode,BoatHullID,DesignerName,RegistrationCountryCode,NominalLength,LengthOverall,BeamMeasure,MaxDraft,BridgeClearanceMeasure,DryWeightMeasure,Engines,CruisingSpeedMeasure,RangeMeasure,AdditionalDetailDescription,DriveTypeCode,MaximumSpeedMeasure,FuelTankCountNumeric,FuelTankCapacityMeasure,WaterTankCountNumeric,WaterTankCapacityMeasure,HoldingTankCountNumeric,HoldingTankCapacityMeasure,CabinsCountNumeric,SingleBerthsCountNumeric,DoubleBerthsCountNumeric,TwinBerthsCountNumeric,HeadsCountNumeric,GeneralBoatDescription,AdditionalDetailDescription,EmbeddedVideoPresent,Videos,Images,NormPrice,Price,CompanyName,SalesRep,DocumentID,BuilderName,IMTTimeStamp,PlsDisclaimer&key=';
 
@@ -35,8 +35,10 @@
 				$apiUrl = $this->globalInventoryUrl;
 				$apiUrl = $apiUrl.'&start='. $offset .'&rows='. $this->limit;
 
-				sleep(60);
+				var_dump($offset);
 
+				sleep(30);
+ 
 				// Sync broker inventory
 				$apiCallForWhile = wp_remote_get($apiUrl, ['timeout' => 300]);
 
@@ -68,7 +70,6 @@
 			                $find_post=get_posts([
 			                    'post_type' => 'rai_yacht',
 			                    'meta_query' => [
-
 			                        array(
 			                           'key' => 'BoatHullID',
 			                           'value' => $record['BoatHullID'],
@@ -110,37 +111,73 @@
 					    $boatC->MOD_DIS = $finalDisclaimer;
 					}
 
+					if (isset($boat['Images']) && is_array($boat['Images']) && count($boat['Images']) > 0) {
+                        $reducedImages = array_slice($boat['Images'], 0, 50);
+
+                        $reducedImages = array_map(
+                        	function($img) {
+                        		$reimg=[
+                        			'Uri' => $img['Uri']
+                        		];
+
+                        		if (! empty($img['Caption'])) {
+                        			$reimg['Caption']=$img['Caption'];
+                        		}
+
+                        		return (object) $reimg;
+                        	}, 
+                        	$reducedImages
+                        );
+
+                        $boatC->Images = $reducedImages;
+                    }
+
+	                if (isset($boat['BoatLocation'])) {
+	                    $boatC->YSP_City = $boat['BoatLocation']['BoatCityName'];
+	                    $boatC->YSP_CountryID = $boat['BoatLocation']['BoatCountryID'];
+	                    $boatC->YSP_State = $boat['BoatLocation']['BoatStateCode'];
+                    }
+
+                    // $output = preg_replace('/(<[^>]+) style=".*?"/i', '$1', $input);
+
 		            $y_post_id=wp_insert_post(
 		                [
 		                    'ID' => $post_id,
 							'post_type' => 'rai_yacht',
-							'post_title' =>  $boat['ModelYear'].' '.$boat['MakeString'].' '.$boat['Model'].' '.$boat['BoatName'],
+							'post_title' =>  addslashes( $boat['ModelYear'].' '.$boat['MakeString'].' '.$boat['Model'].' '.$boat['BoatName']),
 							
 							'post_name' => sanitize_title(
 								$boat['ModelYear'].'-'.$boat['MakeString'].'-'.$boat['Model']
 							),
 
-							'post_contnet' => $boat['GeneralBoatDescription'],
+							//'post_contnet' => $boat['GeneralBoatDescription'][0],
+							
+							'post_contnet' => '',
 							'post_status' => 'publish',
-							'meta_input' => apply_filters('raiys_yacht_meta_sync', $boatC),
-
+							//'meta_input' => apply_filters('raiys_yacht_meta_sync', $boatC),
 						]
 					);
 
 					//var_dump($boat['BoatName']);
 
+		            //if ( defined( 'WP_CLI' ) && WP_CLI ) {
+                        if (is_wp_error($y_post_id)) {
+                            var_dump( 'Document ID - '. $boat['DocumentID']);
+
+                            var_dump($boat);
+                        }
+                    //}
 
 				}
 
 				$offset = $offset + $this->limit;
-
-
+			
+				if ($yachtsSynced != $offset) {
+					echo 'off sync \n';
+				}
 
 			}
 
-
-
-			
 			var_dump($offset);
 			var_dump($yachtsSynced);
 

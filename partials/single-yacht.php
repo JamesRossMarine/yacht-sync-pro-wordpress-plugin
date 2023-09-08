@@ -105,7 +105,10 @@ get_header();
                 </div>
                 <div class="yacht-mobile-form-container">
                     <p class="yacht-form-title">Inquire Now</p>
-                    <form action="/submit" method="post">
+                    <form class="single-yacht-detils-lead" action="/submit" method="post">
+                        <div>
+                        <input type="hidden" id="yatchHidden" name="yatchHidden" value="<?php echo ($vessel->ModelYear . ' ' . $vessel->MakeString . ' ' . $vessel->BoatName) ?>">
+                        </div>
                         <div>
                             <label for="fname">First name</label>
                             <input type="text" id="fname" name="fname" placeholder="First name" required />
@@ -138,7 +141,13 @@ get_header();
                             <p class="form-disclaimer">Your privacy is important to us; to learn about how we protect it, read our <a href="#">privacy policy.</a></p>
                         </div>
                         <input class="yacht-form-submit" type="submit" value="Send" />
+
+
                     </form>
+                    <div class="success-message" style="display: none; background-color: #4CAF50; color: #fff; padding: 10px; text-align: center;">
+                        <p class="success-messages">Thank you for getting in touch. We will be in touch shortly.</p>
+                    </div>
+
                 </div>
                 <div class="yacht-general-description-container">
                     <p class="yacht-description-label">
@@ -288,7 +297,10 @@ get_header();
                     </div>
                     <div class="yacht-form-container">
                         <p class="yacht-form-title">Inquire Now</p>
-                        <form action="/submit" method="post">
+                        <form class="single-yacht-detils-lead" action="/submit" method="post">
+                            <div>
+                            <input type="hidden" id="yatchHidden" name="yatchHidden" value="<?php echo ($vessel->ModelYear . ' ' . $vessel->MakeString . ' ' . $vessel->BoatName) ?>">
+                            </div>
                             <div>
                                 <label for="fname">First name</label>
                                 <input type="text" id="fname" name="fname" placeholder="First name" required />
@@ -322,6 +334,9 @@ get_header();
                             </div>
                             <input class="yacht-form-submit" type="submit" value="Send" />
                         </form>
+                        <div class="success-message" style="display: none; background-color: #4CAF50; color: #fff; padding: 10px; text-align: center;">
+                        <p class="success-messages">Thank you for getting in touch. We will be in touch shortly.</p>
+                    </div>
                     </div>
                 </div>
             </div>

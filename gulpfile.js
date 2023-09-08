@@ -30,7 +30,8 @@ var global_script_files=[
     'js/common.js',
     'js/api-client.js',
     'js/templates.js',
-    'js/yachtSearch.js'
+    'js/yachtSearch.js',
+    'js/leads.js'
 ];
 
 var exitOnJshintError = map(function (file, cb) {

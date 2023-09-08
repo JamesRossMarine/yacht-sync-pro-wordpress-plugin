@@ -4,6 +4,7 @@
 
 		public function __construct() {
 
+			$this->options = new raiYachtSync_Options();
 			$this->RunImports = new raiYachtSync_RunImports();
 			
 		}
@@ -11,6 +12,7 @@
 		public function add_actions_and_filters() {
 
 			add_action('rest_api_init', [$this, 'register_rest_routes']);
+			add_filter( 'wp_mail_content_type', [$this, 'wp_mail_set_content_type'] );
 
 		}
 
@@ -79,6 +81,14 @@
 
 		    register_rest_route( 'raiys', '/yacht-pdf-download', array(
 		        'callback' => [$this, 'yacht_pdf_download'],
+		        'methods'  => [WP_REST_Server::READABLE, WP_REST_Server::CREATABLE],
+		        'permission_callback' => '__return_true',
+		        'args' => array(
+		            
+		        )
+		    ) );
+			register_rest_route( 'raiys', '/yacht-leads', array(
+		        'callback' => [$this, 'yacht_leads'],
 		        'methods'  => [WP_REST_Server::READABLE, WP_REST_Server::CREATABLE],
 		        'permission_callback' => '__return_true',
 		        'args' => array(
@@ -159,7 +169,7 @@
 	   	public function yacht_dropdown_options(WP_REST_Request $request) {
 
 	   		$labels = $request->get_param('labels');
-
+   		
 	   		$labelsToMetaField = [
 	   			"Builders" => "MakeString",
 	   			"HullMaterials" => "BoatHullMaterialCode"
@@ -177,6 +187,7 @@
 				set_transient('rai_yacht_dropdown_options_'.join('_', $labels), $return, 4 * HOUR_IN_SECONDS);
 			}
 
+
 	   		return $return; 
 
 	   }
@@ -188,9 +199,12 @@
 	   		$labelsKey=[
 	   			'Keywords' => function() {
 	   				$makes=$this->get_unique_yacht_meta_values('MakeString', 'rai_yacht');
+
 	   				//$years=$this->get_unique_yacht_meta_values('ModelYear', 'rai_yacht');
+	   				
 	   				$models=$this->get_unique_yacht_meta_values('Model', 'rai_yacht');
 	   				$boat_names=$this->get_unique_yacht_meta_values('BoatName', 'rai_yacht');
+	   				
 	   				//$lengths=$this->get_unique_yacht_meta_values('LengthOverall', 'rai_yacht');
 
 	   				$list = array_merge($makes, $models, $boat_names);
@@ -280,6 +294,50 @@
 			}
 
 	   } 
+
+	   public function wp_mail_set_content_type() {
+		return 'text/html';
+	   }
+
+	   public function yacht_leads(WP_REST_Request $request) {
+
+		$to = $this->options->get('send_lead_to_this_email');
+		
+		//$to = 'hauk@jamesrossadvertising.com';
+		$fname = $request->get_param('fname');
+		$lname = $request->get_param('lname');
+		$message = $request->get_param('message');
+		$email = $request->get_param('email');
+		$phone = $request->get_param('phone');
+		$vesselHidden = $request->get_param('yatchHidden');
+
+		$subject = $fname . " " . $lname . " " . 'submitted an inquiry' ;
+		
+		$fullMessage = '<!DOCTYPE html><html><body>';
+		$fullMessage .= '<h1>' . $subject . '</h1>';
+		$fullMessage .= '<p><strong>Vessel:</strong> ' . $vesselHidden . '</p>';
+		$fullMessage .= '<p><strong>Name:</strong> ' . "$fname $lname" . '</p>';
+		$fullMessage .= '<p><strong>Email:</strong> ' . $email . '</p>';
+		$fullMessage .= '<p><strong>Phone:</strong> ' . $phone . '</p>';
+		$fullMessage .= '<p><strong>Message:</strong></p>';
+		$fullMessage .= '<p>' . nl2br($message) . '</p>'; 
+	
+		$fullMessage .= '</body></html>';
+	
+		$headers = array(
+			'Content-Type: text/html; charset=UTF-8',
+		);
+	
+		$sent = wp_mail($to, $subject, $fullMessage, $headers);
+	
+		if ($sent) {
+			return array('message' => 'Email sent successfully');
+		} else {
+			return array('error' => 'Email sending failed');
+		}
+	}
+	
+	
 
 
 	}
