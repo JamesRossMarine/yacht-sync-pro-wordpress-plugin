@@ -58,14 +58,21 @@
             
 			$this->cleanup();
 
+			$boats_com_api_global_key = $this->options->get('boats_com_api_global_key');
+			$boats_com_api_brokerage_key = $this->options->get('boats_com_api_brokerage_key');
+
+
 			// @ToDo For Loop the Runs  
 			// KEEP THIS IN THIS ORDER
-			$this->ImportGlobalBoatsCom->run();
+			if (! empty($boats_com_api_global_key)) {
+				$this->ImportGlobalBoatsCom->run();
+			}
 
 			//$this->ImportYachtBrokerOrg->run();
 
-			$this->ImportBrokerageOnlyBoatsCom->run();
-
+			if (! empty($boats_com_api_global_key)) {
+				$this->ImportBrokerageOnlyBoatsCom->run();
+			}
 		}
        
 
