@@ -3,18 +3,21 @@
         <div class="ys-v-row-item">
             <label>Keyword</label>
             <input type="text" name="keyword" placeholder="Search by Name" />
+            <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g id="icon/search">
+                    <path id="Vector" d="M7.33333 12.6667C10.2789 12.6667 12.6667 10.2789 12.6667 7.33333C12.6667 4.38781 10.2789 2 7.33333 2C4.38781 2 2 4.38781 2 7.33333C2 10.2789 4.38781 12.6667 7.33333 12.6667Z" stroke="#334155" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path id="Vector_2" d="M14.0001 14.0001L11.1001 11.1001" stroke="#334155" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </g>
+            </svg>
         </div>
         <div class="ys-v-row-item">
             <label>Builder</label>
             <select name="builder">
                 <option value="" selected disabled>Any</option>
-                <option value="Admiral">Admiral</option>
-                <option value="Azimut">Azimut</option>
-                <option value="Baglietto">Baglietto</option>
-                <option value="Benetti">Benetti</option>
-                <option value="Ferretti">Ferretti</option>
-                <option value="Mangusta">Mangusta</option>
             </select>
+            <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M4 6L8 10L12 6" stroke="#94A3B8" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
         </div>
         <div class="ys-v-row-item">
             <label>Year</label>
@@ -55,17 +58,18 @@
                 <option value="9">9</option>
                 <option value="10">10</option>
             </select>
+            <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M4 6L8 10L12 6" stroke="#94A3B8" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
         </div>
         <div class="ys-v-row-item">
             <label>Hull</label>
             <select name="hull">
                 <option value="" selected disabled>Any</option>
-                <option value="Aluminum">Aluminum</option>
-                <option value="Composite">Composite</option>
-                <option value="Fiberglass">Fiberglass</option>
-                <option value="Resin">Resin</option>
-                <option value="Wood">Wood</option>
             </select>
+            <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M4 6L8 10L12 6" stroke="#94A3B8" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
         </div>
         <div class="ys-v-row-item">
             <label>Condition</label>
@@ -74,6 +78,9 @@
                 <option value="New">New</option>
                 <option value="Used">Used</option>
             </select>
+            <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M4 6L8 10L12 6" stroke="#94A3B8" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
         </div>
         <div class="ys-v-row-item submit-container">
             <label>Submit</label>

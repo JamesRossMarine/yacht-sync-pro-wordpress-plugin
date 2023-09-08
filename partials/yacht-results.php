@@ -19,7 +19,7 @@
                     <input type="radio" form="ysp-yacht-search-form" name="view" value="grid" style="display: none;">
 
                     <span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="18" viewBox="0 0 16 16" fill="none">
                             <path d="M12.6667 2H3.33333C2.59695 2 2 2.59695 2 3.33333V12.6667C2 13.403 2.59695 14 3.33333 14H12.6667C13.403 14 14 13.403 14 12.6667V3.33333C14 2.59695 13.403 2 12.6667 2Z" stroke="#334155" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M2 6H14" stroke="#334155" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M2 10H14" stroke="#334155" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
@@ -35,7 +35,7 @@
                     <input type="radio" form="ysp-yacht-search-form" name="view" value="list" style="display: none;">
 
                     <span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="18" viewBox="0 0 16 16" fill="none">
                             <path d="M2.66699 8H13.3337" stroke="#94A3B8" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M2.66699 4H13.3337" stroke="#94A3B8" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M2.66699 12H13.3337" stroke="#94A3B8" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
