@@ -42,7 +42,7 @@ get_header();
                     <div id="lightgallery" class="carousel carousel-main yacht-main-image-container">
                         <?php foreach($vessel->Images as $imageObject) { ?>
                             <div class="carousel-cell" data-src="<?php echo ($imageObject->Uri); ?>">
-                                <img class="yacht-image" src="<?php echo ($imageObject->Uri); ?>" alt="yacht-image"/>
+                                <img class="yacht-image" src="<?php echo ($imageObject->Uri); ?>"/>
                             </div>
                         <?php } ?>
                     </div>
