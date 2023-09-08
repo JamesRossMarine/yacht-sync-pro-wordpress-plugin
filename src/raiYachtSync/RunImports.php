@@ -14,8 +14,24 @@
 		}
 
 		public function cleanup() {
+	        global $wpdb;
 		
-			$yArgs=[
+	       	$wpdb->query( 
+				$wpdb->prepare( 
+					"DELETE wp FROM $wpdb->posts wp 
+					LEFT JOIN $wpdb->postmeta pm ON pm.post_id = wp.ID 
+					WHERE wp.post_type = %s",
+					'rai_yacht'
+				)
+			);
+
+			$wpdb->query(
+				"DELETE pm FROM $wpdb->postmeta pm 
+				LEFT JOIN $wpdb->posts wp ON wp.ID = pm.post_id 
+				WHERE wp.ID IS NULL"
+			);
+
+		/*	$yArgs=[
 	            'fields' => "ids",
 	            'post_type' => 'rai_yacht',
 	            'posts_per_page' => -1,
@@ -25,7 +41,7 @@
 
 	        foreach ($pt_yachts as $yID) {
 	            wp_delete_post($yID, true);
-	        }
+	        }*/
 
 	        /* 
 				DELETE wp FROM wp_posts wp 
@@ -42,14 +58,21 @@
             
 			$this->cleanup();
 
+			$boats_com_api_global_key = $this->options->get('boats_com_api_global_key');
+			$boats_com_api_brokerage_key = $this->options->get('boats_com_api_brokerage_key');
+
+
 			// @ToDo For Loop the Runs  
 			// KEEP THIS IN THIS ORDER
-			//$this->ImportGlobalBoatsCom->run();
+			if (! empty($boats_com_api_global_key)) {
+				$this->ImportGlobalBoatsCom->run();
+			}
 
 			//$this->ImportYachtBrokerOrg->run();
 
-			$this->ImportBrokerageOnlyBoatsCom->run();
-
+			if (! empty($boats_com_api_global_key)) {
+				$this->ImportBrokerageOnlyBoatsCom->run();
+			}
 		}
        
 

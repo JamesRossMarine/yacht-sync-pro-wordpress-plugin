@@ -1,14 +1,17 @@
 <?php
 
 	class raiYachtSync_ImportRuns_YachtBrokerOrg {
-		protected $yachtBrokerAPIKey = '0a3e392e786c817195307150386779f18c69540e';
-   		protected $yachtClientId = '82420';
+		public $yachtBrokerAPIKey = '0a3e392e786c817195307150386779f18c69540e';
+   		public $yachtClientId = '82420';
    		protected $url = '';
    		protected $yachtBrokerLimit = 30;
 
 		public function __construct() {
 
 			$this->options = new raiYachtSync_Options();
+
+			$this->yachtBrokerAPIKey = $this->options->get('yacht_broker_org_api_token');
+			$this->yachtClientId = $this->options->get('yacht_broker_org_id');
 			
 		}
 
@@ -45,7 +48,7 @@
 		        }
 
 				foreach ($apiBody['V-Data'] as $row) {
-		            $yachtSynced ++;
+		            $yachtSynced++;
 		           	
 		           	$theBoat=[
 		           		'BoatLocation' => (object) [
@@ -59,8 +62,7 @@
 		           			'Name' => $row['ListingOwnerEmail'],
 		           			'Email' => $row['ListingOwnerEmail'],
 		           			'Phone' => $row['ListingOwnerPhone']
-		           		],
-
+		           		]
 		           	];
 
 		           	$MapToBoatOrg=[

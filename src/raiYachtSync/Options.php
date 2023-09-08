@@ -6,7 +6,7 @@
 	    const PREFIX = 'rai_ys_';
 
 	    public $defaultOptionValues = [
-	        
+	        'euro_c_c' => .9,
 	    ];
 
 	    public function __construct() {

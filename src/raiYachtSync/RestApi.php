@@ -169,19 +169,24 @@
 	   	public function yacht_dropdown_options(WP_REST_Request $request) {
 
 	   		$labels = $request->get_param('labels');
-
+   		
 	   		$labelsToMetaField = [
 	   			"Builders" => "MakeString",
 	   			"HullMaterials" => "BoatHullMaterialCode"
 	   		];
 
-	   		$return=[];
+	   		$return = get_transient('rai_yacht_dropdown_options_'.join('_', $labels));
 
-	   		foreach ($labels as $label) {
+			if (! $return) {
+				$return = [];
 
-	   			$return[ $label ] = $this->get_unique_yacht_meta_values( $labelsToMetaField[ $label ], 'rai_yacht');
+				foreach ($labels as $label) {
+					$return[ $label ] = $this->get_unique_yacht_meta_values( $labelsToMetaField[ $label ], 'rai_yacht');
+				}
+	
+				set_transient('rai_yacht_dropdown_options_'.join('_', $labels), $return, 4 * HOUR_IN_SECONDS);
+			}
 
-	   		}
 
 	   		return $return; 
 
@@ -194,9 +199,12 @@
 	   		$labelsKey=[
 	   			'Keywords' => function() {
 	   				$makes=$this->get_unique_yacht_meta_values('MakeString', 'rai_yacht');
+
 	   				//$years=$this->get_unique_yacht_meta_values('ModelYear', 'rai_yacht');
+	   				
 	   				$models=$this->get_unique_yacht_meta_values('Model', 'rai_yacht');
 	   				$boat_names=$this->get_unique_yacht_meta_values('BoatName', 'rai_yacht');
+	   				
 	   				//$lengths=$this->get_unique_yacht_meta_values('LengthOverall', 'rai_yacht');
 
 	   				$list = array_merge($makes, $models, $boat_names);
@@ -213,13 +221,14 @@
 
 	   		];
 
-	   		$return=[];
+	   		$return = get_transient('rai_yacht_list_options_'.join('_', $labels));
 
-	   		foreach ($labels as $label) {
-
-	   			$return[ $label ] = $labelsKey[ $label ]();
-	   		
-	   		}
+			if (! $return){
+				foreach ($labels as $label) {
+					$return[ $label ] = $labelsKey[ $label ]();
+				}
+				set_transient('rai_yacht_list_options'.join('_', $labels), $return, 4 * HOUR_IN_SECONDS);
+			}
 
 	   		return $return;
 	   }
