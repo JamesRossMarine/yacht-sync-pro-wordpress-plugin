@@ -65,6 +65,40 @@
 		           		]
 		           	];
 
+		           	/*
+					'YBDocumentID' => 'ID',
+		  				'SalesStatus' => 'Status',
+		                'SaleClassCode' => 'Condition',
+		                'CompanyName' => 'ListingOwnerBrokerageName' ,
+		                'GeneralBoatDescription' => 'Summary' ,
+		                'NumberOfEngines' => 'EngineQty',
+		                'Price' => 'PriceUSD' ,
+		                'NormPrice' => 'PriceUSD',
+		                'ModelYear' => 'Year',
+		                'Model' => 'Model',
+		                'PriceHideInd' => 'PriceHidden',
+		                'MakeString' => 'Manufacturer',
+		                'BoatCategoryCode' => 'Type',
+		                'BoatName' => 'VesselName',
+		                'CruisingSpeedMeasure' => 'CruiseSpeed', 
+		                'MaximumSpeedMeasure' => 'MaximumSpeed',
+		                'RangeMeasure' => 'RangeNMI',
+		                'BeamMeasure' => 'BeamFeet',
+		                'LastModificationDate' => 'UpdatedTimestamp',
+		                'WaterTankCapacityMeasure' => 'FreshWaterCapacityGallons',
+		                'FuelTankCapacityMeasure' => 'FuelTankCapacityGallons' ,
+		                'DryWeightMeasure' => 'DryWeight' ,
+		                'CabinsCountNumeric' => 'CabinCount',
+		                'HeadsCountNumeric' => 'HeadCount',
+		                'BoatHullMaterialCode' => 'HullMaterial',
+		                'BoatHullID' => 'HullIdentificationNumber',
+		                'DisplayLengthFeet' => 'LOAFeet',
+		                'TaxStatusCode' => 'TaxStatus',
+		                'NominalLength' => 'LOAMeters',
+		                'AdditionalDetailDescription' => 'Description'
+
+		           	*/
+
 		           	$MapToBoatOrg=[
 		           		//'ID' => 'DocumentID',
 		           		'ID' => 'YBDocumentID',
