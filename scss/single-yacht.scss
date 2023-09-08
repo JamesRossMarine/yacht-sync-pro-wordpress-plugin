@@ -62,6 +62,21 @@
             }
         }
         .yacht-image-container {
+            height: 537px;
+            @media screen and (max-width: $breakpoint-large){
+                height: 475px;
+                margin-bottom: 29px;
+
+            }
+
+            @media screen and (max-width: $breakpoint-med){
+                height: 360px;
+            }
+
+            @media screen and (max-width: $breakpoint-small){
+                height: 230px;
+            }
+
             .yacht-main-image-container {
                 height: 537px;
                 width: 100%;
@@ -79,27 +94,38 @@
                 @media screen and (max-width: $breakpoint-small){
                     height: 230px;
                 }
-    
-                .yacht-image {
+               
+                .carousel-cell {
                     height: 100%;
                     width: 100%;
-                    object-fit: cover;
+                    position: relative;
+
+                    .yacht-image {
+                        height: 100%;
+                        width: 100%;
+                        object-fit: cover;
+                    }
                 }
             }
-            .yacht-gallery-container {
-                // display: flex;
-                display: none;
-                justify-content: space-between;
-                margin-top: 20px;
-                margin-bottom: 75px;
+        }
+        .yacht-nav-image-container {
+            height: 100px;
 
-                @media screen and (max-width: $breakpoint-med) {
-                    display: none;
-                }
+            .carousel-nav {
+                height: 100px;
+                margin: 10px;
 
-                .yacht-gallery-image {
-                    width: 102px;
-                    height: 102px;
+                .carousel-cell {
+                    height: 80px;
+                    width: 100px;
+                    position: relative;
+                    margin-right: 10px;
+    
+                    .yacht-image {
+                        height: 100%;
+                        width: 100%;
+                        object-fit: cover;
+                    }
                 }
             }
         }
