@@ -27,6 +27,8 @@ var global_script_files=[
     'js/threeP/lightgallery-dist/plugins/video/lg-video.umd.js',
     'js/threeP/lightgallery-dist/plugins/rotate/lg-rotate.umd.js',
 
+    'js/threeP/flickity.js',
+
     'js/common.js',
     'js/api-client.js',
     'js/templates.js',

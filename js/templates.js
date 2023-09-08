@@ -3,8 +3,15 @@ var ysp_templates={};
 	
 	ysp_templates.yacht.grid=function(vessel) {
 		let meters = parseInt(vessel.LengthOverall) * 0.3048;
-		let price = vessel.Price.slice(0, -3);
+
+		let price = '';
+
+		if (typeof vessel.Price == 'string') {
+			let price = vessel.Price.slice(0, -3);
+		}
+
 		let length = '';
+
 		if(rai_yacht_sync.europe_option_picked == "yes"){
 			length = vessel.LengthOverall ? meters.toFixed(2) + ' m' : 'N/A';
 			price = vessel.Price ? `€ ${new Intl.NumberFormat('en-us', { minimumFractionDigits: 2}).format((parseInt(vessel.Price.slice(0, -3)) * rai_yacht_sync.euro_c_c))}` : 'Contact Us For Price';
@@ -57,7 +64,12 @@ var ysp_templates={};
 
 	ysp_templates.yacht.list=function(vessel) {
 		let meters = parseInt(vessel.LengthOverall) * 0.3048;
-		let price = vessel.Price.slice(0, -3);
+		let price = '';
+
+		if (typeof vessel.Price == 'string') {
+			let price = vessel.Price.slice(0, -3);
+		}
+		
 		let length = '';
 		if(rai_yacht_sync.europe_option_picked == "yes"){
 			length = vessel.LengthOverall ? meters.toFixed(2) + ' m' : 'N/A';
