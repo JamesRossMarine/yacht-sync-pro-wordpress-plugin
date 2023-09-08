@@ -39,9 +39,9 @@ get_header();
                     </div>
                 </div>
                 <div class="yacht-image-container">
-                    <div class="carousel carousel-main yacht-main-image-container">
+                    <div id="lightgallery" class="carousel carousel-main yacht-main-image-container">
                         <?php foreach($vessel->Images as $imageObject) { ?>
-                            <div class="carousel-cell">
+                            <div class="carousel-cell" data-src="<?php echo ($imageObject->Uri); ?>">
                                 <img class="yacht-image" src="<?php echo ($imageObject->Uri); ?>" alt="yacht-image"/>
                             </div>
                         <?php } ?>
