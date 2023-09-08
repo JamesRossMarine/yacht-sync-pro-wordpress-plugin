@@ -169,7 +169,7 @@
 	   	public function yacht_dropdown_options(WP_REST_Request $request) {
 
 	   		$labels = $request->get_param('labels');
-
+   		
 	   		$labelsToMetaField = [
 	   			"Builders" => "MakeString",
 	   			"HullMaterials" => "BoatHullMaterialCode"
@@ -183,6 +183,7 @@
 
 	   		}
 
+
 	   		return $return; 
 
 	   }
@@ -194,9 +195,12 @@
 	   		$labelsKey=[
 	   			'Keywords' => function() {
 	   				$makes=$this->get_unique_yacht_meta_values('MakeString', 'rai_yacht');
+
 	   				//$years=$this->get_unique_yacht_meta_values('ModelYear', 'rai_yacht');
+	   				
 	   				$models=$this->get_unique_yacht_meta_values('Model', 'rai_yacht');
 	   				$boat_names=$this->get_unique_yacht_meta_values('BoatName', 'rai_yacht');
+	   				
 	   				//$lengths=$this->get_unique_yacht_meta_values('LengthOverall', 'rai_yacht');
 
 	   				$list = array_merge($makes, $models, $boat_names);
