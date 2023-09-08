@@ -1,7 +1,23 @@
 <?php
 get_header();
 ?>
+    <?php
+        $brokerQueryArgs = array(
+            'post_type' => 'rai_broker',
+            'posts_per_page' => 1,
+        );
 
+        $mainBrokerQueryArgs = array(
+            'post_type' => 'rai_broker',
+            'meta_query' => array(
+                array(
+                    'key' => 'rai_main_broker',
+                    'value' => '1',
+                ),
+            ),
+            'posts_per_page' => 1,
+        );
+    ?>
 <main id="primary" class="site-main">
     <?php
     while (have_posts()) :
@@ -88,21 +104,83 @@ get_header();
                         </div>
                     </div>
                 </div>
-                <div class="yacht-download-brochure-container">
-                    <button class="yacht-download-button">
-                        <img src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/download.png" alt="download-icon" />
-                        Download Brochure
-                    </button>
-                </div>
-                <div class="yacht-mobile-broker-container">
-                    <div class="broker-profile-image"></div>
-                    <div class="broker-info">
-                        <p class="broker-name">First Last Name</p>
-                        <p class="broker-title">Broker</p>
-                        <p class="broker-email">broker@gmail.com</p>
-                        <p class="broker-phone">+1 (305) 652-8000</p>
-                    </div>
-                </div>
+                <?php
+                    $brokerNameFromApi = $vessel->SalesRep->Name;
+                    $BrokerNames = explode(' ', $brokerNameFromApi);
+
+                    $brokerQueryArgs = array(
+                        'post_type' => 'rai_broker',
+                        'posts_per_page' => 1,
+
+                        'meta_query' => [
+                            'name' => [
+                                'relation' => 'OR'
+                            ],
+                        ],
+                    );
+
+                    foreach ($BrokerNames as $bName) {
+                        $brokerQueryArgs['meta_query']['name'][]=[
+                            'key' => 'broker_fname',
+                            'compare' => 'LIKE',
+                            'value' => $bName,
+                        ];
+                    }
+
+                    foreach ($BrokerNames as $bName) {
+                        $brokerQueryArgs['meta_query']['name'][]=[
+                            'key' => 'broker_lname',
+                            'compare' => 'LIKE',
+                            'value' => $bName,
+                        ];
+                    }
+
+                    $brokerQuery = new WP_Query($brokerQueryArgs);
+
+                    if ($brokerQuery->have_posts()) {
+
+                    }
+                    else {
+                        $mainBrokerQueryArgs = array(
+                            'post_type' => 'rai_broker',
+                            'meta_query' => array(
+                                array(
+                                    'key' => 'rai_main_broker',
+                                    'value' => '1',
+                                ),
+                            ),
+                            'posts_per_page' => 1,
+                        );
+
+                        $brokerQuery = new WP_Query($mainBrokerQueryArgs);
+
+
+                    }
+
+                    if ($brokerQuery->have_posts()) {
+                        while ($brokerQuery->have_posts()) {
+                            $brokerQuery->the_post();
+
+                            $broker_first_name = get_post_meta($post->ID, 'rai_broker_fname', true);
+                            $broker_last_name = get_post_meta($post->ID, 'rai_broker_lname', true);
+                            $broker_email = get_post_meta($post->ID, 'rai_broker_email', true);
+                            $broker_phone = get_post_meta($post->ID, 'rai_broker_phone', true);
+                            ?>
+                            <div class="yacht-mobile-broker-container">
+                                <div class="broker-profile-image"><img src="<?php echo esc_url(get_the_post_thumbnail_url()); ?>" alt="" style="width:120px; height:120px;" /></div>
+                                <div class="broker-info">
+                                    <p class="broker-name"><?php echo ($broker_first_name . " " . $broker_last_name); ?></p>
+                                    <p class="broker-title">Broker</p>
+                                    <p class="broker-email"><a href="mailto:<?php echo $broker_email; ?>"><?php echo $broker_email; ?></a></p>
+                                    <p class="broker-phone"><a href="tel:<?php echo $broker_phone; ?>"><?php echo $broker_phone; ?></a></p>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                        wp_reset_postdata();
+                    }
+                    ?>
+
                 <div class="yacht-mobile-form-container">
                     <p class="yacht-form-title">Inquire Now</p>
                     <form class="single-yacht-detils-lead" action="/submit" method="post">
@@ -286,15 +364,83 @@ get_header();
             </div>
             <div class="secondary-container">
                 <div class="secondary-sub-container">
-                    <div class="broker-info-container">
-                        <div class="broker-profile-image"></div>
-                        <div class="broker-info">
-                            <p class="broker-name">First Last Name</p>
-                            <p class="broker-title">Broker</p>
-                            <p class="broker-email">broker@gmail.com</p>
-                            <p class="broker-phone">+1 (305) 652-8000</p>
-                        </div>
-                    </div>
+                <?php
+                    $brokerNameFromApi = $vessel->SalesRep->Name;
+                    $BrokerNames = explode(' ', $brokerNameFromApi);
+
+                    $brokerQueryArgs = array(
+                        'post_type' => 'rai_broker',
+                        'posts_per_page' => 1,
+
+                        'meta_query' => [
+                            'name' => [
+                                'relation' => 'OR'
+                            ],
+                        ],
+                    );
+
+                    foreach ($BrokerNames as $bName) {
+                        $brokerQueryArgs['meta_query']['name'][]=[
+                            'key' => 'broker_fname',
+                            'compare' => 'LIKE',
+                            'value' => $bName,
+                        ];
+                    }
+
+                    foreach ($BrokerNames as $bName) {
+                        $brokerQueryArgs['meta_query']['name'][]=[
+                            'key' => 'broker_lname',
+                            'compare' => 'LIKE',
+                            'value' => $bName,
+                        ];
+                    }
+
+                    $brokerQuery = new WP_Query($brokerQueryArgs);
+
+                    if ($brokerQuery->have_posts()) {
+
+                    }
+                    else {
+                        $mainBrokerQueryArgs = array(
+                            'post_type' => 'rai_broker',
+                            'meta_query' => array(
+                                array(
+                                    'key' => 'rai_main_broker',
+                                    'value' => '1',
+                                ),
+                            ),
+                            'posts_per_page' => 1,
+                        );
+
+                        $brokerQuery = new WP_Query($mainBrokerQueryArgs);
+
+
+                    }
+
+                    if ($brokerQuery->have_posts()) {
+                        while ($brokerQuery->have_posts()) {
+                            $brokerQuery->the_post();
+
+                            $broker_first_name = get_post_meta($post->ID, 'rai_broker_fname', true);
+                            $broker_last_name = get_post_meta($post->ID, 'rai_broker_lname', true);
+                            $broker_email = get_post_meta($post->ID, 'rai_broker_email', true);
+                            $broker_phone = get_post_meta($post->ID, 'rai_broker_phone', true);
+                            ?>
+                            <div class="broker-info-container">
+                                <div class="broker-profile-image"><img src="<?php echo esc_url(get_the_post_thumbnail_url()); ?>" alt="" style="width:120px; height:120px;" /></div>
+                                <div class="broker-info">
+                                    <p class="broker-name"><?php echo ($broker_first_name . " " . $broker_last_name); ?></p>
+                                    <p class="broker-title">Broker</p>
+                                    <p class="broker-email"><a href="mailto:<?php echo $broker_email; ?>"><?php echo $broker_email; ?></a></p>
+                                    <p class="broker-phone"><a href="tel:<?php echo $broker_phone; ?>"><?php echo $broker_phone; ?></a></p>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                        wp_reset_postdata();
+                    }
+                    ?>
+
                     <div class="yacht-form-container">
                         <p class="yacht-form-title">Inquire Now</p>
                         <form class="single-yacht-detils-lead" action="/submit" method="post">
