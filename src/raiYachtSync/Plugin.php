@@ -24,6 +24,9 @@
 
 			$this->Commands = new raiYachtSync_AddCommands();
 			$this->Crons = new raiYachtSync_Cron();
+
+			
+
 		}
 
 		public function isInstalled() {

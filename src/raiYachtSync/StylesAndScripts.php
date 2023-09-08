@@ -12,6 +12,26 @@
 
 			add_action( 'wp_enqueue_scripts' , [$this, 'enqueueYachtDetails']);
 		}
+		
+		public function pickedColorsFromWpAdmin() {
+
+			$colorOne = $this->options->get('color_one');
+			$colorTwo = $this->options->get('color_two');
+
+			return "
+				:root {
+					--main-color: $colorOne;
+					--secondary-color: $colorTwo;
+				}
+			";
+
+		}
+
+		public function pickedEuroMeterFromWpAdmin() {
+			$euroMeterSetting = $this->options->get('is_euro_site');
+
+			return "";
+		}
 
 		public function enqueueGlobal() {
 
@@ -21,13 +41,17 @@
 			$js_vars = [
 				'wp_rest_url' => get_rest_url(),
 				'assets_url' => RAI_YS_PLUGIN_ASSETS,
-				'yacht_search_url' => get_permalink($this->options->get('yacht_search_page_id'))
+				'yacht_search_url' => get_permalink($this->options->get('yacht_search_page_id')),
+				'europe_option_picked' => $this->options->get('is_euro_site'),
+				'euro_c_c' => $this->options->get('euro_c_c')
 			];
 
 			wp_localize_script('yacht-sync-script', 'rai_yacht_sync', $js_vars); 
 
 			wp_enqueue_script('yacht-sync-script');
 			wp_enqueue_style('yacht-sync-styles');
+
+			wp_add_inline_style('yacht-sync-styles', $this->pickedColorsFromWpAdmin());
 
 		}
 
