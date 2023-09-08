@@ -55,12 +55,21 @@ get_header();
                     </div>
                 </div>
                 <div class="yacht-image-container">
-                    <div class="yacht-main-image-container">
-                        <img class="yacht-image" src="<?php echo ($vessel->Images[0]->Uri); ?>" alt="yacht-image" />
+                    <div class="carousel carousel-main yacht-main-image-container">
+                        <?php foreach($vessel->Images as $imageObject) { ?>
+                            <div class="carousel-cell">
+                                <img class="yacht-image" src="<?php echo ($imageObject->Uri); ?>" alt="yacht-image"/>
+                            </div>
+                        <?php } ?>
                     </div>
-                    <div class="yacht-gallery-container">
-                        <?php for ($x = 1; $x < 9; $x++) { ?>
-                            <img class="yacht-gallery-image" src="<?php echo ($vessel->Images[$x]->Uri); ?>" alt="<?php echo ($vessel->Images[$x]->Caption); ?>" />
+                </div>
+                <div class="yacht-nav-image-container">
+                    <div class="carousel carousel-nav">
+                        <?php foreach($vessel->Images as $imageObject) { ?>
+                            <div class="carousel-cell">
+                                <div class="carousel-nav-overlay"></div>
+                                <img class="yacht-image" src="<?php echo ($imageObject->Uri); ?>" alt="yacht-image"/>
+                            </div>
                         <?php } ?>
                     </div>
                 </div>
