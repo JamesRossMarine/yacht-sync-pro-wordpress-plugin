@@ -9,8 +9,7 @@
 			$this->ImportBrokerageOnlyBoatsCom = new raiYachtSync_ImportRuns_BrokerageOnlyBoatsCom();
 
 			$this->ImportYachtBrokerOrg = new raiYachtSync_ImportRuns_YachtBrokerOrg();
-
-
+			
 		}
 
 		public function cleanup() {
@@ -31,27 +30,19 @@
 				WHERE wp.ID IS NULL"
 			);
 
-		/*	$yArgs=[
-	            'fields' => "ids",
-	            'post_type' => 'rai_yacht',
-	            'posts_per_page' => -1,
-	        ];
+			/*
+				$yArgs=[
+		            'fields' => "ids",
+		            'post_type' => 'rai_yacht',
+		            'posts_per_page' => -1,
+		        ];
 
-	        $pt_yachts=get_posts($yArgs);
+		        $pt_yachts=get_posts($yArgs);
 
-	        foreach ($pt_yachts as $yID) {
-	            wp_delete_post($yID, true);
-	        }*/
-
-	        /* 
-				DELETE wp FROM wp_posts wp 
-				LEFT JOIN wp_postmeta pm ON pm.post_id = wp.ID 
-				WHERE wp.post_type = 'rai_yacht'
-
-				DELETE pm FROM wp_postmeta pm 
-				LEFT JOIN wp_posts wp ON wp.ID = pm.post_id 
-				WHERE wp.ID IS NULL
-	         */
+		        foreach ($pt_yachts as $yID) {
+		            wp_delete_post($yID, true);
+		        }
+	        */
 		}
 
 		public function run() {
@@ -60,7 +51,7 @@
 
 			$boats_com_api_global_key = $this->options->get('boats_com_api_global_key');
 			$boats_com_api_brokerage_key = $this->options->get('boats_com_api_brokerage_key');
-
+			$yacht_broker_org_api_token = $this->options->get('yacht_broker_org_api_token');
 
 			// @ToDo For Loop the Runs  
 			// KEEP THIS IN THIS ORDER
@@ -68,7 +59,9 @@
 				$this->ImportGlobalBoatsCom->run();
 			}
 
-			//$this->ImportYachtBrokerOrg->run();
+			if (!empty($yacht_broker_org_api_token)) {
+				$this->ImportYachtBrokerOrg->run();
+			}
 
 			if (! empty($boats_com_api_global_key)) {
 				$this->ImportBrokerageOnlyBoatsCom->run();

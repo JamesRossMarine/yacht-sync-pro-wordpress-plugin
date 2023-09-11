@@ -217,7 +217,15 @@
 
 	   				return $list;
 
-	   			}
+	   			},
+
+	   			'Cities' => function() {
+
+	   				$list = $this->get_unique_yacht_meta_values('YSP_City', 'rai_yacht');
+
+	   				return $list;
+
+	   			},
 
 	   		];
 
@@ -225,8 +233,11 @@
 
 			if (! $return){
 				foreach ($labels as $label) {
-					$return[ $label ] = $labelsKey[ $label ]();
+					if (is_callable($labelsKey[ $label ])) {
+						$return[ $label ] = $labelsKey[ $label ]();
+					}
 				}
+				
 				set_transient('rai_yacht_list_options'.join('_', $labels), $return, 4 * HOUR_IN_SECONDS);
 			}
 

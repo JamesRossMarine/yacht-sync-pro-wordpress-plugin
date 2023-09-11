@@ -57,16 +57,22 @@
 		           			'BoatStateCode' => $row['State']
 		           		],
 
+		           		'YSP_City' => $row['City'],
+		           		'YSP_CountryID' => $row['Country'],
+		           		'YSP_State' => $row['State'],
+
 		           		'SalesRep' => (object)  [
 		           			'PartyId' => $row['ListingOwnerID'],
-		           			'Name' => $row['ListingOwnerEmail'],
+		           			'Name' => $row['ListingOwnerName'],
 		           			'Email' => $row['ListingOwnerEmail'],
 		           			'Phone' => $row['ListingOwnerPhone']
-		           		]
+		           		],
+
+		           		'YSP_BrokerName' => $row['ListingOwnerName']
 		           	];
 
-		           	/*
-					'YBDocumentID' => 'ID',
+		           	$MapToBoatOrg=[
+		           		'YBDocumentID' => 'ID',
 		  				'SalesStatus' => 'Status',
 		                'SaleClassCode' => 'Condition',
 		                'CompanyName' => 'ListingOwnerBrokerageName' ,
@@ -94,52 +100,17 @@
 		                'BoatHullID' => 'HullIdentificationNumber',
 		                'DisplayLengthFeet' => 'LOAFeet',
 		                'TaxStatusCode' => 'TaxStatus',
-		                'NominalLength' => 'LOAMeters',
+		                'NominalLength' => 'LOAFeet',
 		                'AdditionalDetailDescription' => 'Description'
-
-		           	*/
-
-		           	$MapToBoatOrg=[
-		           		//'ID' => 'DocumentID',
-		           		'ID' => 'YBDocumentID',
-		                'Status' => 'SalesStatus',
-		                'Condition' => 'SaleClassCode',
-		                'ListingOwnerBrokerageName' => 'CompanyName',
-		                'Summary' => 'GeneralBoatDescription',
-		                'EngineQty' => 'NumberOfEngines',
-		                'PriceUSD' => 'Price',
-		                'PriceUSD' => 'NormPrice',
-		                'Year' => 'ModelYear',
-		                'Model' => 'Model',
-		                'PriceHidden' => 'PriceHideInd',
-		                'Manufacturer' => 'MakeString',
-		                'Type' => 'BoatCategoryCode',
-		                'VesselName' => 'BoatName',
-		                'CruiseSpeed' => 'CruisingSpeedMeasure',
-		                'MaximumSpeed' => 'MaximumSpeedMeasure',
-		                'RangeNMI' => 'RangeMeasure',
-		                'BeamFeet' => 'BeamMeasure',
-		                'UpdatedTimestamp' => 'LastModificationDate',
-		                'FreshWaterCapacityGallons' => 'WaterTankCapacityMeasure',
-		                'FuelTankCapacityGallons' => 'FuelTankCapacityMeasure',
-		                'DryWeight' => 'DryWeightMeasure',
-		                'CabinCount' => 'CabinsCountNumeric',
-		                'HeadCount' => 'HeadsCountNumeric',
-		                'HullMaterial' => 'BoatHullMaterialCode',
-		                'HullIdentificationNumber' => 'BoatHullID',
-		                'LOAFeet' => 'DisplayLengthFeet',
-		                'TaxStatus' => 'TaxStatusCode',
-		                'LOAMeters' => 'NominalLength',
-		                'Description' => 'AdditionalDetailDescription'
 
 		           	];
 
-		           	foreach ($MapToBoatOrg as $key => $newKey) {
+		           	foreach ($MapToBoatOrg as $mapToKey => $key) {
 		           		if (isset($row[ $key ])) {
-		           			$theBoat[ $newKey ] = $row[ $key ];
+		           			$theBoat[ $mapToKey ] = $row[ $key ];
 		           		}
 		           		else {
-		           			$theBoat[$newKey] = '';
+		           			$theBoat[ $mapToKey ] = '';
 		           		}
 
 		           	}
@@ -149,7 +120,7 @@
 		            
 		                foreach ($row['gallery'] as $key => $img) {
 		                    $images[] = (object) [
-		                        'Priority' => $img['Sort'],
+		                        //'Priority' => $img['Sort'],
 		                        'Caption'  => $img['Title'],
 		                        'Uri'      => $img['HD']
 		                    ];
@@ -167,7 +138,6 @@
 			            $row['MaximumSpeedMeasure']  .= ' '.str_replace('Knots', 'kn', $row['SpeedUnit']);
 			            $theBoat['MaximumSpeedMeasure']=$row['MaximumSpeedMeasure'];
 		            }
-
 
 		            if (isset($row['BeamMeasure'])) {
 		                $row['BeamMeasure'] .= ' ft';
@@ -257,11 +227,12 @@
 		                [
 		                    'ID' => $post_id,
 							'post_type' => 'rai_yacht',
-							'post_title' =>  $theBoat['ModelYear'].' '.$theBoat['MakeString'].' '.$theBoat['Model'].' '.$theBoat['BoatName'],
+							'post_title' =>  addslashes( $theBoat['ModelYear'].' '.$theBoat['MakeString'].' '.$theBoat['Model'].' '.$theBoat['BoatName'] ),
 							'post_name' => sanitize_title(
 								$theBoat['ModelYear'].'-'.$theBoat['MakeString'].'-'.$theBoat['Model']
 							),
-							'post_contnet' => $theBoat['GeneralBoatDescription'],
+							//'post_contnet' => $theBoat['GeneralBoatDescription'],
+							'post_contnet' => '',
 							'post_status' => 'publish',
 							'meta_input' => apply_filters('raiys_yacht_meta_sync', $theBoat),
 

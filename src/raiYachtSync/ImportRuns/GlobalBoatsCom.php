@@ -35,9 +35,9 @@
 				$apiUrl = $this->globalInventoryUrl;
 				$apiUrl = $apiUrl.'&start='. $offset .'&rows='. $this->limit;
 
-				var_dump($offset);
+				//var_dump($offset);
 
-				sleep(30);
+				sleep(10);
  
 				// Sync broker inventory
 				$apiCallForWhile = wp_remote_get($apiUrl, ['timeout' => 300]);
@@ -162,9 +162,9 @@
 
 		            //if ( defined( 'WP_CLI' ) && WP_CLI ) {
                         if (is_wp_error($y_post_id)) {
-                            var_dump( 'Document ID - '. $boat['DocumentID']);
+                            //var_dump( 'Document ID - '. $boat['DocumentID']);
 
-                            var_dump($boat);
+                            //var_dump($boat);
                         }
                     //}
 
@@ -173,13 +173,13 @@
 				$offset = $offset + $this->limit;
 			
 				if ($yachtsSynced != $offset) {
-					echo 'off sync \n';
+					//echo 'off sync \n';
 				}
 
 			}
 
-			var_dump($offset);
-			var_dump($yachtsSynced);
+			//var_dump($offset);
+			//var_dump($yachtsSynced);
 
 
 

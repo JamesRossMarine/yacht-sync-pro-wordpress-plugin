@@ -29,7 +29,7 @@
 
 			//$apiCallInventory = $apiCall['body']['results'];
 
-			var_dump($total);
+			//var_dump($total);
 
 			while ($total > ($yachtsSynced)) {
 
@@ -114,7 +114,7 @@
                     }
 
 		            if (isset($boat['BoatLocation'])) {
-	                    $boatC->YSP_Country = $boat['BoatLocation']['BoatCountryID'];
+	                    $boatC->YSP_CountryID = $boat['BoatLocation']['BoatCountryID'];
 	                    $boatC->YSP_City = $boat['BoatLocation']['BoatCityName'];
 	                    $boatC->YSP_State = $boat['BoatLocation']['BoatStateCode'];
                     }
@@ -122,7 +122,7 @@
                     if (isset($boat['SalesRep'])) {
                     	$boatC->YSP_BrokerName=$boat['SalesRep']['Name'];
                     }
-
+                    
                     if (isset($boatC->AdditionalDetailDescription)) {
 	                    unset($boatC->AdditionalDetailDescription);
 	                }
@@ -147,13 +147,13 @@
 						]
 					);
 					
-					if ( defined( 'WP_CLI' ) && WP_CLI ) {
+					/*if ( defined( 'WP_CLI' ) && WP_CLI ) {
                         if (is_wp_error($y_post_id)) {
                             WP_CLI::log( 'Document ID - '. $boat['DocumentID']);
 
                             var_dump($boat);
                         }
-                    }
+                    }*/
 
 
 
@@ -165,7 +165,7 @@
 
 			}
 
-			var_dump($yachtsSynced);
+			//var_dump($yachtsSynced);
 
 		}
 
