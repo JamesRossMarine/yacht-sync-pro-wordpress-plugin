@@ -1,5 +1,10 @@
 #ysp-yacht-details {
+    margin: 40px;
     display: flex;
+
+    @media screen and (max-width: $breakpoint-small){
+        margin: 0px;
+    }
 
     .yacht-main-container {
         width: 70%;
@@ -9,11 +14,14 @@
         }
 
         .yacht-general-info {
-
+            @media screen and (max-width: $breakpoint-small){
+                margin: 0px 20px;
+            }
             .yacht-name-price-info {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+
                 @media screen and (max-width: $breakpoint-med){
                     display: block;
                 }
@@ -62,7 +70,9 @@
             }
         }
         .yacht-image-container {
-
+            @media screen and (max-width: $breakpoint-small){
+                margin: 0px 20px;
+            }
             .yacht-main-image-container {
                 height: 537px;
                 width: 100%;
@@ -94,6 +104,9 @@
         }
         .yacht-nav-image-container {
             height: 100px;
+            @media screen and (max-width: $breakpoint-small){
+                margin: 0px 20px;
+            }
 
             .carousel-nav {
                 height: 100px;
@@ -133,6 +146,7 @@
         .yacht-main-info-container {
             width: 100%;
             background-color: #F1F5F9;
+            margin-bottom: 20px;
 
             .yacht-main-info {
                 display: flex;
@@ -262,6 +276,9 @@
             @media screen and (max-width: $breakpoint-large){
                 margin-bottom: 40px;
             }
+            @media screen and (max-width: $breakpoint-small){
+                margin: 0px 20px;
+            }
 
             .yacht-download-button {
                 background-color: $main-text-color;
@@ -287,6 +304,9 @@
                 @media  screen and (max-width: $breakpoint-large) {
                     display: flex;
                     margin-bottom: 40px;
+                }
+                @media screen and (max-width: $breakpoint-small){
+                    margin: 0px 20px;
                 }
 
                 .broker-profile-image {
@@ -332,6 +352,9 @@
 
             @media screen and (max-width: $breakpoint-large){
                 display: block;
+            }
+            @media screen and (max-width: $breakpoint-small){
+                margin: 0px 20px;
             }
 
             .yacht-form-title {
@@ -436,6 +459,9 @@
                 display: block;
                 margin-bottom: 40px;
             }
+            @media screen and (max-width: $breakpoint-small){
+                margin: 0px 20px;
+            }
 
             .yacht-description-label {
                 width: 33%;
@@ -473,6 +499,9 @@
                 display: block;
                 margin-bottom: 40px;
             }
+            @media screen and (max-width: $breakpoint-small){
+                margin: 0px 20px;
+            }
 
             .yacht-specs-label {
                 width: 33%;
@@ -494,6 +523,7 @@
                     width: 100%;
                     justify-content: space-between;
                     border-bottom: 1px solid $divider-color;
+                    padding: 20px 0px;
 
                     .specification-name {
                         color: $main-text-color;
@@ -513,6 +543,9 @@
         }
         .yacht-full-details-container {
             width: 100%;
+            @media screen and (max-width: $breakpoint-small){
+                margin: 0px 20px;
+            }
 
             .yacht-details-label {
                 color: $main-text-color;
@@ -532,6 +565,7 @@
                     justify-content: space-between;
                     align-items: center;
                     border-bottom: 1px solid $divider-color;
+                    padding: 20px 0px;
 
                     .yacht-accordion-name {
                         color: $main-text-color;
