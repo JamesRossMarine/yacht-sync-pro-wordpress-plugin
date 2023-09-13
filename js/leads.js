@@ -4,18 +4,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
         let formData = raiys_get_form_data(e.target);
         let successMessage = e.target.parentElement.querySelector('.success-message');
+        let honeypotField = e.target.querySelector('#honeypot');
 
         console.log('Form Data:', formData);
-
-        rai_ysp_api.call_api("POST", apiEndpoint, formData)
-            .then(function(data_result) {
-                console.log('success');
-                successMessage.style.display = 'block';
-                e.target.style.display = 'none';
-            })
-            .catch(function(error) {
-                console.log(error);
-            });
+        if (honeypotField.value === '') {
+            rai_ysp_api.call_api("POST", apiEndpoint, formData)
+                .then(function(data_result) {
+                    console.log('success');
+                    successMessage.style.display = 'block';
+                    e.target.style.display = 'none';
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
+        } else {
+            console.log('Honeypot triggered');
+        }
     }
 
     let yachtForms = document.querySelectorAll('.single-yacht-detils-lead');
