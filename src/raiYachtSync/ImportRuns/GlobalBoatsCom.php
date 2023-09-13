@@ -27,7 +27,7 @@
 
 	        $total = $apiCall['body']['data']['numResults'];
 
-	        var_dump($total);
+	        //var_dump($total);
 
 			//$apiCallInventory = $apiCall['body']['data']['results'];
 

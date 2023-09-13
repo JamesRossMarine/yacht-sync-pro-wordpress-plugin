@@ -1,14 +1,15 @@
 <?php
 
 	class raiYachtSync_ImportRuns_YachtBrokerOrg {
-		public $yachtBrokerAPIKey = '0a3e392e786c817195307150386779f18c69540e';
-   		public $yachtClientId = '82420';
+		public $yachtBrokerAPIKey = '';
+   		public $yachtClientId = '';
    		protected $url = '';
    		protected $yachtBrokerLimit = 30;
 
 		public function __construct() {
 
 			$this->options = new raiYachtSync_Options();
+			$this->LocationConvert = new raiYachtSync_LocationConvert();
 
 			$this->yachtBrokerAPIKey = $this->options->get('yacht_broker_org_api_token');
 			$this->yachtClientId = $this->options->get('yacht_broker_org_id');
@@ -28,6 +29,8 @@
 	        $apiUrlOne  = 'https://api.yachtbroker.org/listings?key='.$this->yachtBrokerAPIKey.'&id='. $this->yachtClientId .'&gallery=true&engines=true&generators=true&textblocks=true&media=true&limit='.$this->yachtBrokerLimit;
 
 	        $apiCall = wp_remote_get($apiUrlOne, $headers);
+
+	        //var_dump($apiCall['body']);
 
 	        $json = json_decode($apiCall['body'], true);
 
@@ -53,13 +56,13 @@
 		           	$theBoat=[
 		           		'BoatLocation' => (object) [
 		           			'BoatCityName' => $row['City'],
-		           			'BoatCountryID' => $row['Country'],
-		           			'BoatStateCode' => $row['State']
+		           			'BoatCountryID' => $this->LocationConvert->filpped_country[ $row['Country'] ],
+		           			'BoatStateCode' => $this->LocationConvert->filpped_state[ $row['State'] ]
 		           		],
 
 		           		'YSP_City' => $row['City'],
-		           		'YSP_CountryID' => $row['Country'],
-		           		'YSP_State' => $row['State'],
+		           		'YSP_CountryID' => $this->LocationConvert->filpped_country[ $row['Country'] ],
+		           		'YSP_State' => $this->LocationConvert->filpped_state[ $row['State'] ],
 
 		           		'SalesRep' => (object)  [
 		           			'PartyId' => $row['ListingOwnerID'],
