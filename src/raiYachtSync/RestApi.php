@@ -95,6 +95,14 @@
 		            
 		        )
 		    ) );
+			register_rest_route( 'raiys', '/broker-leads', array(
+		        'callback' => [$this, 'broker_leads'],
+		        'methods'  => [WP_REST_Server::READABLE, WP_REST_Server::CREATABLE],
+		        'permission_callback' => '__return_true',
+		        'args' => array(
+		            
+		        )
+		    ) );
 		}
 
 		public function sync_yachts(WP_REST_Request $request) {
@@ -336,6 +344,52 @@
 		return 'text/html';
 	   }
 
+	   public function spamChecker($form_data) {
+
+	   		$comment = array(
+			    'comment_type' => 'contact-form',
+			    
+			    'comment_author' => $form_data['fname'].' '.$form_data['lname'],
+			    'comment_author_email' => $form_data['email'],
+
+			    'comment_content' => $form_data['message'],
+
+			    'permalink' => $form_data['ReferrerUrl'],
+
+			    'honeypot_field_name' => 'fax',
+			    
+			    'hidden_honeypot_field' => $form_data['fax'],
+
+			    'contact_me_by_fax_only' => $form_data['fax'],
+
+			);
+
+			// good comment until proven bad
+			$akismet = new raiYachtSync_Akismet('4ebc51dc31b7');
+			
+			if(!$akismet->error) {
+
+			    //Check to see if the key is valid
+			    if($akismet->valid_key()) {
+
+				    $results = ['spam_aki' => true, 'error' => 'Please refresh and try again. Spam Key Issue.'];
+			    
+			    }
+			    				    
+			    if ($akismet->is_spam($comment)) {
+
+				    $results = ['spam_aki' => true, 'error' => 'Please refresh and try again.'];
+			    
+			    }
+			    else {
+				
+					$results = ['not_spam_aki' => true];
+			    
+			    }
+			}
+			return $results;
+	   }
+
 	   public function yacht_leads(WP_REST_Request $request) {
 
 		$to = $this->options->get('send_lead_to_this_email');
@@ -346,14 +400,88 @@
 		$message = $request->get_param('message');
 		$email = $request->get_param('email');
 		$phone = $request->get_param('phone');
+		$fax = $request->get_param('fax');
 		$vesselHidden = $request->get_param('yatchHidden');
+		$ReferrerUrl = $_SERVER['HTTP_REFERER'];
 
 		$subject = $fname . " " . $lname . " " . 'submitted an inquiry' ;
+
+		$spamChecker = $this->spamChecker([
+			'fname' => $fname,
+			'lname' => $lname,
+			'message' => $message,
+			'email' => $email,
+			'phone' => $phone,
+			'yachtHidden' => $vesselHidden,	
+			'fax' => $fax,
+			'ReferrerUrl' => $ReferrerUrl
+		]);
+
+		if  ( isset( $spamChecker['not_spam_aki']) && $spamChecker['not_spam_aki'] == true ) {
+			$fullMessage = '<!DOCTYPE html><html><body>';
+			$fullMessage .= '<h1>' . $subject . '</h1>';
+			$fullMessage .= '<p><strong>Vessel:</strong> ' . $vesselHidden . '</p>';
+			$fullMessage .= '<p><strong>Page:</strong> ' . $ReferrerUrl . '</p>';
+			$fullMessage .= '<p><strong>Name:</strong> ' . "$fname $lname" . '</p>';
+			$fullMessage .= '<p><strong>Email:</strong> ' . $email . '</p>';
+			$fullMessage .= '<p><strong>Phone:</strong> ' . $phone . '</p>';
+			$fullMessage .= '<p><strong>Message:</strong></p>';
+			$fullMessage .= '<p>' . nl2br($message) . '</p>'; 
+		
+			$fullMessage .= '</body></html>';
+		
+			$headers = array(
+				'Content-Type: text/html; charset=UTF-8',
+			);
+		
+			$sent = wp_mail($to, $subject, $fullMessage, $headers);
+		
+			if ($sent) {
+				return array('message' => 'Email sent successfully');
+			} else {
+				return array('error' => 'Email failed to send');
+			}
+		}
+		else {
+			return array('error' => 'Email failed to send');
+		}
+	}
+
+	public function broker_leads(WP_REST_Request $request) {
+		
+		$brokerID=$request->get_param('brokerID');
+		//$broker=get_post($request->get_param('brokerID'));
+		$broker_email = get_post_meta($brokerID, "rai_broker_email", true);
+
+		$to = $broker_email;
+
+		$fname = $request->get_param('fname');
+		$lname = $request->get_param('lname');
+		$message = $request->get_param('message');
+		$email = $request->get_param('email');
+		$phone = $request->get_param('phone');
+		$fax = $request->get_param('fax');
+		$ReferrerUrl = $_SERVER['HTTP_REFERER'];
+
+		$subject = $fname . " " . $lname . " " . 'submitted an inquiry' ;
+
+		$spamChecker = $this->spamChecker([
+			'fname' => $fname,
+			'lname' => $lname,
+			'message' => $message,
+			'email' => $email,
+			'phone' => $phone,
+			'brokerID' => $broker_email,
+			'fax' => $fax,
+			'ReferrerUrl' => $_SERVER['HTTP_REFERER']
+		]);
+
+		if  ( isset( $spamChecker['not_spam_aki']) && $spamChecker['not_spam_aki'] == true ) {
 		
 		$fullMessage = '<!DOCTYPE html><html><body>';
 		$fullMessage .= '<h1>' . $subject . '</h1>';
-		$fullMessage .= '<p><strong>Vessel:</strong> ' . $vesselHidden . '</p>';
 		$fullMessage .= '<p><strong>Name:</strong> ' . "$fname $lname" . '</p>';
+		$fullMessage .= '<p><strong>Page:</strong> ' . $ReferrerUrl . '</p>';
 		$fullMessage .= '<p><strong>Email:</strong> ' . $email . '</p>';
 		$fullMessage .= '<p><strong>Phone:</strong> ' . $phone . '</p>';
 		$fullMessage .= '<p><strong>Message:</strong></p>';
@@ -366,14 +494,18 @@
 		);
 	
 		$sent = wp_mail($to, $subject, $fullMessage, $headers);
-	
+
 		if ($sent) {
 			return array('message' => 'Email sent successfully');
 		} else {
-			return array('error' => 'Email sending failed');
+			return array('error' => 'Email failed to send');
+			}
+		}
+		else {
+			return array('error' => 'Email failed to send');
 		}
 	}
-	
+
 	
 
 
