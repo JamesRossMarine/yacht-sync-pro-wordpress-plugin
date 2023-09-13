@@ -1,4 +1,5 @@
 <?php
+use Random\Engine;
 	class raiYachtSync_ImportRuns_GlobalBoatsCom {
    		protected $limit = 153;
 	
@@ -137,6 +138,25 @@
 	                    $boatC->YSP_CountryID = $boat['BoatLocation']['BoatCountryID'];
 	                    $boatC->YSP_State = $boat['BoatLocation']['BoatStateCode'];
                     }
+
+					if (isset($boat['Engines'])) {
+						$boatC->YSP_EngineCount = count($boat['Engines']);
+						if (isset($boat['Engines'][0]['Model'])){
+							$boatC->YSP_EngineModel = $boat['Engines'][0]['Model'];
+						}
+						if (isset($boat['Engines'][0]['Fuel'])){
+							$boatC->YSP_EngineFuel = $boat['Engines'][0]['Fuel'];
+						}
+						if (isset($boat['Engines'][0]['EnginePower'])){
+							$boatC->YSP_EnginePower = $boat['Engines'][0]['EnginePower'];
+						}
+						if (isset($boat['Engines'][0]['Hours'])){
+							$boatC->YSP_EngineHours = $boat['Engines'][0]['Hours'];
+						}
+						if (isset($boat['Engines'][0]['Type'])){
+							$boatC->YSP_EngineType = $boat['Engines'][0]['Type'];
+						}
+					}
 
                     // $output = preg_replace('/(<[^>]+) style=".*?"/i', '$1', $input);
 
