@@ -221,8 +221,7 @@ get_header();
                             <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="+1 (777) 777-7777" required />
                         </div>
                         <div style="display: none;">
-                            <label for="honeypot">Leave this field empty:</label>
-                            <input type="text" id="honeypot" name="honeypot">
+                        <input type="text"  name="fax">
                         </div>
                         <div>
                             <label for="inquirytype">Inquiry type</label>
@@ -485,8 +484,7 @@ get_header();
                                 <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="+1 (777) 777-7777" required />
                             </div>
                             <div style="display: none;">
-                            <label for="honeypot">Leave this field empty:</label>
-                            <input type="text" id="honeypot" name="honeypot">
+                            <input type="text" name="fax">
                             </div>
                             <div>
                                 <label for="inquirytype">Inquiry type</label>
