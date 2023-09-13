@@ -155,7 +155,7 @@
 
 				if ($this->if_query_var_check($query->get('ys_country'))) {
 					$yacht_sync_meta_query[]=[
-						'key' => 'Country',
+						'key' => 'YSP_CountryID',
 						'compare' => "=",
 						'value' => $query->get('ys_country')
 					];
