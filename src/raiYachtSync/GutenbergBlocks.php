@@ -10,7 +10,7 @@
             add_action('init', [$this, 'serverside_blocks']);
 
             add_action('init', [$this, 'js_scripts']);
-
+ 
 	        add_action( 'enqueue_block_editor_assets', [$this, 'pass_styles'] );
         }
 

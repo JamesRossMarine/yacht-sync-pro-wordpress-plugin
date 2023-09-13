@@ -40,7 +40,9 @@ get_header();
             <div class="second-main-container">
                 <div class="broker-form-container">
                     <p class="broker-form-title">Inquire Now</p>
-                    <form action="/submit" method="post">
+                    <form class="single-broker-detils-lead" action="/submit" method="post">
+                        <input type="hidden" name="brokerID" value="<?php echo $post->ID; ?>" />
+
                         <div>
                             <label for="fname">First name</label>
                             <input type="text" id="fname" name="fname" placeholder="First name" required />
@@ -74,6 +76,9 @@ get_header();
                         </div>
                         <input class="broker-form-submit" type="submit" value="Send" />
                     </form>
+                    <div class="success-message" style="display: none; background-color: #4CAF50; color: #fff; padding: 10px; text-align: center;">
+                        <p class="success-messages">Thank you for getting in touch. We will be in touch shortly.</p>
+                    </div>
                 </div>
             </div>
         </div>

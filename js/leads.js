@@ -1,27 +1,34 @@
 document.addEventListener('DOMContentLoaded', function() {
-    let forms = document.querySelectorAll('.single-yacht-detils-lead');
+    function handleSubmit(e, apiEndpoint) {
+        e.preventDefault();
 
+        let formData = raiys_get_form_data(e.target);
+        let successMessage = e.target.parentElement.querySelector('.success-message');
 
-    forms.forEach((fEle) => {
+        console.log('Form Data:', formData);
+
+        rai_ysp_api.call_api("POST", apiEndpoint, formData)
+            .then(function(data_result) {
+                console.log('success');
+                successMessage.style.display = 'block';
+                e.target.style.display = 'none';
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+    }
+
+    let yachtForms = document.querySelectorAll('.single-yacht-detils-lead');
+    yachtForms.forEach((fEle) => {
         fEle.addEventListener('submit', function(e) {
-            e.preventDefault();
+            handleSubmit(e, "yacht-leads");
+        });
+    });
 
-            let FormData = raiys_get_form_data(e.target);
-
-            let successMessage = fEle.parentElement.querySelector('.success-message');
-
-            rai_ysp_api.call_api("POST", "yacht-leads", FormData)
-                .then(function(data_result) {
-
-                    console.log('success')
-                    successMessage.style.display = 'block';
-
-                    console.log('Form should be hidden.');
-                    e.target.style.display = 'none';
-                })
-                .catch(function(error) {
-                    console.log(error);
-                });
+    let brokerForms = document.querySelectorAll('.single-broker-detils-lead');
+    brokerForms.forEach((fEle) => {
+        fEle.addEventListener('submit', function(e) {
+            handleSubmit(e, "broker-leads");
         });
     });
 });

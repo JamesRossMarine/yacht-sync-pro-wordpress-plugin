@@ -95,6 +95,14 @@
 		            
 		        )
 		    ) );
+			register_rest_route( 'raiys', '/broker-leads', array(
+		        'callback' => [$this, 'broker_leads'],
+		        'methods'  => [WP_REST_Server::READABLE, WP_REST_Server::CREATABLE],
+		        'permission_callback' => '__return_true',
+		        'args' => array(
+		            
+		        )
+		    ) );
 		}
 
 		public function sync_yachts(WP_REST_Request $request) {
@@ -327,6 +335,45 @@
 		$fullMessage = '<!DOCTYPE html><html><body>';
 		$fullMessage .= '<h1>' . $subject . '</h1>';
 		$fullMessage .= '<p><strong>Vessel:</strong> ' . $vesselHidden . '</p>';
+		$fullMessage .= '<p><strong>Name:</strong> ' . "$fname $lname" . '</p>';
+		$fullMessage .= '<p><strong>Email:</strong> ' . $email . '</p>';
+		$fullMessage .= '<p><strong>Phone:</strong> ' . $phone . '</p>';
+		$fullMessage .= '<p><strong>Message:</strong></p>';
+		$fullMessage .= '<p>' . nl2br($message) . '</p>'; 
+	
+		$fullMessage .= '</body></html>';
+	
+		$headers = array(
+			'Content-Type: text/html; charset=UTF-8',
+		);
+	
+		$sent = wp_mail($to, $subject, $fullMessage, $headers);
+	
+		if ($sent) {
+			return array('message' => 'Email sent successfully');
+		} else {
+			return array('error' => 'Email sending failed');
+		}
+	}
+
+	public function broker_leads(WP_REST_Request $request) {
+		
+		$brokerID=$request->get_param('brokerID');
+		//$broker=get_post($request->get_param('brokerID'));
+		$broker_email = get_post_meta($brokerID, "rai_broker_email", true);
+
+		$to = $broker_email;
+		
+		$fname = $request->get_param('fname');
+		$lname = $request->get_param('lname');
+		$message = $request->get_param('message');
+		$email = $request->get_param('email');
+		$phone = $request->get_param('phone');
+
+		$subject = $fname . " " . $lname . " " . 'submitted an inquiry' ;
+		
+		$fullMessage = '<!DOCTYPE html><html><body>';
+		$fullMessage .= '<h1>' . $subject . '</h1>';
 		$fullMessage .= '<p><strong>Name:</strong> ' . "$fname $lname" . '</p>';
 		$fullMessage .= '<p><strong>Email:</strong> ' . $email . '</p>';
 		$fullMessage .= '<p><strong>Phone:</strong> ' . $phone . '</p>';
