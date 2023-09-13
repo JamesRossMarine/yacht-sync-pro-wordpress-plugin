@@ -158,6 +158,18 @@ use Random\Engine;
 						}
 					}
 
+					if (isset($boat['Images'][0]['LastModifiedDateTime'])){
+						$boatC->YSP_ListingDate = $boat['Images'][0]['LastModifiedDateTime'];
+					}
+					if (isset($boat['OriginalPrice']) && isset($boat['Price'])){
+						if (str_contains($boat['OriginalPrice'], 'EUR')){
+							$boatC->YSP_EuroVal = (int) $boat['OriginalPrice'];
+						} else {
+							$price = (int) $boat['Price'] * $this->options->get('euro_c_c');
+							$boatC->YSP_EuroVal = $price;
+						}
+					}
+
                     // $output = preg_replace('/(<[^>]+) style=".*?"/i', '$1', $input);
 
 		            $y_post_id=wp_insert_post(

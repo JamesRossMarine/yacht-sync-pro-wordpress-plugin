@@ -47,6 +47,11 @@
 			$vars[] = 'ys_engine_hourshi';
 			$vars[] = 'ys_engine_type';
 
+			$vars[] = 'ys_listing_date';
+
+			$vars[] = 'ys_euroval_lo';
+			$vars[] = 'ys_euroval_hi';
+
 			// $vars[] = 'ys_type';
 
 			$vars[] = 'ys_country';
@@ -367,7 +372,31 @@
 						'value' => $query->get('ys_engine_type')
 					];
 				}
-				
+				if ($this->if_query_var_check($query->get('ys_listing_date'))) {
+					$yacht_sync_meta_query[]=[
+						'key' => 'YSP_ListingDate',
+						'compare' => "=",
+						'value' => $query->get('ys_listing_date')
+					];
+				}
+				if ($this->if_query_var_check($query->get('ys_euroval_lo'))) {
+					$yacht_sync_meta_query[]=[
+						'key' => 'YSP_EuroVal',
+						'compare' => ">=",
+						'type' => 'NUMERIC',
+						'value' => $query->get('ys_euroval_lo')
+					];
+				}
+
+				if ($this->if_query_var_check($query->get('ys_euroval_hi'))) {
+					$yacht_sync_meta_query[]=[
+						'key' => 'YSP_EuroVal',
+						'compare' => "<=",
+						'type' => 'NUMERIC',
+						'value' => $query->get('ys_euroval_hi')
+					];
+				}
+
 				// if ($this->if_query_var_check($query->get('ys_type'))) {
 				// 	$yacht_sync_meta_query[]=[
 				// 		'key' => 'YSP_Type',
