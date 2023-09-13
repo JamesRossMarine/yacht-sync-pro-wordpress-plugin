@@ -344,6 +344,53 @@
 		return 'text/html';
 	   }
 
+	   public function spamChecker($form_data) {
+
+	   		$comment = array(
+			    'comment_type' => 'contact-form',
+			    
+			    'comment_author' => $form_data['FirstName'].' '.$form_data['LastName'],
+			    'comment_author_email' => $form_data['Email'],
+
+			    'comment_content' => $form_data['Message'],
+
+			    'permalink' => $form_data['ReferrerUrl'],
+
+			    'honeypot_field_name' => 'contact_me_by_fax_only',
+			    
+			    'hidden_honeypot_field' => $form_data['contact_me_by_fax_only'],
+
+			    'contact_me_by_fax_only' => $form_data['contact_me_by_fax_only'],
+
+			);
+
+			// good comment until proven bad
+			$akismet = new raiYachtSync_Akismet('4ebc51dc31b7');
+			
+			if(!$akismet->error) {
+
+			    //Check to see if the key is valid
+			    if($akismet->valid_key()) {
+
+				    $results = ['spam_aki' => true, 'error' => 'Please refresh and try again. Spam Key Issue.'];
+			    
+			    }
+			    				    
+			    if ($akismet->is_spam($comment)) {
+
+				    $results = ['spam_aki' => true, 'error' => 'Please refresh and try again.'];
+			    
+			    }
+			    else {
+				
+					$results = ['not_spam_aki' => true];
+			    
+			    }
+			}
+
+			retrun $return;
+	   }
+
 	   public function yacht_leads(WP_REST_Request $request) {
 
 		$to = $this->options->get('send_lead_to_this_email');
@@ -357,28 +404,37 @@
 		$vesselHidden = $request->get_param('yatchHidden');
 
 		$subject = $fname . " " . $lname . " " . 'submitted an inquiry' ;
+
+		$spamChecker = $this->spamChecker([
+			
+		]);
+
+		if  ( isset( $spamChecker['not_spam_aki']) && $spamChecker['not_spam_aki'] == true ) {
+			$fullMessage = '<!DOCTYPE html><html><body>';
+			$fullMessage .= '<h1>' . $subject . '</h1>';
+			$fullMessage .= '<p><strong>Vessel:</strong> ' . $vesselHidden . '</p>';
+			$fullMessage .= '<p><strong>Name:</strong> ' . "$fname $lname" . '</p>';
+			$fullMessage .= '<p><strong>Email:</strong> ' . $email . '</p>';
+			$fullMessage .= '<p><strong>Phone:</strong> ' . $phone . '</p>';
+			$fullMessage .= '<p><strong>Message:</strong></p>';
+			$fullMessage .= '<p>' . nl2br($message) . '</p>'; 
 		
-		$fullMessage = '<!DOCTYPE html><html><body>';
-		$fullMessage .= '<h1>' . $subject . '</h1>';
-		$fullMessage .= '<p><strong>Vessel:</strong> ' . $vesselHidden . '</p>';
-		$fullMessage .= '<p><strong>Name:</strong> ' . "$fname $lname" . '</p>';
-		$fullMessage .= '<p><strong>Email:</strong> ' . $email . '</p>';
-		$fullMessage .= '<p><strong>Phone:</strong> ' . $phone . '</p>';
-		$fullMessage .= '<p><strong>Message:</strong></p>';
-		$fullMessage .= '<p>' . nl2br($message) . '</p>'; 
-	
-		$fullMessage .= '</body></html>';
-	
-		$headers = array(
-			'Content-Type: text/html; charset=UTF-8',
-		);
-	
-		$sent = wp_mail($to, $subject, $fullMessage, $headers);
-	
-		if ($sent) {
-			return array('message' => 'Email sent successfully');
-		} else {
-			return array('error' => 'Email sending failed');
+			$fullMessage .= '</body></html>';
+		
+			$headers = array(
+				'Content-Type: text/html; charset=UTF-8',
+			);
+		
+			$sent = wp_mail($to, $subject, $fullMessage, $headers);
+		
+			if ($sent) {
+				return array('message' => 'Email sent successfully');
+			} else {
+				return array('error' => 'Email failed to send');
+			}
+		}
+		else {
+			return array('error' => 'Email failed to send');
 		}
 	}
 

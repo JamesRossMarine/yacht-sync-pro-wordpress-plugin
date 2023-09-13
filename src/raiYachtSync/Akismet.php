@@ -57,7 +57,7 @@
 
 
 // Used by the Akismet class to communicate with the Akismet service
-class yatcoConnect_Akismet {
+class raiYachtSync_Akismet {
     
     private $api_version = '1.1';
     private $connection_handle;
