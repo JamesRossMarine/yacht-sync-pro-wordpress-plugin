@@ -9,6 +9,7 @@
 			$this->StylesAndScripts = new raiYachtSync_StylesAndScripts();
 
 			$this->PostTypes = new raiYachtSync_PostTypes();
+			$this->Taxonomies = new raiYachtSync_Taxonomies();
 			$this->RestApi = new raiYachtSync_RestApi();
 			
 			$this->YoastFun_OgImage = new raiYachtSync_YoastFun_ogImage();

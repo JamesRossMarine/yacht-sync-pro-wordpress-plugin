@@ -123,9 +123,20 @@
                     	$boatC->YSP_BrokerName=$boat['SalesRep']['Name'];
                     }
                     
-                    if (isset($boatC->AdditionalDetailDescription)) {
-	                    unset($boatC->AdditionalDetailDescription);
+					if (isset($boatC->AdditionalDetailDescription)) {
+						foreach ($boatC->AdditionalDetailDescription as $aIndex => $description) {
+							$boatC->AdditionalDetailDescription[ $aIndex ] = preg_replace('/(<[^>]+) style=".*?"/i', '$1', $description);
+						}
 	                }
+
+					if (isset($boatC->GeneralBoatDescription)) {
+						foreach ($boatC->GeneralBoatDescription as $gIndex => $description){
+							$boatC->GeneralBoatDescription[ $gIndex ] = preg_replace('/(<[^>]+) style=".*?"/i', '$1', $description);
+						}
+					}
+
+					$boatC->CompanyBoat = true;
+					
 
 		            $y_post_id=wp_insert_post(
 		                [
@@ -137,15 +148,14 @@
 							'post_name' => sanitize_title(
 								$boat['ModelYear'].'-'.$boat['MakeString'].'-'.$boat['Model']
 							),
-
-							//'post_contnet' => $boat['GeneralBoatDescription'],
-							'post_contnet' => '',
-							
+							'post_content' => join(' ', $boatC->GeneralBoatDescription),
 							'post_status' => 'publish',
 							'meta_input' => apply_filters('raiys_yacht_meta_sync', $boatC),
 
 						]
 					);
+
+					wp_set_post_terms($y_post_id, $boat['BoatClassCode'], 'boatclass', false);
 					
 					/*if ( defined( 'WP_CLI' ) && WP_CLI ) {
                         if (is_wp_error($y_post_id)) {

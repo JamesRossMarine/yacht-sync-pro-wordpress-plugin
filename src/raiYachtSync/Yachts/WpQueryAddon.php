@@ -35,6 +35,25 @@
 			$vars[] = 'pricelo';
 			$vars[] = 'pricehi';
 
+			$vars[] = 'stateroomlo';
+			$vars[] = 'stateroomhi';
+
+			$vars[] = 'ys_engineslo';
+			$vars[] = 'ys_engineshi';
+			$vars[] = 'ys_engine_model';
+			$vars[] = 'ys_engine_fuel';
+			$vars[] = 'ys_engine_power';
+			$vars[] = 'ys_engine_hourslo';
+			$vars[] = 'ys_engine_hourshi';
+			$vars[] = 'ys_engine_type';
+
+			$vars[] = 'ys_listing_date';
+
+			$vars[] = 'ys_euroval_lo';
+			$vars[] = 'ys_euroval_hi';
+
+			// $vars[] = 'ys_type';
+
 			$vars[] = 'ys_country';
 			$vars[] = 'ys_state';
 			$vars[] = 'ys_city';
@@ -163,7 +182,7 @@
 
 				if ($this->if_query_var_check($query->get('ys_state'))) {
 					$yacht_sync_meta_query[]=[
-						'key' => 'State',
+						'key' => 'YSP_State',
 						'compare' => "=",
 						'value' => $query->get('ys_state')
 					];
@@ -171,7 +190,7 @@
 
 				if ($this->if_query_var_check($query->get('ys_city'))) {
 					$yacht_sync_meta_query[]=[
-						'key' => 'City',
+						'key' => 'YSP_City',
 						'compare' => "=",
 						'value' => $query->get('ys_city')
 					];
@@ -273,6 +292,118 @@
 						'value' => $query->get('pricehi')
 					];
 				}
+
+				if ($this->if_query_var_check($query->get('stateroomlo'))) {
+					$yacht_sync_meta_query[]=[
+						'key' => 'CabinsCountNumeric',
+						'compare' => ">=",
+						'type' => 'NUMERIC',
+						'value' => $query->get('stateroomlo')
+					];
+				}
+
+				if ($this->if_query_var_check($query->get('stateroomhi'))) {
+					$yacht_sync_meta_query[]=[
+						'key' => 'CabinsCountNumeric',
+						'compare' => "<=",
+						'type' => 'NUMERIC',
+						'value' => $query->get('stateroomhi')
+					];
+				}
+				if ($this->if_query_var_check($query->get('ys_engineslo'))) {
+					$yacht_sync_meta_query[]=[
+						'key' => 'YSP_EngineCount',
+						'compare' => ">=",
+						'type' => 'NUMERIC',
+						'value' => $query->get('ys_engineslo')
+					];
+				}
+
+				if ($this->if_query_var_check($query->get('ys_engineshi'))) {
+					$yacht_sync_meta_query[]=[
+						'key' => 'YSP_EngineCount',
+						'compare' => "<=",
+						'type' => 'NUMERIC',
+						'value' => $query->get('ys_engineshi')
+					];
+				}
+				if ($this->if_query_var_check($query->get('ys_engine_model'))) {
+					$yacht_sync_meta_query[]=[
+						'key' => 'YSP_EngineModel',
+						'compare' => "=",
+						'value' => $query->get('ys_engine_model')
+					];
+				}
+				if ($this->if_query_var_check($query->get('ys_engine_fuel'))) {
+					$yacht_sync_meta_query[]=[
+						'key' => 'YSP_EngineFuel',
+						'compare' => "=",
+						'value' => $query->get('ys_engine_fuel')
+					];
+				}
+				if ($this->if_query_var_check($query->get('ys_engine_power'))) {
+					$yacht_sync_meta_query[]=[
+						'key' => 'YSP_EnginePower',
+						'compare' => "=",
+						'value' => $query->get('ys_engine_power')
+					];
+				}
+				if ($this->if_query_var_check($query->get('ys_engine_hourslo'))) {
+					$yacht_sync_meta_query[]=[
+						'key' => 'YSP_EngineHours',
+						'compare' => ">=",
+						'type' => 'NUMERIC',
+						'value' => $query->get('ys_engine_hourslo')
+					];
+				}
+
+				if ($this->if_query_var_check($query->get('ys_engine_hourshi'))) {
+					$yacht_sync_meta_query[]=[
+						'key' => 'YSP_EngineHours',
+						'compare' => "<=",
+						'type' => 'NUMERIC',
+						'value' => $query->get('ys_engine_hourshi')
+					];
+				}
+				if ($this->if_query_var_check($query->get('ys_engine_type'))) {
+					$yacht_sync_meta_query[]=[
+						'key' => 'YSP_EngineType',
+						'compare' => "=",
+						'value' => $query->get('ys_engine_type')
+					];
+				}
+				if ($this->if_query_var_check($query->get('ys_listing_date'))) {
+					$yacht_sync_meta_query[]=[
+						'key' => 'YSP_ListingDate',
+						'compare' => "=",
+						'value' => $query->get('ys_listing_date')
+					];
+				}
+				if ($this->if_query_var_check($query->get('ys_euroval_lo'))) {
+					$yacht_sync_meta_query[]=[
+						'key' => 'YSP_EuroVal',
+						'compare' => ">=",
+						'type' => 'NUMERIC',
+						'value' => $query->get('ys_euroval_lo')
+					];
+				}
+
+				if ($this->if_query_var_check($query->get('ys_euroval_hi'))) {
+					$yacht_sync_meta_query[]=[
+						'key' => 'YSP_EuroVal',
+						'compare' => "<=",
+						'type' => 'NUMERIC',
+						'value' => $query->get('ys_euroval_hi')
+					];
+				}
+
+				// if ($this->if_query_var_check($query->get('ys_type'))) {
+				// 	$yacht_sync_meta_query[]=[
+				// 		'key' => 'YSP_Type',
+				// 		'compare' => "=",
+				// 		'value' => $query->get('ys_type')
+				// 	];
+				// }
 
 				if ($query->get('lengthUnit') == 'meter') {
 					if ($this->if_query_var_check($query->get('lengthlo'))) {
