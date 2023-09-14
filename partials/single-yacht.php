@@ -220,6 +220,9 @@ get_header();
                             <label for="phone">Phone number</label>
                             <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="+1 (777) 777-7777" required />
                         </div>
+                        <div style="display: none;">
+                        <input type="text"  name="fax">
+                        </div>
                         <div>
                             <label for="inquirytype">Inquiry type</label>
                             <select>
@@ -479,6 +482,9 @@ get_header();
                             <div>
                                 <label for="phone">Phone number</label>
                                 <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="+1 (777) 777-7777" required />
+                            </div>
+                            <div style="display: none;">
+                            <input type="text" name="fax">
                             </div>
                             <div>
                                 <label for="inquirytype">Inquiry type</label>

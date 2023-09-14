@@ -26,6 +26,7 @@
 			$this->Commands = new raiYachtSync_AddCommands();
 			$this->Crons = new raiYachtSync_Cron();
 
+			$this->GutenbergBlocks = new raiYachtSync_GutenbergBlocks();
 			
 
 		}

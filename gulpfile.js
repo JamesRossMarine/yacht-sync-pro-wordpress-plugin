@@ -104,6 +104,13 @@ gulp.task('client-minify-js', function() {
         .pipe(gulp.dest('build/js'));
 });
 
+gulp.task('combine-blocks', function () {
+    return gulp.src("built-blocks/**/*.js")
+        .pipe(concat('all-blocks.js'))
+        .pipe(terser())
+        .pipe(gulp.dest('build/js'));
+});
+
 gulp.task('render-client', gulp.series('client-sass', 'client-sass-no-maps', 'client-js', 'client-minify-js'));
 
 gulp.task('default', gulp.series('render-client'));
