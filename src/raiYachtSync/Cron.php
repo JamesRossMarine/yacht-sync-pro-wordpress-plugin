@@ -9,6 +9,7 @@
 	    public function add_actions_and_filters() {
 
 	    	add_action( 'init', [$this, 'cron_scheduler']);
+
 	    	add_action( 'rai_cron_yacht_sync', [$this, 'run_cron_yacht_sync']);
 			add_action( 'rai_cron_euro_c_save', [$this, 'run_cron_euro_c_save']);
 
@@ -46,5 +47,6 @@
 			if (! is_wp_error($result)) {
 				$this->options->update('euro_c_c', $result->rates->EUR);
 			}
+			
 		}
 	}
