@@ -182,7 +182,7 @@
 
 				if ($this->if_query_var_check($query->get('ys_state'))) {
 					$yacht_sync_meta_query[]=[
-						'key' => 'State',
+						'key' => 'YSP_State',
 						'compare' => "=",
 						'value' => $query->get('ys_state')
 					];
@@ -190,7 +190,7 @@
 
 				if ($this->if_query_var_check($query->get('ys_city'))) {
 					$yacht_sync_meta_query[]=[
-						'key' => 'City',
+						'key' => 'YSP_City',
 						'compare' => "=",
 						'value' => $query->get('ys_city')
 					];
