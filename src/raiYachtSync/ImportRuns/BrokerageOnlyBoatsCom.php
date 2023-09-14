@@ -137,7 +137,6 @@
 
 					$boatC->CompanyBoat = true;
 					
-
 		            $y_post_id=wp_insert_post(
 		                [
 		                    'ID' => $post_id,

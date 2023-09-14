@@ -242,8 +242,8 @@
 
 						]
 					);
-					var_dump($theBoat['BoatClassCode']);
-					wp_set_post_terms($y_post_id, [$theBoat['BoatClassCode'][0]], 'boatclass', false);
+
+					wp_set_post_terms($y_post_id, $theBoat['BoatClassCode'], 'boatclass', false);
 		        }
 
 	        }
