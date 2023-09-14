@@ -23,3 +23,4 @@ function raiys_push_history( data = {}) {
     
     history.pushState(data, '', '/all-yacht-search?'+searchParams.toString());
 }
+

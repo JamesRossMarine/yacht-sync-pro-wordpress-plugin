@@ -10,6 +10,8 @@
 			add_shortcode('ys-v-yacht-search-form', [$this, 'v_searchform']);
 			add_shortcode('ys-h-yacht-search-form', [$this, 'h_searchform']);
 			add_shortcode('ys-yacht-results', [$this, 'yacht_results']);
+			add_shortcode('ys-quick-search', [$this, 'quick_search']);
+			add_shortcode('ys-h-quick-search', [$this, 'quick_h_search']);
 
 		}
 
@@ -64,6 +66,44 @@
 				$file_to_include=RAI_YS_PLUGIN_TEMPLATES_DIR.'/yacht-results.php'; 
 
 		    	include apply_filters('rai_ys_yacht_results_template', $file_to_include);
+
+		    return ob_get_clean();
+
+       	}
+
+		   public function quick_search($atts = array(), $content = null) {
+			// normalize attribute keys, lowercase
+		    $atts = array_change_key_case((array)$atts, CASE_LOWER);
+		 
+		    // override default attributes with user attributes
+		    $attributes = shortcode_atts([
+            	
+            ], $atts);
+
+            ob_start();
+		  		
+				$file_to_include=RAI_YS_PLUGIN_TEMPLATES_DIR.'/quick-search.php'; 
+
+		    	include apply_filters('rai_ys_quick_search_results_template', $file_to_include);
+
+		    return ob_get_clean();
+
+       	}
+
+		   public function quick_h_search($atts = array(), $content = null) {
+			// normalize attribute keys, lowercase
+		    $atts = array_change_key_case((array)$atts, CASE_LOWER);
+		 
+		    // override default attributes with user attributes
+		    $attributes = shortcode_atts([
+            	
+            ], $atts);
+
+            ob_start();
+		  		
+				$file_to_include=RAI_YS_PLUGIN_TEMPLATES_DIR.'/quick-h-search.php'; 
+
+		    	include apply_filters('rai_ys_quick_search_results_template', $file_to_include);
 
 		    return ob_get_clean();
 

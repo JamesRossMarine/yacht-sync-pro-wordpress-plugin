@@ -73,6 +73,24 @@
                 ],
                 'render_callback' => [$this, 'yacht_results']
             ]);
+            register_block_type( 'ysp-blocks/quick-search', [
+                'api_version'    => 1,
+                'title'          => 'Quick Search',
+                'editor_script'  => 'ysp-gutenberg-blocks',
+                'attributes'     => [
+                    
+                ],
+                'render_callback' => [$this, 'quick_search']
+            ]);
+            register_block_type( 'ysp-blocks/quick-h-search', [
+                'api_version'    => 1,
+                'title'          => 'Quick Horizontal Search',
+                'editor_script'  => 'ysp-gutenberg-blocks',
+                'attributes'     => [
+                    
+                ],
+                'render_callback' => [$this, 'quick_h_search']
+            ]);
         }
 
         public function hform_block($props) {
@@ -83,6 +101,12 @@
         }
         public function yacht_results($props) {
             return $this->Shortcode_Yachts->yacht_results($props, '');
+        }
+        public function quick_search($props) {
+            return $this->Shortcode_Yachts->quick_search($props, '');
+        }
+        public function quick_h_search($props) {
+                return $this->Shortcode_Yachts->quick_h_search($props, '');
         }
 
     }
