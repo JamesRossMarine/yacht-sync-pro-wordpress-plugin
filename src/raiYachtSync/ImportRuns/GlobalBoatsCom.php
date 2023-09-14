@@ -182,15 +182,16 @@ use Random\Engine;
 								$boat['ModelYear'].'-'.$boat['MakeString'].'-'.$boat['Model']
 							),
 
-							//'post_contnet' => $boat['GeneralBoatDescription'][0],
+							//'post_content' => $boat['GeneralBoatDescription'][0],
 							
-							'post_contnet' => '',
+							'post_content' => '',
 							'post_status' => 'publish',
+
 							'meta_input' => apply_filters('raiys_yacht_meta_sync', $boatC),
 						]
 					);
 
-					//var_dump($boat['BoatName']);
+					wp_set_post_terms($y_post_id, $boat['BoatClassCode'], 'boatclass', false);
 
 		            //if ( defined( 'WP_CLI' ) && WP_CLI ) {
                         if (is_wp_error($y_post_id)) {

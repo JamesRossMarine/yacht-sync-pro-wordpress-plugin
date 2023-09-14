@@ -138,14 +138,16 @@
 								$boat['ModelYear'].'-'.$boat['MakeString'].'-'.$boat['Model']
 							),
 
-							//'post_contnet' => $boat['GeneralBoatDescription'],
-							'post_contnet' => '',
+							//'post_content' => $boat['GeneralBoatDescription'],
+							'post_content' => '',
 							
 							'post_status' => 'publish',
 							'meta_input' => apply_filters('raiys_yacht_meta_sync', $boatC),
 
 						]
 					);
+
+					wp_set_post_terms($y_post_id, $boat['BoatClassCode'], 'boatclass', false);
 					
 					/*if ( defined( 'WP_CLI' ) && WP_CLI ) {
                         if (is_wp_error($y_post_id)) {

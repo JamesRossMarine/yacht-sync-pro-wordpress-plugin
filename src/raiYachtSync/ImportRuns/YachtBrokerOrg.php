@@ -234,16 +234,15 @@
 							'post_name' => sanitize_title(
 								$theBoat['ModelYear'].'-'.$theBoat['MakeString'].'-'.$theBoat['Model']
 							),
-							//'post_contnet' => $theBoat['GeneralBoatDescription'],
-							'post_contnet' => '',
+							//'post_content' => $theBoat['GeneralBoatDescription'],
+							'post_content' => '',
 							'post_status' => 'publish',
-							'meta_input' => apply_filters('raiys_yacht_meta_sync', $theBoat),
+							'meta_input' => apply_filters('raiys_yacht_meta_sync', $theBoat)
 
 						]
 					);
-
-		           	//var_dump($theBoat);
-
+					var_dump($theBoat['BoatClassCode']);
+					wp_set_post_terms($y_post_id, [$theBoat['BoatClassCode'][0]], 'boatclass', false);
 		        }
 
 	        }
