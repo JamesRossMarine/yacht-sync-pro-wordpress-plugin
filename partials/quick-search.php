@@ -1,5 +1,5 @@
 <div id="quick-search-container">
-    <form id="ysp-quick-search-form" class="ys-h-row ysp-quick-search-form">
+    <form id="ysp-quick-search-form" class="ys-h-row ysp-quick-search-form" action="<?php echo $action_url; ?>" method="GET">
         <input type="hidden" name="page_index" />
         <div class="ys-quick-row-item">
             <label>Builder</label>
