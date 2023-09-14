@@ -134,6 +134,8 @@
 							$boatC->GeneralBoatDescription[ $gIndex ] = preg_replace('/(<[^>]+) style=".*?"/i', '$1', $description);
 						}
 					}
+
+					$boatC->CompanyBoat = true;
 					
 
 		            $y_post_id=wp_insert_post(
