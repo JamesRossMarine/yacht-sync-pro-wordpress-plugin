@@ -170,7 +170,17 @@ use Random\Engine;
 						}
 					}
 
-                    // $output = preg_replace('/(<[^>]+) style=".*?"/i', '$1', $input);
+                    if (isset($boatC->AdditionalDetailDescription)) {
+						foreach ($boatC->AdditionalDetailDescription as $aIndex => $description) {
+							$boatC->AdditionalDetailDescription[ $aIndex ] = preg_replace('/(<[^>]+) style=".*?"/i', '$1', $description);
+						}
+	                }
+
+					if (isset($boatC->GeneralBoatDescription)) {
+						foreach ($boatC->GeneralBoatDescription as $gIndex => $description){
+							$boatC->GeneralBoatDescription[ $gIndex ] = preg_replace('/(<[^>]+) style=".*?"/i', '$1', $description);
+						}
+					}
 
 		            $y_post_id=wp_insert_post(
 		                [
@@ -182,9 +192,7 @@ use Random\Engine;
 								$boat['ModelYear'].'-'.$boat['MakeString'].'-'.$boat['Model']
 							),
 
-							//'post_content' => $boat['GeneralBoatDescription'][0],
-							
-							'post_content' => '',
+							'post_content' => join(' ', $boatC->GeneralBoatDescription),
 							'post_status' => 'publish',
 
 							'meta_input' => apply_filters('raiys_yacht_meta_sync', $boatC),

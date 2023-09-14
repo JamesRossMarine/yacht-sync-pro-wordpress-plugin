@@ -226,6 +226,8 @@
 		                $wpdb->delete($wpdb->postmeta, ['post_id' => $find_post[0]->ID], ['%d']);
 		            }
 
+					// $general_description = preg_replace('/(<[^>]+) style=".*?"/i', '$1', $theBoat['GeneralBoatDescription']);
+
 		            $y_post_id=wp_insert_post(
 		                [
 		                    'ID' => $post_id,
@@ -234,8 +236,7 @@
 							'post_name' => sanitize_title(
 								$theBoat['ModelYear'].'-'.$theBoat['MakeString'].'-'.$theBoat['Model']
 							),
-							//'post_content' => $theBoat['GeneralBoatDescription'],
-							'post_content' => '',
+							'post_content' => $theBoat['GeneralBoatDescription'],
 							'post_status' => 'publish',
 							'meta_input' => apply_filters('raiys_yacht_meta_sync', $theBoat)
 
