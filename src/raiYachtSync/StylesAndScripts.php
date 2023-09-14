@@ -9,7 +9,6 @@
 
 		public function add_actions_and_filters() {
 			add_action( 'wp_enqueue_scripts' , [$this, 'enqueueGlobal']);
-
 			add_action( 'wp_enqueue_scripts' , [$this, 'enqueueYachtDetails']);
 		}
 		
