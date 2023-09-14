@@ -15,9 +15,6 @@
             <select name="builder">
                 <option value="" selected disabled>Any</option>
             </select>
-            <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M4 6L8 10L12 6" stroke="#94A3B8" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
         </div>
         <div class="ys-v-row-item">
             <label>Year</label>

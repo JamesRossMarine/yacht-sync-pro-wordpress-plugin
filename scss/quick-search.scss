@@ -1,0 +1,62 @@
+#quick-search-container {
+    max-width: 300px;
+    border: 1px solid $secondary-text-color;;
+    padding: 10px;
+    background-color: $main-text-color;
+  
+  
+  .ys-quick-row-item {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+  
+  label {
+    order: -1; /* Place labels above inputs */
+    color: $secondary-text-color;
+  }
+  
+  .min-max-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  input[type="number"],
+  select {
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+  }
+  
+  .submit-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    height: 30px;
+  }
+  
+  input[type="submit"] {
+    width: auto;
+    padding: 10px 20px;
+    background-color: $secondary-text-color;
+    color: $main-text-color;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Style the dropdown icon */
+  .dropdown-icon {
+    align-self: flex-end;
+  }
+  
+  /* Close icon styles */
+  .close-icon {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+  }
+}
