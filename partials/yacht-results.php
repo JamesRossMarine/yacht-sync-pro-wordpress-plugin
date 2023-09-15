@@ -8,11 +8,6 @@
             <input type="checkbox" name="brand" />
             <label><span id="company-name">(Brand Name)</span> Listings</label>
         </div> -->
-
-        <div>
-
-        </div>
-
         <div class="list-view-and-sort-container">
             <div class="list-view-group">
                 <label class="grid-view">
@@ -26,7 +21,6 @@
                             <path d="M6 2V14" stroke="#334155" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M10 2V14" stroke="#334155" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-
                         Gallery
                     </span>
                 </label>
@@ -63,10 +57,12 @@
             </select>
         </div>
     </div>
-
+    <div class="loader-icon">
+        <img src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>/images/loading-icon.gif" alt="loading-gif" />
+    </div>
     <div class="search-result-grid">
         <div id="search-result-row">
-
+            
         </div>
     </div>
 
