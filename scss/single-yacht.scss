@@ -42,7 +42,7 @@
                 .yacht-price {
                     font-size: $h2-size;
                     font-weight: $h1-weight;
-                    color: $secondary-text-color;
+                    color: $main-text-color;
                     line-height: 28px;
                     margin: 0;
                 }
@@ -54,13 +54,13 @@
 
                 .yacht-make {
                     font-size: 14px;
-                    color: $secondary-text-color;
+                    color: $main-text-color;
                     line-height: 20px;
                     margin: 10px 15px 26px 0px;
                 }
                 .yacht-year {
                     font-size: 14px;
-                    color: $secondary-text-color;
+                    color: $main-text-color;
                     line-height: 20px;
                     margin: 10px 0px 26px 15px;
                 }
@@ -168,7 +168,7 @@
                         align-items: center;
     
                         p {
-                            color: $main-text-color;
+                            color: black;
                             font-size: 12px;
                             font-family: Inter;
                             font-weight: 500;
@@ -179,7 +179,7 @@
                     .yacht-length-value {
     
                         p {
-                            color: $main-text-color;
+                            color: black;
                             font-size: 18px;
                             font-weight: 500;
                             margin: 14px 0px 0px 0px
@@ -195,7 +195,7 @@
                         align-items: center;
     
                         p {
-                            color: $main-text-color;
+                            color: black;
                             font-size: 12px;
                             font-family: Inter;
                             font-weight: 500;
@@ -206,7 +206,7 @@
                     .yacht-beam-value {
     
                         p {
-                            color: $main-text-color;
+                            color: black;
                             font-size: 18px;
                             font-weight: 500;
                             margin: 14px 0px 0px 0px
@@ -222,7 +222,7 @@
                         align-items: center;
     
                         p {
-                            color: $main-text-color;
+                            color: black;
                             font-size: 12px;
                             font-family: Inter;
                             font-weight: 500;
@@ -233,7 +233,7 @@
                     .yacht-cabins-value {
     
                         p {
-                            color: $main-text-color;
+                            color: black;
                             font-size: 18px;
                             font-weight: 500;
                             margin: 14px 0px 0px 0px
@@ -249,7 +249,7 @@
                         align-items: center;
     
                         p {
-                            color: $main-text-color;
+                            color: black;
                             font-size: 12px;
                             font-family: Inter;
                             font-weight: 500;
@@ -260,7 +260,7 @@
                     .yacht-guests-value {
     
                         p {
-                            color: $main-text-color;
+                            color: black;
                             font-size: 18px;
                             font-weight: 500;
                             margin: 14px 0px 0px 0px
@@ -350,7 +350,7 @@
                         line-height: 24px;
                     }
                     .broker-title {
-                        color: $secondary-text-color;
+                        color: $main-text-color;
                         font-size: 16px;
                         font-weight: 500;
                         line-height: 24px;
@@ -465,7 +465,7 @@
                     width: 100%;
                     padding: 8px 12px;
                     margin: auto;
-                    color: #FFFFFF;
+                    color: $secondary-text-color;
 
                     &:hover {
                         background-color: #a9a9a9;
@@ -652,9 +652,9 @@
                         font-size: 16px;
                         font-weight: 500;
                         line-height: 24px;
-                    }
+                    }ßßß
                     .broker-title {
-                        color: $secondary-text-color;
+                        color: $main-text-color;
                         font-size: 16px;
                         font-weight: 500;
                         line-height: 24px;
@@ -762,7 +762,7 @@
                         width: 100%;
                         padding: 8px 12px;
                         margin: auto;
-                        color: #FFFFFF;
+                        color: $secondary-text-color;
 
                         &:hover {
                             background-color: #a9a9a9;

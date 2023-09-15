@@ -1,0 +1,73 @@
+#quick-h-search-container {
+    border: 1px solid $secondary-text-color;
+    padding: 10px;
+    background-color: $main-text-color;
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+
+    form#ysp-quick-h-search-form {
+        display: flex;
+    }
+
+    .ys-quick-row-item {
+        flex-direction: row;
+        margin-bottom: 10px;
+        padding: 10px;
+        border: none;
+
+        label {
+            order: 1;
+            width: 70px;
+            margin-right: 10px;
+            text-align: right;
+            color: $secondary-text-color;
+        }
+
+        .min-max-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        #quick-h-search-container .ys-quick-row-item input[type=number], #quick-h-search-container .ys-quick-row-item select {
+            flex: 1;
+            margin-top: 5px;
+            height: 30px;
+            border: none;
+        }
+        input[type="number"] {
+            height: 30px;
+        }
+        select {
+            height: 30px;
+            width: 100%;
+        }
+        .min-max-container input {
+            width: 45%;
+            border: 1px solid #d9d9d9;
+        }
+       span {
+            color: $secondary-text-color;
+        }
+        
+    }
+
+    .submit-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        height: 80px;
+        margin: auto;
+
+        input[type="submit"] {
+            width: auto;
+            padding: 10px 20px;
+            background-color: $secondary-text-color;
+            color: $main-text-color;
+            border: none;
+            cursor: pointer;
+        }
+    }
+}
