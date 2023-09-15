@@ -113,13 +113,29 @@ get_header();
                         </div>
                     </div>
                 </div>
-
-                <a href="<?php echo get_rest_url(); ?>raiys/yacht-pdf-loader?yacht_post_id=<?php echo get_the_ID(); ?>" target="_blank">
-                        <button class="yacht-download-button">
-                            <img src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/download.png" alt="download-icon" />
-                            Download Brochure
-                        </button>
+                <div class="yacht-download-brochure-container">
+                    <a href="<?php echo get_rest_url(); ?>raiys/yacht-pdf-loader?yacht_post_id=<?php echo get_the_ID(); ?>" target="_blank">
+                            <button class="yacht-download-button">
+                                <img src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/download.png" alt="download-icon" />
+                                Download Brochure
+                            </button>
                     </a>
+                    <div id="video-gallery">
+                        <?php 
+                            if(isset($vessel->Videos)) {
+                                $videoUrls = $vessel->Videos->url;
+                                foreach($videoUrls as $aindex => $video) { 
+                        ?>
+                            <a data-src="<?php echo $video;?>">
+                                Open Video
+                            </a>
+                        <?php   
+                                }
+                            }
+                        ?>
+                    </div>
+                </div>
+                
                     
                 <?php
                     $brokerNameFromApi = $vessel->SalesRep->Name;
