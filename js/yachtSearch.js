@@ -64,7 +64,6 @@ function ysp_yacht_search_and_reader(data) {
 document.addEventListener("DOMContentLoaded", function() {
     let yachtSearchAndResults=document.querySelector('.ysp-yacht-search-form');
 
-
     if (yachtSearchAndResults) {
         yachtSearchAndResults.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -84,7 +83,28 @@ document.addEventListener("DOMContentLoaded", function() {
 
         });
 
+        // PRETTY URL
+        let strpaths=window.location.href;
+
+        strpaths=strpaths.replace(rai_yacht_sync.yacht_search_page_id, '');
+
+        let paths = strpaths.split("/");
+
+        let pretty_url_path_params={};
+
+        paths.forEach(function(path) {
+
+            if (path != '') {
+                let phase_path = path.split('-');
+                let only_vals=phase_path.slice(1);
+
+                pretty_url_path_params[phase_path[0]]=only_vals.join('-');
+            }
+
+        });
+
         // Restore Fields
+
         let URLREF=new URL(location.href); // maybe for a re-do
 
         let formInputs=document.querySelectorAll('.ysp-yacht-search-form *[name], *[name][form="ysp-yacht-search-form"]');

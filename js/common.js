@@ -18,9 +18,13 @@ function raiys_push_history( data = {}) {
 
         if (it != '' && typeof it != 'undefined' && property != 'OnFirstLoad' && typeof it != 'object') {
             searchParams.set(property, it);
+
+            strpath=strpath+""+property+'-'+(it.toString().split(' ').join('-'))+'/';
+            strpath=strpath.toLowerCase();
         }
     }
     
-    history.pushState(data, '', '/all-yacht-search?'+searchParams.toString());
+    //history.pushState(data, '', rai_yacht_sync.yacht_search_url+'?'+searchParams.toString());
+    history.pushState(data, '', rai_yacht_sync.yacht_search_url+strpath);    
 }
 

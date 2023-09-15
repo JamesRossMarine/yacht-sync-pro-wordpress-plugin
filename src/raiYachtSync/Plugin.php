@@ -12,6 +12,7 @@
 			$this->Taxonomies = new raiYachtSync_Taxonomies();
 			$this->RestApi = new raiYachtSync_RestApi();
 			
+
 			$this->YoastFun_OgImage = new raiYachtSync_YoastFun_ogImage();
 			$this->YoastFun_Descriptions = new raiYachtSync_YoastFun_Descriptions();
 
@@ -23,12 +24,12 @@
 			$this->Brokers_MetaFields = new raiYachtSync_Brokers_MetaSections();
 			$this->Brokers_Shortcodes = new raiYachtSync_Shortcodes_Brokers();
 
+			$this->RewriteURL = new raiYachtSync_RewriteURL();
+			
+			$this->GutenbergBlocks = new raiYachtSync_GutenbergBlocks();
+
 			$this->Commands = new raiYachtSync_AddCommands();
 			$this->Crons = new raiYachtSync_Cron();
-
-			$this->GutenbergBlocks = new raiYachtSync_GutenbergBlocks();
-			
-
 		}
 
 		public function isInstalled() {
