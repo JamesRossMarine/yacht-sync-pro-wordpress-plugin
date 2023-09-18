@@ -1,8 +1,8 @@
 <div id="v-search-container">
-    <form id="v-search-form" class="ys-v-row ysp-yacht-search-form" >
+    <form id="v-search-form" class="ys-v-row ysp-yacht-search-form ysp-form" >
         <div class="ys-v-row-item">
             <label>Keyword</label>
-            <input type="text" name="keyword" placeholder="Search by Name" />
+            <input type="text" name="ys_keyword" placeholder="Search by Name" />
             <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="icon/search">
                     <path id="Vector" d="M7.33333 12.6667C10.2789 12.6667 12.6667 10.2789 12.6667 7.33333C12.6667 4.38781 10.2789 2 7.33333 2C4.38781 2 2 4.38781 2 7.33333C2 10.2789 4.38781 12.6667 7.33333 12.6667Z" stroke="#334155" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -81,7 +81,8 @@
         </div>
         <div class="ys-v-row-item submit-container">
             <label>Submit</label>
-            <input type="submit" name="submit" value="Submit"/>
+            <input class="ysp-general-button" type="submit" name="submit" value="Submit"/>
         </div>
     </form>
+    <button class="ysp-general-button">Hello World</button>
 </div>

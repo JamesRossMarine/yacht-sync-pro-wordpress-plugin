@@ -7,6 +7,7 @@ $h1-weight: 600;
 
 $main-text-color: var(--main-color);
 $secondary-text-color: var(--secondary-color);
+$white-color: var(--white);
 $divider-color: #CBD5E1;
 $border-color: #D9D9D9;
 
@@ -23,4 +24,5 @@ $max-width: 1440px;
 :root {
     --main-color: #334155;
     --secondary-color: #94A3B8;
+    --white: #FFFFFF;
 }

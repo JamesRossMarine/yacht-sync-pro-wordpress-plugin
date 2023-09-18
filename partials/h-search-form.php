@@ -1,5 +1,5 @@
 <div id="h-search-container">
-    <form id="ysp-yacht-search-form" class="ys-h-row ysp-yacht-search-form">
+    <form id="ysp-yacht-search-form" class="ys-h-row ysp-yacht-search-form ysp-form">
         <input type="hidden" name="page_index" />
 
         <div class="ys-h-row-item">
@@ -84,7 +84,7 @@
         </div>
         <div class="ys-h-row-item submit-container">
             <label>Submit</label>
-            <input type="submit" name="submit" value="Submit"/>
+            <input class="ysp-general-button" type="submit" name="submit" value="Submit"/>
         </div>
     </form>
 </div>
