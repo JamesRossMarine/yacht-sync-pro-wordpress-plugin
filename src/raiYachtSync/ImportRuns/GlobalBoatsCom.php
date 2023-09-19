@@ -133,6 +133,10 @@ use Random\Engine;
                         $boatC->Images = $reducedImages;
                     }
 
+					if (isset($boat['NominalLength'])) {
+						$boatC->YSP_Length = ((int) $boat['NominalLength']);
+					}
+
 	                if (isset($boat['BoatLocation'])) {
 	                    $boatC->YSP_City = $boat['BoatLocation']['BoatCityName'];
 	                    $boatC->YSP_CountryID = $boat['BoatLocation']['BoatCountryID'];

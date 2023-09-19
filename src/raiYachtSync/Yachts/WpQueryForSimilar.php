@@ -26,8 +26,9 @@
             $similar_post_id = $query->get('similar_listings_to');
             
             if ( $query->get('post_type') == "rai_yacht" && is_numeric( $similar_post_id )  ) {
-                $length = 70;
-                $year = get_post_meta($similar_post_id, 'ModelYear', true);
+                $length = intval(get_post_meta($similar_post_id, 'YSP_Length', true));
+
+                $year = intval(get_post_meta($similar_post_id, 'ModelYear', true));
                 $make = get_post_meta($similar_post_id, 'MakeString', true);
                 // $category = get_post_meta($similar_post_id, '', true);
 
