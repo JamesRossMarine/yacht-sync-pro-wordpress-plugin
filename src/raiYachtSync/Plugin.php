@@ -4,7 +4,7 @@
 		static public $indicateActivated;
 
 		public function __construct() {
-			
+
 			$this->AdminDashboard = new raiYachtSync_AdminDashboard_SettingsPanel();
 			$this->StylesAndScripts = new raiYachtSync_StylesAndScripts();
 

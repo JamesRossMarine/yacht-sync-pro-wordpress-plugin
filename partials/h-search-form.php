@@ -16,7 +16,7 @@
         <div class="ys-h-row-item">
             <label>Builder</label>
             <select name="make" data-fill-options="Builders">
-                <option value="" selected disabled>Any</option>
+                <option value="">Any</option>
             </select>
         </div>
         <div class="ys-h-row-item">
@@ -84,7 +84,7 @@
         </div>
         <div class="ys-h-row-item submit-container">
             <label>Submit</label>
-            <input type="submit" name="submit" value="Submit"/>
+            <input type="submit" value="Submit"/>
         </div>
     </form>
 </div>

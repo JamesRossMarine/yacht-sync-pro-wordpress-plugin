@@ -1,3 +1,13 @@
+Object.defineProperty(String.prototype, 'eachWordCapitalize', {
+  value: function() {
+    return this.toLowerCase()
+    .split(' ')
+    .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+    .join(' ');
+  },
+  enumerable: false
+});
+
 function raiys_get_form_data(form_ele) {
     var formData = new FormData( form_ele );
           
@@ -23,6 +33,8 @@ function raiys_push_history( data = {}) {
             strpath=strpath.toLowerCase();
         }
     }
+
+    console.log(strpath);
     
     //history.pushState(data, '', rai_yacht_sync.yacht_search_url+'?'+searchParams.toString());
     history.pushState(data, '', rai_yacht_sync.yacht_search_url+strpath);    
