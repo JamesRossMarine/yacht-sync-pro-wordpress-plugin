@@ -2,7 +2,7 @@ var ysp_templates={};
 	ysp_templates.yacht={};
 	
 	ysp_templates.yacht.grid=function(vessel) {
-		let meters = parseInt(vessel.LengthOverall) * 0.3048;
+		let meters = parseInt(vessel.NominalLength) * 0.3048;
 
 		let price = '';
 
@@ -13,10 +13,10 @@ var ysp_templates={};
 		let length = '';
 
 		if(rai_yacht_sync.europe_option_picked == "yes"){
-			length = vessel.LengthOverall ? meters.toFixed(2) + ' m' : 'N/A';
+			length = vessel.NominalLength ? meters.toFixed(2) + ' m' : 'N/A';
 			price = vessel.Price ? `€ ${new Intl.NumberFormat('en-us', { minimumFractionDigits: 2}).format((parseInt(vessel.Price.slice(0, -3)) * rai_yacht_sync.euro_c_c))}` : 'Contact Us For Price';
 		} else {
-			length = vessel.LengthOverall ? vessel.LengthOverall + " / " + meters.toFixed(2) + ' m' : 'N/A';
+			length = vessel.NominalLength ? vessel.NominalLength + " / " + meters.toFixed(2) + ' m' : 'N/A';
 			price = vessel.Price ? `$ ${new Intl.NumberFormat('en-us', { minimumFractionDigits: 2}).format(parseInt(vessel.Price.slice(0, -3)))}` : 'Contact Us For Price'
 		}
 
@@ -63,7 +63,7 @@ var ysp_templates={};
 	};
 
 	ysp_templates.yacht.list=function(vessel) {
-		let meters = parseInt(vessel.LengthOverall) * 0.3048;
+		let meters = parseInt(vessel.NominalLength) * 0.3048;
 		let price = '';
 
 		if (typeof vessel.Price == 'string') {
@@ -72,10 +72,10 @@ var ysp_templates={};
 		
 		let length = '';
 		if(rai_yacht_sync.europe_option_picked == "yes"){
-			length = vessel.LengthOverall ? meters.toFixed(2) + ' m' : 'N/A';
+			length = vessel.NominalLength ? meters.toFixed(2) + ' m' : 'N/A';
 			price = vessel.Price ? `€ ${new Intl.NumberFormat('en-us', { minimumFractionDigits: 2}).format((parseInt(vessel.Price.slice(0, -3)) * rai_yacht_sync.euro_c_c))}` : 'Contact Us For Price';
 		} else {
-			length = vessel.LengthOverall ? vessel.LengthOverall + " / " + meters.toFixed(2) + ' m' : 'N/A';
+			length = vessel.NominalLength ? vessel.NominalLength + " / " + meters.toFixed(2) + ' m' : 'N/A';
 			price = vessel.Price ? `$ ${new Intl.NumberFormat('en-us', { minimumFractionDigits: 2}).format(parseInt(vessel.Price.slice(0, -3)))}` : 'Contact Us For Price'
 		}
 

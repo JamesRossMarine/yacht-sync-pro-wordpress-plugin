@@ -407,7 +407,7 @@
 
 				if ($query->get('lengthUnit') == 'meter') {
 					if ($this->if_query_var_check($query->get('lengthlo'))) {
-						$yArgs['meta_query'][]=[
+						$yacht_sync_meta_query['meta_query'][]=[
 							'key' => 'NominalLength',
 							'compare' => ">=",
 							'type' => 'NUMERIC',
@@ -416,7 +416,7 @@
 					}
 
 					if ($this->if_query_var_check($query->get('lengthhi'))) {
-						$yArgs['meta_query'][]=[
+						$yacht_sync_meta_query['meta_query'][]=[
 							'key' => 'NominalLength',
 							'compare' => "<=",
 							'type' => 'NUMERIC',
@@ -426,7 +426,7 @@
 				}
 				else {
 					if ($this->if_query_var_check($query->get('lengthlo'))) {
-						$yArgs['meta_query'][]=[
+						$yacht_sync_meta_query['meta_query'][]=[
 							'key' => 'NominalLength',
 							'compare' => ">=",
 							'type' => 'NUMERIC',
@@ -435,7 +435,7 @@
 					}
 
 					if ($this->if_query_var_check($query->get('lengthhi'))) {
-						$yArgs['meta_query'][]=[
+						$yacht_sync_meta_query['meta_query'][]=[
 							'key' => 'NominalLength',
 							'compare' => "<=",
 							'type' => 'NUMERIC',
