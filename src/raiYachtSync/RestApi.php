@@ -150,6 +150,8 @@
 
 			wp_reset_postdata();
 
+			$return['query'] = $yachts_query->query_vars;
+
 			return $return;
 
 	    }
