@@ -32,4 +32,9 @@ document.addEventListener("DOMContentLoaded", () => {
           selector: '.carousel-cell'
       });
     }
+    if (document.getElementById('video-gallery')){
+      lightGallery(document.getElementById('video-gallery'), {
+        plugins: [lgVideo],
+      })
+    }
   });

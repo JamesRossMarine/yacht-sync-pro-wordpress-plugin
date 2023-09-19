@@ -18,11 +18,11 @@
 	    public function cron_scheduler() {
 
 	    	if ( ! wp_next_scheduled( 'rai_cron_yacht_sync' ) ) {
-			    wp_schedule_event( time(), 'daily', 'rai_cron_yacht_sync' );
+			    wp_schedule_event( strtotime('04:00:00'), 'daily', 'rai_cron_yacht_sync' );
 			}
 
 			if ( ! wp_next_scheduled( 'rai_cron_euro_c_save' ) ) {
-			    wp_schedule_event( time(), 'daily', 'rai_cron_euro_c_save' );
+			    wp_schedule_event( strtotime('03:00:00'), 'daily', 'rai_cron_euro_c_save' );
 			}
 	    	
 	    }

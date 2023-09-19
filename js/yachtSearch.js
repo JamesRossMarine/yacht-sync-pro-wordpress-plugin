@@ -3,8 +3,12 @@ function ysp_yacht_search_and_reader(data) {
 
     jQuery('#search-result-row').html('');
 
+    document.querySelector('#search-result-section').classList.add('loading');
+    
     // GET AND WRITE
     return rai_ysp_api.call_api("POST", "yachts", data).then(function(data_result) {
+        document.querySelector('#search-result-section').classList.remove('loading');
+        document.querySelector('#search-result-section').classList.add('loaded');
 
         jQuery('#total-results').text(new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(data_result.total));
 

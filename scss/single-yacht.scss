@@ -272,6 +272,7 @@
         }
         .yacht-download-brochure-container {
             margin-top: 23px;
+            display: flex;
 
             @media screen and (max-width: $breakpoint-large){
                 margin-bottom: 40px;
@@ -284,6 +285,7 @@
                 background-color: $main-text-color;
                 padding: 10px 16px;
                 color: #FFFFFF;
+                font-size: 18px;
                 display: flex;
                 align-items: center;
                 box-shadow: none;
@@ -296,6 +298,28 @@
                 img {
                     margin-right: 8px;
                 }
+            }
+            #video-gallery {
+
+                a {
+                    background-color: $main-text-color;
+                    padding: 10px 16px;
+                    color: #FFFFFF;
+                    font-size: 18px;
+                    display: flex;
+                    align-items: center;
+                    box-shadow: none;
+                    border: none;
+                    text-decoration: none;
+                    line-height: normal;
+                    margin-left: 20px;
+                    text-align: center;
+
+                    &:hover {
+                        background-color: darkgray;
+                    }
+                }
+
             }
         }
         .yacht-mobile-broker-container {
