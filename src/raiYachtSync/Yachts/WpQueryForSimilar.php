@@ -22,7 +22,6 @@
 
         public function preGet($query) {
             
-
             $similar_post_id = $query->get('similar_listings_to');
             
             if ( $query->get('post_type') == "rai_yacht" && is_numeric( $similar_post_id )  ) {
@@ -30,7 +29,7 @@
 
                 $year = intval(get_post_meta($similar_post_id, 'ModelYear', true));
                 $make = get_post_meta($similar_post_id, 'MakeString', true);
-                // $category = get_post_meta($similar_post_id, '', true);
+                $category = wp_get_post_terms($similar_post_id, 'boatclass', array( 'fields' => 'slug' ) );
 
                 $similar_query_one_args = [
                     'post_type' => 'rai_yacht',
@@ -59,7 +58,13 @@
                         'yearlo' => $year - 10,
                         'yearhi' => $year + 10,
 
-                        'make' => $make
+                        'tax_query' => array(
+                            array(
+                                'taxonomy' => 'boatclass',
+                                'field' => 'slug',
+                                'terms' => [ $category[0] ]
+                            )
+                        )
                     ];
 
                     $similar_query_two = new WP_Query($similar_query_two_args);
@@ -70,7 +75,15 @@
                     }
                     else {
                         $query->query_vars = array_merge($query->query_vars, [
-                            'make' => $make,
+                            
+                            'tax_query' => array(
+                                array(
+                                    'taxonomy' => 'boatclass',
+                                    'field' => 'slug',
+                                    'terms' => [ $category[0] ]
+                                )
+                            )
+
                         ]);
                     }
                 }
