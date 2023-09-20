@@ -71,7 +71,7 @@
 
        	}
 
-		   public function quick_search($atts = array(), $content = null) {
+		public function quick_search($atts = array(), $content = null) {
 			// normalize attribute keys, lowercase
 		    $atts = array_change_key_case((array)$atts, CASE_LOWER);
 		 
@@ -79,6 +79,8 @@
 		    $attributes = shortcode_atts([
             	
             ], $atts);
+
+            $action_url = get_permalink($this->options->get('yacht_search_page_id'));
 
             ob_start();
 		  		
@@ -90,7 +92,7 @@
 
        	}
 
-		   public function quick_h_search($atts = array(), $content = null) {
+		public function quick_h_search($atts = array(), $content = null) {
 			// normalize attribute keys, lowercase
 		    $atts = array_change_key_case((array)$atts, CASE_LOWER);
 		 
@@ -98,6 +100,8 @@
 		    $attributes = shortcode_atts([
             	
             ], $atts);
+
+			$action_url = get_permalink($this->options->get('yacht_search_page_id'));
 
             ob_start();
 		  		

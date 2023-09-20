@@ -78,6 +78,8 @@
 				&&
 				$val != "0"
 				&&
+				$val != 'undefined'
+				&&
 				! is_null($val)
 			) || $val === true;
 
