@@ -63,7 +63,7 @@
 				$this->ImportYachtBrokerOrg->run();
 			}
 
-			if (! empty($boats_com_api_global_key)) {
+			if (! empty($boats_com_api_brokerage_key)) {
 				$this->ImportBrokerageOnlyBoatsCom->run();
 			}
 		}

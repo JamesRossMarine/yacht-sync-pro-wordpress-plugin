@@ -1,4 +1,5 @@
 <?php
+use Random\Engine;
 	class raiYachtSync_ImportRuns_GlobalBoatsCom {
    		protected $limit = 153;
 	
@@ -138,7 +139,48 @@
 	                    $boatC->YSP_State = $boat['BoatLocation']['BoatStateCode'];
                     }
 
-                    // $output = preg_replace('/(<[^>]+) style=".*?"/i', '$1', $input);
+					if (isset($boat['Engines'])) {
+						$boatC->YSP_EngineCount = count($boat['Engines']);
+						if (isset($boat['Engines'][0]['Model'])){
+							$boatC->YSP_EngineModel = $boat['Engines'][0]['Model'];
+						}
+						if (isset($boat['Engines'][0]['Fuel'])){
+							$boatC->YSP_EngineFuel = $boat['Engines'][0]['Fuel'];
+						}
+						if (isset($boat['Engines'][0]['EnginePower'])){
+							$boatC->YSP_EnginePower = $boat['Engines'][0]['EnginePower'];
+						}
+						if (isset($boat['Engines'][0]['Hours'])){
+							$boatC->YSP_EngineHours = $boat['Engines'][0]['Hours'];
+						}
+						if (isset($boat['Engines'][0]['Type'])){
+							$boatC->YSP_EngineType = $boat['Engines'][0]['Type'];
+						}
+					}
+
+					if (isset($boat['Images'][0]['LastModifiedDateTime'])){
+						$boatC->YSP_ListingDate = $boat['Images'][0]['LastModifiedDateTime'];
+					}
+					if (isset($boat['OriginalPrice']) && isset($boat['Price'])){
+						if (str_contains($boat['OriginalPrice'], 'EUR')){
+							$boatC->YSP_EuroVal = (int) $boat['OriginalPrice'];
+						} else {
+							$price = (int) $boat['Price'] * $this->options->get('euro_c_c');
+							$boatC->YSP_EuroVal = $price;
+						}
+					}
+
+                    if (isset($boatC->AdditionalDetailDescription)) {
+						foreach ($boatC->AdditionalDetailDescription as $aIndex => $description) {
+							$boatC->AdditionalDetailDescription[ $aIndex ] = preg_replace('/(<[^>]+) style=".*?"/i', '$1', $description);
+						}
+	                }
+
+					if (isset($boatC->GeneralBoatDescription)) {
+						foreach ($boatC->GeneralBoatDescription as $gIndex => $description){
+							$boatC->GeneralBoatDescription[ $gIndex ] = preg_replace('/(<[^>]+) style=".*?"/i', '$1', $description);
+						}
+					}
 
 		            $y_post_id=wp_insert_post(
 		                [
@@ -150,15 +192,14 @@
 								$boat['ModelYear'].'-'.$boat['MakeString'].'-'.$boat['Model']
 							),
 
-							//'post_contnet' => $boat['GeneralBoatDescription'][0],
-							
-							'post_contnet' => '',
+							'post_content' => join(' ', $boatC->GeneralBoatDescription),
 							'post_status' => 'publish',
+
 							'meta_input' => apply_filters('raiys_yacht_meta_sync', $boatC),
 						]
 					);
 
-					//var_dump($boat['BoatName']);
+					wp_set_post_terms($y_post_id, $boat['BoatClassCode'], 'boatclass', false);
 
 		            //if ( defined( 'WP_CLI' ) && WP_CLI ) {
                         if (is_wp_error($y_post_id)) {
