@@ -29,8 +29,8 @@
 
                 $year = intval(get_post_meta($similar_post_id, 'ModelYear', true));
                 $make = get_post_meta($similar_post_id, 'MakeString', true);
-                $category = wp_get_post_terms($similar_post_id, 'boatclass', array( 'fields' => 'slug' ) );
-
+                $category = wp_get_post_terms($similar_post_id, 'boatclass', array( 'fields' => 'slugs' ) );
+                
                 $similar_query_one_args = [
                     'post_type' => 'rai_yacht',
                    
