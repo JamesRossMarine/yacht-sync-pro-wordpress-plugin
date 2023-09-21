@@ -23,11 +23,15 @@ var ysp_templates={};
 		return `
 			<div class="yacht-result-grid-item">
 				<div class="yacht-main-image-container">
-					<img class="yacht-main-image" src="${vessel.Images ? vessel.Images[0].Uri : rai_yacht_sync.assets_url + 'images/default-yacht-image.jpeg'}" alt="yacht-image" loading="lazy" />
+					<a class="yacht-details" href="${ vessel._link }">
+						<img class="yacht-main-image" src="${vessel.Images ? vessel.Images[0].Uri : rai_yacht_sync.assets_url + 'images/default-yacht-image.jpeg'}" alt="yacht-image" loading="lazy" />
+					</a>	
 				</div>
 				<div class="yacht-general-info-container">
 					<div class="yacht-title-container">
-						<h6 class="yacht-title">${vessel.ModelYear ? vessel.ModelYear : ''} ${vessel.MakeString ? vessel.MakeString : ''} ${vessel.Model ? vessel.Model : ''} ${vessel.BoatName ? vessel.BoatName : ''}</h6>
+						<a class="yacht-details" href="${ vessel._link }">
+							<h6 class="yacht-title">${vessel.ModelYear ? vessel.ModelYear : ''} ${vessel.MakeString ? vessel.MakeString : ''} ${vessel.Model ? vessel.Model : ''} ${vessel.BoatName ? vessel.BoatName : ''}</h6>
+						</a>
 					</div>
 					<div class="yacht-info-container">
 						<div class="yacht-info">
@@ -53,6 +57,7 @@ var ysp_templates={};
 						<div class="yacht-price-container">
 							<p class="yacht-price">${price}</p>
 						</div>
+						
 						<a class="yacht-details" href="${ vessel._link }">
 							Details
 						</a>
@@ -71,6 +76,7 @@ var ysp_templates={};
 		}
 		
 		let length = '';
+		
 		if(rai_yacht_sync.europe_option_picked == "yes"){
 			length = vessel.NominalLength ? meters.toFixed(2) + ' m' : 'N/A';
 			price = vessel.Price ? `€ ${new Intl.NumberFormat('en-us', { minimumFractionDigits: 2}).format((parseInt(vessel.Price.slice(0, -3)) * rai_yacht_sync.euro_c_c))}` : 'Contact Us For Price';
@@ -82,11 +88,15 @@ var ysp_templates={};
 		return `
 			<div class="yacht-result-grid-item list-view">
 				<div class="yacht-main-image-container">
-					<img class="yacht-main-image" src="${vessel.Images ? vessel.Images[0].Uri : vessel.Images ? vessel.Images[0].Uri : rai_yacht_sync.assets_url + 'images/default-yacht-image.jpeg'}" alt="yacht-image" loading="lazy" />
+					<a class="yacht-details" href="${ vessel._link }">
+						<img class="yacht-main-image" src="${vessel.Images ? vessel.Images[0].Uri : vessel.Images ? vessel.Images[0].Uri : rai_yacht_sync.assets_url + 'images/default-yacht-image.jpeg'}" alt="yacht-image" loading="lazy" />
+					</a>
 				</div>
 				<div class="yacht-general-info-container">
 					<div class="yacht-title-container">
-						<h6 class="yacht-title">${vessel.ModelYear ? vessel.ModelYear : ''} ${vessel.MakeString ? vessel.MakeString : ''} ${vessel.Model ? vessel.Model : ''} ${vessel.BoatName ? vessel.BoatName : ''}</h6>
+						<a class="yacht-details" href="${ vessel._link }">
+							<h6 class="yacht-title">${vessel.ModelYear ? vessel.ModelYear : ''} ${vessel.MakeString ? vessel.MakeString : ''} ${vessel.Model ? vessel.Model : ''} ${vessel.BoatName ? vessel.BoatName : ''}</h6>
+						</a>
 					</div>
 					<div class="yacht-info-container">
 						<div class="yacht-info">

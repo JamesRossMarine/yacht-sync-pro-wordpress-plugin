@@ -7,11 +7,15 @@
 
 		public function add_actions_and_filters() {
 
-			add_shortcode('ys-v-yacht-search-form', [$this, 'v_searchform']);
-			add_shortcode('ys-h-yacht-search-form', [$this, 'h_searchform']);
-			add_shortcode('ys-yacht-results', [$this, 'yacht_results']);
 			add_shortcode('ys-quick-search', [$this, 'quick_search']);
 			add_shortcode('ys-h-quick-search', [$this, 'quick_h_search']);
+
+			add_shortcode('ys-v-yacht-search-form', [$this, 'v_searchform']);
+			add_shortcode('ys-h-yacht-search-form', [$this, 'h_searchform']);
+		
+			add_shortcode('ys-v-super-yacht-search-form', [$this, 'v_super_searchform']);
+
+			add_shortcode('ys-yacht-results', [$this, 'yacht_results']);
 
 		}
 
@@ -27,6 +31,25 @@
 		    ob_start();
 		  		
 				$file_to_include=RAI_YS_PLUGIN_TEMPLATES_DIR.'/v-search-form.php'; 
+
+		    	include apply_filters('rai_ys_v_yacht_search_template', $file_to_include);
+
+		    return ob_get_clean();
+		    
+        }
+
+        public function v_super_searchform($atts = array(), $content = null) {
+			// normalize attribute keys, lowercase
+		    $atts = array_change_key_case((array)$atts, CASE_LOWER);
+		 	
+		    // override default attributes with user attributes
+		    $attributes = shortcode_atts([
+            	
+            ], $atts);
+
+		    ob_start();
+		  		
+				$file_to_include=RAI_YS_PLUGIN_TEMPLATES_DIR.'/v-super-search-form.php'; 
 
 		    	include apply_filters('rai_ys_v_yacht_search_template', $file_to_include);
 

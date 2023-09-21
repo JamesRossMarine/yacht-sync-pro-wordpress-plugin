@@ -3,9 +3,11 @@ function raiys_get_form_data(form_ele) {
           
     var fd = Array.from(formData.entries()).reduce((memo, pair) => ({
         ...memo,
-        [pair[0]]: pair[1],
+        [pair[0]]: formData.getAll(pair[0]), //pair[1]
     }), {});
 
+    console.log(fd);
+    
     return fd;
 }
 

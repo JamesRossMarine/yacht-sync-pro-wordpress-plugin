@@ -23,7 +23,7 @@ function ysp_yacht_search_and_reader(data) {
                 }
             });
 
-            // raiys_push_history(data);
+            //raiys_push_history(data);
 
             jQuery('#yachts-pagination').pagination({
                 items: data_result.total,

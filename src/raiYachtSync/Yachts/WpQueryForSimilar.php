@@ -40,7 +40,7 @@
                     'yearlo' => $year - 5,
                     'yearhi' => $year + 5,
 
-                    'make' => $make
+                    'make' => $make,
                 ];
 
                 $similar_query_one = new WP_Query($similar_query_one_args);
@@ -58,13 +58,7 @@
                         'yearlo' => $year - 10,
                         'yearhi' => $year + 10,
 
-                        'tax_query' => array(
-                            array(
-                                'taxonomy' => 'boatclass',
-                                'field' => 'slug',
-                                'terms' => [ $category[0] ]
-                            )
-                        )
+                        'boatclass' => [ $category[0] ] 
                     ];
 
                     $similar_query_two = new WP_Query($similar_query_two_args);
@@ -76,14 +70,8 @@
                     else {
                         $query->query_vars = array_merge($query->query_vars, [
                             
-                            'tax_query' => array(
-                                array(
-                                    'taxonomy' => 'boatclass',
-                                    'field' => 'slug',
-                                    'terms' => [ $category[0] ]
-                                )
-                            )
-
+                            'boatclass'  => [ $category[0] ]
+                            
                         ]);
                     }
                 }
