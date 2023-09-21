@@ -413,7 +413,9 @@ get_header();
                             $yachtQuery = new WP_Query(array(
                                 'post_type' => 'rai_yacht',
                                 'similar_listings_to' => get_the_ID(),
+
                                 'posts_per_page' => 3,
+                                'orderby' => 'rand'
                             ));
 
                             while ( $yachtQuery->have_posts() ) {

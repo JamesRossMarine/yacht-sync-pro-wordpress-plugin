@@ -33,6 +33,7 @@
                 
                 $similar_query_one_args = [
                     'post_type' => 'rai_yacht',
+                    'post__not_in' => [ $similar_post_id ],
                    
                     'lengthlo' => $length - 15,
                     'lengthhi' => $length + 15,
@@ -41,6 +42,7 @@
                     'yearhi' => $year + 5,
 
                     'make' => $make,
+
                 ];
 
                 $similar_query_one = new WP_Query($similar_query_one_args);
@@ -51,6 +53,7 @@
                 else {
                     $similar_query_two_args = [
                         'post_type' => 'rai_yacht',
+                        'post__not_in' => [ $similar_post_id ],
                     
                         'lengthlo' => $length - 30,
                         'lengthhi' => $length + 30,
@@ -58,7 +61,7 @@
                         'yearlo' => $year - 10,
                         'yearhi' => $year + 10,
 
-                        'boatclass' => [ $category[0] ] 
+                        'boatclass' => [ $category[0] ],
                     ];
 
                     $similar_query_two = new WP_Query($similar_query_two_args);
@@ -70,6 +73,7 @@
                     else {
                         $query->query_vars = array_merge($query->query_vars, [
                             
+                            'post__not_in' => [ $similar_post_id ],
                             'boatclass'  => [ $category[0] ]
                             
                         ]);

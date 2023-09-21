@@ -9,21 +9,29 @@ Object.defineProperty(String.prototype, 'eachWordCapitalize', {
 });
 
 function raiys_get_form_data(form_ele) {
-    var formData = new FormData( form_ele );
-          
-    var fd = Array.from(formData.entries()).reduce((memo, pair) => ({
-        ...memo,
-        [pair[0]]: formData.getAll(pair[0]), //pair[1]
-    }), {});
+    let formData = new FormData( form_ele );
 
-    console.log(fd);
-    
+    let fd=Object.fromEntries(formData.entries());
+
+    for (const [fIndex, field] of Object.entries(fd)) {
+
+        let ValArray = formData.getAll(fIndex);
+
+        if (typeof ValArray[1] != 'undefined') {
+            fd[ fIndex ] = ValArray;
+        }
+
+        if (fd[ fIndex ] == '') {
+            delete fd[fIndex];
+        }
+    }
+
     return fd;
 }
 
-function raiys_push_history( data = {}) {
-    var searchParams = new URLSearchParams();
-    var strpath='';
+function raiys_push_history( data = {} ) {
+    let searchParams = new URLSearchParams();
+    let strpath='';
 
     for (const property in data) {
         var it = data[ property ];

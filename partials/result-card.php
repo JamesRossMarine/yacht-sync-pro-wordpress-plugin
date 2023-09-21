@@ -21,11 +21,15 @@
 ?>
 <div class="yacht-result-grid-item">
     <div class="yacht-main-image-container">
-        <img class="yacht-main-image" src="<?php echo ($yacht['Images'] ? $yacht['Images'][0]->Uri : RAI_YS_PLUGIN_ASSETS .'images/default-yacht-image.jpeg')?>" alt="yacht-image" loading="lazy" />
+        <a class="yacht-details" href="<?php echo($yacht['_link']);?>">
+            <img class="yacht-main-image" src="<?php echo ($yacht['Images'] ? $yacht['Images'][0]->Uri : RAI_YS_PLUGIN_ASSETS .'images/default-yacht-image.jpeg')?>" alt="yacht-image" loading="lazy" />
+        </a>
     </div>
     <div class="yacht-general-info-container">
         <div class="yacht-title-container">
-            <h6 class="yacht-title"><?php echo ($yacht['ModelYear'] ? $yacht['ModelYear'] : '');?> <?php echo ($yacht['MakeString'] ? $yacht['MakeString'] : '');?> <?php echo ($yacht['Model'] ? $yacht['Model'] : '');?> <?php echo ($yacht['BoatName'] ? $yacht['BoatName'] : '');?></h6>
+            <a class="yacht-details" href="<?php echo($yacht['_link']);?>">
+                <h6 class="yacht-title"><?php echo ($yacht['ModelYear'] ? $yacht['ModelYear'] : '');?> <?php echo ($yacht['MakeString'] ? $yacht['MakeString'] : '');?> <?php echo ($yacht['Model'] ? $yacht['Model'] : '');?> <?php echo ($yacht['BoatName'] ? $yacht['BoatName'] : '');?></h6>
+            </a>
         </div>
         <div class="yacht-info-container">
             <div class="yacht-info">
