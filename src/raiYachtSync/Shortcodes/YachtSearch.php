@@ -6,13 +6,12 @@
 		}
 
 		public function add_actions_and_filters() {
-
 			add_shortcode('ys-v-yacht-search-form', [$this, 'v_searchform']);
 			add_shortcode('ys-h-yacht-search-form', [$this, 'h_searchform']);
 			add_shortcode('ys-yacht-results', [$this, 'yacht_results']);
 			add_shortcode('ys-quick-search', [$this, 'quick_search']);
 			add_shortcode('ys-h-quick-search', [$this, 'quick_h_search']);
-
+			add_shortcode('ys-yacht-results-heading', [$this, 'ys_yacht_results_heading']);
 		}
 
 		public function v_searchform($atts = array(), $content = null) {
@@ -52,6 +51,25 @@
 		    return ob_get_clean();
         }
 
+        public function ys_yacht_results_heading($atts = array(), $content = null) {
+			// normalize attribute keys, lowercase
+		    $atts = array_change_key_case((array)$atts, CASE_LOWER);
+		 
+		    // override default attributes with user attributes
+		    $attributes = shortcode_atts([
+            	
+            ], $atts);
+
+            ob_start();
+		  		
+				$file_to_include=RAI_YS_PLUGIN_TEMPLATES_DIR.'/ys-yacht-results-heading.php'; 
+
+		    	include apply_filters('rai_ys_yacht_results_template', $file_to_include);
+
+		    return ob_get_clean();
+
+       	}
+		
         public function yacht_results($atts = array(), $content = null) {
 			// normalize attribute keys, lowercase
 		    $atts = array_change_key_case((array)$atts, CASE_LOWER);
