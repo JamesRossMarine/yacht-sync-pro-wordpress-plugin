@@ -5,10 +5,15 @@
 </head>
 
 <body>
-	<div style=' margin: auto; margin-top: 49vh; text-align: center;'>
-		<b>LOADDING PDF</b><br>
-		Our servers are generating this document in real-time. Please wait a few seconds.
-	</div>
+<div style='display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh;'>
+    <img src='<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/loading-icon.gif' alt='Loading Icon' style="height: 120px; width: 120px; "/>
+    <div style='margin-top: 20px; text-align: center;'>
+        <b>LOADING PDF</b><br>
+        Our servers are generating this document in real-time. Please wait a few seconds.
+    </div>
+</div>
+
+
 
 	<script type="text/javascript">
 
