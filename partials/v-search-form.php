@@ -1,8 +1,9 @@
 <div id="v-search-container">
-    <form id="v-search-form" class="ys-v-row ysp-yacht-search-form" >
-        <div class="ys-v-row-item">
+    <form id="ysp-yacht-search-form" class="ys-v-row ysp-yacht-search-form ysp-form" >
+    <input type="hidden" name="page_index" />    
+    <div class="ys-v-row-item">
             <label>Keyword</label>
-            <input type="text" name="keyword" placeholder="Search by Name" />
+            <input type="text" name="ys_keyword" placeholder="Search by Name" />
             <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="icon/search">
                     <path id="Vector" d="M7.33333 12.6667C10.2789 12.6667 12.6667 10.2789 12.6667 7.33333C12.6667 4.38781 10.2789 2 7.33333 2C4.38781 2 2 4.38781 2 7.33333C2 10.2789 4.38781 12.6667 7.33333 12.6667Z" stroke="#334155" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -12,32 +13,32 @@
         </div>
         <div class="ys-v-row-item">
             <label>Builder</label>
-            <select name="builder">
-                <option value="" selected disabled>Any</option>
+            <select name="make" data-fill-options="Builders">
+                <option value="">Any</option>
             </select>
         </div>
         <div class="ys-v-row-item">
             <label>Year</label>
             <div class="min-max-container">
-                <input type="number" name="year-min" placeholder="Min"/>
+                <input type="number" name="yearlo" placeholder="Min"/>
                 <span>-</span>
-                <input type="number" name="year-max" placeholder="Max"/>
+                <input type="number" name="yearhi" placeholder="Max"/>
             </div>
         </div>
         <div class="ys-v-row-item">
             <label>Length</label>
             <div class="min-max-container">
-                <input type="number" name="length-min" placeholder="Min"/>
+                <input type="number" name="lengthlo" placeholder="Min"/>
                 <span>-</span>
-                <input type="number" name="length-max" placeholder="Max"/>
+                <input type="number" name="lengthhi" placeholder="Max"/>
             </div>
         </div>
         <div class="ys-v-row-item">
             <label>Price</label>
             <div class="min-max-container">
-                <input type="number" name="price-min" placeholder="Min"/>
+                <input type="number" name="pricelo" placeholder="Min"/>
                 <span>-</span>
-                <input type="number" name="price-max" placeholder="Max"/>
+                <input type="number" name="pricehi" placeholder="Max"/>
             </div>
         </div>
         <div class="ys-v-row-item">
@@ -61,7 +62,7 @@
         </div>
         <div class="ys-v-row-item">
             <label>Hull</label>
-            <select name="hull">
+            <select name="hull" data-fill-options="HullMaterials">
                 <option value="" selected disabled>Any</option>
             </select>
             <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -71,7 +72,7 @@
         <div class="ys-v-row-item">
             <label>Condition</label>
             <select name="condition">
-                <option value="" selected disabled>Any</option>
+                <option value="">Any</option>
                 <option value="New">New</option>
                 <option value="Used">Used</option>
             </select>
@@ -81,7 +82,7 @@
         </div>
         <div class="ys-v-row-item submit-container">
             <label>Submit</label>
-            <input type="submit" name="submit" value="Submit"/>
+            <input class="ysp-general-button" type="submit" name="submit" value="Submit"/>
         </div>
     </form>
 </div>

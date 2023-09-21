@@ -16,6 +16,8 @@
 			$this->YoastFun_Descriptions = new raiYachtSync_YoastFun_Descriptions();
 
 			$this->Yachts_WpQueryAddon = new raiYachtSync_Yachts_WpQueryAddon();
+			$this->Yachts_WpQueryForSimilar = new raiYachtSync_Yachts_WpQueryForSimilar();
+			
 			$this->Yachts_DetailOverride = new raiYachtSync_Yachts_DetailsOverride();
 			$this->Yachts_Shortcode = new raiYachtSync_Shortcodes_YachtSearch();
 

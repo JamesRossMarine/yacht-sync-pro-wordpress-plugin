@@ -113,6 +113,10 @@
                         $boatC->Images = $reducedImages;
                     }
 
+					if (isset($boat['NominalLength'])) {
+						$boatC->YSP_Length = (int) $boat['NominalLength'];
+					}
+
 		            if (isset($boat['BoatLocation'])) {
 	                    $boatC->YSP_CountryID = $boat['BoatLocation']['BoatCountryID'];
 	                    $boatC->YSP_City = $boat['BoatLocation']['BoatCityName'];

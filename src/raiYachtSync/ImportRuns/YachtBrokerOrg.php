@@ -132,6 +132,10 @@
 
 		            $theBoat['Images'] = $images;
 
+					if (isset($row['NominalLength'])) {
+						$theBoat['YSP_Length'] = (int) $row['NominalLength'];
+					}
+
 		            if (isset($row['CruisingSpeedMeasure'])) {
 			            $row['CruisingSpeedMeasure'] .= ' '.str_replace('Knots', 'kn', $row['SpeedUnit']);
 			            $theBoat['CruisingSpeedMeasure']=$row['CruisingSpeedMeasure'];		            	
