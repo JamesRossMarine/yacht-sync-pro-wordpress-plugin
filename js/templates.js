@@ -7,7 +7,7 @@ var ysp_templates={};
 		let price = '';
 
 		if (typeof vessel.Price == 'string') {
-			let price = vessel.Price.slice(0, -3);
+			price = vessel.Price.slice(0, -3);
 		}
 
 		let length = '';
