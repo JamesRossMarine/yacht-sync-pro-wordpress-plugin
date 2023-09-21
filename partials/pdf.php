@@ -97,10 +97,7 @@ $year = $vessel->ModelYear;
 $company = $vessel->CompanyName;
 
 //Broker Variables
-$broker = $vessel->SalesRep->Name;
-if ($broker == ""){
-    $broker = "Italian Yacht Group";
-}
+
 $brokerLocation = $city . ', ' . $state;
 //        console_log($brokerLocation, '$brokerLocation');
 $phone = $vessel->Office->Phone; //Broker Phone
@@ -150,7 +147,8 @@ if (is_array($vessel->Engines)) {
     $enginePropellerType2 = $vessel->Engines[1]->PropellerType;
     $engineYear2 = $vessel->Engines[1]->Year;
 }
-
+$post = get_post($yacht_post_id);
+$permalink = $post->guid;
 
 $enginePower1Numbers = intval($enginePower1);
 $enginePower2Numbers = intval($enginePower2);
@@ -169,12 +167,25 @@ $holdingTankCapacity = $vessel->HoldingTankCapacityMeasure;
 $heads = $vessel->HeadsCountNumeric;
 $windlassType = $vessel->WindlassTypeCode;
 $boatClass = $vessel->BoatClassCode[0];
+
+$YSP_Options = new raiYachtSync_Options();
+
+$colorOne = $YSP_Options->get('color_one');
+$colorTwo = $YSP_Options->get('color_two');
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 
     <style>
+
+        :root {
+            --main-color: <?php echo $colorOne; ?>;
+            --secondary-color: <?php echo $colorTwo; ?>;
+            --main-text-color: var(--main-color);
+            --secondary-text-color: var(--secondary-color);
+        }
+
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap');
 
         #pdf-page-template {
@@ -182,7 +193,6 @@ $boatClass = $vessel->BoatClassCode[0];
             max-width: 1440px;
             margin: auto;
             font-family: 'Montserrat', sans-serif;
-
         }
 
         /* COVER PAGE */
@@ -226,7 +236,7 @@ $boatClass = $vessel->BoatClassCode[0];
             justify-content: space-between;
         }
         .main-name-price-container .main-boat-name {
-            color: #C00020;
+            color: var(--secondary-text-color);
             text-transform: uppercase;
             font-weight: 400;
             margin: 0;
@@ -275,7 +285,7 @@ $boatClass = $vessel->BoatClassCode[0];
             top: 0;
             bottom: 0;
             width: 2px;
-            background-color: #C00020;
+            background-color: var(--secondary-text-color);
         }
 
         .main-location-container::before {
@@ -292,12 +302,12 @@ $boatClass = $vessel->BoatClassCode[0];
             font-size: 12px;
             margin: 0px;
             margin-bottom: 10px;
-            color: #252F38;
+            color: var(--main-text-color);
         }
         .location-value, .builder-value, .cabins-value, .length-value {
             font-size: 10px;
             margin: 0px;
-            color: #6A7075;
+            color: var(--main-text-color);
         }
 
         /* MAIN SPECIFICATIONS */
@@ -307,7 +317,7 @@ $boatClass = $vessel->BoatClassCode[0];
         }
 
         .main-specifications-container .main-specifications-title {
-            color: #C00020;
+            color: var(--secondary-text-color);
             font-weight: 400;
             font-size: 14px;
         }
@@ -325,12 +335,12 @@ $boatClass = $vessel->BoatClassCode[0];
         }
         .individual-specification-group .specification-title {
             text-transform: uppercase;
-            color: #252F38;
+            color: var(--main-text-color);
             font-weight: 600;
             font-size: 12px
         }
         .individual-specification-group .specification-value {
-            color: #6A7075;
+            color: var(--main-text-color);
             font-weight: 400;
             font-size: 10px;
         }
@@ -340,13 +350,20 @@ $boatClass = $vessel->BoatClassCode[0];
             display: flex;
             justify-content: space-between;
             margin-bottom: 200px;
-            padding: 10px;
+            padding: 20px;
+        }
+        .footer-broker-info{
+            display: flex;
+            justify-content: space-between;
+            width: 800px;
+            margin: auto;
         }
 
         .footer-broker-info p {
-            margin: 0;
+            margin: auto;
             margin-bottom: 10px;
             font-size: 12px;
+            color: var(--secondary-text-color);
         }
 
         .footer-container .footer-img {
@@ -366,8 +383,13 @@ $boatClass = $vessel->BoatClassCode[0];
             font-size: 12px;
         }
 
+        .footer-broker-info p a {
+            text-decoration: none;
+            color: var(--secondary-text-color);
+        }
+
         .other-specs-group .other-specs-title {
-            color: #C00020;
+            color: var(--secondary-text-color);
             font-weight: 400;
             font-size: 14px;
         }
@@ -379,13 +401,13 @@ $boatClass = $vessel->BoatClassCode[0];
         }
 
         .individual-specs-group .other-specs-name {
-            color: #252F38;
+            color: var(--main-text-color);
             font-weight: 600;
             font-size: 12px;
         }
 
         .individual-specs-group .other-specs-value {
-            color: #252F38;
+            color: var(--main-text-color);
             font-weight: 400;
             font-size: 10px;
         }
@@ -402,45 +424,61 @@ $boatClass = $vessel->BoatClassCode[0];
         .image-gallery-container {
             display: flex;
             flex-wrap: wrap;
-            margin: auto;
+            justify-content: center;
+            align-items: center;
         }
+
         .individual-image-container {
-            width: 50%;
+            flex-basis: calc(50% - 10px); /* Two images per row with a little space in between */
+            margin: 5px; /* Space between images */
             box-sizing: border-box;
-            padding: 5px;
         }
+
         .gallery-image {
             max-width: 100%;
             height: auto;
+            display: block;
+            margin: auto;
         }
         .gallery-image {
             display: block;
             max-height: 317px !important;
             height: 317px !important;
+            width: 480px;
         }
+
         .pdf-page {
             width: 100%;
-            height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+        }
+        .go-back{
+            display: flex;
+            text-decoration: none;
+            color: black;
+            padding-bottom: 20px;
+            width: 155px;
+            font-size: 12px;
+        }
+        .back-yacht{
+            padding-left: 5px;
+            font-weight: 12px;
         }
 
     </style>
 </head>
 <body>
 <div id="pdf-page-template">
-    <div class="cover-page-container">
-        <div class="cover-page-container-logo">
-            <img src="<?php echo get_template_directory_uri(); ?>/images/logo_dark.svg" alt="" />
-        </div>
-        <div class="cover-page-title-container">
-            <h4 class="cover-title"><?= $vesselH1 ?></h4>
-        </div>
-    </div>
     <div class="main-page-container">
         <div class="main-title-container">
+            <div class="go-back-back">
+                <a class="go-back" href="<?php echo $permalink ?>">
+                 <img src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/back.svg" alt="" />
+                 <div class="back-yacht">DETAIL'S PAGE</div>
+                 </a>
+            </div>
             <div class="main-name-price-container">
                 <h3 class="main-boat-name"><?= $vesselH1 ?></h3>
                 <h3 class="main-boat-price">$<?= $price ?></h3>
@@ -452,30 +490,30 @@ $boatClass = $vessel->BoatClassCode[0];
         <div class="main-hero-image-container">
             <img src="<?php echo $vessel->Images[0]->Uri ?>" alt="" />
         </div>
-        <div class="main-info-container">
+        <div class="main-info-container"> 
             <div class="main-location-container">
-                <img width="50" height="50" src="<?php echo get_template_directory_uri(); ?>/images/yacht-location.svg" alt="" />
+                <img width="50" height="50" src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/Compass.svg" alt="" />
                 <div class="main-location">
                     <p class="location-name">LOCATION</p>
                     <p class="location-value"><?= $boatLocation ?></p>
                 </div>
             </div>
             <div class="main-builder-container">
-                <img width="50" height="50" src="<?php echo get_template_directory_uri(); ?>/images/yacht-builder.svg" alt="" />
+                <img width="50" height="50" src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/Vector.svg" alt="" />
                 <div class="main-builder">
                     <p class="builder-name">BUILDER</p>
                     <p class="builder-value"><?= $make ?></p>
                 </div>
             </div>
             <div class="main-cabins-container">
-                <img width="50" height="50" src="<?php echo get_template_directory_uri(); ?>/images/yacht-cabins.svg" alt="" />
+                <img width="50" height="50" src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/Bed.svg" alt="" />
                 <div class="main-cabins">
                     <p class="cabins-name">CABINS</p>
                     <p class="cabins-value"><?= $cabinCount ?></p>
                 </div>
             </div>
             <div class="main-length-container">
-                <img width="90" height="50" src="<?php echo get_template_directory_uri(); ?>/images/yacht-length.svg" alt="" />
+                <img width="90" height="50" src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/Length.svg" alt="" />
                 <div class="main-length">
                     <p class="length-name">LENGTH</p>
                     <p class="length-value"><?= $length ?> / <?= $lengthMeters ?> m</p>
@@ -538,9 +576,6 @@ $boatClass = $vessel->BoatClassCode[0];
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="main-description-container" style="page-break-after: always;">
-            <p style="padding-top: 20px "><?= $generalDescription ?></p>
         </div>
         <div class="other-info-container" style="padding-top: 20px ">
             <div class="other-specs-group">
@@ -626,16 +661,6 @@ $boatClass = $vessel->BoatClassCode[0];
                 $counter++;
             }
             ?>
-            <div style="page-break-after: always;">
-            <div class="other-specs-group" style="padding-top: 20px ">
-                <h3 class="other-specs-title">OTHER</h3>
-                <div class="other-specs-group-container">
-                    <div class="additional-description">
-                        <?= $additionalDescription ?>
-                    </div>
-                </div>
-            </div>
-        </div>
         </div>
     </div>
     <div class="pdf-page">
@@ -654,16 +679,82 @@ $boatClass = $vessel->BoatClassCode[0];
             </div>
         <?php } ?>
     </div>
-    <div class="footer-container" style="page-break-after: always;">
-        <img class="footer-img" src="<?php echo get_template_directory_uri(); ?>/images/logo_dark.svg" alt="" />
-        <div class="footer-broker-info">
-            <p class="footer-broker-name"><?= $broker ?></p>
-            <p class="footer-broker-phone"><?= $phone ?></p>
-            <p class="footer-broker-email"><?= $email ?></p>
-            <p class="footer-broker-website">www.italianyachtgroup.com</p>
+    
+    <?php
+    $broker = $vessel->SalesRep->Name;
+    
+    $BrokerNames = explode(' ', $broker);
+    
+    $brokerQueryArgs = array(
+        'post_type' => 'rai_broker',
+        'posts_per_page' => 1,
+    
+        'meta_query' => [
+            'name' => [
+                'relation' => 'OR'
+            ],
+        ],
+    );
+    
+    foreach ($BrokerNames as $bName) {
+        $brokerQueryArgs['meta_query']['name'][]=[
+            'key' => 'broker_fname',
+            'compare' => 'LIKE',
+            'value' => $bName,
+        ];
+    }
+    
+    foreach ($BrokerNames as $bName) {
+        $brokerQueryArgs['meta_query']['name'][]=[
+            'key' => 'broker_lname',
+            'compare' => 'LIKE',
+            'value' => $bName,
+        ];
+    }
+    
+    $brokerQuery = new WP_Query($brokerQueryArgs);
+    
+    if ($brokerQuery->have_posts()) {
+    
+    }
+    else {
+        $mainBrokerQueryArgs = array(
+            'post_type' => 'rai_broker',
+            'meta_query' => array(
+                array(
+                    'key' => 'rai_main_broker',
+                    'value' => '1',
+                ),
+            ),
+            'posts_per_page' => 1,
+        );
+    
+        $brokerQuery = new WP_Query($mainBrokerQueryArgs);
+    
+    
+    }
+
+    if ($brokerQuery->have_posts()) {
+        while ($brokerQuery->have_posts()) {
+            $brokerQuery->the_post(); 
+            $broker_first_name = get_post_meta($brokerQuery->post->ID, 'rai_broker_fname', true);
+            $broker_last_name = get_post_meta($brokerQuery->post->ID, 'rai_broker_lname', true);
+            $broker_email = get_post_meta($brokerQuery->post->ID, 'rai_broker_email', true);
+            $broker_phone = get_post_meta($brokerQuery->post->ID, 'rai_broker_phone', true);
+         ?>
+            <div class="footer-container" style="page-break-after: always;">
+                <div class="footer-broker-info">
+                <p class="footer-broker-name"><?php echo ($broker_first_name . " " . $broker_last_name); ?></p>
+                <p class="footer-broker-phone"><a href="tel:<?php echo $broker_phone; ?>"><?php echo $broker_phone; ?></p>
+                <p class="footer-broker-email"><a href="mailto:<?php echo $broker_email; ?>"><?php echo $broker_email; ?></p>
+            </div>
         </div>
+        <?php
+            }
+            wp_reset_postdata();
+        }
+        ?>
     </div>
-</div>
 
 </body>
 </html>
