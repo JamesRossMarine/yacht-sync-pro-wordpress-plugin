@@ -1,6 +1,7 @@
 #search-result-section {
     max-width: $max-width;
     position: relative;
+    padding-top: 20px;
 
     &.loading {
         .loader-icon {
@@ -37,7 +38,7 @@
         margin-bottom: 10px;
         
         .total-results-title {
-            color: #334155;
+            color: $main-text-color;
         }
     }
     .yacht-search-options {
@@ -98,7 +99,7 @@
 
             select {
                 border: none;
-                width: 90px;
+                width: 110px;
             }
         }
     }
@@ -158,7 +159,7 @@
                             font-size: 14px;
                             font-weight: 500;
                             line-height: 20px;
-                            color: $secondary-text-color;
+                            color: $main-text-color;
                             margin: 0px;
                             padding: 10px 92px 10px 18px;
                         }
@@ -171,23 +172,24 @@
                             .yacht-individual-container {
                                 display: flex;
                                 margin-bottom: 10px;
+                                justify-content: space-between;
                                 
                                 p {
                                     margin: 0;
                                 }
                                 .yacht-individual-title {
-                                    width: 40px;
+                                    width: 50px;
                                     margin-right: 60px;
                                     font-size: 14px;
                                     font-weight: 500;
                                     line-height: 20px;
-                                    color: $secondary-text-color
+                                    color: $main-text-color
                                 }
                                 .yacht-individual-value {
                                     font-size: 14px;
                                     font-weight: 400;
                                     line-height: 20px;
-                                    color: $secondary-text-color
+                                    color: $main-text-color
                                 }
                             }
                         }
@@ -207,7 +209,7 @@
                                 font-size: 14px;
                                 font-weight: 500;
                                 line-height: 20px;
-                                color: $secondary-text-color;
+                                color: $main-text-color;
                             }
                         }
                         .yacht-details {
@@ -262,17 +264,18 @@
                             .yacht-individual-container {
                                 display: flex;
                                 margin-bottom: 10px;
+                                justify-content: space-between;
                                 
                                 p {
                                     margin: 0;
                                 }
                                 .yacht-individual-title {
-                                    width: 40px;
+                                    width: 50px;
                                     margin-right: 60px;
                                     font-size: 14px;
                                     font-weight: 500;
                                     line-height: 20px;
-                                    color: $main-text-color
+                                    color: $main-text-color;
                                 }
                                 .yacht-individual-value {
                                     font-size: 14px;
@@ -313,4 +316,7 @@
             }
         }
     }
+}
+.page-link{
+    color: $main-text-color;
 }
