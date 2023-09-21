@@ -80,7 +80,7 @@
 				&&
 				$val != "0"
 				&&
-				$val != 'undefined'
+				$val != "undefined"
 				&&
 				! is_null($val)
 			) || $val === true;
@@ -126,7 +126,7 @@
 
 				}
 	
-				if ($this->if_query_var_check( $query->get('page_index') ) >= 2 ) {
+				if ($this->if_query_var_check( $query->get('page_index') )  && $query->get('page_index')  >= 2 ) {
 
 					$query->set('offset', 12 * ( $query->get('page_index') - 1));
 
@@ -209,34 +209,45 @@
 
 				}
 				elseif ($query->get('condition') == 'New') {
-					$yacht_sync_meta_query=[
-						'relation' => 'AND',
-						
-						[
-							'key' => 'ModelYear',
-							'compare' => ">=",
-							'type' => 'NUMERIC',
-							'value' => date('Y')
-						],
-
-						[
-							'key' => 'SaleClassCode',
-							'compare' => "=",
-							'value' => 'New'
-						]
-						
+					$yacht_sync_meta_query[]=[
+						'key' => 'SaleClassCode',
+						'compare' => "=",
+						'value' => 'New'
+					];
+				}
+				elseif (is_array($query->get('condition'))) {
+					$yacht_sync_meta_query[]=[
+						'key' => 'SaleClassCode',
+						'compare' => "IN",
+						'value' => $query->get('condition')
 					];
 				}
 
-				if ($this->if_query_var_check($query->get('hull'))) {
+				if (is_array($query->get('hull'))) {
+					$yacht_sync_meta_query[]=[
+						'key' => 'BoatHullMaterialCode',
+						'compare' => "in",
+						'value' => $query->get('hull')
+					];
+				}
+				elseif ($this->if_query_var_check($query->get('hull'))) {
 					$yacht_sync_meta_query[]=[
 						'key' => 'BoatHullMaterialCode',
 						'compare' => "=",
 						'value' => $query->get('hull')
 					];
+
 				}
 
-				if ($this->if_query_var_check($query->get('staterooms'))) {
+				if (is_array($query->get('staterooms'))) {
+					$yacht_sync_meta_query[]=[
+						'key' => 'CabinsCountNumeric',
+						'compare' => "IN",
+						'type' => 'NUMERIC',
+						'value' => $query->get('staterooms')
+					];
+				}
+				elseif ($this->if_query_var_check($query->get('staterooms'))) {
 					$yacht_sync_meta_query[]=[
 						'key' => 'CabinsCountNumeric',
 						'compare' => "=",
@@ -245,7 +256,14 @@
 					];
 				}
 
-				if ($this->if_query_var_check($query->get('make'))) {
+				if (is_array($query->get('make'))) {
+					$yacht_sync_meta_query[]=[
+						'key' => 'MakeString',
+						'compare' => "IN",
+						'value' => $query->get('make')
+					];
+				}
+				elseif ($this->if_query_var_check($query->get('make'))) {
 					$yacht_sync_meta_query[]=[
 						'key' => 'MakeString',
 						'compare' => "=",

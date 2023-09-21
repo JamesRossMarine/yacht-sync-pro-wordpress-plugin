@@ -1,5 +1,5 @@
 #ysp-yacht-details {
-    margin: 40px;
+    // margin: 40px;
     display: flex;
 
     @media screen and (max-width: $breakpoint-small){
@@ -110,7 +110,7 @@
 
             .carousel-nav {
                 height: 100px;
-                margin: 10px;
+                margin: 10px 0px;
 
                 .carousel-cell {
                     height: 80px;
@@ -271,7 +271,7 @@
             }
         }
         .yacht-download-brochure-container {
-            margin-top: 23px;
+            margin: 23px 0px;
             display: flex;
 
             @media screen and (max-width: $breakpoint-large){
@@ -343,6 +343,10 @@
 
                     p {
                         margin: 0px;
+                        color: $main-text-color;
+                    }
+                    a {
+                        color: $main-text-color;
                     }
                     .broker-name {
                         color: $main-text-color;
@@ -362,6 +366,9 @@
                         font-size: 16px;
                         font-weight: 400;
                         line-height: 24px;
+                        a {
+                            color: $main-text-color !important;
+                        }
                     }
                     .broker-phone {
                         color: $main-text-color;
@@ -411,7 +418,7 @@
                         margin-bottom: 14px;
                         padding: 8px 12px;
                         border: 1px solid #CBD5E1;
-                        width: 93%;
+                        width: 100%;
                         &:focus {
                             border-radius: 0px;
                         }
@@ -434,7 +441,7 @@
                         margin-bottom: 14px;
                         padding: 8px 12px;
                         height: 135px;
-                        width: 93%;
+                        width: 100%;
                         border: 1px solid #CBD5E1;
                         resize: none;
                         font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -708,7 +715,7 @@
                             margin-bottom: 14px;
                             padding: 8px 12px;
                             border: 1px solid #CBD5E1;
-                            width: 93%;
+                            width: 100%;
                             &:focus {
                                 border-radius: 0px;
                             }
@@ -731,7 +738,7 @@
                             margin-bottom: 14px;
                             padding: 8px 12px;
                             height: 135px;
-                            width: 93%;
+                            width: 100%;
                             border: 1px solid #CBD5E1;
                             resize: none;
                             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;

@@ -23,7 +23,7 @@ function ysp_yacht_search_and_reader(data) {
                 }
             });
 
-            // raiys_push_history(data);
+            raiys_push_history(data);
 
             jQuery('#yachts-pagination').pagination({
                 items: data_result.total,
@@ -68,7 +68,6 @@ function ysp_yacht_search_and_reader(data) {
 document.addEventListener("DOMContentLoaded", function() {
     let yachtSearchAndResults=document.querySelector('.ysp-yacht-search-form');
 
-
     if (yachtSearchAndResults) {
         yachtSearchAndResults.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -88,7 +87,34 @@ document.addEventListener("DOMContentLoaded", function() {
 
         });
 
+        // PRETTY URL
+        let strpaths=window.location.href;
+
+        strpaths=strpaths.replace(rai_yacht_sync.yacht_search_page_id, '');
+
+        let paths = strpaths.split("/");
+
+        let pretty_url_path_params={};
+
+        paths.forEach(function(path) {
+
+            if (path != '') {
+                let phase_path = path.split('-');
+                let only_vals=phase_path.slice(1);
+
+                pretty_url_path_params[phase_path[0]]=only_vals.join(' ');
+
+                if (typeof pretty_url_path_params[phase_path[0]] == 'string') {
+                    pretty_url_path_params[phase_path[0]] = pretty_url_path_params[phase_path[0]].eachWordCapitalize();
+                }
+            }
+
+        });
+
+        console.log(pretty_url_path_params);
+
         // Restore Fields
+
         let URLREF=new URL(location.href); // maybe for a re-do
 
         let formInputs=document.querySelectorAll('.ysp-yacht-search-form *[name], *[name][form="ysp-yacht-search-form"]');
@@ -99,6 +125,17 @@ document.addEventListener("DOMContentLoaded", function() {
             let name = ele.getAttribute('name');
 
             let urlVal = URLREF.searchParams.get( name );
+
+            let hasPretty = pretty_url_path_params[ name ];
+
+            if (typeof hasPretty != 'null' && typeof hasPretty != 'undefined') {
+                if (typeof input.type != 'undefined' && input.type == 'checkbox' && input.value == hasPretty ) {
+                    input.checked=true;
+                }
+                else {
+                    input.value = hasPretty;
+                }
+            }
 
             if (urlVal != '' && urlVal != null) {
                 if (typeof input.type != 'undefined' && input.type == 'checkbox' && input.value == urlVal ) {
@@ -149,6 +186,7 @@ document.addEventListener("DOMContentLoaded", function() {
             for (let label in rOptions) {
 
                 let SelectorEle = document.querySelectorAll("select[data-fill-options='"+ label +"']");
+                let name = SelectorEle[0].getAttribute('name');
 
                 rOptions[label].forEach(function(b) {
 
@@ -164,11 +202,47 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 let URLREF = new URL(location.href);
                 let UrlVal = URLREF.searchParams.get( label );
+
+                let strpaths=window.location.href;
+
+                strpaths=strpaths.replace(rai_yacht_sync.yacht_search_page_id, '');
+
+                let paths = strpaths.split("/");
+
+                let pretty_url_path_params={};
+
+                paths.forEach(function(path) {
+
+                    if (path != '') {
+                        let phase_path = path.split('-');
+                        let only_vals=phase_path.slice(1);
+
+                        pretty_url_path_params[phase_path[0]]=only_vals.join(' ');
+
+                         if (typeof pretty_url_path_params[phase_path[0]] == 'string') {
+                           pretty_url_path_params[phase_path[0]] = pretty_url_path_params[phase_path[0]].eachWordCapitalize();
+                }
+                    }
+
+                });
                 
                 if (UrlVal != '' && UrlVal != null) {
                     SelectorEle.forEach((ele) => {
                         ele.value = UrlVal; 
                     });
+
+                }
+
+
+                let hasPretty = pretty_url_path_params[ name ];
+
+                console.log( pretty_url_path_params[ name ]);
+
+                if (hasPretty != '' && hasPretty != null) {
+                    SelectorEle.forEach((ele) => {
+                        ele.value = hasPretty; 
+                    });
+
                 }
             }
         }).then(function () {

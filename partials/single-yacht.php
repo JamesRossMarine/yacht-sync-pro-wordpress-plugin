@@ -17,6 +17,10 @@ get_header();
             ),
             'posts_per_page' => 1,
         );
+
+        $YSP_Options = new raiYachtSync_Options();
+        $YSP_Euro_Opt = $YSP_Options->get('is_euro_site');
+        $YSP_Euro_C_C = $YSP_Options->get('euro_c_c')
     ?>
 <main id="primary" class="site-main">
     <?php
@@ -395,6 +399,44 @@ get_header();
                                 <p class="yacht-accordion-display-item">Engine Hours: <?php echo empty($vessel->Engines[2]->Hours) ? "N/A" : $vessel->Engines[2]->Hours; ?></p>
                             </div>
                         <?php } ?>
+                    </div>
+                </div>
+                <div class="similar-listings-container">
+                    <h3 class="similar-listings-title">
+                        Similar Listings
+                        <hr/>
+                    </h3>
+                    
+                    <div class="yacht-similar-listing-row">
+        
+                        <?php
+                            $yachtQuery = new WP_Query(array(
+                                'post_type' => 'rai_yacht',
+                                'similar_listings_to' => get_the_ID(),
+                                'posts_per_page' => 3,
+                            ));
+
+                            while ( $yachtQuery->have_posts() ) {
+                                $yachtQuery->the_post();
+
+                                $meta = get_post_meta($yachtQuery->post->ID);
+
+                                foreach ($meta as $indexM => $valM) {
+                                    if (is_array($valM) && ! isset($valM[1])) {
+                                        $meta[$indexM] = $valM[0];
+                                    }
+                                }
+
+                                $meta2=array_map("maybe_unserialize", $meta);
+
+                                $meta2['_link']=get_permalink($yachtQuery->post->ID);
+
+                                $yacht = $meta2;
+                                include ('result-card.php');
+                            }
+
+                            wp_reset_postdata();
+                        ?>
                     </div>
                 </div>
             </div>

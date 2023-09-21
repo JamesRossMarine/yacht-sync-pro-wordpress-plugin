@@ -16,7 +16,7 @@
         <div class="ys-h-row-item">
             <label>Builder</label>
             <select name="make" data-fill-options="Builders">
-                <option value="" selected disabled>Any</option>
+                <option value="">Any</option>
             </select>
         </div>
         <div class="ys-h-row-item">

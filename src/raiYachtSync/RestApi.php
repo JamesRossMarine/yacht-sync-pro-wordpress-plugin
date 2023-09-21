@@ -5,6 +5,8 @@
 		public function __construct() {
 
 			$this->options = new raiYachtSync_Options();
+			$this->db_helper = new raiYachtSync_DBHelper();
+
 			$this->RunImports = new raiYachtSync_RunImports();
 			
 		}
@@ -120,7 +122,17 @@
 				'posts_per_page' => 12,
 			];
 
-			$yArgs=array_merge($yArgs, $request->get_params());
+			$r_params=$request->get_params();
+
+			foreach ($r_params as $rIndex => $p) {
+				if (is_array($p)) {
+					if (! isset($p[1])) {
+						$r_params[ $rIndex ] = $p[0];
+					}
+				}
+			}
+
+			$yArgs=array_merge($yArgs, $r_params);
 
 			$yachts_query=new WP_Query($yArgs);
 
@@ -151,31 +163,10 @@
 			wp_reset_postdata();
 
 			$return['query'] = $yachts_query->query_vars;
-
+			
 			return $return;
 
 	    }
-
-	    public function get_unique_yacht_meta_values( $key = 'trees', $type = 'post', $status = 'publish' ) {
-			global $wpdb;
-			if( empty( $key ) )
-				return;
-			
-			$res = $wpdb->get_col( $wpdb->prepare( "
-				SELECT DISTINCT pm.meta_value FROM {$wpdb->postmeta} pm
-				LEFT JOIN {$wpdb->posts} p ON p.ID = pm.post_id
-				INNER JOIN {$wpdb->postmeta} pmm ON pmm.post_id = pm.post_id
-				WHERE pm.meta_key = '%s'
-				AND p.post_status = '%s' 
-				AND p.post_type = '%s' 
-				AND pmm.meta_key = 'SalesStatus' 
-				AND pmm.meta_value != 'Sold' AND pmm.meta_value != 'Suspend' 
-				AND LENGTH(pm.meta_value) > 1
-				ORDER BY pm.meta_value ASC
-				", $key, $status, $type ) );
-
-			return $res;
-		}
 
 	   	public function yacht_dropdown_options(WP_REST_Request $request) {
 
@@ -192,12 +183,11 @@
 				$return = [];
 
 				foreach ($labels as $label) {
-					$return[ $label ] = $this->get_unique_yacht_meta_values( $labelsToMetaField[ $label ], 'rai_yacht');
+					$return[ $label ] = $this->db_helper->get_unique_yacht_meta_values( $labelsToMetaField[ $label ] );
 				}
 	
 				set_transient('rai_yacht_dropdown_options_'.join('_', $labels), $return, 4 * HOUR_IN_SECONDS);
 			}
-
 
 	   		return $return; 
 
@@ -209,12 +199,12 @@
 
 	   		$labelsKey=[
 	   			'Keywords' => function() {
-	   				$makes=$this->get_unique_yacht_meta_values('MakeString', 'rai_yacht');
+	   				$makes=$this->db_helper->get_unique_yacht_meta_values('MakeString');
 
 	   				//$years=$this->get_unique_yacht_meta_values('ModelYear', 'rai_yacht');
 	   				
-	   				$models=$this->get_unique_yacht_meta_values('Model', 'rai_yacht');
-	   				$boat_names=$this->get_unique_yacht_meta_values('BoatName', 'rai_yacht');
+	   				$models=$this->db_helper->get_unique_yacht_meta_values('Model');
+	   				$boat_names=$this->db_helper->get_unique_yacht_meta_values('BoatName');
 	   				
 	   				//$lengths=$this->get_unique_yacht_meta_values('LengthOverall', 'rai_yacht');
 
@@ -232,7 +222,7 @@
 
 	   			'Cities' => function() {
 
-	   				$list = $this->get_unique_yacht_meta_values('YSP_City', 'rai_yacht');
+	   				$list = $this->get_unique_yacht_meta_values('YSP_City');
 
 	   				return $list;
 
