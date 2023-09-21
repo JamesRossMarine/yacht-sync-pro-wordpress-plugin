@@ -167,9 +167,10 @@ use Random\Engine;
 					}
 					if (isset($boat['OriginalPrice']) && isset($boat['Price'])){
 						if (str_contains($boat['OriginalPrice'], 'EUR')){
-							$boatC->YSP_EuroVal = (int) $boat['OriginalPrice'];
+							var_dump("This is the issue 1");
+							$boatC->YSP_EuroVal = intval($boat['OriginalPrice']);
 						} else {
-							$price = (int) $boat['Price'] * $this->options->get('euro_c_c');
+							$price = intval($boat['Price']) * $this->options->get('euro_c_c');
 							$boatC->YSP_EuroVal = $price;
 						}
 					}
