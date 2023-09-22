@@ -37,7 +37,6 @@
 
 		public function run_cron_euro_c_save() {
 
-			try {
 				$apiUrl = 'https://api.exchangerate.host/latest?base=USD&symbols=EUR';
 			
 				$response = wp_remote_get($apiUrl);
@@ -48,15 +47,6 @@
 				
 				if (! is_wp_error($result) && $responseCode == 200) {
 					$this->options->update('euro_c_c', $result->rates->EUR);
-				} else {
-					echo 'HTTP Request Error: ' . $response->get_error_message() . '<br>';
-					return;
 				}
-			} catch (Exception $e){
-				echo $e->getMessage() . "<br/>";
-				while($e = $e->getPrevious()) {
-					echo 'Previous exception: '.$e->getMessage() . "<br/>";
-				 }
-			}
 		}
 	}
