@@ -139,6 +139,7 @@
 						}
 					}
 
+					$boatC->rai_non_syncing_vessel = '0';
 					$boatC->CompanyBoat = true;
 					
 		            $y_post_id=wp_insert_post(

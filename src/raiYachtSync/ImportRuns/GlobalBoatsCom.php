@@ -167,7 +167,6 @@ use Random\Engine;
 					}
 					if (isset($boat['OriginalPrice']) && isset($boat['Price'])){
 						if (str_contains($boat['OriginalPrice'], 'EUR')){
-							var_dump("This is the issue 1");
 							$boatC->YSP_EuroVal = intval($boat['OriginalPrice']);
 						} else {
 							$price = intval($boat['Price']) * $this->options->get('euro_c_c');
@@ -186,6 +185,8 @@ use Random\Engine;
 							$boatC->GeneralBoatDescription[ $gIndex ] = preg_replace('/(<[^>]+) style=".*?"/i', '$1', $description);
 						}
 					}
+
+					$boatC->rai_non_syncing_vessel = '0';
 
 		            $y_post_id=wp_insert_post(
 		                [

@@ -186,6 +186,8 @@
 		                }
 		            }
 
+					$theBoat['rai_non_syncing_vessel'] = '0';
+
 		            if (isset($row['Engines']) && is_array($row['Engines'])) {
 		                $engines     = [];
 		                $enginePower = 0;

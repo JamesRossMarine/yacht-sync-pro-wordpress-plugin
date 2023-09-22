@@ -19,7 +19,8 @@
 				$wpdb->prepare( 
 					"DELETE wp FROM $wpdb->posts wp 
 					LEFT JOIN $wpdb->postmeta pm ON pm.post_id = wp.ID 
-					WHERE wp.post_type = %s",
+					WHERE wp.post_type = %s AND pm.meta_key = 'rai_non_syncing_vessel'
+					AND pm.meta_value = '0'",
 					'rai_yacht'
 				)
 			);
@@ -67,7 +68,4 @@
 				$this->ImportBrokerageOnlyBoatsCom->run();
 			}
 		}
-       
-
-
 	}
