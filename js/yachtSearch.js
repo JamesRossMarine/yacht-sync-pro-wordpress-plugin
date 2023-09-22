@@ -23,7 +23,7 @@ function ysp_yacht_search_and_reader(data) {
                 }
             });
 
-            raiys_push_history(data);
+            raiys_push_history( data );
 
             jQuery('#yachts-pagination').pagination({
                 items: data_result.total,
@@ -102,11 +102,19 @@ document.addEventListener("DOMContentLoaded", function() {
                 let phase_path = path.split('-');
                 let only_vals=phase_path.slice(1);
 
-                pretty_url_path_params[phase_path[0]]=only_vals.join(' ');
+                only_vals=only_vals.join(' ').eachWordCapitalize();
 
-                if (typeof pretty_url_path_params[phase_path[0]] == 'string') {
-                    pretty_url_path_params[phase_path[0]] = pretty_url_path_params[phase_path[0]].eachWordCapitalize();
+                let only_vals_array=(only_vals.split('+'));
+
+                if (typeof only_vals_array[1] != 'undefined') {
+                    only_vals = only_vals_array.map((ov) => {
+                        return ov.eachWordCapitalize();
+                    });
+
+                    console.log(only_vals);
                 }
+
+                pretty_url_path_params[phase_path[0]]=only_vals;
             }
 
         });
@@ -129,19 +137,38 @@ document.addEventListener("DOMContentLoaded", function() {
             let hasPretty = pretty_url_path_params[ name ];
 
             if (typeof hasPretty != 'null' && typeof hasPretty != 'undefined') {
-                if (typeof input.type != 'undefined' && input.type == 'checkbox' && input.value == hasPretty ) {
-                    input.checked=true;
+
+                if (Array.isArray(hasPretty)) {
+                    console.log(hasPretty);
+
+                    hasPretty.forEach((hP) => {
+
+                        if (typeof input.type != 'undefined' && input.type == 'checkbox' && input.getAttribute('value') == hP ) {
+                            input.checked=true;
+                        }
+                   
+
+                    });
+
                 }
                 else {
-                    input.value = hasPretty;
+
+                    if (typeof input.type != 'undefined' && input.type == 'checkbox' && input.getAttribute('value') == hasPretty ) {
+                        input.checked=true;
+                    }
+                    else if (input.type != 'checkbox') {
+                        input.value = hasPretty;
+                    }
+
                 }
+
             }
 
             if (urlVal != '' && urlVal != null) {
-                if (typeof input.type != 'undefined' && input.type == 'checkbox' && input.value == urlVal ) {
+                if (typeof input.type != 'undefined' && input.type == 'checkbox' && input.getAttribute('value') == urlVal ) {
                     input.checked=true;
                 }
-                else {
+                else if (input.type != 'checkbox') {
                     input.value = urlVal;
                 }
             }

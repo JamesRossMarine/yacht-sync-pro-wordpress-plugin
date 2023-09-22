@@ -34,13 +34,22 @@ function raiys_push_history( data = {} ) {
     let strpath='';
 
     for (const property in data) {
-        var it = data[ property ];
+        let it = data[ property ];
 
-        if (it != '' && typeof it != 'undefined' && property != 'OnFirstLoad' && typeof it != 'object') {
+
+        if (it != '' && typeof it != 'undefined' && typeof it == 'string' && property != 'OnFirstLoad' && typeof it != 'object') {
             searchParams.set(property, it);
 
             strpath=strpath+""+property+'-'+(it.toString().split(' ').join('-'))+'/';
             strpath=strpath.toLowerCase();
+        }
+        else if (Array.isArray(it)) {
+            searchParams.set(property, it);
+
+            it = it.map((prop) => { return prop.toString().split(' ').join('-'); });
+
+            strpath=strpath+""+property+'-'+( it.join("+") )+'/';
+            strpath=strpath.toLowerCase();  
         }
     }
 
