@@ -9,6 +9,8 @@
 
 			$this->RunImports = new raiYachtSync_RunImports();
 			
+			$this->SearchSEO = new raiYachtSync_SearchSEO();
+
 		}
 
 		public function add_actions_and_filters() {
@@ -163,6 +165,8 @@
 			wp_reset_postdata();
 
 			$return['query'] = $yachts_query->query_vars;
+
+			$return['SEO'] = $this->SearchSEO->generate_title( $yArgs );
 			
 			return $return;
 
