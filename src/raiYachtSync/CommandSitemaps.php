@@ -1,5 +1,5 @@
 <?php
-	class raiYachtSync_CommandSitemap {
+	class raiYachtSync_CommandSitemaps {
 		protected $environment;
 
 	    public function __construct( ) {
@@ -9,7 +9,7 @@
 	    }
 
 	    public function __invoke( $args ) {	
-
+			$this->mapsOfSearch->generateSitemap();
 	    	
 	        WP_CLI::log( 'COMPLETED SITEMAPS' );
 	    }
