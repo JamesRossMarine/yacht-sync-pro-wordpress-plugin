@@ -30,7 +30,7 @@
 	            }
 	        };					            
 
-	        xhttp.open("GET", "https://api.urlbox.io/v1/0FbOuhgmL1s2bINM/pdf?&url=<?= get_rest_url() ?>/raiys/yacht-pdf?yacht_post_id=<?php echo $request->get_param('yacht_post_id'); ?>", true);
+	        xhttp.open("GET", "https://api.urlbox.io/v1/0FbOuhgmL1s2bINM/pdf?&url=<?= get_rest_url() ?>raiys/yacht-pdf?yacht_post_id=<?php echo $request->get_param('yacht_post_id'); ?>", true);
 
 	        xhttp.setRequestHeader('Content-Type', 'application/pdf');
 
@@ -39,7 +39,7 @@
 	    }).then(function( rData) {
 
 	    	setTimeout(function() {
-	    		window.location.href="<?= get_rest_url() ?>/raiys/yacht-pdf-download?yacht_post_id=<?php echo $request->get_param('yacht_post_id'); ?>";
+	    		window.location.href="<?= get_rest_url() ?>raiys/yacht-pdf-download?yacht_post_id=<?php echo $request->get_param('yacht_post_id'); ?>";
 
 
 	    	}, 3000);
