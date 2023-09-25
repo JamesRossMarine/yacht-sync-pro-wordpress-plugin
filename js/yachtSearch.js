@@ -12,6 +12,10 @@ function ysp_yacht_search_and_reader(data) {
 
         jQuery('#total-results').text(new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(data_result.total));
 
+        raiys_push_history( data );
+
+        jQuery('#yachts-pagination').html('');
+
         if (data_result.total > 0) {
 
             data_result.results.forEach(function(item) {
@@ -23,7 +27,6 @@ function ysp_yacht_search_and_reader(data) {
                 }
             });
 
-            raiys_push_history( data );
 
             jQuery('#yachts-pagination').pagination({
                 items: data_result.total,
@@ -50,8 +53,6 @@ function ysp_yacht_search_and_reader(data) {
 
         } 
         else {
-            jQuery('#yachts-pagination').html('');
-
             jQuery('#search-result-row').append(ysp_templates.noResults());
 
         }
