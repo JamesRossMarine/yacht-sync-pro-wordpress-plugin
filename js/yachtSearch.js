@@ -27,7 +27,6 @@ function ysp_yacht_search_and_reader(data) {
                 }
             });
 
-
             jQuery('#yachts-pagination').pagination({
                 items: data_result.total,
                 itemsOnPage: 12,
@@ -49,8 +48,6 @@ function ysp_yacht_search_and_reader(data) {
                     ysp_yacht_search_and_reader(formDataObject);
                 }
             });
-
-
         } 
         else {
             jQuery('#search-result-row').append(ysp_templates.noResults());
