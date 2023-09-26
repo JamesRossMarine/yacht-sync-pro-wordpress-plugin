@@ -166,7 +166,7 @@
 
 			$return['query'] = $yachts_query->query_vars;
 
-			$return['SEO'] = $this->SearchSEO->generate_title( $yArgs );
+			$return['SEO'] = $this->SearchSEO->all_together( $yArgs );
 			
 			return $return;
 

@@ -349,6 +349,7 @@
 						'value' => $query->get('ys_engineshi')
 					];
 				}
+				
 				if ($this->if_query_var_check($query->get('ys_engine_model'))) {
 					$yacht_sync_meta_query[]=[
 						'key' => 'YSP_EngineModel',
@@ -356,6 +357,7 @@
 						'value' => $query->get('ys_engine_model')
 					];
 				}
+				
 				if ($this->if_query_var_check($query->get('ys_engine_fuel'))) {
 					$yacht_sync_meta_query[]=[
 						'key' => 'YSP_EngineFuel',
@@ -363,6 +365,7 @@
 						'value' => $query->get('ys_engine_fuel')
 					];
 				}
+				
 				if ($this->if_query_var_check($query->get('ys_engine_power'))) {
 					$yacht_sync_meta_query[]=[
 						'key' => 'YSP_EnginePower',
@@ -370,6 +373,7 @@
 						'value' => $query->get('ys_engine_power')
 					];
 				}
+
 				if ($this->if_query_var_check($query->get('ys_engine_hourslo'))) {
 					$yacht_sync_meta_query[]=[
 						'key' => 'YSP_EngineHours',

@@ -3,7 +3,7 @@
     <input type="hidden" name="page_index" />    
     <div class="ys-v-row-item">
             <label>Keyword</label>
-            <input type="text" name="ys_keyword" placeholder="Search by Name" list="ysp_keywords_list" />
+            <input type="text" name="ys_keyword" placeholder="Search by Name, Models, Builders, Size, And Location!" list="ysp_keywords_list" />
 
             <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="icon/search">

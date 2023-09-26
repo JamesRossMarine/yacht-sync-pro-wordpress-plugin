@@ -11,6 +11,19 @@
 
 		}
 
+		public function all_together($params) {
+
+			$all=[
+				'title' => $this->generate_title($params),
+				'generate_meta_description' => $this->generate_meta_description($params),
+				'heading' => $this->generate_heading($params),
+				'p' => $this->generate_paragraph($params)
+			];
+
+			return $all;
+
+		}
+
 		public function grab_params($params = []) {
 			global $wp_query;
 
@@ -18,6 +31,8 @@
 				'condition',
 				'ys_keyword',
 				// sail or motor
+				'yearlo',
+				'yearhi',		
 				'make'
 			];
 
@@ -58,7 +73,6 @@
 		public function generate_title($passed_params = []) {
 
 			$grabbed_params=$this->grab_params($passed_params);
-
 			$grabbed_location=$this->grab_location($passed_params);
 
 			return sprintf(
@@ -71,17 +85,44 @@
 
 		}
 
-		public function generate_meta_description() {
+		public function generate_meta_description($passed_params = []) {
 
+			$grabbed_params=$this->grab_params($passed_params);
+			$grabbed_location=$this->grab_location($passed_params);
+
+			return sprintf(
+				'Find %sboats and yachts for sale %s',
+
+				$grabbed_params,
+				$grabbed_location
+			);
+		}
+
+		public function generate_heading($passed_params = []) {
+
+			$grabbed_params=$this->grab_params($passed_params);
+			$grabbed_location=$this->grab_location($passed_params);
+
+			return sprintf(
+				'%sYachts for Sale %s',
+
+				$grabbed_params,
+				$grabbed_location
+			);
 
 		}
 
-		public function generate_heading() {
+		public function generate_paragraph($passed_params = []) {
 
+			$grabbed_params=$this->grab_params($passed_params);
+			$grabbed_location=$this->grab_location($passed_params);
 
-		}
+			return sprintf(
+				'Find %sboats and yachts for sale %s',
 
-		public function generate_paragraph() {
+				$grabbed_params,
+				$grabbed_location
+			);
 
 		}	
 
