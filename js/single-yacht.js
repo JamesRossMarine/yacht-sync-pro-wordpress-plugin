@@ -3,14 +3,18 @@ document.addEventListener("DOMContentLoaded", () => {
         wrapAround: true,
         cellAlign: 'center',
         contain: true,
-        pageDots: false
+        pageDots: false,
+        lazyLoad: true,
+        // imagesLoaded: true
     });
 
     var flktyNav = new Flickity('.carousel-nav', {
         asNavFor: '.carousel-main',
         contain: true,
         pageDots: false,
-        prevNextButtons: false
+        prevNextButtons: false,
+        lazyLoad: true,
+        // imagesLoaded: true
     });
 
 
