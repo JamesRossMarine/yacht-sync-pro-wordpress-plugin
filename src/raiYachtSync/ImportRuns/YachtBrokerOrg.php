@@ -19,6 +19,8 @@
 		public function run() {
 			global $wpdb;
 
+			var_dump('Started Yacht Broker.org Import');
+
 	        $headers = [
 	            'headers' => [
 	                'X-API-KEY'   => $this->yachtBrokerAPIKey,
@@ -205,6 +207,26 @@
 		                $theBoat['TotalEnginePowerQuantity'] = number_format($enginePower, 2).' hp';
 		            }
 
+		         /*   if (isset($boat['Engines'])) {
+						$boatC->YSP_EngineCount = count($boat['Engines']);
+						if (isset($boat['Engines'][0]['Model'])){
+							$boatC->YSP_EngineModel = $boat['Engines'][0]['Model'];
+						}
+						if (isset($boat['Engines'][0]['Fuel'])){
+							$boatC->YSP_EngineFuel = $boat['Engines'][0]['Fuel'];
+						}
+						if (isset($boat['Engines'][0]['EnginePower'])){
+							$boatC->YSP_EnginePower = $boat['Engines'][0]['EnginePower'];
+						}
+						if (isset($boat['Engines'][0]['Hours'])){
+							$boatC->YSP_EngineHours = $boat['Engines'][0]['Hours'];
+						}
+						if (isset($boat['Engines'][0]['Type'])){
+							$boatC->YSP_EngineType = $boat['Engines'][0]['Type'];
+						}
+					}*/
+
+
 		            if (! empty($theBoat['BoatHullID'])) {
 		                $find_post=get_posts([
 		                    'post_type' => 'rai_yacht',
@@ -230,7 +252,7 @@
 		                $wpdb->delete($wpdb->postmeta, ['post_id' => $find_post[0]->ID], ['%d']);
 		            }
 
-					// $general_description = preg_replace('/(<[^>]+) style=".*?"/i', '$1', $theBoat['GeneralBoatDescription']);
+		            //$theBoat->CompanyBoat = true;
 
 		            $y_post_id=wp_insert_post(
 		                [

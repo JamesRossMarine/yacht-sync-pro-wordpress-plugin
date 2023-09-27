@@ -51,6 +51,7 @@
 
 			$boats_com_api_global_key = $this->options->get('boats_com_api_global_key');
 			$boats_com_api_brokerage_key = $this->options->get('boats_com_api_brokerage_key');
+			
 			$yacht_broker_org_api_token = $this->options->get('yacht_broker_org_api_token');
 
 			// @ToDo For Loop the Runs  

@@ -17,6 +17,8 @@
 		public function run() {
 			global $wpdb;
 
+			var_dump('Started Boats.com Brokerage Only Import');
+
 			$offset = 0;
 			$yachtsSynced = 0;
 
@@ -126,6 +128,29 @@
                     if (isset($boat['SalesRep'])) {
                     	$boatC->YSP_BrokerName=$boat['SalesRep']['Name'];
                     }
+
+                    if (isset($boat['Engines'])) {
+						$boatC->YSP_EngineCount = count($boat['Engines']);
+						if (isset($boat['Engines'][0]['Model'])){
+							$boatC->YSP_EngineModel = $boat['Engines'][0]['Model'];
+						}
+						if (isset($boat['Engines'][0]['Fuel'])){
+							$boatC->YSP_EngineFuel = $boat['Engines'][0]['Fuel'];
+						}
+						if (isset($boat['Engines'][0]['EnginePower'])){
+							$boatC->YSP_EnginePower = $boat['Engines'][0]['EnginePower'];
+						}
+						if (isset($boat['Engines'][0]['Hours'])){
+							$boatC->YSP_EngineHours = $boat['Engines'][0]['Hours'];
+						}
+						if (isset($boat['Engines'][0]['Type'])){
+							$boatC->YSP_EngineType = $boat['Engines'][0]['Type'];
+						}
+					}
+
+					if (isset($boat['Images'][0]['LastModifiedDateTime'])){
+						$boatC->YSP_ListingDate = $boat['Images'][0]['LastModifiedDateTime'];
+					}
                     
 					if (isset($boatC->AdditionalDetailDescription)) {
 						foreach ($boatC->AdditionalDetailDescription as $aIndex => $description) {
