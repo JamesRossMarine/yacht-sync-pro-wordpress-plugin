@@ -8,14 +8,7 @@
 
         <?php
 
-        $args = [
-            'post_type' => 'rai_yacht',
-        ];
-        
-        $args = array_merge($args, $atts);
-
-        $yachtQuery = new WP_Query($args);
-
+       
         while ($yachtQuery->have_posts()) {
             $yachtQuery->the_post();
 

@@ -52,7 +52,7 @@
 		  		
 				$file_to_include=RAI_YS_PLUGIN_TEMPLATES_DIR.'/v-super-search-form.php'; 
 
-		    	include apply_filters('rai_ys_v_yacht_search_template', $file_to_include);
+		    	include apply_filters('rai_ys_v_super_yacht_search_template', $file_to_include);
 
 		    return ob_get_clean();
 		    
@@ -131,7 +131,7 @@
 		  		
 				$file_to_include=RAI_YS_PLUGIN_TEMPLATES_DIR.'/quick-h-search.php'; 
 
-		    	include apply_filters('rai_ys_quick_search_results_template', $file_to_include);
+		    	include apply_filters('rai_ys_h_quick_search_results_template', $file_to_include);
 
 		    return ob_get_clean();
 
@@ -146,11 +146,19 @@
             	
             ], $atts);
 
+            $args = [
+	            'post_type' => 'rai_yacht',
+	        ];
+	        
+	        $args = array_merge($args, $atts);
+
+	        $yachtQuery = new WP_Query($args);
+
 		    ob_start();
 		  		
 				$file_to_include=RAI_YS_PLUGIN_TEMPLATES_DIR.'/yacht-featured-listings.php'; 
 
-		    	include apply_filters('rai_ys_v_yacht_search_template', $file_to_include);
+		    	include apply_filters('rai_ys_featured_yacht_results_template', $file_to_include);
 
 		    return ob_get_clean();
 		    
