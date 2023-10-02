@@ -1,7 +1,7 @@
 <!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
-	<title>PDF Loadding...</title>
+	<title>PDF Loading...</title>
 </head>
 
 <body>
