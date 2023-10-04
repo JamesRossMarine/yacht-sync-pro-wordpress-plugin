@@ -1,13 +1,11 @@
 <section id="search-result-section" class="search-result-section">
-	<h5 class="yacht-search-total">
+	<div class="scroll-to-here-on-yacht-search"></div>
+
+    <h5 class="yacht-search-total">
         <span class="total-results-title"><span id="total-results"></span> YACHTS FOUND</span>
     </h5>
      
     <div class="yacht-search-options">
-        <!-- <div class="brand-listing-container">
-            <input type="checkbox" name="brand" />
-            <label><span id="company-name">(Brand Name)</span> Listings</label>
-        </div> -->
         <div class="list-view-and-sort-container">
             <div class="list-view-group">
                 <label class="grid-view">
@@ -21,6 +19,7 @@
                             <path d="M6 2V14" stroke="#334155" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M10 2V14" stroke="#334155" stroke-width="1.33" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
+
                         Gallery
                     </span>
                 </label>
@@ -40,26 +39,32 @@
                 </label>
             </div>
 
-            <select name="sortBy" form="ysp-yacht-search-form">
-                <option value="">Filter By</option>
-                
-                <option value="length:desc">Length: high to low</option>
-                <option value="length:asc">Length: low to high</option>
-                
-                <option value="price:desc">Price: high to low</option>
-                <option value="price:asc">Price: low to high</option>
+            <div>
+                <label>Filter by: </label>
 
-                <option value="year:desc">Year: high to low</option>
-                <option value="year:asc">Year: low to high</option>
+                <select name="sortBy" form="ysp-yacht-search-form">
+                    <option value="">pick a sort</option>
+                    
+                    <option value="length:desc">Length: high to low</option>
+                    <option value="length:asc">Length: low to high</option>
+                    
+                    <option value="price:desc">Price: high to low</option>
+                    <option value="price:asc">Price: low to high</option>
 
-                <option value="timeon:desc">Least time on market</option>
-                <option value="timeon:asc">Most time on market</option>
-            </select>
+                    <option value="year:desc">Year: high to low</option>
+                    <option value="year:asc">Year: low to high</option>
+
+                    <option value="timeon:desc">Least time on market</option>
+                    <option value="timeon:asc">Most time on market</option>
+                </select>
+            </div>
         </div>
     </div>
+
     <div class="loader-icon">
         <img src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>/images/loading-icon.gif" alt="loading-gif" />
     </div>
+
     <div class="search-result-grid">
         <div id="search-result-row">
             

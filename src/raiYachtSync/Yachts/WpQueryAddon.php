@@ -64,6 +64,8 @@
 
 			$vars[] = 'ys_only_these';
 
+			$vars[] = 'ys_company_only';
+
 			return $vars;
 		}
 
@@ -174,6 +176,14 @@
 							]
 						];
 					}
+				}
+
+				if ($this->if_query_var_check($query->get('ys_company_only'))) {
+					$yacht_sync_meta_query[]=[
+						'key' => 'CompanyBoat',
+						'compare' => "=",
+						'value' => '1'
+					];
 				}
 
 				if ($this->if_query_var_check($query->get('ys_country'))) {

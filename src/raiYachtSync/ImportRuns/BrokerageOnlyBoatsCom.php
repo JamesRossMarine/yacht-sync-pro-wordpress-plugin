@@ -164,7 +164,7 @@
 						}
 					}
 
-					$boatC->CompanyBoat = true;
+					$boatC->CompanyBoat = 1;
 					
 		            $y_post_id=wp_insert_post(
 		                [

@@ -252,7 +252,7 @@
 		                $wpdb->delete($wpdb->postmeta, ['post_id' => $find_post[0]->ID], ['%d']);
 		            }
 
-		            //$theBoat->CompanyBoat = true;
+		            $theBoat['CompanyBoat'] = 1;
 
 		            $y_post_id=wp_insert_post(
 		                [
