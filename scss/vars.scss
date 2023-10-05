@@ -5,8 +5,10 @@ $h3-size: 14px;
 
 $h1-weight: 600;
 
-$main-text-color: var(--main-color);
-$secondary-text-color: var(--secondary-color);
+$main-text-color: var(--main-text-color);
+$main-background-color: var(--main-background-color);
+$secondary-text-color: var(--secondary-text-color);
+$secondary-background-color: var(--secondary-background-color);
 $white-color: var(--white);
 $divider-color: #CBD5E1;
 $border-color: #D9D9D9;
@@ -22,7 +24,9 @@ $broker-row-gap: 40px;
 $max-width: 1440px;
 
 :root {
-    --main-color: #334155;
-    --secondary-color: #94A3B8;
+    --main-text-color: #334155;
+    --main-background-color: #94A3B8;
+    --secondary-text-color: #334155;
+    --secondary-background-color: #94A3B8;
     --white: #FFFFFF;
 }

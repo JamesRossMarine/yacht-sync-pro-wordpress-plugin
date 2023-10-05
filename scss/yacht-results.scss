@@ -1,5 +1,9 @@
 #search-result-section {
- 
+    max-width: $max-width;
+    margin: auto;
+    position: relative;
+    padding-top: 20px;
+
     &.loading {
         .loader-icon {
             display: flex;
@@ -55,11 +59,9 @@
                 line-height: 14px;
             }
         }
-
         .list-view-and-sort-container {
             display: flex;
             justify-content: space-between;
-            width: 100%;
 
             .list-view-group {
                 display: flex;
@@ -72,7 +74,6 @@
 
                     span{
                         display: flex;
-                        align-items: center;
                         background-color: #FFFFFF;
                         border: none;
                         color: #94A3B8;
@@ -99,6 +100,7 @@
 
             select {
                 border: none;
+                width: 110px;
             }
         }
     }
@@ -114,7 +116,7 @@
         }
     }
     .search-result-grid {
-        .search-result-row {
+        #search-result-row {
             display: flex !important;
             justify-content: flex-start;
             flex-wrap: wrap;

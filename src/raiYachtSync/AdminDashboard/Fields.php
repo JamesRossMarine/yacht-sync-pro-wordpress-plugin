@@ -64,7 +64,7 @@
 					
 					add_settings_field(
 						self::SLUG . '_color_one',
-						"Primary Color",
+						"Main Text Color",
 						array( $this, 'color_one_field' ),
 						self::SLUG,
 						self::SLUG . '_admin_fields',
@@ -73,8 +73,26 @@
 					
 					add_settings_field(
 						self::SLUG . '_color_two',
-						"Secondary Color",
+						"Main Background Color",
 						array( $this, 'color_two_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+
+					add_settings_field(
+						self::SLUG . '_color_third',
+						"Secondary Text Color",
+						array( $this, 'color_third_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+					
+					add_settings_field(
+						self::SLUG . '_color_four',
+						"Secondary Background Color",
+						array( $this, 'color_four_field' ),
 						self::SLUG,
 						self::SLUG . '_admin_fields',
 						array( )
@@ -198,6 +216,26 @@
 
 		public function color_two_field() {
 			$nameOfField=self::SLUG.'_color_two';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="color" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
+
+		public function color_third_field() {
+			$nameOfField=self::SLUG.'_color_third';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="color" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
+
+		public function color_four_field() {
+			$nameOfField=self::SLUG.'_color_four';
 			$valOfField=get_option($nameOfField);
 
 			?>
