@@ -5,6 +5,9 @@
         <span class="total-results-title"><span id="total-results"></span> YACHTS FOUND</span>
     </h5>
      
+
+    <label><input type="checkbox" name="ys_company_only" value="1" form="ysp-yacht-search-form"> Company Only</label>
+
     <div class="yacht-search-options">
         <div class="list-view-and-sort-container">
             <div class="list-view-group">

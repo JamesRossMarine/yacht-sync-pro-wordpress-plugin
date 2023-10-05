@@ -1,5 +1,5 @@
 <?php
-use Random\Engine;
+	
 	class raiYachtSync_ImportRuns_GlobalBoatsCom {
    		protected $limit = 153;
 	
@@ -62,7 +62,7 @@ use Random\Engine;
 					$boatC = json_decode(json_encode($boat));
 
 					$find_post=get_posts([
-	                    'post_type' => 'rai_yacht',
+	                    'post_type' => 'syncing_rai_yacht',
 	                    'meta_query' => [
 	                        array(
 	                           'key' => 'DocumentID',
@@ -75,7 +75,7 @@ use Random\Engine;
 		           	if (! isset($find_post[0]->ID)) {
 			            if (! empty($record['BoatHullID'])) {
 			                $find_post=get_posts([
-			                    'post_type' => 'rai_yacht',
+			                    'post_type' => 'syncing_rai_yacht',
 			                    'meta_query' => [
 			                        array(
 			                           'key' => 'BoatHullID',
@@ -164,7 +164,7 @@ use Random\Engine;
 							$boatC->YSP_EngineHours = $boat['Engines'][0]['Hours'];
 						}
 						if (isset($boat['Engines'][0]['Type'])){
-							$boatC->YSP_EngineType = $boat['Engines'][0]['Type'];
+							$boatC->YSP_EngineType = $boat['Engines'][0]['Type']; 
 						}
 					}
 
@@ -172,7 +172,6 @@ use Random\Engine;
 						$boatC->YSP_ListingDate = $boat['Images'][0]['LastModifiedDateTime'];
 					}
 
-					
 					/*if (isset($boat['OriginalPrice']) && isset($boat['Price'])){
 						if (str_contains($boat['OriginalPrice'], 'EUR')){
 							var_dump("This is the issue 1");
@@ -198,7 +197,7 @@ use Random\Engine;
 		            $y_post_id=wp_insert_post(
 		                [
 		                    'ID' => $post_id,
-							'post_type' => 'rai_yacht',
+							'post_type' => 'syncing_rai_yacht',
 							'post_title' =>  addslashes( $boat['ModelYear'].' '.$boat['MakeString'].' '.$boat['Model'].' '.$boat['BoatName']),
 							
 							'post_name' => sanitize_title(

@@ -229,7 +229,7 @@
 
 		            if (! empty($theBoat['BoatHullID'])) {
 		                $find_post=get_posts([
-		                    'post_type' => 'rai_yacht',
+		                    'post_type' => 'syncing_rai_yacht',
 		                    'meta_query' => [
 
 		                        array(
@@ -257,7 +257,7 @@
 		            $y_post_id=wp_insert_post(
 		                [
 		                    'ID' => $post_id,
-							'post_type' => 'rai_yacht',
+							'post_type' => 'syncing_rai_yacht',
 							'post_title' =>  addslashes( $theBoat['ModelYear'].' '.$theBoat['MakeString'].' '.$theBoat['Model'].' '.$theBoat['BoatName'] ),
 							'post_name' => sanitize_title(
 								$theBoat['ModelYear'].'-'.$theBoat['MakeString'].'-'.$theBoat['Model']

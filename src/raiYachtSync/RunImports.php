@@ -45,11 +45,16 @@
 	        */
 		}
 
-		public function run() {
-            
-			$this->cleanup();
+		public function move_over() {
+	        global $wpdb;
 
-			$boats_com_api_global_key = $this->options->get('boats_com_api_global_key');
+	        $wpdb->update($wpdb->posts, ['post_type'=>'rai_yacht'], ['post_type' => 'syncing_rai_yacht'], ['%s'], ['%s'] );
+
+		}
+
+		public function run() {
+           
+           	$boats_com_api_global_key = $this->options->get('boats_com_api_global_key');
 			$boats_com_api_brokerage_key = $this->options->get('boats_com_api_brokerage_key');
 			
 			$yacht_broker_org_api_token = $this->options->get('yacht_broker_org_api_token');
@@ -67,6 +72,9 @@
 			if (! empty($boats_com_api_brokerage_key)) {
 				$this->ImportBrokerageOnlyBoatsCom->run();
 			}
+			
+			$this->cleanup();
+			$this->move_over();
 		}
        
 
