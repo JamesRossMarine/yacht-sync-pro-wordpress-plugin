@@ -81,9 +81,9 @@
 					);
 
 					add_settings_field(
-						self::SLUG . '_color_third',
+						self::SLUG . '_color_three',
 						"Secondary Text Color",
-						array( $this, 'color_third_field' ),
+						array( $this, 'color_three_field' ),
 						self::SLUG,
 						self::SLUG . '_admin_fields',
 						array( )
@@ -224,8 +224,8 @@
 
 		}
 
-		public function color_third_field() {
-			$nameOfField=self::SLUG.'_color_third';
+		public function color_three_field() {
+			$nameOfField=self::SLUG.'_color_three';
 			$valOfField=get_option($nameOfField);
 
 			?>

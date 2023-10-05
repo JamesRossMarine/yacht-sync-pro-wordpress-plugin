@@ -16,11 +16,15 @@
 
 			$colorOne = $this->options->get('color_one');
 			$colorTwo = $this->options->get('color_two');
+			$colorThree = $this->options->get('color_three');
+			$colorFour = $this->options->get('color_four');
 
 			return "
 				:root {
-					--main-color: $colorOne;
-					--secondary-color: $colorTwo;
+					--main-text-color: $colorOne;
+					--main-background-color: $colorTwo;
+					--secondary-text-color: $colorThree;
+					--secondary-background-color: $colorFour;
 				}
 			";
 
