@@ -324,13 +324,13 @@ get_header();
                             </p>
                         </div>
                         <div class="yacht-accordion-display">
-                            <p class="yacht-accordion-display-item">Make: <?php echo empty($vessel->MakeString) ? "N/A" : $vessel->MakeString; ?></p>
-                            <p class="yacht-accordion-display-item">Model: <?php echo empty($vessel->Model) ? "N/A" : $vessel->Model; ?></p>
-                            <p class="yacht-accordion-display-item">Condition: <?php echo empty($vessel->SaleClassCode) ? "N/A" : $vessel->SaleClassCode; ?></p>
-                            <p class="yacht-accordion-display-item">Class: <?php echo empty($vessel->BoatCategoryCode) ? "N/A" : $vessel->BoatCategoryCode; ?></p>
-                            <p class="yacht-accordion-display-item">Construction: <?php echo empty($vessel->BoatHullMaterialCode) ? "N/A" : $vessel->BoatHullMaterialCode; ?></p>
-                            <p class="yacht-accordion-display-item">Boat Hull ID: <?php echo empty($vessel->BoatHullID) ? "N/A" : $vessel->BoatHullID; ?></p>
-                            <p class="yacht-accordion-display-item">Has Hull ID: <?php echo empty($vessel->HasBoatHullID) ? "No" : ($vessel->HasBoatHullID == '1' ? 'Yes' : "N/A");  ?></p>
+                            <p class="yacht-accordion-display-item">Make: <span class="yacht-accordion-display-value"><?php echo empty($vessel->MakeString) ? "N/A" : $vessel->MakeString; ?></span></p>
+                            <p class="yacht-accordion-display-item">Model: <span class="yacht-accordion-display-value"><?php echo empty($vessel->Model) ? "N/A" : $vessel->Model; ?></span></p>
+                            <p class="yacht-accordion-display-item">Condition: <span class="yacht-accordion-display-value"><?php echo empty($vessel->SaleClassCode) ? "N/A" : $vessel->SaleClassCode; ?></span></p>
+                            <p class="yacht-accordion-display-item">Class: <span class="yacht-accordion-display-value"><?php echo empty($vessel->BoatCategoryCode) ? "N/A" : $vessel->BoatCategoryCode; ?></span></p>
+                            <p class="yacht-accordion-display-item">Construction: <span class="yacht-accordion-display-value"><?php echo empty($vessel->BoatHullMaterialCode) ? "N/A" : $vessel->BoatHullMaterialCode; ?></span></p>
+                            <p class="yacht-accordion-display-item">Boat Hull ID: <span class="yacht-accordion-display-value"><?php echo empty($vessel->BoatHullID) ? "N/A" : $vessel->BoatHullID; ?></span></p>
+                            <p class="yacht-accordion-display-item">Has Hull ID: <span class="yacht-accordion-display-value"><?php echo empty($vessel->HasBoatHullID) ? "No" : ($vessel->HasBoatHullID == '1' ? 'Yes' : "N/A");  ?></span></p>
                         </div>
                         <div class="yacht-accordion-item">
                             <p class="yacht-accordion-name">
@@ -341,9 +341,9 @@ get_header();
                             </p>
                         </div>
                         <div class="yacht-accordion-display">
-                            <p class="yacht-accordion-display-item">Length: <?php echo empty($vessel->NominalLength) ? "N/A" : $vessel->NominalLength . " / " . round((float)$vessel->NominalLength * 0.3048, 2) . ' m'; ?></p>
-                            <p class="yacht-accordion-display-item">Length Overall: <?php echo empty($vessel->LengthOverall) ? "N/A" : $vessel->LengthOverall . " / " . round((float)$vessel->LengthOverall * 0.3048, 2) . ' m'; ?></p>
-                            <p class="yacht-accordion-display-item">Beam: <?php echo empty($vessel->BeamMeasure) ? "N/A" : $vessel->BeamMeasure . " / " . round((float)$vessel->BeamMeasure * 0.3048, 2) . ' m'; ?></p>
+                            <p class="yacht-accordion-display-item">Length: <span class="yacht-accordion-display-value"><?php echo empty($vessel->NominalLength) ? "N/A" : $vessel->NominalLength . " / " . round((float)$vessel->NominalLength * 0.3048, 2) . ' m'; ?></span></p>
+                            <p class="yacht-accordion-display-item">Length Overall: <span class="yacht-accordion-display-value"><?php echo empty($vessel->LengthOverall) ? "N/A" : $vessel->LengthOverall . " / " . round((float)$vessel->LengthOverall * 0.3048, 2) . ' m'; ?></span></p>
+                            <p class="yacht-accordion-display-item">Beam: <span class="yacht-accordion-display-value"><?php echo empty($vessel->BeamMeasure) ? "N/A" : $vessel->BeamMeasure . " / " . round((float)$vessel->BeamMeasure * 0.3048, 2) . ' m'; ?></span></p>
                         </div>
                         <?php if (!empty($vessel->Engines[0])) { ?>
                             <div class="yacht-accordion-item">
@@ -355,12 +355,12 @@ get_header();
                                 </p>
                             </div>
                             <div class="yacht-accordion-display">
-                                <p class="yacht-accordion-display-item">Make: <?php echo empty($vessel->Engines[0]->Make) ? "N/A" : $vessel->Engines[0]->Make; ?></p>
-                                <p class="yacht-accordion-display-item">Model: <?php echo empty($vessel->Engines[0]->Model) ? "N/A" : $vessel->Engines[0]->Model; ?></p>
-                                <p class="yacht-accordion-display-item">Fuel: <?php echo empty($vessel->Engines[0]->Fuel) ? "N/A" : $vessel->Engines[0]->Fuel; ?></p>
-                                <p class="yacht-accordion-display-item">Engine Power: <?php echo empty($vessel->Engines[0]->EnginePower) ? "N/A" : $vessel->Engines[0]->EnginePower; ?></p>
-                                <p class="yacht-accordion-display-item">Type: <?php echo empty($vessel->Engines[0]->Type) ? "N/A" : $vessel->Engines[0]->Type; ?></p>
-                                <p class="yacht-accordion-display-item">Engine Hours: <?php echo empty($vessel->Engines[0]->Hours) ? "N/A" : $vessel->Engines[0]->Hours; ?></p>
+                                <p class="yacht-accordion-display-item">Make: <span class="yacht-accordion-display-value"><?php echo empty($vessel->Engines[0]->Make) ? "N/A" : $vessel->Engines[0]->Make; ?></span></p>
+                                <p class="yacht-accordion-display-item">Model: <span class="yacht-accordion-display-value"><?php echo empty($vessel->Engines[0]->Model) ? "N/A" : $vessel->Engines[0]->Model; ?></span></p>
+                                <p class="yacht-accordion-display-item">Fuel: <span class="yacht-accordion-display-value"><?php echo empty($vessel->Engines[0]->Fuel) ? "N/A" : $vessel->Engines[0]->Fuel; ?></span></p>
+                                <p class="yacht-accordion-display-item">Engine Power: <span class="yacht-accordion-display-value"><?php echo empty($vessel->Engines[0]->EnginePower) ? "N/A" : $vessel->Engines[0]->EnginePower; ?></span></p>
+                                <p class="yacht-accordion-display-item">Type: <span class="yacht-accordion-display-value"><?php echo empty($vessel->Engines[0]->Type) ? "N/A" : $vessel->Engines[0]->Type; ?></span></p>
+                                <p class="yacht-accordion-display-item">Engine Hours: <span class="yacht-accordion-display-value"><?php echo empty($vessel->Engines[0]->Hours) ? "N/A" : $vessel->Engines[0]->Hours; ?></span></p>
                             </div>
                         <?php }
                         if (!empty($vessel->Engines[1])) { ?>
@@ -373,12 +373,12 @@ get_header();
                                 </p>
                             </div>
                             <div class="yacht-accordion-display">
-                                <p class="yacht-accordion-display-item">Make: <?php echo empty($vessel->Engines[1]->Make) ? "N/A" : $vessel->Engines[1]->Make; ?></p>
-                                <p class="yacht-accordion-display-item">Model: <?php echo empty($vessel->Engines[1]->Model) ? "N/A" : $vessel->Engines[1]->Model; ?></p>
-                                <p class="yacht-accordion-display-item">Fuel: <?php echo empty($vessel->Engines[1]->Fuel) ? "N/A" : $vessel->Engines[1]->Fuel; ?></p>
-                                <p class="yacht-accordion-display-item">Engine Power: <?php echo empty($vessel->Engines[1]->EnginePower) ? "N/A" : $vessel->Engines[1]->EnginePower; ?></p>
-                                <p class="yacht-accordion-display-item">Type: <?php echo empty($vessel->Engines[1]->Type) ? "N/A" : $vessel->Engines[1]->Type; ?></p>
-                                <p class="yacht-accordion-display-item">Engine Hours: <?php echo empty($vessel->Engines[1]->Hours) ? "N/A" : $vessel->Engines[1]->Hours; ?></p>
+                                <p class="yacht-accordion-display-item">Make: <span class="yacht-accordion-display-value"><?php echo empty($vessel->Engines[1]->Make) ? "N/A" : $vessel->Engines[1]->Make; ?></span></p>
+                                <p class="yacht-accordion-display-item">Model: <span class="yacht-accordion-display-value"><?php echo empty($vessel->Engines[1]->Model) ? "N/A" : $vessel->Engines[1]->Model; ?></span></p>
+                                <p class="yacht-accordion-display-item">Fuel: <span class="yacht-accordion-display-value"><?php echo empty($vessel->Engines[1]->Fuel) ? "N/A" : $vessel->Engines[1]->Fuel; ?></span></p>
+                                <p class="yacht-accordion-display-item">Engine Power: <span class="yacht-accordion-display-value"><?php echo empty($vessel->Engines[1]->EnginePower) ? "N/A" : $vessel->Engines[1]->EnginePower; ?></span></p>
+                                <p class="yacht-accordion-display-item">Type: <span class="yacht-accordion-display-value"><?php echo empty($vessel->Engines[1]->Type) ? "N/A" : $vessel->Engines[1]->Type; ?></span></p>
+                                <p class="yacht-accordion-display-item">Engine Hours: <span class="yacht-accordion-display-value"><?php echo empty($vessel->Engines[1]->Hours) ? "N/A" : $vessel->Engines[1]->Hours; ?></span></p>
                             </div>
                         <?php }
                         if (!empty($vessel->Engines[2])) { ?>
@@ -391,12 +391,12 @@ get_header();
                                 </p>
                             </div>
                             <div class="yacht-accordion-display">
-                                <p class="yacht-accordion-display-item">Make: <?php echo empty($vessel->Engines[2]->Make) ? "N/A" : $vessel->Engines[2]->Make; ?></p>
-                                <p class="yacht-accordion-display-item">Model: <?php echo empty($vessel->Engines[2]->Model) ? "N/A" : $vessel->Engines[2]->Model; ?></p>
-                                <p class="yacht-accordion-display-item">Fuel: <?php echo empty($vessel->Engines[2]->Fuel) ? "N/A" : $vessel->Engines[2]->Fuel; ?></p>
-                                <p class="yacht-accordion-display-item">Engine Power: <?php echo empty($vessel->Engines[2]->EnginePower) ? "N/A" : $vessel->Engines[2]->EnginePower; ?></p>
-                                <p class="yacht-accordion-display-item">Type: <?php echo empty($vessel->Engines[2]->Type) ? "N/A" : $vessel->Engines[2]->Type; ?></p>
-                                <p class="yacht-accordion-display-item">Engine Hours: <?php echo empty($vessel->Engines[2]->Hours) ? "N/A" : $vessel->Engines[2]->Hours; ?></p>
+                                <p class="yacht-accordion-display-item">Make: <span class="yacht-accordion-display-value"><?php echo empty($vessel->Engines[2]->Make) ? "N/A" : $vessel->Engines[2]->Make; ?></span></p>
+                                <p class="yacht-accordion-display-item">Model: <span class="yacht-accordion-display-value"><?php echo empty($vessel->Engines[2]->Model) ? "N/A" : $vessel->Engines[2]->Model; ?></span></p>
+                                <p class="yacht-accordion-display-item">Fuel: <span class="yacht-accordion-display-value"><?php echo empty($vessel->Engines[2]->Fuel) ? "N/A" : $vessel->Engines[2]->Fuel; ?></span></p>
+                                <p class="yacht-accordion-display-item">Engine Power: <span class="yacht-accordion-display-value"><?php echo empty($vessel->Engines[2]->EnginePower) ? "N/A" : $vessel->Engines[2]->EnginePower; ?></span></p>
+                                <p class="yacht-accordion-display-item">Type: <span class="yacht-accordion-display-value"><?php echo empty($vessel->Engines[2]->Type) ? "N/A" : $vessel->Engines[2]->Type; ?></span></p>
+                                <p class="yacht-accordion-display-item">Engine Hours: <span class="yacht-accordion-display-value"><?php echo empty($vessel->Engines[2]->Hours) ? "N/A" : $vessel->Engines[2]->Hours; ?></span></p>
                             </div>
                         <?php } ?>
                     </div>

@@ -42,7 +42,7 @@
                 .yacht-price {
                     font-size: $h2-size;
                     font-weight: $h1-weight;
-                    color: $main-text-color;
+                    color: $secondary-text-color;
                     line-height: 28px;
                     margin: 0;
                 }
@@ -54,13 +54,13 @@
 
                 .yacht-make {
                     font-size: 14px;
-                    color: $main-text-color;
+                    color: $secondary-text-color;
                     line-height: 20px;
                     margin: 10px 15px 26px 0px;
                 }
                 .yacht-year {
                     font-size: 14px;
-                    color: $main-text-color;
+                    color: $secondary-text-color;
                     line-height: 20px;
                     margin: 10px 0px 26px 15px;
                 }
@@ -343,10 +343,6 @@
 
                     p {
                         margin: 0px;
-                        color: $main-text-color;
-                    }
-                    a {
-                        color: $main-text-color;
                     }
                     .broker-name {
                         color: $main-text-color;
@@ -355,26 +351,37 @@
                         line-height: 24px;
                     }
                     .broker-title {
-                        color: $main-text-color;
+                        color: $secondary-text-color;
                         font-size: 16px;
                         font-weight: 500;
                         line-height: 24px;
                         margin-bottom: 19px;
                     }
                     .broker-email {
-                        color: $main-text-color;
+                        color: $secondary-text-color;
                         font-size: 16px;
                         font-weight: 400;
                         line-height: 24px;
                         a {
-                            color: $main-text-color !important;
+                            color: $secondary-text-color ;
+
+                            &:hover {
+                                color: $main-text-color
+                            }
                         }
                     }
                     .broker-phone {
-                        color: $main-text-color;
+                        color: $secondary-text-color;
                         font-size: 16px;
                         font-weight: 400;
                         line-height: 24px;
+                        a {
+                            color: $secondary-text-color ;
+
+                            &:hover {
+                                color: $main-text-color
+                            }
+                        }
                     }
                 }
         }
@@ -389,7 +396,7 @@
             }
 
             .yacht-form-title {
-                color: $main-text-color;
+                color: $secondary-text-color;
                 font-size: 20px;
                 font-weight: 600;
                 line-height: 28px;
@@ -513,7 +520,7 @@
 
                 p, a, ul, ol, li {
                     text-align: left !important;
-                    color: $main-text-color !important;
+                    color: $secondary-text-color !important;
                     font-size: 16px !important;
                     font-weight: 400 !important;
                 }
@@ -615,6 +622,10 @@
                         font-size: 16px;
                         font-weight: 400;
                         line-height: 24px;
+
+                        .yacht-accordion-display-value {
+                            color: $secondary-text-color;
+                        }
                     }
                 }
             }
@@ -660,25 +671,41 @@
                         font-size: 16px;
                         font-weight: 500;
                         line-height: 24px;
-                    }ßßß
+                    }
                     .broker-title {
-                        color: $main-text-color;
+                        color: $secondary-text-color;
                         font-size: 16px;
                         font-weight: 500;
                         line-height: 24px;
                         margin-bottom: 19px;
                     }
                     .broker-email {
-                        color: $main-text-color;
+                        color: $secondary-text-color;
                         font-size: 16px;
                         font-weight: 400;
                         line-height: 24px;
+
+                        a {
+                            color: $secondary-text-color;
+                            
+                            &:hover {
+                                color: $main-text-color
+                            }
+                        }
                     }
                     .broker-phone {
-                        color: $main-text-color;
+                        color: $secondary-text-color;
                         font-size: 16px;
                         font-weight: 400;
                         line-height: 24px;
+                        
+                        a {
+                            color: $secondary-text-color;
+
+                            &:hover {
+                                color: $main-text-color
+                            }
+                        }
                     }
                 }
             }
@@ -686,7 +713,7 @@
             .yacht-form-container {
 
                 .yacht-form-title {
-                    color: $main-text-color;
+                    color: $secondary-text-color;
                     font-size: 20px;
                     font-weight: 600;
                     line-height: 28px;

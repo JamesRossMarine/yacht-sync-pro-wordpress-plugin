@@ -1,7 +1,7 @@
 #quick-h-search-container {
-    border: 1px solid $secondary-text-color;
+    border: 1px solid $main-text-color;
     padding: 10px;
-    background-color: $main-text-color;
+    background-color: $secondary-background-color;
     width: 100%;
     max-width: 1200px;
     margin: auto;
@@ -21,7 +21,7 @@
             width: 70px;
             margin-right: 10px;
             text-align: right;
-            color: $secondary-text-color;
+            color: $main-text-color;
         }
 
         .min-max-container {
@@ -48,7 +48,7 @@
             border: 1px solid #d9d9d9;
         }
        span {
-            color: $secondary-text-color;
+            color: $main-text-color;
         }
         
     }
@@ -64,8 +64,8 @@
         input[type="submit"] {
             width: auto;
             padding: 10px 20px;
-            background-color: $secondary-text-color;
-            color: $main-text-color;
+            background-color: $main-text-color;
+            color: $secondary-background-color;
             border: none;
             cursor: pointer;
         }
