@@ -1,8 +1,12 @@
 <?php
-use Random\Engine;
+	
 	class raiYachtSync_ImportRuns_GlobalBoatsCom {
    		protected $limit = 153;
 	
+		// Testing URL
+		//public $globalInventoryUrl = 'https://services.boats.com/pls/boats/search?fields=ModelYear,MakeString,Model,BoatName,DocumentID,NominalLength,BoatClassCode&key=';
+		
+   		// PRODUCTION URL
 		public $globalInventoryUrl = 'https://services.boats.com/pls/boats/search?fields=SalesStatus,MakeString,Model,ModelYear,BoatCategoryCode,SaleClassCode,StockNumber,BoatLocation,BoatName,BoatClassCode,BoatHullMaterialCode,BoatHullID,DesignerName,RegistrationCountryCode,NominalLength,LengthOverall,BeamMeasure,MaxDraft,BridgeClearanceMeasure,DryWeightMeasure,Engines,CruisingSpeedMeasure,RangeMeasure,AdditionalDetailDescription,DriveTypeCode,MaximumSpeedMeasure,FuelTankCountNumeric,FuelTankCapacityMeasure,WaterTankCountNumeric,WaterTankCapacityMeasure,HoldingTankCountNumeric,HoldingTankCapacityMeasure,CabinsCountNumeric,SingleBerthsCountNumeric,DoubleBerthsCountNumeric,TwinBerthsCountNumeric,HeadsCountNumeric,GeneralBoatDescription,AdditionalDetailDescription,EmbeddedVideoPresent,Videos,Images,NormPrice,Price,CompanyName,SalesRep,DocumentID,BuilderName,IMTTimeStamp,PlsDisclaimer&key=';
 
 		public function __construct() {
@@ -30,8 +34,6 @@ use Random\Engine;
 
 	        //var_dump($total);
 
-			//$apiCallInventory = $apiCall['body']['data']['results'];
-
 			while ($total > $yachtsSynced) {
 				$apiUrl = $this->globalInventoryUrl;
 				$apiUrl = $apiUrl.'&start='. $offset .'&rows='. $this->limit;
@@ -49,6 +51,10 @@ use Random\Engine;
 
 				$apiCallInventory = $apiCallForWhile['body']['data']['results'];
 
+				if (count( $apiCallInventory ) == 0) {
+					break;
+				}
+
 				foreach ($apiCallInventory as $boat) {
 					$yachtsSynced++;
 
@@ -56,7 +62,7 @@ use Random\Engine;
 					$boatC = json_decode(json_encode($boat));
 
 					$find_post=get_posts([
-	                    'post_type' => 'rai_yacht',
+	                    'post_type' => 'syncing_rai_yacht',
 	                    'meta_query' => [
 	                        array(
 	                           'key' => 'DocumentID',
@@ -69,7 +75,7 @@ use Random\Engine;
 		           	if (! isset($find_post[0]->ID)) {
 			            if (! empty($record['BoatHullID'])) {
 			                $find_post=get_posts([
-			                    'post_type' => 'rai_yacht',
+			                    'post_type' => 'syncing_rai_yacht',
 			                    'meta_query' => [
 			                        array(
 			                           'key' => 'BoatHullID',
@@ -158,7 +164,7 @@ use Random\Engine;
 							$boatC->YSP_EngineHours = $boat['Engines'][0]['Hours'];
 						}
 						if (isset($boat['Engines'][0]['Type'])){
-							$boatC->YSP_EngineType = $boat['Engines'][0]['Type'];
+							$boatC->YSP_EngineType = $boat['Engines'][0]['Type']; 
 						}
 					}
 
@@ -166,8 +172,7 @@ use Random\Engine;
 						$boatC->YSP_ListingDate = $boat['Images'][0]['LastModifiedDateTime'];
 					}
 
-					/*
-					if (isset($boat['OriginalPrice']) && isset($boat['Price'])){
+					/*if (isset($boat['OriginalPrice']) && isset($boat['Price'])){
 						if (str_contains($boat['OriginalPrice'], 'EUR')){
 							var_dump("This is the issue 1");
 							$boatC->YSP_EuroVal = intval($boat['OriginalPrice']);
@@ -192,7 +197,7 @@ use Random\Engine;
 		            $y_post_id=wp_insert_post(
 		                [
 		                    'ID' => $post_id,
-							'post_type' => 'rai_yacht',
+							'post_type' => 'syncing_rai_yacht',
 							'post_title' =>  addslashes( $boat['ModelYear'].' '.$boat['MakeString'].' '.$boat['Model'].' '.$boat['BoatName']),
 							
 							'post_name' => sanitize_title(
@@ -221,12 +226,13 @@ use Random\Engine;
 				$offset = $offset + $this->limit;
 			
 				if ($yachtsSynced != $offset) {
-					//echo 'off sync \n';
+					$total = $apiCallForWhile['body']['data']['numResults'];
 				}
 
 			}
 
 			//var_dump($offset);
+			//var_dump($total);
 			//var_dump($yachtsSynced);
 
 

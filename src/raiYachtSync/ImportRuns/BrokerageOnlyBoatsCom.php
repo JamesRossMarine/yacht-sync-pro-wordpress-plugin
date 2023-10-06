@@ -56,7 +56,7 @@
 					//$boatC->CompanyName = 'Italian Yacht Group';
 					
 		            $find_post=get_posts([
-	                    'post_type' => 'rai_yacht',
+	                    'post_type' => 'syncing_rai_yacht',
 	                    'meta_query' => [
 
 	                        array(
@@ -70,7 +70,7 @@
 		           	if (! isset($find_post[0]->ID)) {
 			            if (! empty($record['BoatHullID'])) {
 			                $find_post=get_posts([
-			                    'post_type' => 'rai_yacht',
+			                    'post_type' => 'syncing_rai_yacht',
 			                    'meta_query' => [
 
 			                        array(
@@ -169,7 +169,7 @@
 		            $y_post_id=wp_insert_post(
 		                [
 		                    'ID' => $post_id,
-							'post_type' => 'rai_yacht',
+							'post_type' => 'syncing_rai_yacht',
 							
 							'post_title' => addslashes(  $boat['ModelYear'].' '.$boat['MakeString'].' '.$boat['Model'].' '.$boat['BoatName'] ),
 							

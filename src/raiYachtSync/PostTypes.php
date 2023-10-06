@@ -34,6 +34,27 @@
 				'can_export' => true
 
             ]);
+			
+			register_post_type('syncing_rai_yacht', [
+
+           		'labels' => array(
+					'name' => 'Syncing Yachts',
+					'singular_name' => 'Yacht',
+				),
+				
+				'has_archive' => false,
+				//'query_var' => 'rai_yacht_id',
+
+				'rewrite' => array(
+			        'slug' => 'yacht-listing',
+			        'with_front' => true
+			    ),
+
+				'public' => true,
+				'publicly_queryable' => true,
+				'can_export' => true
+
+            ]);
 
 			/*register_post_type('rai_soldyatch', [
 
