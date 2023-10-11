@@ -45,13 +45,8 @@
 				'has_archive' => false,
 				//'query_var' => 'rai_yacht_id',
 
-				'rewrite' => array(
-			        'slug' => 'yacht-listing',
-			        'with_front' => true
-			    ),
-
-				'public' => true,
-				'publicly_queryable' => true,
+				'public' => false,
+				'publicly_queryable' => false,
 				'can_export' => true
 
             ]);

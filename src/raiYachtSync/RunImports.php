@@ -12,7 +12,7 @@
 			
 		}
 
-		public function cleanup() {
+		public function clean_up() {
 	        global $wpdb;
 		
 	       	$wpdb->query( 
@@ -73,7 +73,7 @@
 				$this->ImportBrokerageOnlyBoatsCom->run();
 			}
 			
-			$this->cleanup();
+			$this->clean_up();
 			$this->move_over();
 		}
        
