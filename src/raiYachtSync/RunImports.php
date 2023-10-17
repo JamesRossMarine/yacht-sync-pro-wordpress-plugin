@@ -17,8 +17,7 @@
 		
 	       	$wpdb->query( 
 				$wpdb->prepare( 
-					"DELETE wp FROM $wpdb->posts wp 
-					LEFT JOIN $wpdb->postmeta pm ON pm.post_id = wp.ID 
+					"DELETE wp FROM $wpdb->posts wp
 					WHERE wp.post_type = %s",
 					'rai_yacht'
 				)
@@ -29,21 +28,28 @@
 				LEFT JOIN $wpdb->posts wp ON wp.ID = pm.post_id 
 				WHERE wp.ID IS NULL"
 			);
-
-			/*
-				$yArgs=[
-		            'fields' => "ids",
-		            'post_type' => 'rai_yacht',
-		            'posts_per_page' => -1,
-		        ];
-
-		        $pt_yachts=get_posts($yArgs);
-
-		        foreach ($pt_yachts as $yID) {
-		            wp_delete_post($yID, true);
-		        }
-	        */
 		}
+
+		public function clean_up_brokerage_only() {
+	        global $wpdb;
+		
+	       	$wpdb->query( 
+				$wpdb->prepare( 
+					"DELETE wp FROM $wpdb->posts wp 
+					LEFT JOIN $wpdb->postmeta pm ON pm.post_id = wp.ID 
+					WHERE wp.post_type = %s AND pm.meta_key = %s", 
+					'rai_yacht',
+					'CompanyBoat'
+				)
+			);
+
+			$wpdb->query(
+				"DELETE pm FROM $wpdb->postmeta pm 
+				LEFT JOIN $wpdb->posts wp ON wp.ID = pm.post_id 
+				WHERE wp.ID IS NULL"
+			);
+		}
+		
 
 		public function move_over() {
 	        global $wpdb;
@@ -77,6 +83,28 @@
 			$this->move_over();
 		}
        
+
+       	public function run_brokerage_only() {
+
+ 			$boats_com_api_brokerage_key = $this->options->get('boats_com_api_brokerage_key');
+			
+			$yacht_broker_org_api_token = $this->options->get('yacht_broker_org_api_token');
+
+			// @ToDo For Loop the Runs  
+			// KEEP THIS IN THIS ORDER
+			if (!empty($yacht_broker_org_api_token)) {
+				$this->ImportYachtBrokerOrg->run();
+			}
+
+			if (! empty($boats_com_api_brokerage_key)) {
+				$this->ImportBrokerageOnlyBoatsCom->run();
+			}
+			
+			$this->clean_up_brokerage_only();
+			$this->move_over();
+
+
+       	}
 
 
 	}
