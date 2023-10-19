@@ -1,4 +1,4 @@
-## Post Types
+Post Types
 ***
 <li>rai_yacht</li>
 <li>rai_broker</li>
