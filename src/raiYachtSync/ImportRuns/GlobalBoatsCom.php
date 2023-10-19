@@ -195,20 +195,23 @@
 					}
 
 		            $y_post_id=wp_insert_post(
-		                [
-		                    'ID' => $post_id,
-							'post_type' => 'syncing_rai_yacht',
-							'post_title' =>  addslashes( $boat['ModelYear'].' '.$boat['MakeString'].' '.$boat['Model'].' '.$boat['BoatName']),
-							
-							'post_name' => sanitize_title(
-								$boat['ModelYear'].'-'.$boat['MakeString'].'-'.$boat['Model']
-							),
+		            	apply_filters('raiys_yacht_post', 
+		            		[
+			                    'ID' => $post_id,
+								'post_type' => 'syncing_rai_yacht',
+								'post_title' =>  addslashes( $boat['ModelYear'].' '.$boat['MakeString'].' '.$boat['Model'].' '.$boat['BoatName']),
+								
+								'post_name' => sanitize_title(
+									$boat['ModelYear'].'-'.$boat['MakeString'].'-'.$boat['Model']
+								),
 
-							'post_content' => join(' ', $boatC->GeneralBoatDescription),
-							'post_status' => 'publish',
+								'post_content' => join(' ', $boatC->GeneralBoatDescription),
+								'post_status' => 'publish',
 
-							'meta_input' => apply_filters('raiys_yacht_meta_sync', $boatC),
-						]
+								'meta_input' => apply_filters('raiys_yacht_meta_sync', $boatC),
+							],
+							$boatC
+						)
 					);
 
 					wp_set_post_terms($y_post_id, $boat['BoatClassCode'], 'boatclass', false);

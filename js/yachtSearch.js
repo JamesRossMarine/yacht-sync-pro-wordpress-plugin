@@ -6,9 +6,7 @@ function ysp_yacht_search_and_reader(data) {
     document.querySelector('#search-result-section').classList.remove('loaded');
     document.querySelector('#search-result-section').classList.add('loading');
 
-    jQuery([document.documentElement, document.body]).animate({
-        scrollTop: (jQuery(".scroll-to-here-on-yacht-search").offset().top)
-    }, 250);
+    
     
     // GET AND WRITE
     return rai_ysp_api.call_api("POST", "yachts", data).then(function(data_result) {
@@ -55,6 +53,10 @@ function ysp_yacht_search_and_reader(data) {
             jQuery('#search-result-row').append(ysp_templates.noResults());
 
         }
+
+        jQuery([document.documentElement, document.body]).animate({
+            scrollTop: (jQuery(".scroll-to-here-on-yacht-search").offset().top)
+        }, 250);
 
         return data_result;
 

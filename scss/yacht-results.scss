@@ -1,6 +1,4 @@
 #search-result-section {
-    max-width: $max-width;
-    margin: auto;
     position: relative;
     padding-top: 20px;
 
@@ -120,7 +118,6 @@
             display: flex !important;
             justify-content: flex-start;
             flex-wrap: wrap;
-            width: 100%;
             gap: 20px;
 
             .yacht-result-grid-item {

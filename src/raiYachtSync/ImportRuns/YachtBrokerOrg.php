@@ -255,18 +255,21 @@
 		            $theBoat['CompanyBoat'] = 1;
 
 		            $y_post_id=wp_insert_post(
-		                [
-		                    'ID' => $post_id,
-							'post_type' => 'syncing_rai_yacht',
-							'post_title' =>  addslashes( $theBoat['ModelYear'].' '.$theBoat['MakeString'].' '.$theBoat['Model'].' '.$theBoat['BoatName'] ),
-							'post_name' => sanitize_title(
-								$theBoat['ModelYear'].'-'.$theBoat['MakeString'].'-'.$theBoat['Model']
-							),
-							'post_content' => $theBoat['GeneralBoatDescription'],
-							'post_status' => 'publish',
-							'meta_input' => apply_filters('raiys_yacht_meta_sync', $theBoat)
+		            	apply_filters('raiys_yacht_post', 
+			                [
+			                    'ID' => $post_id,
+								'post_type' => 'syncing_rai_yacht',
+								'post_title' =>  addslashes( $theBoat['ModelYear'].' '.$theBoat['MakeString'].' '.$theBoat['Model'].' '.$theBoat['BoatName'] ),
+								'post_name' => sanitize_title(
+									$theBoat['ModelYear'].'-'.$theBoat['MakeString'].'-'.$theBoat['Model']
+								),
+								'post_content' => $theBoat['GeneralBoatDescription'],
+								'post_status' => 'publish',
+								'meta_input' => apply_filters('raiys_yacht_meta_sync', $theBoat)
 
-						]
+							],
+							$theBoat
+						)
 					);
 
 					wp_set_post_terms($y_post_id, $theBoat['BoatClassCode'], 'boatclass', false);
