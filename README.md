@@ -1,9 +1,8 @@
-Post Types
-***
+# Post Types
 <li>rai_yacht</li>
 <li>rai_broker</li>
 
-<h3><strong></strong>Shortcodes</strong></h3>
+# Shortcodes
 <li>ys-quick-search</li>
 <li>ys-h-quick-search</li>
 <li>ys-v-yacht-search-form</li>
@@ -12,7 +11,7 @@ Post Types
 <li>ys-yacht-results</li>
 <li>ys-featured-listings</li>
 
-<h3><strong></strong>Filters</strong></h3>
+# Filters
 <li>rai_ys_v_yacht_search_template</li>
 <li>rai_ys_v_super_yacht_search_template</li>
 <li>rai_ys_h_yacht_search_template</li>
@@ -22,7 +21,7 @@ Post Types
 <li>rai_ys_yacht_results_template</li>
 
 
-<h3><strong></strong>WP REST API </strong></h3>
+# WP REST API
 <li>/raiys/sync</li>
 <li>/raiys/yachts</li>
 <li>/raiys/list-options</li>
@@ -32,6 +31,6 @@ Post Types
 <li>/raiys/yacht-lead</li>
 <li>/raiys/broker-lead</li>
 
-<h3><strong></strong>Commands</strong></h3>
+# Commands
 <li>wp sync-yachts</li>
 <li>wp sitemap-generator</li>
