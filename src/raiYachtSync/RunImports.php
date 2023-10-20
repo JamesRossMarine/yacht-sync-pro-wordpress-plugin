@@ -52,7 +52,7 @@
 		
 
 		public function move_over() {
-	        global $wpdb;
+	        global $wpdb;	        
 
 	        $wpdb->update($wpdb->posts, ['post_type'=>'rai_yacht'], ['post_type' => 'syncing_rai_yacht'], ['%s'], ['%s'] );
 

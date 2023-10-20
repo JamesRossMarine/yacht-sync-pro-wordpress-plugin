@@ -48,6 +48,10 @@
 
 				$apiCallInventory = $apiCallForWhile['body']['results'];
 
+				if (count( $apiCallInventory ) == 0) {
+					break;
+				}
+
 				foreach ($apiCallInventory as $boat) {
 					$yachtsSynced++;
 					$record=$boat;
