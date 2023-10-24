@@ -13,7 +13,7 @@
 		}
 
 		public function addPostTypes() {
-	
+	 
 			register_post_type('syncing_rai_yacht', [
 
            		'labels' => array(

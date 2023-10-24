@@ -74,9 +74,11 @@ document.addEventListener("DOMContentLoaded", function() {
         yachtSearchAndResults.addEventListener('submit', function(e) {
             e.preventDefault();
 
+            console.log('joshie!!!');
+
             e.target.querySelector('input[name=page_index]').value=1;
 
-            let params = raiys_get_form_data(e.target.form);
+            let params = raiys_get_form_data(e.target);
 
             ysp_yacht_search_and_reader( params );
 
