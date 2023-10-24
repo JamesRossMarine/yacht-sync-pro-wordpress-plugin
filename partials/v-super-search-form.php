@@ -35,7 +35,7 @@
 
                     foreach ($categories as $cat) {
                         
-                        echo "<label><input type='checkbox' name='boatclass' value='$cat->slug' style='width: auto;'> $cat->name</label>";
+                        echo "<label><input type='checkbox' name='boatclass' value='$cat->name' style='width: auto;'> $cat->name</label>";
 
                     }
                 ?>

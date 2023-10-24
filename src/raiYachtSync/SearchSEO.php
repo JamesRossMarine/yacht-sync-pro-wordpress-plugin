@@ -31,22 +31,28 @@
 				'condition',
 				'ys_keyword',
 				// sail or motor
-				'yearlo',
-				'yearhi',		
-				'make'
+				//'yearlo',
+				//'yearhi',		
+				'make',
+				'boatclass'
 			];
+
+			$orders_of_withins = [];
 
 			$grabbed_params = '';
 
 			foreach ($order_of_params as $param) {
 
 				if ($wp_query->query_vars['post_type'] == 'rai_yacht') {
-					$pVal=$wp_query->query_vars[$param];
+					$pVal = $wp_query->query_vars[$param];
+				}
+				elseif (isset($params[ $param ])) {
+					$pVal = $params[ $param ];
 				}
 				else {
-					$pVal=$params[ $param ];
+					$pVal=null;
 				}
-
+				
 				if (! is_null($pVal)) {
 
 					if (is_array($pVal)) {
@@ -59,6 +65,8 @@
 					}
 
 				}
+
+				unset($pVal);
 
 			}
 
