@@ -14,6 +14,7 @@ function ysp_yacht_search_and_reader(data) {
         document.querySelector('#search-result-section').classList.remove('loading');
         document.querySelector('#search-result-section').classList.add('loaded');
 
+        document.title = data_result.SEO.title;
         jQuery('#ysp-search-heading').text(data_result.SEO.heading);
         jQuery('#ysp-search-paragraph').text(data_result.SEO.p);
 
