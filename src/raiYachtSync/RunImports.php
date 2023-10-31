@@ -14,40 +14,62 @@
 
 		public function clean_up() {
 	        global $wpdb;
-		
-	       	$wpdb->query( 
-				$wpdb->prepare( 
-					"DELETE wp FROM $wpdb->posts wp
+			
+			// Check if boats are in the syncing-post-type to be moved before we delete. 
+	        $count_of_synced = $wpdb->get_col(
+	        	$wpdb->prepare( 
+					"SELECT COUNT(*) FROM $wpdb->posts wp
 					WHERE wp.post_type = %s",
-					'rai_yacht'
+					'syncing_rai_yacht'
 				)
-			);
+	        );
 
-			$wpdb->query(
-				"DELETE pm FROM $wpdb->postmeta pm 
-				LEFT JOIN $wpdb->posts wp ON wp.ID = pm.post_id 
-				WHERE wp.ID IS NULL"
-			);
+	        if ($count_of_synced > 0) {
+		       	$wpdb->query( 
+					$wpdb->prepare( 
+						"DELETE wp FROM $wpdb->posts wp
+						WHERE wp.post_type = %s",
+						'rai_yacht'
+					)
+				);
+
+				$wpdb->query(
+					"DELETE pm FROM $wpdb->postmeta pm 
+					LEFT JOIN $wpdb->posts wp ON wp.ID = pm.post_id 
+					WHERE wp.ID IS NULL"
+				);
+	        }
 		}
 
 		public function clean_up_brokerage_only() {
 	        global $wpdb;
-		
-	       	$wpdb->query( 
-				$wpdb->prepare( 
-					"DELETE wp FROM $wpdb->posts wp 
-					LEFT JOIN $wpdb->postmeta pm ON pm.post_id = wp.ID 
-					WHERE wp.post_type = %s AND pm.meta_key = %s", 
-					'rai_yacht',
-					'CompanyBoat'
-				)
-			);
 
-			$wpdb->query(
-				"DELETE pm FROM $wpdb->postmeta pm 
-				LEFT JOIN $wpdb->posts wp ON wp.ID = pm.post_id 
-				WHERE wp.ID IS NULL"
-			);
+	      	// Check if boats are in the syncing-post-type to be moved before we delete. 
+	        $count_of_synced = $wpdb->get_col(
+	        	$wpdb->prepare( 
+					"SELECT COUNT(*) FROM $wpdb->posts wp
+					WHERE wp.post_type = %s",
+					'syncing_rai_yacht'
+				)
+	        );
+
+	        if ($count_of_synced > 0) {
+		       	$wpdb->query( 
+					$wpdb->prepare( 
+						"DELETE wp FROM $wpdb->posts wp 
+						LEFT JOIN $wpdb->postmeta pm ON pm.post_id = wp.ID 
+						WHERE wp.post_type = %s AND pm.meta_key = %s", 
+						'rai_yacht',
+						'CompanyBoat'
+					)
+				);
+
+				$wpdb->query(
+					"DELETE pm FROM $wpdb->postmeta pm 
+					LEFT JOIN $wpdb->posts wp ON wp.ID = pm.post_id 
+					WHERE wp.ID IS NULL"
+				);
+			}
 		}
 		
 
