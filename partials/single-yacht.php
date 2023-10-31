@@ -48,8 +48,14 @@ get_header();
                             <?php echo ($vessel->ModelYear . ' ' . $vessel->MakeString . ' ' . $vessel->BoatName) ?>
                         </h1>
                         <h2 class="yacht-price">
-                            <?php echo ('$' . $vessel->Price) ?>
-                        </h2>
+                        <?php
+                        if ($YSP_Euro_Opt == "yes") {
+                            echo '€' . number_format($vessel->YSP_EuroVal) . ' ' . 'EUR';
+                        } else {
+                            echo '$' . number_format($vessel->Price);
+                        }
+                        ?>
+                    </h2>
                     </div>
                     <div class="yacht-make-year-info">
                         <h3 class="yacht-make"><?php echo ($vessel->MakeString); ?></h3>
@@ -85,7 +91,7 @@ get_header();
                                 <p>Length</p>
                             </div>
                             <div class="yacht-length-value">
-                                <p><?php echo (empty($vessel->MakeString) ? 'N/A' : ($vessel->LengthOverall . '/' . (number_format((substr($vessel->LengthOverall, 0, -3) * 0.3048), 1) . ' m'))); ?></p>
+                                <p><?php //echo (empty($vessel->MakeString) ? 'N/A' : ($vessel->LengthOverall . '/' . (number_format((substr($vessel->LengthOverall, 0, -3) * 0.3048), 1) . ' m'))); ?></p>
                             </div>
                         </div>
                         <div class="yacht-beam">
@@ -94,7 +100,7 @@ get_header();
                                 <p>Beam</p>
                             </div>
                             <div class="yacht-beam-value">
-                                <p><?php echo (empty($vessel->BeamMeasure) ? 'N/A' : ($vessel->BeamMeasure . '/' . (number_format((substr($vessel->BeamMeasure, 0, -3) * 0.3048), 1) . ' m'))); ?></p>
+                                <p><?php // echo (empty($vessel->BeamMeasure) ? 'N/A' : ($vessel->BeamMeasure . '/' . (number_format((substr($vessel->BeamMeasure, 0, -3) * 0.3048), 1) . ' m'))); ?></p>
                             </div>
                         </div>
                         <div class="yacht-cabins">
@@ -204,9 +210,11 @@ get_header();
                             $broker_phone = get_post_meta($post->ID, 'rai_broker_phone', true);
                             ?>
                             <div class="yacht-mobile-broker-container">
+                            <a class="broker-anchor" href="<?php the_permalink(); ?>">
                                 <div class="broker-profile-image"><img src="<?php echo esc_url(get_the_post_thumbnail_url()); ?>" alt="" style="width:120px; height:120px;" /></div>
                                 <div class="broker-info">
                                     <p class="broker-name"><?php echo ($broker_first_name . " " . $broker_last_name); ?></p>
+                                     </a>
                                     <p class="broker-title">Broker</p>
                                     <p class="broker-email"><a href="mailto:<?php echo $broker_email; ?>"><?php echo $broker_email; ?></a></p>
                                     <p class="broker-phone"><a href="tel:<?php echo $broker_phone; ?>"><?php echo $broker_phone; ?></a></p>

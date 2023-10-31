@@ -124,6 +124,30 @@
 						self::SLUG . '_admin_fields',
 						array( )
 					);
+					add_settings_field(
+						self::SLUG . '_company_name',
+						"Company Name",
+						array( $this, 'company_name' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+					add_settings_field(
+						self::SLUG . '_company_logo',
+						"Company Logo",
+						array( $this, 'company_logo_id_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+					add_settings_field(
+						self::SLUG . '_company_number',
+						"Company Phone Number",
+						array( $this, 'company_number' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
 
 					
 					
@@ -291,5 +315,43 @@
 			</select><?php 
 
 		}
+
+		public function company_name() {
+			$nameOfField=self::SLUG.'_company_name';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
+
+		public function company_number() {
+			$nameOfField=self::SLUG.'_company_number';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="tel" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
+		public function company_logo_id_field() {
+			$image_id = get_option(self::SLUG . '_company_logo');
+			$image_url = wp_get_attachment_image_url($image_id, 'small');
+			?>
+			<?php if ($image = wp_get_attachment_image_url($image_id, 'small')) : ?>
+				<a href="#" class="rudr-upload">
+					<img src="<?php echo esc_url($image) ?>" />
+				</a>
+				<a href="#" class="rudr-remove">Remove image</a>
+				<input type="hidden" name="<?php echo self::SLUG; ?>_company_logo" value="<?php echo absint($image_id) ?>">
+			<?php else : ?>
+				<a href="#" class="button rudr-upload">Upload image</a>
+				<a href="#" class="rudr-remove" style="display:none">Remove image</a>
+				<input type="hidden" name="<?php echo self::SLUG; ?>_company_logo" value="">
+			<?php endif;
+		}
+		
+		
 
 	}

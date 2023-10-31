@@ -174,15 +174,15 @@
 						$boatC->YSP_ListingDate = $boat['Images'][0]['LastModifiedDateTime'];
 					}
 
-					/*if (isset($boat['OriginalPrice']) && isset($boat['Price'])){
+					if (isset($boat['OriginalPrice']) && isset($boat['Price'])){
 						if (str_contains($boat['OriginalPrice'], 'EUR')){
 							var_dump("This is the issue 1");
 							$boatC->YSP_EuroVal = intval($boat['OriginalPrice']);
 						} else {
 							$price = intval($boat['Price']) * $this->options->get('euro_c_c');
-							$boatC->YSP_EuroVal = $price;
+							$boatC->YSP_EuroVal = $price;	
 						}
-					}*/
+					}
 
                     if (isset($boatC->AdditionalDetailDescription)) {
 						foreach ($boatC->AdditionalDetailDescription as $aIndex => $description) {
