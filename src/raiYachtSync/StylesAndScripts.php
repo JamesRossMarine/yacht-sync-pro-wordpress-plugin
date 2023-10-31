@@ -10,6 +10,21 @@
 		public function add_actions_and_filters() {
 			add_action( 'wp_enqueue_scripts' , [$this, 'enqueueGlobal']);
 			add_action( 'wp_enqueue_scripts' , [$this, 'enqueueYachtDetails']);
+			add_action( 'admin_enqueue_scripts', [$this, 'rudr_include_js'] );
+		}
+
+		function rudr_include_js() {
+			
+			if ( ! did_action( 'wp_enqueue_media' ) ) {
+				wp_enqueue_media();
+			}
+
+			 wp_enqueue_script( 
+				'ysp-admin', 
+				RAI_YS_PLUGIN_ASSETS. 'js/admin.js',
+				array( 'jquery' ),
+				null
+			);
 		}
 		
 		public function pickedColorsFromWpAdmin() {

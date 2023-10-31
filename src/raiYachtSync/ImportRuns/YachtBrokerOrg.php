@@ -148,6 +148,16 @@
 			            $theBoat['MaximumSpeedMeasure']=$row['MaximumSpeedMeasure'];
 		            }
 
+					if (isset($theBoat['Price'])){
+						if (str_contains($theBoat['Price'], 'EUR')){
+							var_dump("This is the issue 1");
+							$theBoat['YSP_EuroVal'] = intval($theBoat['Price']);
+						} else {
+							$price = intval($theBoat['Price']) * $this->options->get('euro_c_c');
+							$theBoat['YSP_EuroVal'] = $price;	
+						}
+					}
+
 		            if (isset($row['BeamMeasure'])) {
 		                $row['BeamMeasure'] .= ' ft';
 		                $theBoat['BeamMeasure']=$row['BeamMeasure'];
