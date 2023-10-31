@@ -3,6 +3,10 @@
 	class raiYachtSync_YoastFun_SearchSEOApply {
 		public function __construct() {
 			$this->SearchSEO = new raiYachtSync_SearchSEO();
+
+			$this->options = new raiYachtSync_Options();
+
+			$this->yacht_search_page_id = $this->options->get('yacht_search_page_id');
 		}
 
 		public function add_actions_and_filters() {
@@ -14,7 +18,7 @@
 
 			global $wp_query;
 
-			if (is_page(19190)) {
+			if (is_page($this->yacht_search_page_id)) {
 
 				$super_title = $this->SearchSEO->generate_title( $wp_query->get('params_from_paths') );
 
@@ -27,7 +31,7 @@
 		public function yacht_search_description($description) {
 			global $wp_query;
 
-			if (is_page(19190)) {
+			if (is_page($this->yacht_search_page_id)) {
 				$super_descript = $this->SearchSEO->generate_meta_description( $wp_query->get('params_from_paths') );
 
 				$description = $super_descript;

@@ -32,6 +32,8 @@
 
 	        $total = $apiCall['body']['data']['numResults'];
 
+	        $errors = new WP_Error();
+
 	        //var_dump($total);
 
 			while ($total > $yachtsSynced) {
