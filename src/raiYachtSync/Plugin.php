@@ -21,7 +21,7 @@
 			
 			$this->Yachts_DetailOverride = new raiYachtSync_Yachts_DetailsOverride();
 			$this->Yachts_Shortcode = new raiYachtSync_Shortcodes_YachtSearch();
-			$this->Yachts_Search_Seo_ApplyToYoast = new raiYachtSync_SearchSEOApplyToYoast();
+			$this->Yachts_Search_Seo_ApplyToYoast = new raiYachtSync_YoastFun_SearchSEOApply();
 			$this->Yachts_Search_Seo_Shortcode = new raiYachtSync_Shortcodes_YachtSearchSeo();
 
 			$this->Brokers_DetailOverride = new raiYachtSync_Brokers_DetailsOverride();
