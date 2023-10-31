@@ -107,7 +107,6 @@
 		                'TaxStatusCode' => 'TaxStatus',
 		                'NominalLength' => 'LOAFeet',
 		                'AdditionalDetailDescription' => 'Description'
-
 		           	];
 
 		           	foreach ($MapToBoatOrg as $mapToKey => $key) {
