@@ -14,6 +14,10 @@ function ysp_yacht_search_and_reader(data) {
         document.querySelector('#search-result-section').classList.remove('loading');
         document.querySelector('#search-result-section').classList.add('loaded');
 
+        document.title = data_result.SEO.title;
+        jQuery('#ysp-search-heading').text(data_result.SEO.heading);
+        jQuery('#ysp-search-paragraph').text(data_result.SEO.p);
+
         jQuery('#total-results').text(new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(data_result.total));
 
         raiys_push_history( data );
@@ -68,6 +72,34 @@ function ysp_yacht_search_and_reader(data) {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
+
+    // Fill List Options
+    let FillLists=[];
+    let listElements = document.querySelectorAll("datalist[data-fill-list]");
+
+    listElements.forEach((ele) => {
+        FillLists.push(ele.getAttribute('data-fill-list'));
+    });
+    
+    rai_ysp_api.call_api('POST', 'list-options', {labels: FillLists}).then(function(rOptions) {
+        for (let label in rOptions) {
+
+            let SelectorEle = document.querySelectorAll("datalist[data-fill-list='"+ label +"']");
+
+            rOptions[label].forEach(function(b) {
+
+                let option = document.createElement("OPTION");
+
+                    option.text = b;
+                    option.value = b;
+
+                SelectorEle.forEach((ele) => {
+                    ele.append(option);
+                });
+            });
+        }
+    });
+
     let yachtSearchAndResults=document.querySelector('.ysp-yacht-search-form');
 
     if (yachtSearchAndResults) {
@@ -159,7 +191,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 let only_vals=phase_path.slice(1);
 
                 only_vals=only_vals.join(' ').eachWordCapitalize();
-
+                
                 let only_vals_array=(only_vals.split('+'));
 
                 if (typeof only_vals_array[1] != 'undefined') {
@@ -230,33 +262,6 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
 
-        // Fill List Options
-        let FillLists=[];
-        let listElements = document.querySelectorAll("datalist[data-fill-list]");
-
-        listElements.forEach((ele) => {
-            FillLists.push(ele.getAttribute('data-fill-list'));
-        });
-        
-        rai_ysp_api.call_api('POST', 'list-options', {labels: FillLists}).then(function(rOptions) {
-            for (let label in rOptions) {
-
-                let SelectorEle = document.querySelectorAll("datalist[data-fill-list='"+ label +"']");
-
-                rOptions[label].forEach(function(b) {
-
-                    let option = document.createElement("OPTION");
-
-                        option.text = b;
-                        option.value = b;
-
-                    SelectorEle.forEach((ele) => {
-                        ele.append(option);
-                    });
-                });
-            }
-        });
-        
         // Fill options
         let FillOptions=[];
         let selectorElements = document.querySelectorAll("select[data-fill-options]");
@@ -302,9 +307,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
                         pretty_url_path_params[phase_path[0]]=only_vals.join(' ');
 
-                         if (typeof pretty_url_path_params[phase_path[0]] == 'string') {
+                        if (typeof pretty_url_path_params[phase_path[0]] == 'string') {
                            pretty_url_path_params[phase_path[0]] = pretty_url_path_params[phase_path[0]].eachWordCapitalize();
-                }
+                        }
                     }
 
                 });
