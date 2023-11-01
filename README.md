@@ -1,4 +1,4 @@
-[![cropped-White-Logo](https://github.com/RossAndInternets/yacht-sync-wp-plugin/raw/master/assets/140726619/72fbfe6e-3c9a-4e3f-ba0a-b7a1c777f6f4)](https://jrmarineadvertising.com/)
+[![cropped-White-Logo](https://github.com/RossAndInternets/yacht-sync-wp-plugin/raw/master/assets/140726619/72fbfe6e-3c9a-4e3f-ba0a-b7a1c777f6f4)
 
 
  Post Types
