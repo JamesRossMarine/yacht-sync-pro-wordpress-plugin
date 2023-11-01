@@ -50,6 +50,11 @@
 
 			return "";
 		}
+		public function pickedComapnyName() {
+			$companyName = $this->options->get('comapny_name');
+
+			return "";
+		}
 
 		public function enqueueGlobal() {
 
@@ -61,6 +66,9 @@
 				'assets_url' => RAI_YS_PLUGIN_ASSETS,
 				'yacht_search_url' => get_permalink($this->options->get('yacht_search_page_id')),
 				'europe_option_picked' => $this->options->get('is_euro_site'),
+				'company_name' => $this->options->get('company_name'),
+				'company_number' => $this->options->get('company_number'),
+				'company_logo' => wp_get_attachment_image_url($this->options->get('company_logo')),
 				'euro_c_c' => $this->options->get('euro_c_c')
 			];
 

@@ -17,6 +17,7 @@ var ysp_templates={};
 			length = vessel.NominalLength ? meters.toFixed(2) + ' m' : 'N/A';
 			price = vessel.Price ? `€ ${new Intl.NumberFormat('en-us', { minimumFractionDigits: 2}).format((parseInt(vessel.YSP_EuroVal) * rai_yacht_sync.euro_c_c))}` : 'Contact Us For Price';
 		} else {
+			console.log(vessel);
 			length = vessel.NominalLength ? vessel.NominalLength + " / " + meters.toFixed(2) + ' m' : 'N/A';
 			price = vessel.Price ? `$ ${new Intl.NumberFormat('en-us', { minimumFractionDigits: 2}).format(parseInt(vessel.YSP_EuroVal))}` : 'Contact Us For Price'
 		}
@@ -26,6 +27,7 @@ var ysp_templates={};
 				<div class="yacht-main-image-container">
 					<a class="yacht-details" href="${ vessel._link }">
 						<img class="yacht-main-image" src="${vessel.Images ? vessel.Images[0].Uri : rai_yacht_sync.assets_url + 'images/default-yacht-image.jpeg'}" alt="yacht-image" loading="lazy" />
+						${vessel.CompanyName === rai_yacht_sync.company_name ? `<div class="company-banner"><img src="${rai_yacht_sync.company_logo}"></div>` : ''}
 					</a>	
 				</div>
 				<div class="yacht-general-info-container">

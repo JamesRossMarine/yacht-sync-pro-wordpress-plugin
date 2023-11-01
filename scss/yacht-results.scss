@@ -31,6 +31,31 @@
     .loader-icon {
         display: none;
     }
+    .yacht-main-image-container {
+        position: relative;
+    }
+    
+    .image-wrapper {
+        position: relative;
+        display: inline-block; 
+    }
+    
+    .yacht-main-image {
+        width: 100%; 
+        height: auto; 
+    }
+    
+    .company-banner {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        height: 50px;
+        width: 50px;
+        padding: 5px; 
+        font-size: 14px; 
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 600;
+    }
     .yacht-search-total {
         padding-bottom: 15px;
         border-bottom: 1px solid #CBD5E1;
