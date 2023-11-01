@@ -344,7 +344,7 @@
 					<img src="<?php echo esc_url($image) ?>" />
 				</a>
 				<a href="#" class="rudr-remove">Remove image</a>
-				<input type="hidden" name="<?php echo self::SLUG; ?>_company_logo" value="<?php echo absint($image_id) ?>">
+				<input type="hidden" name="<?php echo self::SLUG; ?>_company_logo" value="<?php echo esc_url($image_url); ?>">
 			<?php else : ?>
 				<a href="#" class="button rudr-upload">Upload image</a>
 				<a href="#" class="rudr-remove" style="display:none">Remove image</a>

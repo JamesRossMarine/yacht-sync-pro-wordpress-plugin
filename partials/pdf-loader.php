@@ -1,3 +1,9 @@
+<?php
+        $YSP_Options = new raiYachtSync_Options();
+        $YSP_logo = $YSP_Options->get('company_logo');
+        $YSP_Comapny_logo = $YSP_Options->get('company_logo');
+		$company_logo_url = wp_get_attachment_image_url($YSP_Comapny_logo, 'small');
+		?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -6,11 +12,12 @@
 
 <body>
 <div style='display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh;'>
-    <img src='<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/loading-icon.gif' alt='Loading Icon'  style="height: 120px; width:120px;" />
+<img src="<?php echo esc_url($company_logo_url); ?>" alt="Company Logo" style="height: 120px; width: 120px" />
     <div style='margin-top: 20px; text-align: center;'>
         <b>LOADING PDF</b><br>
         Our servers are generating this document in real-time. Please wait a few seconds.
     </div>
+	<img src='<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/loading-icon.gif' alt='Loading Icon'  style="height: 120px; width:120px;" />
 </div>
 
 

@@ -2,6 +2,9 @@
     max-width: $max-width;
     margin-right: auto;
     margin-left: auto;
+    @media  screen and (max-width: $breakpoint-x-large) {
+        margin-top: 30px;
+    }
 
     .ys-h-row {
         display: flex !important;
@@ -59,22 +62,18 @@
                 height: 40px;
                 border-radius: 0px;
                 border: 1px solid $border-color;
-
-                @media screen and (max-width: $breakpoint-small){
-                    width: 94%;
-                }
             }
 
             svg.search-icon {
                 position: absolute;
                 right: 12px;
-                top: 30px;
+                top: 33px;
             }
 
             svg.dropdown-icon {
                 position: absolute;
                 right: 6px;
-                top: 30px;
+                top: 33px;
             }
 
             input[type="submit"] {
@@ -91,7 +90,7 @@
                 height: 40px;
                 
                 input {
-                    width: 36%;
+                    width: 46%;
                     border: 1px solid $border-color;
                 }
 

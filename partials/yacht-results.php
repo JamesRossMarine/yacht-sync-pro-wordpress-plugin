@@ -1,3 +1,8 @@
+<?php
+        $YSP_Options = new raiYachtSync_Options();
+        $YSP_name = $YSP_Options->get('company_name');
+        $YSP_Comapny_name = $YSP_Options->get('company_name');
+		?>
 <section id="search-result-section" class="search-result-section">
 	<div class="scroll-to-here-on-yacht-search"></div>
 
@@ -6,7 +11,7 @@
     </h5>
      
 
-    <label><input type="checkbox" name="ys_company_only" value="1" form="ysp-yacht-search-form"> Company Only</label>
+    <label><input type="checkbox" name="ys_company_only" value="1" form="ysp-yacht-search-form"> <?php echo $YSP_Comapny_name ?></label>
 
     <div class="yacht-search-options">
         <div class="list-view-and-sort-container">
