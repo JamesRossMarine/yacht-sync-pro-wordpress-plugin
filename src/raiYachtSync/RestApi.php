@@ -357,7 +357,7 @@
 			    
 			    'hidden_honeypot_field' => $form_data['fax'],
 
-			    'contact_me_by_fax_only' => $form_data['fax'],
+			    'fax' => $form_data['fax'],
 
 			);
 
