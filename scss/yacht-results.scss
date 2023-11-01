@@ -51,10 +51,6 @@
         right: 0;
         height: 50px;
         width: 50px;
-        padding: 5px; 
-        font-size: 14px; 
-        font-family: Arial, Helvetica, sans-serif;
-        font-weight: 600;
     }
     .yacht-search-total {
         padding-bottom: 15px;
@@ -85,11 +81,16 @@
         .list-view-and-sort-container {
             display: flex;
             justify-content: space-between;
+            width: 100%;
+            @media screen and (max-width: $breakpoint-small) {
+                flex-direction: column;
+            }
 
             .list-view-group {
                 display: flex;
                 margin-right: 130px;
                 font-size: 12px;
+                padding-top: 10px;
 
                 > label{
                     cursor: pointer;
@@ -123,7 +124,7 @@
 
             select {
                 border: none;
-                width: 110px;
+                width: 175px;
             }
         }
     }
@@ -185,6 +186,9 @@
                             color: $main-text-color;
                             margin: 0px;
                             padding: 10px 92px 10px 18px;
+                        }
+                        a {
+                            text-decoration: none !important;
                         }
                     }
                     .yacht-info-container {
