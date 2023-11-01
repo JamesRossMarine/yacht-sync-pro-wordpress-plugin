@@ -99,7 +99,7 @@
 		            }
 
 		            if (isset($boat['Images']) && is_array($boat['Images']) && count($boat['Images']) > 0) {
-                        $reducedImages = array_slice($boat['Images'], 0, 50);
+                       //$reducedImages = array_slice($boat['Images'], 0, 50);
                         
                         $reducedImages = array_map(
                         	function($img) {
