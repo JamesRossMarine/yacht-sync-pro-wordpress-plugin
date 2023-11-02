@@ -32,7 +32,7 @@
             </div>
         </div>
         <div class="ys-quick-row-item submit-container">
-            <input type="submit" name="submit" value="Submit"/>
+            <input type="submit" value="Submit"/>
         </div>
     </form>
 </div>
