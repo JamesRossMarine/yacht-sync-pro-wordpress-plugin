@@ -52,8 +52,12 @@
 		        	$page++;
 		        }
 
+		        if (count($apiBody['V-Data']) == 0) {
+		        	break;
+		        }
+
 				foreach ($apiBody['V-Data'] as $row) {
-		            $yachtSynced++;
+		            $yachtSynced++; 
 		           	
 		           	$theBoat=[
 		           		'BoatLocation' => (object) [
@@ -107,7 +111,6 @@
 		                'TaxStatusCode' => 'TaxStatus',
 		                'NominalLength' => 'LOAFeet',
 		                'AdditionalDetailDescription' => 'Description'
-
 		           	];
 
 		           	foreach ($MapToBoatOrg as $mapToKey => $key) {

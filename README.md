@@ -1,9 +1,7 @@
-![cropped-White-Logo](https://github.com/RossAndInternets/yacht-sync-wp-plugin/assets/140726619/72fbfe6e-3c9a-4e3f-ba0a-b7a1c777f6f4)
+ ![cropped-White-Logo](https://github.com/RossAndInternets/yacht-sync-wp-plugin/assets/140726619/72fbfe6e-3c9a-4e3f-ba0a-b7a1c777f6f4)
 
 
- Post Types
-
-
+ # Post Types
 <li>rai_yacht</li>
 <li>rai_broker</li>
 
