@@ -14,6 +14,9 @@
 			$this->yachtBrokerAPIKey = $this->options->get('yacht_broker_org_api_token');
 			$this->yachtClientId = $this->options->get('yacht_broker_org_id');
 			
+
+			$this->euro_c_c = intval($this->options->get('euro_c_c'));
+			$this->usd_c_c = intval($this->options->get('usd_c_c'));	
 		}
 
 		public function run() {
@@ -110,7 +113,8 @@
 		                'DisplayLengthFeet' => 'LOAFeet',
 		                'TaxStatusCode' => 'TaxStatus',
 		                'NominalLength' => 'LOAFeet',
-		                'AdditionalDetailDescription' => 'Description'
+		                'AdditionalDetailDescription' => 'Description',
+		                'CabinCountNumeric' => 'CabinCount'
 		           	];
 
 		           	foreach ($MapToBoatOrg as $mapToKey => $key) {
@@ -151,21 +155,14 @@
 			            $theBoat['MaximumSpeedMeasure']=$row['MaximumSpeedMeasure'];
 		            }
 
-					if (isset($theBoat['Price'])){
-						if (str_contains($theBoat['Price'], 'EUR')){
-							var_dump("This is the issue 1");
-							$theBoat['YSP_EuroVal'] = intval($theBoat['Price']);
-							$theBoat['YSP_USDVal'] = intval($theBoat['Price'])  * $this->options->get('usd_c_c');
-						} else {
-							$price = intval($theBoat['Price']) * $this->options->get('euro_c_c');
-							$theBoat['YSP_EuroVal'] = $price;	
-							$theBoat['YSP_USDVal'] = intval($theBoat['Price']);	
-						}
+					if (isset($theBoat['Price'])) {
+						$theBoat['YSP_EuroVal'] = $row['PriceEuro'];
+						$theBoat['YSP_USDVal'] = $row['PriceUSD'];
 					}
 
-		            if (isset($row['BeamMeasure'])) {
-		                $row['BeamMeasure'] .= ' ft';
-		                $theBoat['BeamMeasure']=$row['BeamMeasure'];
+		            if (isset($row['BeamFeet'])) {
+		                $row['BeamFeet'] .= ' ft';
+		                $theBoat['BeamMeasure']=$row['BeamFeet'];
 		            }
 
 		            if (isset($row['WaterTankCapacityMeasure'])) {
