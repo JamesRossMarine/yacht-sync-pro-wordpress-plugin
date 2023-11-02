@@ -91,6 +91,9 @@
                 margin-right: 130px;
                 font-size: 12px;
                 padding-top: 10px;
+                 @media screen and (max-width: $breakpoint-small) {
+                    display: none;
+                 }
 
                 > label{
                     cursor: pointer;
@@ -124,7 +127,7 @@
 
             select {
                 border: none;
-                width: 175px;
+                width: 200px;
             }
         }
     }
