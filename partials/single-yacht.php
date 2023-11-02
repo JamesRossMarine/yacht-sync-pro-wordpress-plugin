@@ -68,7 +68,7 @@ get_header();
                     <div id="lightgallery" class="carousel carousel-main yacht-main-image-container">
                         <?php foreach($vessel->Images as $imageObject) { ?>
                             <div class="carousel-cell" data-src="<?php echo ($imageObject->Uri); ?>">
-                                <img class="yacht-image" data-flickity-lazyload="<?php echo ($imageObject->Uri); ?>" alt="yacht-image-carousel"/>
+                                <img class="yacht-image" src="<?php echo ($imageObject->Uri); ?>" alt="yacht-image-carousel"/>
                             </div>
                         <?php } ?>
                     </div>
@@ -78,7 +78,7 @@ get_header();
                         <?php foreach($vessel->Images as $imageObject) { ?>
                             <div class="carousel-cell">
                                 <div class="carousel-nav-overlay"></div>
-                                <img class="yacht-image" data-flickity-lazyload="<?php echo ($imageObject->Uri); ?>" alt="yacht-image-nav"/>
+                                <img class="yacht-image" src="<?php echo ($imageObject->Uri); ?>" alt="yacht-image-nav"/>
                             </div>
                         <?php } ?>
                     </div>

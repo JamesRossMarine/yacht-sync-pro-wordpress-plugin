@@ -25,6 +25,7 @@
                 margin-right: 0px;
             }
         }
+
         .broker-image-general-container {
             width: 325px;
             @media screen and (max-width: $breakpoint-med){
@@ -53,17 +54,21 @@
                     font-size: 20px;
                     font-weight: 600;
                     line-height: 28px;
+                    margin: 15px 0px;
                 }
                 .broker-title {
                     color: $main-text-color;
+                        margin-bottom: 10px;
                 }
                 .broker-email {
                     font-weight: 400;
                     line-height: 24px;
+                    margin-bottom: 10px;
                 }
                 .broker-phone {
                     font-weight: 400;
                     line-height: 24px;
+                    margin-bottom: 10px;
                 }
             }
         
@@ -81,6 +86,7 @@
         width: 30%;
         @media screen and (max-width: $breakpoint-med){
             width: 100%;
+            margin-top: 40px;
         }
 
         .broker-form-container {
