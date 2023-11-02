@@ -5,21 +5,18 @@ var ysp_templates={};
 		let meters = parseInt(vessel.NominalLength) * 0.3048;
 
 		let price = '';
-
-		if (typeof vessel.Price == 'string') {
-			price = vessel.Price.slice(0, -3);
-		}
-
 		let length = '';
 
 		if(rai_yacht_sync.europe_option_picked == "yes"){
 			console.log(vessel);
 			length = vessel.NominalLength ? meters.toFixed(2) + ' m' : 'N/A';
-			price = vessel.Price ? `€ ${new Intl.NumberFormat('en-us', { minimumFractionDigits: 2}).format((parseInt(vessel.YSP_EuroVal) * rai_yacht_sync.euro_c_c))}` : 'Contact Us For Price';
-		} else {
+			price = vessel.Price ? `€ ${new Intl.NumberFormat('en-us', { minimumFractionDigits: 2}).format(vessel.YSP_EuroVal) }` : 'Contact Us For Price';
+		} 
+
+		else {
 			console.log(vessel);
 			length = vessel.NominalLength ? vessel.NominalLength + " / " + meters.toFixed(2) + ' m' : 'N/A';
-			price = vessel.Price ? `$ ${new Intl.NumberFormat('en-us', { minimumFractionDigits: 2}).format(parseInt(vessel.YSP_EuroVal))}` : 'Contact Us For Price'
+			price = vessel.Price ? `$ ${new Intl.NumberFormat('en-us', { minimumFractionDigits: 2}).format(vessel.YSP_USDVal) }` : 'Contact Us For Price'
 		}
 
 		return `

@@ -155,9 +155,11 @@
 						if (str_contains($theBoat['Price'], 'EUR')){
 							var_dump("This is the issue 1");
 							$theBoat['YSP_EuroVal'] = intval($theBoat['Price']);
+							$theBoat['YSP_USDVal'] = intval($theBoat['Price'])  * $this->options->get('usd_c_c');
 						} else {
 							$price = intval($theBoat['Price']) * $this->options->get('euro_c_c');
 							$theBoat['YSP_EuroVal'] = $price;	
+							$theBoat['YSP_USDVal'] = intval($theBoat['Price']);	
 						}
 					}
 

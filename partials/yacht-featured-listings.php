@@ -1,10 +1,4 @@
-
 <div class="featured-listings-container">
-    <h3 class="featured-listings-title">
-        Featured Listings
-        <hr />
-    </h3>
-
     <div class="yacht-featured-listing-row">
 
         <?php

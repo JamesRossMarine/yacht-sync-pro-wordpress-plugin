@@ -17,6 +17,9 @@
 
 			$this->globalInventoryUrl .= $this->key;
 
+			$this->euro_c_c = intval($this->options->get('euro_c_c'));
+			$this->usd_c_c = intval($this->options->get('usd_c_c'));
+			
 		}
 
 		public function run() {
@@ -174,15 +177,18 @@
 						$boatC->YSP_ListingDate = $boat['Images'][0]['LastModifiedDateTime'];
 					}
 
+
 					if (isset($boat['OriginalPrice']) && isset($boat['Price'])){
-						if (str_contains($boat['OriginalPrice'], 'EUR')){
-							var_dump("This is the issue 1");
-							$boatC->YSP_EuroVal = intval($boat['OriginalPrice']);
+						if (str_contains($boat['OriginalPrice'], 'EUR')) {
+							$boatC->YSP_EuroVal = intval(str_replace(array(' EUR'), '', $boat['OriginalPrice']) );
+							$boatC->YSP_USDVal = $boatC->YSP_EuroVal * $this->usd_c_c;
+
 						} else {
-							$price = intval($boat['Price']) * $this->options->get('euro_c_c');
-							$boatC->YSP_EuroVal = $price;	
+							$boatC->YSP_USDVal = intval(str_replace(array(' USD'), '', $boat['OriginalPrice']));
+							$boatC->YSP_EuroVal = $boatC->YSP_USDVal * $this->euro_c_c;
 						}
 					}
+
 
                     if (isset($boatC->AdditionalDetailDescription)) {
 						foreach ($boatC->AdditionalDetailDescription as $aIndex => $description) {

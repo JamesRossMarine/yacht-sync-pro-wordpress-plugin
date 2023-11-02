@@ -61,5 +61,17 @@
 				if (! is_wp_error($result) && $responseCode == 200) {
 					$this->options->update('euro_c_c', $result->rates->EUR);
 				}
+
+				$apiUrl = 'https://api.exchangerate.host/latest?base=EUR&symbols=USD';
+			
+				$response = wp_remote_get($apiUrl);
+				$responseBody = wp_remote_retrieve_body($response);
+				$responseCode = wp_remote_retrieve_response_code($response);
+				
+				$result = json_decode($responseBody);
+				
+				if (! is_wp_error($result) && $responseCode == 200) {
+					$this->options->update('usd_c_c', $result->rates->USD);
+				}
 		}
 	}

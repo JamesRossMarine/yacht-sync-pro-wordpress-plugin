@@ -1,21 +1,14 @@
 <?php
     $meters = (int) $yacht['NominalLength'] * 0.3048;
-    $price = '';
-
     $length = '';
 
-    if (gettype($yacht['Price'] == 'string')){
-        $string_position = strlen($yacht['Price']);
-        $price = substr($yacht['Price'], 0, $string_position);
-    }
-
-    if($YSP_Euro_Opt == "yes"){
+    if ($YSP_Euro_Opt == "yes") {
         $length = $yacht["NominalLength"] ? number_format($meters, 2) . ' m' : 'N/A';
-        $converted_price = $price * (float) $YSP_Euro_C_C;
-        $price = $yacht["Price"] ?  '€ ' . number_format($converted_price) : 'Contact Us For Price';
-    } else {
+        $price = $yacht["Price"] ?  '€ ' . number_format($yacht['YSP_EuroVal']) : 'Contact Us For Price';
+    } 
+    else {
         $length = $yacht["NominalLength"] ? $yacht['NominalLength'] . ' / ' . number_format($meters, 2) . ' m' : 'N/A';
-        $price = $yacht["Price"] ? '$ ' . number_format($price) : 'Contact Us For Price'; 
+        $price = $yacht["Price"] ? '$ ' . number_format($yacht['YSP_USDVal']) : 'Contact Us For Price'; 
     }
 
 ?>

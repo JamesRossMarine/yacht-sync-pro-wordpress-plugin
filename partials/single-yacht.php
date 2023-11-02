@@ -19,8 +19,8 @@ get_header();
         );
 
         $YSP_Options = new raiYachtSync_Options();
+
         $YSP_Euro_Opt = $YSP_Options->get('is_euro_site');
-        $YSP_Euro_C_C = $YSP_Options->get('euro_c_c')
     ?>
 <main id="primary" class="site-main">
     <?php
@@ -52,7 +52,7 @@ get_header();
                         if ($YSP_Euro_Opt == "yes") {
                             echo '€' . number_format($vessel->YSP_EuroVal) . ' ' . 'EUR';
                         } else {
-                            echo '$' . number_format($vessel->Price);
+                            echo '$' . number_format($vessel->YSP_USDVal);
                         }
                         ?>
                     </h2>
