@@ -8,6 +8,8 @@
 
 			$this->options = new raiYachtSync_Options();
 
+			$this->LocationConvert = new raiYachtSync_LocationConvert();
+
 			$this->key=$this->options->get('boats_com_api_brokerage_key');
 
 			$this->brokerageInventoryUrl .= $this->key;
@@ -29,6 +31,18 @@
 			$apiCall = wp_remote_get($this->brokerageInventoryUrl, ['timeout' => 300]);
 
 				$apiCall['body']=json_decode($apiCall['body'], true);
+
+				$api_status_code = wp_remote_retrieve_response_code($apiCall);
+
+			if ($api_status_code == 200 && isset($apiCall['body']['numResults'])) {
+				// return;
+			}
+			elseif ($api_status_code == 401) {
+				return ['error' => 'Error with auth'];
+			}
+			else {
+				return ['error' => 'Error http error '.$api_status_code];
+			}
 
 	        $total = $apiCall['body']['numResults'];
 
@@ -130,6 +144,9 @@
 	                    $boatC->YSP_CountryID = $boat['BoatLocation']['BoatCountryID'];
 	                    $boatC->YSP_City = $boat['BoatLocation']['BoatCityName'];
 	                    $boatC->YSP_State = $boat['BoatLocation']['BoatStateCode'];
+
+	                    $boatC->YSP_Full_Country = $this->LocationConvert->country[ $boatC->YSP_CountryID ];
+	                    $boatC->YSP_Full_State = $this->LocationConvert->state[ $boatC->YSP_State ];
                     }
 
                     if (isset($boat['SalesRep'])) {
@@ -224,6 +241,8 @@
 
 
 			}
+
+			return ['success' => 'Successfully Sync Boat.com Brokerage Only Feed'];
 
 			//var_dump($yachtsSynced);
 

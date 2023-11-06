@@ -37,6 +37,8 @@
 
 	        //var_dump($apiCall['body']);
 
+	        $api_status_code = wp_remote_retrieve_response_code($apiCall);
+
 	        $json = json_decode($apiCall['body'], true);
 
 	        $total = $json['total'];
@@ -72,6 +74,9 @@
 		           		'YSP_City' => $row['City'],
 		           		'YSP_CountryID' => $this->LocationConvert->filpped_country[ $row['Country'] ],
 		           		'YSP_State' => $this->LocationConvert->filpped_state[ $row['State'] ],
+
+		           		'YSP_Full_Country' => $row['Country'],
+		           		'YSP_Full_State' => $row['State'],
 
 		           		'SalesRep' => (object)  [
 		           			'PartyId' => $row['ListingOwnerID'],

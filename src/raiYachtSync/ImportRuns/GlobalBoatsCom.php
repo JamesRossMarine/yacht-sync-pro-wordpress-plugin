@@ -13,6 +13,8 @@
 
 			$this->options = new raiYachtSync_Options();
 
+			$this->LocationConvert = new raiYachtSync_LocationConvert();
+
 			$this->key=$this->options->get('boats_com_api_global_key');
 
 			$this->globalInventoryUrl .= $this->key;
@@ -152,6 +154,9 @@
 	                    $boatC->YSP_City = $boat['BoatLocation']['BoatCityName'];
 	                    $boatC->YSP_CountryID = $boat['BoatLocation']['BoatCountryID'];
 	                    $boatC->YSP_State = $boat['BoatLocation']['BoatStateCode'];
+
+	                    $boatC->YSP_Full_Country = $this->LocationConvert->country[ $boatC->YSP_CountryID ];
+	                    $boatC->YSP_Full_State = $this->LocationConvert->state[ $boatC->YSP_State ];
                     }
 
 					if (isset($boat['Engines'])) {
