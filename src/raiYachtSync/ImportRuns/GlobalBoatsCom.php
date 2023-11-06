@@ -156,7 +156,14 @@
 	                    $boatC->YSP_State = $boat['BoatLocation']['BoatStateCode'];
 
 	                    $boatC->YSP_Full_Country = $this->LocationConvert->country[ $boatC->YSP_CountryID ];
-	                    $boatC->YSP_Full_State = $this->LocationConvert->state[ $boatC->YSP_State ];
+
+	                    if (isset($this->LocationConvert->state[ $boatC->YSP_State ])) {
+	                   		$boatC->YSP_Full_State = $this->LocationConvert->state[ $boatC->YSP_State ];
+	                    }
+	                    else {
+	                   		$boatC->YSP_Full_State = "";
+	                    }
+
                     }
 
 					if (isset($boat['Engines'])) {

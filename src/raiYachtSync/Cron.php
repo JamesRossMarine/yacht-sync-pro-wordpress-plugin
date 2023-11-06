@@ -50,19 +50,21 @@
 
 		public function run_cron_euro_c_save() {
 
-				$apiUrl = 'https://api.exchangerate.host/latest?base=USD&symbols=EUR';
+				$apiUrl = 'http://api.exchangerate.host/live?access_key=ad455b3579ad64232171cc9a50087f6f&source=USD&symbols=EUR';
 			
-				$response = wp_remote_get($apiUrl);
+				$response = wp_remote_get($apiUrl, [
+					
+				]);
 				$responseBody = wp_remote_retrieve_body($response);
 				$responseCode = wp_remote_retrieve_response_code($response);
 				
 				$result = json_decode($responseBody);
 				
 				if (! is_wp_error($result) && $responseCode == 200) {
-					$this->options->update('euro_c_c', $result->rates->EUR);
+					$this->options->update('euro_c_c', $result->quotes->USDEUR);
 				}
 
-				$apiUrl = 'https://api.exchangerate.host/latest?base=EUR&symbols=USD';
+				$apiUrl = 'http://api.exchangerate.host/live?access_key=ad455b3579ad64232171cc9a50087f6f&source=EUR&symbols=USD';
 			
 				$response = wp_remote_get($apiUrl);
 				$responseBody = wp_remote_retrieve_body($response);
@@ -71,7 +73,7 @@
 				$result = json_decode($responseBody);
 				
 				if (! is_wp_error($result) && $responseCode == 200) {
-					$this->options->update('usd_c_c', $result->rates->USD);
+					$this->options->update('usd_c_c', $result->quotes->EURUSD);
 				}
 		}
 	}
