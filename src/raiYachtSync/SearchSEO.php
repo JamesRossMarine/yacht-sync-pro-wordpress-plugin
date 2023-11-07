@@ -103,7 +103,19 @@
 						$grabbed_params.=$pVal.' ';
 	 				}
 					elseif (is_string($pVal) && ! empty($pVal)) {
-						$grabbed_params.=$pVal.' ';
+						$pVal_a = explode('+', $pVal);
+
+						if (count($pVal_a) > 1) {
+							$pVal = join(' + ', $pVal_a);
+							
+							$grabbed_params.=$pVal.' ';
+
+						}
+						else {
+							$grabbed_params.=$pVal.' ';
+
+						}
+						
 					}
 
 				}
