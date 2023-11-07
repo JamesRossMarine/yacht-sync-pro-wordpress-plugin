@@ -26,6 +26,8 @@
 
 			register_setting( self::SLUG, self::SLUG . '_color_one');
 			register_setting( self::SLUG, self::SLUG . '_color_two');
+			register_setting( self::SLUG, self::SLUG . '_color_three');
+			register_setting( self::SLUG, self::SLUG . '_color_four');
 
 			register_setting( self::SLUG, self::SLUG . '_send_lead_to_this_email');
 

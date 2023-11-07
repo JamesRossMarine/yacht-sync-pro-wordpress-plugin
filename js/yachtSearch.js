@@ -72,9 +72,9 @@ document.addEventListener("DOMContentLoaded", function() {
         yachtSearchAndResults.addEventListener('submit', function(e) {
             e.preventDefault();
 
-            event.target.querySelector('input[name=page_index]').value=1;
+            e.target.querySelector('input[name=page_index]').value=1;
 
-            let params = raiys_get_form_data(event.target);
+            let params = raiys_get_form_data(e.target);
 
             ysp_yacht_search_and_reader( params );
 
@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         yachtSearchAndResults.querySelectorAll('input.submit-on-change').forEach((eeee) => {
             eeee.addEventListener('change', function(e) {
-                event.target.form.querySelector('input[name=page_index]').value=1;
+                e.target.form.querySelector('input[name=page_index]').value=1;
 
                 let params = raiys_get_form_data( e.target.form );
 
@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         yachtSearchAndResults.querySelectorAll('input[type=reset]').forEach((eeee) => {
             eeee.addEventListener('click', function(e) {
-                event.target.form.querySelector('input[name=page_index]').value=1;
+                e.target.form.querySelector('input[name=page_index]').value=1;
 
                 let params = raiys_get_form_data( e.target.form );
 
@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 
         document.querySelector('input[name="ys_company_only"]').addEventListener('change', function(e) {
-            event.target.form.querySelector('input[name=page_index]').value=1;
+            e.target.form.querySelector('input[name=page_index]').value=1;
 
             let params = raiys_get_form_data( e.target.form );
 
@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function() {
         
         document.querySelectorAll('input[name=view][form=ysp-yacht-search-form], select[name=sortBy][form=ysp-yacht-search-form]').forEach((eeee) => {
             eeee.addEventListener('change', function(e) {
-                event.target.form.querySelector('input[name=page_index]').value=1;
+                e.target.form.querySelector('input[name=page_index]').value=1;
 
                 let params = raiys_get_form_data( e.target.form );
 
