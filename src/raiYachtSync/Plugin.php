@@ -16,6 +16,8 @@
 			$this->YoastFun_OgImage = new raiYachtSync_YoastFun_ogImage();
 			$this->YoastFun_Descriptions = new raiYachtSync_YoastFun_Descriptions();
 
+			$this->YoastFun_SchemaPieces = new raiYachtSync_YoastFun_SchemaPieces();
+
 			$this->Yachts_WpQueryAddon = new raiYachtSync_Yachts_WpQueryAddon();
 			$this->Yachts_WpQueryForSimilar = new raiYachtSync_Yachts_WpQueryForSimilar();
 			
