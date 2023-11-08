@@ -19,12 +19,20 @@
             $current_post = $this->context->post;
             $permalink = get_permalink($current_post);
 
+            $yacht_meta = get_post_meta($current_post->ID);
+            // var_dump($yacht_meta);
+
+            $fuel_type = get_post_meta($current_post->ID, 'YSP_EngineFuel', true);
+            $engine_type = get_post_meta($current_post->ID, 'YSP_EngineModel', true);
+
             // we should probably add some data validation here
             $data = [
                 "@type"         => "Vehicle",
                 "@id"           => $permalink . "#vehicle",
                 "url"           => $permalink,
                 "name"          => $current_post->post_title,
+                "vehicleEngine" => $engine_type,
+                "fuelType"      => $fuel_type,
             ];
             
             return $data;
