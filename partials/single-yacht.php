@@ -38,7 +38,6 @@ get_header();
         $vessel = array_map("maybe_unserialize", $meta);
 
         $vessel = (object) $vessel; ?>
-        <!-- <?php var_dump($vessel) ?> -->
 
         <div id="ysp-yacht-details">
             <div class="yacht-main-container">
