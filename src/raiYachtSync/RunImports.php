@@ -124,6 +124,8 @@
 			
 			$yacht_broker_org_api_token = $this->options->get('yacht_broker_org_api_token');
 
+			$resultsOfSync=[];
+			
 			// @ToDo For Loop the Runs  
 			// KEEP THIS IN THIS ORDER
 			if (!empty($yacht_broker_org_api_token)) {
@@ -134,9 +136,19 @@
 				$this->ImportBrokerageOnlyBoatsCom->run();
 			}
 			
-			$this->clean_up_brokerage_only();
-			$this->move_over();
+			$syncHadIssue=false;
 
+			foreach ($resultsOfSync as $syncR) {
+				if (isset($syncR['error'])) {
+					$syncHadIssue=true;
+				}
+
+			}
+
+			if ($syncHadIssue == false) {
+				$this->clean_up_brokerage_only();
+				$this->move_over();
+			}
 
        	}
 
