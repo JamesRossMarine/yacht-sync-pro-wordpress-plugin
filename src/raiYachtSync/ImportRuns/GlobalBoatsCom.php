@@ -39,6 +39,16 @@
 
 	        $errors = new WP_Error();
 
+	        if ($api_status_code == 200 && isset($apiCall['body']['numResults'])) {
+				// return;
+			}
+			elseif ($api_status_code == 401) {
+				return ['error' => 'Error with auth'];
+			}
+			else {
+				return ['error' => 'Error http error '.$api_status_code];
+			}
+
 	        //var_dump($total);
 
 			while ($total > $yachtsSynced) {
@@ -258,7 +268,7 @@
 			//var_dump($total);
 			//var_dump($yachtsSynced);
 
-
+			return ['success' => 'Successfully Sync Boat.com Co-Brokerage / Global Feed'];
 
 		}
 

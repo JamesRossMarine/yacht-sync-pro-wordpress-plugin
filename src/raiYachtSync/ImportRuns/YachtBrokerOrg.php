@@ -41,6 +41,16 @@
 
 	        $json = json_decode($apiCall['body'], true);
 
+	        if ($api_status_code == 200 && isset($json['V-Data'])) {
+				// return;
+			}
+			elseif ($api_status_code == 401) {
+				return ['error' => 'Error with auth'];
+			}
+			else {
+				return ['error' => 'Error http error '.$api_status_code];
+			}
+
 	        $total = $json['total'];
 	        $yachtSynced = 0;
 	        $page = 1;
@@ -243,7 +253,6 @@
 						}
 					}*/
 
-
 		            if (! empty($theBoat['BoatHullID'])) {
 		                $find_post=get_posts([
 		                    'post_type' => 'syncing_rai_yacht',
@@ -294,6 +303,8 @@
 
 	        }
 
+	        return ['success' => 'Successfully Sync YachtBroker.org Brokerage Only Feed'];
+ 
 	        // after for loop
 	    }
 	}
