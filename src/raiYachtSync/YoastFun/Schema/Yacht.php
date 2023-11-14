@@ -24,11 +24,10 @@
             $model_year = get_post_meta($current_post->ID, 'ModelYear', true);
             $make_string = get_post_meta($current_post->ID, 'MakeString', true);
             $model_type = get_post_meta($current_post->ID, 'Model', true);
-            $document_id = get_post_meta($current_post->ID, 'DocumentID', true);
+            $document_id = get_post_meta($current_post->ID, 'HullIdentificationNumber', true);
             $speed = get_post_meta($current_post, 'MaximumSpeedMeasure', true);
-            $price = get_post_meta($current_post->ID, 'Price', true);
-            $price = intval($price);
-
+            $price = get_post_meta($current_post->ID, 'YSP_USDVal', true);
+          
             $images = get_post_meta($current_post->ID, 'Images', true);
             $images_array = array();
 
@@ -42,20 +41,28 @@
                 //"@id" => $permalink . "#vehicle",
                 "url" => $permalink,
                 "name" => $current_post->post_title,
+                'category' => '',
                 "description" => $description,
                 "sku" => $document_id,
-                "image" => $images_array,
+               
+                "image" => $images_array[0],
+               
                 "modelDate" => $model_year,
-                "productID" => $document_id,
+               
                 "manufacturer" => $make_string,
+                "brand" => $make_string,
                 "model" => $model_type,
                 "speed" => $speed,
-                "vehicleEngine" => $engine_type,
+                
+                "vehicleEngine" => $engine_type, // https://schema.org/EngineSpecification
+
+
                 "fuelType" => $fuel_type,
+
                 "offers" => [
                     "@type" => "Offer",
                     "name" => $current_post->post_title,
-                    "price" => strval($price),
+                    "price" => $price,
                     //"url"  => $site_url . "/#webpage",
                     "priceCurrency" => "USD",
                     "availability"  => "InStock"
