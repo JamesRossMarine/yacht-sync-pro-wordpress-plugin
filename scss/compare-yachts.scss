@@ -1,0 +1,30 @@
+.compare-yachts-container {
+    width: 100%;
+    th {
+        padding: 10px;
+        width: 150px;
+    }
+    th:nth-child(even) {
+        background-color: #d8d8d8;
+
+    }
+.compare-info{
+    width: 100%;
+    td {
+        width: 100%;
+
+        padding: 10px
+    }
+    td.compare-img {
+        padding: 0px !important;
+    }
+    tr {
+        width: 100%;
+    }
+    td:nth-child(even) {
+        background-color: #d8d8d8;
+
+    }
+
+}
+}

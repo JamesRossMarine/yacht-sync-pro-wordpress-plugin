@@ -107,6 +107,15 @@
 		            
 		        )
 		    ) );
+
+			register_rest_route( 'raiys', '/compare', array(
+		        'callback' => [$this, 'compare_yachts'],
+		        'methods'  => [WP_REST_Server::READABLE, WP_REST_Server::CREATABLE],
+		        'permission_callback' => '__return_true',
+		        'args' => array(
+		            
+		        )
+		    ) );
 		}
 
 		public function sync_yachts(WP_REST_Request $request) {
@@ -133,6 +142,7 @@
 					}
 				}
 			}
+			
 
 			$yArgs=array_merge($yArgs, $r_params);
 
@@ -171,6 +181,29 @@
 			return $return;
 
 	    }
+
+		function compare_yachts(WP_REST_Request $request) {
+			$ids = $request->get_param('postID');
+		
+			$ids_array = explode(',', $ids);
+			$boats = array(); 
+		
+			foreach ($ids_array as $id) {
+				$boat = get_post($id);
+
+				if ($boat) {
+					$boats[] = $boat; 
+				}
+			}
+
+			header('Content-Type: text/html; charset=UTF-8');
+		
+			$file_to_include = RAI_YS_PLUGIN_TEMPLATES_DIR.'/compare-yachts.php';
+		
+			include apply_filters('rai_ys_yacht_compare_yachts', $file_to_include);
+
+		}
+		
 
 	   	public function yacht_dropdown_options(WP_REST_Request $request) {
 
