@@ -103,6 +103,7 @@
 			
 			$this->clean_up();
 			$this->move_over();
+			$this->pre_clean_up();
 		}
        
 
@@ -124,6 +125,7 @@
 			
 			$this->clean_up_brokerage_only();
 			$this->move_over();
+			$this->pre_clean_up();
 
 
        	}
