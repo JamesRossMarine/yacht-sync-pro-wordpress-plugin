@@ -196,7 +196,22 @@
 			return '';
 		}
 
+		public function cleanup_params($p) {
+
+			foreach ($p as $index_p => $pv) {
+				if (empty($pv)) {
+					unset($p[$index_p]);
+				}
+			}
+
+			return $p;
+
+		}
+
+
 		public function generate_title($passed_params = []) {
+
+			$passed_params = $this->cleanup_params($passed_params);
 
 			$grabbed_params=$this->grab_params($passed_params);
 			$grabbed_second_params=$this->grab_second_params($passed_params);
@@ -215,6 +230,8 @@
 
 		public function generate_meta_description($passed_params = []) {
 
+			$passed_params = $this->cleanup_params($passed_params);
+
 			$grabbed_params=$this->grab_params($passed_params);
 			$grabbed_second_params=$this->grab_second_params($passed_params);
 			$grabbed_location=$this->grab_location($passed_params);
@@ -229,6 +246,8 @@
 		}
 
 		public function generate_heading($passed_params = []) {
+
+			$passed_params = $this->cleanup_params($passed_params);
 
 			$grabbed_params=$this->grab_params($passed_params);
 			$grabbed_second_params=$this->grab_second_params($passed_params);
@@ -245,6 +264,8 @@
 		}
 
 		public function generate_paragraph($passed_params = []) {
+
+			$passed_params = $this->cleanup_params($passed_params);
 
 			$grabbed_params=$this->grab_params($passed_params);
 			$grabbed_second_params=$this->grab_second_params($passed_params);
