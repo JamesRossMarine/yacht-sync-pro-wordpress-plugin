@@ -116,6 +116,7 @@
 				$this->clean_up();
 				$this->move_over();				
 			} 
+		}
        
 
        	public function run_brokerage_only() {
