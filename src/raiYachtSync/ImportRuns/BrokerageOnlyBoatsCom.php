@@ -241,8 +241,6 @@
 								'url' => get_rest_url() ."raiys/yacht-pdf?yacht_post_id=". $y_post_id,
 								'webhook_url' => get_rest_url() ."raiys/set-yacht-pdf?yacht_post_id=". $y_post_id,
 								'use_s3' => true,
-								//'path' => 'balls/josh-',
-								//'download' => $boat['ModelYear'].'-'.$boat['MakeString'].'-'.$boat['Model'].'-'.$boat['BoatName'].'joshwashere.pdf',
 								'format' => 'pdf'
 							])
 						]
