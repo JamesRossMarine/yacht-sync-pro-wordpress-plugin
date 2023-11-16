@@ -11,6 +11,8 @@
 			
 			$this->SearchSEO = new raiYachtSync_SearchSEO();
 
+			$this->Stats = new raiYachtSync_Stats();
+
 		}
 
 		public function add_actions_and_filters() {
@@ -177,6 +179,8 @@
 			$return['query'] = $yachts_query->query_vars;
 
 			$return['SEO'] = $this->SearchSEO->all_together( $yArgs );
+
+			$return['stats'] = $this->Stats->run( $yArgs );
 			
 			return $return;
 
