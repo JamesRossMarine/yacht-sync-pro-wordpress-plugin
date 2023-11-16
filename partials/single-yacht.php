@@ -90,7 +90,7 @@ get_header();
                                 <p>Length</p>
                             </div>
                             <div class="yacht-length-value">
-                                <p><?php echo empty($vessel->NominalLength) ? "N/A" : $vessel->NominalLength . " / " . round((float)$vessel->NominalLength * 0.3048, 2) . ' m'; ?></p>
+                                <p><?php echo empty($vessel->YSP_LOAFeet) ? "N/A" : $vessel->YSP_LOAFeet . "ft / " . $vessel->YSP_LOAMeter . ' m'; ?></p>
                             </div>
                         </div>
                         <div class="yacht-beam">
@@ -99,7 +99,7 @@ get_header();
                                 <p>Beam</p>
                             </div>
                             <div class="yacht-beam-value">
-                                <p><?php echo (empty($vessel->BeamMeasure) ? 'N/A' : ($vessel->BeamMeasure . '/' . (number_format((substr($vessel->BeamMeasure, 0, -3) * 0.3048), 1) . ' m'))); ?></p>
+                                <p><?php echo (empty($vessel->YSP_BeamFeet) ? 'N/A' : ($vessel->YSP_BeamFeet . 'ft /' . $vessel->YSP_BeamMeter . ' m')); ?></p>
                             </div>
                         </div>
                         <div class="yacht-cabins">

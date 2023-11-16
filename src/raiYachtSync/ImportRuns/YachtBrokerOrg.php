@@ -130,7 +130,14 @@
 		                'BoatHullID' => 'HullIdentificationNumber',
 		                'DisplayLengthFeet' => 'LOAFeet',
 		                'TaxStatusCode' => 'TaxStatus',
+		                
 		                'NominalLength' => 'LOAFeet',
+		                'YSP_LOAFeet' => 'LOAFeet',
+		                'YSP_LOAMeter' => 'LOAMeter',
+						
+						'YSP_BeamFeet' => 'BeamFeet',
+		                'YSP_BeamMeter' => 'BeamMeter',
+
 		                'AdditionalDetailDescription' => 'Description',
 		                'CabinCountNumeric' => 'CabinCount'
 		           	];

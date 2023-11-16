@@ -137,7 +137,13 @@
                     }
 
 					if (isset($boat['NominalLength'])) {
-						$boatC->YSP_Length = (int) $boat['NominalLength'];
+						$boatC->YSP_Length = floatval(str_replace(array(' ft'), '', $boat['NominalLength']));
+
+						$boatC->YSP_LOAFeet = $boatC->YSP_Length;
+						$boatC->YSP_LOAMeter = round(($boatC->YSP_Length * 0.3048), 2);
+
+						$boatC->YSP_BeamFeet = floatval(str_replace(array(' ft'), '', $boat['BeamMeasure']));
+						$boatC->YSP_BeamMeter = round(($boatC->YSP_BeamFeet * 0.3048), 2);
 					}
 
 		            if (isset($boat['BoatLocation'])) {
