@@ -184,6 +184,16 @@
 						}
 
 					}
+					// if (isset($boat['OriginalPrice']) && isset($boat['Price'])){
+					// 	if (str_contains($boat['OriginalPrice'], 'EUR')) {
+					// 		$boatC->YSP_EuroVal = intval(str_replace(array(' EUR'), '', $boat['OriginalPrice']) );
+					// 		$boatC->YSP_USDVal = $boatC->YSP_EuroVal * $this->usd_c_c;
+
+					// 	} else {
+					// 		$boatC->YSP_USDVal = intval(str_replace(array(' USD'), '', $boat['OriginalPrice']));
+					// 		$boatC->YSP_EuroVal = $boatC->YSP_USDVal * $this->euro_c_c;
+					// 	}
+					// }
 
 		            if (isset($row['BeamFeet'])) {
 		                $row['BeamFeet'] .= ' ft';
