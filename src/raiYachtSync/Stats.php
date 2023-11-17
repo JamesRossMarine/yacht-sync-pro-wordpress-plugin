@@ -28,62 +28,66 @@ class raiYachtSync_Stats {
         ", 'publish', 'rai_yacht', 'ModelYear'));
 
         $min_max_priceUSD = $wpdb->get_row($wpdb->prepare("
-        SELECT 
-            MIN(pm.meta_value) min_priceUSD,
-            MAX(pm.meta_value) max_priceUSD,
-            SUM(pm.meta_value) sum_priceUSD
-        FROM {$wpdb->postmeta} pm
-        LEFT JOIN {$wpdb->posts} p ON p.ID = pm.post_id
-        INNER JOIN {$wpdb->postmeta} pmm ON pmm.post_id = pm.post_id
-        WHERE p.post_status = %s
-        AND p.post_type = %s
-        AND pm.meta_key = %s 
-        AND pmm.meta_key = 'SalesStatus'
-        AND pmm.meta_value NOT IN ('Sold', 'Suspend')
-        AND LENGTH(pm.meta_value) > 1
-             ", 'publish', 'rai_yacht', 'price'));
+            SELECT 
+                MIN(pm.meta_value) min_priceUSD,
+                MAX(pm.meta_value) max_priceUSD,
+                SUM(pm.meta_value) sum_priceUSD
+            FROM {$wpdb->postmeta} pm
+            LEFT JOIN {$wpdb->posts} p ON p.ID = pm.post_id
+            INNER JOIN {$wpdb->postmeta} pmm ON pmm.post_id = pm.post_id
+            WHERE p.post_status = %s
+            AND p.post_type = %s
+            AND pm.meta_key = %s 
+            AND pmm.meta_key = 'SalesStatus'
+            AND pmm.meta_value NOT IN ('Sold', 'Suspend')
+            AND LENGTH(pm.meta_value) > 1
+        ", 'publish', 'rai_yacht', 'price'));
 
 
         $min_max_priceEUR = $wpdb->get_row($wpdb->prepare("
-        SELECT 
-            MIN(pm.meta_value) min_priceEUR,
-            MAX(pm.meta_value) max_priceEUR,
-            SUM(pm.meta_value) sum_priceEUR
-        FROM {$wpdb->postmeta} pm
-        LEFT JOIN {$wpdb->posts} p ON p.ID = pm.post_id
-        INNER JOIN {$wpdb->postmeta} pmm ON pmm.post_id = pm.post_id
-        WHERE p.post_status = %s
-        AND p.post_type = %s
-        AND pm.meta_key = %s 
-        AND pmm.meta_key = 'SalesStatus'
-        AND pmm.meta_value NOT IN ('Sold', 'Suspend')
-        AND LENGTH(pm.meta_value) > 1
-            ", 'publish', 'rai_yacht', 'PriceEuro'));
+            SELECT 
+                MIN(pm.meta_value) min_priceEUR,
+                MAX(pm.meta_value) max_priceEUR,
+                SUM(pm.meta_value) sum_priceEUR
+            FROM {$wpdb->postmeta} pm
+            LEFT JOIN {$wpdb->posts} p ON p.ID = pm.post_id
+            INNER JOIN {$wpdb->postmeta} pmm ON pmm.post_id = pm.post_id
+            WHERE p.post_status = %s
+            AND p.post_type = %s
+            AND pm.meta_key = %s 
+            AND pmm.meta_key = 'SalesStatus'
+            AND pmm.meta_value NOT IN ('Sold', 'Suspend')
+            AND LENGTH(pm.meta_value) > 1
+        ", 'publish', 'rai_yacht', 'PriceEuro'));
 
         $min_max_length = $wpdb->get_row($wpdb->prepare("
-        SELECT 
-            MIN(pm.meta_value) min_NominalLength,
-            MAX(pm.meta_value) max_NominalLength
-        FROM {$wpdb->postmeta} pm
-        LEFT JOIN {$wpdb->posts} p ON p.ID = pm.post_id
-        INNER JOIN {$wpdb->postmeta} pmm ON pmm.post_id = pm.post_id
-        WHERE p.post_status = %s
-        AND p.post_type = %s
-        AND pm.meta_key = %s
-        AND pmm.meta_key = 'SalesStatus'
-        AND pmm.meta_value NOT IN ('Sold', 'Suspend')
-        AND LENGTH(pm.meta_value) > 1
-            ", 'publish', 'rai_yacht', 'DisplayLengthFeet'));
+            SELECT 
+                MIN(pm.meta_value) min_NominalLength,
+                MAX(pm.meta_value) max_NominalLength
+            FROM {$wpdb->postmeta} pm
+            LEFT JOIN {$wpdb->posts} p ON p.ID = pm.post_id
+            INNER JOIN {$wpdb->postmeta} pmm ON pmm.post_id = pm.post_id
+            WHERE p.post_status = %s
+            AND p.post_type = %s
+            AND pm.meta_key = %s
+            AND pmm.meta_key = 'SalesStatus'
+            AND pmm.meta_value NOT IN ('Sold', 'Suspend')
+            AND LENGTH(pm.meta_value) > 1
+        ", 'publish', 'rai_yacht', 'DisplayLengthFeet'));
 
 
         return [
             'min_year' => $min_max_year->min_year,
             'max_year' => $min_max_year->max_year,
+            
             'min_priceUSD' => $min_max_priceUSD->min_priceUSD,
-            'sum_priceUSD' => $min_max_priceUSD->sum_priceUSD,
             'max_priceUSD' => $min_max_priceUSD->max_priceUSD,
+            'sum_priceUSD' => $min_max_priceUSD->sum_priceUSD,
+            
             'min_priceEUR' => $min_max_priceEUR->min_priceEUR,
             'max_priceEUR' => $min_max_priceEUR->max_priceEUR,
+            'sum_priceEUR' => $min_max_priceEUR->sum_priceEUR,
+            
             'min_NominalLength' => $min_max_length->min_NominalLength,
             'max_NominalLength' => $min_max_length->max_NominalLength,            
         ];
