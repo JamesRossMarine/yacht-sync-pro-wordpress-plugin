@@ -236,21 +236,25 @@
 
 					wp_set_post_terms($y_post_id, $boat['BoatClassCode'], 'boatclass', false);
 					
-					$generatorPDF = wp_remote_post(
-						"https://api.urlbox.io/v1/render/async", 
-						[
-							'headers' => [
-								'Authorization' => 'Bearer ae1422deb6fc4f658c55f5dda7a08704',
-								'Content-Type' => 'application/json'
-							],
-							'body' => json_encode([
-								'url' => get_rest_url() ."raiys/yacht-pdf?yacht_post_id=". $y_post_id,
-								'webhook_url' => get_rest_url() ."raiys/set-yacht-pdf?yacht_post_id=". $y_post_id,
-								'use_s3' => true,
-								'format' => 'pdf'
-							])
-						]
-					);
+					if ( ! in_array($boatC->SalesStatus, ['Sold', 'Suspend']) ) {
+
+						$generatorPDF = wp_remote_post(
+							"https://api.urlbox.io/v1/render/async", 
+							[
+								'headers' => [
+									'Authorization' => 'Bearer ae1422deb6fc4f658c55f5dda7a08704',
+									'Content-Type' => 'application/json'
+								],
+								'body' => json_encode([
+									'url' => get_rest_url() ."raiys/yacht-pdf?yacht_post_id=". $y_post_id,
+									'webhook_url' => get_rest_url() ."raiys/set-yacht-pdf?yacht_post_id=". $y_post_id,
+									'use_s3' => true,
+									'format' => 'pdf'
+								])
+							]
+						);
+
+					}
 
 					/*if ( defined( 'WP_CLI' ) && WP_CLI ) {
                         if (is_wp_error($y_post_id)) {
@@ -259,8 +263,6 @@
                             var_dump($boat);
                         }
                     }*/
-                    
-                    
                     
 				}
 
