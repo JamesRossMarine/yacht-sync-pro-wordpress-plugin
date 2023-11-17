@@ -26,6 +26,8 @@
 
 		public function run() {
 			global $wpdb;
+
+			var_dump('runing global');
 			
 			$offset = 0;
 			$yachtsSynced = 0;
@@ -37,11 +39,13 @@
 
 				$api_status_code = wp_remote_retrieve_response_code($apiCall);
 
+				var_dump($api_status_code);
+
 	        $total = $apiCall['body']['data']['numResults'];
 
 	        $errors = new WP_Error();
 
-	        if ($api_status_code == 200 && isset($apiCall['body']['numResults'])) {
+	        if ($api_status_code == 200 && isset($apiCall['body']['data']['numResults'])) {
 				// return;
 			}
 			elseif ($api_status_code == 401) {
