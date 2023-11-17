@@ -35,6 +35,8 @@
 
 				$apiCall['body']=json_decode($apiCall['body'], true);
 
+				$api_status_code = wp_remote_retrieve_response_code($apiCall);
+
 	        $total = $apiCall['body']['data']['numResults'];
 
 	        $errors = new WP_Error();
