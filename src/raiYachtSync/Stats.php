@@ -41,7 +41,7 @@ class raiYachtSync_Stats {
             AND pmm.meta_key = 'SalesStatus'
             AND pmm.meta_value NOT IN ('Sold', 'Suspend')
             AND LENGTH(pm.meta_value) > 1
-        ", 'publish', 'rai_yacht', 'price'));
+        ", 'publish', 'rai_yacht', 'YSP_USDVal'));
 
 
         $min_max_priceEUR = $wpdb->get_row($wpdb->prepare("
@@ -58,12 +58,12 @@ class raiYachtSync_Stats {
             AND pmm.meta_key = 'SalesStatus'
             AND pmm.meta_value NOT IN ('Sold', 'Suspend')
             AND LENGTH(pm.meta_value) > 1
-        ", 'publish', 'rai_yacht', 'PriceEuro'));
+        ", 'publish', 'rai_yacht', 'YSP_EuroVal'));
 
         $min_max_length = $wpdb->get_row($wpdb->prepare("
             SELECT 
-                MIN(pm.meta_value) min_NominalLength,
-                MAX(pm.meta_value) max_NominalLength
+                MIN(pm.meta_value) min_loa,
+                MAX(pm.meta_value) max_loa
             FROM {$wpdb->postmeta} pm
             LEFT JOIN {$wpdb->posts} p ON p.ID = pm.post_id
             INNER JOIN {$wpdb->postmeta} pmm ON pmm.post_id = pm.post_id
@@ -73,7 +73,22 @@ class raiYachtSync_Stats {
             AND pmm.meta_key = 'SalesStatus'
             AND pmm.meta_value NOT IN ('Sold', 'Suspend')
             AND LENGTH(pm.meta_value) > 1
-        ", 'publish', 'rai_yacht', 'DisplayLengthFeet'));
+        ", 'publish', 'rai_yacht', 'YSP_LOAFeet'));
+
+        $min_max_length_meters = $wpdb->get_row($wpdb->prepare("
+            SELECT 
+                MIN(pm.meta_value) min_loa,
+                MAX(pm.meta_value) max_loa
+            FROM {$wpdb->postmeta} pm
+            LEFT JOIN {$wpdb->posts} p ON p.ID = pm.post_id
+            INNER JOIN {$wpdb->postmeta} pmm ON pmm.post_id = pm.post_id
+            WHERE p.post_status = %s
+            AND p.post_type = %s
+            AND pm.meta_key = %s
+            AND pmm.meta_key = 'SalesStatus'
+            AND pmm.meta_value NOT IN ('Sold', 'Suspend')
+            AND LENGTH(pm.meta_value) > 1
+        ", 'publish', 'rai_yacht', 'YSP_LOAMeter'));
 
 
         return [
@@ -88,8 +103,11 @@ class raiYachtSync_Stats {
             'max_priceEUR' => $min_max_priceEUR->max_priceEUR,
             'sum_priceEUR' => $min_max_priceEUR->sum_priceEUR,
             
-            'min_NominalLength' => $min_max_length->min_NominalLength,
-            'max_NominalLength' => $min_max_length->max_NominalLength,            
+            'min_loa' => $min_max_length->min_loa,
+            'max_loa' => $min_max_length->max_loa,           
+
+            'min_loa_meters' => $min_max_length_meters->min_loa,
+            'min_loa_meters' => $min_max_length_meters->max_loa,            
         ];
     }
 }
