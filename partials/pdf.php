@@ -552,7 +552,7 @@ $colorTwo = $YSP_Options->get('color_two');
                 <div class="specification-column">
                     <div class="individual-specification-group">
                         <p class="specification-title">LENGTH OVERALL</p>
-                        <p class="specification-value"><?= (isset($lengthOverall) && isset($lengthOverallMeters)) ? $lengthOverall . " / " . $lengthOverallMeters . " m" : "N/A" ?></p>
+                        <p class="specification-value"><?= //(isset($lengthOverall) && isset($lengthOverallMeters)) ? $lengthOverall . " / " . $lengthOverallMeters . " m" : "N/A" ?></p>
                     </div>
                     <div class="individual-specification-group">
                         <p class="specification-title">BEAM</p>
@@ -612,7 +612,7 @@ $colorTwo = $YSP_Options->get('color_two');
                     </div>
                     <div class="individual-specs-group">
                         <p class="other-specs-name">OVERALL</p>
-                        <p class="other-specs-value"><?= (isset($lengthOverall) && isset($lengthOverallMeters)) ? $lengthOverall . " / " . $lengthOverallMeters . " m" : "N/A" ?></p>
+                        <p class="other-specs-value"><?= //(isset($lengthOverall) && isset($lengthOverallMeters)) ? $lengthOverall . " / " . $lengthOverallMeters . " m" : "N/A" ?></p>
                     </div>
                     <div class="individual-specs-group">
                         <p class="other-specs-name">BEAM</p>

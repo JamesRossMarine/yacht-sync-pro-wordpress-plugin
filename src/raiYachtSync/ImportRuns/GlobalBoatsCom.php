@@ -26,6 +26,8 @@
 
 		public function run() {
 			global $wpdb;
+
+			var_dump('runing global');
 			
 			$offset = 0;
 			$yachtsSynced = 0;
@@ -35,11 +37,15 @@
 
 				$apiCall['body']=json_decode($apiCall['body'], true);
 
+				$api_status_code = wp_remote_retrieve_response_code($apiCall);
+
+				var_dump($api_status_code);
+
 	        $total = $apiCall['body']['data']['numResults'];
 
 	        $errors = new WP_Error();
 
-	        if ($api_status_code == 200 && isset($apiCall['body']['numResults'])) {
+	        if ($api_status_code == 200 && isset($apiCall['body']['data']['numResults'])) {
 				// return;
 			}
 			elseif ($api_status_code == 401) {
@@ -157,7 +163,13 @@
                     }
 
 					if (isset($boat['NominalLength'])) {
-						$boatC->YSP_Length = ((int) $boat['NominalLength']);
+						$boatC->YSP_Length = floatval(str_replace(array(' ft'), '', $boat['NominalLength']));
+
+						$boatC->YSP_LOAFeet = $boatC->YSP_Length;
+						$boatC->YSP_LOAMeter = round(($boatC->YSP_Length * 0.3048), 2);
+
+						$boatC->YSP_BeamFeet = floatval(str_replace(array(' ft'), '', $boat['BeamMeasure']));
+						$boatC->YSP_BeamMeter = round(($boatC->YSP_BeamFeet * 0.3048), 2);
 					}
 
 	                if (isset($boat['BoatLocation'])) {
