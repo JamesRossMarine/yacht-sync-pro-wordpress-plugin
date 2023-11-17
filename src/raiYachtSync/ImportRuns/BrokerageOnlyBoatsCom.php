@@ -34,7 +34,7 @@
 
 				$api_status_code = wp_remote_retrieve_response_code($apiCall);
 
-			if ($api_status_code == 200 && isset($apiCall['body']['numResults'])) {
+			if ($api_status_code == 200 && isset($apiCall['body']['data']['numResults'])) {
 				// return;
 			}
 			elseif ($api_status_code == 401) {
