@@ -30,7 +30,7 @@
 				'ys_keyword',
 				// sail or motor
 				//'year',		
-				'length',
+				//'length',
 				'make',
 				'boatclass'
 			];
@@ -51,7 +51,7 @@
 
 						break;
 
-					/*case 'year':
+					case 'year':
 						if (isset($params[ 'yearlo' ]) && isset($params['yearhi'])) {
 							$pVal = $params['yearlo'].' - '.$params['yearhi'];
 						}
@@ -64,23 +64,38 @@
 						}
 
 						break;
-					*/
+					
 					
 					case 'length':
-						if (isset($params[ 'lengthlo' ]) && isset($params['lengthhi'])) {
-							$pVal = $params['lengthlo'].' - '.$params['lengthhi'];
-						}
-						elseif (isset($params['lengthlo'])) {
-							$pVal = $params['lengthlo'];
+						if (isset($params['lengthUnit']) && $params['lengthUnit'] == 'meter') {
 
+							if (isset($params[ 'lengthlo' ]) && isset($params['lengthhi'])) {
+								$pVal = ''.$params['lengthlo'].'m - '.$params['lengthhi'].'m ';
+							}
+							elseif (isset($params['lengthlo'])) {
+								$pVal = ''. number_format($params['lengthlo']).'m ';
+
+							}
+							elseif (isset($params['lengthhi'])) {
+								$pVal = ''. number_format($params['lengthhi']) .'m ';
+							}
 						}
-						elseif (isset($params['lengthhi'])) {
-							$pVal = $params['lengthhi'];
+						else {
+							if (isset($params[ 'lengthlo' ]) && isset($params['lengthhi'])) {
+								$pVal = ''.$params['lengthlo'].'ft - '.$params['lengthhi'].'ft ';
+							}
+							elseif (isset($params['lengthlo'])) {
+								$pVal = ''. number_format($params['lengthlo']).'ft ';
+
+							}
+							elseif (isset($params['lengthhi'])) {
+								$pVal = ''. number_format($params['lengthhi']) .'ft ';
+							}
+
 						}
 
 						break;
 					
-
 					default:
 
 						if ($wp_query->query_vars['post_type'] == 'rai_yacht') {
@@ -133,8 +148,10 @@
 			global $wp_query;
 
 			$order_of_params=[
+				'length',
 				'year',
-				'price'
+				'price',
+				'staterooms'
 			];
 
 			$orders_of_withins = [];
@@ -144,21 +161,57 @@
 			foreach ($order_of_params as $param) {
 
 				switch ($param) {
-					case 'price':
-
-						if (isset($params[ 'pricelo' ]) && isset($params['pricehi'])) {
-							$pVal = 'Cost Between '.$params['pricelo'].' - '.$params['pricehi'];
-						}
-						elseif (isset($params['pricelo'])) {
-							$pVal = 'Above $'. number_format($params['pricelo']);
-
-						}
-						elseif (isset($params['pricehi'])) {
-							$pVal = 'Under $'. number_format($params['pricehi']) .'';
+					case 'staterooms':
+						if (isset($params['staterooms'])) {
+							$pVal = 'With '. $params['staterooms'] .' Cabins';
 						}
 
 						break;
- ;
+					case 'length':
+						if (isset($params['lengthUnit']) && $params['lengthUnit'] == 'meter') {
+
+							if (isset($params[ 'lengthlo' ]) && isset($params['lengthhi'])) {
+								$pVal = 'Between '.$params['lengthlo'].'m - '.$params['lengthhi'].'m ';
+							}
+							elseif (isset($params['lengthlo'])) {
+								$pVal = 'Above '. number_format($params['lengthlo']).'m ';
+
+							}
+							elseif (isset($params['lengthhi'])) {
+								$pVal = 'Under '. number_format($params['lengthhi']) .'m ';
+							}
+						}
+						else {
+							if (isset($params[ 'lengthlo' ]) && isset($params['lengthhi'])) {
+								$pVal = 'Between '.$params['lengthlo'].'ft - '.$params['lengthhi'].'ft ';
+							}
+							elseif (isset($params['lengthlo'])) {
+								$pVal = 'Above '. number_format($params['lengthlo']).'ft ';
+
+							}
+							elseif (isset($params['lengthhi'])) {
+								$pVal = 'Under '. number_format($params['lengthhi']) .'ft ';
+							}
+
+						}
+
+						break;
+
+					case 'price':
+
+						if (isset($params[ 'pricelo' ]) && isset($params['pricehi'])) {
+							$pVal = 'With prices between $'.number_format($params['pricelo']).' - $'.number_format($params['pricehi']);
+						}
+						elseif (isset($params['pricelo'])) {
+							$pVal = 'with prices above $'. number_format($params['pricelo']);
+
+						}
+						elseif (isset($params['pricehi'])) {
+							$pVal = 'with prices under $'. number_format($params['pricehi']) .'';
+						}
+
+						break;
+
 					case 'year':
 						if (isset($params[ 'yearlo' ]) && isset($params['yearhi'])) {
 							$pVal = 'Between '.$params['yearlo'].' - '.$params['yearhi'];
