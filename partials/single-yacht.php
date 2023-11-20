@@ -279,7 +279,7 @@ get_header();
                         Description
                     </p>
                     <div class="yacht-description-value">
-                        <?php echo ($vessel->GeneralBoatDescription[0]) ?>
+                        <?php echo ($vessel->GeneralBoatDescription) ?>
                     </div>
                 </div>
                <!--  <div class="yacht-specs-container">
