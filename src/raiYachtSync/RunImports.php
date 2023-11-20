@@ -7,9 +7,21 @@
 
 			$this->ImportGlobalBoatsCom = new raiYachtSync_ImportRuns_GlobalBoatsCom();
 			$this->ImportBrokerageOnlyBoatsCom = new raiYachtSync_ImportRuns_BrokerageOnlyBoatsCom();
-
 			$this->ImportYachtBrokerOrg = new raiYachtSync_ImportRuns_YachtBrokerOrg();
 			
+		}
+
+		public function pre_clean_up() {
+	        global $wpdb;
+			
+	       	$wpdb->query( 
+				$wpdb->prepare( 
+					"DELETE wp FROM $wpdb->posts wp
+					WHERE wp.post_type = %s",
+					'syncing_rai_yacht'
+				)
+			);
+	      
 		}
 
 		public function clean_up() {
@@ -87,22 +99,36 @@
 			
 			$yacht_broker_org_api_token = $this->options->get('yacht_broker_org_api_token');
 
+			$this->pre_clean_up();
+
+			$resultsOfSync=[];
+
 			// @ToDo For Loop the Runs  
 			// KEEP THIS IN THIS ORDER
 			if (! empty($boats_com_api_global_key)) {
-				$this->ImportGlobalBoatsCom->run();
+				$resultsOfSync[]=$this->ImportGlobalBoatsCom->run();
 			}
 
 			if (!empty($yacht_broker_org_api_token)) {
-				$this->ImportYachtBrokerOrg->run();
+				$resultsOfSync[]=$this->ImportYachtBrokerOrg->run();
 			}
 
 			if (! empty($boats_com_api_brokerage_key)) {
-				$this->ImportBrokerageOnlyBoatsCom->run();
+				$resultsOfSync[]=$this->ImportBrokerageOnlyBoatsCom->run();
 			}
-			
-			$this->clean_up();
-			$this->move_over();
+
+			$syncHadIssue=false;
+
+			foreach ($resultsOfSync as $syncR) {
+				if (isset($syncR['error'])) {
+					$syncHadIssue=true;
+				}
+			}
+
+			if ($syncHadIssue == false) {
+				$this->clean_up();
+				$this->move_over();				
+			} 
 		}
        
 
@@ -112,6 +138,10 @@
 			
 			$yacht_broker_org_api_token = $this->options->get('yacht_broker_org_api_token');
 
+			$this->pre_clean_up();
+
+			$resultsOfSync=[];
+			
 			// @ToDo For Loop the Runs  
 			// KEEP THIS IN THIS ORDER
 			if (!empty($yacht_broker_org_api_token)) {
@@ -122,9 +152,19 @@
 				$this->ImportBrokerageOnlyBoatsCom->run();
 			}
 			
-			$this->clean_up_brokerage_only();
-			$this->move_over();
+			$syncHadIssue=false;
 
+			foreach ($resultsOfSync as $syncR) {
+				if (isset($syncR['error'])) {
+					$syncHadIssue=true;
+				}
+
+			}
+
+			if ($syncHadIssue == false) {
+				$this->clean_up_brokerage_only();
+				$this->move_over();
+			}
 
        	}
 

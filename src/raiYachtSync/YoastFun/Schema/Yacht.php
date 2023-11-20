@@ -13,7 +13,7 @@
 
         public function generate() {
 
-            $site_url = home_url();
+            //$site_url = home_url();
             $current_post = $this->context->post;
             $permalink = get_permalink($current_post);
 
@@ -38,28 +38,36 @@
 
             // we should probably add some data validation here
             $data = [
-                "@type"         => "Vehicle",
-                "@id"           => $permalink . "#vehicle",
-                "url"           => $permalink,
-                "name"          => $current_post->post_title,
-                "description"   => $description,
-                "sku"           => $document_id,
-                "image"         => $images_array,
-                "modelDate"     => $model_year,
-                "productID"     => $document_id,
-                "manufacturer"  => $make_string,
-                "model"         => $model_type,
-                "speed"         => $speed,
-                "vehicleEngine" => $engine_type,
-                "fuelType"      => $fuel_type,
-                "offers"        => (object) array(
-                    "@type"         => "Offer",
-                    "name"          => $current_post->post_title,
-                    "price"         => strval($price),
-                    "url"           => $site_url . "/#webpage",
+                "@type" => "Vehicle",
+                //"@id" => $permalink . "#vehicle",
+                "url" => $permalink,
+                "name" => $current_post->post_title,
+                'category' => '',
+                "description" => $description,
+                "sku" => $document_id,
+               
+                "image" => $images_array[0],
+               
+                "modelDate" => $model_year,
+               
+                "manufacturer" => $make_string,
+                "brand" => $make_string,
+                "model" => $model_type,
+                "speed" => $speed,
+                
+                "vehicleEngine" => $engine_type, // https://schema.org/EngineSpecification
+
+
+                "fuelType" => $fuel_type,
+
+                "offers" => [
+                    "@type" => "Offer",
+                    "name" => $current_post->post_title,
+                    "price" => $price,
+                    //"url"  => $site_url . "/#webpage",
                     "priceCurrency" => "USD",
                     "availability"  => "InStock"
-                )
+                ]
             ];
             
             return $data;

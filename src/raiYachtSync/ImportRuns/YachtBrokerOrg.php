@@ -13,6 +13,9 @@
 
 			$this->yachtBrokerAPIKey = $this->options->get('yacht_broker_org_api_token');
 			$this->yachtClientId = $this->options->get('yacht_broker_org_id');
+
+			$this->euro_c_c = intval($this->options->get('euro_c_c'));
+			$this->usd_c_c = intval($this->options->get('usd_c_c'));
 			
 
 			$this->euro_c_c = intval($this->options->get('euro_c_c'));
@@ -40,6 +43,16 @@
 	        $api_status_code = wp_remote_retrieve_response_code($apiCall);
 
 	        $json = json_decode($apiCall['body'], true);
+
+	        if ($api_status_code == 200 && isset($json['V-Data'])) {
+				// return;
+			}
+			elseif ($api_status_code == 401) {
+				return ['error' => 'Error with auth'];
+			}
+			else {
+				return ['error' => 'Error http error '.$api_status_code];
+			}
 
 	        $total = $json['total'];
 	        $yachtSynced = 0;
@@ -117,7 +130,14 @@
 		                'BoatHullID' => 'HullIdentificationNumber',
 		                'DisplayLengthFeet' => 'LOAFeet',
 		                'TaxStatusCode' => 'TaxStatus',
+		                
 		                'NominalLength' => 'LOAFeet',
+		                'YSP_LOAFeet' => 'LOAFeet',
+		                'YSP_LOAMeter' => 'LOAMeter',
+						
+						'YSP_BeamFeet' => 'BeamFeet',
+		                'YSP_BeamMeter' => 'BeamMeter',
+
 		                'AdditionalDetailDescription' => 'Description',
 		                'CabinCountNumeric' => 'CabinCount'
 		           	];
@@ -160,10 +180,27 @@
 			            $theBoat['MaximumSpeedMeasure']=$row['MaximumSpeedMeasure'];
 		            }
 
-					if (isset($theBoat['Price'])) {
-						$theBoat['YSP_EuroVal'] = $row['PriceEuro'];
-						$theBoat['YSP_USDVal'] = $row['PriceUSD'];
+					if (isset($boat['OriginalPrice']) && isset($boat['Price'])){
+						if (str_contains($boat['OriginalPrice'], 'EUR')) {
+							$boatC->YSP_EuroVal = intval(str_replace(array(' EUR'), '', $boat['OriginalPrice']) );
+							$boatC->YSP_USDVal = $boatC->YSP_EuroVal * $this->usd_c_c;
+
+						} else {
+							$boatC->YSP_USDVal = intval(str_replace(array(' USD'), '', $boat['OriginalPrice']));
+							$boatC->YSP_EuroVal = $boatC->YSP_USDVal * $this->euro_c_c;
+						}
+
 					}
+					// if (isset($boat['OriginalPrice']) && isset($boat['Price'])){
+					// 	if (str_contains($boat['OriginalPrice'], 'EUR')) {
+					// 		$boatC->YSP_EuroVal = intval(str_replace(array(' EUR'), '', $boat['OriginalPrice']) );
+					// 		$boatC->YSP_USDVal = $boatC->YSP_EuroVal * $this->usd_c_c;
+
+					// 	} else {
+					// 		$boatC->YSP_USDVal = intval(str_replace(array(' USD'), '', $boat['OriginalPrice']));
+					// 		$boatC->YSP_EuroVal = $boatC->YSP_USDVal * $this->euro_c_c;
+					// 	}
+					// }
 
 		            if (isset($row['BeamFeet'])) {
 		                $row['BeamFeet'] .= ' ft';
@@ -243,7 +280,6 @@
 						}
 					}*/
 
-
 		            if (! empty($theBoat['BoatHullID'])) {
 		                $find_post=get_posts([
 		                    'post_type' => 'syncing_rai_yacht',
@@ -294,6 +330,8 @@
 
 	        }
 
+	        return ['success' => 'Successfully Sync YachtBroker.org Brokerage Only Feed'];
+ 
 	        // after for loop
 	    }
 	}

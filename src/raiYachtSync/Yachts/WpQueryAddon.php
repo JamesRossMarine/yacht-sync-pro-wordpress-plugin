@@ -307,23 +307,77 @@
 					];
 				}
 
-				if ($this->if_query_var_check($query->get('pricelo'))) {
-					$yacht_sync_meta_query[]=[
-						'key' => 'NormPrice',
-						'compare' => ">=",
-						'type' => 'NUMERIC',
-						'value' => $query->get('pricelo')
-					];
-				}
+				if ($this->if_query_var_check($query->get('currency'))) {
 
-				if ($this->if_query_var_check($query->get('pricehi'))) {
-					$yacht_sync_meta_query[]=[
-						'key' => 'NormPrice',
-						'compare' => "<=",
-						'type' => 'NUMERIC',
-						'value' => $query->get('pricehi')
-					];
+					$currency = $query->get('currency');
+
+					switch ($currency) {
+						case 'usd':
+							if ($this->if_query_var_check($query->get('pricelo'))) {
+								$yacht_sync_meta_query[]=[
+									'key' => 'YSP_USDVal',
+									'compare' => ">=",
+									'type' => 'NUMERIC',
+									'value' => $query->get('pricelo')
+								];
+							}
+
+							if ($this->if_query_var_check($query->get('pricehi'))) {
+								$yacht_sync_meta_query[]=[
+									'key' => 'YSP_USDVal',
+									'compare' => "<=",
+									'type' => 'NUMERIC',
+									'value' => $query->get('pricehi')
+								];
+							}
+							
+							break;
+						
+						case 'eur':	
+
+							if ($this->if_query_var_check($query->get('pricelo'))) {
+								$yacht_sync_meta_query[]=[
+									'key' => 'YSP_EuroVal',
+									'compare' => ">=",
+									'type' => 'NUMERIC',
+									'value' => $query->get('pricelo')
+								];
+							}
+
+							if ($this->if_query_var_check($query->get('pricehi'))) {
+								$yacht_sync_meta_query[]=[
+									'key' => 'YSP_EuroVal',
+									'compare' => "<=",
+									'type' => 'NUMERIC',
+									'value' => $query->get('pricehi')
+								];
+							}
+
+
+							break;
+
+					}
 				}
+				else {
+					if ($this->if_query_var_check($query->get('pricelo'))) {
+						$yacht_sync_meta_query[]=[
+							'key' => 'YSP_USDVal',
+							'compare' => ">=",
+							'type' => 'NUMERIC',
+							'value' => $query->get('pricelo')
+						];
+					}
+
+					if ($this->if_query_var_check($query->get('pricehi'))) {
+						$yacht_sync_meta_query[]=[
+							'key' => 'YSP_USDVal',
+							'compare' => "<=",
+							'type' => 'NUMERIC',
+							'value' => $query->get('pricehi')
+						];
+					}
+				}
+ 
 
 				if ($this->if_query_var_check($query->get('stateroomlo'))) {
 					$yacht_sync_meta_query[]=[
