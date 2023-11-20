@@ -14,11 +14,9 @@
         public function generate() {
 
             $post_author_id = $this->context->post->post_author;
-
             $site_url = home_url();
             $current_post = $this->context->post;
             $permalink = get_permalink($current_post);
-
             $rai_broker_email = get_post_meta($current_post->ID, 'rai_broker_email', true);
             $rai_broker_phone = get_post_meta($current_post->ID, 'rai_broker_phone', true);
 
@@ -41,7 +39,7 @@
                     "@type"          => "ImageObject",
                     "url"            => $featured_image_url,
                     "height"         => $featured_image_height,
-                    "weight"         => $featured_image_width
+                    "width"         => $featured_image_width
                 ),
                 "worksFor"      => (object) array (
                     "@type"          => "Organization",

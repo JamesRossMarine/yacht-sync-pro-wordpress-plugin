@@ -25,7 +25,7 @@
             $make_string = get_post_meta($current_post->ID, 'MakeString', true);
             $model_type = get_post_meta($current_post->ID, 'Model', true);
             $document_id = get_post_meta($current_post->ID, 'DocumentID', true);
-            $speed = get_post_meta($current_post, 'MaximumSpeedMeasure', true);
+            $speed = get_post_meta($current_post->ID, 'MaximumSpeedMeasure', true);
             $price = get_post_meta($current_post->ID, 'Price', true);
             $price = intval($price);
 
