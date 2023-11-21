@@ -13,6 +13,7 @@
 
             $pieces[] = new raiYachtSync_YoastFun_Schema_Broker( $context );
             $pieces[] = new raiYachtSync_YoastFun_Schema_Yacht( $context );
+            $pieces[] = new raiYachtSync_YoastFun_Schema_Search( $context );
 
             return $pieces;
         }

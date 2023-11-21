@@ -12,46 +12,27 @@ $vessel = array_map("maybe_unserialize", $meta);
 
 $vessel = (object) $vessel;
 
-//var_dump($vessel);
 
-//<!--TITLE-->
 if( $vessel->BoatName != null ) {
     $vesselH1 = $vessel->ModelYear . " " . $vessel->MakeString . " " . $vessel->Model . " " . $vessel->BoatName;
-    //    console_log("IM INSIDE THE BOATNAME IF");
 } else {
     $vesselH1 = $vessel->ModelYear . " " . $vessel->MakeString . " " . $vessel->Model;
-
 }
+
 function ReplaceStr($str1)
 {
-    // Using str_replace() function
-    // to replace the word
+
     $res3 = str_replace(array(' USD'), '', $str1);
 
-    // Returning the result
     return $res3;
 }
 
 $price = ($vessel->Price && $vessel->Price != "0.00 USD" && $vessel->Price != "1.00 USD") ? number_format(ReplaceStr(trim(str_replace(['EUR', 'USD'], '', $vessel->Price)))) : "Contact Us For Price";
 
-/*$url = 'https://services.boats.com/pls/boats/details?id=' . $vessel->DocumentID . '&key=e97cdb91056f';
-
-$response = file_get_contents($url);
-
-$data = json_decode($response, true);
-
-var_dump($data);
-
-$plsDisclaimer = $data['data']['PlsDisclaimer'];
-$newDisclaimer = substr($plsDisclaimer, 3, -4);
-$finalDisclaimer = "We provide this yacht listing in good faith, and although we cannot guarantee its accuracy or the condition of the boat. The " . $newDisclaimer . " She is subject to prior sale, price change, or withdrawal without notice and does not imply a direct representation of a specific yacht for sale.";*/
-
 $itemReceivedDate = $vessel->ItemReceivedDate;
 $itemDate = strtotime($itemReceivedDate);
 
-$address = $vessel->Office->PostalAddress;
 $beam = $vessel->BeamMeasure;
-$beamMeters = $beam * 0.3048;
 
 $beamMeters = sprintf("%0.2f", $beamMeters);
 $boatHullID = $vessel->BoatHullID;
@@ -73,37 +54,18 @@ $condition = $vessel->SaleClassCode;
 $construction = $vessel->BoatHullMaterialCode;
 $country = $vessel->Office->Country;
 $cruisingSpeed = $vessel->CruisingSpeedMeasure;
-$deadriseMeasure = $vessel->$deadriseMeasure;
 $dryWeight = $vessel->DryWeightMeasure;
 $int_var = (int)filter_var($dryWeight, FILTER_SANITIZE_NUMBER_INT);
 $draft = $vessel->MaxDraft;
-$draftMeters = $draft * 0.3048;
-$draftMeters = sprintf("%0.2f", $draftMeters);
 $length = $vessel->NominalLength;
-$lengthMeters = $length * 0.3048;
-$lengthMeters = sprintf("%0.2f", $lengthMeters);
 $lengthOverall = $vessel->LengthOverall;
-$lengthOverallMeters = $lengthOverall * 0.3048;
-$lengthOverallMeters = sprintf("%0.2f", $lengthOverallMeters);
 $length2 = $vessel->NormNominalLength;
 $make = $vessel->MakeString;
 $model = $vessel->Model;
 $maxSpeed = $vessel->MaximumSpeedMeasure;
-$officePhone = $vessel->Office->Phone;
-$postCode = $vessel->Office->PostCode; //Zip code
-$state = $vessel->Office->State;
 $driveTypeCode = $vessel->DriveTypeCode;
 $year = $vessel->ModelYear;
-$company = $vessel->CompanyName;
-
-//Broker Variables
-
-$brokerLocation = $city . ', ' . $state;
-//        console_log($brokerLocation, '$brokerLocation');
-$phone = $vessel->Office->Phone; //Broker Phone
-//        console_log($phone, '$phone');
-//        $phoneNoDashes = ReplaceDash($phone);
-//        console_log($phoneNoDashes, '$phoneNoDashes');
+$phone = $vessel->Office->Phone; 
 $email = $vessel->Office->Email;
 if($phone == ""){
     $phone = "(954) 533-3145";
@@ -111,62 +73,28 @@ if($phone == ""){
 if ($email == "") {
     $email = "info@theiyg.com";
 }
-$muh_shareUri_facebook = get_permalink();
-$social_link = "www.facebook.com/sharer/sharer.php?u=$muh_shareUri_facebook";
 
-//Description
-$generalDescription = str_replace("Â", "", $vessel->GeneralBoatDescription[0]);
-$additionalDescription = str_replace("Â", "", $vessel->AdditionalDetailDescription[0]);
-
-//Engine Variables
 $numberOfEngines = $vessel->NumberOfEngines;
 if (is_array($vessel->Engines)) {
-    $engineQty = count($vessel->Engines);
+    $enginesData = array();
 
-    //Engine 1
-    $engineMake1 = $vessel->Engines[0]->Make;
-    $engineModel1 = $vessel->Engines[0]->Model;
-    $engineDrive1 = $vessel->Engines[0]->DriveTransmissionDescription;
-    $engineFuel1 = $vessel->Engines[0]->Fuel;
-    $enginePower1 = $vessel->Engines[0]->EnginePower;
-    $engineType1 = $vessel->Engines[0]->Type;
-    $engineHours1 = $vessel->Engines[0]->Hours;
-    $engineLocation1 = $vessel->Engines[0]->BoatEngineLocationCode;
-    $enginePropellerType1 = $vessel->Engines[0]->PropellerType;
-    $engineYear1 = $vessel->Engines[0]->Year;
+    foreach ($vessel->Engines as $engine) {
+        $engineData = array(
+            'Make' => $engine->Make,
+            'Model' => $engine->Model,
+            'Drive' => $engine->DriveTransmissionDescription,
+            'Fuel' => $engine->Fuel,
+            'Power' => $engine->EnginePower,
+        );
 
-    //Engine 2
-    $engineMake2 = $vessel->Engines[1]->Make;
-    $engineModel2 = $vessel->Engines[1]->Model;
-    $engineDrive2 = $vessel->Engines[1]->DriveTransmissionDescription;
-    $engineFuel2 = $vessel->Engines[1]->Fuel;
-    $enginePower2 = $vessel->Engines[1]->EnginePower;
-    $engineType2 = $vessel->Engines[1]->Type;
-    $engineHours2 = $vessel->Engines[1]->Hours;
-    $engineLocation2 = $vessel->Engines[1]->BoatEngineLocationCode;
-    $enginePropellerType2 = $vessel->Engines[1]->PropellerType;
-    $engineYear2 = $vessel->Engines[1]->Year;
+        $enginesData[] = $engineData;
+    }
+
 }
+
 $post = get_post($yacht_post_id);
 $permalink = $post->guid;
 
-$enginePower1Numbers = intval($enginePower1);
-$enginePower2Numbers = intval($enginePower2);
-
-$totalEnginePower = $enginePower1Numbers + $enginePower2Numbers;
-
-//TANKS
-$fuelTanks = $vessel->FuelTankCountNumeric;
-$fuelTankCapacity = $vessel->FuelTankCapacityMeasure;
-$waterTanks = $vessel->WaterTankCountNumeric;
-$waterTankCapacity = $vessel->WaterTankCapacityMeasure;
-$holdingTanks = $vessel->HoldingTankCountNumeric;
-$holdingTankCapacity = $vessel->HoldingTankCapacityMeasure;
-
-//OTHER
-$heads = $vessel->HeadsCountNumeric;
-$windlassType = $vessel->WindlassTypeCode;
-$boatClass = $vessel->BoatClassCode[0];
 
 $YSP_Options = new raiYachtSync_Options();
 
@@ -195,8 +123,6 @@ $colorTwo = $YSP_Options->get('color_two');
             font-family: 'Montserrat', sans-serif;
         }
 
-        /* COVER PAGE */
-
         .cover-page-container-logo {
             width: 100%;
             height: 90vh;
@@ -222,8 +148,6 @@ $colorTwo = $YSP_Options->get('color_two');
             font-weight: 400;
             text-transform: uppercase;
         }
-
-        /* MAIN PAGE TITLE AND IMAGE */
 
         .main-title-container {
             margin-bottom: 40px;
@@ -309,8 +233,6 @@ $colorTwo = $YSP_Options->get('color_two');
             margin: 0px;
             color: var(--main-text-color);
         }
-
-        /* MAIN SPECIFICATIONS */
 
         .main-specifications-container {
             margin-bottom: 150px;
@@ -413,7 +335,7 @@ $colorTwo = $YSP_Options->get('color_two');
         }
 
         .other-specs-group .other-specs-group-container {
-            margin-bottom: 45px;
+            margin-bottom: 35px;
         }
 
         .additional-description {
@@ -429,8 +351,8 @@ $colorTwo = $YSP_Options->get('color_two');
         }
 
         .individual-image-container {
-            flex-basis: calc(50% - 10px); /* Two images per row with a little space in between */
-            margin: 5px; /* Space between images */
+            flex-basis: calc(50% - 10px);
+            margin: 5px;
             box-sizing: border-box;
         }
 
@@ -577,7 +499,7 @@ $colorTwo = $YSP_Options->get('color_two');
                 </div>
             </div>
         </div>
-        <div class="other-info-container" style="padding-top: 20px ">
+        <div class="other-info-container">
             <div class="other-specs-group">
                 <h3 class="other-specs-title">BASIC INFO</h3>
                 <div class="other-specs-group-container">
@@ -629,38 +551,31 @@ $colorTwo = $YSP_Options->get('color_two');
                 </div>
             </div>
             <?php
-            $counter = 1;
-            foreach($vessel->Engines as $engine){
+                if (is_array($enginesData) && !empty($enginesData)) {
+                    $counter = 1;
+
+                    foreach ($enginesData as $engineData) {
+                        ?>
+                        <div class="other-specs-group">
+                            <h3 class="other-specs-title"><?= 'ENGINE ' . $counter ?></h3>
+                            <div class="other-specs-group-container">
+                                <?php
+                                foreach ($engineData as $key => $value) {
+                                    ?>
+                                    <div class="individual-specs-group">
+                                        <p class="other-specs-name"><?= strtoupper($key) ?></p>
+                                        <p class="other-specs-value"><?= $value ? $value : "N/A" ?></p>
+                                    </div>
+                                    <?php
+                                }
+                                ?>
+                            </div>
+                        </div>
+                        <?php
+                        $counter++;
+                    }
+                }
                 ?>
-                <div class="other-specs-group">
-                    <h3 class="other-specs-title"><?= 'ENGINE ' . $counter ?></h3>
-                    <div class="other-specs-group-container">
-                        <div class="individual-specs-group">
-                            <p class="other-specs-name">MAKE</p>
-                            <p class="other-specs-value"><?= $engine->Make ? $engine->Make : "N/A" ?></p>
-                        </div>
-                        <div class="individual-specs-group">
-                            <p class="other-specs-name">MODEL</p>
-                            <p class="other-specs-value"><?= $engine->Model ? $engine->Model : "N/A" ?></p>
-                        </div>
-                        <div class="individual-specs-group">
-                            <p class="other-specs-name">DRIVE TYPE</p>
-                            <p class="other-specs-value"><?= $engine->Type ? $engine->Type : "N/A" ?></p>
-                        </div>
-                        <div class="individual-specs-group">
-                            <p class="other-specs-name">FUEL</p>
-                            <p class="other-specs-value"><?= $engine->Fuel ? ucfirst($engine->Fuel) : 'N/A' ?></p>
-                        </div>
-                        <div class="individual-specs-group">
-                            <p class="other-specs-name">ENGINE POWER</p>
-                            <p class="other-specs-value"><?= $engine->EnginePower ? $engine->EnginePower : 'N/A' ?></p>
-                        </div>
-                    </div>
-                </div>
-                <?php
-                $counter++;
-            }
-            ?>
         </div>
     </div>
     <div class="pdf-page">

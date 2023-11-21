@@ -24,10 +24,11 @@
             $model_year = get_post_meta($current_post->ID, 'ModelYear', true);
             $make_string = get_post_meta($current_post->ID, 'MakeString', true);
             $model_type = get_post_meta($current_post->ID, 'Model', true);
-            $document_id = get_post_meta($current_post->ID, 'HullIdentificationNumber', true);
-            $speed = get_post_meta($current_post, 'MaximumSpeedMeasure', true);
-            $price = get_post_meta($current_post->ID, 'YSP_USDVal', true);
-          
+            $document_id = get_post_meta($current_post->ID, 'DocumentID', true);
+            $speed = get_post_meta($current_post->ID, 'MaximumSpeedMeasure', true);
+            $price = get_post_meta($current_post->ID, 'Price', true);
+            $price = intval($price);
+
             $images = get_post_meta($current_post->ID, 'Images', true);
             $images_array = array();
 
