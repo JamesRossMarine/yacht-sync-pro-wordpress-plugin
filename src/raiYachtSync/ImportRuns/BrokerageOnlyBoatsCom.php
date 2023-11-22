@@ -2,7 +2,7 @@
 	class raiYachtSync_ImportRuns_BrokerageOnlyBoatsCom {
    		protected $limit = 53;
 		
-		public $brokerageInventoryUrl = 'https://api.boats.com/inventory/search?key=';
+		public $brokerageInventoryUrl = 'https://api.boats.com/inventory/search?SalesStatus=Active,On-Order&key=';
 
 		public function __construct() {
 
