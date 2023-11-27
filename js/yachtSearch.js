@@ -231,7 +231,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                     hasPretty.forEach((hP) => {
 
-                        if (typeof input.type != 'undefined' && input.type == 'checkbox' && input.getAttribute('value') == hP ) {
+                        if (typeof input.type != 'undefined' && (input.type == 'checkbox' || input.type == 'radio') && input.getAttribute('value') == hP ) {
                             input.checked=true;
                         }
                    
@@ -241,7 +241,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
                 else {
 
-                    if (typeof input.type != 'undefined' && input.type == 'checkbox' && input.getAttribute('value') == hasPretty ) {
+                    if (typeof input.type != 'undefined' && (input.type == 'checkbox' || input.type == 'radio') && input.getAttribute('value') == hasPretty ) {
                         input.checked=true;
                     }
                     else if (input.type != 'checkbox') {
@@ -253,7 +253,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
 
             if (urlVal != '' && urlVal != null) {
-                if (typeof input.type != 'undefined' && input.type == 'checkbox' && input.getAttribute('value') == urlVal ) {
+                if (typeof input.type != 'undefined' &&  (input.type == 'checkbox' || input.type == 'radio') && input.getAttribute('value') == urlVal ) {
                     input.checked=true;
                 }
                 else if (input.type != 'checkbox') {
