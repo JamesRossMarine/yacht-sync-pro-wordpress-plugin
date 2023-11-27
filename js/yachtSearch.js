@@ -27,7 +27,7 @@ function ysp_yacht_search_and_reader(data) {
         if (data_result.total > 0) {
 
             data_result.results.forEach(function(item) {
-                if (typeof data.view != 'undefined' && data.view == 'list') {
+                if (typeof data.view != 'undefined' && data.view.toLowerCase() == 'list') {
                     jQuery('#search-result-row').append( ysp_templates.yacht.list(item, data) );
                 }
                 else {
