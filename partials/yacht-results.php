@@ -17,7 +17,7 @@
         <div class="list-view-and-sort-container">
             <div class="list-view-group">
                 <label class="grid-view">
-                    <input type="radio" form="ysp-yacht-search-form" name="view" value="grid" style="display: none;">
+                    <input type="radio" form="ysp-yacht-search-form" name="view" value="Grid" style="display: none;">
 
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="18" viewBox="0 0 16 16" fill="none">
@@ -33,7 +33,7 @@
                 </label>
 
                 <label class="list-view">
-                    <input type="radio" form="ysp-yacht-search-form" name="view" value="list" style="display: none;">
+                    <input type="radio" form="ysp-yacht-search-form" name="view" value="List" style="display: none;">
 
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="18" viewBox="0 0 16 16" fill="none">

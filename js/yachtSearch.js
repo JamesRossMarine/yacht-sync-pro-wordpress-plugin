@@ -244,7 +244,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     if (typeof input.type != 'undefined' && (input.type == 'checkbox' || input.type == 'radio') && input.getAttribute('value') == hasPretty ) {
                         input.checked=true;
                     }
-                    else if (input.type != 'checkbox') {
+                    else if (input.type != 'checkbox' && input.type != 'radio') {
                         input.value = hasPretty;
                     }
 
@@ -256,7 +256,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 if (typeof input.type != 'undefined' &&  (input.type == 'checkbox' || input.type == 'radio') && input.getAttribute('value') == urlVal ) {
                     input.checked=true;
                 }
-                else if (input.type != 'checkbox') {
+                else if (input.type != 'checkbox' && input.type != 'radio') {
                     input.value = urlVal;
                 }
             }
