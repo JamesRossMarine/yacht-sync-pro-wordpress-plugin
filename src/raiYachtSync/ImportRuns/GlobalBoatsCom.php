@@ -63,7 +63,7 @@
 
 				//var_dump($offset);
 
-				sleep(10);
+				sleep(5);
  
 				// Sync broker inventory
 				$apiCallForWhile = wp_remote_get($apiUrl, ['timeout' => 300]);

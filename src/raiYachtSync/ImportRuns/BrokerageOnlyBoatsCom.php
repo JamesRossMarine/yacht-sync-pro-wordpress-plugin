@@ -56,6 +56,8 @@
 
 				$apiUrl = $apiUrl.'&start='. $offset .'&rows='. $this->limit;
 
+				sleep(5);
+
 				// Sync broker inventory
 				$apiCallForWhile = wp_remote_get($apiUrl, ['timeout' => 300]);
 
