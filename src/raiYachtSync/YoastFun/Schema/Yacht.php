@@ -39,7 +39,6 @@
             // we should probably add some data validation here
             $data = [
                 "@type" => "Vehicle",
-                //"@id" => $permalink . "#vehicle",
                 "url" => $permalink,
                 "name" => $current_post->post_title,
                 'category' => '',
