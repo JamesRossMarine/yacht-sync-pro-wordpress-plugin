@@ -123,6 +123,15 @@
 
 			if (is_page(6) || $query->get('post_type') == "rai_yacht") {
 
+				if (is_array($query->get('params_from_paths'))) {
+					$params = $query->get('params_from_paths');
+
+					foreach($params as $pKey => $pV) {
+						$query->set($pKey, ucwords($pV));
+					}
+				}
+
+
 				if ($this->if_query_var_check($query->get('ys_offset'))) {
 
 					$query->set('offset', $query->get('ys_offset'));
