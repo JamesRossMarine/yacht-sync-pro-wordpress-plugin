@@ -20,6 +20,7 @@ var sassPaths=[];
 
 var global_script_files=[
     'js/threeP/jquery-pagination.js',
+    'js/threeP/jquery-modal.js',
 
     'js/threeP/lightgallery-dist/lightgallery.umd.js',
     'js/threeP/lightgallery-dist/plugins/thumbnail/lg-thumbnail.umd.js',
