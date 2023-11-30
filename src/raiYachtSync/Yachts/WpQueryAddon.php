@@ -65,6 +65,7 @@
 			$vars[] = 'ys_only_these';
 
 			$vars[] = 'ys_company_only';
+			$vars[] = 'ys_show_only';
 
 			return $vars;
 		}
@@ -183,6 +184,21 @@
 						'key' => 'CompanyBoat',
 						'compare' => "=",
 						'value' => '1'
+					];
+				}
+
+				if ($this->if_query_var_check($query->get('ys_show_only')) && $query->get('ys_show_only') == 'company') {
+					$yacht_sync_meta_query[]=[
+						'key' => 'CompanyBoat',
+						'compare' => "=",
+						'value' => '1'
+					];
+				}
+				elseif ($this->if_query_var_check($query->get('ys_show_only')) && $query->get('ys_show_only') == 'other-then-company') {
+					$yacht_sync_meta_query[]=[
+						'key' => 'CompanyBoat',
+						'compare' => "NOT EXISTS",
+						//'value' => '1'
 					];
 				}
 
