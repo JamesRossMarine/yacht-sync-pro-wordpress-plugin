@@ -18,6 +18,15 @@
 					self::SLUG
 				);
 					add_settings_field(
+						self::SLUG . '_is_in_sync',
+						"Is Syncing Runing?",
+						array( $this, 'is_in_sync_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+
+					add_settings_field(
 						self::SLUG . '_boats_com_api_global_key',
 						"Boats.com Api Global Key",
 						array( $this, 'boats_com_api_global_key_field' ),
@@ -155,6 +164,21 @@
 
 		public function section_cb() {
 			echo '<p>Settings required for yacht syncing!</p>';
+
+		}
+
+		public function is_in_sync_field() {
+			global $wpdb;
+
+			$numberOfSyncing = $wpdb->get_var( "SELECT COUNT(*) FROM $wpdb->posts p WHERE p.post_type = 'syncing_rai_yacht'" );
+			$numberOfLastSynced = $wpdb->get_var( "SELECT COUNT(*) FROM $wpdb->posts p WHERE p.post_type = 'rai_yacht'" );
+
+			if ($numberOfSyncing > 0) {
+				echo "Yes we syncing, current count is $numberOfSyncing ... last sync was ".$numberOfLastSynced;
+			}
+			else {
+				echo 'Doesnt Appear to be in a sync.';
+			}
 
 		}
 

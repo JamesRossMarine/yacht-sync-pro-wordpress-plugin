@@ -65,6 +65,7 @@
 			$vars[] = 'ys_only_these';
 
 			$vars[] = 'ys_company_only';
+			$vars[] = 'ys_show_only';
 
 			return $vars;
 		}
@@ -122,6 +123,15 @@
 
 			if (is_page(6) || $query->get('post_type') == "rai_yacht") {
 
+				if (is_array($query->get('params_from_paths'))) {
+					$params = $query->get('params_from_paths');
+
+					foreach($params as $pKey => $pV) {
+						$query->set($pKey, ucwords($pV));
+					}
+				}
+
+
 				if ($this->if_query_var_check($query->get('ys_offset'))) {
 
 					$query->set('offset', $query->get('ys_offset'));
@@ -178,11 +188,26 @@
 					}
 				}
 
-				if ($this->if_query_var_check($query->get('ys_company_only'))) {
+				if ($this->if_query_var_check($query->get('ys_company_only')) && $query->get('ys_company_only') == 'on') {
 					$yacht_sync_meta_query[]=[
 						'key' => 'CompanyBoat',
 						'compare' => "=",
 						'value' => '1'
+					];
+				}
+
+				if ($this->if_query_var_check($query->get('ys_show_only')) && $query->get('ys_show_only') == 'company') {
+					$yacht_sync_meta_query[]=[
+						'key' => 'CompanyBoat',
+						'compare' => "=",
+						'value' => '1'
+					];
+				}
+				elseif ($this->if_query_var_check($query->get('ys_show_only')) && $query->get('ys_show_only') == 'other-then-company') {
+					$yacht_sync_meta_query[]=[
+						'key' => 'CompanyBoat',
+						'compare' => "NOT EXISTS",
+						//'value' => '1'
 					];
 				}
 
