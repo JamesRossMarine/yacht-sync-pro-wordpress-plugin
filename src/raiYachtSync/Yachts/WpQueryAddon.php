@@ -188,7 +188,12 @@
 					}
 				}
 
-				if ($this->if_query_var_check($query->get('ys_company_only')) && $query->get('ys_company_only') == 'on') {
+				if (
+					$this->if_query_var_check($query->get('ys_company_only')) 
+					&& 
+					($query->get('ys_company_only') == 'on' || $query->get('ys_company_only') == 'On')
+
+				) {
 					$yacht_sync_meta_query[]=[
 						'key' => 'CompanyBoat',
 						'compare' => "=",
