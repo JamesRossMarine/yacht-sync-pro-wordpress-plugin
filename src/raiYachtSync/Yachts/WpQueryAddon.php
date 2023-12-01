@@ -183,7 +183,9 @@
 								'key' => 'LengthOverall',
 								'compare' => "LIKE",
 								'value' => $keyword
-							]
+							],
+
+
 						];
 					}
 				}
@@ -239,7 +241,7 @@
 					];
 				}	
 
-				if ($query->get('condition') == 'Used') {
+				if (strtolower($query->get('condition')) == 'used') {
 					$yacht_sync_meta_query[]=[
 						'key' => 'SaleClassCode',
 						'compare' => "=",
@@ -247,7 +249,7 @@
 					];
 
 				}
-				elseif ($query->get('condition') == 'New') {
+				elseif (strtolower($query->get('condition')) == 'new') {
 					$yacht_sync_meta_query[]=[
 						'key' => 'SaleClassCode',
 						'compare' => "=",
