@@ -102,38 +102,44 @@
 				}
 			}
 
-			// foreach($staterooms as $s) {
-			// 	$path_list[]="staterooms-$s/";
-			// }
+			foreach($staterooms as $s) {
+				$path_list[]="staterooms-$s/";
+			}
 
-			// foreach($hull_material as $h) {
-			// 	$path_list[]="hull-$h/";
-			// }
+			foreach($hull_material as $h) {
+				$path_list[]="hull-$h/";
+			}
 
-			// foreach($yearlo as $yl) {
-			// 	$path_list[]="yearlo-$yl/yearhi-$yl/";
+			foreach($yearlo as $yl) {
+				$path_list[]="yearlo-$yl/";
+				$path_list[]="yearlo-$yl/yearhi-$yl/";
 
-			// 	foreach($builders_list as $b){
-			// 		$path_list[]="yearlo-$yl/make-$b/";
-			// 	}
+				foreach($builders_list as $b){
+					$path_list[]="yearlo-$yl/make-$b/";
+				}
 
-			// 	foreach($builders_list as $b){
-			// 		$path_list[]="yearlo-$yl/yearhi-$yl/make-$b/";
-			// 	}
-			// }
+				foreach($builders_list as $b){
+					$path_list[]="yearlo-$yl/yearhi-$yl/make-$b/";
+				}
+			}
 
-			// foreach($builders_list as $b) {
-			// 	$path_list[]="make-$b/";
+			foreach($builders_list as $b) {
+				$path_list[]="make-$b/";
 
-			// 	foreach($conditions as $c) {
-			// 		$path_list[]="condition-$c/make-$b/";
-			// 	}
-			// }
+				foreach($conditions as $c) {
+					$path_list[]="condition-$c/make-$b/";
 
-			// foreach($ourPriceList as $p){
-			// 	$path_list[]="pricelo-$p/";
-			// 	$path_list[]="pricehi-$p/";
-			// }
+					foreach ($ourPriceList as $p){
+						$path_list[]="condition-$c/make-$b/pricelo-$p/";
+						$path_list[]="condition-$c/make-$b/pricehi-$p/";
+					}
+				}
+			}
+
+			foreach($ourPriceList as $p){
+				$path_list[]="pricelo-$p/";
+				$path_list[]="pricehi-$p/";
+			}
 
 			foreach($path_list as $a => $path){
 				$path_list[$a] = str_replace(" ", "-", $path_list[$a]);
