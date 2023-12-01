@@ -191,8 +191,7 @@
 				if (
 					$this->if_query_var_check($query->get('ys_company_only')) 
 					&& 
-					($query->get('ys_company_only') == 'on' || $query->get('ys_company_only') == 'On')
-
+					strtolower($query->get('ys_company_only')) == 'on'
 				) {
 					$yacht_sync_meta_query[]=[
 						'key' => 'CompanyBoat',
@@ -201,14 +200,14 @@
 					];
 				}
 
-				if ($this->if_query_var_check($query->get('ys_show_only')) && $query->get('ys_show_only') == 'company') {
+				if ($this->if_query_var_check($query->get('ys_show_only')) && strtolower($query->get('ys_show_only'))== 'company') {
 					$yacht_sync_meta_query[]=[
 						'key' => 'CompanyBoat',
 						'compare' => "=",
 						'value' => '1'
 					];
 				}
-				elseif ($this->if_query_var_check($query->get('ys_show_only')) && $query->get('ys_show_only') == 'other-then-company') {
+				elseif ($this->if_query_var_check($query->get('ys_show_only')) && strtolower($query->get('ys_show_only')) == 'other-then-company') {
 					$yacht_sync_meta_query[]=[
 						'key' => 'CompanyBoat',
 						'compare' => "NOT EXISTS",
