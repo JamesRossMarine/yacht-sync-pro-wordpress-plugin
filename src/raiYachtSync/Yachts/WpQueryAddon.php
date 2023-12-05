@@ -183,8 +183,13 @@
 								'key' => 'LengthOverall',
 								'compare' => "LIKE",
 								'value' => $keyword
-							],
-
+							],	
+							
+							[									
+								'key' => 'GeneralBoatDescription',
+								'compare' => "LIKE",
+								'value' => $keyword
+							]
 
 						];
 					}
