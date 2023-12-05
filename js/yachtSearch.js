@@ -151,7 +151,7 @@ document.addEventListener("DOMContentLoaded", function() {
             });            
         }
 
-        document.querySelectorAll('input[name=view][form=ysp-yacht-search-form], select[name=sortBy][form=ysp-yacht-search-form]').forEach((eeee) => {
+        document.querySelectorAll('input[name=view][form=ysp-yacht-search-form], select[name=sortby][form=ysp-yacht-search-form]').forEach((eeee) => {
             eeee.addEventListener('change', function(e) {
                 e.target.form.querySelector('input[name=page_index]').value=1;
 

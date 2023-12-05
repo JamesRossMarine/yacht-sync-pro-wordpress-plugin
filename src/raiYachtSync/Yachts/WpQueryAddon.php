@@ -60,7 +60,7 @@
 
 			$vars[] = 'page_index';
 
-			$vars[] = 'sortBy';
+			$vars[] = 'sortby';
 
 			$vars[] = 'ys_only_these';
 
@@ -584,8 +584,10 @@
 					];
 				}
 
-				if ($this->if_query_var_check($query->get('sortBy'))) {
-					$sort_split=explode(':', $query->get('sortBy'));
+				if ($this->if_query_var_check($query->get('sortby'))) {
+					$sb = strtolower($query->get('sortby'));
+
+					$sort_split=explode(':', $sb);
 
 					$sort_label = $sort_split[0];
 					$sort_order = $sort_split[1];
