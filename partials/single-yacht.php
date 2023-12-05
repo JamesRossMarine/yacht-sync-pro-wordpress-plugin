@@ -143,6 +143,11 @@ get_header();
                             }
                         ?>
                     </div>
+
+                    <div>
+                        <button type="button" data-modal="#single-share">Share =></button>
+
+                    </div>
                 </div>
                 
                     
@@ -599,6 +604,12 @@ get_header();
     ?>
 
 </main><!-- #main -->
+
+
+<div class="ysp-modal" id="single-share">
+
+    <h1 style="text-align: center;">SHARE ME!</h1>
+</div>
 
 <?php
 //get_sidebar();
