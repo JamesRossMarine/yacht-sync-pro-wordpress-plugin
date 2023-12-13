@@ -603,13 +603,45 @@ get_header();
     endwhile; // End of the loop.
     ?>
 
+<link rel="stylesheet" type="text/css" href="styles.css">
+
+<div class="ysp-modal" id="single-share">
+    <div class="modal-content">
+        <div class="modal-left">
+            <img src="<?php echo $image; ?>" alt="Vessel Image">
+            <p class="modal-title">
+                <?php echo esc_html($vessel->ModelYear . ' ' . $vessel->MakeString . ' ' . $vessel->BoatName); ?>
+            </p>
+        </div>
+        <div class="modal-right">
+            <h2>Share This</h2>
+            <div class="modal-socials">
+                <div class="modal-social-icon">
+                    <img src="/icons/send.svg" alt="Send to a Friend Icon">
+                    <p class="modal-social"> Send to a Friend </p>
+                </div>
+                <div class="modal-social-icon">
+                    <img src="/icons/facebook.svg" alt="Facebook Icon">
+                    <p class="modal-social"> Facebook </p>
+                </div>
+                <div class="modal-social-icon">
+                    <img src="/icons/twitter.svg" alt="Twitter Icon">
+                    <p class="modal-social"> Twitter </p>
+                </div>
+            </div>
+            <h3>Copy Link</h3>
+            <div class="copy-link-section">
+                <input type="text" value="<?php echo esc_url(get_permalink()); ?>" id="copyLinkInput" readonly>
+                <button onclick="copyLink()">Copy Link</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 </main><!-- #main -->
 
 
-<div class="ysp-modal" id="single-share">
 
-    <h1 style="text-align: center;">SHARE ME!</h1>
-</div>
 
 <?php
 //get_sidebar();
