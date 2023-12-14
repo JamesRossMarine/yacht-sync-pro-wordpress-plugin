@@ -145,7 +145,7 @@ get_header();
                     </div>
 
                     <div>
-                        <button type="button" data-modal="#single-share">Share =></button>
+                        <button class="yacht-download-button" type="button" data-modal="#single-share">Share </button>
 
                     </div>
                 </div>
