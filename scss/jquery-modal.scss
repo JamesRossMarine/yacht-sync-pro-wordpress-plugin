@@ -179,7 +179,6 @@
 }
 
 .copy-link-section {
-  display: flex;
   flex-direction: column;
   align-items: center;
 }
@@ -191,6 +190,7 @@
 
 .copy-link-section button {
   width: 30%;
+  height: 56px;
 }
 
 /* Responsive styles */
