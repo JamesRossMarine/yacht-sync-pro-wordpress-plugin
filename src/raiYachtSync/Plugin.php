@@ -32,6 +32,8 @@
 
 			$this->RewriteURL = new raiYachtSync_RewriteURL();
 			
+			$this->Shortcode_PrintMeta = new raiYachtSync_Shortcodes_PrintMetaField();
+
 			$this->GutenbergBlocks = new raiYachtSync_GutenbergBlocks();
 
 			$this->Commands = new raiYachtSync_AddCommands();

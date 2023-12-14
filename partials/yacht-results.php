@@ -17,7 +17,7 @@
         <div class="list-view-and-sort-container">
             <div class="list-view-group">
                 <label class="grid-view">
-                    <input type="radio" form="ysp-yacht-search-form" name="view" value="grid" style="display: none;">
+                    <input type="radio" form="ysp-yacht-search-form" name="view" value="Grid" style="display: none;">
 
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="18" viewBox="0 0 16 16" fill="none">
@@ -33,7 +33,7 @@
                 </label>
 
                 <label class="list-view">
-                    <input type="radio" form="ysp-yacht-search-form" name="view" value="list" style="display: none;">
+                    <input type="radio" form="ysp-yacht-search-form" name="view" value="List" style="display: none;">
 
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="18" viewBox="0 0 16 16" fill="none">
@@ -50,20 +50,20 @@
             <div>
                 <label>Filter by: </label>
 
-                <select name="sortBy" form="ysp-yacht-search-form">
+                <select name="sortby" form="ysp-yacht-search-form">
                     <option value="">pick a sort</option>
                     
-                    <option value="length:desc">Length: high to low</option>
-                    <option value="length:asc">Length: low to high</option>
+                    <option value="Length:desc">Length: high to low</option>
+                    <option value="Length:asc">Length: low to high</option>
                     
-                    <option value="price:desc">Price: high to low</option>
-                    <option value="price:asc">Price: low to high</option>
+                    <option value="Price:desc">Price: high to low</option>
+                    <option value="Price:asc">Price: low to high</option>
 
-                    <option value="year:desc">Year: high to low</option>
-                    <option value="year:asc">Year: low to high</option>
+                    <option value="Year:desc">Year: high to low</option>
+                    <option value="Year:asc">Year: low to high</option>
 
-                    <option value="timeon:desc">Least time on market</option>
-                    <option value="timeon:asc">Most time on market</option>
+                    <option value="Timeon:desc">Least time on market</option>
+                    <option value="Timeon:asc">Most time on market</option>
                 </select>
             </div>
         </div>

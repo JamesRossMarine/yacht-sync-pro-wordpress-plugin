@@ -27,7 +27,7 @@ function ysp_yacht_search_and_reader(data) {
         if (data_result.total > 0) {
 
             data_result.results.forEach(function(item) {
-                if (typeof data.view != 'undefined' && data.view == 'list') {
+                if (typeof data.view != 'undefined' && data.view.toLowerCase() == 'list') {
                     jQuery('#search-result-row').append( ysp_templates.yacht.list(item, data) );
                 }
                 else {
@@ -151,7 +151,7 @@ document.addEventListener("DOMContentLoaded", function() {
             });            
         }
 
-        document.querySelectorAll('input[name=view][form=ysp-yacht-search-form], select[name=sortBy][form=ysp-yacht-search-form]').forEach((eeee) => {
+        document.querySelectorAll('input[name=view][form=ysp-yacht-search-form], select[name=sortby][form=ysp-yacht-search-form]').forEach((eeee) => {
             eeee.addEventListener('change', function(e) {
                 e.target.form.querySelector('input[name=page_index]').value=1;
 
@@ -231,7 +231,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                     hasPretty.forEach((hP) => {
 
-                        if (typeof input.type != 'undefined' && input.type == 'checkbox' && input.getAttribute('value') == hP ) {
+                        if (typeof input.type != 'undefined' && (input.type == 'checkbox' || input.type == 'radio') && input.getAttribute('value') == hP ) {
                             input.checked=true;
                         }
                    
@@ -241,10 +241,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
                 else {
 
-                    if (typeof input.type != 'undefined' && input.type == 'checkbox' && input.getAttribute('value') == hasPretty ) {
+                    if (typeof input.type != 'undefined' && (input.type == 'checkbox' || input.type == 'radio') && input.getAttribute('value') == hasPretty ) {
                         input.checked=true;
                     }
-                    else if (input.type != 'checkbox') {
+                    else if (input.type != 'checkbox' && input.type != 'radio') {
                         input.value = hasPretty;
                     }
 
@@ -253,10 +253,10 @@ document.addEventListener("DOMContentLoaded", function() {
             }
 
             if (urlVal != '' && urlVal != null) {
-                if (typeof input.type != 'undefined' && input.type == 'checkbox' && input.getAttribute('value') == urlVal ) {
+                if (typeof input.type != 'undefined' &&  (input.type == 'checkbox' || input.type == 'radio') && input.getAttribute('value') == urlVal ) {
                     input.checked=true;
                 }
-                else if (input.type != 'checkbox') {
+                else if (input.type != 'checkbox' && input.type != 'radio') {
                     input.value = urlVal;
                 }
             }

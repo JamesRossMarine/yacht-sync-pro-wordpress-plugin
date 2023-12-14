@@ -9,6 +9,18 @@
 		public function get_last_mod($url_paths) {
 			$paths = explode('/', $url_paths);
 
+			$search_parameters=[];
+
+			foreach($paths as $path) {
+				$phase = explode('-', $path);
+			
+				$val = join('-', array_slice($phase, 1));
+
+				$val = str_replace('-', ' ', $val);
+
+				$search_parameters[ $phase[0] ] = ucwords($val);
+			}
+
 			$args=[
 				'post_type' => 'rai_yacht',
 				'posts_per_page' => 1, 
@@ -21,8 +33,10 @@
 				],
 				
 				'orderby' => 'listingdate',
-				'order' => 'ASC',
-				'fields' => 'ids'
+				'order' => 'DESC',
+				'fields' => 'ids',
+
+				'params_from_paths' => $search_parameters
 			];
 
 			foreach($paths as $path) {
@@ -38,7 +52,14 @@
 
 			$yachts=get_posts($args);
 
-			return get_post_meta($yachts[0], 'YSP_ListingDate', true);
+			if (isset($yachts[0])) {
+				return get_post_meta($yachts[0], 'YSP_ListingDate', true);
+			}
+			else {
+				return 'no date';
+			}
+
+
 
 		}
 
@@ -53,6 +74,14 @@
 
 			$path_list=[];
 
+			foreach($conditions as $c) {
+				$path_list[]="condition-$c/";
+			}
+
+			foreach($staterooms as $s) {
+				$path_list[]="staterooms-$s/";
+			}
+/*
 			foreach($builders_list as $b) {
 				$path_list[]="make-$b/";
 
@@ -63,13 +92,11 @@
 			foreach($hull_material as $h) {
 				$path_list[]="hull-$h/";
 			}
-			foreach($staterooms as $s) {
-				$path_list[]="staterooms-$s/";
-			}
+			
 			foreach($yearlo as $yl) {
 				$path_list[]="yearlo-$yl/";
 			}
-
+*/
 			if (isset($path_list)) {
 				$path_list_divied = array_chunk($path_list, 40000);
 

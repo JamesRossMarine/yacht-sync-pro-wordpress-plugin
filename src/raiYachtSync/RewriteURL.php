@@ -54,7 +54,7 @@
 
 					$val = str_replace('-', ' ', $val);
 
-					$search_parameters[ $phase[0] ] = $val;
+					$search_parameters[ $phase[0] ] = ucwords($val);
 
 				}
 

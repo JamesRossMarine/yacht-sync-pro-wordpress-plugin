@@ -1,7 +1,7 @@
 <?php
 	
 	class raiYachtSync_ImportRuns_GlobalBoatsCom {
-   		protected $limit = 153;
+   		protected $limit = 200;
 	
 		// Testing URL
 		//public $globalInventoryUrl = 'https://services.boats.com/pls/boats/search?fields=ModelYear,MakeString,Model,BoatName,DocumentID,NominalLength,BoatClassCode&key=';
@@ -39,7 +39,7 @@
 
 				$api_status_code = wp_remote_retrieve_response_code($apiCall);
 
-				var_dump($api_status_code);
+				//var_dump($api_status_code);
 
 	        $total = $apiCall['body']['data']['numResults'];
 
@@ -63,7 +63,7 @@
 
 				//var_dump($offset);
 
-				sleep(10);
+				sleep(5);
  
 				// Sync broker inventory
 				$apiCallForWhile = wp_remote_get($apiUrl, ['timeout' => 300]);
