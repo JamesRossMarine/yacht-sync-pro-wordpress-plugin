@@ -4,7 +4,7 @@
 		public $yachtBrokerAPIKey = '';
    		public $yachtClientId = '';
    		protected $url = '';
-   		protected $yachtBrokerLimit = 30;
+   		protected $yachtBrokerLimit = 50;
 
 		public function __construct() {
 
@@ -284,7 +284,6 @@
 		                $find_post=get_posts([
 		                    'post_type' => 'syncing_rai_yacht',
 		                    'meta_query' => [
-
 		                        array(
 		                           'key' => 'BoatHullID',
 		                           'value' => $theBoat['BoatHullID'],
