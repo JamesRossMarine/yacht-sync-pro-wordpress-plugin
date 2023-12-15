@@ -28,7 +28,7 @@
 			$yachtsSynced = 0;
 
 			// Sync broker inventory
-			$apiCall = wp_remote_get($this->brokerageInventoryUrl, ['timeout' => 300]);
+			$apiCall = wp_remote_get($this->brokerageInventoryUrl, ['timeout' => 120]);
 
 				$apiCall['body']=json_decode($apiCall['body'], true);
 
@@ -59,7 +59,7 @@
 				sleep(5);
 
 				// Sync broker inventory
-				$apiCallForWhile = wp_remote_get($apiUrl, ['timeout' => 300]);
+				$apiCallForWhile = wp_remote_get($apiUrl, ['timeout' => 120]);
 
 				//var_dump($apiCallForWhile);
 
@@ -139,12 +139,14 @@
                     }
 
 					if (isset($boat['NominalLength'])) {
-						$boatC->YSP_Length = floatval(str_replace(array(' ft'), '', $boat['NominalLength']));
+						$boatC->YSP_Length = floatval(str_replace(array(' ft'), '', $boat['NominalLength'])): "";
 
 						$boatC->YSP_LOAFeet = $boatC->YSP_Length;
 						$boatC->YSP_LOAMeter = round(($boatC->YSP_Length * 0.3048), 2);
+					}
 
-						$boatC->YSP_BeamFeet = floatval(str_replace(array(' ft'), '', $boat['BeamMeasure']));
+					if (isset($boat['BeamMeasure'])) {
+						$boatC->YSP_BeamFeet = floatval(str_replace(array(' ft'), '', $boat['BeamMeasure'])): "";
 						$boatC->YSP_BeamMeter = round(($boatC->YSP_BeamFeet * 0.3048), 2);
 					}
 
@@ -238,6 +240,26 @@
 
 					wp_set_post_terms($y_post_id, $boat['BoatClassCode'], 'boatclass', false);
 					
+					if ( ! in_array($boatC->SalesStatus, ['Sold', 'Suspend']) ) {
+
+						$generatorPDF = wp_remote_post(
+							"https://api.urlbox.io/v1/render/async", 
+							[
+								'headers' => [
+									'Authorization' => 'Bearer ae1422deb6fc4f658c55f5dda7a08704',
+									'Content-Type' => 'application/json'
+								],
+								'body' => json_encode([
+									'url' => get_rest_url() ."raiys/yacht-pdf?yacht_post_id=". $y_post_id,
+									'webhook_url' => get_rest_url() ."raiys/set-yacht-pdf?yacht_post_id=". $y_post_id,
+									'use_s3' => true,
+									'format' => 'pdf'
+								])
+							]
+						);
+
+					}
+
 					/*if ( defined( 'WP_CLI' ) && WP_CLI ) {
                         if (is_wp_error($y_post_id)) {
                             WP_CLI::log( 'Document ID - '. $boat['DocumentID']);
@@ -245,8 +267,6 @@
                             var_dump($boat);
                         }
                     }*/
-                    
-                    
                     
 				}
 
