@@ -30,6 +30,7 @@ var global_script_files=[
 
     'js/threeP/flickity.js',
 
+    'js/whatever.js',
     'js/common.js',
     'js/api-client.js',
     'js/templates.js',

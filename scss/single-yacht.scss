@@ -273,6 +273,7 @@
         .yacht-download-brochure-container {
             margin: 23px 0px;
             display: flex;
+            gap: 10px;
 
             @media screen and (max-width: $breakpoint-large){
                 margin-bottom: 40px;

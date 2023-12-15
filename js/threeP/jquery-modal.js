@@ -228,7 +228,7 @@
   $.ysp_modal.AJAX_FAIL = 'modal:ajax:fail';
   $.ysp_modal.AJAX_COMPLETE = 'modal:ajax:complete';
 
-  $.fn.modal = function(options){
+  $.fn.ysp_modal = function(options){
     if (this.length === 1) {
       new $.ysp_modal(this, options);
     }
