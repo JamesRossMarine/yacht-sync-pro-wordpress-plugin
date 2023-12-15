@@ -436,7 +436,10 @@
 					exit();
 				}
 				else {
-					$apiCall = wp_remote_get(
+					wp_redirect("https://api.urlbox.io/v1/0FbOuhgmL1s2bINM/pdf?url=". get_rest_url() ."raiys/yacht-pdf?yacht_post_id=". $request->get_param('yacht_post_id'));
+					exit();
+
+	/*				$apiCall = wp_remote_get(
 						"https://api.urlbox.io/v1/0FbOuhgmL1s2bINM/pdf?url=". get_rest_url() ."raiys/yacht-pdf?yacht_post_id=". $request->get_param('yacht_post_id'), 
 
 						[
@@ -445,7 +448,7 @@
 								'Content-Type'  => 'application/pdf',
 							]
 						]
-					);
+					);*/
 
 				}
 				//$apiCall = wp_remote_get(get_rest_url() . 'raiys/yacht-pdf-download?yacht_post_id=' . $request->get_param('yacht_post_id'));
