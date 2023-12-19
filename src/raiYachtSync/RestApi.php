@@ -198,7 +198,7 @@
 
 			$return['SEO'] = $this->SearchSEO->all_together( $yArgs );
 
-			$return['stats'] = $this->Stats->run( $yArgs );
+			//$return['stats'] = $this->Stats->run( $yArgs );
 			
 			return $return;
 
