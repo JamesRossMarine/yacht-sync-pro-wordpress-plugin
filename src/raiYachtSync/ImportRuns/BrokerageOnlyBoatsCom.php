@@ -107,8 +107,26 @@
 			            else {
 			                $find_post=[];
 			            }
-		           	}
-		           	         
+		           	}		   
+
+		           	if (! isset($find_post[0]->ID)) {
+			            if (! empty($record['BoatHullID'])) {
+			                $find_post_from_synced=get_posts([
+			                    'post_type' => 'rai_yacht',
+			                    'meta_query' => [
+
+			                        array(
+			                           'key' => 'BoatHullID',
+			                           'value' => $record['BoatHullID'],
+			                           'compare' => '=',
+			                       )
+			                    ],
+			                ]);
+			            }
+			            else {
+			                $find_post=[];
+			            }
+		           	}	        	         
 					
 					$find_post_from_synced=get_posts([
 	                    'post_type' => 'rai_yacht',
@@ -122,36 +140,38 @@
 	                    ],
 	                ]);
 
-	                $synced_post_id = $find_post_from_synced[0]->ID;
-
-	                $synced_pdf = get_post_meta($synced_post_id, 'YSP_PDF_URL', true);
-
 	                $pdf_still_e = false;
 
-	                if (!is_null($s3_url) && !empty($s3_url)) {
-						$apiPDF = wp_remote_request($s3_url, [
-							'method' => 'HEAD',
+	                if (isset($find_post_from_synced[0]->ID)) {
+	                	$synced_post_id = $find_post_from_synced[0]->ID;
 
-							'timeout' => 180, 
-							'stream' => false, 
-							
-							'headers' => [
-								'Content-Type'  => 'application/pdf',
+		                $synced_pdf = get_post_meta($synced_post_id, 'YSP_PDF_URL', true);
 
-							]
-						]);
+		                if (!is_null($synced_pdf) && !empty($synced_pdf)) {
+							$apiPDF = wp_remote_request($synced_pdf, [
+								'method' => 'HEAD',
 
-						$api_status_code = wp_remote_retrieve_response_code($apiPDF);
+								'timeout' => 180, 
+								'stream' => false, 
+								
+								'headers' => [
+									'Content-Type'  => 'application/pdf',
 
-						if ($api_status_code == '200') {
-							$pdf_still_e = true;
-						}					
-					}
+								]
+							]);
 
-					if ( $pdf_still_e ) {
-						$boatC->YSP_PDF_URL = $synced_pdf;
-					}
-		           	
+							$api_status_code = wp_remote_retrieve_response_code($apiPDF);
+
+							if ($api_status_code == '200') {
+								$pdf_still_e = true;
+							}
+						}
+
+						if ( $pdf_still_e ) {
+							$boatC->YSP_PDF_URL = $synced_pdf;
+						}
+	                }
+
 		            $post_id=0;
 
 		            if (isset($find_post[0]->ID)) {
