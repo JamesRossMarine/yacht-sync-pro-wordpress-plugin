@@ -361,6 +361,13 @@
 	
 				$yacht_post_id = $request->get_param('yacht_post_id');
 
+				$post_exists = get_post($request->get_param('yacht_post_id'));
+
+	   			if (is_null($post_exists)) {
+
+	   				return ['error' => 'post does not exists.'];
+	   			}
+
 				// ----------------------
 
 				header('Content-Type: text/html; charset=UTF-8');
