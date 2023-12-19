@@ -60,7 +60,7 @@
 
 			$vars[] = 'page_index';
 
-			$vars[] = 'sortBy';
+			$vars[] = 'sortby';
 
 			$vars[] = 'ys_only_these';
 
@@ -183,12 +183,23 @@
 								'key' => 'LengthOverall',
 								'compare' => "LIKE",
 								'value' => $keyword
+							],	
+							
+							[									
+								'key' => 'GeneralBoatDescription',
+								'compare' => "LIKE",
+								'value' => $keyword
 							]
+
 						];
 					}
 				}
 
-				if ($this->if_query_var_check($query->get('ys_company_only')) && $query->get('ys_company_only') == 'on') {
+				if (
+					$this->if_query_var_check($query->get('ys_company_only')) 
+					&& 
+					strtolower($query->get('ys_company_only')) == 'on'
+				) {
 					$yacht_sync_meta_query[]=[
 						'key' => 'CompanyBoat',
 						'compare' => "=",
@@ -196,14 +207,14 @@
 					];
 				}
 
-				if ($this->if_query_var_check($query->get('ys_show_only')) && $query->get('ys_show_only') == 'company') {
+				if ($this->if_query_var_check($query->get('ys_show_only')) && strtolower($query->get('ys_show_only'))== 'company') {
 					$yacht_sync_meta_query[]=[
 						'key' => 'CompanyBoat',
 						'compare' => "=",
 						'value' => '1'
 					];
 				}
-				elseif ($this->if_query_var_check($query->get('ys_show_only')) && $query->get('ys_show_only') == 'other-then-company') {
+				elseif ($this->if_query_var_check($query->get('ys_show_only')) && strtolower($query->get('ys_show_only')) == 'other-then-company') {
 					$yacht_sync_meta_query[]=[
 						'key' => 'CompanyBoat',
 						'compare' => "NOT EXISTS",
@@ -235,7 +246,7 @@
 					];
 				}	
 
-				if ($query->get('condition') == 'Used') {
+				if (strtolower($query->get('condition')) == 'used') {
 					$yacht_sync_meta_query[]=[
 						'key' => 'SaleClassCode',
 						'compare' => "=",
@@ -243,7 +254,7 @@
 					];
 
 				}
-				elseif ($query->get('condition') == 'New') {
+				elseif (strtolower($query->get('condition')) == 'new') {
 					$yacht_sync_meta_query[]=[
 						'key' => 'SaleClassCode',
 						'compare' => "=",
@@ -578,8 +589,10 @@
 					];
 				}
 
-				if ($this->if_query_var_check($query->get('sortBy'))) {
-					$sort_split=explode(':', $query->get('sortBy'));
+				if ($this->if_query_var_check($query->get('sortby'))) {
+					$sb = strtolower($query->get('sortby'));
+
+					$sort_split=explode(':', $sb);
 
 					$sort_label = $sort_split[0];
 					$sort_order = $sort_split[1];
@@ -613,7 +626,11 @@
 					}
 				}
 				else {
-					// ONE DAY MOVE DEFAULT HERE... 
+				
+					$query->set('orderby', 'meta_value_num');
+					$query->set('order', 'DESC');
+					$query->set('meta_key', 'NominalLength');
+
 				}
 
 				$this->apply_meta_query_to_query($query, $yacht_sync_meta_query, 'prop_meta');

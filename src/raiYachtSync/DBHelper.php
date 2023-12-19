@@ -5,7 +5,7 @@
 
 		}
 
-		public function get_unique_yacht_meta_values( $key = 'trees',  ) {
+		public function get_unique_yacht_meta_values( $key = 'trees' ) {
 			global $wpdb;
 		
 			if( empty( $key ) )
