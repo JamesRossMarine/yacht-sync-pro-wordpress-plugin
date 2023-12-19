@@ -1,6 +1,6 @@
 <?php
 	class raiYachtSync_ImportRuns_BrokerageOnlyBoatsCom {
-   		protected $limit = 50;
+   		protected $limit = 53;
 		
 		public $brokerageInventoryUrl = 'https://api.boats.com/inventory/search?SalesStatus=Active,On-Order&key=';
 
@@ -56,7 +56,7 @@
 
 				$apiUrl = $apiUrl.'&start='. $offset .'&rows='. $this->limit;
 
-				sleep(5);
+				sleep(30);
 
 				// Sync broker inventory
 				$apiCallForWhile = wp_remote_get($apiUrl, ['timeout' => 120]);

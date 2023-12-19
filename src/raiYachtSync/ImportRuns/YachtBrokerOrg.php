@@ -4,7 +4,7 @@
 		public $yachtBrokerAPIKey = '';
    		public $yachtClientId = '';
    		protected $url = '';
-   		protected $yachtBrokerLimit = 50;
+   		protected $yachtBrokerLimit = 53;
 
 		public function __construct() {
 
@@ -38,11 +38,9 @@
 
 	        $apiCall = wp_remote_get($apiUrlOne, $headers);
 
-	        //var_dump($apiCall['body']);
-
 	        $api_status_code = wp_remote_retrieve_response_code($apiCall);
 
-	        $json = json_decode($apiCall['body'], true);
+	        $json = json_decode(wp_remote_retrieve_body($apiCall), true);
 
 	        if ($api_status_code == 200 && isset($json['V-Data'])) {
 				// return;
