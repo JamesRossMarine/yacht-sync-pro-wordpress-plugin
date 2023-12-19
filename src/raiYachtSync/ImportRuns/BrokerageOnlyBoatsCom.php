@@ -88,9 +88,9 @@
 	                           'compare' => '=',
 	                       )
 	                    ],
-	                ]);                
+	                ]);       
 
-		           	if (! isset($find_post[0]->ID)) {
+	                if (! isset($find_post[0]->ID)) {
 			            if (! empty($record['BoatHullID'])) {
 			                $find_post=get_posts([
 			                    'post_type' => 'syncing_rai_yacht',
@@ -108,6 +108,49 @@
 			                $find_post=[];
 			            }
 		           	}
+		           	         
+					
+					$find_post_from_synced=get_posts([
+	                    'post_type' => 'rai_yacht',
+	                    'meta_query' => [
+
+	                        array(
+	                           'key' => 'DocumentID',
+	                           'value' => $boat['DocumentID'],
+	                           'compare' => '=',
+	                       )
+	                    ],
+	                ]);
+
+	                $synced_post_id = $find_post_from_synced[0]->ID;
+
+	                $synced_pdf = get_post_meta($synced_post_id, 'YSP_PDF_URL', true);
+
+	                $pdf_still_e = false;
+
+	                if (!is_null($s3_url) && !empty($s3_url)) {
+						$apiPDF = wp_remote_request($s3_url, [
+							'method' => 'HEAD',
+
+							'timeout' => 180, 
+							'stream' => false, 
+							
+							'headers' => [
+								'Content-Type'  => 'application/pdf',
+
+							]
+						]);
+
+						$api_status_code = wp_remote_retrieve_response_code($apiPDF);
+
+						if ($api_status_code == '200') {
+							$pdf_still_e = true;
+						}					
+					}
+
+					if ( $pdf_still_e ) {
+						$boatC->YSP_PDF_URL = $synced_pdf;
+					}
 		           	
 		            $post_id=0;
 
@@ -240,7 +283,7 @@
 
 					wp_set_post_terms($y_post_id, $boat['BoatClassCode'], 'boatclass', false);
 					
-					if ( ! in_array($boatC->SalesStatus, ['Sold', 'Suspend']) ) {
+					if ( $pdf_still_e == false && ! in_array($boatC->SalesStatus, ['Sold', 'Suspend']) ) {
 
 						$generatorPDF = wp_remote_post(
 							"https://api.urlbox.io/v1/render/async", 

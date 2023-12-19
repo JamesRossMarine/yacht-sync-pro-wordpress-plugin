@@ -332,6 +332,16 @@
 	   public function yacht_pdf_loader(WP_REST_Request $request) {
 
 	   		if ($request->get_param('yacht_post_id') != '') {
+	   			// check if post id is real.
+
+	   			$post_exists = get_post($request->get_param('yacht_post_id'));
+
+	   			if (is_null($post_exists)) {
+
+	   				return ['error' => 'post does not exists.'];
+	   			}
+
+	   			
 	   			header('Content-Type: text/html; charset=UTF-8');
 
 	   			$file_to_include=RAI_YS_PLUGIN_TEMPLATES_DIR.'/pdf-loader.php';
@@ -423,23 +433,26 @@
 
 				
 				if (!is_null($s3_url) && !empty($s3_url)) {
-					/*$apiCall = wp_remote_get($s3_url, [
+
+					$apiCall = wp_remote_get($s3_url, [
 						'timeout' => 180, 
 						'stream' => false, 
 						'headers' => [
 							'Content-Type'  => 'application/pdf',
 
 						]
-					]);*/
-					
+					]);
+
+					/*
 					wp_redirect($s3_url);
-					exit();
+					exit();*/
 				}
 				else {
-					wp_redirect("https://api.urlbox.io/v1/0FbOuhgmL1s2bINM/pdf?url=". get_rest_url() ."raiys/yacht-pdf?yacht_post_id=". $request->get_param('yacht_post_id'));
-					exit();
+					/*wp_redirect("https://api.urlbox.io/v1/0FbOuhgmL1s2bINM/pdf?url=". get_rest_url() ."raiys/yacht-pdf?yacht_post_id=". $request->get_param('yacht_post_id'));
 
-	/*				$apiCall = wp_remote_get(
+					exit();*/
+
+					$apiCall = wp_remote_get(
 						"https://api.urlbox.io/v1/0FbOuhgmL1s2bINM/pdf?url=". get_rest_url() ."raiys/yacht-pdf?yacht_post_id=". $request->get_param('yacht_post_id'), 
 
 						[
@@ -448,26 +461,24 @@
 								'Content-Type'  => 'application/pdf',
 							]
 						]
-					);*/
+					);
 
 				}
+
 				//$apiCall = wp_remote_get(get_rest_url() . 'raiys/yacht-pdf-download?yacht_post_id=' . $request->get_param('yacht_post_id'));
 
 				$api_status_code = wp_remote_retrieve_response_code($apiCall);
 
 				if ($api_status_code == '200') {
+					header('Content-Type: application/pdf; charset=UTF-8; ');
+					header('Content-Disposition: inline; filename='.$yacht_p->post_title.'.pdf');
+					//var_dump($apiCall);
+					echo wp_remote_retrieve_body($apiCall);
 
 				}
 				else {
-
-				}
-
-				header('Content-Type: application/pdf; charset=UTF-8; ');
-				header('Content-Disposition: inline; filename='.$yacht_p->post_title.'.pdf');
-				//var_dump($apiCall);
-				echo wp_remote_retrieve_body($apiCall);
-
-		    	
+					return ['success' => 'pdf status was not 200'];
+				}		    	
 			}
 			else {
 				return ['success' => 'No YACHT ID'];
