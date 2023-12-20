@@ -112,14 +112,11 @@
 
 			foreach($yearlo as $yl) {
 				$path_list[]="yearlo-$yl/";
-				$path_list[]="yearlo-$yl/yearhi-$yl/";
+				$path_list[]="ys_keyword-$yl/";
 
 				foreach($builders_list as $b){
+					$path_list[]="ys_keyword-$yl/make-$b/";
 					$path_list[]="yearlo-$yl/make-$b/";
-				}
-
-				foreach($builders_list as $b){
-					$path_list[]="yearlo-$yl/yearhi-$yl/make-$b/";
 				}
 			}
 
