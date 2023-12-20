@@ -145,8 +145,6 @@
 
 			}
 
-			var_dump(count($path_list));
-
 			$final_count=0;
 		
 			if (isset($path_list)) {
@@ -175,7 +173,7 @@
 
 							//if (! isset($xml_priority)) {
 								$xml_priority = '0.6';
-							//}			
+							//}
 
 							if ($last_mod == 'no date') {}
 							else {
@@ -207,7 +205,7 @@
 			}
 
 			foreach($xml_files as $xmlIndex => $xfile) {
-				$myfile = fopen("./sitemap-$xmlIndex.xml", "w") or die("Unable to open file!");
+				$myfile = fopen(ABSPATH."/wp-content/ysp-sitemaps/sitemap-$xmlIndex.xml", "w") or die("Unable to open file!");
 				fwrite($myfile, $xfile);
 				fclose($myfile);
 			}

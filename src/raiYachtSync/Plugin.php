@@ -36,6 +36,8 @@
 
 			$this->GutenbergBlocks = new raiYachtSync_GutenbergBlocks();
 
+			$this->AddSearchSitemapsToYoast = new raiYachtSync_AddSearchSitemapsToYoast();
+
 			$this->Commands = new raiYachtSync_AddCommands();
 			$this->Crons = new raiYachtSync_Cron();
 		}
