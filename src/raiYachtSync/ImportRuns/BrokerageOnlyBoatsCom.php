@@ -279,6 +279,7 @@
 					}
 					
 					$boatC->CompanyBoat = 1;
+					$boatC->Touched_InSync=1;
 					
 		            $y_post_id=wp_insert_post(
 		            	apply_filters('raiys_yacht_post',
