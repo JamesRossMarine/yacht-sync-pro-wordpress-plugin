@@ -8,6 +8,7 @@
 			$this->ImportGlobalBoatsCom = new raiYachtSync_ImportRuns_GlobalBoatsCom();
 			$this->ImportBrokerageOnlyBoatsCom = new raiYachtSync_ImportRuns_BrokerageOnlyBoatsCom();
 			$this->ImportYachtBrokerOrg = new raiYachtSync_ImportRuns_YachtBrokerOrg();
+			$this->ImportYatco = new raiYachtSync_ImportRuns_YatcoCom();
 			
 		}
 
@@ -132,7 +133,7 @@
 
 			// @ToDo For Loop the Runs  
 			// KEEP THIS IN THIS ORDER
-			if (! empty($boats_com_api_global_key)) {
+			/*if (! empty($boats_com_api_global_key)) {
 				$resultsOfSync[]=$this->ImportGlobalBoatsCom->run();
 			}
 
@@ -142,7 +143,11 @@
 
 			if (! empty($boats_com_api_brokerage_key)) {
 				$resultsOfSync[]=$this->ImportBrokerageOnlyBoatsCom->run();
-			}
+			}*/
+
+			$resultsOfSync[]=$this->ImportYatco->run();
+
+			var_dump($resultsOfSync);
 
 			$syncHadIssue=false;
 

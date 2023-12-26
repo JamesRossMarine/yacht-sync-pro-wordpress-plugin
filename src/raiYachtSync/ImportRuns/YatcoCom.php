@@ -1,6 +1,6 @@
 <?php
 
-	class raiYachtSync_ImportRuns_YachtBrokerOrg {
+	class raiYachtSync_ImportRuns_YatcoCom {
 		public $yachtBrokerAPIKey = '';
    		public $yachtClientId = '';
    		protected $url = '';
@@ -11,13 +11,9 @@
 			$this->options = new raiYachtSync_Options();
 			$this->LocationConvert = new raiYachtSync_LocationConvert();
 
-			$this->yachtBrokerAPIKey = $this->options->get('yacht_broker_org_api_token');
-			$this->yachtClientId = $this->options->get('yacht_broker_org_id');
-
 			$this->euro_c_c = intval($this->options->get('euro_c_c'));
 			$this->usd_c_c = intval($this->options->get('usd_c_c'));
 			
-
 			$this->euro_c_c = intval($this->options->get('euro_c_c'));
 			$this->usd_c_c = intval($this->options->get('usd_c_c'));	
 		}
@@ -25,7 +21,7 @@
 		public function run() {
 			global $wpdb;
 
-			var_dump('Started Yacht Broker.org Import');
+			var_dump('Started YATCO Import');
 
 	        $headers = [
 	            'headers' => [
@@ -42,7 +38,7 @@
 
 	        $json = json_decode(wp_remote_retrieve_body($apiCall), true);
 
-	        if ($api_status_code == 200 && isset($json['V-Data'])) {
+	        if ($api_status_code == 200 && isset($json['Results'])) {
 				// return;
 			}
 			elseif ($api_status_code == 401) {
@@ -52,7 +48,7 @@
 				return ['error' => 'Error http error '.$api_status_code];
 			}
 
-	        $total = $json['total'];
+	        $total = $json['Count'];
 	        $yachtSynced = 0;
 	        $page = 1;
 
@@ -126,13 +122,13 @@
 
 		           	}
 
-		            if (! empty($theBoat['VesselID'])) {
+		            if (! empty($row['VesselID'])) {
 		                $find_post=get_posts([
 		                    'post_type' => 'syncing_rai_yacht',
 		                    'meta_query' => [
 		                        array(
 		                           'key' => 'YTCID',
-		                           'value' => $theBoat['VesselID'],
+		                           'value' => $row['VesselID'],
 		                           'compare' => '=',
 		                       )
 		                    ],
@@ -158,12 +154,12 @@
 			                    'ID' => $post_id,
 								'post_type' => 'syncing_rai_yacht',
 								
-								'post_title' =>  addslashes( $theBoat['ModelYear'].' '.$theBoat['BuilderName'].' '.$theBoat['Model'].' '.$theBoat['VesselName'] ),
+								'post_title' =>  addslashes( $row['ModelYear'].' '.$row['BuilderName'].' '.$theBoat['Model'].' '.$row['VesselName'] ),
 
 								'post_name' => sanitize_title(
-									$theBoat['ModelYear'].'-'.$theBoat['BuilderName'].'-'.$theBoat['Model']
+									$row['ModelYear'].'-'.$row['BuilderName'].'-'.$row['Model']
 								),
-								'post_content' => $theBoat['BrokerTeaser'],
+								'post_content' => $row['BrokerTeaser'],
 								'post_status' => 'publish',
 								'meta_input' => apply_filters('raiys_yacht_meta_sync', (object) $theBoat)
 
