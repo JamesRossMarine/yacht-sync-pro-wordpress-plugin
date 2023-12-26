@@ -474,7 +474,7 @@ $colorTwo = $YSP_Options->get('color_two');
                 <div class="specification-column">
                     <div class="individual-specification-group">
                         <p class="specification-title">LENGTH OVERALL</p>
-                        <p class="specification-value"><?= //(isset($lengthOverall) && isset($lengthOverallMeters)) ? $lengthOverall . " / " . $lengthOverallMeters . " m" : "N/A" ?></p>
+                        <p class="specification-value"></p>
                     </div>
                     <div class="individual-specification-group">
                         <p class="specification-title">BEAM</p>
@@ -534,7 +534,7 @@ $colorTwo = $YSP_Options->get('color_two');
                     </div>
                     <div class="individual-specs-group">
                         <p class="other-specs-name">OVERALL</p>
-                        <p class="other-specs-value"><?= //(isset($lengthOverall) && isset($lengthOverallMeters)) ? $lengthOverall . " / " . $lengthOverallMeters . " m" : "N/A" ?></p>
+                        <p class="other-specs-value"></p>
                     </div>
                     <div class="individual-specs-group">
                         <p class="other-specs-name">BEAM</p>
@@ -582,7 +582,7 @@ $colorTwo = $YSP_Options->get('color_two');
             <div class="image-gallery-container" style="padding-top: 60px ">
                 <?php foreach(array_slice($vessel->Images, 0, 6) as $image){ ?>
                     <div class="individual-image-container">
-                        <img class="gallery-image" src="<?= $image->Uri ?>" alt="boat-image" />
+                        <img class="gallery-image" src="<?= $image->Uri ?>" alt="boat-image" style="object-fit: cover;" />
                     </div>
                 <?php } ?>
             </div>
@@ -590,7 +590,7 @@ $colorTwo = $YSP_Options->get('color_two');
     <div class="image-gallery-container" style="padding-top: 20px ">
         <?php foreach(array_slice($vessel->Images, 6, 6) as $image){ ?>
             <div class="individual-image-container">
-                <img class="gallery-image" src="<?= $image->Uri ?>" alt="boat-image" />
+                <img class="gallery-image" src="<?= $image->Uri ?>" alt="boat-image" style="object-fit: cover;"  />
             </div>
         <?php } ?>
     </div>

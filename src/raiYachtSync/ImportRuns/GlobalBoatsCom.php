@@ -1,7 +1,7 @@
 <?php
 	
 	class raiYachtSync_ImportRuns_GlobalBoatsCom {
-   		protected $limit = 200;
+   		protected $limit = 53;
 	
 		// Testing URL
 		//public $globalInventoryUrl = 'https://services.boats.com/pls/boats/search?fields=ModelYear,MakeString,Model,BoatName,DocumentID,NominalLength,BoatClassCode&key=';
@@ -33,7 +33,7 @@
 			$yachtsSynced = 0;
 
 			// Sync broker inventory
-			$apiCall = wp_remote_get($this->globalInventoryUrl, ['timeout' => 300]);
+			$apiCall = wp_remote_get($this->globalInventoryUrl, ['timeout' => 120]);
 
 				$apiCall['body']=json_decode($apiCall['body'], true);
 
@@ -63,10 +63,10 @@
 
 				//var_dump($offset);
 
-				sleep(5);
+				sleep(30);
  
 				// Sync broker inventory
-				$apiCallForWhile = wp_remote_get($apiUrl, ['timeout' => 300]);
+				$apiCallForWhile = wp_remote_get($apiUrl, ['timeout' => 120]);
 
 				//var_dump($apiCallForWhile);
 
@@ -123,7 +123,7 @@
 
 				  	$url = 'https://services.boats.com/pls/boats/details?id=' . $boat['DocumentID'] . '&key='.$this->key;
 					
-					$apiCall = wp_remote_get($url, ['timeout' => 300]);
+					$apiCall = wp_remote_get($url, ['timeout' => 120]);
 
 					$response = $apiCall['body'];
 
@@ -167,7 +167,9 @@
 
 						$boatC->YSP_LOAFeet = $boatC->YSP_Length;
 						$boatC->YSP_LOAMeter = round(($boatC->YSP_Length * 0.3048), 2);
+					}
 
+					if (isset($boat['BeamMeasure'])) {
 						$boatC->YSP_BeamFeet = floatval(str_replace(array(' ft'), '', $boat['BeamMeasure']));
 						$boatC->YSP_BeamMeter = round(($boatC->YSP_BeamFeet * 0.3048), 2);
 					}

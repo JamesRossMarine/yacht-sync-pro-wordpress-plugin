@@ -143,6 +143,11 @@ get_header();
                             }
                         ?>
                     </div>
+
+                    <div>
+                        <button class="yacht-download-button" type="button" data-modal="#single-share">Share </button>
+
+                    </div>
                 </div>
                 
                     
@@ -198,6 +203,7 @@ get_header();
 
 
                     }
+                    
 
                     if ($brokerQuery->have_posts()) {
                         while ($brokerQuery->have_posts()) {
@@ -598,7 +604,55 @@ get_header();
     endwhile; // End of the loop.
     ?>
 
+<link rel="stylesheet" type="text/css" href="styles.css">
+
+<?php
+$image = $vessel->Images[0];
+?>
+<div class="ysp-modal" id="single-share">
+    <div class="modal-content">
+        <div class="modal-left">
+            <img src="<?php echo $image->{'Uri'}; ?>" alt="Vessel Image">
+            <p class="modal-title">
+                <?php echo esc_html($vessel->ModelYear . ' ' . $vessel->MakeString . ' ' . $vessel->BoatName); ?>
+            </p>
+        </div>
+        <div class="modal-right">
+            <h2>Share This</h2>
+<div class="modal-socials">
+    <div class="modal-social-icon">
+        <a href="mailto:?subject=<?php echo urlencode($vessel->ModelYear . ' ' . $vessel->MakeString . ' ' . $vessel->BoatName); ?>&body=<?php echo get_the_permalink(); ?>" style="text-decoration: none; color: black;">
+            <img src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>/icons/send.svg" alt="Email" style="width: 20px; height: 20px;">
+            <p class="modal-social"> Email </p>
+        </a>
+    </div>
+    <div class="modal-social-icon">
+        <a class="yacht-brochure" onclick="window.open('http://www.facebook.com/sharer/sharer.php?u=<?php echo get_the_permalink(); ?>&t=<?php echo urlencode($vessel->ModelYear . ' ' . $vessel->MakeString . ' ' . $vessel->BoatName); ?>', '_blank');" target="_blank" style="text-decoration: none; color: black;">
+            <img src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>/icons/facebook.svg" alt="Facebook Icon" style="width: 20px; height: 20px;">
+            <p class="modal-social"> Facebook </p>
+        </a>
+    </div>
+    <div class="modal-social-icon">
+        <a href="http://twitter.com/share?url=<?php echo get_the_permalink(); ?>&text=<?php echo urlencode($vessel->ModelYear . ' ' . $vessel->MakeString . ' ' . $vessel->BoatName); ?>" target="_blank" style="text-decoration: none; color: black;">
+            <img src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>/icons/twitter.svg" alt="Twitter Icon" style="width: 20px; height: 20px;">
+            <p class="modal-social"> Twitter </p>
+        </a>
+    </div>
+</div>
+
+            <h3>Copy Link</h3>
+            <div class="copy-link-section">
+                <input type="text" value="<?php echo esc_url(get_permalink()); ?>" id="copyLinkInput" readonly>
+                <button onclick="copyLink()">Copy Link</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 </main><!-- #main -->
+
+
+
 
 <?php
 //get_sidebar();
