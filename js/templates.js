@@ -20,7 +20,7 @@ var ysp_templates={};
 		}
 
 		return `
-			<div class="yacht-result-grid-item">
+			<div class="yacht-result-grid-item" data-post-id="${ vessel._postID }">
 				<div class="yacht-main-image-container">
 					<a class="yacht-details" href="${ vessel._link }">
 						<img class="yacht-main-image" src="${vessel.Images ? vessel.Images[0].Uri : rai_yacht_sync.assets_url + 'images/default-yacht-image.jpeg'}" alt="yacht-image" loading="lazy" />
@@ -84,7 +84,7 @@ var ysp_templates={};
 		}
 
 		return `
-			<div class="yacht-result-grid-item list-view">
+			<div class="yacht-result-grid-item list-view" data-post-id="${ vessel._postID }">
 				<div class="yacht-main-image-container">
 					<a class="yacht-details" href="${ vessel._link }">
 						<img class="yacht-main-image" src="${vessel.Images ? vessel.Images[0].Uri : vessel.Images ? vessel.Images[0].Uri : rai_yacht_sync.assets_url + 'images/default-yacht-image.jpeg'}" alt="yacht-image" loading="lazy" />
