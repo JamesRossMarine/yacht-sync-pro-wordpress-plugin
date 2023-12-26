@@ -29,10 +29,29 @@ function ysp_yacht_search_and_reader(data) {
             data_result.results.forEach(function(item) {
                 if (typeof data.view != 'undefined' && data.view.toLowerCase() == 'list') {
                     jQuery('#search-result-row').append( ysp_templates.yacht.list(item, data) );
+                    
                 }
                 else {
                     jQuery('#search-result-row').append( ysp_templates.yacht.grid(item, data) );
                 }
+
+                let ele_card = jQuery('[data-post-id='+ item._postID +']');
+
+                jQuery('[data-modal]', ele_card).click(function(e) {
+                  e.preventDefault();
+                
+                    let vesselInfo = item.ModelYear + ' ' + item.MakeString + ' ' + item.BoatName;
+
+                    jQuery('#yatchHidden').val(vesselInfo);
+
+                  var data_modal = jQuery(this).data('modal');
+              
+                  jQuery( data_modal ).ysp_modal({
+                    closeText: 'X',
+                    modalClass: 'ysp-modal-open',
+                    closeClass: 'ysp-model-close'
+                  });
+                });
             });
 
             jQuery('#yachts-pagination').pagination({

@@ -187,6 +187,7 @@
 				$meta2=array_map("maybe_unserialize", $meta);
 
 					$meta2['_link']=get_permalink($yachts_query->post->ID);
+					$meta2['_postID']=$yachts_query->post->ID;
 				
 				$return['results'][] = $meta2;
 
