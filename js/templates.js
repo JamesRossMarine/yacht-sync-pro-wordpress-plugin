@@ -58,9 +58,7 @@ var ysp_templates={};
 							<p class="yacht-price">${price}</p>
 						</div>
 						
-						<a class="yacht-details" href="${ vessel._link }">
-							Details
-						</a>
+						<button class="yacht-download-button" type="button" data-modal="#single-share">Contact</button>
 					</div>
 				</div>
 			</div>
@@ -122,12 +120,11 @@ var ysp_templates={};
 						<div class="yacht-price-container">
 							<p class="yacht-price">${price}</p>
 						</div>
-						<a class="yacht-details" href="${ vessel._link }">
-							Details
-						</a>
+						<button class="yacht-download-button" type="button" data-modal="#single-share">Contact</button>
 					</div>
 				</div>
 			</div>
+			
 		`;
 	};
 

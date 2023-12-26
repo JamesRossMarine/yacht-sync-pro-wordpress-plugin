@@ -29,10 +29,45 @@ function ysp_yacht_search_and_reader(data) {
             data_result.results.forEach(function(item) {
                 if (typeof data.view != 'undefined' && data.view.toLowerCase() == 'list') {
                     jQuery('#search-result-row').append( ysp_templates.yacht.list(item, data) );
+                    jQuery(document).ready(function() {
+  
+                        jQuery('[data-modal]').click(function(e) {
+                          e.preventDefault();
+                          
+                          console.log('fuck me ');
+                      
+                          var data_modal = jQuery(this).data('modal');
+                      
+                          jQuery( data_modal ).ysp_modal({
+                            closeText: 'X',
+                            modalClass: 'ysp-modal-open',
+                            closeClass: 'ysp-model-close'
+                          });
+                        });
+                      });
                 }
                 else {
                     jQuery('#search-result-row').append( ysp_templates.yacht.grid(item, data) );
+                    jQuery(document).ready(function() {
+  
+                        jQuery('[data-modal]').click(function(e) {
+                          e.preventDefault();
+                          
+                          console.log('fuck me ');
+                      
+                          var data_modal = jQuery(this).data('modal');
+                      
+                          jQuery( data_modal ).ysp_modal({
+                              closeText: 'X',
+                            modalClass: 'ysp-modal-open',
+                            closeClass: 'ysp-model-close'
+                          });
+                        });
+                      });
                 }
+                var vesselInfo = item.ModelYear + ' ' + item.MakeString + ' ' + item.BoatName;
+
+                jQuery('#yatchHidden').val(vesselInfo);
             });
 
             jQuery('#yachts-pagination').pagination({
@@ -151,7 +186,7 @@ document.addEventListener("DOMContentLoaded", function() {
             });            
         }
 
-        document.querySelectorAll('input[name=view][form=ysp-yacht-search-form], select[name=sortBy][form=ysp-yacht-search-form]').forEach((eeee) => {
+        document.querySelectorAll('input[name=view][form=ysp-yacht-search-form], select[name=sortby][form=ysp-yacht-search-form]').forEach((eeee) => {
             eeee.addEventListener('change', function(e) {
                 e.target.form.querySelector('input[name=page_index]').value=1;
 
