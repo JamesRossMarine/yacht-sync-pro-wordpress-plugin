@@ -109,7 +109,20 @@
 			            }
 		           	}		   
 
-		           	if (! isset($find_post[0]->ID)) {
+
+					$find_post_from_synced=get_posts([
+	                    'post_type' => 'rai_yacht',
+	                    'meta_query' => [
+
+	                        array(
+	                           'key' => 'DocumentID',
+	                           'value' => $boat['DocumentID'],
+	                           'compare' => '=',
+	                       )
+	                    ],
+	                ]);
+
+		           	if (! isset($find_post_from_synced[0]->ID)) {
 			            if (! empty($record['BoatHullID'])) {
 			                $find_post_from_synced=get_posts([
 			                    'post_type' => 'rai_yacht',
@@ -124,28 +137,19 @@
 			                ]);
 			            }
 			            else {
-			                $find_post=[];
+			                $find_post_from_synced=[];
 			            }
 		           	}	        	         
 					
-					$find_post_from_synced=get_posts([
-	                    'post_type' => 'rai_yacht',
-	                    'meta_query' => [
-
-	                        array(
-	                           'key' => 'DocumentID',
-	                           'value' => $boat['DocumentID'],
-	                           'compare' => '=',
-	                       )
-	                    ],
-	                ]);
-
 	                $pdf_still_e = false;
 
 	                if (isset($find_post_from_synced[0]->ID)) {
 	                	$synced_post_id = $find_post_from_synced[0]->ID;
 
 		                $synced_pdf = get_post_meta($synced_post_id, 'YSP_PDF_URL', true);
+
+		                $saved_last_mod_date = get_post_meta($synced_post_id, 'LastModificationDate', true);
+		                $current_last_mod_date = $boatC->LastModificationDate;
 
 		                if (!is_null($synced_pdf) && !empty($synced_pdf)) {
 							$apiPDF = wp_remote_request($synced_pdf, [
@@ -165,6 +169,10 @@
 							if ($api_status_code == '200') {
 								$pdf_still_e = true;
 							}
+						}
+
+						if (strtotime($current_last_mod_date) > strtotime($saved_last_mod_date)) {
+							$pdf_still_e = false;
 						}
 
 						if ( $pdf_still_e ) {

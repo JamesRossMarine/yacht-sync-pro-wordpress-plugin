@@ -582,7 +582,7 @@ $colorTwo = $YSP_Options->get('color_two');
             <div class="image-gallery-container" style="padding-top: 60px ">
                 <?php foreach(array_slice($vessel->Images, 0, 6) as $image){ ?>
                     <div class="individual-image-container">
-                        <img class="gallery-image" src="<?= $image->Uri ?>" alt="boat-image" style="object-fit: cover;" />
+                        <img class="gallery-image" src="<?= str_replace("XLARGE", "LARGE", $image->Uri) ?>" alt="boat-image" style="object-fit: cover;" />
                     </div>
                 <?php } ?>
             </div>
@@ -590,7 +590,7 @@ $colorTwo = $YSP_Options->get('color_two');
     <div class="image-gallery-container" style="padding-top: 20px ">
         <?php foreach(array_slice($vessel->Images, 6, 6) as $image){ ?>
             <div class="individual-image-container">
-                <img class="gallery-image" src="<?= $image->Uri ?>" alt="boat-image" style="object-fit: cover;"  />
+                <img class="gallery-image" src="<?= str_replace("XLARGE", "LARGE", $image->Uri) ?>" alt="boat-image" style="object-fit: cover;"  />
             </div>
         <?php } ?>
     </div>

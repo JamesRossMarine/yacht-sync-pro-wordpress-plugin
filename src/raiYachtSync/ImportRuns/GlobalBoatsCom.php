@@ -7,7 +7,7 @@
 		//public $globalInventoryUrl = 'https://services.boats.com/pls/boats/search?fields=ModelYear,MakeString,Model,BoatName,DocumentID,NominalLength,BoatClassCode&key=';
 		
    		// PRODUCTION URL
-		public $globalInventoryUrl = 'https://services.boats.com/pls/boats/search?fields=SalesStatus,MakeString,Model,ModelYear,BoatCategoryCode,SaleClassCode,StockNumber,BoatLocation,BoatName,BoatClassCode,BoatHullMaterialCode,BoatHullID,DesignerName,RegistrationCountryCode,NominalLength,LengthOverall,BeamMeasure,MaxDraft,BridgeClearanceMeasure,DryWeightMeasure,Engines,CruisingSpeedMeasure,RangeMeasure,AdditionalDetailDescription,DriveTypeCode,MaximumSpeedMeasure,FuelTankCountNumeric,FuelTankCapacityMeasure,WaterTankCountNumeric,WaterTankCapacityMeasure,HoldingTankCountNumeric,HoldingTankCapacityMeasure,CabinsCountNumeric,SingleBerthsCountNumeric,DoubleBerthsCountNumeric,TwinBerthsCountNumeric,HeadsCountNumeric,GeneralBoatDescription,AdditionalDetailDescription,EmbeddedVideoPresent,Videos,Images,NormPrice,Price,CompanyName,SalesRep,DocumentID,BuilderName,IMTTimeStamp,PlsDisclaimer&key=';
+		public $globalInventoryUrl = 'https://services.boats.com/pls/boats/search?fields=SalesStatus,MakeString,Model,ModelYear,BoatCategoryCode,SaleClassCode,StockNumber,BoatLocation,BoatName,BoatClassCode,BoatHullMaterialCode,BoatHullID,DesignerName,RegistrationCountryCode,NominalLength,LengthOverall,BeamMeasure,MaxDraft,BridgeClearanceMeasure,DryWeightMeasure,Engines,CruisingSpeedMeasure,RangeMeasure,AdditionalDetailDescription,DriveTypeCode,MaximumSpeedMeasure,FuelTankCountNumeric,FuelTankCapacityMeasure,WaterTankCountNumeric,WaterTankCapacityMeasure,HoldingTankCountNumeric,HoldingTankCapacityMeasure,CabinsCountNumeric,SingleBerthsCountNumeric,DoubleBerthsCountNumeric,TwinBerthsCountNumeric,HeadsCountNumeric,GeneralBoatDescription,AdditionalDetailDescription,EmbeddedVideoPresent,Videos,Images,NormPrice,Price,CompanyName,SalesRep,DocumentID,BuilderName,IMTTimeStamp,PlsDisclaimer,LastModificationDate&key=';
 
 		public function __construct() {
 
@@ -112,6 +112,77 @@
 			                $find_post=[];
 			            }
 		           	}
+
+		           	$find_post_from_synced=get_posts([
+	                    'post_type' => 'rai_yacht',
+	                    'meta_query' => [
+
+	                        array(
+	                           'key' => 'DocumentID',
+	                           'value' => $boat['DocumentID'],
+	                           'compare' => '=',
+	                       )
+	                    ],
+	                ]);
+
+		           	if (! isset($find_post_from_synced[0]->ID)) {
+			            if (! empty($record['BoatHullID'])) {
+			                $find_post_from_synced=get_posts([
+			                    'post_type' => 'rai_yacht',
+			                    'meta_query' => [
+
+			                        array(
+			                           'key' => 'BoatHullID',
+			                           'value' => $record['BoatHullID'],
+			                           'compare' => '=',
+			                       )
+			                    ],
+			                ]);
+			            }
+			            else {
+			                $find_post_from_synced=[];
+			            }
+		           	}	        	         
+					
+					
+		           	$pdf_still_e = false;
+
+	                if (isset($find_post_from_synced[0]->ID)) {
+	                	$synced_post_id = $find_post_from_synced[0]->ID;
+
+		                $synced_pdf = get_post_meta($synced_post_id, 'YSP_PDF_URL', true);
+
+		                $saved_last_mod_date = get_post_meta($synced_post_id, 'LastModificationDate', true);
+		                $current_last_mod_date = $boatC->LastModificationDate;
+
+		                if (!is_null($synced_pdf) && !empty($synced_pdf)) {
+							$apiPDF = wp_remote_request($synced_pdf, [
+								'method' => 'HEAD',
+
+								'timeout' => 180, 
+								'stream' => false, 
+								
+								'headers' => [
+									'Content-Type'  => 'application/pdf',
+
+								]
+							]);
+
+							$api_status_code = wp_remote_retrieve_response_code($apiPDF);
+
+							if ($api_status_code == '200') {
+								$pdf_still_e = true;
+							}
+						}
+
+						if (strtotime($current_last_mod_date) > strtotime($saved_last_mod_date)) {
+							$pdf_still_e = false;
+						}
+
+						if ( $pdf_still_e ) {
+							$boatC->YSP_PDF_URL = $synced_pdf;
+						}
+	                }
 
 		            $post_id=0;
 
@@ -259,6 +330,26 @@
 					);
 
 					wp_set_post_terms($y_post_id, $boat['BoatClassCode'], 'boatclass', false);
+
+					if ( $pdf_still_e == false && ! in_array($boatC->SalesStatus, ['Sold', 'Suspend']) ) {
+
+						$generatorPDF = wp_remote_post(
+							"https://api.urlbox.io/v1/render/async", 
+							[
+								'headers' => [
+									'Authorization' => 'Bearer ae1422deb6fc4f658c55f5dda7a08704',
+									'Content-Type' => 'application/json'
+								],
+								'body' => json_encode([
+									'url' => get_rest_url() ."raiys/yacht-pdf?yacht_post_id=". $y_post_id,
+									'webhook_url' => get_rest_url() ."raiys/set-yacht-pdf?yacht_post_id=". $y_post_id,
+									'use_s3' => true,
+									'format' => 'pdf'
+								])
+							]
+						);
+
+					}
 
 		            //if ( defined( 'WP_CLI' ) && WP_CLI ) {
                         if (is_wp_error($y_post_id)) {
