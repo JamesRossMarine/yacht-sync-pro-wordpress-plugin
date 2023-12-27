@@ -155,11 +155,14 @@
 		                $saved_last_mod_date = get_post_meta($synced_post_id, 'LastModificationDate', true);
 		                $current_last_mod_date = $boatC->LastModificationDate;
 
+		                var_dump($saved_last_mod_date);
+		                var_dump($current_last_mod_date);
+
 		                if (!is_null($synced_pdf) && !empty($synced_pdf)) {
 							$apiPDF = wp_remote_request($synced_pdf, [
 								'method' => 'HEAD',
 
-								'timeout' => 180, 
+								'timeout' => 180,
 								'stream' => false, 
 								
 								'headers' => [

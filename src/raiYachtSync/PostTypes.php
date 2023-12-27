@@ -29,6 +29,9 @@
 			        'with_front' => true
 			    ),
 
+			    'capability_type' => 'post',
+			    'map_meta_cap' => true,
+
 				'public' => false,
 				'publicly_queryable' => false,
 				'can_export' => true
@@ -49,6 +52,9 @@
 			        'slug' => 'yacht-listing',
 			        'with_front' => true
 			    ),
+
+			    'capability_type' => 'post',
+			    'map_meta_cap' => true,
 
 				'public' => true,
 				'publicly_queryable' => true,
