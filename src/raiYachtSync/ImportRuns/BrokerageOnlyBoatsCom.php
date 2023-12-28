@@ -11,6 +11,7 @@
 			$this->LocationConvert = new raiYachtSync_LocationConvert();
 
 			$this->key=$this->options->get('boats_com_api_brokerage_key');
+			$this->opt_prerender_brochures=$this->options->get('prerender_brochures');
 
 			$this->brokerageInventoryUrl .= $this->key;
 
@@ -312,7 +313,7 @@
 
 					wp_set_post_terms($y_post_id, $boat['BoatClassCode'], 'boatclass', false);
 					
-					if ( $pdf_still_e == false && ! in_array($boatC->SalesStatus, ['Sold', 'Suspend']) ) {
+					if ( $this->opt_prerender_brochures == 'yes' && $pdf_still_e == false && ! in_array($boatC->SalesStatus, ['Sold', 'Suspend']) ) {
 
 						$generatorPDF = wp_remote_post(
 							"https://api.urlbox.io/v1/render/async", 

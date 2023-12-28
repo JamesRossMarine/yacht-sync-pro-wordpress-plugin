@@ -70,6 +70,15 @@
 						self::SLUG . '_admin_fields',
 						array( )
 					);
+
+					add_settings_field(
+						self::SLUG . '_prerender_brochures',
+						"Prerender Brochures (Cost Extra)",
+						array( $this, 'prerender_brochure_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
 					
 					add_settings_field(
 						self::SLUG . '_color_one',
@@ -233,6 +242,33 @@
 			];
 
 			$nameOfField=self::SLUG.'_is_euro_site';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<select name="<?= $nameOfField ?>"> 
+				<?php 
+					foreach ( $options as $opt_value => $opt_label ) {
+						$option = '<option value="' . $opt_value . '" '. selected($opt_value, $valOfField, false) .'>';
+
+						$option .= $opt_label;
+						
+						$option .= '</option>';
+
+						echo $option;
+					}
+				?>
+			</select><?php 
+		}
+
+		public function prerender_brochure_field() {
+			$options=[
+				'' => '---- Not Picked Yet ----',
+				'yes' => 'YES',
+				'no' => 'NO',
+			];
+
+			$nameOfField=self::SLUG.'_prerender_brochures';
 			$valOfField=get_option($nameOfField);
 
 			?>
