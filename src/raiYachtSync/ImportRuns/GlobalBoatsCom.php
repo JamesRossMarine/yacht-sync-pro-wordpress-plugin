@@ -19,6 +19,8 @@
 
 			$this->globalInventoryUrl .= $this->key;
 
+			$this->opt_prerender_brochures=$this->options->get('prerender_brochures');
+
 			$this->euro_c_c = intval($this->options->get('euro_c_c'));
 			$this->usd_c_c = intval($this->options->get('usd_c_c'));
 			
