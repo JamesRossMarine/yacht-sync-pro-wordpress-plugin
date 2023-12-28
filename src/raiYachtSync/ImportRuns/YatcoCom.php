@@ -24,6 +24,8 @@
 			var_dump('Started YATCO Import');
 
 	        $headers = [
+	        	'timeout' => 120,
+	        	
 	            'headers' => [
 	             
 	            ]
