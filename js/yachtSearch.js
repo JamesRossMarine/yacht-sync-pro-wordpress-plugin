@@ -95,12 +95,58 @@ document.addEventListener("DOMContentLoaded", function() {
     // Fill List Options
     let FillLists=[];
     let listElements = document.querySelectorAll("datalist[data-fill-list]");
+    let listNeededElements = document.querySelectorAll("input[list]");
 
     listElements.forEach((ele) => {
         FillLists.push(ele.getAttribute('data-fill-list'));
     });
+
+    listNeededElements.forEach((input_ele) => {
+
+        input_ele.addEventListener('input', function(event) {
+
+            let list_id = event.target.getAttribute('list');
+
+            let ele_list = document.querySelector("datalist#"+list_id);
+
+            rai_ysp_api.call_api(
+                'POST', 
+                'list-options-with-value', 
+                {
+                    labels: [ ele_list.getAttribute('data-fill-list') ], 
+                    value: event.target.value
+                }
+            ).then(function(rOptions) {
+
+                for (let label in rOptions) {
+
+                    let SelectorEle = document.querySelectorAll("datalist[data-fill-list='"+ label +"']");
+
+                    SelectorEle.forEach((ele) => {
+                        ele.innerHTML = '';
+                    });
+                    
+                    rOptions[label].forEach(function(b) {
+
+                        let option = document.createElement("OPTION");
+
+                            option.text = b;
+                            option.value = b;
+
+                        SelectorEle.forEach((ele) => {
+                            ele.append(option);
+                        });
+                    });
+                }
+
+
+            });
+
+        });
+
+    })
     
-    rai_ysp_api.call_api('POST', 'list-options', {labels: FillLists}).then(function(rOptions) {
+/*    rai_ysp_api.call_api('POST', 'list-options', {labels: FillLists}).then(function(rOptions) {
         for (let label in rOptions) {
 
             let SelectorEle = document.querySelectorAll("datalist[data-fill-list='"+ label +"']");
@@ -118,7 +164,7 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         }
     });
-
+*/
     let yachtSearchAndResults=document.querySelector('.ysp-yacht-search-form');
 
     if (yachtSearchAndResults) {
