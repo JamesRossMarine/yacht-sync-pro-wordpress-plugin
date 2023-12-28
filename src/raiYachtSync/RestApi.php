@@ -420,15 +420,18 @@
 	
 				$y_post_id = $request->get_param('yacht_post_id');
 
-				update_post_meta($yacht_post_id, 'YSP_PDF_URL', "");
+				update_post_meta($y_post_id, 'YSP_PDF_URL', "");
 
 				$generatorPDF = wp_remote_post(
 					"https://api.urlbox.io/v1/render/sync", 
 					[
+						'timeout' => 180, 
+
 						'headers' => [
 							'Authorization' => 'Bearer ae1422deb6fc4f658c55f5dda7a08704',
 							'Content-Type' => 'application/json'
 						],
+						
 						'body' => json_encode([
 							'url' => get_rest_url() ."raiys/yacht-pdf?yacht_post_id=". $y_post_id,
 							//'webhook_url' => get_rest_url() ."raiys/set-yacht-pdf?yacht_post_id=". $y_post_id,
@@ -440,9 +443,11 @@
 
 				$body = json_decode(wp_remote_retrieve_body($generatorPDF), true);
 
-				var_dump($body);
+				update_post_meta($y_post_id, 'YSP_PDF_URL', $body['renderUrl']);
 
-				update_post_meta($yacht_post_id, 'YSP_PDF_URL', $body['renderUrl']);
+				wp_redirect( $_SERVER['HTTP_REFERER'] );
+
+				exit();
 
 				return ['success' => 'joshie was here'];
 		    	

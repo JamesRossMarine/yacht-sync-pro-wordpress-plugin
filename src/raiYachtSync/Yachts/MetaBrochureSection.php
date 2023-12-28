@@ -27,7 +27,7 @@
 
         	if (! empty($current_pdf)) {
 
-        		echo 'Current: <a target="_blank" href="'. $current_pdf .'">'. $current_pdf .'</a><br/>';
+        		echo 'Current: <a style="word-break: break-word;" target="_blank" href="'. $current_pdf .'">'. $current_pdf .'</a><br/>';
 
         	}
         	else {
