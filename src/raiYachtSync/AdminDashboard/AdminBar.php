@@ -29,17 +29,17 @@
 			    ));
 
 			    $admin_bar->add_menu( array(
-			        'id'    => 'half-pics',
+			        'id'    => 'some-more-pics',
 			        'parent' => 'yacht-brochure',
-			        'title' => 'Download A Borchure With 24 Image Of The Gallery',
-			        'href'  => get_rest_url() ."raiys/yacht-pdf-download?GalleryLimit=". 24 ."&yacht_post_id=". $post->ID,
+			        'title' => 'Download A Borchure With 36 Image Of The Gallery',
+			        'href'  => get_rest_url() ."raiys/yacht-pdf-download?GalleryLimit=". 36 ."&yacht_post_id=". $post->ID,
 			        'meta'  => array(
-			            'title' => __('Download A Borchure With Half Of Gallery'),
+			            'title' => __('Download A Borchure With 36 Images Of Gallery'),
 			            'target' => '_blank',
 			            'class' => ''
 			        ),
 			    ));
-			    
+
 			    $admin_bar->add_menu( array(
 			        'id'    => 'half-pics',
 			        'parent' => 'yacht-brochure',
