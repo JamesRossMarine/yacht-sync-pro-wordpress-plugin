@@ -27,7 +27,7 @@
 			return $res;
 		}
 		
-		public function get_unique_yacht_meta_values_based_input( $key = 'trees', $input_val ) {
+		public function get_unique_yacht_meta_values_based_input( $key = 'trees', $input_val = '' ) {
 			global $wpdb;
 		
 			if( empty( $key ) || empty($input_val) )

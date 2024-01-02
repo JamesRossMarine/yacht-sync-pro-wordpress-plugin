@@ -52,7 +52,6 @@
 			        ),
 			    ));
 
-			    
 			    $admin_bar->add_menu( array(
 			        'id'    => 'full-bro',
 			        'parent' => 'yacht-brochure',
