@@ -108,9 +108,8 @@
 			            else {
 			                $find_post=[];
 			            }
-		           	}		   
-
-
+		           	}
+		           	
 					$find_post_from_synced=get_posts([
 	                    'post_type' => 'rai_yacht',
 	                    'meta_query' => [

@@ -144,6 +144,8 @@
 				$resultsOfSync[]=$this->ImportBrokerageOnlyBoatsCom->run();
 			}
 
+			var_dump($resultsOfSync);
+
 			$syncHadIssue=false;
 
 			foreach ($resultsOfSync as $syncR) {
