@@ -560,7 +560,7 @@ $colorTwo = $YSP_Options->get('color_two');
                             <h3 class="other-specs-title"><?= 'ENGINE ' . $counter ?></h3>
                             <div class="other-specs-group-container">
                                 <?php
-                                foreach ($engineData as $key => $value) {
+                                foreach ($engineData as $key => $waolue) {
                                     ?>
                                     <div class="individual-specs-group">
                                         <p class="other-specs-name"><?= strtoupper($key) ?></p>
@@ -578,22 +578,34 @@ $colorTwo = $YSP_Options->get('color_two');
                 ?>
         </div>
     </div>
-    <div class="pdf-page">
+
+    <?php
+        
+        $limitOfGallery = 12;
+
+        if ( isset( $_GET['GalleryLimit'] ) && ! empty( $_GET['GalleryLimit'] )) {
+
+            $limitOfGallery = $_GET['GalleryLimit'];
+
+        }
+
+        $imageGallery = array_slice($vessel->Images, 0, $limitOfGallery);
+
+        $chuckedGallery = array_chunk($imageGallery, 6);
+
+    ?>
+
+    <?php foreach ($chuckedGallery as $cg) { ?> 
+        <div class="pdf-page">
             <div class="image-gallery-container" style="padding-top: 60px ">
-                <?php foreach(array_slice($vessel->Images, 0, 6) as $image){ ?>
+                <?php foreach($cg as $image) { ?>
                     <div class="individual-image-container">
                         <img class="gallery-image" src="<?= str_replace("XLARGE", "LARGE", $image->Uri) ?>" alt="boat-image" style="object-fit: cover;" />
                     </div>
                 <?php } ?>
             </div>
         </div>
-    <div class="image-gallery-container" style="padding-top: 20px ">
-        <?php foreach(array_slice($vessel->Images, 6, 6) as $image){ ?>
-            <div class="individual-image-container">
-                <img class="gallery-image" src="<?= str_replace("XLARGE", "LARGE", $image->Uri) ?>" alt="boat-image" style="object-fit: cover;"  />
-            </div>
-        <?php } ?>
-    </div>
+    <?php } ?>
     
     <?php
     $broker = $vessel->SalesRep->Name;

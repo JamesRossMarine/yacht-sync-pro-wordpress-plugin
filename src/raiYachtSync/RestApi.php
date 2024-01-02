@@ -381,15 +381,15 @@
 
 	   			},
 
-	   			'Cities' => function() {
+	   			'Cities' => function() use ($input_val) {
 
-	   				$list = $this->get_unique_yacht_meta_values('YSP_City');
+	   				$list = $this->get_unique_yacht_meta_values_based_input('YSP_City', $input_val);
 
 	   				return $list;
 
 	   			},
 
-	   			'DisplayedLocation' => function() {
+	   			'DisplayedLocation' => function() use ($input_val) {
 
 	   				global $wpdb;
 				
@@ -400,6 +400,7 @@
 						INNER JOIN {$wpdb->postmeta} pmmm ON pmmm.post_id = pm.post_id
 						INNER JOIN {$wpdb->postmeta} pmmmm ON pmmmm.post_id = pm.post_id
 						WHERE pm.meta_key = 'YSP_City' 
+						AND pm.meta_value LIKE '%s' 
 						AND pmmm.meta_key = 'YSP_CountryID'  
 						AND pmmmm.meta_key = 'YSP_State'  
 						AND p.post_status = '%s'
@@ -408,7 +409,7 @@
 						AND pmm.meta_value != 'Sold'
 						AND LENGTH(pm.meta_value) > 1
 						ORDER BY pm.meta_value ASC
-						", 'publish', 'rai_yacht' ) );
+						", $input_val.'%s', 'publish', 'rai_yacht' ) );
 
 					return $res;
 
@@ -416,17 +417,13 @@
 
 	   		];
 
-	   		$return = get_transient('rai_yacht_list_options_'.join('_', $labels));
+	   		$return = [];
 
-			if (! $return){
-				foreach ($labels as $label) {
-					if (is_callable($labelsKey[ $label ])) {
-						$return[ $label ] = $labelsKey[ $label ]();
-					}
+			foreach ($labels as $label) {
+				if (is_callable($labelsKey[ $label ])) {
+					$return[ $label ] = $labelsKey[ $label ]();
 				}
-				
-				set_transient('rai_yacht_list_options'.join('_', $labels), $return, 4 * HOUR_IN_SECONDS);
-			}
+			}			
 
 	   		return $return;
 	   }
@@ -439,7 +436,6 @@
 	   			$post_exists = get_post($request->get_param('yacht_post_id'));
 
 	   			if (is_null($post_exists)) {
-
 	   				return ['error' => 'post does not exists.'];
 	   			}
 
@@ -585,7 +581,7 @@
 				// ----------------------
 
 				
-				if (!is_null($s3_url) && !empty($s3_url)) {
+				if (! isset($_GET['GalleryLimit']) && !is_null($s3_url) && !empty($s3_url)) {
 
 					$apiCall = wp_remote_get($s3_url, [
 						'timeout' => 180, 
@@ -600,13 +596,34 @@
 					wp_redirect($s3_url);
 					exit();*/
 				}
+				elseif (isset($_GET['GalleryLimit'])) {
+					/*wp_redirect("https://api.urlbox.io/v1/0FbOuhgmL1s2bINM/pdf?url=". get_rest_url() ."raiys/yacht-pdf?yacht_post_id=". $request->get_param('yacht_post_id'));
+
+					exit();*/
+
+					$render_url = urlencode(get_rest_url() ."raiys/yacht-pdf?yacht_post_id=". $request->get_param('yacht_post_id') ."&GalleryLimit=". $_GET['GalleryLimit']);
+
+					$apiCall = wp_remote_get(
+						"https://api.urlbox.io/v1/0FbOuhgmL1s2bINM/pdf?url=".$render_url, 
+
+						[
+							'timeout' => 180, 
+							'headers' => [
+								'Content-Type'  => 'application/pdf',
+							]
+						]
+					);
+
+				}
 				else {
 					/*wp_redirect("https://api.urlbox.io/v1/0FbOuhgmL1s2bINM/pdf?url=". get_rest_url() ."raiys/yacht-pdf?yacht_post_id=". $request->get_param('yacht_post_id'));
 
 					exit();*/
 
+					$render_url = urlencode( get_rest_url() ."raiys/yacht-pdf?yacht_post_id=". $request->get_param('yacht_post_id') );
+
 					$apiCall = wp_remote_get(
-						"https://api.urlbox.io/v1/0FbOuhgmL1s2bINM/pdf?url=". get_rest_url() ."raiys/yacht-pdf?yacht_post_id=". $request->get_param('yacht_post_id'), 
+						"https://api.urlbox.io/v1/0FbOuhgmL1s2bINM/pdf?url=". $render_url, 
 
 						[
 							'timeout' => 180, 

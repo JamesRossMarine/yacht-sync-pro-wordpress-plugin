@@ -9,7 +9,7 @@
 			global $wpdb;
 		
 			if( empty( $key ) )
-				return;
+				return [];
 			
 			$res = $wpdb->get_col( $wpdb->prepare( "
 				SELECT DISTINCT pm.meta_value FROM {$wpdb->postmeta} pm
@@ -30,9 +30,8 @@
 		public function get_unique_yacht_meta_values_based_input( $key = 'trees', $input_val ) {
 			global $wpdb;
 		
-			if( empty( $key ) )
-				return;
-
+			if( empty( $key ) || empty($input_val) )
+				return [];
 			
 			$res = $wpdb->get_col( $wpdb->prepare( "
 				SELECT DISTINCT pm.meta_value FROM {$wpdb->postmeta} pm

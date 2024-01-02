@@ -5,8 +5,6 @@ function ysp_yacht_search_and_reader(data) {
 
     document.querySelector('#search-result-section').classList.remove('loaded');
     document.querySelector('#search-result-section').classList.add('loading');
-
-    
     
     // GET AND WRITE
     return rai_ysp_api.call_api("POST", "yachts", data).then(function(data_result) {
@@ -109,38 +107,42 @@ document.addEventListener("DOMContentLoaded", function() {
 
             let ele_list = document.querySelector("datalist#"+list_id);
 
-            rai_ysp_api.call_api(
-                'POST', 
-                'list-options-with-value', 
-                {
-                    labels: [ ele_list.getAttribute('data-fill-list') ], 
-                    value: event.target.value
-                }
-            ).then(function(rOptions) {
+            if (event.target.value.length <= 3) {
 
-                for (let label in rOptions) {
+                rai_ysp_api.call_api(
+                    'POST', 
+                    'list-options-with-value', 
+                    {
+                        labels: [ ele_list.getAttribute('data-fill-list') ], 
+                        value: event.target.value
+                    }
+                ).then(function(rOptions) {
 
-                    let SelectorEle = document.querySelectorAll("datalist[data-fill-list='"+ label +"']");
+                    for (let label in rOptions) {
 
-                    SelectorEle.forEach((ele) => {
-                        ele.innerHTML = '';
-                    });
-                    
-                    rOptions[label].forEach(function(b) {
-
-                        let option = document.createElement("OPTION");
-
-                            option.text = b;
-                            option.value = b;
+                        let SelectorEle = document.querySelectorAll("datalist[data-fill-list='"+ label +"']");
 
                         SelectorEle.forEach((ele) => {
-                            ele.append(option);
+                            ele.innerHTML = '';
                         });
-                    });
-                }
+                        
+                        rOptions[label].forEach(function(b) {
 
+                            let option = document.createElement("OPTION");
 
-            });
+                                option.text = b;
+                                option.value = b;
+
+                            SelectorEle.forEach((ele) => {
+                                ele.append(option);
+                            });
+                        });
+                    }
+
+                });
+
+            }
+
 
         });
 
