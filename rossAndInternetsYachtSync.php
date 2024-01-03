@@ -3,7 +3,7 @@
 /*
  Plugin Name: Ross And Internets Yacht Sync
  Plugin URI: https://jamesrossadvertising.com
- Version: 1.5.0
+ Version: 1.6.0
  Author: <a href="https://buildtheintnets.com">Build The Internets</a>
  Description: 
  Text Domain: 

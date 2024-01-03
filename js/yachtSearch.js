@@ -5,8 +5,6 @@ function ysp_yacht_search_and_reader(data) {
 
     document.querySelector('#search-result-section').classList.remove('loaded');
     document.querySelector('#search-result-section').classList.add('loading');
-
-    
     
     // GET AND WRITE
     return rai_ysp_api.call_api("POST", "yachts", data).then(function(data_result) {
@@ -29,10 +27,29 @@ function ysp_yacht_search_and_reader(data) {
             data_result.results.forEach(function(item) {
                 if (typeof data.view != 'undefined' && data.view.toLowerCase() == 'list') {
                     jQuery('#search-result-row').append( ysp_templates.yacht.list(item, data) );
+                    
                 }
                 else {
                     jQuery('#search-result-row').append( ysp_templates.yacht.grid(item, data) );
                 }
+
+                let ele_card = jQuery('[data-post-id='+ item._postID +']');
+
+                jQuery('[data-modal]', ele_card).click(function(e) {
+                  e.preventDefault();
+                
+                    let vesselInfo = item.ModelYear + ' ' + item.MakeString + ' ' + item.BoatName;
+
+                    jQuery('#yatchHidden').val(vesselInfo);
+
+                  var data_modal = jQuery(this).data('modal');
+              
+                  jQuery( data_modal ).ysp_modal({
+                    closeText: 'X',
+                    modalClass: 'ysp-modal-open',
+                    closeClass: 'ysp-model-close'
+                  });
+                });
             });
 
             jQuery('#yachts-pagination').pagination({
@@ -76,12 +93,62 @@ document.addEventListener("DOMContentLoaded", function() {
     // Fill List Options
     let FillLists=[];
     let listElements = document.querySelectorAll("datalist[data-fill-list]");
+    let listNeededElements = document.querySelectorAll("input[list]");
 
     listElements.forEach((ele) => {
         FillLists.push(ele.getAttribute('data-fill-list'));
     });
+
+    listNeededElements.forEach((input_ele) => {
+
+        input_ele.addEventListener('input', function(event) {
+
+            let list_id = event.target.getAttribute('list');
+
+            let ele_list = document.querySelector("datalist#"+list_id);
+
+            if (event.target.value.length <= 3) {
+
+                rai_ysp_api.call_api(
+                    'POST', 
+                    'list-options-with-value', 
+                    {
+                        labels: [ ele_list.getAttribute('data-fill-list') ], 
+                        value: event.target.value
+                    }
+                ).then(function(rOptions) {
+
+                    for (let label in rOptions) {
+
+                        let SelectorEle = document.querySelectorAll("datalist[data-fill-list='"+ label +"']");
+
+                        SelectorEle.forEach((ele) => {
+                            ele.innerHTML = '';
+                        });
+                        
+                        rOptions[label].forEach(function(b) {
+
+                            let option = document.createElement("OPTION");
+
+                                option.text = b;
+                                option.value = b;
+
+                            SelectorEle.forEach((ele) => {
+                                ele.append(option);
+                            });
+                        });
+                    }
+
+                });
+
+            }
+
+
+        });
+
+    })
     
-    rai_ysp_api.call_api('POST', 'list-options', {labels: FillLists}).then(function(rOptions) {
+/*    rai_ysp_api.call_api('POST', 'list-options', {labels: FillLists}).then(function(rOptions) {
         for (let label in rOptions) {
 
             let SelectorEle = document.querySelectorAll("datalist[data-fill-list='"+ label +"']");
@@ -99,7 +166,7 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         }
     });
-
+*/
     let yachtSearchAndResults=document.querySelector('.ysp-yacht-search-form');
 
     if (yachtSearchAndResults) {
@@ -151,7 +218,7 @@ document.addEventListener("DOMContentLoaded", function() {
             });            
         }
 
-        document.querySelectorAll('input[name=view][form=ysp-yacht-search-form], select[name=sortBy][form=ysp-yacht-search-form]').forEach((eeee) => {
+        document.querySelectorAll('input[name=view][form=ysp-yacht-search-form], select[name=sortby][form=ysp-yacht-search-form]').forEach((eeee) => {
             eeee.addEventListener('change', function(e) {
                 e.target.form.querySelector('input[name=page_index]').value=1;
 

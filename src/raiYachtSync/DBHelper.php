@@ -5,11 +5,11 @@
 
 		}
 
-		public function get_unique_yacht_meta_values( $key = 'trees',  ) {
+		public function get_unique_yacht_meta_values( $key = 'trees' ) {
 			global $wpdb;
 		
 			if( empty( $key ) )
-				return;
+				return [];
 			
 			$res = $wpdb->get_col( $wpdb->prepare( "
 				SELECT DISTINCT pm.meta_value FROM {$wpdb->postmeta} pm
@@ -23,6 +23,29 @@
 				AND LENGTH(pm.meta_value) > 1
 				ORDER BY pm.meta_value ASC
 				", $key, 'publish', 'rai_yacht' ) );
+
+			return $res;
+		}
+		
+		public function get_unique_yacht_meta_values_based_input( $key = 'trees', $input_val = '' ) {
+			global $wpdb;
+		
+			if( empty( $key ) || empty($input_val) )
+				return [];
+			
+			$res = $wpdb->get_col( $wpdb->prepare( "
+				SELECT DISTINCT pm.meta_value FROM {$wpdb->postmeta} pm
+				LEFT JOIN {$wpdb->posts} p ON p.ID = pm.post_id
+				INNER JOIN {$wpdb->postmeta} pmm ON pmm.post_id = pm.post_id
+				WHERE pm.meta_key = '%s' 
+				AND pm.meta_value LIKE '%s'
+				AND p.post_status = '%s' 
+				AND p.post_type = '%s' 
+				AND pmm.meta_key = 'SalesStatus' 
+				AND pmm.meta_value != 'Sold' AND pmm.meta_value != 'Suspend' 
+				AND LENGTH(pm.meta_value) > 1
+				ORDER BY pm.meta_value ASC
+				", $key, $input_val.'%', 'publish', 'rai_yacht' ) );
 
 			return $res;
 		}

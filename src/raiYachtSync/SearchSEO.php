@@ -22,6 +22,22 @@
 
 		}
 
+
+		public function make_it_super_clean($string) {
+
+			$string = str_replace('  ', ' ', $string);
+			$string = str_replace('  ', ' ', $string);
+			$string = str_replace('  ', ' ', $string);
+			$string = str_replace('Yachts Yachts', 'Yachts', $string);
+			$string = str_replace('yachts Yachts', 'Yachts', $string);
+
+			//$string = ucwords($string); 
+			$string = ucfirst($string); 
+
+			return $string;
+
+		}
+
 		public function grab_params($params = []) {
 			global $wp_query;
 
@@ -98,7 +114,7 @@
 					
 					default:
 
-						if ($wp_query->query_vars['post_type'] == 'rai_yacht') {
+						if (isset($wp_query->query_vars['post_type']) && $wp_query->query_vars['post_type'] == 'rai_yacht') {
 							$pVal = $wp_query->query_vars[$param];
 						}
 						elseif (isset($params[ $param ])) {
@@ -246,6 +262,10 @@
 		}
 
 		public function grab_location($params) {
+
+			
+
+			
 			return '';
 		}
 
@@ -270,7 +290,7 @@
 			$grabbed_second_params=$this->grab_second_params($passed_params);
 			$grabbed_location=$this->grab_location($passed_params);
 
-			return sprintf(
+			$title = sprintf(
 				'%sYachts %s for Sale %s | %s',
 
 				$grabbed_params,
@@ -278,6 +298,10 @@
 				$grabbed_location,
 				get_bloginfo('name')
 			);
+
+			$title = $this->make_it_super_clean($title);
+
+			return $title;
 
 		}
 
@@ -289,13 +313,17 @@
 			$grabbed_second_params=$this->grab_second_params($passed_params);
 			$grabbed_location=$this->grab_location($passed_params);
 
-			return sprintf(
+			$desc = sprintf(
 				'Find %sboats and yachts %s for sale %s',
 
 				$grabbed_params,
 				$grabbed_second_params,
 				$grabbed_location
 			);
+
+			$desc = $this->make_it_super_clean($desc);
+
+			return $desc;
 		}
 
 		public function generate_heading($passed_params = []) {
@@ -306,13 +334,17 @@
 			$grabbed_second_params=$this->grab_second_params($passed_params);
 			$grabbed_location=$this->grab_location($passed_params);
 
-			return sprintf(
+			$heading = sprintf(
 				'%sYachts %s for Sale %s',
 
 				$grabbed_params,
 				$grabbed_second_params,
 				$grabbed_location
 			);
+
+			$heading = $this->make_it_super_clean($heading);
+
+			return $heading;
 
 		}
 
@@ -324,13 +356,17 @@
 			$grabbed_second_params=$this->grab_second_params($passed_params);
 			$grabbed_location=$this->grab_location($passed_params);
 
-			return sprintf(
+			$para = sprintf(
 				'Find %sboats and yachts %s for sale %s',
 
 				$grabbed_params,
 				$grabbed_second_params,
 				$grabbed_location
 			);
+
+			$para = $this->make_it_super_clean( $para );
+
+			return $para;
 
 		}	
 

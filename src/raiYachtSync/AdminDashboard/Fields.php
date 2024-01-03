@@ -18,6 +18,15 @@
 					self::SLUG
 				);
 					add_settings_field(
+						self::SLUG . '_is_in_sync',
+						"Is Syncing Runing?",
+						array( $this, 'is_in_sync_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+
+					add_settings_field(
 						self::SLUG . '_boats_com_api_global_key',
 						"Boats.com Api Global Key",
 						array( $this, 'boats_com_api_global_key_field' ),
@@ -57,6 +66,15 @@
 						self::SLUG . '_is_euro_site',
 						"Make Site Display Meter And Euros",
 						array( $this, 'is_euro_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+
+					add_settings_field(
+						self::SLUG . '_prerender_brochures',
+						"Prerender Brochures (Cost Extra)",
+						array( $this, 'prerender_brochure_field' ),
 						self::SLUG,
 						self::SLUG . '_admin_fields',
 						array( )
@@ -158,6 +176,21 @@
 
 		}
 
+		public function is_in_sync_field() {
+			global $wpdb;
+
+			$numberOfSyncing = $wpdb->get_var( "SELECT COUNT(*) FROM $wpdb->posts p WHERE p.post_type = 'syncing_rai_yacht'" );
+			$numberOfLastSynced = $wpdb->get_var( "SELECT COUNT(*) FROM $wpdb->posts p WHERE p.post_type = 'rai_yacht'" );
+
+			if ($numberOfSyncing > 0) {
+				echo "Yes we syncing, current count is $numberOfSyncing ... last sync was ".$numberOfLastSynced;
+			}
+			else {
+				echo 'Doesnt Appear to be in a sync.';
+			}
+
+		}
+
 		public function boats_com_api_global_key_field() {
 
 			$nameOfField=self::SLUG.'_boats_com_api_global_key';
@@ -209,6 +242,33 @@
 			];
 
 			$nameOfField=self::SLUG.'_is_euro_site';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<select name="<?= $nameOfField ?>"> 
+				<?php 
+					foreach ( $options as $opt_value => $opt_label ) {
+						$option = '<option value="' . $opt_value . '" '. selected($opt_value, $valOfField, false) .'>';
+
+						$option .= $opt_label;
+						
+						$option .= '</option>';
+
+						echo $option;
+					}
+				?>
+			</select><?php 
+		}
+
+		public function prerender_brochure_field() {
+			$options=[
+				'' => '---- Not Picked Yet ----',
+				'yes' => 'YES',
+				'no' => 'NO',
+			];
+
+			$nameOfField=self::SLUG.'_prerender_brochures';
 			$valOfField=get_option($nameOfField);
 
 			?>

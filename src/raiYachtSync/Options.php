@@ -15,16 +15,16 @@
 
 	    public function get($optionName) 
 	    {
-	        global $rai_yS_gotten_options;
+	        global $ysp_gotten_options;
 
 	        $prefixedOptionName = SELF::PREFIX.$optionName;
 
-	        if (isset($rai_yS_gotten_options[ $prefixedOptionName ])) {
-	          $retVal = $rai_yS_gotten_options[$prefixedOptionName];
+	        if (isset($ysp_gotten_options[ $prefixedOptionName ])) {
+	          $retVal = $ysp_gotten_options[$prefixedOptionName];
 	        }
 	        else {
 	          $retVal = get_option($prefixedOptionName);
-	          $rai_yS_gotten_options[$prefixedOptionName] = $retVal;
+	          $ysp_gotten_options[$prefixedOptionName] = $retVal;
 	        }
 
 	        return $retVal;
@@ -32,11 +32,11 @@
 
 	    public function update($optionName, $value) 
 	    {
-	        global $rai_yS_gotten_options;
+	        global $ysp_gotten_options;
 
 	        $prefixedOptionName = SELF::PREFIX.$optionName;
 
-	        $rai_yS_gotten_options[$prefixedOptionName] = $value;
+	        $ysp_gotten_options[$prefixedOptionName] = $value;
 	        
 	        return update_option($prefixedOptionName, $value);
 	    }

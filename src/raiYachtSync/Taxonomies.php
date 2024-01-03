@@ -11,7 +11,7 @@
     public function add_taxonomies() {
         register_taxonomy('boatclass', 'rai_yacht', array(
 
-            'public' => true,
+            'public' => false,
             'show_ui' => true,
             'hierarchical' => false,
 

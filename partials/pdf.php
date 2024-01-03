@@ -474,7 +474,7 @@ $colorTwo = $YSP_Options->get('color_two');
                 <div class="specification-column">
                     <div class="individual-specification-group">
                         <p class="specification-title">LENGTH OVERALL</p>
-                        <p class="specification-value"><?= //(isset($lengthOverall) && isset($lengthOverallMeters)) ? $lengthOverall . " / " . $lengthOverallMeters . " m" : "N/A" ?></p>
+                        <p class="specification-value"></p>
                     </div>
                     <div class="individual-specification-group">
                         <p class="specification-title">BEAM</p>
@@ -534,7 +534,7 @@ $colorTwo = $YSP_Options->get('color_two');
                     </div>
                     <div class="individual-specs-group">
                         <p class="other-specs-name">OVERALL</p>
-                        <p class="other-specs-value"><?= //(isset($lengthOverall) && isset($lengthOverallMeters)) ? $lengthOverall . " / " . $lengthOverallMeters . " m" : "N/A" ?></p>
+                        <p class="other-specs-value"></p>
                     </div>
                     <div class="individual-specs-group">
                         <p class="other-specs-name">BEAM</p>
@@ -560,7 +560,7 @@ $colorTwo = $YSP_Options->get('color_two');
                             <h3 class="other-specs-title"><?= 'ENGINE ' . $counter ?></h3>
                             <div class="other-specs-group-container">
                                 <?php
-                                foreach ($engineData as $key => $value) {
+                                foreach ($engineData as $key => $waolue) {
                                     ?>
                                     <div class="individual-specs-group">
                                         <p class="other-specs-name"><?= strtoupper($key) ?></p>
@@ -578,22 +578,34 @@ $colorTwo = $YSP_Options->get('color_two');
                 ?>
         </div>
     </div>
-    <div class="pdf-page">
+
+    <?php
+        
+        $limitOfGallery = 12;
+
+        if ( isset( $_GET['GalleryLimit'] ) && ! empty( $_GET['GalleryLimit'] )) {
+
+            $limitOfGallery = $_GET['GalleryLimit'];
+
+        }
+
+        $imageGallery = array_slice($vessel->Images, 0, $limitOfGallery);
+
+        $chuckedGallery = array_chunk($imageGallery, 6);
+
+    ?>
+
+    <?php foreach ($chuckedGallery as $cg) { ?> 
+        <div class="pdf-page">
             <div class="image-gallery-container" style="padding-top: 60px ">
-                <?php foreach(array_slice($vessel->Images, 0, 6) as $image){ ?>
+                <?php foreach($cg as $image) { ?>
                     <div class="individual-image-container">
-                        <img class="gallery-image" src="<?= $image->Uri ?>" alt="boat-image" />
+                        <img class="gallery-image" src="<?= str_replace("XLARGE", "LARGE", $image->Uri) ?>" alt="boat-image" style="object-fit: cover;" />
                     </div>
                 <?php } ?>
             </div>
         </div>
-    <div class="image-gallery-container" style="padding-top: 20px ">
-        <?php foreach(array_slice($vessel->Images, 6, 6) as $image){ ?>
-            <div class="individual-image-container">
-                <img class="gallery-image" src="<?= $image->Uri ?>" alt="boat-image" />
-            </div>
-        <?php } ?>
-    </div>
+    <?php } ?>
     
     <?php
     $broker = $vessel->SalesRep->Name;
