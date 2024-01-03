@@ -49,7 +49,7 @@
     "map": false
   },
   "scripts": {
-    "bigboyblock": "sudo wp-scripts build --webpack-src-dir=js-blocks --output-path=built-blocks",
+    "bigboyblock": "wp-scripts build --webpack-src-dir=js-blocks --output-path=built-blocks",
     "blocks": "npm run bigboyblock && gulp combine-blocks"
   },
   "dependencies": {

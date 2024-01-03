@@ -5,6 +5,7 @@
 
 		public function __construct() {
 
+			$this->AdminBar = new raiYachtSync_AdminDashboard_AdminBar();
 			$this->AdminDashboard = new raiYachtSync_AdminDashboard_SettingsPanel();
 			$this->StylesAndScripts = new raiYachtSync_StylesAndScripts();
 
@@ -26,6 +27,8 @@
 			$this->Yachts_Search_Seo_ApplyToYoast = new raiYachtSync_YoastFun_SearchSEOApply();
 			$this->Yachts_Search_Seo_Shortcode = new raiYachtSync_Shortcodes_YachtSearchSeo();
 
+			$this->Yachts_Meta_Brochure = new raiYachtSync_Yachts_MetaBrochureSection();
+
 			$this->Brokers_DetailOverride = new raiYachtSync_Brokers_DetailsOverride();
 			$this->Brokers_MetaFields = new raiYachtSync_Brokers_MetaSections();
 			$this->Brokers_Shortcodes = new raiYachtSync_Shortcodes_Brokers();
@@ -40,6 +43,7 @@
 
 			$this->Commands = new raiYachtSync_AddCommands();
 			$this->Crons = new raiYachtSync_Cron();
+		
 		}
 
 		public function isInstalled() {

@@ -24,6 +24,32 @@
 	      
 		}
 
+		public function newLifeCycle() {
+
+	        $wpdb->query( 
+				$wpdb->prepare( 
+					"UPDATE $wpdb->postmeta pm 
+					INNER JOIN $wpdb->posts AS p ON pm.post_id = p.ID
+					SET pm.meta_value = '0'
+					WHERE p.post_type = %s AND pm.meta_key = 'Touched_InSync'",
+					'rai_yacht'
+				)
+			);
+
+			// sync here
+
+			$wpdb->query( 
+				$wpdb->prepare( 
+					"DELETE wp FROM $wpdb->posts wp
+					INNER JOIN $wpdb->posts AS p ON p.ID = pm.post_id 
+					WHERE wp.post_type = %s AND pm.meta_key = 'Touched_InSync' AND pm.meta_value = '0'",
+					'rai_yacht'
+				)
+			);
+
+			
+		}
+
 		public function clean_up() {
 	        global $wpdb;
 			
@@ -35,6 +61,7 @@
 					'syncing_rai_yacht'
 				)
 	        );
+
 
 	        if ($count_of_synced > 0) {
 		       	$wpdb->query( 
@@ -116,6 +143,8 @@
 			if (! empty($boats_com_api_brokerage_key)) {
 				$resultsOfSync[]=$this->ImportBrokerageOnlyBoatsCom->run();
 			}
+
+			var_dump($resultsOfSync);
 
 			$syncHadIssue=false;
 
