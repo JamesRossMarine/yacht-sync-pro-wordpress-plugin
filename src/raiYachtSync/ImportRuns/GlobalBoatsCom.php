@@ -29,7 +29,7 @@
 		public function run() {
 			global $wpdb;
 
-			var_dump('runing global');
+			var_dump('Running global sync...');
 			
 			$offset = 0;
 			$yachtsSynced = 0;
