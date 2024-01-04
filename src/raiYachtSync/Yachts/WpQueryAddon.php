@@ -246,7 +246,14 @@
 					];
 				}	
 
-				if (strtolower($query->get('condition')) == 'used') {
+				if (is_array($query->get('condition'))) {
+					$yacht_sync_meta_query[]=[
+						'key' => 'SaleClassCode',
+						'compare' => "IN",
+						'value' => $query->get('condition')
+					];
+				}
+				elseif (strtolower($query->get('condition')) == 'used') {
 					$yacht_sync_meta_query[]=[
 						'key' => 'SaleClassCode',
 						'compare' => "=",
@@ -261,14 +268,7 @@
 						'value' => 'New'
 					];
 				}
-				elseif (is_array($query->get('condition'))) {
-					$yacht_sync_meta_query[]=[
-						'key' => 'SaleClassCode',
-						'compare' => "IN",
-						'value' => $query->get('condition')
-					];
-				}
-
+				
 				if (is_array($query->get('hull'))) {
 					$yacht_sync_meta_query[]=[
 						'key' => 'BoatHullMaterialCode',

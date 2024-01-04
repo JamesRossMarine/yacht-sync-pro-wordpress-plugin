@@ -170,6 +170,7 @@
 
 							if ($last_mod == 'no date') {}
 							else {
+								
 								$final_count++;
 								$xml_file.= '<url>';
 									$xml_file.= '<loc>'. htmlspecialchars($url, ENT_QUOTES, 'UTF-8') .'</loc>';

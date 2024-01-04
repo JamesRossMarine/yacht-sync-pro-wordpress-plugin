@@ -271,9 +271,11 @@
 
 		public function cleanup_params($p) {
 
-			foreach ($p as $index_p => $pv) {
-				if (empty($pv)) {
-					unset($p[$index_p]);
+			if (is_array($p)) {
+				foreach ($p as $index_p => $pv) {
+					if (empty($pv)) {
+						unset($p[$index_p]);
+					}
 				}
 			}
 
