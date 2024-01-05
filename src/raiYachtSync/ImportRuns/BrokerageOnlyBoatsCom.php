@@ -142,6 +142,7 @@
 		           	}	        	         
 					
 	                $pdf_still_e = false;
+	                $yacht_updated = false;
 
 	                if (isset($find_post_from_synced[0]->ID)) {
 	                	$synced_post_id = $find_post_from_synced[0]->ID;
@@ -173,6 +174,7 @@
 
 						if (strtotime($current_last_mod_date) > strtotime($saved_last_mod_date)) {
 							$pdf_still_e = false;
+							$yacht_updated = true;
 						}
 
 						if ( $pdf_still_e ) {

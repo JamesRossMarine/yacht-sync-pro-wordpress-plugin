@@ -40,8 +40,8 @@
 
 			$wpdb->query( 
 				$wpdb->prepare( 
-					"DELETE wp FROM $wpdb->posts wp
-					INNER JOIN $wpdb->posts AS p ON p.ID = pm.post_id 
+					"DELETE wp FROM $wpdb->posts p
+					INNER JOIN $wpdb->postmeta AS pm ON p.ID = pm.post_id 
 					WHERE wp.post_type = %s AND pm.meta_key = 'Touched_InSync' AND pm.meta_value = '0'",
 					'rai_yacht'
 				)
