@@ -148,6 +148,7 @@
 					
 					
 		           	$pdf_still_e = false;
+		           	$yacht_updated = false;
 
 	                if (isset($find_post_from_synced[0]->ID)) {
 	                	$synced_post_id = $find_post_from_synced[0]->ID;
@@ -179,6 +180,7 @@
 
 						if (strtotime($current_last_mod_date) > strtotime($saved_last_mod_date)) {
 							$pdf_still_e = false;
+							$yacht_updated = true;
 						}
 
 						if ( $pdf_still_e ) {
@@ -188,7 +190,22 @@
 
 		            $post_id=0;
 
-		            if (isset($find_post[0]->ID)) {
+		           if (isset($find_post_from_synced[0]->ID) && $yacht_updated) {
+		                $post_id=$find_post_from_synced[0]->ID;
+
+		                $wpdb->delete(
+		                	$wpdb->postmeta, 
+		                	[
+		                		'post_id' => $find_post_from_synced[0]->ID
+		                	], 
+		                	['%d']
+		                );
+		            }
+		            elseif (isset($find_post_from_synced[0]->ID) && $yacht_updated == false) {
+		                $post_id=$find_post_from_synced[0]->ID;
+		            	
+		            }
+		            elseif (isset($find_post[0]->ID)) {
 		                $post_id=$find_post[0]->ID;
 
 		                $wpdb->delete($wpdb->postmeta, ['post_id' => $find_post[0]->ID], ['%d']);
@@ -310,6 +327,8 @@
 							$boatC->GeneralBoatDescription[ $gIndex ] = preg_replace('/(<[^>]+) style=".*?"/i', '$1', $description);
 						}
 					}
+
+					$boatC->Touched_InSync=1;
 
 		            $y_post_id=wp_insert_post(
 		            	apply_filters('raiys_yacht_post', 
