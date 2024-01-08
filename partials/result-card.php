@@ -34,7 +34,7 @@
                 </div>
                 <div class="yacht-individual-container">
                     <p class="yacht-individual-title" style="">Cabins</p>
-                    <p class="yacht-individual-value"><?php echo ($yacht['CabinCountNumeric'] ? $yacht['CabinCountNumeric'] : 'N/A') ?></p>
+                    <p class="yacht-individual-value"><?php echo (isset($yacht['CabinCountNumeric']) ? $yacht['CabinCountNumeric'] : 'N/A') ?></p>
                 </div>
                 <div class="yacht-individual-container">
                     <p class="yacht-individual-title">Builder</p>
