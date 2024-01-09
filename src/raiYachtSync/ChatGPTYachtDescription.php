@@ -1,5 +1,5 @@
 <?php
-	class ChatGPT_YachtSearch {
+	class raiYachtSync_ChatGPTYachtDescription {
 
 		public function __construct() {
 
@@ -14,29 +14,31 @@
 
 		}
 
+		
 		public function make_description($input, $links_to_scan) {
 
 			$gpt_messages = [
-				
+				['role' => 'system', 'content' => 'Be a SEO Content Writer.']
 			];
 
 			foreach($links_to_scan as $sl) {
 				$gpt_messages[] = ['role' => 'system', 'content' => 'Scan '.$sl];
 			}
 
-			$gpt_messages[] = ["role" => "assistant", "content" => "Write two sentences about \"". $input ."\" while using context from scanned links"];
+			$gpt_messages[] = ["role" => "assistant", "content" => "Write a meta description while using context from scanned links"];
 
 			$gpt_headers = [
 				'headers' => [
-					'Authorization' => 'Bearer oXIGa^UWhJ81R$pSJ*Dj6ogs'
+					'Authorization' => 'Bearer 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',
+					'Content-Type' => 'application/json',
 				],
 
 				'timeout' => 120,
 
-				'body' => [
+				'body' => json_encode([
 					"model" => "gpt-4",
 					"messages" => $gpt_messages
-				]
+				])
 
 			];
 
@@ -44,10 +46,9 @@
 
 			$gpt_call = wp_remote_post($gpt_url, $gpt_headers);
 
+			$gpt_body = json_decode(wp_remote_retrieve_body($gpt_call), true);
 
-			$gpt_body = json_encode(wp_remote_retrieve_body($gpt_call), true);
-
-			var_dump($gpt_body);
+			return ($gpt_body['choices'][0]['message']['content']);
 
 		}
 
