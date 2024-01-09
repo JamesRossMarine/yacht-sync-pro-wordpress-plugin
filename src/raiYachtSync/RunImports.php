@@ -8,6 +8,7 @@
 			$this->ImportGlobalBoatsCom = new raiYachtSync_ImportRuns_GlobalBoatsCom();
 			$this->ImportBrokerageOnlyBoatsCom = new raiYachtSync_ImportRuns_BrokerageOnlyBoatsCom();
 			$this->ImportYachtBrokerOrg = new raiYachtSync_ImportRuns_YachtBrokerOrg();
+			$this->ImportYatco = new raiYachtSync_ImportRuns_YatcoCom();
 			
 		}
 
@@ -153,6 +154,10 @@
 				$resultsOfSync[]=$this->ImportBrokerageOnlyBoatsCom->run();
 			}
 
+			if (! empty($yatco_api_token) && $yatco_api_token == 'fortheops') {
+				$resultsOfSync[]=$this->ImportYatco->run();
+			}
+			
 			var_dump($resultsOfSync);
 
 			$syncHadIssue=false;
