@@ -2,7 +2,7 @@
 	class raiYachtSync_SearchSEO {
 
 		public function __construct() {
-
+			$this->ChatGPT_YachtSearch = new raiYachtSync_ChatGPTYachtSearch();
 		}
 
 		public function add_actions_and_filters() {
@@ -17,6 +17,8 @@
 				'heading' => $this->generate_heading($params),
 				'p' => $this->generate_paragraph($params)
 			];
+
+			$all['gpt_p'] = $this->ChatGPT_YachtSearch->make_description($all['p'], []);
 
 			return $all;
 
