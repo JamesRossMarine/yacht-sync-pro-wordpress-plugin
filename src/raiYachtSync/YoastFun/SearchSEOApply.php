@@ -70,11 +70,9 @@
 
 				$params = (array) $wp_query->get('params_from_paths');
 
-			    $yacht_query = new WP_Query(array_merge(['post_type' => 'rai_yacht'], $params));
+			    $yacht_query = new WP_Query(array_merge(['post_type' => 'rai_yacht', 'posts_per_page' => 12], $params, ['page_index' => 1]));
 
 				$total = $yacht_query->max_num_pages;
-
-				//var_dump($total);
 
 				$prev_link_needed = false;
 				$next_link_needed = false;
