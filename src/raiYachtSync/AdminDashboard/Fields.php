@@ -63,6 +63,15 @@
 					);
 					
 					add_settings_field(
+						self::SLUG . '_yatco_api_token',
+						"YATCO API Token",
+						array( $this, 'yatco_api_token_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+					
+					add_settings_field(
 						self::SLUG . '_is_euro_site',
 						"Make Site Display Meter And Euros",
 						array( $this, 'is_euro_field' ),
@@ -226,6 +235,16 @@
 
 		public function yacht_broker_org_id_field() {
 			$nameOfField=self::SLUG.'_yacht_broker_org_id';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
+
+		public function yatco_api_token_field() {
+			$nameOfField=self::SLUG.'_yatco_api_token_field';
 			$valOfField=get_option($nameOfField);
 
 			?>
