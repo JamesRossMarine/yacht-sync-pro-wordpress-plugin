@@ -19,6 +19,8 @@
 
 			$this->globalInventoryUrl .= $this->key;
 
+			$this->opt_prerender_brochures=$this->options->get('prerender_brochures');
+
 			$this->euro_c_c = intval($this->options->get('euro_c_c'));
 			$this->usd_c_c = intval($this->options->get('usd_c_c'));
 			
@@ -27,7 +29,7 @@
 		public function run() {
 			global $wpdb;
 
-			var_dump('runing global');
+			var_dump('Running global sync...');
 			
 			$offset = 0;
 			$yachtsSynced = 0;
@@ -146,6 +148,7 @@
 					
 					
 		           	$pdf_still_e = false;
+		           	$yacht_updated = false;
 
 	                if (isset($find_post_from_synced[0]->ID)) {
 	                	$synced_post_id = $find_post_from_synced[0]->ID;
@@ -159,7 +162,7 @@
 							$apiPDF = wp_remote_request($synced_pdf, [
 								'method' => 'HEAD',
 
-								'timeout' => 180, 
+								'timeout' => 180,
 								'stream' => false, 
 								
 								'headers' => [
@@ -177,6 +180,7 @@
 
 						if (strtotime($current_last_mod_date) > strtotime($saved_last_mod_date)) {
 							$pdf_still_e = false;
+							$yacht_updated = true;
 						}
 
 						if ( $pdf_still_e ) {
@@ -186,7 +190,22 @@
 
 		            $post_id=0;
 
-		            if (isset($find_post[0]->ID)) {
+		           if (isset($find_post_from_synced[0]->ID) && $yacht_updated) {
+		                $post_id=$find_post_from_synced[0]->ID;
+
+		                $wpdb->delete(
+		                	$wpdb->postmeta, 
+		                	[
+		                		'post_id' => $find_post_from_synced[0]->ID
+		                	], 
+		                	['%d']
+		                );
+		            }
+		            elseif (isset($find_post_from_synced[0]->ID) && $yacht_updated == false) {
+		                $post_id=$find_post_from_synced[0]->ID;
+		            	
+		            }
+		            elseif (isset($find_post[0]->ID)) {
 		                $post_id=$find_post[0]->ID;
 
 		                $wpdb->delete($wpdb->postmeta, ['post_id' => $find_post[0]->ID], ['%d']);
@@ -309,6 +328,8 @@
 						}
 					}
 
+					$boatC->Touched_InSync=1;
+
 		            $y_post_id=wp_insert_post(
 		            	apply_filters('raiys_yacht_post', 
 		            		[
@@ -331,7 +352,7 @@
 
 					wp_set_post_terms($y_post_id, $boat['BoatClassCode'], 'boatclass', false);
 
-					if ( $pdf_still_e == false && ! in_array($boatC->SalesStatus, ['Sold', 'Suspend']) ) {
+					if ($this->opt_prerender_brochures == 'yes' && $pdf_still_e == false && ! in_array($boatC->SalesStatus, ['Sold', 'Suspend']) ) {
 
 						$generatorPDF = wp_remote_post(
 							"https://api.urlbox.io/v1/render/async", 

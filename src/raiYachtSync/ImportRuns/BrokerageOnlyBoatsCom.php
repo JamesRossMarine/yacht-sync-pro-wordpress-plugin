@@ -11,6 +11,7 @@
 			$this->LocationConvert = new raiYachtSync_LocationConvert();
 
 			$this->key=$this->options->get('boats_com_api_brokerage_key');
+			$this->opt_prerender_brochures=$this->options->get('prerender_brochures');
 
 			$this->brokerageInventoryUrl .= $this->key;
 
@@ -107,9 +108,8 @@
 			            else {
 			                $find_post=[];
 			            }
-		           	}		   
-
-
+		           	}
+		           	
 					$find_post_from_synced=get_posts([
 	                    'post_type' => 'rai_yacht',
 	                    'meta_query' => [
@@ -142,6 +142,7 @@
 		           	}	        	         
 					
 	                $pdf_still_e = false;
+	                $yacht_updated = false;
 
 	                if (isset($find_post_from_synced[0]->ID)) {
 	                	$synced_post_id = $find_post_from_synced[0]->ID;
@@ -150,7 +151,7 @@
 
 		                $saved_last_mod_date = get_post_meta($synced_post_id, 'LastModificationDate', true);
 		                $current_last_mod_date = $boatC->LastModificationDate;
-
+		                
 		                if (!is_null($synced_pdf) && !empty($synced_pdf)) {
 							$apiPDF = wp_remote_request($synced_pdf, [
 								'method' => 'HEAD',
@@ -173,6 +174,7 @@
 
 						if (strtotime($current_last_mod_date) > strtotime($saved_last_mod_date)) {
 							$pdf_still_e = false;
+							$yacht_updated = true;
 						}
 
 						if ( $pdf_still_e ) {
@@ -182,7 +184,22 @@
 
 		            $post_id=0;
 
-		            if (isset($find_post[0]->ID)) {
+		            if (isset($find_post_from_synced[0]->ID) && $yacht_updated) {
+		                $post_id=$find_post_from_synced[0]->ID;
+
+		                $wpdb->delete(
+		                	$wpdb->postmeta, 
+		                	[
+		                		'post_id' => $find_post_from_synced[0]->ID
+		                	], 
+		                	['%d']
+		                );
+		            }
+		            elseif (isset($find_post_from_synced[0]->ID) && $yacht_updated == false) {
+		                $post_id=$find_post_from_synced[0]->ID;
+		            	
+		            }
+		            elseif (isset($find_post[0]->ID)) {
 		                $post_id=$find_post[0]->ID;
 
 		                $wpdb->delete($wpdb->postmeta, ['post_id' => $find_post[0]->ID], ['%d']);
@@ -312,7 +329,7 @@
 
 					wp_set_post_terms($y_post_id, $boat['BoatClassCode'], 'boatclass', false);
 					
-					if ( $pdf_still_e == false && ! in_array($boatC->SalesStatus, ['Sold', 'Suspend']) ) {
+					if ( $this->opt_prerender_brochures == 'yes' && $pdf_still_e == false && ! in_array($boatC->SalesStatus, ['Sold', 'Suspend']) ) {
 
 						$generatorPDF = wp_remote_post(
 							"https://api.urlbox.io/v1/render/async", 
