@@ -12,6 +12,7 @@
 		public function add_actions_and_filters() {
 			add_filter('wpseo_title',  [$this, 'yacht_search_title'], 10, 1);
 			add_filter('wpseo_metadesc',  [$this, 'yacht_search_description'], 10, 1);
+			add_filter( 'wpseo_canonical', [ $this, 'yacht_search_cononical' ], 10, 1 );
 		}
 
 		public function yacht_search_title($title) {
@@ -38,6 +39,18 @@
 			}
 
 			return $description;	
+		}
+
+		public function yacht_search_cononical($url) {
+			
+			if (is_page($this->yacht_search_page_id)) {
+				$protocol = is_ssl() ? 'https://' : 'http://';
+			
+			    $url = ($protocol) . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+			}
+
+
+			return $url;
 		}
 
 	}
