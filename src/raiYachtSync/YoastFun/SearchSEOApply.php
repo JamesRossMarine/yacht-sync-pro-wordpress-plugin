@@ -12,7 +12,11 @@
 		public function add_actions_and_filters() {
 			add_filter('wpseo_title',  [$this, 'yacht_search_title'], 10, 1);
 			add_filter('wpseo_metadesc',  [$this, 'yacht_search_description'], 10, 1);
-			add_filter( 'wpseo_canonical', [ $this, 'yacht_search_cononical' ], 10, 1 );
+			add_filter('wpseo_canonical', [ $this, 'yacht_search_cononical' ], 10, 1 );
+
+			add_action('wp_head', [$this, 'next_prev_meta_tags'], 10, 1);
+
+
 		}
 
 		public function yacht_search_title($title) {
@@ -51,6 +55,63 @@
 
 
 			return $url;
+		}
+
+		public function next_prev_meta_tags() {
+
+			if (is_page($this->yacht_search_page_id)) {
+				global $wp_query;
+
+				$protocol = is_ssl() ? 'https://' : 'http://';
+			
+			    $page_url = ($protocol) . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+
+			    $page_url = preg_replace(['/(\/page_index-)\d+/'], '', $page_url);
+
+				$params = (array) $wp_query->get('params_from_paths');
+
+			    $yacht_query = new WP_Query(array_merge(['post_type' => 'rai_yacht'], $params));
+
+				$total = $yacht_query->max_num_pages;
+
+				//var_dump($total);
+
+				$prev_link_needed = false;
+				$next_link_needed = false;
+
+				if (isset($params['page_index'])) {
+
+					$c_index = $params['page_index'];
+
+					if ($c_index == $total) {
+						$prev_link_needed = $c_index - 1;
+					}
+					elseif ($c_index == 2) {
+						$prev_link_needed = 1;
+						$next_link_needed = $c_index + 1;
+
+					}
+					elseif ($c_index > 2) {
+						$prev_link_needed = $c_index - 1;
+						$next_link_needed = $c_index + 1;
+					}
+
+				}
+				else {
+					$next_link_needed = $c_index + 1;
+				}
+
+				if ($prev_link_needed > 0) {
+					echo '<link rel="prev" href="'. $page_url .'page_index-'. $prev_link_needed .'/">';
+
+				}
+
+				if ($next_link_needed > 0) {
+					echo '<link rel="next" href="'. $page_url .'page_index-'. $next_link_needed .'/">';
+
+				}
+
+			}
 		}
 
 	}
