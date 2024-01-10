@@ -265,10 +265,14 @@
 
 		public function grab_location($params) {
 
-			
+			$string = '';
+
+			if (isset($params['page_index']) && $params['page_index'] >= 2) {
+				$string = '(Page: #'. $params['page_index'] .' )';
+			} 
 
 			
-			return '';
+			return $string;
 		}
 
 		public function cleanup_params($p) {
