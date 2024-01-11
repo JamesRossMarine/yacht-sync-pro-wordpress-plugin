@@ -17,14 +17,14 @@
 		public function make_description($input, $links_to_scan) {
 
 			$gpt_messages = [
-				['role' => 'system', 'content' => 'Be a SEO Content Writer.']
+				['role' => 'system', 'content' => 'You are a SEO content writer with the purpose of selling yachts and boats.']
 			];
 
 			foreach($links_to_scan as $sl) {
 				$gpt_messages[] = ['role' => 'system', 'content' => 'Scan '.$sl];
 			}
 
-			$gpt_messages[] = ["role" => "assistant", "content" => "Write three sentences about \"". $input ."\" while using context from scanned links"];
+			$gpt_messages[] = ["role" => "assistant", "content" => "Write three sentences about \"". $input ."\" while using context from scanned links. Do not return a response with quotation marks."];
 
 			$gpt_headers = [
 				'headers' => [

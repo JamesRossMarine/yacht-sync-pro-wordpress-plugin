@@ -10,6 +10,7 @@
 		}
 
 		public function all_together($params) {
+			global $wp_query;
 
 			$all=[
 				'title' => $this->generate_title($params),
@@ -18,7 +19,17 @@
 				'p' => $this->generate_paragraph($params)
 			];
 
-			$all['gpt_p'] = $this->ChatGPT_YachtSearch->make_description($all['p'], []);
+			$links=[];
+
+			$params = (array) $wp_query->get('params_from_paths');
+
+			$yacht_query = get_posts(array_merge(['post_type' => 'rai_yacht', 'posts_per_page' => 12], $params, ['page_index' => 1]));
+
+			foreach ($yacht_query as $y) {
+				$links[] = get_permalink($y);
+			}
+			
+			$all['gpt_p'] = $this->ChatGPT_YachtSearch->make_description($all['p'], $links);
 
 			return $all;
 
