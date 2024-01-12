@@ -508,6 +508,14 @@
 
 				update_post_meta($y_post_id, 'YSP_PDF_URL', "");
 
+				$error = get_post_meta($y_post_id, 'YSP_PDF_ERROR', true);
+
+				$pdf_render_url =  get_rest_url() ."raiys/yacht-pdf?yacht_post_id=". $y_post_id;
+
+				if (! empty($error)) {
+					$pdf_render_url .= '&GalleryLimit=6';
+				}
+
 				$generatorPDF = wp_remote_post(
 					"https://api.urlbox.io/v1/render/sync", 
 					[
@@ -519,7 +527,7 @@
 						],
 						
 						'body' => json_encode([
-							'url' => get_rest_url() ."raiys/yacht-pdf?yacht_post_id=". $y_post_id,
+							'url' => $pdf_render_url,
 							//'webhook_url' => get_rest_url() ."raiys/set-yacht-pdf?yacht_post_id=". $y_post_id,
 							'use_s3' => true,
 							'format' => 'pdf'
@@ -529,7 +537,13 @@
 
 				$body = json_decode(wp_remote_retrieve_body($generatorPDF), true);
 
-				update_post_meta($y_post_id, 'YSP_PDF_URL', $body['renderUrl']);
+				if (isset($body['renderUrl'])) {
+					update_post_meta($y_post_id, 'YSP_PDF_URL', $body['renderUrl']);
+					//update_post_meta($y_post_id, 'YSP_PDF_ERROR', "");
+				}
+				elseif (isset($body['error']['message'])) {
+					update_post_meta($y_post_id, 'YSP_PDF_ERROR', $body['error']['message']);
+				}
 
 				wp_redirect( $_SERVER['HTTP_REFERER'] );
 
