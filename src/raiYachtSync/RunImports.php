@@ -22,6 +22,16 @@
 					'syncing_rai_yacht'
 				)
 			);
+
+			/*$wpdb->query( 
+				$wpdb->prepare( 
+					"UPDATE $wpdb->postmeta pm 
+					INNER JOIN $wpdb->posts AS p ON pm.post_id = p.ID
+					SET pm.meta_value = '0'
+					WHERE p.post_type = %s AND pm.meta_key = 'Touched_InSync'",
+					'rai_yacht'
+				)
+			);*/
 	      
 		}
 
@@ -65,22 +75,22 @@
 
 
 	        if ($count_of_synced > 0) {
-		       	/*$wpdb->query( 
+		       	$wpdb->query( 
 					$wpdb->prepare( 
 						"DELETE wp FROM $wpdb->posts wp
 						WHERE wp.post_type = %s",
 						'rai_yacht'
 					)
-				);*/
+				);
 
-				$wpdb->query( 
+				/*$wpdb->query( 
 					$wpdb->prepare( 
 						"DELETE p FROM $wpdb->posts p
 						INNER JOIN $wpdb->postmeta AS pm ON p.ID = pm.post_id 
-						WHERE wp.post_type = %s AND pm.meta_key = 'Touched_InSync' AND pm.meta_value = '0'",
+						WHERE p.post_type = %s AND pm.meta_key = 'Touched_InSync' AND pm.meta_value = '0'",
 						'rai_yacht'
 					)
-				);
+				);*/
 
 				$wpdb->query(
 					"DELETE pm FROM $wpdb->postmeta pm 

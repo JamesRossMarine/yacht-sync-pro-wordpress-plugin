@@ -190,7 +190,7 @@
 
 		            $post_id=0;
 
-		           if (isset($find_post_from_synced[0]->ID) && $yacht_updated) {
+		           	if (isset($find_post_from_synced[0]->ID) && $yacht_updated) {
 		                $post_id=$find_post_from_synced[0]->ID;
 
 		                $wpdb->delete(
@@ -201,10 +201,10 @@
 		                	['%d']
 		                );
 		            }
-		            elseif (isset($find_post_from_synced[0]->ID) && $yacht_updated == false) {
+		            /*elseif (isset($find_post_from_synced[0]->ID) && $yacht_updated == false) {
 		                $post_id=$find_post_from_synced[0]->ID;
 		            	
-		            }
+		            }*/
 		            elseif (isset($find_post[0]->ID)) {
 		                $post_id=$find_post[0]->ID;
 
