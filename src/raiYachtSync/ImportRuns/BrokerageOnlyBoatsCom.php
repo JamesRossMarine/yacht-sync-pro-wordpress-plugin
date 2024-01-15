@@ -18,6 +18,11 @@
 			$this->euro_c_c = intval($this->options->get('euro_c_c'));
 			$this->usd_c_c = intval($this->options->get('usd_c_c'));
 
+			$this->CarryOverKeys = [
+				'_yoast_wpseo_title',
+				'_yoast_wpseo_metadesc'
+			];
+
 		}
 		
 		public function run() {
@@ -180,12 +185,20 @@
 						if ( $pdf_still_e ) {
 							$boatC->YSP_PDF_URL = $synced_pdf;
 						}
+	                
+						// carry overs
+						foreach ($this->CarryOverKeys as $metakey) {
+							$val = get_post_meta($synced_post_id, $metakey, true);
+							$boatC->{$metakey} = $val;
+						}
 	                }
 
 		            $post_id=0;
+		            $post_type = 'syncing_rai_yacht';
 
 		            if (isset($find_post_from_synced[0]->ID) && $yacht_updated) {
 		                $post_id=$find_post_from_synced[0]->ID;
+		            	$post_type = 'rai_yacht';
 
 		                $wpdb->delete(
 		                	$wpdb->postmeta, 
@@ -195,10 +208,11 @@
 		                	['%d']
 		                );
 		            }
-		           /* elseif (isset($find_post_from_synced[0]->ID) && $yacht_updated == false) {
+		           	elseif (isset($find_post_from_synced[0]->ID) && $yacht_updated == false) {
 		                $post_id=$find_post_from_synced[0]->ID;
+		            	$post_type = 'rai_yacht';
 		            	
-		            }*/
+		            }
 		            elseif (isset($find_post[0]->ID)) {
 		                $post_id=$find_post[0]->ID;
 
@@ -310,7 +324,7 @@
 		            	apply_filters('raiys_yacht_post',
 			                [
 			                    'ID' => $post_id,
-								'post_type' => 'syncing_rai_yacht',
+								'post_type' => $post_type,
 								
 								'post_title' => addslashes(  $boat['ModelYear'].' '.$boat['MakeString'].' '.$boat['Model'].' '.$boat['BoatName'] ),
 								
