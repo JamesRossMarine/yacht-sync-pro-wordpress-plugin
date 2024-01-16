@@ -132,6 +132,14 @@
 		            
 		        )
 		    ) );
+    		register_rest_route( 'raiys', '/delete-yacht-pdf', array(
+		        'callback' => [$this, 'delete_yacht_pdf'],
+		        'methods'  => [WP_REST_Server::READABLE, WP_REST_Server::CREATABLE],
+		        'permission_callback' => '__return_true',
+		        'args' => array(
+		            
+		        )
+		    ) );
 
 
 			register_rest_route( 'raiys', '/yacht-leads', array(

@@ -92,6 +92,19 @@
 					)
 				);*/
 
+				$pdfs = $wpdb->get_col("
+					SELECT pm.meta_value FROM {$wpdb->postmeta} pm
+					LEFT JOIN {$wpdb->posts} p ON p.ID = pm.post_id
+					WHERE pm.meta_key = 'YSP_PDF_URL' AND wp.ID IS NULL");
+
+				foreach ($pdfs as $file) {
+					
+					$phase_url = parse_url($file);
+
+					$this->BrochureCleanUp->remove( $phase_url['path'] );
+
+				}
+
 				$wpdb->query(
 					"DELETE pm FROM $wpdb->postmeta pm 
 					LEFT JOIN $wpdb->posts wp ON wp.ID = pm.post_id 
