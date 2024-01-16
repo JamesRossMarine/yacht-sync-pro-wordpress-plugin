@@ -3,7 +3,7 @@ jQuery(document).ready(function() {
   jQuery('[data-modal]').click(function(e) {
     e.preventDefault();
     
-    console.log('fuck me ');
+    console.log('Hey there!');
 
     var data_modal = jQuery(this).data('modal');
 

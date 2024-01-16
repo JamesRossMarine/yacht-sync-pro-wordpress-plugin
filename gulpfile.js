@@ -36,7 +36,8 @@ var global_script_files=[
     'js/templates.js',
     'js/yachtSearch.js',
     'js/leads.js',
-    'js/single-yacht.js'
+    'js/single-yacht.js',
+    'js/loan-calc-widget.js'
 ];
 
 var exitOnJshintError = map(function (file, cb) {
