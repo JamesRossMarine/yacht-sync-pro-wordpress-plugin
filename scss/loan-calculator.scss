@@ -1,0 +1,31 @@
+#ysp-loan-calculator-container {
+
+    #ysp-loan-calculator-form {
+        display: block;
+        .ysp-loan-calculator-row {
+            display: block;
+            align-items: center;
+            margin-bottom: 1rem;
+
+            label {
+                display: block;
+                font-size: 18px;
+                font-weight: 600;
+            }
+
+            input {
+                width: 100%;
+                max-width: 400px;
+                height: 40px;
+                border-radius: 4px;
+                font-size: 18px;
+                padding-left: 10px;
+                font-weight: 600;
+            }
+
+            input[type="submit"] {
+                height: auto;
+            }
+        }
+    }
+}
