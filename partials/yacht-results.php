@@ -50,7 +50,7 @@
             <div>
                 <label>Filter by: </label>
 
-                <select name="sortby" form="ysp-yacht-search-form">
+                <select name="sortby" label="Sorted By" form="ysp-yacht-search-form">
                     <option value="">pick a sort</option>
                     
                     <option value="Length:desc">Length: high to low</option>
