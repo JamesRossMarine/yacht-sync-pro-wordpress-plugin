@@ -5,7 +5,47 @@ function ysp_yacht_search_and_reader(data) {
 
     document.querySelector('#search-result-section').classList.remove('loaded');
     document.querySelector('#search-result-section').classList.add('loading');
-    
+
+    let tagsEle = document.querySelector('#ysp-search-tags');
+        tagsEle.innerHTML="";
+
+    var ysp_tags_not_print = [];
+
+    for (let paramKey in data) {
+        let label='';
+
+        if (document.querySelector('label[for='+ paramKey +']')) {
+            label=document.querySelector('label[for='+ paramKey +']').innerText;
+        }
+        else if (document.querySelector('*[name='+ paramKey +']') && document.querySelector('*[name='+ paramKey +']').hasAttribute('label')) {
+            label=document.querySelector('*[name='+ paramKey +']').getAttribute('label');
+        }
+
+        if ( label != null && label != 'null' && label != '') {
+
+            let newTagEle = document.createElement('button');
+                newTagEle.value = data[ paramKey ]; //'';
+                newTagEle.innerHTML = 'X_'+ label+": "+data[ paramKey ] +" _X"; //'';
+                newTagEle.setAttribute('key', paramKey); //'';
+                
+                newTagEle.onclick = function(event) {
+
+                    let key = event.target.getAttribute('key');
+                    
+                    document.querySelector('*[name='+ key +']').value = "";
+                    event.target.remove();
+
+                    let params = raiys_get_form_data( document.querySelector('*[name='+ key +']').form );
+
+                    ysp_yacht_search_and_reader( params );
+
+                };
+
+            tagsEle.appendChild( newTagEle )
+
+        }
+    }
+
     // GET AND WRITE
     return rai_ysp_api.call_api("POST", "yachts", data).then(function(data_result) {
 
