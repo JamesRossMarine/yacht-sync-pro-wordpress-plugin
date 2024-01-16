@@ -95,8 +95,8 @@
 					}
 
 				}
-				else {
-					$next_link_needed = $c_index + 1;
+				elseif ($total > 1) {
+					$next_link_needed = 1 + 1;
 				}
 
 				if ($prev_link_needed > 0) {
