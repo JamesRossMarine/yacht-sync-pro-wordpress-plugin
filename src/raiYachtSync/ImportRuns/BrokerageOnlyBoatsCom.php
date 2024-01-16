@@ -18,6 +18,10 @@
 			$this->euro_c_c = intval($this->options->get('euro_c_c'));
 			$this->usd_c_c = intval($this->options->get('usd_c_c'));
 
+			$this->CarryOverKeys = [
+				'_yoast_wpseo_title',
+				'_yoast_wpseo_metadesc'
+			];
 		}
 		
 		public function run() {
@@ -179,6 +183,12 @@
 
 						if ( $pdf_still_e ) {
 							$boatC->YSP_PDF_URL = $synced_pdf;
+						}
+
+						// carry overs
+						foreach ($this->CarryOverKeys as $metakey) {
+							$val = get_post_meta($synced_post_id, $metakey, true);
+							$boatC->{$metakey} = $val;
 						}
 	                }
 

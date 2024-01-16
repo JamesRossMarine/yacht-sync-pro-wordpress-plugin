@@ -21,6 +21,11 @@
 			$this->usd_c_c = intval($this->options->get('usd_c_c'));	
 
 			$this->opt_prerender_brochures=$this->options->get('prerender_brochures');
+
+			$this->CarryOverKeys = [
+				'_yoast_wpseo_title',
+				'_yoast_wpseo_metadesc'
+			];
 		}
 
 		public function run() {
@@ -365,6 +370,12 @@
 
 						if ( $pdf_still_e ) {
 							$theBoat['YSP_PDF_URL'] = $synced_pdf;
+						}
+
+						// carry overs
+						foreach ($this->CarryOverKeys as $metakey) {
+							$val = get_post_meta($synced_post_id, $metakey, true);
+							$theBoat[ $metakey ] = $val;
 						}
 	                }
 
