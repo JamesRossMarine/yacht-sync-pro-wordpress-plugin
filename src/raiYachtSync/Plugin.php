@@ -7,6 +7,7 @@
 
 			$this->AdminBar = new raiYachtSync_AdminDashboard_AdminBar();
 			$this->AdminDashboard = new raiYachtSync_AdminDashboard_SettingsPanel();
+			$this->AdminDashboardWidget = new raiYachtSync_AdminDashboard_DashboardWidget();
 			$this->StylesAndScripts = new raiYachtSync_StylesAndScripts();
 
 			$this->PostTypes = new raiYachtSync_PostTypes();
