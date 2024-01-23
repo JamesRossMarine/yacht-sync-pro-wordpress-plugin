@@ -189,6 +189,12 @@
 								'key' => 'GeneralBoatDescription',
 								'compare' => "LIKE",
 								'value' => $keyword
+							],
+
+							[									
+								'key' => 'YSP_City',
+								'compare' => "LIKE",
+								'value' => $keyword
 							]
 
 						];
