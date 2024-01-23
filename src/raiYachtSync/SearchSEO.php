@@ -3,6 +3,8 @@
 
 		public function __construct() {
 			$this->ChatGPT_YachtSearch = new raiYachtSync_ChatGPTYachtSearch();
+
+			$this->options = new raiYachtSync_Options();
 		}
 
 		public function add_actions_and_filters() {
@@ -55,6 +57,7 @@
 			global $wp_query;
 
 			$order_of_params=[
+				'ys_company_only',
 				'condition',
 				'ys_keyword',
 				// sail or motor
@@ -71,6 +74,15 @@
 			foreach ($order_of_params as $param) {
 
 				switch ($param) {
+					case 'ys_company_only':
+						if (isset($params['ys_company_only'])) {
+
+							$pVal = $this->options->get('company_name').'\'s';
+						
+						}
+
+						break;
+
 					case 'ys_keyword':
 						if (isset($params['ys_keyword'])) {
 
@@ -85,18 +97,28 @@
 							$pVal = $params['yearlo'].' - '.$params['yearhi'];
 						}
 						elseif (isset($params['yearlo'])) {
-							$pVal = $params['yearlo']; 
-
+							$pVal = $params['yearlo'].' - '.date("Y", strtotime('+2year'));
 						}
 						elseif (isset($params['yearhi'])) {
-							$pVal = $params['yearhi'];
+							$pVal = '1960 - '.$params['yearhi'];
 						}
 
 						break;
 					
 					
 					case 'length':
-						if (isset($params['lengthUnit']) && $params['lengthUnit'] == 'meter') {
+						if (
+							(
+								isset($params['lengthUnit']) 
+								&& 
+								($params['lengthUnit'] == 'meter' || $params['lengthUnit'] == 'Meter')
+							)
+							||
+							(
+								isset($params['lengthunit']) 
+								&& 
+								($params['lengthunit'] == 'meter' || $params['lengthunit'] == 'Meter')
+							)) {
 
 							if (isset($params[ 'lengthlo' ]) && isset($params['lengthhi'])) {
 								$pVal = ''.$params['lengthlo'].'m - '.$params['lengthhi'].'m ';
@@ -197,7 +219,19 @@
 
 						break;
 					case 'length':
-						if (isset($params['lengthUnit']) && $params['lengthUnit'] == 'meter') {
+						if (
+							(
+								isset($params['lengthUnit']) 
+								&& 
+								($params['lengthUnit'] == 'meter' || $params['lengthUnit'] == 'Meter')
+							)
+							||
+							(
+								isset($params['lengthunit']) 
+								&& 
+								($params['lengthunit'] == 'meter' || $params['lengthunit'] == 'Meter')
+							)
+						) {
 
 							if (isset($params[ 'lengthlo' ]) && isset($params['lengthhi'])) {
 								$pVal = 'Between '.$params['lengthlo'].'m - '.$params['lengthhi'].'m ';
@@ -250,7 +284,7 @@
 
 						}
 						elseif (isset($params['yearhi'])) {
-							$pVal = "up to ".$params['yearhi'];
+							$pVal = 'Between 1960 - '.$params['yearhi'];
 						}
 
 						break;
