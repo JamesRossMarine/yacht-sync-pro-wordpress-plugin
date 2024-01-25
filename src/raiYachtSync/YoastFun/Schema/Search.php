@@ -5,10 +5,16 @@
 
         public function __construct( WPSEO_Schema_Context $context ) {
             $this->context = $context;
+            
+            $this->options = new raiYachtSync_Options();
+			$this->yacht_search_page_id = $this->options->get('yacht_search_page_id');
         }
 
         public function is_needed() {
-            return is_singular('');
+            $this->options = new raiYachtSync_Options();
+			$this->yacht_search_page_id = $this->options->get('yacht_search_page_id');
+
+            return is_page($this->yacht_search_page_id);
         }
 
         public function generate() {
