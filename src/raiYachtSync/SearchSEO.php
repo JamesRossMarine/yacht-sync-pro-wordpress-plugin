@@ -45,6 +45,7 @@
 			$string = str_replace('  ', ' ', $string);
 			$string = str_replace('Yachts Yachts', 'Yachts', $string);
 			$string = str_replace('yachts Yachts', 'Yachts', $string);
+			$string = str_replace('Boats Yachts', 'Boats', $string);
 
 			//$string = ucwords($string); 
 			$string = ucfirst($string); 
