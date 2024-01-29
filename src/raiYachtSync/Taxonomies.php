@@ -12,6 +12,7 @@
         register_taxonomy('boatclass', 'rai_yacht', array(
 
             'public' => false,
+            'publicly_queryable' => true,
             'show_ui' => true,
             'hierarchical' => false,
 
