@@ -537,7 +537,7 @@
 				// 	];
 				// }
 
-				if ($query->get('lengthUnit') == 'meter') {
+				if ($query->get('lengthUnit') == 'meter' || $query->get('lengthUnit') == 'Meter') {
 					if ($this->if_query_var_check($query->get('lengthlo'))) {
 						$yacht_sync_meta_query[]=[
 							'key' => 'NominalLength',
