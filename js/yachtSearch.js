@@ -6,10 +6,12 @@ function ysp_yacht_search_and_reader(data) {
     document.querySelector('#search-result-section').classList.remove('loaded');
     document.querySelector('#search-result-section').classList.add('loading');
 
-    let tagsEle = document.querySelector('#ysp-search-tags');
+    let tagsEle = document.querySelectorAll('.ysp-search-tags');
         
     if (tagsEle) {
-        tagsEle.innerHTML="";
+        tagsEle.forEach(function(te) {
+            te.innerHTML="";
+        });
         
         var ysp_tags_not_print = [];
 
@@ -25,26 +27,27 @@ function ysp_yacht_search_and_reader(data) {
 
             if ( label != null && label != 'null' && label != '') {
 
-                let newTagEle = document.createElement('button');
-                    newTagEle.value = data[ paramKey ]; //'';
-                    newTagEle.innerHTML = 'X_'+ label+": "+data[ paramKey ] +" _X"; //'';
-                    newTagEle.setAttribute('key', paramKey); //'';
-                    
-                    newTagEle.onclick = function(event) {
-
-                        let key = event.target.getAttribute('key');
+                tagsEle.forEach(function(te) {
+                    let newTagEle = document.createElement('button');
+                        newTagEle.value = data[ paramKey ]; //'';
+                        newTagEle.innerHTML = 'X_'+ label+": "+data[ paramKey ] +" _X"; //'';
+                        newTagEle.setAttribute('key', paramKey); //'';
                         
-                        document.querySelector('*[name='+ key +']').value = "";
-                        event.target.remove();
+                        newTagEle.onclick = function(event) {
 
-                        let params = raiys_get_form_data( document.querySelector('*[name='+ key +']').form );
+                            let key = event.target.getAttribute('key');
+                            
+                            document.querySelector('*[name='+ key +']').value = "";
+                            event.target.remove();
 
-                        ysp_yacht_search_and_reader( params );
+                            let params = raiys_get_form_data( document.querySelector('*[name='+ key +']').form );
 
-                    };
+                            ysp_yacht_search_and_reader( params );
 
-                tagsEle.appendChild( newTagEle )
+                        };
 
+                        te.appendChild( newTagEle );
+                });
             }
         }
     }
@@ -214,6 +217,23 @@ document.addEventListener("DOMContentLoaded", function() {
     let yachtSearchAndResults=document.querySelector('.ysp-yacht-search-form');
 
     if (yachtSearchAndResults) {
+        document.querySelector('#open-mobile-search').addEventListener('click', function(e) {
+
+            document.querySelector('#ysp-super-mobile-search').style.display='block';
+            document.querySelector('body').style.overflowY='hidden';
+
+
+        });
+        
+        document.querySelector('#close-mobile-search').addEventListener('click', function(e) {
+
+            document.querySelector('#ysp-super-mobile-search').style.display='none';
+            document.querySelector('body').style.overflowY='unset';
+
+
+        });
+
+
         yachtSearchAndResults.addEventListener('submit', function(e) {
             e.preventDefault();
 
