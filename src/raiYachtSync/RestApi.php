@@ -296,6 +296,9 @@
 	   				
 	   				$models=$this->db_helper->get_unique_yacht_meta_values('Model');
 	   				$boat_names=$this->db_helper->get_unique_yacht_meta_values('BoatName');
+	   				$locations=$this->db_helper->get_unique_yacht_meta_values('BoatName');
+
+
 	   				
 	   				//$lengths=$this->get_unique_yacht_meta_values('LengthOverall', 'rai_yacht');
 
@@ -362,22 +365,43 @@
 	   }
 
 	   public function yacht_list_options_with_value(WP_REST_Request $request) {
+	   				global $wpdb;
 
 	   		$labels = $request->get_param('labels');
 	   		$input_val = $request->get_param('value');
 
 	   		$labelsKey=[
-	   			'Keywords' => function() use ($input_val) {
+	   			'Keywords' => function() use ($input_val, $wpdb) {
+
 	   				$makes=$this->db_helper->get_unique_yacht_meta_values_based_input('MakeString', $input_val);
 
 	   				//$years=$this->get_unique_yacht_meta_values('ModelYear', 'rai_yacht');
 	   				
 	   				$models=$this->db_helper->get_unique_yacht_meta_values_based_input('Model', $input_val);
+	   				
 	   				$boat_names=$this->db_helper->get_unique_yacht_meta_values_based_input('BoatName', $input_val);
+	   				
+	   				$locations=$wpdb->get_col( $wpdb->prepare( "
+						SELECT DISTINCT IF(pmmm.meta_value='US' OR pmmm.meta_value='US', CONCAT(pm.meta_value, ', ', pmmmm.meta_value), CONCAT(pm.meta_value, ', ', pmmm.meta_value)) FROM {$wpdb->postmeta} pm
+						LEFT JOIN {$wpdb->posts} p ON p.ID = pm.post_id
+						INNER JOIN {$wpdb->postmeta} pmm ON pmm.post_id = pm.post_id
+						INNER JOIN {$wpdb->postmeta} pmmm ON pmmm.post_id = pm.post_id
+						INNER JOIN {$wpdb->postmeta} pmmmm ON pmmmm.post_id = pm.post_id
+						WHERE pm.meta_key = 'YSP_City' 
+						AND pmmm.meta_key = 'YSP_CountryID'  
+						AND pmmmm.meta_key = 'YSP_State'  
+						AND pm.meta_value LIKE '%s' 
+						AND p.post_status = '%s'
+						AND p.post_type = '%s' 
+						AND pmm.meta_key = 'SalesStatus' 
+						AND pmm.meta_value != 'Sold'
+						AND LENGTH(pm.meta_value) > 1
+						ORDER BY pm.meta_value ASC
+						", $input_val.'%', 'publish', 'rai_yacht' ) );;
 	   				
 	   				//$lengths=$this->get_unique_yacht_meta_values('LengthOverall', 'rai_yacht');
 
-	   				$list = array_merge($makes, $models, $boat_names);
+	   				$list = array_merge($makes, $models, $boat_names, $locations);
 
 	   				$list = array_filter($list, function($item) {
 	   					return (! is_numeric($item));

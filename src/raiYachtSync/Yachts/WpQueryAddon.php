@@ -189,6 +189,12 @@
 								'key' => 'GeneralBoatDescription',
 								'compare' => "LIKE",
 								'value' => $keyword
+							],
+
+							[									
+								'key' => 'YSP_City',
+								'compare' => "LIKE",
+								'value' => $keyword
 							]
 
 						];
@@ -531,7 +537,7 @@
 				// 	];
 				// }
 
-				if ($query->get('lengthUnit') == 'meter') {
+				if ($query->get('lengthUnit') == 'meter' || $query->get('lengthUnit') == 'Meter') {
 					if ($this->if_query_var_check($query->get('lengthlo'))) {
 						$yacht_sync_meta_query[]=[
 							'key' => 'NominalLength',
