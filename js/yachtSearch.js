@@ -217,12 +217,14 @@ document.addEventListener("DOMContentLoaded", function() {
     let yachtSearchAndResults=document.querySelector('.ysp-yacht-search-form');
 
     if (yachtSearchAndResults) {
-        document.querySelector('#open-mobile-search').addEventListener('click', function(e) {
+        document.querySelectorAll('.open-mobile-search').forEach((omse) => {
+            omse.addEventListener('click', function(e) {
 
-            document.querySelector('#ysp-super-mobile-search').style.display='block';
-            document.querySelector('body').style.overflowY='hidden';
+                document.querySelector('#ysp-super-mobile-search').style.display='block';
+                document.querySelector('body').style.overflowY='hidden';
 
 
+            });
         });
         
         document.querySelector('#close-mobile-search').addEventListener('click', function(e) {

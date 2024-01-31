@@ -100,26 +100,36 @@
         <div class="ys-h-row-item submit-container">
             <label>Submit</label>
             
-            <input class="ysp-general-button" type="submit" name="submit" value="Submit"/>
+            <button class="ysp-general-button" type="submit">Submit</button>
         </div>
     </form>
 
 </div>
 
-<button id="open-mobile-search">Filters</button>
+<button class="open-mobile-search">Filters</button>
+
+<div class="Filters-Floating-Bar">
+    
+    <button class="open-mobile-search">Filters (2)</button>
+
+</div>
 
 <datalist id="ysp_keywords_list" data-fill-list='Keywords'></datalist>
 
 <div id="ysp-super-mobile-search">
-    <div style="padding: 15px;">
+    <div style="padding: 15px; overflow-y: scroll; height: 100%;">
 
-        <h3>Boat Search</h3>
+        <div style="position: fixed; top: 0px; left: 0px; width: 100%; background: #fff; padding: 15px;  border-bottom: 1px solid #d9d9d9; ">
+            <h3>Boat Search</h3>
 
-        <a id="close-mobile-search">__CLOSE__</a>
+            <a id="close-mobile-search">__CLOSE__</a>
 
-        <div class="ysp-search-tags">
-        
+            <div class="ysp-search-tags">
+            
+            </div>
         </div>
+
+        <div style="height: 135px;"></div>
 
         <form id="ysp-yacht-search-form" class="ys-h-row ysp-yacht-search-form ysp-form ysp-search-mobile">
             <input type="hidden" name="page_index" />
@@ -137,6 +147,60 @@
                 </svg> -->
             </div>
             
+            <div class="ys-h-row-item">
+                <label for="make">Builder</label>
+
+                <select name="make" data-fill-options="Builders">
+                    <option value="">Any</option>
+                </select>
+            </div>
+
+            <div class="ys-h-row-item">
+                <label for="make">Builder</label>
+
+                <select name="make" data-fill-options="Builders">
+                    <option value="">Any</option>
+                </select>
+            </div>
+
+            <div class="ys-h-row-item">
+                <label for="make">Builder</label>
+
+                <select name="make" data-fill-options="Builders">
+                    <option value="">Any</option>
+                </select>
+            </div>
+
+            <div class="ys-h-row-item">
+                <label>Year</label>
+
+                <div class="min-max-container">
+                    <input type="number" label="Year Above" name="yearlo" placeholder="Min"/>
+                    <span>-</span>
+                    <input type="number" label="Year Below" name="yearhi" placeholder="Max"/>
+                </div>
+            </div>
+
+            <div class="ys-h-row-item">
+                <label>Length</label>
+                
+                <div class="min-max-container">
+                    <input type="number" label="Length Above" name="lengthlo" placeholder="Min"/>
+                    <span>-</span>
+                    <input type="number" label="Length Below" name="lengthhi" placeholder="Max"/>
+                </div>
+            </div>
+
+            <div class="ys-h-row-item">
+                <label>Price</label>
+
+                <div class="min-max-container">
+                    <input type="number" label="Price Above" name="pricelo" placeholder="Min"/>
+                    <span>-</span>
+                    <input type="number" label="Price Below" name="pricehi" placeholder="Max"/>
+                </div>
+            </div>
+
             <div class="ys-h-row-item">
                 <label for="make">Builder</label>
 
@@ -219,10 +283,10 @@
                 </select>
             </div>
 
-            <div class="ys-h-row-item submit-container">
-                <label>Submit</label>
-                
-                <input class="ysp-general-button" type="submit" name="submit" value="Submit"/>
+            <div style="height: 75px;"></div>
+
+            <div class="ys-h-row-item submit-container" style="position: fixed; bottom: 0px; left: 0px; width: 100%; background: #fff; padding: 15px; border-top: 1px solid #d9d9d9;">
+                <button class="ysp-general-button" type="submit">View The Boats And Hoes</button>
             </div>
         </form>
 
