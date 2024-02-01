@@ -14,8 +14,8 @@
 		        'endpoint' => 'https://nyc3.digitaloceanspaces.com',
 		        'use_path_style_endpoint' => false, // Configures to use subdomain/virtual calling format.
 		        'credentials' => [
-	                'key'    => 'DO00V8J83K4JJCF9D7BZ',
-	                'secret' => 'hEhdK3MY/68dVUYKgGE364R1WcYayxiSGkdCdDKURj8',
+	                'key'    => 'DO00ND3AZGE2E3Z4XFDQ',
+	                'secret' => 'mVy+V67cFxmePbictLcJTbAorcp5nwpjbZjgLqmhNlM',
 	            ],
 			]);
 
@@ -27,6 +27,10 @@
 
 	    public function remove($filepath) {
 	    	
+	    	if ($filepath[0] == '/') {
+	    		$filepath = substr($filepath, 1);
+	    	}
+
 	    	return ($this->client->deleteObject([
 	    		'Bucket' => 'yspbrochures',
 	            'Key' => $filepath
@@ -38,10 +42,13 @@
 	    	
 	    	$filepath = parse_url($url, PHP_URL_PATH);
 
+	    	if ($filepath[0] == '/') {
+	    		$filepath = substr($filepath, 1);
+	    	}
+
 	    	return ($this->client->deleteObject([
 	    		'Bucket' => 'yspbrochures',
 	            'Key' => $filepath
 	    	]));
-
 	    }
 	}

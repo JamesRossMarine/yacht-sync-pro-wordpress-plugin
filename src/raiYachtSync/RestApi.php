@@ -546,6 +546,10 @@
 				
 				update_post_meta($y_post_id, 'YSP_PDF_URL', "");
 
+				wp_redirect( $_SERVER['HTTP_REFERER'] );
+
+				exit();
+
 				return ['success' => 'joshie was here'];
 			}
 			else {
@@ -558,6 +562,10 @@
 			if ($request->get_param('yacht_post_id') != '') {
 	
 				$y_post_id = $request->get_param('yacht_post_id');
+
+				$pdf_url=get_post_meta($y_post_id, 'YSP_PDF_URL', true);
+				
+				$this->BrochureCleanUp->removeUseUrl($pdf_url);
 
 				update_post_meta($y_post_id, 'YSP_PDF_URL', "");
 
