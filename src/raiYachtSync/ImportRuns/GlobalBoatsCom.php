@@ -15,6 +15,7 @@
 
 			$this->LocationConvert = new raiYachtSync_LocationConvert();
 			$this->BrochureCleanUp = new raiYachtSync_BrochureCleanUp();
+			$this->ChatGPTYachtDescriptionVersionTwo = new raiYachtSync_ChatGPTYachtDescriptionVersionTwo();
 
 			$this->key=$this->options->get('boats_com_api_global_key');
 
@@ -341,6 +342,16 @@
 						foreach ($boatC->GeneralBoatDescription as $gIndex => $description){
 							$boatC->GeneralBoatDescription[ $gIndex ] = preg_replace('/(<[^>]+) style=".*?"/i', '$1', $description);
 						}
+					}
+
+					if (isset($boatC->_yoast_wpseo_metadesc) && ! empty($boatC->_yoast_wpseo_metadesc)) {
+
+						$boatC->_yoast_wpseo_metadesc = $this->ChatGPTYachtDescriptionVersionTwo->make_description(
+
+							join(' ', $boatC->GeneralBoatDescription)
+
+						);
+
 					}
 
 					$boatC->Touched_InSync=1;

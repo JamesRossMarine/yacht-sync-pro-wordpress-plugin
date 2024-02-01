@@ -319,6 +319,16 @@
 						}
 					}
 					
+					if (isset($boatC->_yoast_wpseo_metadesc) && ! empty($boatC->_yoast_wpseo_metadesc)) {
+
+						$boatC->_yoast_wpseo_metadesc = $this->ChatGPTYachtDescriptionVersionTwo->make_description(
+
+							 join(' ', $boatC->GeneralBoatDescription)
+							
+						);
+
+					}
+					
 					$boatC->CompanyBoat = 1;
 					$boatC->Touched_InSync=1;
 					
