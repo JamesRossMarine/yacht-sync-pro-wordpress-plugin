@@ -12,6 +12,8 @@
 
 			$this->BrochureCleanUp = new raiYachtSync_BrochureCleanUp();
 
+			$this->ChatGPTYachtDescriptionVersionTwo = new raiYachtSync_ChatGPTYachtDescriptionVersionTwo();
+
 			$this->key=$this->options->get('boats_com_api_brokerage_key');
 			$this->opt_prerender_brochures=$this->options->get('prerender_brochures');
 
@@ -318,17 +320,21 @@
 							$boatC->YSP_EuroVal = $boatC->YSP_USDVal * $this->euro_c_c;
 						}
 					}
+
+					var_dump($boatC->_yoast_wpseo_metadesc);
 					
-					if (isset($boatC->_yoast_wpseo_metadesc) && ! empty($boatC->_yoast_wpseo_metadesc)) {
+					if (( isset($boatC->_yoast_wpseo_metadesc) && ( empty($boatC->_yoast_wpseo_metadesc) || is_null($boatC->_yoast_wpseo_metadesc)) ) || ! isset($boatC->_yoast_wpseo_metadesc)) {
+
+						var_dump('ping!');
 
 						$boatC->_yoast_wpseo_metadesc = $this->ChatGPTYachtDescriptionVersionTwo->make_description(
 
-							 join(' ', $boatC->GeneralBoatDescription)
+							join(' ', $boatC->GeneralBoatDescription)
 							
 						);
 
 					}
-					
+
 					$boatC->CompanyBoat = 1;
 					$boatC->Touched_InSync=1;
 					
