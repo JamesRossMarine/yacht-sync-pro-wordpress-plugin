@@ -543,6 +543,8 @@
 				$pdf_url=get_post_meta($y_post_id, 'YSP_PDF_URL', true);
 
 				$this->BrochureCleanUp->removeUseUrl($pdf_url);
+				
+				update_post_meta($y_post_id, 'YSP_PDF_URL', "");
 
 				return ['success' => 'joshie was here'];
 			}
