@@ -24,7 +24,7 @@
 				$gpt_messages[] = ['role' => 'system', 'content' => 'Scan '.$sl];
 			}
 
-			$gpt_messages[] = ["role" => "assistant", "content" => "Write three sentences about \"". $input ."\" while using context from scanned links. Do not return a response with quotation marks."];
+			$gpt_messages[] = ["role" => "assistant", "content" => "Write one sentences about \"". $input ."\" while using context from scanned links. Do not return a response with quotation marks."];
 
 			$gpt_headers = [
 				'headers' => [
