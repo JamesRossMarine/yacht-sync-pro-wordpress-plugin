@@ -94,7 +94,7 @@
 
 				$pdfs = $wpdb->get_col("
 					SELECT pm.meta_value FROM {$wpdb->postmeta} pm
-					LEFT JOIN {$wpdb->posts} p ON p.ID = pm.post_id
+					LEFT JOIN {$wpdb->posts} wp ON p.ID = pm.post_id
 					WHERE pm.meta_key = 'YSP_PDF_URL' AND wp.ID IS NULL");
 
 				foreach ($pdfs as $file) {
