@@ -21,7 +21,7 @@
 				'p' => $this->generate_paragraph($params)
 			];
 
-			$links=[];
+			/*$links=[];
 
 			$params = (array) $wp_query->get('params_from_paths');
 
@@ -31,7 +31,7 @@
 				$links[] = get_permalink($y);
 			}
 			
-			$all['gpt_p'] = $this->ChatGPT_YachtSearch->make_description($all['p'], $links);
+			$all['gpt_p'] = $this->ChatGPT_YachtSearch->make_description($all['p'], $links);*/
 
 			return $all;
 
