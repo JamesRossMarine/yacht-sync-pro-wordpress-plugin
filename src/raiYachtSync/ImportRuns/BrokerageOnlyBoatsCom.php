@@ -10,6 +10,8 @@
 
 			$this->LocationConvert = new raiYachtSync_LocationConvert();
 
+			$this->BrochureCleanUp = new raiYachtSync_BrochureCleanUp();
+
 			$this->key=$this->options->get('boats_com_api_brokerage_key');
 			$this->opt_prerender_brochures=$this->options->get('prerender_brochures');
 
@@ -183,6 +185,10 @@
 
 						if ( $pdf_still_e ) {
 							$boatC->YSP_PDF_URL = $synced_pdf;
+						}
+
+						if (! empty($synced_pdf) && ! $pdf_still_e && $yacht_updated) {
+							$this->BrochureCleanUp->removeUseUrl($synced_pdf);
 						}
 
 						// carry overs
