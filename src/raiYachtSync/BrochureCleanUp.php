@@ -33,4 +33,15 @@
 	    	]));
 
 	    }
+
+	    public function removeUseUrl($url) {
+	    	
+	    	$filepath = parse_url($url, PHP_URL_PATH);
+
+	    	return ($this->client->deleteObject([
+	    		'Bucket' => 'yspbrochures',
+	            'Key' => $filepath
+	    	]));
+
+	    }
 	}

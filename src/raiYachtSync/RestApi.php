@@ -5,6 +5,7 @@
 		public function __construct() {
 
 			$this->options = new raiYachtSync_Options();
+
 			$this->db_helper = new raiYachtSync_DBHelper();
 
 			$this->RunImports = new raiYachtSync_RunImports();
@@ -12,6 +13,8 @@
 			$this->SearchSEO = new raiYachtSync_SearchSEO();
 
 			$this->Stats = new raiYachtSync_Stats();
+
+			$this->BrochureCleanUp = new raiYachtSync_BrochureCleanUp();
 
 		}
 
@@ -532,6 +535,22 @@
 
 	   }
 
+	   public function delete_yacht_pdf(WP_REST_Request $request) {
+	   		if ($request->get_param('yacht_post_id') != '') {
+	
+				$y_post_id = $request->get_param('yacht_post_id');
+
+				$pdf_url=get_post_meta($y_post_id, 'YSP_PDF_URL', true);
+
+				$this->BrochureCleanUp->removeUseUrl($pdf_url);
+
+				return ['success' => 'joshie was here'];
+			}
+			else {
+				return ['success' => 'No YACHT ID'];
+			}
+		}
+
 		public function redo_yacht_pdf(WP_REST_Request $request) {
 
 			if ($request->get_param('yacht_post_id') != '') {
@@ -871,4 +890,6 @@
 				return array('error' => 'Email failed to send');
 			}
 		}
+
+		
 	}
