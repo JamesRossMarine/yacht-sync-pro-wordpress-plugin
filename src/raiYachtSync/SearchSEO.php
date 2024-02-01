@@ -314,7 +314,7 @@
 			$string = '';
 
 			if (isset($params['page_index']) && $params['page_index'] >= 2) {
-				$string = '(Page: #'. $params['page_index'] .' )';
+				$string = ' | Page '. $params['page_index'] .'';
 			} 
 
 			
