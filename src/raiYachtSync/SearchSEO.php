@@ -278,14 +278,14 @@
 
 					case 'year':
 						if (isset($params[ 'yearlo' ]) && isset($params['yearhi'])) {
-							$pVal = 'Between '.$params['yearlo'].' - '.$params['yearhi'];
+							$pVal = 'from '.$params['yearlo'].' to '.$params['yearhi'];
 						}
 						elseif (isset($params['yearlo'])) {
-							$pVal = 'Between '.$params['yearlo'].' - '.date("Y", strtotime('+2year'));
+							$pVal = 'from '.$params['yearlo'].' to '.date("Y", strtotime('+2year'));
 
 						}
 						elseif (isset($params['yearhi'])) {
-							$pVal = 'Between 1960 - '.$params['yearhi'];
+							$pVal = 'from 1960 to '.$params['yearhi'];
 						}
 
 						break;
