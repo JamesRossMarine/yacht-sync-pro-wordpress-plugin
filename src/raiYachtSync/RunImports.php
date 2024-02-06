@@ -8,6 +8,7 @@
 			$this->ImportGlobalBoatsCom = new raiYachtSync_ImportRuns_GlobalBoatsCom();
 			$this->ImportBrokerageOnlyBoatsCom = new raiYachtSync_ImportRuns_BrokerageOnlyBoatsCom();
 			$this->ImportYachtBrokerOrg = new raiYachtSync_ImportRuns_YachtBrokerOrg();
+			$this->ImportYatco = new raiYachtSync_ImportRuns_YatcoCom();
 			
 		}
 
@@ -21,6 +22,16 @@
 					'syncing_rai_yacht'
 				)
 			);
+
+			/*$wpdb->query( 
+				$wpdb->prepare( 
+					"UPDATE $wpdb->postmeta pm 
+					INNER JOIN $wpdb->posts AS p ON pm.post_id = p.ID
+					SET pm.meta_value = '0'
+					WHERE p.post_type = %s AND pm.meta_key = 'Touched_InSync'",
+					'rai_yacht'
+				)
+			);*/
 	      
 		}
 
@@ -40,8 +51,8 @@
 
 			$wpdb->query( 
 				$wpdb->prepare( 
-					"DELETE wp FROM $wpdb->posts wp
-					INNER JOIN $wpdb->posts AS p ON p.ID = pm.post_id 
+					"DELETE p FROM $wpdb->posts p
+					INNER JOIN $wpdb->postmeta AS pm ON p.ID = pm.post_id 
 					WHERE wp.post_type = %s AND pm.meta_key = 'Touched_InSync' AND pm.meta_value = '0'",
 					'rai_yacht'
 				)
@@ -62,7 +73,6 @@
 				)
 	        );
 
-
 	        if ($count_of_synced > 0) {
 		       	$wpdb->query( 
 					$wpdb->prepare( 
@@ -71,6 +81,28 @@
 						'rai_yacht'
 					)
 				);
+
+				/*$wpdb->query( 
+					$wpdb->prepare( 
+						"DELETE p FROM $wpdb->posts p
+						INNER JOIN $wpdb->postmeta AS pm ON p.ID = pm.post_id 
+						WHERE p.post_type = %s AND pm.meta_key = 'Touched_InSync' AND pm.meta_value = '0'",
+						'rai_yacht'
+					)
+				);*/
+
+				$pdfs = $wpdb->get_col("
+					SELECT pm.meta_value FROM {$wpdb->postmeta} pm
+					LEFT JOIN {$wpdb->posts} wp ON wp.ID = pm.post_id
+					WHERE pm.meta_key = 'YSP_PDF_URL' AND wp.ID IS NULL");
+
+				foreach ($pdfs as $file) {
+					
+					$phase_url = parse_url($file);
+
+					$this->BrochureCleanUp->remove( $phase_url['path'] );
+
+				}
 
 				$wpdb->query(
 					"DELETE pm FROM $wpdb->postmeta pm 
@@ -144,6 +176,10 @@
 				$resultsOfSync[]=$this->ImportBrokerageOnlyBoatsCom->run();
 			}
 
+			if (! empty($yatco_api_token) && $yatco_api_token == 'fortheops') {
+				$resultsOfSync[]=$this->ImportYatco->run();
+			}
+			
 			var_dump($resultsOfSync);
 
 			$syncHadIssue=false;

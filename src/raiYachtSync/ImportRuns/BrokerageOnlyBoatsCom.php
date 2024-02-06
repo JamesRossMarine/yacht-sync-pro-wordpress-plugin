@@ -10,6 +10,10 @@
 
 			$this->LocationConvert = new raiYachtSync_LocationConvert();
 
+			$this->BrochureCleanUp = new raiYachtSync_BrochureCleanUp();
+
+			$this->ChatGPTYachtDescriptionVersionTwo = new raiYachtSync_ChatGPTYachtDescriptionVersionTwo();
+
 			$this->key=$this->options->get('boats_com_api_brokerage_key');
 			$this->opt_prerender_brochures=$this->options->get('prerender_brochures');
 
@@ -18,6 +22,10 @@
 			$this->euro_c_c = intval($this->options->get('euro_c_c'));
 			$this->usd_c_c = intval($this->options->get('usd_c_c'));
 
+			$this->CarryOverKeys = [
+				'_yoast_wpseo_title',
+				'_yoast_wpseo_metadesc'
+			];
 		}
 		
 		public function run() {
@@ -142,6 +150,7 @@
 		           	}	        	         
 					
 	                $pdf_still_e = false;
+	                $yacht_updated = false;
 
 	                if (isset($find_post_from_synced[0]->ID)) {
 	                	$synced_post_id = $find_post_from_synced[0]->ID;
@@ -173,16 +182,42 @@
 
 						if (strtotime($current_last_mod_date) > strtotime($saved_last_mod_date)) {
 							$pdf_still_e = false;
+							$yacht_updated = true;
 						}
 
 						if ( $pdf_still_e ) {
 							$boatC->YSP_PDF_URL = $synced_pdf;
 						}
+
+						if (! empty($synced_pdf) && ! $pdf_still_e && $yacht_updated) {
+							$this->BrochureCleanUp->removeUseUrl($synced_pdf);
+						}
+
+						// carry overs
+						foreach ($this->CarryOverKeys as $metakey) {
+							$val = get_post_meta($synced_post_id, $metakey, true);
+							$boatC->{$metakey} = $val;
+						}
 	                }
 
 		            $post_id=0;
 
-		            if (isset($find_post[0]->ID)) {
+		            if (isset($find_post_from_synced[0]->ID) && $yacht_updated) {
+		                $post_id=$find_post_from_synced[0]->ID;
+
+		                $wpdb->delete(
+		                	$wpdb->postmeta, 
+		                	[
+		                		'post_id' => $find_post_from_synced[0]->ID
+		                	], 
+		                	['%d']
+		                );
+		            }
+		           /* elseif (isset($find_post_from_synced[0]->ID) && $yacht_updated == false) {
+		                $post_id=$find_post_from_synced[0]->ID;
+		            	
+		            }*/
+		            elseif (isset($find_post[0]->ID)) {
 		                $post_id=$find_post[0]->ID;
 
 		                $wpdb->delete($wpdb->postmeta, ['post_id' => $find_post[0]->ID], ['%d']);
@@ -285,7 +320,21 @@
 							$boatC->YSP_EuroVal = $boatC->YSP_USDVal * $this->euro_c_c;
 						}
 					}
+
+					var_dump($boatC->_yoast_wpseo_metadesc);
 					
+					if (( isset($boatC->_yoast_wpseo_metadesc) && ( empty($boatC->_yoast_wpseo_metadesc) || is_null($boatC->_yoast_wpseo_metadesc)) ) || ! isset($boatC->_yoast_wpseo_metadesc)) {
+
+						var_dump('ping!');
+
+						$boatC->_yoast_wpseo_metadesc = $this->ChatGPTYachtDescriptionVersionTwo->make_description(
+
+							join(' ', $boatC->GeneralBoatDescription)
+							
+						);
+
+					}
+
 					$boatC->CompanyBoat = 1;
 					$boatC->Touched_InSync=1;
 					

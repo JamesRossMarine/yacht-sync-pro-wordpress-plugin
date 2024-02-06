@@ -5,6 +5,7 @@
 		public function __construct() {
 
 			$this->options = new raiYachtSync_Options();
+
 			$this->db_helper = new raiYachtSync_DBHelper();
 
 			$this->RunImports = new raiYachtSync_RunImports();
@@ -12,6 +13,8 @@
 			$this->SearchSEO = new raiYachtSync_SearchSEO();
 
 			$this->Stats = new raiYachtSync_Stats();
+
+			$this->BrochureCleanUp = new raiYachtSync_BrochureCleanUp();
 
 		}
 
@@ -126,6 +129,14 @@
 
     		register_rest_route( 'raiys', '/redo-yacht-pdf', array(
 		        'callback' => [$this, 'redo_yacht_pdf'],
+		        'methods'  => [WP_REST_Server::READABLE, WP_REST_Server::CREATABLE],
+		        'permission_callback' => '__return_true',
+		        'args' => array(
+		            
+		        )
+		    ) );
+    		register_rest_route( 'raiys', '/delete-yacht-pdf', array(
+		        'callback' => [$this, 'delete_yacht_pdf'],
 		        'methods'  => [WP_REST_Server::READABLE, WP_REST_Server::CREATABLE],
 		        'permission_callback' => '__return_true',
 		        'args' => array(
@@ -288,6 +299,9 @@
 	   				
 	   				$models=$this->db_helper->get_unique_yacht_meta_values('Model');
 	   				$boat_names=$this->db_helper->get_unique_yacht_meta_values('BoatName');
+	   				$locations=$this->db_helper->get_unique_yacht_meta_values('BoatName');
+
+
 	   				
 	   				//$lengths=$this->get_unique_yacht_meta_values('LengthOverall', 'rai_yacht');
 
@@ -354,22 +368,43 @@
 	   }
 
 	   public function yacht_list_options_with_value(WP_REST_Request $request) {
+	   				global $wpdb;
 
 	   		$labels = $request->get_param('labels');
 	   		$input_val = $request->get_param('value');
 
 	   		$labelsKey=[
-	   			'Keywords' => function() use ($input_val) {
+	   			'Keywords' => function() use ($input_val, $wpdb) {
+
 	   				$makes=$this->db_helper->get_unique_yacht_meta_values_based_input('MakeString', $input_val);
 
 	   				//$years=$this->get_unique_yacht_meta_values('ModelYear', 'rai_yacht');
 	   				
 	   				$models=$this->db_helper->get_unique_yacht_meta_values_based_input('Model', $input_val);
+	   				
 	   				$boat_names=$this->db_helper->get_unique_yacht_meta_values_based_input('BoatName', $input_val);
+	   				
+	   				$locations=$wpdb->get_col( $wpdb->prepare( "
+						SELECT DISTINCT IF(pmmm.meta_value='US' OR pmmm.meta_value='US', CONCAT(pm.meta_value, ', ', pmmmm.meta_value), CONCAT(pm.meta_value, ', ', pmmm.meta_value)) FROM {$wpdb->postmeta} pm
+						LEFT JOIN {$wpdb->posts} p ON p.ID = pm.post_id
+						INNER JOIN {$wpdb->postmeta} pmm ON pmm.post_id = pm.post_id
+						INNER JOIN {$wpdb->postmeta} pmmm ON pmmm.post_id = pm.post_id
+						INNER JOIN {$wpdb->postmeta} pmmmm ON pmmmm.post_id = pm.post_id
+						WHERE pm.meta_key = 'YSP_City' 
+						AND pmmm.meta_key = 'YSP_CountryID'  
+						AND pmmmm.meta_key = 'YSP_State'  
+						AND pm.meta_value LIKE '%s' 
+						AND p.post_status = '%s'
+						AND p.post_type = '%s' 
+						AND pmm.meta_key = 'SalesStatus' 
+						AND pmm.meta_value != 'Sold'
+						AND LENGTH(pm.meta_value) > 1
+						ORDER BY pm.meta_value ASC
+						", $input_val.'%', 'publish', 'rai_yacht' ) );;
 	   				
 	   				//$lengths=$this->get_unique_yacht_meta_values('LengthOverall', 'rai_yacht');
 
-	   				$list = array_merge($makes, $models, $boat_names);
+	   				$list = array_merge($makes, $models, $boat_names, $locations);
 
 	   				$list = array_filter($list, function($item) {
 	   					return (! is_numeric($item));
@@ -500,13 +535,47 @@
 
 	   }
 
+	   public function delete_yacht_pdf(WP_REST_Request $request) {
+	   		if ($request->get_param('yacht_post_id') != '') {
+	
+				$y_post_id = $request->get_param('yacht_post_id');
+
+				$pdf_url=get_post_meta($y_post_id, 'YSP_PDF_URL', true);
+
+				$this->BrochureCleanUp->removeUseUrl($pdf_url);
+				
+				update_post_meta($y_post_id, 'YSP_PDF_URL', "");
+
+				wp_redirect( $_SERVER['HTTP_REFERER'] );
+
+				exit();
+
+				return ['success' => 'joshie was here'];
+			}
+			else {
+				return ['success' => 'No YACHT ID'];
+			}
+		}
+
 		public function redo_yacht_pdf(WP_REST_Request $request) {
 
 			if ($request->get_param('yacht_post_id') != '') {
 	
 				$y_post_id = $request->get_param('yacht_post_id');
 
+				$pdf_url=get_post_meta($y_post_id, 'YSP_PDF_URL', true);
+				
+				$this->BrochureCleanUp->removeUseUrl($pdf_url);
+
 				update_post_meta($y_post_id, 'YSP_PDF_URL', "");
+
+				$error = get_post_meta($y_post_id, 'YSP_PDF_ERROR', true);
+
+				$pdf_render_url =  get_rest_url() ."raiys/yacht-pdf?yacht_post_id=". $y_post_id;
+
+				if (! empty($error)) {
+					$pdf_render_url .= '&GalleryLimit=6';
+				}
 
 				$generatorPDF = wp_remote_post(
 					"https://api.urlbox.io/v1/render/sync", 
@@ -519,7 +588,7 @@
 						],
 						
 						'body' => json_encode([
-							'url' => get_rest_url() ."raiys/yacht-pdf?yacht_post_id=". $y_post_id,
+							'url' => $pdf_render_url,
 							//'webhook_url' => get_rest_url() ."raiys/set-yacht-pdf?yacht_post_id=". $y_post_id,
 							'use_s3' => true,
 							'format' => 'pdf'
@@ -529,7 +598,13 @@
 
 				$body = json_decode(wp_remote_retrieve_body($generatorPDF), true);
 
-				update_post_meta($y_post_id, 'YSP_PDF_URL', $body['renderUrl']);
+				if (isset($body['renderUrl'])) {
+					update_post_meta($y_post_id, 'YSP_PDF_URL', $body['renderUrl']);
+					//update_post_meta($y_post_id, 'YSP_PDF_ERROR', "");
+				}
+				elseif (isset($body['error']['message'])) {
+					update_post_meta($y_post_id, 'YSP_PDF_ERROR', $body['error']['message']);
+				}
 
 				wp_redirect( $_SERVER['HTTP_REFERER'] );
 
@@ -603,8 +678,13 @@
 
 					$render_url = urlencode(get_rest_url() ."raiys/yacht-pdf?yacht_post_id=". $request->get_param('yacht_post_id') ."&GalleryLimit=". $_GET['GalleryLimit']);
 
-					$apiCall = wp_remote_get(
-						"https://api.urlbox.io/v1/0FbOuhgmL1s2bINM/pdf?url=".$render_url, 
+					$pdfbox = "https://api.urlbox.io/v1/0FbOuhgmL1s2bINM/pdf?url=".$render_url;
+
+					wp_redirect($pdfbox);
+					exit();
+
+					/*$apiCall = wp_remote_get(
+						$pdfbox, 
 
 						[
 							'timeout' => 180, 
@@ -612,8 +692,7 @@
 								'Content-Type'  => 'application/pdf',
 							]
 						]
-					);
-
+					);*/
 				}
 				else {
 					/*wp_redirect("https://api.urlbox.io/v1/0FbOuhgmL1s2bINM/pdf?url=". get_rest_url() ."raiys/yacht-pdf?yacht_post_id=". $request->get_param('yacht_post_id'));
@@ -821,4 +900,6 @@
 				return array('error' => 'Email failed to send');
 			}
 		}
+
+		
 	}

@@ -4,7 +4,7 @@
 		public $yachtBrokerAPIKey = '';
    		public $yachtClientId = '';
    		protected $url = '';
-   		protected $yachtBrokerLimit = 53;
+   		protected $yachtBrokerLimit = 23;
 
 		public function __construct() {
 
@@ -17,9 +17,15 @@
 			$this->euro_c_c = intval($this->options->get('euro_c_c'));
 			$this->usd_c_c = intval($this->options->get('usd_c_c'));
 			
-
 			$this->euro_c_c = intval($this->options->get('euro_c_c'));
 			$this->usd_c_c = intval($this->options->get('usd_c_c'));	
+
+			$this->opt_prerender_brochures=$this->options->get('prerender_brochures');
+
+			$this->CarryOverKeys = [
+				'_yoast_wpseo_title',
+				'_yoast_wpseo_metadesc'
+			];
 		}
 
 		public function run() {
@@ -31,7 +37,9 @@
 	            'headers' => [
 	                'X-API-KEY'   => $this->yachtBrokerAPIKey,
 	                'X-CLIENT-ID' => $this->yachtClientId
-	            ]
+	            ],
+
+	            'timeout' => 120
 	        ];
 
 	        $apiUrlOne  = 'https://api.yachtbroker.org/listings?key='.$this->yachtBrokerAPIKey.'&id='. $this->yachtClientId .'&gallery=true&engines=true&generators=true&textblocks=true&media=true&limit='.$this->yachtBrokerLimit;
@@ -41,6 +49,9 @@
 	        $api_status_code = wp_remote_retrieve_response_code($apiCall);
 
 	        $json = json_decode(wp_remote_retrieve_body($apiCall), true);
+
+	        var_dump($api_status_code);
+	        var_dump($apiUrlOne);
 
 	        if ($api_status_code == 200 && isset($json['V-Data'])) {
 				// return;
@@ -294,15 +305,105 @@
 		                $find_post=[];
 		            }
 
+		            $find_post_from_synced=get_posts([
+	                    'post_type' => 'rai_yacht',
+	                    'meta_query' => [
+	                        array(
+	                           'key' => 'BoatHullID',
+	                           'value' => $theBoat['BoatHullID'],
+	                           'compare' => '=',
+	                       )
+	                    ],
+	                ]);
+
+		           	if (! isset($find_post_from_synced[0]->ID)) {
+			            if (! empty($record['BoatHullID'])) {
+			                $find_post_from_synced=get_posts([
+			                    'post_type' => 'rai_yacht',
+			                    'meta_query' => [
+
+			                        array(
+			                           'key' => 'YBDocumentID',
+			                           'value' => $theBoat['YBDocumentID'],
+			                           'compare' => '=',
+			                       )
+			                    ],
+			                ]);
+			            }
+			            else {
+			                $find_post_from_synced=[];
+			            }
+		           	}	        	         
+					
+					if (isset($find_post_from_synced[0]->ID)) {
+	                	$synced_post_id = $find_post_from_synced[0]->ID;
+
+		                $synced_pdf = get_post_meta($synced_post_id, 'YSP_PDF_URL', true);
+
+		                $saved_last_mod_date = get_post_meta($synced_post_id, 'LastModificationDate', true);
+		                $current_last_mod_date = $boatC->LastModificationDate;
+
+		                if (!is_null($synced_pdf) && !empty($synced_pdf)) {
+							$apiPDF = wp_remote_request($synced_pdf, [
+								'method' => 'HEAD',
+
+								'timeout' => 180,
+								'stream' => false, 
+								
+								'headers' => [
+									'Content-Type'  => 'application/pdf',
+
+								]
+							]);
+
+							$api_status_code = wp_remote_retrieve_response_code($apiPDF);
+
+							if ($api_status_code == '200') {
+								$pdf_still_e = true;
+							}
+						}
+
+						if (strtotime($current_last_mod_date) > strtotime($saved_last_mod_date)) {
+							$pdf_still_e = false;
+							$yacht_updated = true;
+						}
+
+						if ( $pdf_still_e ) {
+							$theBoat['YSP_PDF_URL'] = $synced_pdf;
+						}
+
+						// carry overs
+						foreach ($this->CarryOverKeys as $metakey) {
+							$val = get_post_meta($synced_post_id, $metakey, true);
+							$theBoat[ $metakey ] = $val;
+						}
+	                }
+
 		            $post_id=0;
 
-		            if (isset($find_post[0]->ID)) {
+		            if (isset($find_post_from_synced[0]->ID) && $yacht_updated) {
+		                $post_id=$find_post_from_synced[0]->ID;
+
+		                $wpdb->delete(
+		                	$wpdb->postmeta, 
+		                	[
+		                		'post_id' => $find_post_from_synced[0]->ID
+		                	], 
+		                	['%d']
+		                );
+		            }
+		            /*elseif (isset($find_post_from_synced[0]->ID) && $yacht_updated == false) {
+		                $post_id=$find_post_from_synced[0]->ID;
+		            	
+		            }*/
+		            elseif (isset($find_post[0]->ID)) {
 		                $post_id=$find_post[0]->ID;
 
 		                $wpdb->delete($wpdb->postmeta, ['post_id' => $find_post[0]->ID], ['%d']);
 		            }
 
 		            $theBoat['CompanyBoat'] = 1;
+		            $theBoat['Touched_InSync'] = 1;
 
 		            $y_post_id=wp_insert_post(
 		            	apply_filters('raiys_yacht_post', 
@@ -323,6 +424,26 @@
 					);
 
 					wp_set_post_terms($y_post_id, $theBoat['BoatClassCode'], 'boatclass', false);
+
+					if ($this->opt_prerender_brochures == 'yes' && $pdf_still_e == false && ! in_array($theBoat['SalesStatus'], ['Sold', 'Suspend']) ) {
+
+						$generatorPDF = wp_remote_post(
+							"https://api.urlbox.io/v1/render/async", 
+							[
+								'headers' => [
+									'Authorization' => 'Bearer ae1422deb6fc4f658c55f5dda7a08704',
+									'Content-Type' => 'application/json'
+								],
+								'body' => json_encode([
+									'url' => get_rest_url() ."raiys/yacht-pdf?yacht_post_id=". $y_post_id,
+									'webhook_url' => get_rest_url() ."raiys/set-yacht-pdf?yacht_post_id=". $y_post_id,
+									'use_s3' => true,
+									'format' => 'pdf'
+								])
+							]
+						);
+
+					}
 		        }
 
 	        }

@@ -2,11 +2,12 @@
 	class raiYachtSync_YoastFun_Descriptions {
 
 		public function __construct() {
-								
+			$this->ChatGPT_YachtDescription = new raiYachtSync_ChatGPTYachtDescription();
 		}
 	
 		public function add_actions_and_filters() {
-			add_filter('wpseo_metadesc',  [$this, 'yacht_description'], 10, 1);
+			//add_filter('wpseo_metadesc',  [$this, 'yacht_description'], 10, 1);
+			//add_filter('wpseo_metadesc',  [$this, 'gpt_yacht_description'], 10, 1);
 
 		}
 
@@ -33,6 +34,21 @@
 						$vessel['Model'],
 						$vessel['BoatName']
 					)));
+
+				}
+
+			return $description;
+
+		}
+
+		public function gpt_yacht_description($description) {
+			global $wp_query, $post;
+
+				if (is_singular('rai_yacht')) {
+					
+					$link = get_permalink($post);
+
+					return $this->ChatGPT_YachtDescription->make_description('make description', [$link]);
 
 				}
 

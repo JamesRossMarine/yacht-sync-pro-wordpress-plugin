@@ -152,9 +152,14 @@ get_header();
                 
                     
                 <?php
-                    $brokerNameFromApi = $vessel->SalesRep->Name;
-                    $BrokerNames = explode(' ', $brokerNameFromApi);
-
+                    if (isset($vessel->SalesRep->Name)) {
+                        $brokerNameFromApi = $vessel->SalesRep->Name;
+                        $BrokerNames = explode(' ', $brokerNameFromApi);                        
+                    }
+                    else {
+                        $BrokerNames = [];
+                    }
+                    
                     $brokerQueryArgs = array(
                         'post_type' => 'rai_broker',
                         'posts_per_page' => 1,
@@ -285,7 +290,7 @@ get_header();
                         Description
                     </p>
                     <div class="yacht-description-value">
-                        <?php echo ($vessel->GeneralBoatDescription) ?>
+                        <?php if (isset($vessel->GeneralBoatDescription)) { echo join(" ", $vessel->GeneralBoatDescription); } ?>
                     </div>
                 </div>
                <!--  <div class="yacht-specs-container">
@@ -418,8 +423,13 @@ get_header();
             <div class="secondary-container">
                 <div class="secondary-sub-container">
                 <?php
-                    $brokerNameFromApi = $vessel->SalesRep->Name;
-                    $BrokerNames = explode(' ', $brokerNameFromApi);
+                    if (isset($vessel->SalesRep->Name)) {
+                        $brokerNameFromApi = $vessel->SalesRep->Name;
+                        $BrokerNames = explode(' ', $brokerNameFromApi);                        
+                    }
+                    else {
+                        $BrokerNames = [];
+                    }
 
                     $brokerQueryArgs = array(
                         'post_type' => 'rai_broker',

@@ -58,9 +58,6 @@
 			else {
 				return 'no date';
 			}
-
-
-
 		}
 
 		public function generateSitemap() {
@@ -90,12 +87,6 @@
 			foreach($conditions as $c) {
 				$path_list[]="condition-$c/";
 
-				foreach($yearlo as $yl) {
-					foreach ($builders_list as $b) {
-						$path_list[]="condition-$c/yearlo-$yl/make-$b/";
-					}
-				}
-
 				foreach($ourPriceList as $p) {
 					$path_list[]="condition-$c/pricelo-$p/";
 					$path_list[]="condition-$c/pricehi-$p/";
@@ -111,12 +102,14 @@
 			}
 
 			foreach($yearlo as $yl) {
-				$path_list[]="yearlo-$yl/";
 				$path_list[]="ys_keyword-$yl/";
 
 				foreach($builders_list as $b){
 					$path_list[]="ys_keyword-$yl/make-$b/";
-					$path_list[]="yearlo-$yl/make-$b/";
+
+					foreach($conditions as $c) {
+						$path_list[]="condition-$c/ys_keyword-$yl/make-$b/";
+					}
 				}
 			}
 
@@ -177,6 +170,7 @@
 
 							if ($last_mod == 'no date') {}
 							else {
+								
 								$final_count++;
 								$xml_file.= '<url>';
 									$xml_file.= '<loc>'. htmlspecialchars($url, ENT_QUOTES, 'UTF-8') .'</loc>';

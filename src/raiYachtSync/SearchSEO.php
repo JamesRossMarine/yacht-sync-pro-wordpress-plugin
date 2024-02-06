@@ -2,7 +2,9 @@
 	class raiYachtSync_SearchSEO {
 
 		public function __construct() {
+			$this->ChatGPT_YachtSearch = new raiYachtSync_ChatGPTYachtSearch();
 
+			$this->options = new raiYachtSync_Options();
 		}
 
 		public function add_actions_and_filters() {
@@ -10,6 +12,7 @@
 		}
 
 		public function all_together($params) {
+			global $wp_query;
 
 			$all=[
 				'title' => $this->generate_title($params),
@@ -17,6 +20,18 @@
 				'heading' => $this->generate_heading($params),
 				'p' => $this->generate_paragraph($params)
 			];
+
+			/*$links=[];
+
+			$params = (array) $wp_query->get('params_from_paths');
+
+			$yacht_query = get_posts(array_merge(['post_type' => 'rai_yacht', 'posts_per_page' => 12], $params, ['page_index' => 1]));
+
+			foreach ($yacht_query as $y) {
+				$links[] = get_permalink($y);
+			}
+			
+			$all['gpt_p'] = $this->ChatGPT_YachtSearch->make_description($all['p'], $links);*/
 
 			return $all;
 
@@ -30,6 +45,7 @@
 			$string = str_replace('  ', ' ', $string);
 			$string = str_replace('Yachts Yachts', 'Yachts', $string);
 			$string = str_replace('yachts Yachts', 'Yachts', $string);
+			$string = str_replace('Boats Yachts', 'Boats', $string);
 
 			//$string = ucwords($string); 
 			$string = ucfirst($string); 
@@ -42,6 +58,7 @@
 			global $wp_query;
 
 			$order_of_params=[
+				'ys_company_only',
 				'condition',
 				'ys_keyword',
 				// sail or motor
@@ -58,6 +75,15 @@
 			foreach ($order_of_params as $param) {
 
 				switch ($param) {
+					case 'ys_company_only':
+						if (isset($params['ys_company_only'])) {
+
+							$pVal = $this->options->get('company_name').'\'s';
+						
+						}
+
+						break;
+
 					case 'ys_keyword':
 						if (isset($params['ys_keyword'])) {
 
@@ -72,18 +98,28 @@
 							$pVal = $params['yearlo'].' - '.$params['yearhi'];
 						}
 						elseif (isset($params['yearlo'])) {
-							$pVal = $params['yearlo']; 
-
+							$pVal = $params['yearlo'].' - '.date("Y", strtotime('+2year'));
 						}
 						elseif (isset($params['yearhi'])) {
-							$pVal = $params['yearhi'];
+							$pVal = '1960 - '.$params['yearhi'];
 						}
 
 						break;
 					
 					
 					case 'length':
-						if (isset($params['lengthUnit']) && $params['lengthUnit'] == 'meter') {
+						if (
+							(
+								isset($params['lengthUnit']) 
+								&& 
+								($params['lengthUnit'] == 'meter' || $params['lengthUnit'] == 'Meter')
+							)
+							||
+							(
+								isset($params['lengthunit']) 
+								&& 
+								($params['lengthunit'] == 'meter' || $params['lengthunit'] == 'Meter')
+							)) {
 
 							if (isset($params[ 'lengthlo' ]) && isset($params['lengthhi'])) {
 								$pVal = ''.$params['lengthlo'].'m - '.$params['lengthhi'].'m ';
@@ -184,7 +220,19 @@
 
 						break;
 					case 'length':
-						if (isset($params['lengthUnit']) && $params['lengthUnit'] == 'meter') {
+						if (
+							(
+								isset($params['lengthUnit']) 
+								&& 
+								($params['lengthUnit'] == 'meter' || $params['lengthUnit'] == 'Meter')
+							)
+							||
+							(
+								isset($params['lengthunit']) 
+								&& 
+								($params['lengthunit'] == 'meter' || $params['lengthunit'] == 'Meter')
+							)
+						) {
 
 							if (isset($params[ 'lengthlo' ]) && isset($params['lengthhi'])) {
 								$pVal = 'Between '.$params['lengthlo'].'m - '.$params['lengthhi'].'m ';
@@ -230,14 +278,14 @@
 
 					case 'year':
 						if (isset($params[ 'yearlo' ]) && isset($params['yearhi'])) {
-							$pVal = 'Between '.$params['yearlo'].' - '.$params['yearhi'];
+							$pVal = 'from '.$params['yearlo'].' to '.$params['yearhi'];
 						}
 						elseif (isset($params['yearlo'])) {
-							$pVal = 'Between '.$params['yearlo'].' - '.date("Y", strtotime('+2year'));
+							$pVal = 'from '.$params['yearlo'].' to '.date("Y", strtotime('+2year'));
 
 						}
 						elseif (isset($params['yearhi'])) {
-							$pVal = "up to ".$params['yearhi'];
+							$pVal = 'from 1960 to '.$params['yearhi'];
 						}
 
 						break;
@@ -263,17 +311,23 @@
 
 		public function grab_location($params) {
 
-			
+			$string = '';
+
+			if (isset($params['page_index']) && $params['page_index'] >= 2) {
+				$string = ' | Page '. $params['page_index'] .'';
+			} 
 
 			
-			return '';
+			return $string;
 		}
 
 		public function cleanup_params($p) {
 
-			foreach ($p as $index_p => $pv) {
-				if (empty($pv)) {
-					unset($p[$index_p]);
+			if (is_array($p)) {
+				foreach ($p as $index_p => $pv) {
+					if (empty($pv)) {
+						unset($p[$index_p]);
+					}
 				}
 			}
 
