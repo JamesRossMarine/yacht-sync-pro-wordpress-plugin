@@ -330,8 +330,13 @@ document.addEventListener("DOMContentLoaded", function() {
             let name = ele.getAttribute('name');
 
             let urlVal = URLREF.searchParams.get( name );
+                // urlVal = ;
+
+           
 
             let hasPretty = pretty_url_path_params[ name ];
+
+           // console.log(hasPretty);
 
             if (typeof hasPretty != 'null' && typeof hasPretty != 'undefined') {
 
@@ -362,6 +367,11 @@ document.addEventListener("DOMContentLoaded", function() {
             }
 
             if (urlVal != '' && urlVal != null) {
+
+                if (typeof urlVal == 'string') {
+                    urlVal = urlVal.eachWordCapitalize();
+                }
+
                 if (typeof input.type != 'undefined' &&  (input.type == 'checkbox' || input.type == 'radio') && input.getAttribute('value') == urlVal ) {
                     input.checked=true;
                 }
