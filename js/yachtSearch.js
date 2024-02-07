@@ -408,7 +408,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
 
                 let URLREF = new URL(location.href);
-                let UrlVal = URLREF.searchParams.get( label );
+                let UrlVal = URLREF.searchParams.get( name );
 
                 let strpaths=window.location.href;
 
@@ -434,6 +434,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
                 
                 if (UrlVal != '' && UrlVal != null) {
+                    console.log(UrlVal);
+
+                    if (typeof UrlVal == 'string') {
+                        UrlVal = UrlVal.eachWordCapitalize();
+                    }
+
                     SelectorEle.forEach((ele) => {
                         ele.value = UrlVal; 
                     });
