@@ -172,8 +172,7 @@
 								'stream' => false, 
 								
 								'headers' => [
-									'Content-Type'  => 'application/pdf',
-
+									'Content-Type'  => 'application/pdf'
 								]
 							]);
 
