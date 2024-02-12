@@ -50,30 +50,49 @@
 
 		public function run_cron_euro_c_save() {
 
-				$apiUrl = 'http://api.exchangerate.host/live?access_key=ad455b3579ad64232171cc9a50087f6f&source=USD&symbols=EUR';
+			$apiUrl = 'http://api.exchangerate.host/live?access_key=ad455b3579ad64232171cc9a50087f6f&source=USD&symbols=EUR';
+		
+			$response = wp_remote_get($apiUrl, [
+				
+			]);
 			
-				$response = wp_remote_get($apiUrl, [
-					
-				]);
-				$responseBody = wp_remote_retrieve_body($response);
-				$responseCode = wp_remote_retrieve_response_code($response);
-				
-				$result = json_decode($responseBody);
-				
-				if (! is_wp_error($result) && $responseCode == 200) {
+			$responseBody = wp_remote_retrieve_body($response);
+			$responseCode = wp_remote_retrieve_response_code($response);
+			
+			$result = json_decode($responseBody);
+			
+			if (! is_wp_error($result) && $responseCode == 200) {
+				if (isset($result->quotes)) {
 					$this->options->update('euro_c_c', $result->quotes->USDEUR);
 				}
+				else {
+					$this->options->update('euro_c_c', 0.92);
+				}
+			}
+			else {
+				$this->options->update('euro_c_c', 0.92);
+			}
 
-				$apiUrl = 'http://api.exchangerate.host/live?access_key=ad455b3579ad64232171cc9a50087f6f&source=EUR&symbols=USD';
+			$apiUrl = 'http://api.exchangerate.host/live?access_key=ad455b3579ad64232171cc9a50087f6f&source=EUR&symbols=USD';
+		
+			$response = wp_remote_get($apiUrl);
+			$responseBody = wp_remote_retrieve_body($response);
+			$responseCode = wp_remote_retrieve_response_code($response);
 			
-				$response = wp_remote_get($apiUrl);
-				$responseBody = wp_remote_retrieve_body($response);
-				$responseCode = wp_remote_retrieve_response_code($response);
-				
-				$result = json_decode($responseBody);
-				
-				if (! is_wp_error($result) && $responseCode == 200) {
+			$result = json_decode($responseBody);
+			
+			if (! is_wp_error($result) && $responseCode == 200) {
+				if (isset($result->quotes)) {
 					$this->options->update('usd_c_c', $result->quotes->EURUSD);
 				}
+				else {
+					$this->options->update('usd_c_c', 1.08);
+				}
+			}
+			else {
+				$this->options->update('usd_c_c', 1.08);
+
+			}
+
 		}
 	}
