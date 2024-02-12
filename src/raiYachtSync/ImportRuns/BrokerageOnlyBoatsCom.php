@@ -321,11 +321,11 @@
 						}
 					}
 
-					var_dump($boatC->_yoast_wpseo_metadesc);
+					//var_dump($boatC->_yoast_wpseo_metadesc);
 					
 					if (( isset($boatC->_yoast_wpseo_metadesc) && ( empty($boatC->_yoast_wpseo_metadesc) || is_null($boatC->_yoast_wpseo_metadesc)) ) || ! isset($boatC->_yoast_wpseo_metadesc)) {
 
-						var_dump('ping!');
+						//var_dump('ping!');
 
 						$boatC->_yoast_wpseo_metadesc = $this->ChatGPTYachtDescriptionVersionTwo->make_description(
 

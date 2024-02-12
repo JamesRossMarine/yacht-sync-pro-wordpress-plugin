@@ -27,6 +27,15 @@
 					);
 
 					add_settings_field(
+						self::SLUG . '_compare_sync_to_api',
+						"Amount of yachts in API vs WP? (brokerage-only)",
+						array( $this, 'compare_sync_to_api_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+
+					add_settings_field(
 						self::SLUG . '_boats_com_api_global_key',
 						"Boats.com Api Global Key",
 						array( $this, 'boats_com_api_global_key_field' ),
@@ -197,6 +206,40 @@
 			else {
 				echo 'Doesnt Appear to be in a sync.';
 			}
+
+		}
+
+		public function compare_sync_to_api_field() {
+			global $wpdb;
+
+			$wpBrokerageCount = $wpdb->get_var( "
+				SELECT COUNT(*) 
+				FROM $wpdb->posts p 
+				LEFT JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id
+				WHERE p.post_type = 'rai_yacht' AND pm.meta_key = 'CompanyBoat' AND pm.meta_value = '1' 
+			" );
+
+			$brokerageInventoryUrl = 'https://api.boats.com/inventory/search?SalesStatus=Active,On-Order&key=';
+
+			$key=$this->options->get('boats_com_api_brokerage_key');
+
+			$brokerageInventoryUrl .= $key;
+
+			$brokerageApiCall = wp_remote_get($brokerageInventoryUrl, ['timeout' => 120]);
+
+				$brokerageApiCall['body']=json_decode($brokerageApiCall['body'], true);
+
+				$api_status_code = wp_remote_retrieve_response_code($brokerageApiCall);
+
+				if ($api_status_code == 200 && isset($brokerageApiCall['body']['numResults'])) {
+
+					echo 'Dont shot the messagener, the api has '. $brokerageApiCall['body']['numResults'] . ' and wordpress has '. $wpBrokerageCount;
+
+				}
+				else {
+					echo 'ERROR... ERROR...';
+
+				}
 
 		}
 

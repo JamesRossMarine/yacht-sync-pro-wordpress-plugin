@@ -16,6 +16,7 @@
             $pieces[] = new raiYachtSync_YoastFun_Schema_Search( $context );
             $pieces[] = new raiYachtSync_YoastFun_Schema_ImageGallery( $context );
             $pieces[] = new raiYachtSync_YoastFun_Schema_VideoObject( $context );
+            $pieces[] = new raiYachtSync_YoastFun_Schema_PDFDoc( $context );
 
             return $pieces;
         }
