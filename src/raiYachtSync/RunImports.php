@@ -67,7 +67,7 @@
 	        global $wpdb;
 			
 			// Check if boats are in the syncing-post-type to be moved before we delete. 
-	        $count_of_synced = $wpdb->get_col(
+	        $count_of_synced = $wpdb->get_var(
 	        	$wpdb->prepare( 
 					"SELECT COUNT(*) FROM $wpdb->posts wp
 					WHERE wp.post_type = %s",
@@ -112,7 +112,7 @@
 					if ($urlIsStillNeeded == null) {
 						var_dump($file);
 						$this->BrochureCleanUp->remove( $phase_url );
-					}				
+					}
 				}
 
 				$wpdb->query(
@@ -127,7 +127,7 @@
 	        global $wpdb;
 
 	      	// Check if boats are in the syncing-post-type to be moved before we delete. 
-	        $count_of_synced = $wpdb->get_col(
+	        $count_of_synced = $wpdb->get_var(
 	        	$wpdb->prepare( 
 					"SELECT COUNT(*) FROM $wpdb->posts wp
 					WHERE wp.post_type = %s",
@@ -136,11 +136,14 @@
 	        );
 
 	        if ($count_of_synced > 0) {
+
+	        	var_dump('ping');
+
 		       	$wpdb->query( 
 					$wpdb->prepare( 
 						"DELETE wp FROM $wpdb->posts wp 
 						LEFT JOIN $wpdb->postmeta pm ON pm.post_id = wp.ID 
-						WHERE wp.post_type = %s AND pm.meta_key = %s", 
+						WHERE wp.post_type = %s AND pm.meta_key = %s AND pm.meta_value = '1'", 
 						'rai_yacht',
 						'CompanyBoat'
 					)
@@ -167,12 +170,16 @@
 						$this->BrochureCleanUp->remove( $phase_url );
 					}				
 				}
+	        	
+	        	var_dump('ping2');
 
 				$wpdb->query(
 					"DELETE pm FROM $wpdb->postmeta pm 
 					LEFT JOIN $wpdb->posts wp ON wp.ID = pm.post_id 
 					WHERE wp.ID IS NULL"
 				);
+
+	        	var_dump('ping3');
 			}
 		}
 		
