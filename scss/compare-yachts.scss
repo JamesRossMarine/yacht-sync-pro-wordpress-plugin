@@ -1,30 +1,118 @@
-.compare-yachts-container {
+.ysp-compare-yachts-container {
     width: 100%;
-    th {
-        padding: 10px;
-        width: 150px;
-    }
-    th:nth-child(even) {
-        background-color: #d8d8d8;
-
-    }
-.compare-info{
-    width: 100%;
-    td {
+    max-width: 1400px;
+    margin: 0px auto;
+    position: relative;
+    
+    .ysp-compare-general-container {
         width: 100%;
+        max-width: 1400px;
+        position: fixed;
+        z-index: 10;
 
-        padding: 10px
+        .ysp-compare-logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 0px;
+            width: 100%;
+            background: #202020;
+    
+            img {
+                width: auto;
+                height: 50px;
+            }
+        }
+
+        .ysp-compare-images-container {
+            display: flex;
+            background: #FFFFFF;
+            width: 100%;
+            border-bottom: 1px solid #202020;
+            border-left: 1px solid #202020;
+
+            .ysp-compare-title-container {
+                width: 20%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                p {
+                    text-transform: uppercase;
+                    font-size: 20px;
+                    color: #202020;
+                }
+            }
+
+            .ysp-compare-images {
+                width: 80%;
+                display: flex;
+
+                .ysp-compare-image {
+                    max-width: 40%;
+                    min-width: 26.66%;
+                    width: 100%;
+                    max-height: 260px;
+    
+                    img {
+                        width: 100%;
+                        height: auto;
+                        object-fit: cover;
+                    }
+                }
+            }
+        }
     }
-    td.compare-img {
-        padding: 0px !important;
-    }
-    tr {
+
+    .ysp-yacht-compare-supporting-container {
         width: 100%;
-    }
-    td:nth-child(even) {
-        background-color: #d8d8d8;
+        display: flex;
 
-    }
+        .ysp-yacht-compare-keys {
+            width: 20%;
 
-}
+            p {
+                padding: 10px 0px;
+                width: 100%;
+    
+                &:nth-child(even) {
+                    background-color: #d8d8d8;
+                }
+            }
+        }
+    
+        .ysp-compare-info{
+            width: 80%;
+            display: flex;
+
+            .ysp-yacht-compare-info {
+                max-width: 40%;
+                min-width: 26.66%;
+                width: 100%;
+
+                p {
+                    width: 100%;
+                    padding: 10px 0px;
+    
+                    &.compare-img {
+                        padding: 0px !important;
+                    }
+    
+                    &:nth-child(even) {
+                        background-color: #d8d8d8;
+            
+                    }
+                }
+
+                .ysp-remove-button {
+                    padding: 10px 15px;
+                    color: #FFFFFF;
+                    background-color: #EE4B2B;
+                    border-radius: 3px;
+                    text-decoration: none;
+                    margin: 0px auto;
+                }
+            }
+        }
+    }
 }
