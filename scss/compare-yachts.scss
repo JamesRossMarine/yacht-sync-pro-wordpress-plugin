@@ -17,6 +17,7 @@
             padding: 20px 0px;
             width: 100%;
             background: #202020;
+            border: 1px solid #202020;
     
             img {
                 width: auto;
@@ -28,8 +29,7 @@
             display: flex;
             background: #FFFFFF;
             width: 100%;
-            border-bottom: 1px solid #202020;
-            border-left: 1px solid #202020;
+            border: 1px solid #202020;
 
             .ysp-compare-title-container {
                 width: 20%;
@@ -49,10 +49,8 @@
                 display: flex;
 
                 .ysp-compare-image {
-                    max-width: 40%;
-                    min-width: 26.66%;
+                    flex-grow: 1;
                     width: 100%;
-                    max-height: 260px;
     
                     img {
                         width: 100%;
@@ -67,13 +65,18 @@
     .ysp-yacht-compare-supporting-container {
         width: 100%;
         display: flex;
+        padding-top: 381px;
+        border: 1px solid #FFFFFF;
 
         .ysp-yacht-compare-keys {
             width: 20%;
 
             p {
+                width: 100%;
+                text-align: center;
                 padding: 10px 0px;
                 width: 100%;
+                margin: 0px;
     
                 &:nth-child(even) {
                     background-color: #d8d8d8;
@@ -86,13 +89,13 @@
             display: flex;
 
             .ysp-yacht-compare-info {
-                max-width: 40%;
-                min-width: 26.66%;
+                flex-grow: 1;
                 width: 100%;
 
                 p {
                     width: 100%;
                     padding: 10px 0px;
+                    margin: 0px;
     
                     &.compare-img {
                         padding: 0px !important;

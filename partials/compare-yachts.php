@@ -26,7 +26,7 @@
         </div>
         <div class="ysp-compare-images-container">
             <div class="ysp-compare-title-container">
-                <p>Compare</p>
+                <p>Yacht Compare Tool</p>
             </div>
             <div class="ysp-compare-images">
                 <?php foreach ($boats as $boat_post) : ?>
@@ -64,7 +64,7 @@
                     <p><?php echo empty($vessel->MakeString) ? "N/A" : $vessel->MakeString; ?></p>
                     <p> <?php echo empty($vessel->Model) ? "N/A" : $vessel->Model; ?></p>
                     <p> <?php echo empty($vessel->SaleClassCode) ? "N/A" : $vessel->SaleClassCode; ?></p>
-                    <p> $<?php echo $boat_post->Price; ?></p>
+                    <p> $<?php echo empty($boat_post->Price) ? "N/A" : number_format(intval($boat_post->Price), 2); ?></p>
                     <p> <?php echo empty($vessel->BoatCategoryCode) ? "N/A" : $vessel->BoatCategoryCode; ?></p>
                     <p> <?php echo empty($vessel->BoatHullMaterialCode) ? "N/A" : $vessel->BoatHullMaterialCode; ?></p>
                     <p> <?php echo empty($vessel->BoatHullID) ? "N/A" : $vessel->BoatHullID; ?></span></p>
@@ -77,7 +77,7 @@
                     <p> <span class="yacht-accordion-display-value"><?php echo empty($boat_post->Engines[0]->Fuel) ? "N/A" : $boat_post->Engines[0]->Fuel; ?></span></p>
                     <p> <span class="yacht-accordion-display-value"><?php echo empty($boat_post->Engines[0]->EnginePower) ? "N/A" : $boat_post->Engines[0]->EnginePower; ?></span></p>
                     <p> <span class="yacht-accordion-display-value"><?php echo empty($boat_post->Engines[0]->Type) ? "N/A" : $boat_post->Engines[0]->Type; ?></span></p>
-                    <p> <span class="yacht-accordion-display-value"><?php echo empty($boat_post->Engines[0]->Hours) ? "N/A" : $boat_post->Engines[0]->Hours; ?></span></p>
+                    <p> <span class="yacht-accordion-display-value"><?php echo empty($boat_post->Engines[0]->Hours) ? "N/A" : number_format(intval($boat_post->Engines[0]->Hours)); ?></span></p>
                     <a class="ysp-remove-button" href="<?php echo remove_query_arg($boat_post->ID, false); ?>" class="button-link">
                         Remove Yacht
                     </a>
