@@ -160,6 +160,7 @@
 						self::SLUG . '_admin_fields',
 						array( )
 					);
+					
 					add_settings_field(
 						self::SLUG . '_company_name',
 						"Company Name",
@@ -168,6 +169,7 @@
 						self::SLUG . '_admin_fields',
 						array( )
 					);
+					
 					add_settings_field(
 						self::SLUG . '_company_logo',
 						"Company Logo",
@@ -176,6 +178,7 @@
 						self::SLUG . '_admin_fields',
 						array( )
 					);
+
 					add_settings_field(
 						self::SLUG . '_company_number',
 						"Company Phone Number",
@@ -184,7 +187,69 @@
 						self::SLUG . '_admin_fields',
 						array( )
 					);
+					
+					add_settings_field(
+						self::SLUG . '_exchange_api_token',
+						"Currency Exchange API TOKEN",
+						array( $this, 'exchange_api_token_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
 
+					add_settings_field(
+						self::SLUG . '_chatgpt_api_token',
+						"ChatGPT API Token",
+						array( $this, 'chatgpt_api_token_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+
+					add_settings_field(
+						self::SLUG . '_pdf_urlbox_api_token',
+						"UrlBox API Token",
+						array( $this, 'pdf_urlbox_api_token_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+
+					add_settings_field(
+						self::SLUG . '_pdf_s3_bucket',
+						"S3 Bucket (FOR PDF STORAGE)",
+						array( $this, 'pdf_s3_bucket_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+					
+					add_settings_field(
+						self::SLUG . '_pdf_s3_endpoint',
+						"S3 Enpoint (FOR PDF STORAGE)",
+						array( $this, 'pdf_s3_endpoint_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+					
+					add_settings_field(
+						self::SLUG . '_pdf_s3_key',
+						"S3 Key (FOR PDF STORAGE)",
+						array( $this, 'pdf_s3_key_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+					
+					add_settings_field(
+						self::SLUG . '_pdf_s3_secret',
+						"S3 Secret (FOR PDF STORAGE)",
+						array( $this, 'pdf_s3_secret_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
 					
 					
 		}		
@@ -474,6 +539,77 @@
 			<?php endif;
 		}
 		
+		public function exchange_api_token_field() {
+			$nameOfField=self::SLUG.'_exchange_api_token';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
+
+
+		public function chatgpt_api_token_field() {
+			$nameOfField=self::SLUG.'_chatgpt_api_token';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
+
+		public function pdf_urlbox_api_token_field() {
+			$nameOfField=self::SLUG.'_pdf_urlbox_api_token';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
 		
+		public function pdf_s3_bucket_field() {
+			$nameOfField=self::SLUG.'_pdf_s3_bucket';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
+
+		public function pdf_s3_endpoint_field() {
+			$nameOfField=self::SLUG.'_pdf_s3_endpoint';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
+
+		public function pdf_s3_key_field() {
+			$nameOfField=self::SLUG.'_pdf_s3_key';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
+		
+		public function pdf_s3_secret_field() {
+			$nameOfField=self::SLUG.'_pdf_s3_secret';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
+
+
 
 	}
