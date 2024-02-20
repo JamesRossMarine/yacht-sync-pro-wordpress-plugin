@@ -33,14 +33,18 @@
 			register_setting( self::SLUG, self::SLUG . '_send_lead_to_this_email');
 
 			register_setting( self::SLUG, self::SLUG . '_yacht_search_page_id');
+			
 			register_setting( self::SLUG, self::SLUG . '_company_name');
 			register_setting( self::SLUG, self::SLUG . '_company_number');
 			register_setting( self::SLUG, self::SLUG . '_company_logo');
 
+			register_setting( self::SLUG, self::SLUG . '_akismet_api_token');
 			register_setting( self::SLUG, self::SLUG . '_exchange_api_token');
 			register_setting( self::SLUG, self::SLUG . '_chatgpt_api_token');
 
-			register_setting( self::SLUG, self::SLUG . '_pdf_urlbox_api_token');
+			register_setting( self::SLUG, self::SLUG . '_pdf_urlbox_api_token_public_key');
+			register_setting( self::SLUG, self::SLUG . '_pdf_urlbox_api_secret_key');
+
 			register_setting( self::SLUG, self::SLUG . '_pdf_s3_bucket');
 			register_setting( self::SLUG, self::SLUG . '_pdf_s3_endpoint');
 			register_setting( self::SLUG, self::SLUG . '_pdf_s3_key');

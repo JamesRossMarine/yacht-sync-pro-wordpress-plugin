@@ -189,6 +189,15 @@
 					);
 					
 					add_settings_field(
+						self::SLUG . '_akismet_api_token',
+						"Akismet API TOKEN",
+						array( $this, 'akismet_token_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+
+					add_settings_field(
 						self::SLUG . '_exchange_api_token',
 						"Currency Exchange API TOKEN",
 						array( $this, 'exchange_api_token_field' ),
@@ -207,7 +216,16 @@
 					);
 
 					add_settings_field(
-						self::SLUG . '_pdf_urlbox_api_token',
+						self::SLUG . '_pdf_urlbox_api_token_public_key',
+						"UrlBox API Token",
+						array( $this, 'pdf_urlbox_api_token_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+					
+					add_settings_field(
+						self::SLUG . '_pdf_urlbox_api_secret_key',
 						"UrlBox API Token",
 						array( $this, 'pdf_urlbox_api_token_field' ),
 						self::SLUG,
@@ -539,6 +557,16 @@
 			<?php endif;
 		}
 		
+		public function akismet_token_field() {
+			$nameOfField=self::SLUG.'_akismet_api_token';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
+
 		public function exchange_api_token_field() {
 			$nameOfField=self::SLUG.'_exchange_api_token';
 			$valOfField=get_option($nameOfField);
@@ -599,7 +627,7 @@
 			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
 
 		}
-		
+
 		public function pdf_s3_secret_field() {
 			$nameOfField=self::SLUG.'_pdf_s3_secret';
 			$valOfField=get_option($nameOfField);

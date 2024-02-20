@@ -8,14 +8,21 @@
   	  	public function __construct() {
 	  		require __DIR__.'/../../vendor/autoload.php';
 
+	  		$this->options = new raiYachtSync_Options();
+
+	  		$this->pdf_s3_bucket = $this->options->get('pdf_s3_bucket');
+	  		$this->pdf_s3_endpoint = $this->options->get('pdf_s3_endpoint');
+	  		$this->pdf_s3_key = $this->options->get('pdf_s3_key');
+	  		$this->pdf_s3_secret = $this->options->get('pdf_s3_secret');
+
 			$this->client = new Aws\S3\S3Client([
 		        'version' => 'latest',
 		        'region'  => 'us-east-1',
-		        'endpoint' => 'https://nyc3.digitaloceanspaces.com',
+		        'endpoint' => $this->pdf_s3_endpoint,
 		        'use_path_style_endpoint' => false, // Configures to use subdomain/virtual calling format.
 		        'credentials' => [
-	                'key'    => 'DO00ND3AZGE2E3Z4XFDQ',
-	                'secret' => 'mVy+V67cFxmePbictLcJTbAorcp5nwpjbZjgLqmhNlM',
+	                'key'    => $this->pdf_s3_key,
+	                'secret' => $this->pdf_s3_secret,
 	            ],
 			]);
 
@@ -32,7 +39,7 @@
 	    	}
 
 	    	return ($this->client->deleteObject([
-	    		'Bucket' => 'yspbrochures',
+	    		'Bucket' => $this->pdf_s3_bucket,
 	            'Key' => $filepath
 	    	]));
 
@@ -47,7 +54,7 @@
 	    	}
 
 	    	return ($this->client->deleteObject([
-	    		'Bucket' => 'yspbrochures',
+	    		'Bucket' => $this->pdf_s3_bucket,
 	            'Key' => $filepath
 	    	]));
 	    }
