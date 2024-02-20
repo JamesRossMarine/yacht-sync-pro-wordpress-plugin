@@ -441,6 +441,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
                     SelectorEle.forEach((ele) => {
                         ele.value = UrlVal; 
+
+                        if (ele.value == '') {
+                            ele.value = UrlVal.toUpperCase();
+                        }
                     });
 
                 }
@@ -453,8 +457,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 if (hasPretty != '' && hasPretty != null) {
                     SelectorEle.forEach((ele) => {
                         ele.value = hasPretty; 
-                    });
 
+                        if (ele.value == '') {
+
+                            ele.value = hasPretty.toUpperCase();
+                        }
+                    }); 
                 }
             }
         }).then(function () {
