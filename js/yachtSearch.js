@@ -459,7 +459,6 @@ document.addEventListener("DOMContentLoaded", function() {
                         ele.value = hasPretty; 
 
                         if (ele.value == '') {
-
                             ele.value = hasPretty.toUpperCase();
                         }
                     }); 
