@@ -48,7 +48,7 @@
 					'Content-Type: text/html; charset=UTF-8',
 				);
 			
-	    		$sent = wp_mail($to, $subject, $fullMessage, $headers)
+	    		$sent = wp_mail($to, $subject, $fullMessage, $headers);
 
 	    		if ($sent) {
 					return array('message' => 'Email sent successfully');
