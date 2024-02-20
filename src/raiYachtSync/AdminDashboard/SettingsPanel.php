@@ -19,11 +19,16 @@
 			
 			register_setting( self::SLUG, self::SLUG . '_boats_com_api_global_key');
 			register_setting( self::SLUG, self::SLUG . '_boats_com_api_brokerage_key');
+			
 			register_setting( self::SLUG, self::SLUG . '_yacht_broker_org_api_token');
+			
 			register_setting( self::SLUG, self::SLUG . '_yacht_broker_org_id');
 
 			register_setting( self::SLUG, self::SLUG . '_is_euro_site');
 			register_setting( self::SLUG, self::SLUG . '_prerender_brochures');
+
+			register_setting( self::SLUG, self::SLUG . '_alert_on_low_count');
+			register_setting( self::SLUG, self::SLUG . '_alert_emails');
 
 			register_setting( self::SLUG, self::SLUG . '_color_one');
 			register_setting( self::SLUG, self::SLUG . '_color_two');

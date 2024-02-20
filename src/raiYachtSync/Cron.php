@@ -13,6 +13,7 @@
 	    	add_action( 'rai_cron_yacht_sync', [$this, 'run_cron_yacht_sync']);
 	    	//add_action( 'rai_cron_yacht_sync_for_brokerage_only', [$this, 'run_cron_yacht_sync_for_brokerage_only']);
 			add_action( 'rai_cron_euro_c_save', [$this, 'run_cron_euro_c_save']);
+			add_action( 'rai_cron_check_count', [$this, 'run_cron_check_count']);
 
 	    }
 
@@ -30,6 +31,9 @@
 			    //wp_schedule_event( strtotime('10:00:00'), 'daily', 'rai_cron_yacht_sync_for_brokerage_only' );
 			}
 	    	
+			if ( ! wp_next_scheduled( 'rai_cron_check_count' ) ) {
+			    wp_schedule_event( time(), 'hourly', 'rai_cron_check_count' );
+			}
 	    }
 
 	    public function run_cron_yacht_sync() {
@@ -93,6 +97,14 @@
 				$this->options->update('usd_c_c', 1.08);
 
 			}
+
+		}
+
+		public function run_cron_check_count() {
+
+			$alertOnLow = new raiYachtSync_AlertOnLowCount();
+
+			$alertOnLow->email();
 
 		}
 	}

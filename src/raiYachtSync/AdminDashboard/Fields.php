@@ -79,7 +79,26 @@
 						self::SLUG . '_admin_fields',
 						array( )
 					);
+
+					add_settings_field(
+						self::SLUG . '_alert_on_low_count',
+						"Alert When Listing Count Drops Belows",
+						array( $this, 'alert_on_low_count_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
 					
+					add_settings_field(
+						self::SLUG . '_alert_emails',
+						"Alert Who?",
+						array( $this, 'alert_emails_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+					
+
 					add_settings_field(
 						self::SLUG . '_is_euro_site',
 						"Make Site Display Meter And Euros",
@@ -371,6 +390,26 @@
 
 		public function yatco_api_token_field() {
 			$nameOfField=self::SLUG.'_yatco_api_token_field';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
+
+		public function alert_on_low_count_field() {
+			$nameOfField=self::SLUG.'_alert_on_low_count';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="number" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
+
+		public function alert_emails_field() {
+			$nameOfField=self::SLUG.'_alert_emails';
 			$valOfField=get_option($nameOfField);
 
 			?>

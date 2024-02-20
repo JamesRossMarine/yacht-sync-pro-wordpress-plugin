@@ -7,6 +7,8 @@
 
 			$this->BrochureCleanUp = new raiYachtSync_BrochureCleanUp();
 
+			$this->AlertOnLowCount = new raiYachtSync_AlertOnLowCount();
+
 			$this->ImportGlobalBoatsCom = new raiYachtSync_ImportRuns_GlobalBoatsCom();
 			$this->ImportBrokerageOnlyBoatsCom = new raiYachtSync_ImportRuns_BrokerageOnlyBoatsCom();
 			$this->ImportYachtBrokerOrg = new raiYachtSync_ImportRuns_YachtBrokerOrg();
@@ -268,6 +270,7 @@
 			if ($syncHadIssue == false) {
 				$this->clean_up_brokerage_only();
 				$this->move_over();
+				$this->AlertOnLowCount->email();
 			}
 
        	}
