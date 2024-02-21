@@ -54,6 +54,7 @@
 			if ( ! wp_next_scheduled( 'rai_cron_check_count' ) ) {
 			    wp_schedule_event( time(), 'hourly', 'rai_cron_check_count' );
 			}
+
 	    }
 
 	    public function run_cron_yacht_sync() {
@@ -129,9 +130,8 @@
 		}
 		
 		public function run_cron_yacht_search_sitemaps() {
+			$mapsOfSearch = new raiYachtSync_SitemapsOfSearch();
 
-
-
-
+			$mapsOfSearch->generateSitemap();
 		}
 	}	
