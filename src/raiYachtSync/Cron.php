@@ -12,10 +12,24 @@
 
 	    	add_action( 'init', [$this, 'cron_scheduler']);
 
+	    	add_filter( 'cron_schedules', [$this, 'add_cron_intervals'] );
+
 	    	add_action( 'rai_cron_yacht_sync', [$this, 'run_cron_yacht_sync']);
 	    	//add_action( 'rai_cron_yacht_sync_for_brokerage_only', [$this, 'run_cron_yacht_sync_for_brokerage_only']);
 			add_action( 'rai_cron_euro_c_save', [$this, 'run_cron_euro_c_save']);
 			add_action( 'rai_cron_check_count', [$this, 'run_cron_check_count']);
+			add_action( 'rai_cron_yacht_search_sitemaps', [$this, 'run_cron_yacht_search_sitemaps']);
+
+	    }
+
+	    public function add_cron_intervals( $schedules ) {
+
+	    	 $schedules['weekly'] = array(
+		        'interval' => 604800, //that's how many seconds in a week, for the unix timestamp
+		        'display' => __('weekly')
+		    );
+
+		    return $schedules;
 
 	    }
 
@@ -31,6 +45,10 @@
 
 			if ( ! wp_next_scheduled( 'rai_cron_yacht_sync_brokerage_only' ) ) {
 			    //wp_schedule_event( strtotime('10:00:00'), 'daily', 'rai_cron_yacht_sync_for_brokerage_only' );
+			}
+
+			if ( ! wp_next_scheduled( 'rai_cron_yacht_search_sitemaps' ) ) {
+				wp_schedule_event( time(), 'weekly', 'rai_cron_yacht_search_sitemaps' );
 			}
 	    	
 			if ( ! wp_next_scheduled( 'rai_cron_check_count' ) ) {
@@ -109,4 +127,11 @@
 			$alertOnLow->email();
 
 		}
-	}
+		
+		public function run_cron_yacht_search_sitemaps() {
+
+
+
+
+		}
+	}	
