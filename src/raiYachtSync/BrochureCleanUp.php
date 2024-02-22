@@ -15,16 +15,20 @@
 	  		$this->pdf_s3_key = $this->options->get('pdf_s3_key');
 	  		$this->pdf_s3_secret = $this->options->get('pdf_s3_secret');
 
-			$this->client = new Aws\S3\S3Client([
-		        'version' => 'latest',
-		        'region'  => 'us-east-1',
-		        'endpoint' => $this->pdf_s3_endpoint,
-		        'use_path_style_endpoint' => false, // Configures to use subdomain/virtual calling format.
-		        'credentials' => [
-	                'key'    => $this->pdf_s3_key,
-	                'secret' => $this->pdf_s3_secret,
-	            ],
-			]);
+	  		if (! empty($this->pdf_s3_endpoint)) {
+
+				$this->client = new Aws\S3\S3Client([
+			        'version' => 'latest',
+			        'region'  => 'us-east-1',
+			        'endpoint' => $this->pdf_s3_endpoint,
+			        'use_path_style_endpoint' => false, // Configures to use subdomain/virtual calling format.
+			        'credentials' => [
+		                'key'    => $this->pdf_s3_key,
+		                'secret' => $this->pdf_s3_secret,
+		            ],
+				]);
+	  			
+	  		}
 
 	    }
 
