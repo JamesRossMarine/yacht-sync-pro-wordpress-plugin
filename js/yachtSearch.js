@@ -29,8 +29,10 @@ function ysp_yacht_search_and_reader(data) {
 
                 tagsEle.forEach(function(te) {
                     let newTagEle = document.createElement('button');
+                        
                         newTagEle.value = data[ paramKey ]; //'';
-                        newTagEle.innerHTML = 'X_'+ label+": "+data[ paramKey ] +" _X"; //'';
+                        newTagEle.innerHTML = ysp_templates.yacht_tag(label, data[paramKey]);
+
                         newTagEle.setAttribute('key', paramKey); //'';
                         
                         newTagEle.onclick = function(event) {
@@ -471,6 +473,27 @@ document.addEventListener("DOMContentLoaded", function() {
             ysp_yacht_search_and_reader( params );       
         });
 
+
+        let mobileForm = document.querySelector('#ysp-mobile-yacht-search-form');
+
+        if (mobileForm) {
+            mobileForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                e.target.querySelector('input[name=page_index]').value=1;
+
+                document.querySelector('#ysp-super-mobile-search').style.display='none';
+                document.querySelector('body').style.overflowY='unset';
+
+                let params = raiys_get_form_data(e.target);
+
+                ysp_yacht_search_and_reader( params );
+
+
+
+            }); 
+        }
+            
     }
 
 });

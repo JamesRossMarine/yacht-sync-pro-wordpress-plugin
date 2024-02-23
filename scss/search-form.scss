@@ -31,12 +31,15 @@
 
     background-color: #fff;
 
+    .ys-h-row-item{
+    	margin-bottom: 10px;
+    }
+
 
 }
 
 .Filters-Floating-Bar{
 	display: block;
-
 
 	position: fixed;
 
@@ -54,4 +57,21 @@
 	@media (min-width: $breakpoint-med) {
 		display: none;
 	}
+}
+
+.ysp-search-tags{
+	
+	button{
+		padding: 4px 6px;
+		background: #E2E8F0;
+		color: #334155;
+		font-size: 12px;	
+
+		svg{
+			position: relative;
+			top: 1px;
+		}
+
+	}
+
 }
