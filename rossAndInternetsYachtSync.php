@@ -3,7 +3,7 @@
 /*
  Plugin Name: Ross And Internets Yacht Sync
  Plugin URI: https://jamesrossadvertising.com
- Version: 1.6.0
+ Version: 1.7.0
  Author: <a href="https://buildtheintnets.com">Build The Internets</a>
  Description: 
  Text Domain: 
@@ -39,3 +39,26 @@ function init_rossAndInternetsYachtSync() {
     rossAndInternetsYachtSync_init(__FILE__);
 }
 
+
+//////////////////////////////////
+// Run Updater
+/////////////////////////////////
+require __DIR__.'/src/plugin-update-checker/plugin-update-checker.php';
+use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
+
+$myUpdateChecker = PucFactory::buildUpdateChecker(
+    'https://github.com/RossAndInternets/yacht-sync-wp-plugin',
+    __FILE__,
+    'yacht-sync-wp-plugin'
+);
+
+//Optional: If you're using a private repository, create an OAuth consumer
+//and set the authentication credentials like this:
+//Note: For now you need to check "This is a private consumer" when
+//creating the consumer to work around #134:
+// https://github.com/YahnisElsts/plugin-update-checker/issues/134
+
+$myUpdateChecker->setAuthentication('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');
+
+//Optional: Set the branch that contains the stable release.
+$myUpdateChecker->setBranch('wp-admin-release');

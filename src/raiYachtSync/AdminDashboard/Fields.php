@@ -27,6 +27,15 @@
 					);
 
 					add_settings_field(
+						self::SLUG . '_compare_sync_to_api',
+						"Amount of yachts in API vs WP? (brokerage-only)",
+						array( $this, 'compare_sync_to_api_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+
+					add_settings_field(
 						self::SLUG . '_boats_com_api_global_key',
 						"Boats.com Api Global Key",
 						array( $this, 'boats_com_api_global_key_field' ),
@@ -70,7 +79,26 @@
 						self::SLUG . '_admin_fields',
 						array( )
 					);
+
+					add_settings_field(
+						self::SLUG . '_alert_on_low_count',
+						"Alert When Listing Count Drops Belows",
+						array( $this, 'alert_on_low_count_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
 					
+					add_settings_field(
+						self::SLUG . '_alert_emails',
+						"Alert Who?",
+						array( $this, 'alert_emails_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+					
+
 					add_settings_field(
 						self::SLUG . '_is_euro_site',
 						"Make Site Display Meter And Euros",
@@ -151,6 +179,7 @@
 						self::SLUG . '_admin_fields',
 						array( )
 					);
+					
 					add_settings_field(
 						self::SLUG . '_company_name',
 						"Company Name",
@@ -159,6 +188,7 @@
 						self::SLUG . '_admin_fields',
 						array( )
 					);
+					
 					add_settings_field(
 						self::SLUG . '_company_logo',
 						"Company Logo",
@@ -167,6 +197,7 @@
 						self::SLUG . '_admin_fields',
 						array( )
 					);
+
 					add_settings_field(
 						self::SLUG . '_company_number',
 						"Company Phone Number",
@@ -175,7 +206,87 @@
 						self::SLUG . '_admin_fields',
 						array( )
 					);
+					
+					add_settings_field(
+						self::SLUG . '_akismet_api_token',
+						"Akismet API TOKEN",
+						array( $this, 'akismet_token_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
 
+					add_settings_field(
+						self::SLUG . '_exchange_api_token',
+						"Currency Exchange API TOKEN",
+						array( $this, 'exchange_api_token_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+
+					add_settings_field(
+						self::SLUG . '_chatgpt_api_token',
+						"ChatGPT API Token",
+						array( $this, 'chatgpt_api_token_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+
+					add_settings_field(
+						self::SLUG . '_pdf_urlbox_api_token_public_key',
+						"UrlBox API Token",
+						array( $this, 'pdf_urlbox_api_token_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+					
+					add_settings_field(
+						self::SLUG . '_pdf_urlbox_api_secret_key',
+						"UrlBox API Token",
+						array( $this, 'pdf_urlbox_api_token_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+
+					add_settings_field(
+						self::SLUG . '_pdf_s3_bucket',
+						"S3 Bucket (FOR PDF STORAGE)",
+						array( $this, 'pdf_s3_bucket_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+					
+					add_settings_field(
+						self::SLUG . '_pdf_s3_endpoint',
+						"S3 Enpoint (FOR PDF STORAGE)",
+						array( $this, 'pdf_s3_endpoint_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+					
+					add_settings_field(
+						self::SLUG . '_pdf_s3_key',
+						"S3 Key (FOR PDF STORAGE)",
+						array( $this, 'pdf_s3_key_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+					
+					add_settings_field(
+						self::SLUG . '_pdf_s3_secret',
+						"S3 Secret (FOR PDF STORAGE)",
+						array( $this, 'pdf_s3_secret_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
 					
 					
 		}		
@@ -197,6 +308,40 @@
 			else {
 				echo 'Doesnt Appear to be in a sync.';
 			}
+
+		}
+
+		public function compare_sync_to_api_field() {
+			global $wpdb;
+
+			$wpBrokerageCount = $wpdb->get_var( "
+				SELECT COUNT(*) 
+				FROM $wpdb->posts p 
+				LEFT JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id
+				WHERE p.post_type = 'rai_yacht' AND pm.meta_key = 'CompanyBoat' AND pm.meta_value = '1' 
+			" );
+
+			$brokerageInventoryUrl = 'https://api.boats.com/inventory/search?SalesStatus=Active,On-Order&key=';
+
+			$key=$this->options->get('boats_com_api_brokerage_key');
+
+			$brokerageInventoryUrl .= $key;
+
+			$brokerageApiCall = wp_remote_get($brokerageInventoryUrl, ['timeout' => 120]);
+
+				$brokerageApiCall['body']=json_decode($brokerageApiCall['body'], true);
+
+				$api_status_code = wp_remote_retrieve_response_code($brokerageApiCall);
+
+				if ($api_status_code == 200 && isset($brokerageApiCall['body']['numResults'])) {
+
+					echo 'Dont shot the messagener, the api has '. $brokerageApiCall['body']['numResults'] . ' and wordpress has '. $wpBrokerageCount;
+
+				}
+				else {
+					echo 'ERROR... ERROR...';
+
+				}
 
 		}
 
@@ -245,6 +390,26 @@
 
 		public function yatco_api_token_field() {
 			$nameOfField=self::SLUG.'_yatco_api_token_field';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
+
+		public function alert_on_low_count_field() {
+			$nameOfField=self::SLUG.'_alert_on_low_count';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="number" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
+
+		public function alert_emails_field() {
+			$nameOfField=self::SLUG.'_alert_emails';
 			$valOfField=get_option($nameOfField);
 
 			?>
@@ -431,6 +596,87 @@
 			<?php endif;
 		}
 		
+		public function akismet_token_field() {
+			$nameOfField=self::SLUG.'_akismet_api_token';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
+
+		public function exchange_api_token_field() {
+			$nameOfField=self::SLUG.'_exchange_api_token';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
+
+
+		public function chatgpt_api_token_field() {
+			$nameOfField=self::SLUG.'_chatgpt_api_token';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
+
+		public function pdf_urlbox_api_token_field() {
+			$nameOfField=self::SLUG.'_pdf_urlbox_api_token';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
 		
+		public function pdf_s3_bucket_field() {
+			$nameOfField=self::SLUG.'_pdf_s3_bucket';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
+
+		public function pdf_s3_endpoint_field() {
+			$nameOfField=self::SLUG.'_pdf_s3_endpoint';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
+
+		public function pdf_s3_key_field() {
+			$nameOfField=self::SLUG.'_pdf_s3_key';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
+
+		public function pdf_s3_secret_field() {
+			$nameOfField=self::SLUG.'_pdf_s3_secret';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
+
+
 
 	}

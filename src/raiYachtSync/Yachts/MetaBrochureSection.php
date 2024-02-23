@@ -39,6 +39,7 @@
 
         		<p>Reset: <a href="<?= get_rest_url() ."raiys/redo-yacht-pdf?yacht_post_id=". $y_post_id ?>">Click Here</a></p>
 
+                <p>Delete: <a href="<?= get_rest_url() ."raiys/delete-yacht-pdf?yacht_post_id=". $y_post_id ?>">Click Here</a></p>
 
         	<?php
 

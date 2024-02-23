@@ -24,11 +24,11 @@
 				$gpt_messages[] = ['role' => 'system', 'content' => 'Scan '.$sl];
 			}
 
-			$gpt_messages[] = ["role" => "assistant", "content" => "Write three sentences about \"". $input ."\" while using context from scanned links. Do not return a response with quotation marks."];
+			$gpt_messages[] = ["role" => "assistant", "content" => "Write one sentences about \"". $input ."\" while using context from scanned links. Do not return a response with quotation marks."];
 
 			$gpt_headers = [
 				'headers' => [
-					'Authorization' => 'Bearer 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',
+					'Authorization' => 'Bearer '.$this->gpt_token,
 					'Content-Type' => 'application/json',
 				],
 
@@ -46,6 +46,8 @@
 			$gpt_call = wp_remote_post($gpt_url, $gpt_headers);
 
 			$gpt_body = json_decode(wp_remote_retrieve_body($gpt_call), true);
+
+			
 
 			return ($gpt_body['choices'][0]['message']['content']);
 

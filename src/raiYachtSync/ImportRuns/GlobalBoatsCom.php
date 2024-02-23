@@ -14,6 +14,8 @@
 			$this->options = new raiYachtSync_Options();
 
 			$this->LocationConvert = new raiYachtSync_LocationConvert();
+			$this->BrochureCleanUp = new raiYachtSync_BrochureCleanUp();
+			$this->ChatGPTYachtDescriptionVersionTwo = new raiYachtSync_ChatGPTYachtDescriptionVersionTwo();
 
 			$this->key=$this->options->get('boats_com_api_global_key');
 
@@ -23,6 +25,8 @@
 
 			$this->euro_c_c = intval($this->options->get('euro_c_c'));
 			$this->usd_c_c = intval($this->options->get('usd_c_c'));
+			
+			$this->urlbox_secret_key = $this->options->get('pdf_urlbox_api_secret_key'); 
 			
 			$this->CarryOverKeys = [
 				'_yoast_wpseo_title',
@@ -170,8 +174,7 @@
 								'stream' => false, 
 								
 								'headers' => [
-									'Content-Type'  => 'application/pdf',
-
+									'Content-Type'  => 'application/pdf'
 								]
 							]);
 
@@ -189,6 +192,10 @@
 
 						if ( $pdf_still_e ) {
 							$boatC->YSP_PDF_URL = $synced_pdf;
+						}
+
+						if (! empty($synced_pdf) && ! $pdf_still_e && $yacht_updated) {
+							$this->BrochureCleanUp->removeUseUrl($synced_pdf);
 						}
 
 						// carry overs
@@ -233,6 +240,8 @@
 
 					if (isset($data['data']['PlsDisclaimer'])) {
 						$plsDisclaimer = $data['data']['PlsDisclaimer'];
+
+						$plsDisclaimer = strip_tags($plsDisclaimer);
 
 						$newDisclaimer = substr($plsDisclaimer, 3, -4);
 
@@ -338,6 +347,28 @@
 						}
 					}
 
+					if (
+						( 
+							isset($boatC->_yoast_wpseo_metadesc) 
+							&& 
+							( 
+								empty($boatC->_yoast_wpseo_metadesc) 
+								|| 
+								is_null($boatC->_yoast_wpseo_metadesc)
+							) 
+						) 
+						|| 
+						! isset($boatC->_yoast_wpseo_metadesc)
+					) {
+
+						$boatC->_yoast_wpseo_metadesc = $this->ChatGPTYachtDescriptionVersionTwo->make_description(
+
+							join(' ', $boatC->GeneralBoatDescription)
+
+						);
+
+					}
+
 					$boatC->Touched_InSync=1;
 
 		            $y_post_id=wp_insert_post(
@@ -368,7 +399,7 @@
 							"https://api.urlbox.io/v1/render/async", 
 							[
 								'headers' => [
-									'Authorization' => 'Bearer ae1422deb6fc4f658c55f5dda7a08704',
+									'Authorization' => 'Bearer '.$this->urlbox_secret_key,
 									'Content-Type' => 'application/json'
 								],
 								'body' => json_encode([

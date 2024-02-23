@@ -5,6 +5,8 @@
 
 			$this->options = new raiYachtSync_Options();
 
+			$this->gpt_token = $this->options->get('chatgpt_api_token');
+
 
 
 		}
@@ -29,7 +31,7 @@
 
 			$gpt_headers = [
 				'headers' => [
-					'Authorization' => 'Bearer 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',
+					'Authorization' => 'Bearer '.$this->gpt_token,
 					'Content-Type' => 'application/json',
 				],
 

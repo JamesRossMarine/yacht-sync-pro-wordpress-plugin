@@ -7,7 +7,7 @@
 	
 		public function add_actions_and_filters() {
 			//add_filter('wpseo_metadesc',  [$this, 'yacht_description'], 10, 1);
-			add_filter('wpseo_metadesc',  [$this, 'gpt_yacht_description'], 10, 1);
+			//add_filter('wpseo_metadesc',  [$this, 'gpt_yacht_description'], 10, 1);
 
 		}
 

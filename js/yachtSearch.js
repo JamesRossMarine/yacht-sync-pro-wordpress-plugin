@@ -76,7 +76,6 @@ function ysp_yacht_search_and_reader(data) {
             data_result.results.forEach(function(item) {
                 if (typeof data.view != 'undefined' && data.view.toLowerCase() == 'list') {
                     jQuery('#search-result-row').append( ysp_templates.yacht.list(item, data) );
-                    
                 }
                 else {
                     jQuery('#search-result-row').append( ysp_templates.yacht.grid(item, data) );
@@ -354,8 +353,13 @@ document.addEventListener("DOMContentLoaded", function() {
             let name = ele.getAttribute('name');
 
             let urlVal = URLREF.searchParams.get( name );
+                // urlVal = ;
+
+           
 
             let hasPretty = pretty_url_path_params[ name ];
+
+           // console.log(hasPretty);
 
             if (typeof hasPretty != 'null' && typeof hasPretty != 'undefined') {
 
@@ -386,6 +390,11 @@ document.addEventListener("DOMContentLoaded", function() {
             }
 
             if (urlVal != '' && urlVal != null) {
+
+                if (typeof urlVal == 'string') {
+                    urlVal = urlVal.eachWordCapitalize();
+                }
+
                 if (typeof input.type != 'undefined' &&  (input.type == 'checkbox' || input.type == 'radio') && input.getAttribute('value') == urlVal ) {
                     input.checked=true;
                 }
@@ -422,7 +431,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
 
                 let URLREF = new URL(location.href);
-                let UrlVal = URLREF.searchParams.get( label );
+                let UrlVal = URLREF.searchParams.get( name );
 
                 let strpaths=window.location.href;
 
@@ -448,8 +457,18 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
                 
                 if (UrlVal != '' && UrlVal != null) {
+                    console.log(UrlVal);
+
+                    if (typeof UrlVal == 'string') {
+                        UrlVal = UrlVal.eachWordCapitalize();
+                    }
+
                     SelectorEle.forEach((ele) => {
                         ele.value = UrlVal; 
+
+                        if (ele.value == '') {
+                            ele.value = UrlVal.toUpperCase();
+                        }
                     });
 
                 }
@@ -462,8 +481,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 if (hasPretty != '' && hasPretty != null) {
                     SelectorEle.forEach((ele) => {
                         ele.value = hasPretty; 
-                    });
 
+                        if (ele.value == '') {
+                            ele.value = hasPretty.toUpperCase();
+                        }
+                    }); 
                 }
             }
         }).then(function () {

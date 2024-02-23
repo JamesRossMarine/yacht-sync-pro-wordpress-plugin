@@ -5,6 +5,7 @@
 		public function __construct() {
 
 			$this->options = new raiYachtSync_Options();
+
 			$this->db_helper = new raiYachtSync_DBHelper();
 
 			$this->RunImports = new raiYachtSync_RunImports();
@@ -12,6 +13,8 @@
 			$this->SearchSEO = new raiYachtSync_SearchSEO();
 
 			$this->Stats = new raiYachtSync_Stats();
+
+			$this->BrochureCleanUp = new raiYachtSync_BrochureCleanUp();
 
 		}
 
@@ -35,6 +38,15 @@
 
 		    register_rest_route( 'raiys', '/yachts', array(
 		        'callback' => [$this, 'yachts'],
+		        'methods'  => [WP_REST_Server::READABLE, WP_REST_Server::CREATABLE],
+		        'permission_callback' => '__return_true',
+		        'args' => array(
+		            
+		        )
+		    ) );
+
+			register_rest_route( 'raiys', '/compare', array(
+		        'callback' => [$this, 'compare_yachts'],
 		        'methods'  => [WP_REST_Server::READABLE, WP_REST_Server::CREATABLE],
 		        'permission_callback' => '__return_true',
 		        'args' => array(
@@ -132,8 +144,17 @@
 		            
 		        )
 		    ) );
+		    
+    		register_rest_route( 'raiys', '/delete-yacht-pdf', array(
+		        'callback' => [$this, 'delete_yacht_pdf'],
+		        'methods'  => [WP_REST_Server::READABLE, WP_REST_Server::CREATABLE],
+		        'permission_callback' => '__return_true',
+		        'args' => array(
+		            
+		        )
+		    ) );
 
-
+    		// Leads 
 			register_rest_route( 'raiys', '/yacht-leads', array(
 		        'callback' => [$this, 'yacht_leads'],
 		        'methods'  => [WP_REST_Server::READABLE, WP_REST_Server::CREATABLE],
@@ -142,6 +163,7 @@
 		            
 		        )
 		    ) );
+
 			register_rest_route( 'raiys', '/broker-leads', array(
 		        'callback' => [$this, 'broker_leads'],
 		        'methods'  => [WP_REST_Server::READABLE, WP_REST_Server::CREATABLE],
@@ -151,14 +173,7 @@
 		        )
 		    ) );
 
-			register_rest_route( 'raiys', '/compare', array(
-		        'callback' => [$this, 'compare_yachts'],
-		        'methods'  => [WP_REST_Server::READABLE, WP_REST_Server::CREATABLE],
-		        'permission_callback' => '__return_true',
-		        'args' => array(
-		            
-		        )
-		    ) );
+
 		}
 
 		public function sync_yachts(WP_REST_Request $request) {
@@ -524,11 +539,37 @@
 
 	   }
 
+	   public function delete_yacht_pdf(WP_REST_Request $request) {
+	   		if ($request->get_param('yacht_post_id') != '') {
+	
+				$y_post_id = $request->get_param('yacht_post_id');
+
+				$pdf_url=get_post_meta($y_post_id, 'YSP_PDF_URL', true);
+
+				$this->BrochureCleanUp->removeUseUrl($pdf_url);
+				
+				update_post_meta($y_post_id, 'YSP_PDF_URL', "");
+
+				wp_redirect( $_SERVER['HTTP_REFERER'] );
+
+				exit();
+
+				return ['success' => 'joshie was here'];
+			}
+			else {
+				return ['success' => 'No YACHT ID'];
+			}
+		}
+
 		public function redo_yacht_pdf(WP_REST_Request $request) {
 
 			if ($request->get_param('yacht_post_id') != '') {
 	
 				$y_post_id = $request->get_param('yacht_post_id');
+
+				$pdf_url=get_post_meta($y_post_id, 'YSP_PDF_URL', true);
+				
+				$this->BrochureCleanUp->removeUseUrl($pdf_url);
 
 				update_post_meta($y_post_id, 'YSP_PDF_URL', "");
 
@@ -546,7 +587,7 @@
 						'timeout' => 180, 
 
 						'headers' => [
-							'Authorization' => 'Bearer ae1422deb6fc4f658c55f5dda7a08704',
+							'Authorization' => 'Bearer '.$this->options->get('pdf_urlbox_api_secret_key'),
 							'Content-Type' => 'application/json'
 						],
 						
@@ -616,6 +657,8 @@
 
 				$s3_url=get_post_meta($yacht_post_id, 'YSP_PDF_URL', true);
 
+				$urlbox_public_key = $this->options->get('pdf_urlbox_api_secret_key');
+
 				// ----------------------
 
 				
@@ -635,13 +678,13 @@
 					exit();*/
 				}
 				elseif (isset($_GET['GalleryLimit'])) {
-					/*wp_redirect("https://api.urlbox.io/v1/0FbOuhgmL1s2bINM/pdf?url=". get_rest_url() ."raiys/yacht-pdf?yacht_post_id=". $request->get_param('yacht_post_id'));
+					/*wp_redirect("https://api.urlbox.io/v1/$urlbox_public_key/pdf?url=". get_rest_url() ."raiys/yacht-pdf?yacht_post_id=". $request->get_param('yacht_post_id'));
 
 					exit();*/
 
 					$render_url = urlencode(get_rest_url() ."raiys/yacht-pdf?yacht_post_id=". $request->get_param('yacht_post_id') ."&GalleryLimit=". $_GET['GalleryLimit']);
 
-					$pdfbox = "https://api.urlbox.io/v1/0FbOuhgmL1s2bINM/pdf?url=".$render_url;
+					$pdfbox = "https://api.urlbox.io/v1/$urlbox_public_key/pdf?url=".$render_url;
 
 					wp_redirect($pdfbox);
 					exit();
@@ -658,14 +701,14 @@
 					);*/
 				}
 				else {
-					/*wp_redirect("https://api.urlbox.io/v1/0FbOuhgmL1s2bINM/pdf?url=". get_rest_url() ."raiys/yacht-pdf?yacht_post_id=". $request->get_param('yacht_post_id'));
+					/*wp_redirect("https://api.urlbox.io/v1/$urlbox_public_key/pdf?url=". get_rest_url() ."raiys/yacht-pdf?yacht_post_id=". $request->get_param('yacht_post_id'));
 
 					exit();*/
 
 					$render_url = urlencode( get_rest_url() ."raiys/yacht-pdf?yacht_post_id=". $request->get_param('yacht_post_id') );
 
 					$apiCall = wp_remote_get(
-						"https://api.urlbox.io/v1/0FbOuhgmL1s2bINM/pdf?url=". $render_url, 
+						"https://api.urlbox.io/v1/$urlbox_public_key/pdf?url=". $render_url, 
 
 						[
 							'timeout' => 180, 
@@ -723,7 +766,7 @@
 			);
 
 			// good comment until proven bad
-			$akismet = new raiYachtSync_Akismet('4ebc51dc31b7');
+			$akismet = new raiYachtSync_Akismet( $this->options->get('akismet_api_token') );
 			
 			if(!$akismet->error) {
 
@@ -863,4 +906,6 @@
 				return array('error' => 'Email failed to send');
 			}
 		}
+
+		
 	}

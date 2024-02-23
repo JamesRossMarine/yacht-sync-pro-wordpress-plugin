@@ -21,7 +21,7 @@
 				'p' => $this->generate_paragraph($params)
 			];
 
-			$links=[];
+			/*$links=[];
 
 			$params = (array) $wp_query->get('params_from_paths');
 
@@ -31,7 +31,7 @@
 				$links[] = get_permalink($y);
 			}
 			
-			$all['gpt_p'] = $this->ChatGPT_YachtSearch->make_description($all['p'], $links);
+			$all['gpt_p'] = $this->ChatGPT_YachtSearch->make_description($all['p'], $links);*/
 
 			return $all;
 
@@ -278,14 +278,14 @@
 
 					case 'year':
 						if (isset($params[ 'yearlo' ]) && isset($params['yearhi'])) {
-							$pVal = 'Between '.$params['yearlo'].' - '.$params['yearhi'];
+							$pVal = 'from '.$params['yearlo'].' to '.$params['yearhi'];
 						}
 						elseif (isset($params['yearlo'])) {
-							$pVal = 'Between '.$params['yearlo'].' - '.date("Y", strtotime('+2year'));
+							$pVal = 'from '.$params['yearlo'].' to '.date("Y", strtotime('+2year'));
 
 						}
 						elseif (isset($params['yearhi'])) {
-							$pVal = 'Between 1960 - '.$params['yearhi'];
+							$pVal = 'from 1960 to '.$params['yearhi'];
 						}
 
 						break;
@@ -314,7 +314,7 @@
 			$string = '';
 
 			if (isset($params['page_index']) && $params['page_index'] >= 2) {
-				$string = '(Page: #'. $params['page_index'] .' )';
+				$string = ' | Page '. $params['page_index'] .'';
 			} 
 
 			

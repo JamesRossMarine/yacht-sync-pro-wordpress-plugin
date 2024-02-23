@@ -9,13 +9,13 @@
 	    }
 
 	    public function __invoke( $args ) {	
-			$timestamp = microtime( true );
+			$timestamp = time( );
 			WP_CLI::log( 'MY ASS CHECKER' );
 			WP_CLI::log( 'Start time: ' . date( 'Y-m-d H:i:s', $timestamp ) );
 
 			$this->mapsOfSearch->generateSitemap();
 
-			$timestamp = microtime( true );
+			$timestamp = time( );
     		WP_CLI::log( 'End time: ' . date( 'Y-m-d H:i:s', $timestamp ) );
 	    	
 	        WP_CLI::log( 'COMPLETED SITEMAPS' );

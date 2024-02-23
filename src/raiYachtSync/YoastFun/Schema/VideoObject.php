@@ -5,7 +5,11 @@
 
     public function __construct( WPSEO_Schema_Context $context ) {
         $this->context = $context;
-        $this->context->video = get_post_meta($this->context->post->ID, 'Videos', true);
+
+        if (isset($this->context->post)) {
+            $this->context->video = get_post_meta($this->context->post->ID, 'Videos', true);
+        }
+
     }
 
     public function is_needed() {
@@ -23,4 +27,4 @@
 
         return $data;
     }
-}
+}   

@@ -146,7 +146,9 @@
 
 				if ($this->if_query_var_check($query->get('ys_keyword'))) {
 
-					$keywords=explode(' ', $query->get('ys_keyword'));
+					$searchingfor = str_replace(',', '', $query->get('ys_keyword'));
+
+					$keywords=explode(' ', $searchingfor);
 
 					$yacht_sync_meta_query['ys_keyword']=[];
 
@@ -204,7 +206,7 @@
 				if (
 					$this->if_query_var_check($query->get('ys_company_only')) 
 					&& 
-					strtolower($query->get('ys_company_only')) == 'on'
+					(strtolower($query->get('ys_company_only')) == 'on' || $query->get('ys_company_only') == '1')
 				) {
 					$yacht_sync_meta_query[]=[
 						'key' => 'CompanyBoat',
