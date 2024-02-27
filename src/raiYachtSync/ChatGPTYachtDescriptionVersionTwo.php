@@ -27,7 +27,7 @@
 
 			$gpt_headers = [
 				'headers' => [
-					'Authorization' => 'Bearer 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',
+					'Authorization' => 'Bearer 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',
 					'Content-Type' => 'application/json',
 				],
 
