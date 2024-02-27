@@ -8,13 +8,11 @@ var ysp_templates={};
 		let length = '';
 
 		if(rai_yacht_sync.europe_option_picked == "yes"){
-			console.log(vessel);
 			length = vessel.NominalLength ? meters.toFixed(2) + ' m' : 'N/A';
 			price = vessel.Price ? `€ ${new Intl.NumberFormat('en-us', { minimumFractionDigits: 2}).format(vessel.YSP_EuroVal) }` : 'Contact Us For Price';
 		} 
 
 		else {
-			console.log(vessel);
 			length = vessel.NominalLength ? vessel.NominalLength + " / " + meters.toFixed(2) + ' m' : 'N/A';
 			price = vessel.Price ? `$ ${new Intl.NumberFormat('en-us', { minimumFractionDigits: 2}).format(vessel.YSP_USDVal) }` : 'Contact Us For Price'
 		}
@@ -138,3 +136,22 @@ var ysp_templates={};
 
     };
 
+
+    ysp_templates.yacht_tag = function(label, value) {
+
+    	return `
+    		${value}
+
+			<svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" fill="none">
+			<g clip-path="url(#clip0_205_399)">
+			<circle cx="4.5" cy="4.5" r="4.5" fill="#94A3B8"/>
+			<path d="M3.09375 5.90625L5.90625 3.09375M3.09375 3.09375L5.90625 5.90625" stroke="#F2F2F2" stroke-width="0.69" stroke-linecap="round" stroke-linejoin="round"/>
+			</g>
+			<defs>
+			<clipPath id="clip0_205_399">
+			<rect width="9" height="9" fill="white"/>
+			</clipPath>
+			</defs>
+			</svg>
+    	`;
+    };
