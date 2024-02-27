@@ -58,16 +58,16 @@
 
             <select name="staterooms">
                 <option value="">Any</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
+                <option value="1">1 Stateroom</option>
+                <option value="2">2 Staterooms</option>
+                <option value="3">3 Staterooms</option>
+                <option value="4">4 Staterooms</option>
+                <option value="5">5 Staterooms</option>
+                <option value="6">6 Staterooms</option>
+                <option value="7">7 Staterooms</option>
+                <option value="8">8 Staterooms</option>
+                <option value="9">9 Staterooms</option>
+                <option value="10">10 Staterooms</option>
             </select>
             
             <!-- <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -165,7 +165,7 @@
             </div>
         </div>
 
-        <div style="height: 155px;"></div>
+        <div style="height: 145px;"></div>
 
         <form id="ysp-mobile-yacht-search-form" class="ys-h-row ysp-yacht-search-form ysp-form ysp-search-mobile">
             <input type="hidden" name="page_index" />
@@ -249,16 +249,16 @@
 
                 <select name="staterooms">
                     <option value="">Any</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
+                    <option value="1">1 Stateroom</option>
+                    <option value="2">2 Staterooms</option>
+                    <option value="3">3 Staterooms</option>
+                    <option value="4">4 Staterooms</option>
+                    <option value="5">5 Staterooms</option>
+                    <option value="6">6 Staterooms</option>
+                    <option value="7">7 Staterooms</option>
+                    <option value="8">8 Staterooms</option>
+                    <option value="9">9 Staterooms</option>
+                    <option value="10">10 Staterooms</option>
                 </select>
                 
                 <!-- <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">

@@ -19,19 +19,30 @@ function ysp_yacht_search_and_reader(data) {
             let label='';
 
             if (document.querySelector('label[for='+ paramKey +']')) {
+            
                 label=document.querySelector('label[for='+ paramKey +']').innerText;
+            
             }
             else if (document.querySelector('*[name='+ paramKey +']') && document.querySelector('*[name='+ paramKey +']').hasAttribute('label')) {
+
                 label=document.querySelector('*[name='+ paramKey +']').getAttribute('label');
+            
             }
 
             if ( label != null && label != 'null' && label != '') {
 
                 tagsEle.forEach(function(te) {
+
+                    let eleInput = document.querySelector('*[name='+ paramKey +']');
+
                     let newTagEle = document.createElement('button');
-                        
-                        newTagEle.value = data[ paramKey ]; //'';
-                        newTagEle.innerHTML = ysp_templates.yacht_tag(label, data[paramKey]);
+                        let tagVal = data[paramKey];
+
+                        if (eleInput.tagName == 'SELECT') {
+                            tagVal = eleInput.options[ eleInput.selectedIndex ].innerText;
+                        }
+                       
+                        newTagEle.innerHTML = ysp_templates.yacht_tag(label, tagVal);
 
                         newTagEle.setAttribute('key', paramKey); //'';
                         
@@ -39,14 +50,16 @@ function ysp_yacht_search_and_reader(data) {
 
                             let key = event.target.getAttribute('key');
 
-                            let inputEle = document.querySelector('*[name='+ key +']');
+                            let inputEles = document.querySelectorAll('*[name='+ key +']');
 
-                            if (typeof inputEle.type != 'undefined' && (inputEle.type == 'checkbox' || inputEle.type == 'radio')) {
-                                inputEle.checked=false;                                
-                            }
-                            else {
-                                inputEle.value='';
-                            }
+                            inputEles.forEach(function(eleI) {
+                                if (typeof eleI.type != 'undefined' && (eleI.type == 'checkbox' || eleI.type == 'radio')) {
+                                    eleI.checked=false;                                
+                                }
+                                else {
+                                    eleI.value='';
+                                }                                
+                            });
 
                             event.target.remove();
 
@@ -268,13 +281,15 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 
         if (document.querySelector('input[name="ys_company_only"]')) {
-            document.querySelector('input[name="ys_company_only"]').addEventListener('change', function(e) {
-                e.target.form.requestSubmit();
-            });            
+            document.querySelectorAll('input[name="ys_company_only"]').forEach(function(eleCheck) {
+                eleCheck.addEventListener('change', function(e) {
+                    e.target.form.requestSubmit();
+                });
+            })            
         }
 
-        document.querySelectorAll('input[name=view][form=ysp-yacht-search-form], select[name=sortby][form=ysp-yacht-search-form]').forEach((eeee) => {
-            eeee.addEventListener('change', function(e) {
+        document.querySelectorAll('input[name=view][form=ysp-yacht-search-form], select[name=sortby][form=ysp-yacht-search-form]').forEach((eleViewOption) => {
+            eleViewOption.addEventListener('change', function(e) {
                 e.target.form.requestSubmit();
             });
         });
@@ -491,17 +506,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 //raiys_sync_form_data(e.target, document.querySelector('.ysp-yacht-search-form'));
 
-                let params = raiys_get_form_data(e.target);
+                let params = raiys_get_form_data(e.target);               
 
-               
-
-                ysp_yacht_search_and_reader( params ).then(function() {
-
-                    //raiys_restore_fields();
-
-                });
-
-
+                ysp_yacht_search_and_reader( params );
 
             }); 
         }
