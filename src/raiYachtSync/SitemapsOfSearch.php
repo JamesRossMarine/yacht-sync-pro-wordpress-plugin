@@ -4,6 +4,7 @@
 		public function __construct() {
 			$this->db_helper = new raiYachtSync_DBHelper();
 			$this->options = new raiYachtSync_Options();
+			$this->stats = new raiYachtSync_Stats();
 		}
 
 		public function get_last_mod($url_paths) {
@@ -84,12 +85,17 @@
 
 			$path_list=[];
 
+			$VesselStats = $this->stats->run([]); 
+
 			foreach($conditions as $c) {
 				$path_list[]="condition-$c/";
 
 				foreach($ourPriceList as $p) {
 					$path_list[]="condition-$c/pricelo-$p/";
-					$path_list[]="condition-$c/pricehi-$p/";
+
+					if ($VesselStats['max_priceUSD'] < $p) {
+						$path_list[]="condition-$c/pricehi-$p/";
+					}
 				}
 			}
 
@@ -119,16 +125,30 @@
 				foreach($conditions as $c) {
 					$path_list[]="condition-$c/make-$b/";
 
-					foreach ($ourPriceList as $p){
+					$builderConditionStats = $this->stats->run([
+						'make' => $b,
+						'condition' => $c
+					]); 
+
+					foreach ($ourPriceList as $p) {
 						$path_list[]="condition-$c/make-$b/pricelo-$p/";
-						$path_list[]="condition-$c/make-$b/pricehi-$p/";
+						
+						if ($builderConditionStats['max_priceUSD'] < $p) {
+							/*var_dump('stats: '.$builderConditionStats['max_priceUSD']);
+							var_dump('price: '.$p);*/
+							$path_list[]="condition-$c/make-$b/pricehi-$p/";
+
+						}
 					}
 				}
 			}
 
 			foreach($ourPriceList as $p){
 				$path_list[]="pricelo-$p/";
-				$path_list[]="pricehi-$p/";
+			
+				if ($VesselStats['max_priceUSD'] < $p) {
+					$path_list[]="pricehi-$p/";
+				}
 			}
 
 			foreach($path_list as $a => $path){
@@ -137,6 +157,8 @@
 				$path_list[$a] = strtolower($path_list[$a]);
 
 			}
+
+			var_dump(count($path_list));
 
 			$final_count=0;
 		
