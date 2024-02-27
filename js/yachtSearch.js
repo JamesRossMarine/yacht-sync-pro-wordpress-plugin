@@ -44,7 +44,7 @@ function ysp_yacht_search_and_reader(data) {
                        
                         newTagEle.innerHTML = ysp_templates.yacht_tag(label, tagVal);
 
-                        newTagEle.setAttribute('key', paramKey); //'';
+                        newTagEle.setAttribute('key', paramKey);
                         
                         newTagEle.onclick = function(event) {
 
