@@ -1,6 +1,8 @@
 
 function ysp_yacht_search_and_reader(data) {
 
+    console.log(data);
+
     jQuery('#search-result-row').html('');
 
     document.querySelector('#search-result-section').classList.remove('loaded');
@@ -245,7 +247,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 document.querySelector('#ysp-super-mobile-search').style.display='block';
                 document.querySelector('body').style.overflowY='hidden';
-
 
             });
         });

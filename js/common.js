@@ -53,6 +53,13 @@ function raiys_sync_form_data(form_eleA, form_eleB) {
 }
 
 function raiys_set_form_to_data(inputData) {
+
+    let formA=document.querySelector('.ysp-yacht-search-form');
+    let formB=document.querySelector('#ysp-mobile-yacht-search-form');
+
+    formA.reset();
+    formB.reset();
+
     let formInputs=document.querySelectorAll('.ysp-yacht-search-form *[name], *[name][form="ysp-yacht-search-form"], #ysp-mobile-yacht-search-form *[name], *[name][form="ysp-mobile-yacht-search-form"]');
 
     formInputs.forEach((ele) => {
