@@ -29,29 +29,6 @@ function raiys_get_form_data(form_ele) {
     return fd;
 }
 
-function raiys_sync_form_data(form_eleA, form_eleB) {
-    let formData = new FormData( form_eleA );
-    let formDataB = new FormData( form_eleB );
-
-    let fd=Object.fromEntries(formData.entries());
-
-    for (const [fIndex, field] of Object.entries(fd)) {
-
-        let ValArray = formData.getAll(fIndex);
-
-        if (typeof ValArray[1] != 'undefined') {
-            fd[ fIndex ] = ValArray;
-        }
-
-        if (fd[ fIndex ] == '') {
-            delete fd[fIndex];
-        }
-
-        formDataB.set(fIndex, ValArray);
-    }
-    
-}
-
 function raiys_set_form_to_data(inputData) {
 
     let formA=document.querySelector('.ysp-yacht-search-form');

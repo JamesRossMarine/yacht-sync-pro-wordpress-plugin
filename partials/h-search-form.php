@@ -165,7 +165,7 @@
             </div>
         </div>
 
-        <div style="height: 145px;"></div>
+        <div style="height: 125px;"></div>
 
         <form id="ysp-mobile-yacht-search-form" class="ys-h-row ysp-yacht-search-form ysp-form ysp-search-mobile">
             <input type="hidden" name="page_index" />

@@ -254,12 +254,15 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         });
         
-        document.querySelector('#close-mobile-search').addEventListener('click', function(e) {
+        if (document.querySelector('#close-mobile-search')) {
+            document.querySelector('#close-mobile-search').addEventListener('click', function(e) {
 
-            document.querySelector('#ysp-super-mobile-search').style.display='none';
-            document.querySelector('body').style.overflowY='unset';
+                document.querySelector('#ysp-super-mobile-search').style.display='none';
+                document.querySelector('body').style.overflowY='unset';
 
-        });
+            });
+            
+        }
 
         yachtSearchAndResults.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -303,8 +306,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 let input_name = e.target.getAttribute('name');
 
-                document.querySelectorAll('input[name="'+ input_name +'"]').forEach((iEle) => {
-                    iEle.checked=false;
+                document.querySelectorAll('input[name="'+ input_name +'"]').forEach((eleInput) => {
+                    eleInput.checked=false;
                 })
 
             });
@@ -419,16 +422,18 @@ document.addEventListener("DOMContentLoaded", function() {
             for (let label in rOptions) {
 
                 let SelectorEle = document.querySelectorAll("select[data-fill-options='"+ label +"']");
+
+                console.log(SelectorEle);
+
                 let name = SelectorEle[0].getAttribute('name');
 
                 rOptions[label].forEach(function(b) {
-
-                    let option = document.createElement("OPTION");
-
-                        option.text = b;
-                        option.value = b;
-
                     SelectorEle.forEach((ele) => {
+                        let option = document.createElement("OPTION");
+
+                            option.text = b;
+                            option.value = b;
+
                         ele.add(option);
                     });
                 });

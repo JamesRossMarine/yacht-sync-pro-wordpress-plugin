@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	    rai_ysp_api.call_api('POST', 'dropdown-options', {labels: FillOptions}).then(function(rOptions) {
 	        for (let label in rOptions) {
 
-	            let SelectorEle = document.querySelectorAll("select[data-fill-options='"+ label +"']");
+	            let SelectorEle = document.querySelectorAll(".ysp-quick-search-form select[data-fill-options='"+ label +"']");
 	            let name = SelectorEle[0].getAttribute('name');
 
 	            rOptions[label].forEach(function(b) {
