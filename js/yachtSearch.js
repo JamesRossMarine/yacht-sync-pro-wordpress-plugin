@@ -132,7 +132,6 @@ function ysp_yacht_search_and_reader(data) {
                 nextText: '>',
                 edges: 4,
                 displayedPages: 4,
-                ellipsePageSet: false,
                 hrefTextPrefix: currentURL.replace(new RegExp("page_index-(\\d*)(/)", "g"), "")+'page_index-',
                 hrefTextSuffix: '/',
                 onPageClick: function(pageNumber, event) {
