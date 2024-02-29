@@ -90,7 +90,7 @@ function ysp_yacht_search_and_reader(data) {
 
         jQuery('#total-results').text(new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(data_result.total));
 
-        raiys_push_history( data );
+        let currentURL=raiys_push_history( data );
         raiys_set_form_to_data( data );
 
         jQuery('#yachts-pagination').html('');
@@ -130,7 +130,11 @@ function ysp_yacht_search_and_reader(data) {
                 currentPage: data.page_index,
                 prevText: '<',
                 nextText: '>',
-                hrefTextPrefix: '?page_index=',
+                edges: 4,
+                displayedPages: 4,
+                ellipsePageSet: false,
+                hrefTextPrefix: currentURL.replace(new RegExp("page_index-(\\d*)(/)", "g"), "")+'page_index-',
+                hrefTextSuffix: '/',
                 onPageClick: function(pageNumber, event) {
                     event.preventDefault();
 
