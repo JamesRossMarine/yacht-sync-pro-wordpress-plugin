@@ -74,6 +74,48 @@ function ysp_yacht_search_and_reader(data) {
                         te.appendChild( newTagEle );
                 });
             }
+            else {
+                tagsEle.forEach(function(te) {
+
+                    let eleInput = document.querySelector('*[name='+ paramKey +']');
+
+                    let newTagEle = document.createElement('button');
+                        let tagVal = data[paramKey];
+
+                        if (eleInput.tagName == 'SELECT') {
+                            tagVal = eleInput.options[ eleInput.selectedIndex ].innerText;
+                        }
+                       
+                        newTagEle.innerHTML = ysp_templates.yacht_tag('', tagVal);
+
+                        newTagEle.setAttribute('key', paramKey);
+                        
+                        newTagEle.onclick = function(event) {
+
+                            let key = event.target.getAttribute('key');
+
+                            let inputEles = document.querySelectorAll('*[name='+ key +']');
+
+                            inputEles.forEach(function(eleI) {
+                                if (typeof eleI.type != 'undefined' && (eleI.type == 'checkbox' || eleI.type == 'radio')) {
+                                    eleI.checked=false;                                
+                                }
+                                else {
+                                    eleI.value='';
+                                }                                
+                            });
+
+                            event.target.remove();
+
+                            let params = raiys_get_form_data( document.querySelector('*[name='+ key +']').form );
+
+                            ysp_yacht_search_and_reader( params );
+
+                        };
+
+                        te.appendChild( newTagEle );
+                });
+            }
         }
     }
 
@@ -250,6 +292,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 document.querySelector('#ysp-super-mobile-search').style.display='block';
                 document.querySelector('body').style.overflowY='hidden';
+                document.querySelector('body').classList.add('ysp-mobile-yacht-search-open');
 
             });
         });
@@ -259,6 +302,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 document.querySelector('#ysp-super-mobile-search').style.display='none';
                 document.querySelector('body').style.overflowY='unset';
+                document.querySelector('body').classList.remove('ysp-mobile-yacht-search-open');
 
             });
             
