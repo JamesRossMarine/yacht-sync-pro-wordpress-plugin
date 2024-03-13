@@ -31,70 +31,47 @@ function ysp_yacht_search_and_reader(data) {
             
             }
 
-            if ( label != null && label != 'null' && label != '') {
 
-                tagsEle.forEach(function(te) {
+            tagsEle.forEach(function(te) {
 
-                    let eleInput = document.querySelector('*[name='+ paramKey +']');
+                let eleInput = document.querySelector('*[name='+ paramKey +']');
 
-                    let newTagEle = document.createElement('button');
-                        let tagVal = data[paramKey];
+                let newTagEle = document.createElement('a');
+                    let tagVal = data[paramKey];
 
-                        if (eleInput.tagName == 'SELECT') {
-                            tagVal = eleInput.options[ eleInput.selectedIndex ].innerText;
-                        }
-                       
+                    if (eleInput.tagName == 'SELECT') {
+                        tagVal = eleInput.options[ eleInput.selectedIndex ].innerText;
+                    }
+                   
+                    newTagEle.className = 'btn btn-primary ysp-tag';
+
+                    if ( label != null && label != 'null' && label != '') {
                         newTagEle.innerHTML = ysp_templates.yacht_tag(label, tagVal);
-
-                        newTagEle.setAttribute('key', paramKey);
-                        
-                        newTagEle.onclick = function(event) {
-
-                            let key = event.target.getAttribute('key');
-
-                            let inputEles = document.querySelectorAll('*[name='+ key +']');
-
-                            inputEles.forEach(function(eleI) {
-                                if (typeof eleI.type != 'undefined' && (eleI.type == 'checkbox' || eleI.type == 'radio')) {
-                                    eleI.checked=false;                                
-                                }
-                                else {
-                                    eleI.value='';
-                                }                                
-                            });
-
-                            event.target.remove();
-
-                            let params = raiys_get_form_data( document.querySelector('*[name='+ key +']').form );
-
-                            ysp_yacht_search_and_reader( params );
-
-                        };
-
-                        te.appendChild( newTagEle );
-                });
-            }
-            else {
-                tagsEle.forEach(function(te) {
-
-                    let eleInput = document.querySelector('*[name='+ paramKey +']');
-
-                    let newTagEle = document.createElement('button');
-                        let tagVal = data[paramKey];
-
-                        if (eleInput.tagName == 'SELECT') {
-                            tagVal = eleInput.options[ eleInput.selectedIndex ].innerText;
-                        }
-                       
+                    }
+                    else {
                         newTagEle.innerHTML = ysp_templates.yacht_tag('', tagVal);
+                    }
 
-                        newTagEle.setAttribute('key', paramKey);
-                        
-                        newTagEle.onclick = function(event) {
+                    newTagEle.setAttribute('key', paramKey);
+                    
+                    te.appendChild( newTagEle );
+                    
+                    console.log(document.querySelector('.ysp-tag[key="'+ paramKey +'"]'));
+                    console.log(('.ysp-tag[key="'+ paramKey +'"]'));
 
-                            let key = event.target.getAttribute('key');
+                    document.querySelectorAll('a.ysp-tag[key="'+ paramKey +'"]').forEach(function(yspTagEle) {
 
-                            let inputEles = document.querySelectorAll('*[name='+ key +']');
+                        yspTagEle.addEventListener('click', function(event) {
+
+                            console.log(event);
+
+                            let key = event.currentTarget.getAttribute('key');
+
+                            console.log(key);
+
+                            let inputEles = document.querySelectorAll('select[name='+ key +'], input[name='+ key +']');
+
+                            console.log(inputEles);
 
                             inputEles.forEach(function(eleI) {
                                 if (typeof eleI.type != 'undefined' && (eleI.type == 'checkbox' || eleI.type == 'radio')) {
@@ -105,20 +82,16 @@ function ysp_yacht_search_and_reader(data) {
                                 }                                
                             });
 
-                            event.target.remove();
+                            event.currentTarget.remove();
 
-                            let params = raiys_get_form_data( document.querySelector('*[name='+ key +']').form );
+                            inputEles[0].form.requestSubmit();
 
-                            ysp_yacht_search_and_reader( params );
-
-                        };
-
-                        te.appendChild( newTagEle );
-                });
-            }
+                        });
+                    });
+            });
+        
         }
     }
-
 
     // GET AND WRITE
     return rai_ysp_api.call_api("POST", "yachts", data).then(function(data_result) {
