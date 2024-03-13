@@ -236,7 +236,7 @@
 
 					add_settings_field(
 						self::SLUG . '_pdf_urlbox_api_token_public_key',
-						"UrlBox API Token",
+						"UrlBox API Public Token",
 						array( $this, 'pdf_urlbox_api_token_field' ),
 						self::SLUG,
 						self::SLUG . '_admin_fields',
@@ -245,7 +245,7 @@
 					
 					add_settings_field(
 						self::SLUG . '_pdf_urlbox_api_secret_key',
-						"UrlBox API Token",
+						"UrlBox API Secret Key",
 						array( $this, 'pdf_urlbox_api_token_field' ),
 						self::SLUG,
 						self::SLUG . '_admin_fields',

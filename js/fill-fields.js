@@ -19,13 +19,12 @@ document.addEventListener("DOMContentLoaded", function() {
 	            let name = SelectorEle[0].getAttribute('name');
 
 	            rOptions[label].forEach(function(b) {
-
-	                let option = document.createElement("OPTION");
-
-	                    option.text = b;
-	                    option.value = b;
-
 	                SelectorEle.forEach((ele) => {
+	                	let option = document.createElement("OPTION");
+
+		                    option.text = b;
+		                    option.value = b;
+
 	                    ele.add(option);
 	                });
 	            });
