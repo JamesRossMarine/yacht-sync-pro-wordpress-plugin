@@ -15,7 +15,7 @@ function ysp_yacht_search_and_reader(data) {
             te.innerHTML="";
         });
         
-        var ysp_tags_not_print = [];
+        var ysp_tags_not_print = ['page_index', ''];
 
         for (let paramKey in data) {
             let label='';
@@ -43,7 +43,7 @@ function ysp_yacht_search_and_reader(data) {
                         tagVal = eleInput.options[ eleInput.selectedIndex ].innerText;
                     }
                    
-                    newTagEle.className = 'btn btn-primary ysp-tag';
+                    newTagEle.className = 'btn btn-primary btn-sm ysp-tag';
 
                     if ( label != null && label != 'null' && label != '') {
                         newTagEle.innerHTML = ysp_templates.yacht_tag(label, tagVal);
