@@ -241,6 +241,9 @@
 
         ul {
             display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+
             gap: 20px;
             list-style: none;
             padding-left: 0px;

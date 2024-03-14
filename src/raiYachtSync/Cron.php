@@ -4,15 +4,32 @@
 
 	    public function __construct() {
 	    	$this->options = new raiYachtSync_Options();
+
+	    	$this->exchange_token = $this->options->get('exchange_api_token');
 	    }
 
 	    public function add_actions_and_filters() {
 
 	    	add_action( 'init', [$this, 'cron_scheduler']);
 
+	    	add_filter( 'cron_schedules', [$this, 'add_cron_intervals'] );
+
 	    	add_action( 'rai_cron_yacht_sync', [$this, 'run_cron_yacht_sync']);
 	    	//add_action( 'rai_cron_yacht_sync_for_brokerage_only', [$this, 'run_cron_yacht_sync_for_brokerage_only']);
 			add_action( 'rai_cron_euro_c_save', [$this, 'run_cron_euro_c_save']);
+			add_action( 'rai_cron_check_count', [$this, 'run_cron_check_count']);
+			add_action( 'rai_cron_yacht_search_sitemaps', [$this, 'run_cron_yacht_search_sitemaps']);
+
+	    }
+
+	    public function add_cron_intervals( $schedules ) {
+
+	    	 $schedules['weekly'] = array(
+		        'interval' => 604800, //that's how many seconds in a week, for the unix timestamp
+		        'display' => __('weekly')
+		    );
+
+		    return $schedules;
 
 	    }
 
@@ -29,7 +46,15 @@
 			if ( ! wp_next_scheduled( 'rai_cron_yacht_sync_brokerage_only' ) ) {
 			    //wp_schedule_event( strtotime('10:00:00'), 'daily', 'rai_cron_yacht_sync_for_brokerage_only' );
 			}
+
+			if ( ! wp_next_scheduled( 'rai_cron_yacht_search_sitemaps' ) ) {
+				wp_schedule_event( time(), 'weekly', 'rai_cron_yacht_search_sitemaps' );
+			}
 	    	
+			if ( ! wp_next_scheduled( 'rai_cron_check_count' ) ) {
+			    wp_schedule_event( time(), 'hourly', 'rai_cron_check_count' );
+			}
+
 	    }
 
 	    public function run_cron_yacht_sync() {
@@ -50,7 +75,7 @@
 
 		public function run_cron_euro_c_save() {
 
-			$apiUrl = 'http://api.exchangerate.host/live?access_key=ad455b3579ad64232171cc9a50087f6f&source=USD&symbols=EUR';
+			$apiUrl = "http://api.exchangerate.host/live?access_key=$this->exchange_token&source=USD&symbols=EUR";
 		
 			$response = wp_remote_get($apiUrl, [
 				
@@ -73,7 +98,7 @@
 				$this->options->update('euro_c_c', 0.92);
 			}
 
-			$apiUrl = 'http://api.exchangerate.host/live?access_key=ad455b3579ad64232171cc9a50087f6f&source=EUR&symbols=USD';
+			$apiUrl = "http://api.exchangerate.host/live?access_key=$this->exchange_token&source=EUR&symbols=USD";
 		
 			$response = wp_remote_get($apiUrl);
 			$responseBody = wp_remote_retrieve_body($response);
@@ -95,4 +120,18 @@
 			}
 
 		}
-	}
+
+		public function run_cron_check_count() {
+
+			$alertOnLow = new raiYachtSync_AlertOnLowCount();
+
+			$alertOnLow->email();
+
+		}
+		
+		public function run_cron_yacht_search_sitemaps() {
+			$mapsOfSearch = new raiYachtSync_SitemapsOfSearch();
+
+			$mapsOfSearch->generateSitemap();
+		}
+	}	

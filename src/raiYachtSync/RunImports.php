@@ -7,6 +7,8 @@
 
 			$this->BrochureCleanUp = new raiYachtSync_BrochureCleanUp();
 
+			$this->AlertOnLowCount = new raiYachtSync_AlertOnLowCount();
+
 			$this->ImportGlobalBoatsCom = new raiYachtSync_ImportRuns_GlobalBoatsCom();
 			$this->ImportBrokerageOnlyBoatsCom = new raiYachtSync_ImportRuns_BrokerageOnlyBoatsCom();
 			$this->ImportYachtBrokerOrg = new raiYachtSync_ImportRuns_YachtBrokerOrg();
@@ -67,7 +69,7 @@
 	        global $wpdb;
 			
 			// Check if boats are in the syncing-post-type to be moved before we delete. 
-	        $count_of_synced = $wpdb->get_col(
+	        $count_of_synced = $wpdb->get_var(
 	        	$wpdb->prepare( 
 					"SELECT COUNT(*) FROM $wpdb->posts wp
 					WHERE wp.post_type = %s",
@@ -112,7 +114,7 @@
 					if ($urlIsStillNeeded == null) {
 						var_dump($file);
 						$this->BrochureCleanUp->remove( $phase_url );
-					}				
+					}
 				}
 
 				$wpdb->query(
@@ -127,7 +129,7 @@
 	        global $wpdb;
 
 	      	// Check if boats are in the syncing-post-type to be moved before we delete. 
-	        $count_of_synced = $wpdb->get_col(
+	        $count_of_synced = $wpdb->get_var(
 	        	$wpdb->prepare( 
 					"SELECT COUNT(*) FROM $wpdb->posts wp
 					WHERE wp.post_type = %s",
@@ -136,25 +138,53 @@
 	        );
 
 	        if ($count_of_synced > 0) {
+
+	        	var_dump('ping');
+
 		       	$wpdb->query( 
 					$wpdb->prepare( 
 						"DELETE wp FROM $wpdb->posts wp 
 						LEFT JOIN $wpdb->postmeta pm ON pm.post_id = wp.ID 
-						WHERE wp.post_type = %s AND pm.meta_key = %s", 
+						WHERE wp.post_type = %s AND pm.meta_key = %s AND pm.meta_value = '1'", 
 						'rai_yacht',
 						'CompanyBoat'
 					)
 				);
+
+				$pdfs = $wpdb->get_col("
+					SELECT pm.meta_value 
+					FROM {$wpdb->postmeta} pm
+					LEFT JOIN {$wpdb->posts} wp ON wp.ID = pm.post_id
+					WHERE pm.meta_key = 'YSP_PDF_URL' AND pm.meta_value IS NOT NULL AND pm.meta_value != '' AND wp.ID IS NULL");
+
+				foreach ($pdfs as $file) {
+					$phase_url = parse_url($file, PHP_URL_PATH);
+
+					$urlIsStillNeeded = $wpdb->get_var("
+						SELECT pm.meta_value  
+						FROM {$wpdb->postmeta} pm
+						LEFT JOIN {$wpdb->posts} wp ON wp.ID = pm.post_id
+						WHERE wp.post_type = 'syncing_rai_yacht' AND pm.meta_key = 'YSP_PDF_URL' AND pm.meta_value = '{$file}'
+					");
+
+					if ($urlIsStillNeeded == null) {
+						//var_dump($file);
+						$this->BrochureCleanUp->remove( $phase_url );
+					}				
+				}
+	        	
+	        	var_dump('ping2');
 
 				$wpdb->query(
 					"DELETE pm FROM $wpdb->postmeta pm 
 					LEFT JOIN $wpdb->posts wp ON wp.ID = pm.post_id 
 					WHERE wp.ID IS NULL"
 				);
+
+	        	var_dump('ping3');
 			}
 		}
 		
-
 		public function move_over() {
 	        global $wpdb;	        
 
@@ -240,6 +270,7 @@
 			if ($syncHadIssue == false) {
 				$this->clean_up_brokerage_only();
 				$this->move_over();
+				$this->AlertOnLowCount->email();
 			}
 
        	}

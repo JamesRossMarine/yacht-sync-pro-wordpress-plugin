@@ -1,5 +1,5 @@
 <br>
 <br>
-<div id="ysp-search-tags">
+<div class="ysp-search-tags">
 	
 </div>

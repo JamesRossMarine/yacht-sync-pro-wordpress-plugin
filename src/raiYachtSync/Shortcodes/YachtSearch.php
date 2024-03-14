@@ -168,6 +168,7 @@
 
             $args = [
 	            'post_type' => 'rai_yacht',
+	            'posts_per_page' => -1,
 	        ];
 	        
 	        $args = array_merge($args, $atts);

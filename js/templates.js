@@ -8,13 +8,11 @@ var ysp_templates={};
 		let length = '';
 
 		if(rai_yacht_sync.europe_option_picked == "yes"){
-			console.log(vessel);
 			length = vessel.NominalLength ? meters.toFixed(2) + ' m' : 'N/A';
 			price = vessel.Price ? `€ ${new Intl.NumberFormat('en-us', { minimumFractionDigits: 2}).format(vessel.YSP_EuroVal) }` : 'Contact Us For Price';
 		} 
 
 		else {
-			console.log(vessel);
 			length = vessel.NominalLength ? vessel.NominalLength + " / " + meters.toFixed(2) + ' m' : 'N/A';
 			price = vessel.Price ? `$ ${new Intl.NumberFormat('en-us', { minimumFractionDigits: 2}).format(vessel.YSP_USDVal) }` : 'Contact Us For Price'
 		}
@@ -138,3 +136,14 @@ var ysp_templates={};
 
     };
 
+
+    ysp_templates.yacht_tag = function(label, value) {
+
+    	return `
+    		<span>
+	    		${value}
+
+	    		<img src="${rai_yacht_sync.assets_url}/images/remove-tag.png">
+			</span>
+    	`;
+    };

@@ -28,14 +28,14 @@
 
 			$gpt_headers = [
 				'headers' => [
-					'Authorization' => 'Bearer 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',
+					'Authorization' => 'Bearer '.$this->gpt_token,
 					'Content-Type' => 'application/json',
 				],
 
 				'timeout' => 120,
 
 				'body' => json_encode([
-					"model" => "gpt-4",
+					"model" => "gpt-3.5-turbo",
 					"messages" => $gpt_messages
 				])
 

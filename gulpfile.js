@@ -34,6 +34,7 @@ var global_script_files=[
     'js/common.js',
     'js/api-client.js',
     'js/templates.js',
+    'js/fill-fields.js',
     'js/yachtSearch.js',
     'js/leads.js',
     'js/single-yacht.js'

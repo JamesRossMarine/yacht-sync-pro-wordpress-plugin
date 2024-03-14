@@ -5,7 +5,7 @@
 
 			$this->options = new raiYachtSync_Options();
 
-
+			$this->gpt_token = $this->options->get('chatgpt_api_token');
 
 		}
 
@@ -18,26 +18,40 @@
 		public function make_description($context) {
 
 			$gpt_messages = [
-				['role' => 'system', 'content' => 'You are a SEO content writer with the purpose of selling yachts and boats.']
+				[
+					'role' => 'system', 
+					'content' => 'You are a SEO content writer with the purpose of selling yachts and boats.'
+				]
+			];
+			
+			//$gpt_messages = apply_filters( 'rai_custom_gpt_for_yacht_details_before', $gpt_messages );
+
+			$gpt_messages[] = [
+				'role' => 'system', 
+				'content' => 'Read This For Context. '.$context
 			];
 
-			$gpt_messages[] = ['role' => 'system', 'content' => 'Read This For Context. '.$context];
-
-			$gpt_messages[] = ["role" => "assistant", "content" => "Write a meta description within 160 characters from the context above. Do not return a response with quotation marks."];
+			$gpt_messages[] = [
+				"role" => "assistant", 
+				"content" => "Write a meta description within 160 characters from the context above. Do not return a response with quotation marks."
+			];
+			
+			$gpt_messages = apply_filters( 'rai_custom_gpt_for_yacht_details_after', $gpt_messages );
 
 			$gpt_headers = [
 				'headers' => [
-					'Authorization' => 'Bearer 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',
+					'Authorization' => 'Bearer '.$this->gpt_token,
 					'Content-Type' => 'application/json',
 				],
 
 				'timeout' => 120,
 
 				'body' => json_encode([
-					"model" => "gpt-4",
+					"model" => "gpt-3.5-turbo",
 					"messages" => $gpt_messages
 				])
 			];
+			
 
 			$gpt_url = "https://api.openai.com/v1/chat/completions";
 

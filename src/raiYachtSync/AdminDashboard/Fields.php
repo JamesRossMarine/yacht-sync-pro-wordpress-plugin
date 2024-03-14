@@ -79,7 +79,26 @@
 						self::SLUG . '_admin_fields',
 						array( )
 					);
+
+					add_settings_field(
+						self::SLUG . '_alert_on_low_count',
+						"Alert When Listing Count Drops Belows",
+						array( $this, 'alert_on_low_count_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
 					
+					add_settings_field(
+						self::SLUG . '_alert_emails',
+						"Alert Who?",
+						array( $this, 'alert_emails_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+					
+
 					add_settings_field(
 						self::SLUG . '_is_euro_site',
 						"Make Site Display Meter And Euros",
@@ -160,6 +179,7 @@
 						self::SLUG . '_admin_fields',
 						array( )
 					);
+					
 					add_settings_field(
 						self::SLUG . '_company_name',
 						"Company Name",
@@ -168,6 +188,7 @@
 						self::SLUG . '_admin_fields',
 						array( )
 					);
+					
 					add_settings_field(
 						self::SLUG . '_company_logo',
 						"Company Logo",
@@ -176,6 +197,7 @@
 						self::SLUG . '_admin_fields',
 						array( )
 					);
+
 					add_settings_field(
 						self::SLUG . '_company_number',
 						"Company Phone Number",
@@ -184,7 +206,87 @@
 						self::SLUG . '_admin_fields',
 						array( )
 					);
+					
+					add_settings_field(
+						self::SLUG . '_akismet_api_token',
+						"Akismet API TOKEN",
+						array( $this, 'akismet_token_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
 
+					add_settings_field(
+						self::SLUG . '_exchange_api_token',
+						"Currency Exchange API TOKEN",
+						array( $this, 'exchange_api_token_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+
+					add_settings_field(
+						self::SLUG . '_chatgpt_api_token',
+						"ChatGPT API Token",
+						array( $this, 'chatgpt_api_token_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+
+					add_settings_field(
+						self::SLUG . '_pdf_urlbox_api_token_public_key',
+						"UrlBox API Public Token",
+						array( $this, 'pdf_urlbox_api_public_token_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+					
+					add_settings_field(
+						self::SLUG . '_pdf_urlbox_api_secret_key',
+						"UrlBox API Secret Key",
+						array( $this, 'pdf_urlbox_api_secret_token_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+
+					add_settings_field(
+						self::SLUG . '_pdf_s3_bucket',
+						"S3 Bucket (FOR PDF STORAGE)",
+						array( $this, 'pdf_s3_bucket_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+					
+					add_settings_field(
+						self::SLUG . '_pdf_s3_endpoint',
+						"S3 Enpoint (FOR PDF STORAGE)",
+						array( $this, 'pdf_s3_endpoint_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+					
+					add_settings_field(
+						self::SLUG . '_pdf_s3_key',
+						"S3 Key (FOR PDF STORAGE)",
+						array( $this, 'pdf_s3_key_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+					
+					add_settings_field(
+						self::SLUG . '_pdf_s3_secret',
+						"S3 Secret (FOR PDF STORAGE)",
+						array( $this, 'pdf_s3_secret_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
 					
 					
 		}		
@@ -288,6 +390,26 @@
 
 		public function yatco_api_token_field() {
 			$nameOfField=self::SLUG.'_yatco_api_token_field';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
+
+		public function alert_on_low_count_field() {
+			$nameOfField=self::SLUG.'_alert_on_low_count';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="number" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
+
+		public function alert_emails_field() {
+			$nameOfField=self::SLUG.'_alert_emails';
 			$valOfField=get_option($nameOfField);
 
 			?>
@@ -474,6 +596,97 @@
 			<?php endif;
 		}
 		
+		public function akismet_token_field() {
+			$nameOfField=self::SLUG.'_akismet_api_token';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
+
+		public function exchange_api_token_field() {
+			$nameOfField=self::SLUG.'_exchange_api_token';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
+
+
+		public function chatgpt_api_token_field() {
+			$nameOfField=self::SLUG.'_chatgpt_api_token';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
+
+		public function pdf_urlbox_api_public_token_field() {
+			$nameOfField=self::SLUG.'_pdf_urlbox_api_token_public_key';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
+
+		public function pdf_urlbox_api_secret_token_field() {
+			$nameOfField=self::SLUG.'_pdf_urlbox_api_secret_key';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
 		
+		public function pdf_s3_bucket_field() {
+			$nameOfField=self::SLUG.'_pdf_s3_bucket';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
+
+		public function pdf_s3_endpoint_field() {
+			$nameOfField=self::SLUG.'_pdf_s3_endpoint';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
+
+		public function pdf_s3_key_field() {
+			$nameOfField=self::SLUG.'_pdf_s3_key';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
+
+		public function pdf_s3_secret_field() {
+			$nameOfField=self::SLUG.'_pdf_s3_secret';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
+
+
 
 	}

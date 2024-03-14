@@ -27,7 +27,7 @@
                 'theme_url' => get_template_directory_uri(),
             ];
     
-            wp_localize_script('ysp-gutenberg-blocks', 'ysp-blocks', $js_vars); 
+            wp_localize_script('ysp-gutenberg-blocks', 'ysp_blocks', $js_vars); 
 
         }
 
