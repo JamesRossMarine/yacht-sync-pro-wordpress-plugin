@@ -237,7 +237,7 @@
 					add_settings_field(
 						self::SLUG . '_pdf_urlbox_api_token_public_key',
 						"UrlBox API Public Token",
-						array( $this, 'pdf_urlbox_api_token_field' ),
+						array( $this, 'pdf_urlbox_api_public_token_field' ),
 						self::SLUG,
 						self::SLUG . '_admin_fields',
 						array( )
@@ -246,7 +246,7 @@
 					add_settings_field(
 						self::SLUG . '_pdf_urlbox_api_secret_key',
 						"UrlBox API Secret Key",
-						array( $this, 'pdf_urlbox_api_token_field' ),
+						array( $this, 'pdf_urlbox_api_secret_token_field' ),
 						self::SLUG,
 						self::SLUG . '_admin_fields',
 						array( )
@@ -627,8 +627,18 @@
 
 		}
 
-		public function pdf_urlbox_api_token_field() {
-			$nameOfField=self::SLUG.'_pdf_urlbox_api_token';
+		public function pdf_urlbox_api_public_token_field() {
+			$nameOfField=self::SLUG.'_pdf_urlbox_api_token_public_key';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
+
+		public function pdf_urlbox_api_secret_token_field() {
+			$nameOfField=self::SLUG.'_pdf_urlbox_api_secret_key';
 			$valOfField=get_option($nameOfField);
 
 			?>
