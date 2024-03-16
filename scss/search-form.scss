@@ -62,13 +62,18 @@
 	
 	.ysp-tag{
 		padding: 4px 6px;
+		
 		background: #E2E8F0;
 		color: #334155;
+
 		font-size: 12px;	
+
+        margin-right: 5px;
+        margin-bottom: 5px;
 
 		svg{
 			position: relative;
-			top: 1px;
+			top: -1px;
 		}
 
 	}
