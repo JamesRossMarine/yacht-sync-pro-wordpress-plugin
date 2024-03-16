@@ -569,7 +569,9 @@
 
 				$pdf_url=get_post_meta($y_post_id, 'YSP_PDF_URL', true);
 				
-				$this->BrochureCleanUp->removeUseUrl($pdf_url);
+				if (! empty($pdf_url) && ! is_null($pdf_url)) {
+					$this->BrochureCleanUp->removeUseUrl($pdf_url);
+				}
 
 				update_post_meta($y_post_id, 'YSP_PDF_URL', "");
 
