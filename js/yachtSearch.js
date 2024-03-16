@@ -36,7 +36,7 @@ function ysp_yacht_search_and_reader(data) {
 
                 let eleInput = document.querySelector('*[name='+ paramKey +']');
 
-                let newTagEle = document.createElement('a');
+                let newTagEle = document.createElement('span');
                     let tagVal = data[paramKey];
 
                     if (eleInput.tagName == 'SELECT') {
@@ -59,7 +59,7 @@ function ysp_yacht_search_and_reader(data) {
                     console.log(document.querySelector('.ysp-tag[key="'+ paramKey +'"]'));
                     console.log(('.ysp-tag[key="'+ paramKey +'"]'));
 
-                    document.querySelectorAll('a.ysp-tag[key="'+ paramKey +'"]').forEach(function(yspTagEle) {
+                    document.querySelectorAll('span.ysp-tag[key="'+ paramKey +'"]').forEach(function(yspTagEle) {
 
                         yspTagEle.addEventListener('click', function(event) {
 
