@@ -353,7 +353,7 @@
 
 				if ($this->if_query_var_check($query->get('currency'))) {
 
-					$currency = $query->get('currency');
+					$currency = strtolower($query->get('currency'));
 
 					switch ($currency) {
 						case 'usd':
