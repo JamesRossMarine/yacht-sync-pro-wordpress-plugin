@@ -327,7 +327,7 @@
 
 				if ($this->if_query_var_check($query->get('boatname'))) {
 					$yacht_sync_meta_query[]=[
-						'key' => 'MakeString',
+						'key' => 'BoatName',
 						'compare' => "=",
 						'value' => $query->get('boatname')
 					];
