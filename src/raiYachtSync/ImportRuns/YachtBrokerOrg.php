@@ -14,11 +14,8 @@
 			$this->yachtBrokerAPIKey = $this->options->get('yacht_broker_org_api_token');
 			$this->yachtClientId = $this->options->get('yacht_broker_org_id');
 
-			$this->euro_c_c = intval($this->options->get('euro_c_c'));
-			$this->usd_c_c = intval($this->options->get('usd_c_c'));
-			
-			$this->euro_c_c = intval($this->options->get('euro_c_c'));
-			$this->usd_c_c = intval($this->options->get('usd_c_c'));	
+			$this->euro_c_c = floatval($this->options->get('euro_c_c'));
+			$this->usd_c_c = floatval($this->options->get('usd_c_c'));
 
 			$this->opt_prerender_brochures=$this->options->get('prerender_brochures');
 

@@ -19,8 +19,8 @@
 
 			$this->brokerageInventoryUrl .= $this->key;
 
-			$this->euro_c_c = intval($this->options->get('euro_c_c'));
-			$this->usd_c_c = intval($this->options->get('usd_c_c'));
+			$this->euro_c_c = floatval($this->options->get('euro_c_c'));
+			$this->usd_c_c = floatval($this->options->get('usd_c_c'));
 
 			$this->urlbox_secret_key = $this->options->get('pdf_urlbox_api_secret_key');
 
@@ -320,6 +320,7 @@
 						} else {
 							$boatC->YSP_USDVal = intval(str_replace(array(' USD'), '', $boat['OriginalPrice']));
 							$boatC->YSP_EuroVal = $boatC->YSP_USDVal * $this->euro_c_c;
+							var_dump($this->euro_c_c);			
 						}
 					}
 

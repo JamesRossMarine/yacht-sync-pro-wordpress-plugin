@@ -23,8 +23,8 @@
 
 			$this->opt_prerender_brochures=$this->options->get('prerender_brochures');
 
-			$this->euro_c_c = intval($this->options->get('euro_c_c'));
-			$this->usd_c_c = intval($this->options->get('usd_c_c'));
+			$this->euro_c_c = floatval($this->options->get('euro_c_c'));
+			$this->usd_c_c = floatval($this->options->get('usd_c_c'));
 			
 			$this->urlbox_secret_key = $this->options->get('pdf_urlbox_api_secret_key'); 
 			
