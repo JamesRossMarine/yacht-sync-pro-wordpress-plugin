@@ -24,7 +24,7 @@
 
 	        $already_scaned = get_transient('rai_listing_fell_below');
 
-	    	if (! $already_scaned || $liveListingCount < $this->low_count) {
+	    	if (! $already_scaned && $this->low_count > $liveListingCount) {
 
 	    		set_transient('rai_listing_fell_below', 'yes', 4 * HOUR_IN_SECONDS);
 
