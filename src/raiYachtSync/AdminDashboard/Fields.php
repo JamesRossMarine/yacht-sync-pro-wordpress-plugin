@@ -1,4 +1,5 @@
 <?php
+	#[AllowDynamicProperties]
 	class raiYachtSync_AdminDashboard_Fields {
 
 		const SLUG = 'rai_ys';

@@ -1,5 +1,5 @@
 <?php
-
+	#[AllowDynamicProperties]
 	class raiYachtSync_RestApi {
 
 		public function __construct() {

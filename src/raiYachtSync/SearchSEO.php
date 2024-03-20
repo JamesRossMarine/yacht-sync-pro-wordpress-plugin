@@ -1,4 +1,5 @@
 <?php
+	#[AllowDynamicProperties]
 	class raiYachtSync_SearchSEO {
 
 		public function __construct() {

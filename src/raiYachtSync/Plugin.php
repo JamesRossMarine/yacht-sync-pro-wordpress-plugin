@@ -1,4 +1,5 @@
 <?php 
+	#[AllowDynamicProperties]
 	class raiYachtSync_Plugin {
 
 		static public $indicateActivated;

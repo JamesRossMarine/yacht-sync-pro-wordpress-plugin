@@ -1,4 +1,5 @@
 <?php
+#[AllowDynamicProperties]
 class raiYachtSync_Stats {
     public function run($params) {
         global $wpdb;

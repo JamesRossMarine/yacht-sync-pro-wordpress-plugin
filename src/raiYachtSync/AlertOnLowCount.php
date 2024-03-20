@@ -1,4 +1,5 @@
 <?php
+	#[AllowDynamicProperties]
 	class raiYachtSync_AlertOnLowCount {
 
 		public function __construct( ) {

@@ -1,4 +1,5 @@
 <?php
+	#[AllowDynamicProperties]
 	class raiYachtSync_AddCommands {
 
 		public function __construct() {

@@ -1,4 +1,6 @@
 <?php
+    #[AllowDynamicProperties]
+	
 	class raiYachtSync_Shortcodes_YachtSearch {
 
 		public function __construct() {

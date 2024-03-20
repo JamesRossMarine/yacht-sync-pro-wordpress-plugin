@@ -1,5 +1,5 @@
 <?php
-
+	#[AllowDynamicProperties]
 	class raiYachtSync_LocationConvert {
 
 		public $country = array(

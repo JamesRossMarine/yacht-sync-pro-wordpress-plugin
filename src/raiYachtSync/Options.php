@@ -1,4 +1,5 @@
 <?php 
+	#[AllowDynamicProperties]
 	class raiYachtSync_Options {
 
 	    const OPTION_INSTALLED = '_installed';

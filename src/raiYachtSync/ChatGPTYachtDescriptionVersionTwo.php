@@ -1,4 +1,5 @@
 <?php
+	#[AllowDynamicProperties]
 	class raiYachtSync_ChatGPTYachtDescriptionVersionTwo {
 
 		public function __construct() {
