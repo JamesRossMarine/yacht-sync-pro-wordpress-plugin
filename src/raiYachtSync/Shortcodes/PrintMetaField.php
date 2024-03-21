@@ -1,4 +1,5 @@
 <?php
+    #[AllowDynamicProperties]
 	class raiYachtSync_Shortcodes_PrintMetaField {
 
 		public function __construct() {

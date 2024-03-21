@@ -1,5 +1,6 @@
 <?php
-	
+    #[AllowDynamicProperties]
+		
 	class raiYachtSync_ImportRuns_GlobalBoatsCom {
    		protected $limit = 53;
 	

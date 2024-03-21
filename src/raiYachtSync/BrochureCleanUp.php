@@ -2,6 +2,8 @@
 
 	//use Aws\Resource\Aws;
 	use Aws\S3\S3Client;
+
+	#[AllowDynamicProperties]
 	
 	class raiYachtSync_BrochureCleanUp {
   	

@@ -1,5 +1,5 @@
 <?php
-
+	#[AllowDynamicProperties]
 	class raiYachtSync_PostTypes {
 
 		public function __construct() {

@@ -1,5 +1,6 @@
 <?php
-
+    #[AllowDynamicProperties]
+	
 	class raiYachtSync_ImportRuns_YachtBrokerOrg {
 		public $yachtBrokerAPIKey = '';
    		public $yachtClientId = '';

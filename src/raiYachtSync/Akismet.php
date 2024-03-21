@@ -57,6 +57,7 @@
 
 
 // Used by the Akismet class to communicate with the Akismet service
+#[AllowDynamicProperties]
 class raiYachtSync_Akismet {
     
     private $api_version = '1.1';

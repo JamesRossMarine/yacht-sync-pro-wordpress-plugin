@@ -1,6 +1,7 @@
 <?php
-	class raiYachtSync_Cron {
 
+	#[AllowDynamicProperties]
+	class raiYachtSync_Cron {
 
 	    public function __construct() {
 	    	$this->options = new raiYachtSync_Options();

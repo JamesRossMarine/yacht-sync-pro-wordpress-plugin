@@ -1,4 +1,5 @@
 <?php
+
     class raiYachtSync_YoastFun_Schema_Broker {
 
         public $context;
