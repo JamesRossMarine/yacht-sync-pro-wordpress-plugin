@@ -35,7 +35,7 @@
 				"content" => "Write a meta description within 160 characters from the context above. Do not return a response with quotation marks."
 			];
 			
-			$gpt_messages = apply_filters( 'rai_custom_gpt_for_yacht_details_v2', $gpt_messages );
+			$gpt_messages = apply_filters( 'rai_custom_gpt_for_yacht_details_v2', $gpt_messages, $context );
 
 			$gpt_headers = [
 				'headers' => [

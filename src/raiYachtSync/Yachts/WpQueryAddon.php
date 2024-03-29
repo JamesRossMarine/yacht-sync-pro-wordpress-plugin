@@ -199,6 +199,18 @@
 								'key' => 'YSP_City',
 								'compare' => "LIKE",
 								'value' => $keyword
+							],
+
+							[									
+								'key' => 'YSP_Full_Country',
+								'compare' => "LIKE",
+								'value' => $keyword
+							],
+							
+							[									
+								'key' => 'YSP_Full_State',
+								'compare' => "LIKE",
+								'value' => $keyword
 							]
 
 						];
