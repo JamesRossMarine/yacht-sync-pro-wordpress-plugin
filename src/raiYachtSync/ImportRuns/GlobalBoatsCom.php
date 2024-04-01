@@ -244,7 +244,7 @@
 
 						$plsDisclaimer = strip_tags($plsDisclaimer);
 
-						$newDisclaimer = substr($plsDisclaimer, 3, -4);
+						//$newDisclaimer = substr($plsDisclaimer, 3, -4);
 
 						$finalDisclaimer = "We provide this yacht listing in good faith, and although we cannot guarantee its accuracy or the condition of the boat. The " . $newDisclaimer . " She is subject to prior sale, price change, or withdrawal without notice and does not imply a direct representation of a specific yacht for sale.";
 
