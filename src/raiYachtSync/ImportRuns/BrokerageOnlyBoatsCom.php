@@ -343,9 +343,8 @@
 					) {
 
 						$boatC->_yoast_wpseo_metadesc = $this->ChatGPTYachtDescriptionVersionTwo->make_description(
-
-							join(' ', $boatC->GeneralBoatDescription)
-							
+							'Vessel Name - '.$boat['ModelYear'].' '.$boat['MakeString'].' '.$boat['Model'].' '.$boat['BoatName']. '. '.
+							'Vessel Description - '.join(' ', $boatC->GeneralBoatDescription)
 						);
 
 					}

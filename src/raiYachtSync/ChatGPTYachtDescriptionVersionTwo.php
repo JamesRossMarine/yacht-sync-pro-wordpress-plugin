@@ -27,12 +27,12 @@
 			
 			$gpt_messages[] = [
 				'role' => 'system', 
-				'content' => 'Read This For Context. '.$context
+				'content' => 'Read This For Context About The Vessel. '.$context
 			];
 
 			$gpt_messages[] = [
 				"role" => "assistant", 
-				"content" => "Write a meta description within 160 characters from the context above. Do not return a response with quotation marks."
+				"content" => "Write a meta description within 160 characters from the context above about the vessel. Do not return a response with quotation marks."
 			];
 			
 			$gpt_messages = apply_filters( 'rai_custom_gpt_for_yacht_details_v2', $gpt_messages, $context );
