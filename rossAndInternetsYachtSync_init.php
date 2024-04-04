@@ -5,7 +5,7 @@
         $rossAndInternetsYachtSyncPlugin = new raiYachtSync_Plugin();
         // $options = new rossWorld_Options();
 
-        $rossAndInternetsYachtSyncPlugin->version = '1.8.0';
+        $rossAndInternetsYachtSyncPlugin->version = '1.9.0';
 
         // Install the plugin
         // NOTE: this file gets run each time you *activate* the plugin.
