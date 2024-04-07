@@ -1,5 +1,5 @@
 <?php
-	
+	#[AllowDynamicProperties]
 	class raiYachtSync_AddSearchSitemapsToYoast {
 
 		public function __construct() {

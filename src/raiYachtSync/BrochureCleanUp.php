@@ -2,6 +2,8 @@
 
 	//use Aws\Resource\Aws;
 	use Aws\S3\S3Client;
+
+	#[AllowDynamicProperties]
 	
 	class raiYachtSync_BrochureCleanUp {
   	
@@ -37,29 +39,41 @@
 	    }
 
 	    public function remove($filepath) {
-	    	
-	    	if ($filepath[0] == '/') {
-	    		$filepath = substr($filepath, 1);
-	    	}
 
-	    	return ($this->client->deleteObject([
-	    		'Bucket' => $this->pdf_s3_bucket,
-	            'Key' => $filepath
-	    	]));
+	    	if (! empty($url) && ! is_null($url)) {
+	    	
+		    	if ($filepath[0] == '/') {
+		    		$filepath = substr($filepath, 1);
+		    	}
+
+		    	return ($this->client->deleteObject([
+		    		'Bucket' => $this->pdf_s3_bucket,
+		            'Key' => $filepath
+		    	]));
+		  	}
+		  	else {
+		  		return 'error - no url';
+		  	}
 
 	    }
 
 	    public function removeUseUrl($url) {
 	    	
-	    	$filepath = parse_url($url, PHP_URL_PATH);
+	    	if (! empty($url) && ! is_null($url)) {
+		    	$filepath = parse_url($url, PHP_URL_PATH);
 
-	    	if ($filepath[0] == '/') {
-	    		$filepath = substr($filepath, 1);
-	    	}
+		    	if ($filepath[0] == '/') {
+		    		$filepath = substr($filepath, 1);
+		    	}
 
-	    	return ($this->client->deleteObject([
-	    		'Bucket' => $this->pdf_s3_bucket,
-	            'Key' => $filepath
-	    	]));
+		    	return ($this->client->deleteObject([
+		    		'Bucket' => $this->pdf_s3_bucket,
+		            'Key' => $filepath
+		    	]));
+		    }	
+		    else {
+		  		return 'error - no url';
+		  	}
+		  	
 	    }
 	}

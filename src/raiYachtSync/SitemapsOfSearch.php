@@ -1,4 +1,5 @@
 <?php
+	#[AllowDynamicProperties]
 	class raiYachtSync_SitemapsOfSearch {
 
 		public function __construct() {

@@ -1,4 +1,5 @@
 <?php
+	#[AllowDynamicProperties]
 	class raiYachtSync_Brokers_DetailsOverride {
 		public function __construct() {
 

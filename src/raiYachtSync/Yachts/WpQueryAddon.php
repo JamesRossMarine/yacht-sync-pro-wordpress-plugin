@@ -1,4 +1,6 @@
 <?php
+    #[AllowDynamicProperties]
+	
 	class raiYachtSync_Yachts_WpQueryAddon {
 
 
@@ -197,6 +199,18 @@
 								'key' => 'YSP_City',
 								'compare' => "LIKE",
 								'value' => $keyword
+							],
+
+							[									
+								'key' => 'YSP_Full_Country',
+								'compare' => "LIKE",
+								'value' => $keyword
+							],
+							
+							[									
+								'key' => 'YSP_Full_State',
+								'compare' => "LIKE",
+								'value' => $keyword
 							]
 
 						];
@@ -327,7 +341,7 @@
 
 				if ($this->if_query_var_check($query->get('boatname'))) {
 					$yacht_sync_meta_query[]=[
-						'key' => 'MakeString',
+						'key' => 'BoatName',
 						'compare' => "=",
 						'value' => $query->get('boatname')
 					];
@@ -353,7 +367,7 @@
 
 				if ($this->if_query_var_check($query->get('currency'))) {
 
-					$currency = $query->get('currency');
+					$currency = strtolower($query->get('currency'));
 
 					switch ($currency) {
 						case 'usd':

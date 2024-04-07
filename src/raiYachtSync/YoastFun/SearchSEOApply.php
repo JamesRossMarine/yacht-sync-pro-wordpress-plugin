@@ -1,5 +1,6 @@
 <?php
-
+    #[AllowDynamicProperties]
+	
 	class raiYachtSync_YoastFun_SearchSEOApply {
 		public function __construct() {
 			$this->SearchSEO = new raiYachtSync_SearchSEO();

@@ -1,5 +1,6 @@
 <?php
-	
+    #[AllowDynamicProperties]
+		
 	class raiYachtSync_ImportRuns_GlobalBoatsCom {
    		protected $limit = 53;
 	
@@ -23,8 +24,8 @@
 
 			$this->opt_prerender_brochures=$this->options->get('prerender_brochures');
 
-			$this->euro_c_c = intval($this->options->get('euro_c_c'));
-			$this->usd_c_c = intval($this->options->get('usd_c_c'));
+			$this->euro_c_c = floatval($this->options->get('euro_c_c'));
+			$this->usd_c_c = floatval($this->options->get('usd_c_c'));
 			
 			$this->urlbox_secret_key = $this->options->get('pdf_urlbox_api_secret_key'); 
 			
@@ -243,9 +244,9 @@
 
 						$plsDisclaimer = strip_tags($plsDisclaimer);
 
-						$newDisclaimer = substr($plsDisclaimer, 3, -4);
+						//$newDisclaimer = substr($plsDisclaimer, 3, -4);
 
-						$finalDisclaimer = "We provide this yacht listing in good faith, and although we cannot guarantee its accuracy or the condition of the boat. The " . $newDisclaimer . " She is subject to prior sale, price change, or withdrawal without notice and does not imply a direct representation of a specific yacht for sale.";
+						$finalDisclaimer = "We provide this yacht listing in good faith, and although we cannot guarantee its accuracy or the condition of the boat. The " . $plsDisclaimer . " She is subject to prior sale, price change, or withdrawal without notice and does not imply a direct representation of a specific yacht for sale.";
 
 					    $boatC->MOD_DIS = $finalDisclaimer;
 					}
@@ -362,9 +363,8 @@
 					) {
 
 						$boatC->_yoast_wpseo_metadesc = $this->ChatGPTYachtDescriptionVersionTwo->make_description(
-
-							join(' ', $boatC->GeneralBoatDescription)
-
+							'Vessel Name - '.$boat['ModelYear'].' '.$boat['MakeString'].' '.$boat['Model'].' '.$boat['BoatName']. '. '.
+							'Vessel Description - '.join(' ', $boatC->GeneralBoatDescription)
 						);
 
 					}

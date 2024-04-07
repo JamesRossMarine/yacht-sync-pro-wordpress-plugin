@@ -1,4 +1,5 @@
 <?php  
+    #[AllowDynamicProperties]
     class raiYachtSync_GutenbergBlocks {
 
         public function __construct() {

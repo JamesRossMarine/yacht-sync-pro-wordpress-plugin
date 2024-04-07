@@ -1,4 +1,5 @@
 <?php
+    #[AllowDynamicProperties]
 
 	class raiYachtSync_ImportRuns_YatcoCom {
 		public $yachtBrokerAPIKey = '';
@@ -11,11 +12,8 @@
 			$this->options = new raiYachtSync_Options();
 			$this->LocationConvert = new raiYachtSync_LocationConvert();
 
-			$this->euro_c_c = intval($this->options->get('euro_c_c'));
-			$this->usd_c_c = intval($this->options->get('usd_c_c'));
-			
-			$this->euro_c_c = intval($this->options->get('euro_c_c'));
-			$this->usd_c_c = intval($this->options->get('usd_c_c'));	
+			$this->euro_c_c = floatval($this->options->get('euro_c_c'));
+			$this->usd_c_c = floatval($this->options->get('usd_c_c'));
 		}
 
 		public function run() {

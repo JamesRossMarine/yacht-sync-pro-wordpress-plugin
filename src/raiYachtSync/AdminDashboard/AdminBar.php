@@ -1,4 +1,5 @@
 <?php
+	#[AllowDynamicProperties]
 	class raiYachtSync_AdminDashboard_AdminBar {
 
 		public function __construct() {

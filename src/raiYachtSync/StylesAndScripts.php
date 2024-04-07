@@ -1,4 +1,6 @@
 <?php 
+
+	#[AllowDynamicProperties]
 	class raiYachtSync_StylesAndScripts {
 
 		public function __construct() {
@@ -58,7 +60,7 @@
 
 		public function enqueueGlobal() {
 
-			wp_register_style('yacht-sync-styles', RAI_YS_PLUGIN_ASSETS.'build/css/app-style.css', false, null, false);
+			wp_register_style('yacht-sync-styles', RAI_YS_PLUGIN_ASSETS.'build/css/app-style.noMaps.css', false, null, false);
 			wp_register_script('yacht-sync-script', RAI_YS_PLUGIN_ASSETS.'build/js/globalPlugin.noMaps.js', ['jquery'], null, true);
 
 			$js_vars = [

@@ -1,4 +1,6 @@
 <?php
+    #[AllowDynamicProperties]
+    
     class raiYachtSync_Yachts_WpQueryForSimilar {
 
         public function __construct() {
