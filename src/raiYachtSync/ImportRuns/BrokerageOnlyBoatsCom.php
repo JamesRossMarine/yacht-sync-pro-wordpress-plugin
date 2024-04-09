@@ -43,11 +43,11 @@
 			// Sync broker inventory
 			$apiCall = wp_remote_get($this->brokerageInventoryUrl, ['timeout' => 120]);
 
-				$apiCall['body']=json_decode($apiCall['body'], true);
+				$apiCallBody=json_decode(wp_remote_retrieve_body($apiCall), true);
 
 				$api_status_code = wp_remote_retrieve_response_code($apiCall);
 
-			if ($api_status_code == 200 && isset($apiCall['body']['numResults'])) {
+			if ($api_status_code == 200 && isset($apiCallBody['numResults'])) {
 				// return;
 			}
 			elseif ($api_status_code == 401) {
@@ -76,9 +76,13 @@
 
 				//var_dump($apiCallForWhile);
 
-				$apiCallForWhile['body']=json_decode($apiCallForWhile['body'], true);	
+				$apiCallForWhileBody = json_decode(wp_remote_retrieve_body($apiCallForWhile), true);
 
-				$apiCallInventory = $apiCallForWhile['body']['results'];
+				if (! isset($apiCallForWhileBody['results']) && ! is_array($apiCallForWhileBody['results'])) {
+					break;
+				}
+
+				$apiCallInventory = $apiCallForWhileBody['results'];
 
 				if (count( $apiCallInventory ) == 0) {
 					break;

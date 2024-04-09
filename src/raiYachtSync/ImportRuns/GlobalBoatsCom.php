@@ -46,17 +46,17 @@
 			// Sync broker inventory
 			$apiCall = wp_remote_get($this->globalInventoryUrl, ['timeout' => 120]);
 
-				$apiCall['body']=json_decode($apiCall['body'], true);
+				$apiCallBody=json_decode(wp_remote_retrieve_body($apiCall), true);
 
 				$api_status_code = wp_remote_retrieve_response_code($apiCall);
 
 				//var_dump($api_status_code);
 
-	        $total = $apiCall['body']['data']['numResults'];
+	        $total = $apiCallBody['data']['numResults'];
 
 	        $errors = new WP_Error();
 
-	        if ($api_status_code == 200 && isset($apiCall['body']['data']['numResults'])) {
+	        if ($api_status_code == 200 && isset($apiCallBody['data']['numResults'])) {
 				// return;
 			}
 			elseif ($api_status_code == 401) {
@@ -81,9 +81,13 @@
 
 				//var_dump($apiCallForWhile);
 
-				$apiCallForWhile['body']=json_decode($apiCallForWhile['body'], true);	
+				$apiCallForWhileBody = json_decode(wp_remote_retrieve_body($apiCallForWhile), true);	
 
-				$apiCallInventory = $apiCallForWhile['body']['data']['results'];
+				if (! isset($apiCallForWhileBody['data']) && ! isset($apiCallForWhileBody['data']['results']) && ! is_array($apiCallForWhileBody['data']['results'])) {
+					break;
+				}
+
+				$apiCallInventory = $apiCallForWhileBody['data']['results'];
 
 				if (count( $apiCallInventory ) == 0) {
 					break;

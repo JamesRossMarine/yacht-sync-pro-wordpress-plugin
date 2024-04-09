@@ -6,6 +6,8 @@
 						
 			$this->options = new raiYachtSync_Options();
 
+			$this->low_count = $this->options->get('alert_on_low_count');
+
 			$this->BrochureCleanUp = new raiYachtSync_BrochureCleanUp();
 
 			$this->AlertOnLowCount = new raiYachtSync_AlertOnLowCount();
@@ -78,7 +80,7 @@
 				)
 	        );
 
-	        if ($count_of_synced > 0) {
+	        if ($count_of_synced > $this->low_count) {
 		       	$wpdb->query( 
 					$wpdb->prepare( 
 						"DELETE wp FROM $wpdb->posts wp
@@ -96,34 +98,19 @@
 					)
 				);*/
 
-				$pdfs = $wpdb->get_col("
-					SELECT pm.meta_value 
-					FROM {$wpdb->postmeta} pm
-					LEFT JOIN {$wpdb->posts} wp ON wp.ID = pm.post_id
-					WHERE pm.meta_key = 'YSP_PDF_URL' AND pm.meta_value IS NOT NULL AND pm.meta_value != '' AND wp.ID IS NULL");
-
-				foreach ($pdfs as $file) {
-					$phase_url = parse_url($file, PHP_URL_PATH);
-
-					$urlIsStillNeeded = $wpdb->get_var("
-						SELECT pm.meta_value  
-						FROM {$wpdb->postmeta} pm
-						LEFT JOIN {$wpdb->posts} wp ON wp.ID = pm.post_id
-						WHERE wp.post_type = 'syncing_rai_yacht' AND pm.meta_key = 'YSP_PDF_URL' AND pm.meta_value = '{$file}'
-					");
-
-					if ($urlIsStillNeeded == null) {
-						var_dump($file);
-						$this->BrochureCleanUp->remove( $phase_url );
-					}
-				}
+				$this->pdf_cleanup();
 
 				$wpdb->query(
 					"DELETE pm FROM $wpdb->postmeta pm 
 					LEFT JOIN $wpdb->posts wp ON wp.ID = pm.post_id 
 					WHERE wp.ID IS NULL"
 				);
+	        
+
+				return true;
 	        }
+
+	        retrun false;
 		}
 
 		public function clean_up_brokerage_only() {
@@ -152,27 +139,7 @@
 					)
 				);
 
-				$pdfs = $wpdb->get_col("
-					SELECT pm.meta_value 
-					FROM {$wpdb->postmeta} pm
-					LEFT JOIN {$wpdb->posts} wp ON wp.ID = pm.post_id
-					WHERE pm.meta_key = 'YSP_PDF_URL' AND pm.meta_value IS NOT NULL AND pm.meta_value != '' AND wp.ID IS NULL");
-
-				foreach ($pdfs as $file) {
-					$phase_url = parse_url($file, PHP_URL_PATH);
-
-					$urlIsStillNeeded = $wpdb->get_var("
-						SELECT pm.meta_value  
-						FROM {$wpdb->postmeta} pm
-						LEFT JOIN {$wpdb->posts} wp ON wp.ID = pm.post_id
-						WHERE wp.post_type = 'syncing_rai_yacht' AND pm.meta_key = 'YSP_PDF_URL' AND pm.meta_value = '{$file}'
-					");
-
-					if ($urlIsStillNeeded == null) {
-						//var_dump($file);
-						$this->BrochureCleanUp->remove( $phase_url );
-					}				
-				}
+				$this->pdf_cleanup();
 	        	
 	        	var_dump('ping2');
 
@@ -183,6 +150,36 @@
 				);
 
 	        	var_dump('ping3');
+
+	        	return true;
+			}
+
+			return false;
+		}
+
+		public function pdf_cleanup() {
+			global $wpdb;
+
+			$pdfs = $wpdb->get_col("
+				SELECT pm.meta_value 
+				FROM {$wpdb->postmeta} pm
+				LEFT JOIN {$wpdb->posts} wp ON wp.ID = pm.post_id
+				WHERE pm.meta_key = 'YSP_PDF_URL' AND pm.meta_value IS NOT NULL AND pm.meta_value != '' AND wp.ID IS NULL");
+
+			foreach ($pdfs as $file) {
+				$phase_url = parse_url($file, PHP_URL_PATH);
+
+				$urlIsStillNeeded = $wpdb->get_var("
+					SELECT pm.meta_value  
+					FROM {$wpdb->postmeta} pm
+					LEFT JOIN {$wpdb->posts} wp ON wp.ID = pm.post_id
+					WHERE wp.post_type = 'syncing_rai_yacht' AND pm.meta_key = 'YSP_PDF_URL' AND pm.meta_value = '{$file}'
+				");
+
+				if ($urlIsStillNeeded == null) {
+					//var_dump($file);
+					$this->BrochureCleanUp->remove( $phase_url );
+				}				
 			}
 		}
 		
@@ -233,9 +230,15 @@
 			}
 
 			if ($syncHadIssue == false) {
-				$this->clean_up();
-				$this->move_over();				
-				$this->AlertOnLowCount->email();
+				$cleaned_up=$this->clean_up();
+					
+				if ($cleaned_up) {
+					$this->move_over();				
+					$this->AlertOnLowCount->email();	
+				}
+				else {
+					// EMAIL - AS SYNC FAILED DUE TO NOT MEETING THE REQUIREMENTS OF COUNT PROBILLY
+				}
 			} 
 		}
        
@@ -270,9 +273,12 @@
 			}
 
 			if ($syncHadIssue == false) {
-				$this->clean_up_brokerage_only();
-				$this->move_over();
-				$this->AlertOnLowCount->email();
+				$cleaned_up = $this->clean_up_brokerage_only();
+			
+				if ($cleaned_up) {
+					$this->move_over();				
+					$this->AlertOnLowCount->email();	
+				}
 			}
 
        	}
