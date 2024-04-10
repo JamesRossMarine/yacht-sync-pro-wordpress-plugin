@@ -338,6 +338,12 @@
 							$boatC->YSP_EuroVal = $boatC->YSP_USDVal * $this->euro_c_c;
 						}
 					}
+					else {
+						$boatC->OriginalPrice = 0;
+						$boatC->YSP_USDVal = 0;
+						$boatC->YSP_EuroVal = 0;
+					}
+
 
 
                     if (isset($boatC->AdditionalDetailDescription)) {

@@ -110,7 +110,7 @@
 				return true;
 	        }
 
-	        retrun false;
+	        return false;
 		}
 
 		public function clean_up_brokerage_only() {
@@ -269,7 +269,6 @@
 				if (isset($syncR['error'])) {
 					$syncHadIssue=true;
 				}
-
 			}
 
 			if ($syncHadIssue == false) {

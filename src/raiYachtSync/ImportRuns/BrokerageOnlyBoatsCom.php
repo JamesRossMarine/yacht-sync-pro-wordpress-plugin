@@ -57,7 +57,7 @@
 				return ['error' => 'Error http error '.$api_status_code];
 			}
 
-	        $total = $apiCall['body']['numResults'];
+	        $total = $apiCallBody['numResults'];
 
 			//$apiCallInventory = $apiCall['body']['results'];
 
@@ -328,6 +328,11 @@
 							$boatC->YSP_EuroVal = $boatC->YSP_USDVal * $this->euro_c_c;
 							var_dump($this->euro_c_c);			
 						}
+					}
+					else {
+						$boatC->OriginalPrice = 0;
+						$boatC->YSP_USDVal = 0;
+						$boatC->YSP_EuroVal = 0;
 					}
 
 					//var_dump($boatC->_yoast_wpseo_metadesc);
