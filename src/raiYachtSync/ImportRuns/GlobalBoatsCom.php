@@ -436,7 +436,7 @@
 				$offset = $offset + $this->limit;
 			
 				if ($yachtsSynced != $offset) {
-					$total = $apiCallForWhile['body']['data']['numResults'];
+					$total = $apiCallForWhileBody['data']['numResults'];
 				}
 
 			}
