@@ -160,6 +160,24 @@ function ysp_yacht_search_and_reader(data) {
                     closeClass: 'ysp-model-close'
                   });
                 });
+
+                ysp_markLovedVessel( ele_card );
+
+                jQuery('.love', ele_card).click(function(e) {
+                    e.preventDefault();
+                
+                    jQuery(this).toggleClass('active');
+
+                    let yachtId = jQuery(this).data('yacht-id');
+                
+                    if ( jQuery(this).hasClass('active') ) {
+                        ysp_addLovedVessel(yachtId);
+                    }
+                    else {
+                        ysp_removeLovedVessel(yachtId);
+                    }
+
+                });                
             });
 
             jQuery('#yachts-pagination').pagination({
