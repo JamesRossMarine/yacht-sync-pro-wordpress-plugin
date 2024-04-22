@@ -82,6 +82,13 @@
     <div id="yachts-pagination">
 
     </div>
+
+    <div id="yachts-compare-bar">
+        
+        <a href="" id="ysp_compare_linkout">
+        </a>
+
+    </div>
 </section>
 
 <div class="ysp-modal" id="single-share">

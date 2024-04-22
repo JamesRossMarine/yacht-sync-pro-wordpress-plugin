@@ -49,6 +49,10 @@ var ysp_templates={};
 								<p class="yacht-individual-title">Length</p>
 								<p class="yacht-individual-value">${length}</p>
 							</div>
+							<div class="yacht-individual-container">
+								<p class="yacht-individual-title">Compare</p>
+								<p class="yacht-individual-value"><input type="checkbox" class="compare_toggle" name="compare" value="${ vessel._postID }" /></p>
+							</div>
 						</div>
 					</div>
 					<div class="yacht-price-details-container">
