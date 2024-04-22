@@ -541,6 +541,15 @@ document.addEventListener("DOMContentLoaded", function() {
         }).then(function () {
             // Render Yachts For Page Load
             let params = raiys_get_form_data(document.querySelector('.ysp-yacht-search-form'));
+                console.log(params);
+
+            if (typeof params.ys_yachts_loved != 'undefined') {
+
+                console.log(params.ys_yachts_loved);
+
+                params.ys_only_these=JSON.parse( localStorage.getItem('ysp_loved_vessels') ).join(',');
+
+            }
 
             ysp_yacht_search_and_reader( params );       
         });
