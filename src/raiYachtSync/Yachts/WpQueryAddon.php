@@ -69,6 +69,9 @@
 			$vars[] = 'ys_company_only';
 			$vars[] = 'ys_show_only';
 
+			$vars[] = 'ys_yachts_loved';
+			$vars[] = 'dont_push';
+
 			return $vars;
 		}
 

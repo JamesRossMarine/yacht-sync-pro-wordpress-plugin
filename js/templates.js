@@ -18,7 +18,7 @@ var ysp_templates={};
 		}
 
 		return `
-			<div class="yacht-result-grid-item" data-post-id="${ vessel._postID }">
+			<div class="yacht-result-grid-item" data-post-id="${ vessel._postID }" data-yacht-id="${ vessel.DocumentID }">
 				<div class="yacht-main-image-container">
 					<a class="yacht-details" href="${ vessel._link }">
 						<img class="yacht-main-image" src="${vessel.Images ? vessel.Images[0].Uri : rai_yacht_sync.assets_url + 'images/default-yacht-image.jpeg'}" alt="yacht-image" loading="lazy" />
@@ -49,6 +49,10 @@ var ysp_templates={};
 								<p class="yacht-individual-title">Length</p>
 								<p class="yacht-individual-value">${length}</p>
 							</div>
+							<div class="yacht-individual-container">
+								<p class="yacht-individual-title">Compare</p>
+								<p class="yacht-individual-value"><input type="checkbox" class="compare_toggle" name="compare" value="${ vessel._postID }" /></p>
+							</div>
 						</div>
 					</div>
 					<div class="yacht-price-details-container">
@@ -57,6 +61,7 @@ var ysp_templates={};
 						</div>
 						
 						<button class="yacht-download-button" type="button" data-modal="#single-share">Contact</button>
+						<button class="love" type="button" data-yacht-id="${ vessel.DocumentID }">Liked</button>
 					</div>
 				</div>
 			</div>

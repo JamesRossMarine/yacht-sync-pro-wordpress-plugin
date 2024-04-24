@@ -35,6 +35,9 @@ var global_script_files=[
     'js/api-client.js',
     'js/templates.js',
     'js/fill-fields.js',
+    'js/yachtSearchTags.js',
+    'js/yachtSearchLoved.js',
+    'js/yachtSearchCompare.js',
     'js/yachtSearch.js',
     'js/leads.js',
     'js/single-yacht.js'
