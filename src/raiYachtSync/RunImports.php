@@ -68,6 +68,37 @@
 			
 		}
 
+		public function emailSyncFailed() {
+			$siteName = get_bloginfo('name');
+    		$siteUrl = get_bloginfo('url');
+
+    		$to = $this->options->get('alert_emails');;
+
+    		$subject = $siteName . ' - SYNC Has Failed Due A "Failed Count Check" OR API ISSUE.';
+
+    		$message = '<!DOCTYPE html><html><body>';
+			$message .= '<h1>' . $subject . '</h1>';
+
+			$message .= '<p></p>';
+
+			$message .= '<a href="'. $siteUrl .'">'. $siteName .'</a>'; 
+		
+			$message .= '</body></html>';
+
+    		$headers = array(
+				'Content-Type: text/html; charset=UTF-8',
+			);
+		
+    		$sent = wp_mail($to, $subject, $message, $headers);
+
+    		if ($sent) {
+				return array('message' => 'Email sent successfully');
+			} 
+			else {
+				return array('error' => 'Email failed to send');
+			}
+		}
+
 		public function clean_up() {
 	        global $wpdb;
 			
@@ -238,6 +269,9 @@
 				}
 				else {
 					// EMAIL - AS SYNC FAILED DUE TO NOT MEETING THE REQUIREMENTS OF COUNT PROBILLY
+
+					$this->emailSyncFailed();
+
 				}
 			} 
 		}
