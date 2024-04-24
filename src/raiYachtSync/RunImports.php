@@ -269,11 +269,12 @@
 				}
 				else {
 					// EMAIL - AS SYNC FAILED DUE TO NOT MEETING THE REQUIREMENTS OF COUNT PROBILLY
-
 					$this->emailSyncFailed();
-
 				}
 			} 
+			else {
+				$this->emailSyncFailed();
+			}
 		}
        
 
@@ -289,7 +290,7 @@
 			
 			// @ToDo For Loop the Runs  
 			// KEEP THIS IN THIS ORDER
-			if (!empty($yacht_broker_org_api_token)) {
+			if (! empty($yacht_broker_org_api_token)) {
 				$resultsOfSync[]=$this->ImportYachtBrokerOrg->run();
 			}
 
@@ -312,6 +313,9 @@
 					$this->move_over();				
 					$this->AlertOnLowCount->email();	
 				}
+			}
+			else {
+				$this->emailSyncFailed();
 			}
 
        	}
