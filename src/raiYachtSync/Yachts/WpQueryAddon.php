@@ -650,7 +650,7 @@
 							break;
 					}
 				}
-				else {
+				elseif (! is_array($query->get('orderby')) || ! $this->if_query_var_check($query->get('orderby')) ) {
 				
 					$query->set('orderby', 'meta_value_num');
 					$query->set('order', 'DESC');
