@@ -18,11 +18,38 @@
 
     public function generate() {
 
+        $youtube_data_api_key = 'AIzaSyAWVv4hhLRqi55W9GxCpJmA-D7aqb9-mso';
+
+        $url = $this->context->video->url[0];
+        $url_without_query = strstr($url, "?", true);
+        $url_parts = explode("/", $url_without_query);
+        $video_id = end($url_parts);
+
+
+        $api_url = "https://www.googleapis.com/youtube/v3/videos?id=" . $video_id . "&key=" . $youtube_data_api_key . "&part=contentDetails,snippet";
+
+        $youtube_data_response = wp_remote_get(
+            esc_url_raw( $api_url ),
+            array(
+                'headers' => array(
+                    'referer' => home_url()
+                )
+            )
+        );
+
+        $youtube_data_response = json_decode(wp_remote_retrieve_body($youtube_data_response));
+        $youtube_description = $youtube_data_response->items[0]->snippet->description;
+        $youtube_description = strip_tags($youtube_description);
+        $youtube_description = preg_replace('/[^a-zA-Z0-9\s]/', '', $youtube_description);
+
         $data = [
             "@type" => "VideoObject",
             "name" => $this->context->post->post_title . " Video",
+            "description" => $youtube_description,
             "thumbnailUrl" => $this->context->video->thumbnailUrl[0],
             "contentUrl" => $this->context->video->url[0],
+            "uploadDate" => $youtube_data_response->items[0]->snippet->publishedAt,
+            "duration" => $youtube_data_response->items[0]->contentDetails->duration
         ];
 
         return $data;
