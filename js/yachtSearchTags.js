@@ -47,10 +47,14 @@ function ysp_makeSearchTags( data ) {
                               
                                 let eleUnit =  document.querySelector('.ysp-yacht-search-form [name=lengthunit]:checked');
                                     if (! eleUnit) {
-                                        eleUnit =  document.querySelector('.ysp-yacht-search-form select[name=lengthunit]');
+                                        eleUnit =  document.querySelector('.ysp-yacht-search-form [name=lengthunit]');
                                     }
 
-                                tagVal = tagVal +' '+ eleUnit.value;
+                                tagVal = tagVal +' ';
+
+                                if (eleUnit) {
+                                    tagVal += eleUnit.value;
+                                }
                             }
                            
                             newTagEle.className = 'btn btn-primary btn-sm ysp-tag';
