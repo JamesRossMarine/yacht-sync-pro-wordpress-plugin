@@ -236,6 +236,15 @@
 					);
 
 					add_settings_field(
+						self::SLUG . '_chatgpt_api_model',
+						"ChatGPT API Model",
+						array( $this, 'chatgpt_api_model_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+
+					add_settings_field(
 						self::SLUG . '_pdf_urlbox_api_token_public_key',
 						"UrlBox API Public Token",
 						array( $this, 'pdf_urlbox_api_public_token_field' ),
@@ -284,6 +293,15 @@
 						self::SLUG . '_pdf_s3_secret',
 						"S3 Secret (FOR PDF STORAGE)",
 						array( $this, 'pdf_s3_secret_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+
+					add_settings_field(
+						self::SLUG . '_youtube_data_api_key',
+						"Youtube Data API Key",
+						array( $this, 'youtube_data_api_key_field' ),
 						self::SLUG,
 						self::SLUG . '_admin_fields',
 						array( )
@@ -628,6 +646,15 @@
 
 		}
 
+		public function chatgpt_api_model_field() {
+			$nameOfField=self::SLUG.'_chatgpt_api_model';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php
+		}
+
 		public function pdf_urlbox_api_public_token_field() {
 			$nameOfField=self::SLUG.'_pdf_urlbox_api_token_public_key';
 			$valOfField=get_option($nameOfField);
@@ -688,6 +715,14 @@
 
 		}
 
+		public function youtube_data_api_key_field() {
+			$nameOfField=self::SLUG.'_youtube_data_api_key';
+			$valOfField=get_option($nameOfField);
 
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
 
 	}

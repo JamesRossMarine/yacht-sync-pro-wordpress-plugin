@@ -47,6 +47,7 @@
 			register_setting( self::SLUG, self::SLUG . '_akismet_api_token');
 			register_setting( self::SLUG, self::SLUG . '_exchange_api_token');
 			register_setting( self::SLUG, self::SLUG . '_chatgpt_api_token');
+			register_setting( self::SLUG, self::SLUG . '_chatgpt_api_model');
 
 			register_setting( self::SLUG, self::SLUG . '_pdf_urlbox_api_token_public_key');
 			register_setting( self::SLUG, self::SLUG . '_pdf_urlbox_api_secret_key');
@@ -55,6 +56,8 @@
 			register_setting( self::SLUG, self::SLUG . '_pdf_s3_endpoint');
 			register_setting( self::SLUG, self::SLUG . '_pdf_s3_key');
 			register_setting( self::SLUG, self::SLUG . '_pdf_s3_secret');
+
+			register_setting( self::SLUG, self::SLUG . '_youtube_data_api_key');
 
 			$this->fields->set_fields();
 			
