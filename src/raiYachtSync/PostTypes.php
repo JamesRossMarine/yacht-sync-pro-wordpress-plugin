@@ -44,6 +44,8 @@
 					'name' => 'Synced Yachts',
 					'singular_name' => 'Yacht',
 				),
+
+				'supports' => array('title', 'editor', 'thumbnail'),
 				
 				'has_archive' => false,
 				//'query_var' => 'rai_yacht_id',
