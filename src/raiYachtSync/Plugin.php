@@ -27,6 +27,7 @@
 			$this->Yachts_Shortcode = new raiYachtSync_Shortcodes_YachtSearch();
 			$this->Yachts_Search_Seo_ApplyToYoast = new raiYachtSync_YoastFun_SearchSEOApply();
 			$this->Yachts_Search_Seo_Shortcode = new raiYachtSync_Shortcodes_YachtSearchSeo();
+			$this->Yachts_RestrictManagePosts = new raiYachtSync_Yachts_RestrictManagePosts();
 
 			$this->Yachts_Meta_Brochure = new raiYachtSync_Yachts_MetaBrochureSection();
 
