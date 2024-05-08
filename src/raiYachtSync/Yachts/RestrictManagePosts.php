@@ -3,7 +3,7 @@
 
     class raiYachtSync_Yachts_RestrictManagePosts {
         public function __construct() {
-            $this->add_actions_and_filters();
+            $this->DBHelper = new raiYachtSync_DBHelper();
         }
         
         public function add_actions_and_filters() {
@@ -36,35 +36,32 @@
             }
         }
 
-        public function rai_yacht_filtering_by_builder() {
-            if(!is_singular('rai_yacht')){
+        public function rai_yacht_filtering_by_builder($post_type) {
+            if($post_type != 'rai_yacht'){
                 return;
-              }
-              $selected = '';
-              $request_attr = 'MakeString';
-              if ( isset($_REQUEST[$request_attr]) ) {
-                $selected = $_REQUEST[$request_attr];
-              }
+            }
+            
+            global $wpdb;
 
-              $meta_key = 'my_custom_field_location';
-              global $wpdb;
-              $results = $wpdb->get_col( 
-                  $wpdb->prepare( "
-                      SELECT DISTINCT pm.meta_value FROM {$wpdb->postmeta} pm
-                      LEFT JOIN {$wpdb->posts} p ON p.ID = pm.post_id
-                      WHERE pm.meta_key = '%s' 
-                      AND p.post_status IN ('publish', 'draft')
-                      ORDER BY pm.meta_value", 
-                      $meta_key
-                  ) 
-              );
-             
-              echo '<select id="ysp-make-string" name="ysp-make-string">';
-              echo '<option value="0">' . __( 'Show all makes', 'ysp.local' ) . ' </option>';
-              foreach($results as $make){
+            $selected = '';
+            $request_attr = 'make';
+            $meta_key = 'MakeString';
+
+            if ( isset($_REQUEST[$request_attr]) ) {
+            
+                $selected = $_REQUEST[$request_attr];
+            }
+
+            $results = $this->DBHelper->get_unique_yacht_meta_values($meta_key);
+            
+            echo '<select name="make">';
+            echo '<option value="0">' . __( 'All makes', 'ysp.local' ) . ' </option>';
+
+            foreach($results as $make){
                 $select = ($make == $selected) ? ' selected="selected"':'';
                 echo '<option value="' . $make . '"' . $select . '>' . $make . ' </option>';
-              }
-              echo '</select>';
+            }
+
+            echo '</select>';
         }
     }
