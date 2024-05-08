@@ -79,10 +79,10 @@
 
            ]);
 */
-           register_post_type('rai_broker', [
+           register_post_type('rai_team', [
            		'labels' => array(
-					'name' => 'Ross Brokers',
-					'singular_name' => 'Broker',
+					'name' => 'Team Members',
+					'singular_name' => 'Team Member',
 				),
 				
 				'has_archive' => false,
