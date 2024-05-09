@@ -83,8 +83,8 @@
                     $_POST['broker_phone']
                 );
             }
-            $main_broker = isset($_POST['main_broker']) ? '1' : '0';
-            update_post_meta($post_id, 'rai_main_broker', $main_broker);
+            
+            // update_post_meta($post_id, 'rai_main_broker', $main_broker);
         }
 
     }
