@@ -1,3 +1,5 @@
+const yspBeforeYachtSearch = new Event("ysp-before-submitting-yacht-search");
+const yspAfterYachtSearch = new Event("ysp-after-submitting-yacht-search");
 
 function ysp_yacht_search_and_reader(data) {
 
@@ -212,11 +214,17 @@ document.addEventListener("DOMContentLoaded", function() {
         yachtSearchAndResults.addEventListener('submit', function(e) {
             e.preventDefault();
 
+            e.target.dispatchEvent(yspBeforeYachtSearch);
+
             e.target.querySelector('input[name=page_index]').value=1;
 
             let params = raiys_get_form_data(e.target);
 
-            ysp_yacht_search_and_reader( params );
+            ysp_yacht_search_and_reader( params ).then(function(api_data) {
+
+                e.target.dispatchEvent(yspAfterYachtSearch);
+
+            });
 
         }); 
 
