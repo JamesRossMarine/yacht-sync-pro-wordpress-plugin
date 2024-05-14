@@ -152,3 +152,10 @@ var ysp_templates={};
 			</span>
     	`;
     };
+
+    ysp_templates.pagination = {};
+    
+    	ysp_templates.pagination.next_text = `>`;
+
+    	ysp_templates.pagination.prev_text = `<`;
+

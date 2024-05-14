@@ -36,7 +36,7 @@ function ysp_addVesselToCompareList(yachtId) {
     if (YSP_VesselCompareList.indexOf( yachtId ) == -1) {
 
     	YSP_VesselCompareList.push(yachtId);
-  		
+        
     }
     
     ysp_makeCompareLinkout();
