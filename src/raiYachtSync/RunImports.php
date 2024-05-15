@@ -11,6 +11,7 @@
 			$this->BrochureCleanUp = new raiYachtSync_BrochureCleanUp();
 
 			$this->AlertOnLowCount = new raiYachtSync_AlertOnLowCount();
+			$this->AlertOnDiffCount = new raiYachtSync_AlertOnDiffCount();
 
 			$this->ImportGlobalBoatsCom = new raiYachtSync_ImportRuns_GlobalBoatsCom();
 			$this->ImportBrokerageOnlyBoatsCom = new raiYachtSync_ImportRuns_BrokerageOnlyBoatsCom();
@@ -266,6 +267,7 @@
 				if ($cleaned_up) {
 					$this->move_over();				
 					$this->AlertOnLowCount->email();	
+					$this->AlertOnDiffCount->email();	
 				}
 				else {
 					// EMAIL - AS SYNC FAILED DUE TO NOT MEETING THE REQUIREMENTS OF COUNT PROBILLY
@@ -312,6 +314,7 @@
 				if ($cleaned_up) {
 					$this->move_over();				
 					$this->AlertOnLowCount->email();	
+					$this->AlertOnDiffCount->email();	
 				}
 			}
 			else {
