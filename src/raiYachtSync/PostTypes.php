@@ -88,6 +88,12 @@
 				'has_archive' => false,
 				//'query_var' => 'rai_broker_id',
 
+				
+				'rewrite' => array(
+			        'slug' => 'team',
+			        'with_front' => true
+			    ),
+
 				'public' => true,
 				'publicly_queryable' => true,
 				'can_export' => false,

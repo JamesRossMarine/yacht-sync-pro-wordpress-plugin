@@ -356,7 +356,7 @@
 
 					echo 'Dont shot the messagener, the api has '. $brokerageApiCall['body']['numResults'] . ' and wordpress has '. $wpBrokerageCount;
 
-					$EmailAlert = new raiYachtSync_AlertOnLDiffCount();
+					$EmailAlert = new raiYachtSync_AlertOnDiffCount();
 
 					$EmailAlert->email();
 
