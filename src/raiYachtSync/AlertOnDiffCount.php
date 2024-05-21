@@ -1,6 +1,6 @@
 <?php
 	#[AllowDynamicProperties]
-	class raiYachtSync_AlertOnLDiffCount {
+	class raiYachtSync_AlertOnDiffCount {
 
 		public function __construct( ) {
 
@@ -31,7 +31,7 @@
 
 			}
 			else {
-				retrun false;
+				return false;
 			}
 	    }
 

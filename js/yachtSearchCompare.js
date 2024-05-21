@@ -57,8 +57,11 @@ function ysp_removeVesselToCompareList(yachtId) {
 
 function ysp_makeCompareLinkout() {
 
-	document.getElementById('ysp_compare_linkout').href=rai_yacht_sync.wp_rest_url+"raiys/compare/?postID="+YSP_VesselCompareList.join(',');
+    if (YSP_VesselCompareList.length >= 2) {
+    	document.getElementById('ysp_compare_linkout').href=rai_yacht_sync.wp_rest_url+"raiys/compare/?postID="+YSP_VesselCompareList.join(',');
 
-	document.getElementById('ysp_compare_linkout').innerHTML=`<button type="button">Compare ( ${YSP_VesselCompareList.length} )</button>`;
+    	document.getElementById('ysp_compare_linkout').innerHTML=`<button type="button">Compare ( ${YSP_VesselCompareList.length} )</button>`;
+    }
+
 
 }
