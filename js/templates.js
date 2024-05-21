@@ -1,20 +1,26 @@
 var ysp_templates={};
 	ysp_templates.yacht={};
 	
-	ysp_templates.yacht.grid=function(vessel) {
+	ysp_templates.yacht.grid=function(vessel, params) {
 		let meters = parseInt(vessel.NominalLength) * 0.3048;
 
 		let price = '';
 		let length = '';
 
-		if(rai_yacht_sync.europe_option_picked == "yes"){
+		if (rai_yacht_sync.europe_option_picked == "yes") {
 			length = vessel.NominalLength ? meters.toFixed(2) + ' m' : 'N/A';
-			price = (typeof vessel.YSP_EuroVal != 'undefined' && vessel.YSP_EuroVal > 0) ? `€ ${new Intl.NumberFormat('en-us', { minimumFractionDigits: 2}).format(vessel.YSP_EuroVal) }` : 'Contact Us For Price';
+			price = (typeof vessel.YSP_EuroVal != 'undefined' && vessel.YSP_EuroVal > 0) ? `€${new Intl.NumberFormat('en-us', { minimumFractionDigits: 2}).format(vessel.YSP_EuroVal) }` : 'Contact Us For Price';
 		} 
-
 		else {
 			length = vessel.NominalLength ? vessel.NominalLength + " / " + meters.toFixed(2) + ' m' : 'N/A';
-			price = (typeof vessel.YSP_USDVal != 'undefined' && vessel.YSP_USDVal > 0) ? `$ ${new Intl.NumberFormat('en-us', { minimumFractionDigits: 2}).format(vessel.YSP_USDVal) }` : 'Contact Us For Price'
+
+			if (params.currency == 'Eur') {
+				price = (typeof vessel.YSP_USDVal != 'undefined' && vessel.YSP_USDVal > 0) ? `€${new Intl.NumberFormat('en-us', { minimumFractionDigits: 2}).format(vessel.YSP_EuroVal) }` : 'Contact Us For Price';
+			}
+			else {
+				price = (typeof vessel.YSP_USDVal != 'undefined' && vessel.YSP_USDVal > 0) ? `$${new Intl.NumberFormat('en-us', { minimumFractionDigits: 2}).format(vessel.YSP_USDVal) }` : 'Contact Us For Price';
+			}
+
 		}
 
 		return `

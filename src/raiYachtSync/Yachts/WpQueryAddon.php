@@ -30,10 +30,10 @@
 			$vars[] = 'yearhi';
 
 			$vars[] = 'lengthunit';
-
 			$vars[] = 'lengthlo';
 			$vars[] = 'lengthhi';
 
+			$vars[] = 'currency';
 			$vars[] = 'pricelo';
 			$vars[] = 'pricehi';
 
