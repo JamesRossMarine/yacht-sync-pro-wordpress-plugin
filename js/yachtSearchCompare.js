@@ -61,7 +61,42 @@ function ysp_makeCompareLinkout() {
     	document.getElementById('ysp_compare_linkout').href=rai_yacht_sync.wp_rest_url+"raiys/compare/?postID="+YSP_VesselCompareList.join(',');
 
     	document.getElementById('ysp_compare_linkout').innerHTML=`<button type="button">Compare ( ${YSP_VesselCompareList.length} )</button>`;
+        
+        let params = {
+            'post__in': YSP_VesselCompareList,
+        };
+
+        return rai_ysp_api.call_api("POST", "yachts", params).then(function(data_result) {
+
+            data_result.results.forEach(function(item) {
+                jQuery('#ysp-compare-previews').append( ysp_templates.yacht.compare_preview(item, params) );
+
+                let ele_preview = jQuery('#ysp-compare-previews [data-post-id='+ item._postID +']');
+                
+                jQuery('.remove-from-compare', ele_preview).click(function() {
+                    console.log('hello');
+                    
+                    let ele_card = jQuery('#search-result-row [data-post-id='+ item._postID +']');
+
+                    jQuery('.compare_toggle', ele_card).prop('checked', false).removeClass('armed');
+
+                    ysp_removeVesselToCompareList(item._postID);
+                
+                    ysp_makeCompareLinkout();
+
+
+                });
+
+            });
+
+        });
     }
+    else {
+        jQuery('#ysp-compare-previews').html('');
+        jQuery('#ysp_compare_linkout').html('');
+    }
+
+
 
 
 }

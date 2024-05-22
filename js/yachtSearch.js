@@ -47,7 +47,7 @@ function ysp_yacht_search_and_reader(data) {
                     jQuery('#search-result-row').append( ysp_templates.yacht.grid(item, data) );
                 }
 
-                let ele_card = jQuery('[data-post-id='+ item._postID +']');
+                let ele_card = jQuery('#search-result-row [data-post-id='+ item._postID +']');
 
                 jQuery('[data-modal]', ele_card).click(function(e) {
                     e.preventDefault();
