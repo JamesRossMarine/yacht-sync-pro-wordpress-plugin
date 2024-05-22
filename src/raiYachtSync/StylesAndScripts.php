@@ -62,6 +62,9 @@
 
 			wp_register_style('yacht-sync-styles', RAI_YS_PLUGIN_ASSETS.'build/css/app-style.noMaps.css', false, null, false);
 			wp_register_script('yacht-sync-script', RAI_YS_PLUGIN_ASSETS.'build/js/globalPlugin.noMaps.js', ['jquery'], null, true);
+			
+			wp_register_style('ysp-single-yacht-styles', RAI_YS_PLUGIN_ASSETS.'build/css/app-single-yacht.noMaps.css', false, null, false);
+			wp_register_script('ysp-single-yacht-script', RAI_YS_PLUGIN_ASSETS.'build/js/appSingleYacht.noMaps.js', ['jquery'], null, true);
 
 			$js_vars = [
 				'wp_rest_url' => get_rest_url(),
@@ -77,9 +80,15 @@
 			wp_localize_script('yacht-sync-script', 'rai_yacht_sync', $js_vars); 
 
 			wp_enqueue_script('yacht-sync-script');
+			
 			wp_enqueue_style('yacht-sync-styles');
 
 			wp_add_inline_style('yacht-sync-styles', $this->pickedColorsFromWpAdmin());
+
+			if (is_singular('rai_yacht')) {
+				wp_enqueue_style("ysp-single-yacht-styles");
+				wp_enqueue_script("ysp-single-yacht-script");
+			}
 
 		}
 
