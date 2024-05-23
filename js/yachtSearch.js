@@ -457,8 +457,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 console.log(params.ys_yachts_loved);
 
-                params.ys_only_these=JSON.parse( localStorage.getItem('ysp_loved_vessels') ).join(',');
+                let loved_yachts = JSON.parse( localStorage.getItem('ysp_loved_vessels') );
 
+                if (loved_yachts.length > 0) {
+                    params.ys_only_these=JSON.parse( localStorage.getItem('ysp_loved_vessels') ).join(',');
+
+                }
+                else {
+                    params.ys_only_these="0,0,0";
+                }
             }
 
             ysp_yacht_search_and_reader( params );       
