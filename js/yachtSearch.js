@@ -460,7 +460,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 let loved_yachts = JSON.parse( localStorage.getItem('ysp_loved_vessels') );
 
                 if (loved_yachts.length > 0) {
-                    params.ys_only_these=JSON.parse( localStorage.getItem('ysp_loved_vessels') ).join(',');
+                    params.ys_only_these = loved_yachts.join(',');
 
                 }
                 else {
