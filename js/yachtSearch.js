@@ -453,9 +453,8 @@ document.addEventListener("DOMContentLoaded", function() {
             let params = raiys_get_form_data(document.querySelector('.ysp-yacht-search-form'));
                 console.log(params);
 
+            // Liked / Loved 
             if (typeof params.ys_yachts_loved != 'undefined') {
-
-                console.log(params.ys_yachts_loved);
 
                 let loved_yachts = JSON.parse( localStorage.getItem('ysp_loved_vessels') );
 
