@@ -20,6 +20,8 @@
     $company_logo_url = wp_get_attachment_image_url($YSP_Comapny_logo, 'small');
 ?>
 <div class="ysp-compare-yachts-container">
+    <a href="<?= get_site_url() . '/yacht-search/?restore_to_compare='. $_GET["postID"] ?>"><img src="<?= get_template_directory_uri() . '/images/Left_Blue_Arrow.svg' ?>" alt="Back" title="Back" width="22" height="22" /> Back</a>
+
     <div class="ysp-compare-general-container">
         <div class="ysp-compare-logo-container">
             <img style="margin: auto;" src="<?php echo esc_url($company_logo_url); ?>" alt="Company Logo" style="height: 120px; width: 120px" />

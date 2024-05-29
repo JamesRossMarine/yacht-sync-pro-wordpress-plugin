@@ -363,6 +363,9 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
 
+        // Restore Compare
+         ysp_restoreCompares();
+
         // Fill options
         let FillOptions=[];
         let selectorElements = document.querySelectorAll("select[data-fill-options]");
@@ -466,6 +469,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     params.ys_only_these="0,0,0";
                 }
             }
+
 
             ysp_yacht_search_and_reader( params );       
         });
