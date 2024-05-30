@@ -46,9 +46,27 @@
 					);
 
 					add_settings_field(
+						self::SLUG . '_boats_com_api_global_key_2',
+						"Boats.com Api Global Key #2",
+						array( $this, 'boats_com_api_global_key_2_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+
+					add_settings_field(
 						self::SLUG . '_boats_com_api_brokerage_key',
 						"Boats.com Api Brokerage Key",
 						array( $this, 'boats_com_api_brokerage_key_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+
+					add_settings_field(
+						self::SLUG . '_boats_com_api_brokerage_ke_2',
+						"Boats.com Api Brokerage Key #2",
+						array( $this, 'boats_com_api_brokerage_key_2_field' ),
 						self::SLUG,
 						self::SLUG . '_admin_fields',
 						array( )
@@ -379,9 +397,31 @@
 
 		}
 
+		public function boats_com_api_global_key_2_field() {
+
+			$nameOfField=self::SLUG.'_boats_com_api_global_key_2';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
+
 		public function boats_com_api_brokerage_key_field() {
 
 			$nameOfField=self::SLUG.'_boats_com_api_brokerage_key';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
+
+		public function boats_com_api_brokerage_key_2_field() {
+
+			$nameOfField=self::SLUG.'_boats_com_api_brokerage_key_2';
 			$valOfField=get_option($nameOfField);
 
 			?>

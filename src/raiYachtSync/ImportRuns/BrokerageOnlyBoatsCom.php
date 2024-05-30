@@ -6,7 +6,7 @@
 		
 		public $brokerageInventoryUrl = 'https://api.boats.com/inventory/search?SalesStatus=Active,On-Order&key=';
 
-		public function __construct() {
+		public function __construct($metakey = 'boats_com_api_brokerage_key') {
 
 			$this->options = new raiYachtSync_Options();
 
@@ -16,7 +16,7 @@
 
 			$this->ChatGPTYachtDescriptionVersionTwo = new raiYachtSync_ChatGPTYachtDescriptionVersionTwo();
 
-			$this->key=$this->options->get('boats_com_api_brokerage_key');
+			$this->key=$this->options->get($metakey);
 			$this->opt_prerender_brochures=$this->options->get('prerender_brochures');
 
 			$this->brokerageInventoryUrl .= $this->key;

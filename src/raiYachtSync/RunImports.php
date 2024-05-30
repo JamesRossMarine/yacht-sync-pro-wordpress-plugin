@@ -14,8 +14,13 @@
 			$this->AlertOnDiffCount = new raiYachtSync_AlertOnDiffCount();
 
 			$this->ImportGlobalBoatsCom = new raiYachtSync_ImportRuns_GlobalBoatsCom();
+			$this->ImportGlobalBoatsCom2 = new raiYachtSync_ImportRuns_GlobalBoatsCom('boats_com_api_global_key_2');
+
 			$this->ImportBrokerageOnlyBoatsCom = new raiYachtSync_ImportRuns_BrokerageOnlyBoatsCom();
+			$this->ImportBrokerageOnlyBoatsCom2 = new raiYachtSync_ImportRuns_BrokerageOnlyBoatsCom('boats_com_api_brokerage_key_2');
+			
 			$this->ImportYachtBrokerOrg = new raiYachtSync_ImportRuns_YachtBrokerOrg();
+			
 			$this->ImportYatco = new raiYachtSync_ImportRuns_YatcoCom();
 			
 		}
@@ -225,7 +230,10 @@
 		public function run() {
            
            	$boats_com_api_global_key = $this->options->get('boats_com_api_global_key');
+           	$boats_com_api_global_key_2 = $this->options->get('boats_com_api_global_key_2');
+
 			$boats_com_api_brokerage_key = $this->options->get('boats_com_api_brokerage_key');
+			$boats_com_api_brokerage_key_2 = $this->options->get('boats_com_api_brokerage_key_2');
 			
 			$yacht_broker_org_api_token = $this->options->get('yacht_broker_org_api_token');
 
@@ -239,12 +247,20 @@
 				$resultsOfSync[]=$this->ImportGlobalBoatsCom->run();
 			}
 
+			if (! empty($boats_com_api_global_key_2)) {
+				$resultsOfSync[]=$this->ImportGlobalBoatsCom2->run();
+			}
+
 			if (!empty($yacht_broker_org_api_token)) {
 				$resultsOfSync[]=$this->ImportYachtBrokerOrg->run();
 			}
 
 			if (! empty($boats_com_api_brokerage_key)) {
 				$resultsOfSync[]=$this->ImportBrokerageOnlyBoatsCom->run();
+			}
+
+			if (! empty($boats_com_api_brokerage_key_2)) {
+				$resultsOfSync[]=$this->ImportBrokerageOnlyBoatsCom2->run();
 			}
 
 			if (! empty($yatco_api_token) && $yatco_api_token == 'fortheops') {
@@ -283,6 +299,7 @@
        	public function run_brokerage_only() {
 
  			$boats_com_api_brokerage_key = $this->options->get('boats_com_api_brokerage_key');
+ 			$boats_com_api_brokerage_key_2 = $this->options->get('boats_com_api_brokerage_key_2');
 			
 			$yacht_broker_org_api_token = $this->options->get('yacht_broker_org_api_token');
 
@@ -298,6 +315,10 @@
 
 			if (! empty($boats_com_api_brokerage_key)) {
 				$resultsOfSync[]=$this->ImportBrokerageOnlyBoatsCom->run();
+			}
+
+			if (! empty($boats_com_api_brokerage_key_2)) {
+				$resultsOfSync[]=$this->ImportBrokerageOnlyBoatsCom2->run();
 			}
 			
 			$syncHadIssue=false;
