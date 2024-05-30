@@ -1,5 +1,6 @@
 const yspBeforeYachtSearch = new Event("ysp-before-submitting-yacht-search");
 const yspAfterYachtSearch = new Event("ysp-after-submitting-yacht-search");
+const yspAfterRenderingYacht = new Event("ysp-after-rendering-yacht-search");
 
 function ysp_yacht_search_and_reader(data) {
 
@@ -98,6 +99,8 @@ function ysp_yacht_search_and_reader(data) {
         jQuery([document.documentElement, document.body]).animate({
             scrollTop: (jQuery(".scroll-to-here-on-yacht-search").offset().top)
         }, 250);
+
+        document.querySelector('.ysp-yacht-search-form:not(#ysp-mobile-yacht-search-form)').dispatchEvent(yspAfterRenderingYacht);
 
         return data_result;
 
