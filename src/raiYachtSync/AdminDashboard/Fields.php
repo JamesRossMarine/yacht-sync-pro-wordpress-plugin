@@ -198,6 +198,15 @@
 						self::SLUG . '_admin_fields',
 						array( )
 					);
+
+					add_settings_field(
+						self::SLUG . '_team_page_id',
+						"Team Page",
+						array( $this, 'team_page_id_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
 					
 					add_settings_field(
 						self::SLUG . '_company_name',
@@ -603,6 +612,44 @@
 			}
 
 			$nameOfField=self::SLUG.'_yacht_search_page_id';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<select name="<?= $nameOfField ?>"> 
+				<?php 
+					foreach ( $options as $opt_value => $opt_label ) {
+						$option = '<option value="' . $opt_value . '" '. selected($opt_value, $valOfField, false) .'>';
+
+						$option .= $opt_label;
+						
+						$option .= '</option>';
+
+						echo $option;
+					}
+				?>
+			</select><?php 
+
+		}
+
+		public function team_page_id_field() {
+			$pages=get_posts([
+				'post_type' => 'page', 
+				'posts_per_page' => -1, 
+				'post_status' => ['draft', 'publish'], 
+				'orderby' => 'title',
+				'order' => 'ASC'
+			]);
+
+			$options=[
+				'' => '---- Not Picked Yet ----',
+			];
+
+			foreach ($pages as $pg) {
+				$options[$pg->ID]=$pg->post_title;
+			}
+
+			$nameOfField=self::SLUG.'_team_page_id';
 			$valOfField=get_option($nameOfField);
 
 			?>

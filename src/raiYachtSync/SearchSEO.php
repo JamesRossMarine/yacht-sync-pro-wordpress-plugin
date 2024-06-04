@@ -59,8 +59,8 @@
 			global $wp_query;
 
 			$order_of_params=[
-				'ys_company_only',
 				'condition',
+				'ys_company_only',
 				'ys_keyword',
 				// sail or motor
 				//'year',		

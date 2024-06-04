@@ -42,6 +42,7 @@
 			register_setting( self::SLUG, self::SLUG . '_send_lead_to_this_email');
 
 			register_setting( self::SLUG, self::SLUG . '_yacht_search_page_id');
+			register_setting( self::SLUG, self::SLUG . '_team_page_id');
 			
 			register_setting( self::SLUG, self::SLUG . '_company_name');
 			register_setting( self::SLUG, self::SLUG . '_company_number');

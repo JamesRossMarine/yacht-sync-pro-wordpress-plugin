@@ -19,6 +19,7 @@
 			$this->YoastFun_Descriptions = new raiYachtSync_YoastFun_Descriptions();
 
 			$this->YoastFun_SchemaPieces = new raiYachtSync_YoastFun_SchemaPieces();
+			$this->YoastFun_Breadcrumbs = new raiYachtSync_YoastFun_Breadcrumbs();
 
 			$this->Yachts_WpQueryAddon = new raiYachtSync_Yachts_WpQueryAddon();
 			$this->Yachts_WpQueryForSimilar = new raiYachtSync_Yachts_WpQueryForSimilar();
