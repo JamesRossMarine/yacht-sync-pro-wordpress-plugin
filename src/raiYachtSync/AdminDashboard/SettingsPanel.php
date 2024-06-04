@@ -34,6 +34,8 @@
 			register_setting( self::SLUG, self::SLUG . '_alert_on_low_count');
 			register_setting( self::SLUG, self::SLUG . '_alert_emails');
 
+			register_setting( self::SLUG, self::SLUG . '_last_synced');
+
 			register_setting( self::SLUG, self::SLUG . '_color_one');
 			register_setting( self::SLUG, self::SLUG . '_color_two');
 			register_setting( self::SLUG, self::SLUG . '_color_three');

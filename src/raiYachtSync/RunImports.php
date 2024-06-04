@@ -282,6 +282,7 @@
 					
 				if ($cleaned_up) {
 					$this->move_over();				
+					$this->options->set('last_synced', date('Y-m-d h:i:sa'));
 					$this->AlertOnLowCount->email();	
 					$this->AlertOnDiffCount->email();	
 				}
