@@ -34,7 +34,9 @@
 
 				'public' => false,
 				'publicly_queryable' => false,
-				'can_export' => true
+				'can_export' => true,
+
+				'supports' => array('title', 'editor', 'thumbnail', 'custom-fields')
 
             ]);
             
@@ -97,7 +99,7 @@
 				'public' => true,
 				'publicly_queryable' => true,
 				'can_export' => false,
-				'supports' => array('title', 'editor', 'thumbnail')
+				'supports' => array('title', 'editor', 'thumbnail', 'custom-fields')
            ]);
 
 		}
