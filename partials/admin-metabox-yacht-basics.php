@@ -46,139 +46,207 @@
 	$yacht_total_engine_hours_numeric = get_post_meta( $post->ID, 'TotalEngineHoursNumeric', true );
 	$yacht_total_engine_power_quantity = get_post_meta( $post->ID, 'TotalEnginePowerQuantity', true );
 ?>
-<label>Beam Measure (ft)</label>
-<input type="number" name="YSP_BeamFeet" step="0.5" value="<?= $yacht_ysp_beam_feet ?>">
-<br>
-<label>Beam Measure (m)</label>
-<input type="number" name="YSP_BeamMeter" step="0.5" value="<?= $yacht_ysp_beam_meter ?>">
-<br>
-<label>Broker Name</label>
-<input type="text" name="YSP_BrokerName" value="<?= $yacht_ysp_broker_name ?>">
-<br>
-<label>Yacht City Name</label>
-<input type="text" name="YSP_City" value="<?= $yacht_ysp_city ?>">
-<br>
-<label>Yacht Country Name</label>
-<input type="text" name="YSP_CountryID" value="<?= $yacht_ysp_country_id ?>">
-<br>
-<label>Yacht State Name</label>
-<input type="text" name="YSP_State" value="<?= $yacht_ysp_state ?>">
-<br>
-<label>Engine Count</label>
-<input type="text" name="YSP_EngineCount" value="<?= $yacht_ysp_engine_count ?>">
-<br>
-<label>Engine Fuel</label>
-<input type="text" name="YSP_EngineFuel" value="<?= $yacht_ysp_engine_fuel ?>">
-<br>
-<label>Engine Hours</label>
-<input type="number" name="YSP_EngineHours" value="<?= $yacht_ysp_engine_hours ?>">
-<br>
-<label>Engine Model</label>
-<input type="text" name="YSP_EngineModel" value="<?= $yacht_ysp_engine_model ?>">
-<br>
-<label>Engine Power</label>
-<input type="text" name="YSP_EnginePower" value="<?= $yacht_ysp_engine_power ?>">
-<br>
-<label>Engine Type</label>
-<input type="text" name="YSP_EngineType" value="<?= $yacht_ysp_engine_type ?>">
-<br>
-<label>Price (USD)</label>
-<input type="number" name="NormPrice" value="<?= $yacht_norm_price ?>">
-<br>
-<label>Price (EUR)</label>
-<input type="number" name="YSP_EuroVal" value="<?= $yacht_ysp_euro_val ?>">
-<br>
-<label>Length</label>
-<input type="text" name="YSP_Length" value="<?= $yacht_ysp_length ?>">
-<br>
-<label>Overall Length (ft)</label>
-<input type="number" name="YSP_LOAFeet" step="0.5" value="<?= $yacht_ysp_loa_feet ?>">
-<br>
-<label>Overall Length (m)</label>
-<input type="number" name="YSP_LOAMeter" step="0.5" value="<?= $yacht_ysp_loa_meter ?>">
-<br>
-<label>Listing Date</label>
-<input type="date" name="YSP_ListingDate" value="<?= $yacht_ysp_listing_date ?>">
-<br>
-<label>Make</label>
-<input type="text" name="MakeString" value="<?= $yacht_make_string ?>">
-<br>
-<label>Model</label>
-<input type="text" name="Model" value="<?= $yacht_model ?>">
-<br>
-<label>Year</label>
-<input type="number" name="ModelYear" min="1900" max="<?= (string) date("Y") + 1 ?>" value="<?= $yacht_model_year ?>">
-<br>
-<label>Sales Status</label>
-<select name="SalesStatus">
-	<option value="Active" <?php if ($yacht_sales_status == "Active") echo "selected"; ?>>Active</option>
-	<option value="SalePending" <?php if ($yacht_sales_status == "SalePending") echo "selected"; ?>>Sale Pending</option>
-	<option value="Sold" <?php if ($yacht_sales_status == "Sold") echo "selected"; ?>>Sold</option>
-</select>
-<br>
-<label>Yacht Category</label>
-<input type="text" name="BoatCategoryCode" value="<?= $yacht_boat_category_code ?>">
-<br>
-<label>Yacht Class</label>
-<input type="text" name="BoatClassCode" value="<?= $yacht_boat_class_code ?>">
-<br>
-<label>Has Hull ID</label>
-<input type="text" name="HasHullID" value="<?= $yacht_has_boat_hull_id ?>">
-<br>
-<label>Hull ID</label>
-<input type="text" name="BoatHullID" value="<?= $yacht_boat_hull_id ?>">
-<br>
-<label>Hull Material</label>
-<input type="text" name="BoatHullMaterialCode" value="<?= $yacht_boat_hull_material_code ?>">
-<br>
-<label>Yacht Name</label>
-<input type="text" name="BoatName" value="<?= $yacht_boat_name ?>">
-<br>
-<label>Company Owned</label>
-<select name="CompanyBoat">
-	<option value="0" <?php if ($yacht_company_boat == "0") echo "selected"; ?>>No</option>
-	<option value="1" <?php if ($yacht_company_boat == "1") echo "selected"; ?>>Yes</option>
-</select>
-<br>
-<label>Company Name</label>
-<input type="text" name="CompanyName" value="<?= $yacht_company_name ?>">
-<br>
-<label>Document ID</label>
-<input type="text" name="DocumentID" value="<?= $yacht_document_id ?>">
-<br>
-<label>Heads Count</label>
-<input type="number" name="HeadsCountNumeric" value="<?= $yacht_heads_count_numeric ?>">
-<br>
-<label>Fuel Tank Capacity</label>
-<input type="text" name="FuelTankCapacityMeasure" value="<?= $yacht_fuel_tank_capacity_measure ?>">
-<br>
-<label>Fuel Tank Count</label>
-<input type="text" name="FuelTankCountNumeric" value="<?= $yacht_fuel_tank_count_numeric ?>">
-<br>
-<label>Fuel Tank Material</label>
-<input type="text" name="FuelTankMaterialCode" value="<?= $yacht_fuel_tank_material_code ?>">
-<br>
-<label>Holding Tank Capacity</label>
-<input type="text" name="HoldingTankCapacityMeasure" value="<?= $yacht_holding_tank_capacity_measure ?>">
-<br>
-<label>Holding Tank Count</label>
-<input type="text" name="HoldingTankCountNumeric" value="<?= $yacht_holding_tank_count_numeric ?>">
-<br>
-<label>Holding Tank Material</label>
-<input type="text" name="HoldingTankMaterialCode" value="<?= $yacht_holding_tank_material_code ?>">
-<br>
-<label>Water Tank Capacity</label>
-<input type="text" name="WaterTankCapacityMeasure" value="<?= $yacht_water_tank_capacity_measure ?>">
-<br>
-<label>Water Tank Count</label>
-<input type="text" name="WaterTankCountNumeric" value="<?= $yacht_water_tank_count_numeric ?>">
-<br>
-<label>Water Tank Material</label>
-<input type="text" name="WaterTankMaterialCode" value="<?= $yacht_water_tank_material_code ?>">
-<br>
-<label>Total Engine Hours</label>
-<input type="number" name="TotalEngineHoursNumberic" value="<?= $yacht_total_engine_hours_numeric ?>">
-<br>
-<label>Total Engine Power Quantity</label>
-<input type="text" name="TotalEnginePowerQuantity" value="<?= $yacht_total_engine_power_quantity ?>">
-<br>
+<div id="yacht-metabox-basics">
+	<div class="metafield">
+		<label>Beam Measure (ft)</label>
+		<input type="number" name="YSP_BeamFeet" step="0.1" value="<?= $yacht_ysp_beam_feet ?>">
+	</div>
+	<div class="metafield">
+		<label>Beam Measure (m)</label>
+		<input type="number" name="YSP_BeamMeter" step="0.1" value="<?= $yacht_ysp_beam_meter ?>">
+	</div>
+	<div class="metafield">
+		<label>Broker Name</label>
+		<input type="text" name="YSP_BrokerName" value="<?= $yacht_ysp_broker_name ?>">
+	</div>
+	<div class="metafield">
+		<label>Yacht City Name</label>
+		<input type="text" name="YSP_City" value="<?= $yacht_ysp_city ?>">
+	</div>
+	<div class="metafield">
+		<label>Yacht Country Name</label>
+		<input type="text" name="YSP_CountryID" value="<?= $yacht_ysp_country_id ?>">
+	</div>
+	<div class="metafield">
+		<label>Yacht State Name</label>
+		<input type="text" name="YSP_State" value="<?= $yacht_ysp_state ?>">
+	</div>
+	<div class="metafield">
+		<label>Engine Count</label>
+		<input type="text" name="YSP_EngineCount" value="<?= $yacht_ysp_engine_count ?>">
+	</div>
+	<div class="metafield">
+		<label>Engine Fuel</label>
+		<input type="text" name="YSP_EngineFuel" value="<?= $yacht_ysp_engine_fuel ?>">
+	</div>
+	<div class="metafield">
+		<label>Engine Hours</label>
+		<input type="number" name="YSP_EngineHours" value="<?= $yacht_ysp_engine_hours ?>">
+	</div>
+	<div class="metafield">
+		<label>Engine Model</label>
+		<input type="text" name="YSP_EngineModel" value="<?= $yacht_ysp_engine_model ?>">
+	</div>
+	<div class="metafield">
+		<label>Engine Power</label>
+		<input type="text" name="YSP_EnginePower" value="<?= $yacht_ysp_engine_power ?>">
+	</div>
+	<div class="metafield">
+		<label>Engine Type</label>
+		<input type="text" name="YSP_EngineType" value="<?= $yacht_ysp_engine_type ?>">
+	</div>
+	<div class="metafield">
+		<label>Price (USD)</label>
+		<input type="number" name="NormPrice" value="<?= $yacht_norm_price ?>">
+	</div>
+	<div class="metafield">
+		<label>Price (EUR)</label>
+		<input type="number" name="YSP_EuroVal" value="<?= $yacht_ysp_euro_val ?>">
+	</div>
+	<div class="metafield">
+		<label>Length</label>
+		<input type="text" name="YSP_Length" value="<?= $yacht_ysp_length ?>">
+	</div>
+	<div class="metafield">
+		<label>Overall Length (ft)</label>
+		<input type="number" name="YSP_LOAFeet" step="0.5" value="<?= $yacht_ysp_loa_feet ?>">
+	</div>
+	<div class="metafield">
+		<label>Overall Length (m)</label>
+		<input type="number" name="YSP_LOAMeter" step="0.5" value="<?= $yacht_ysp_loa_meter ?>">
+	</div>
+	<div class="metafield">
+		<label>Listing Date</label>
+		<input type="date" name="YSP_ListingDate" value="<?= $yacht_ysp_listing_date ?>">
+	</div>
+	<div class="metafield">
+		<label>Make</label>
+		<input type="text" name="MakeString" value="<?= $yacht_make_string ?>">
+	</div>
+	<div class="metafield">
+		<label>Model</label>
+		<input type="text" name="Model" value="<?= $yacht_model ?>">
+	</div>
+	<div class="metafield">
+		<label>Year</label>
+		<input type="number" name="ModelYear" min="1900" max="<?= (string) date("Y") + 1 ?>" value="<?= $yacht_model_year ?>">
+	</div>
+	<div class="metafield">
+		<label>Sales Status</label>
+		<select name="SalesStatus">
+			<option value="Active" <?php if ($yacht_sales_status == "Active") echo "selected"; ?>>Active</option>
+			<option value="SalePending" <?php if ($yacht_sales_status == "SalePending") echo "selected"; ?>>Sale Pending</option>
+			<option value="Sold" <?php if ($yacht_sales_status == "Sold") echo "selected"; ?>>Sold</option>
+		</select>
+	</div>
+	<div class="metafield">
+		<label>Yacht Category</label>
+		<input type="text" name="BoatCategoryCode" value="<?= $yacht_boat_category_code ?>">
+	</div>
+	<!-- <div class="metafield">
+		<label>Yacht Class</label>
+		<input type="text" name="BoatClassCode" value="<?= $yacht_boat_class_code ?>">
+	</div> -->
+	<div class="metafield">
+		<label>Has Hull ID</label>
+		<input type="text" name="HasHullID" value="<?= $yacht_has_boat_hull_id ?>">
+	</div>
+	<div class="metafield">
+		<label>Hull ID</label>
+		<input type="text" name="BoatHullID" value="<?= $yacht_boat_hull_id ?>">
+	</div>
+	<div class="metafield">
+		<label>Hull Material</label>
+		<input type="text" name="BoatHullMaterialCode" value="<?= $yacht_boat_hull_material_code ?>">
+	</div>
+	<div class="metafield">
+		<label>Yacht Name</label>
+		<input type="text" name="BoatName" value="<?= $yacht_boat_name ?>">
+	</div>
+	<div class="metafield">
+		<label>Company Owned</label>
+		<select name="CompanyBoat">
+			<option value="0" <?php if ($yacht_company_boat == "0") echo "selected"; ?>>No</option>
+			<option value="1" <?php if ($yacht_company_boat == "1") echo "selected"; ?>>Yes</option>
+		</select>
+	</div>
+	<div class="metafield">
+		<label>Company Name</label>
+		<input type="text" name="CompanyName" value="<?= $yacht_company_name ?>">
+	</div>
+	<div class="metafield">
+		<label>Document ID</label>
+		<input type="text" name="DocumentID" value="<?= $yacht_document_id ?>">
+	</div>
+	<div class="metafield">
+		<label>Heads Count</label>
+		<input type="number" name="HeadsCountNumeric" value="<?= $yacht_heads_count_numeric ?>">
+	</div>
+	<div class="metafield">
+		<label>Fuel Tank Capacity</label>
+		<input type="text" name="FuelTankCapacityMeasure" value="<?= $yacht_fuel_tank_capacity_measure ?>">
+	</div>
+	<div class="metafield">
+		<label>Fuel Tank Count</label>
+		<input type="text" name="FuelTankCountNumeric" value="<?= $yacht_fuel_tank_count_numeric ?>">
+	</div>
+	<div class="metafield">
+		<label>Fuel Tank Material</label>
+		<input type="text" name="FuelTankMaterialCode" value="<?= $yacht_fuel_tank_material_code ?>">
+	</div>
+	<div class="metafield">
+		<label>Holding Tank Capacity</label>
+		<input type="text" name="HoldingTankCapacityMeasure" value="<?= $yacht_holding_tank_capacity_measure ?>">
+	</div>
+	<div class="metafield">
+		<label>Holding Tank Count</label>
+		<input type="text" name="HoldingTankCountNumeric" value="<?= $yacht_holding_tank_count_numeric ?>">
+	</div>
+	<div class="metafield">
+		<label>Holding Tank Material</label>
+		<input type="text" name="HoldingTankMaterialCode" value="<?= $yacht_holding_tank_material_code ?>">
+	</div>
+	<div class="metafield">
+		<label>Water Tank Capacity</label>
+		<input type="text" name="WaterTankCapacityMeasure" value="<?= $yacht_water_tank_capacity_measure ?>">
+	</div>
+	<div class="metafield">
+		<label>Water Tank Count</label>
+		<input type="text" name="WaterTankCountNumeric" value="<?= $yacht_water_tank_count_numeric ?>">
+	</div>
+	<div class="metafield">
+		<label>Water Tank Material</label>
+		<input type="text" name="WaterTankMaterialCode" value="<?= $yacht_water_tank_material_code ?>">
+	</div>
+	<div class="metafield">
+		<label>Total Engine Hours</label>
+		<input type="number" name="TotalEngineHoursNumberic" value="<?= $yacht_total_engine_hours_numeric ?>">
+	</div>
+	<div class="metafield">
+		<label>Total Engine Power Quantity</label>
+		<input type="text" name="TotalEnginePowerQuantity" value="<?= $yacht_total_engine_power_quantity ?>">
+	</div>
+</div>
+
+<style type="text/css">
+	#yacht-metabox-basics .metafield{
+		display: block;
+		margin-top: 10px;
+		margin-bottom: 10px;
+		padding-bottom: 10px;
+		border-bottom: 1px solid #000;
+
+	}
+
+	#yacht-metabox-basics .metafield label{
+		display: block;
+		margin-bottom: 10px;
+	}
+
+	#yacht-metabox-basics .metafield input{
+		display: block;
+		width: 100%;
+		max-width: 500px;
+
+	}
+</style>

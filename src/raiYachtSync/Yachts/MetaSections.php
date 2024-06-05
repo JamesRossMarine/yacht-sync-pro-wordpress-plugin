@@ -28,57 +28,58 @@
 
 		public function rai_yacht_data_save($post_id) {
             $fields = [
-		    'YSP_BeamFeet',
-		    'YSP_BeamMeter',
-		    'YSP_BrokerName',
-		    'YSP_City',
-		    'YSP_CountryID',
-		    'YSP_State',
-		    'YSP_EngineCount',
-		    'YSP_EngineFuel',
-		    'YSP_EngineHours',
-		    'YSP_EngineModel',
-		    'YSP_EnginePower',
-		    'YSP_EngineType',
-		    'NormPrice',
-		    'YSP_EuroVal',
-		    'YSP_Length',
-		    'YSP_LOAFeet',
-		    'YSP_LOAMeter',
-		    'YSP_ListingDate',
-		    'MakeString',
-		    'Model',
-		    'ModelYear',
-		    'SalesStatus',
-		    'BoatCategoryCode',
-		    'BoatClassCode',
-		    'HasHullID',
-		    'BoatHullID',
-		    'BoatHullMaterialCode',
-		    'BoatName',
-		    'CompanyBoat',
-		    'CompanyName',
-		    'DocumentID',
-		    //'GeneralBoatDescription',
-		    //'AdditionalDetailDescription',
-		    'HeadsCountNumeric',
-		    'FuelTankCapacityMeasure',
-		    'FuelTankCountNumeric',
-		    'FuelTankMaterialCode',
-		    'HoldingTankCapacityMeasure',
-		    'HoldingTankCountNumeric',
-		    'HoldingTankMaterialCode',
-		    'WaterTankCapacityMeasure',
-		    'WaterTankCountNumeric',
-		    'WaterTankMaterialCode',
-		    'TotalEngineHoursNumberic',
-		    'TotalEnginePowerQuantity'
-		];
+			    'YSP_BeamFeet',
+			    'YSP_BeamMeter',
+			    'YSP_BrokerName',
+			    'YSP_City',
+			    'YSP_CountryID',
+			    'YSP_State',
+			    'YSP_EngineCount',
+			    'YSP_EngineFuel',
+			    'YSP_EngineHours',
+			    'YSP_EngineModel',
+			    'YSP_EnginePower',
+			    'YSP_EngineType',
+			    'NormPrice',
+			    'YSP_EuroVal',
+			    'YSP_Length',
+			    'YSP_LOAFeet',
+			    'YSP_LOAMeter',
+			    'YSP_ListingDate',
+			    'MakeString',
+			    'Model',
+			    'ModelYear',
+			    'SalesStatus',
+			    'BoatCategoryCode',
+			    //'BoatClassCode',
+			    'HasHullID',
+			    'BoatHullID',
+			    'BoatHullMaterialCode',
+			    'BoatName',
+			    'CompanyBoat',
+			    'CompanyName',
+			    'DocumentID',
+			    //'GeneralBoatDescription',
+			    //'AdditionalDetailDescription',
+			    'HeadsCountNumeric',
+			    'FuelTankCapacityMeasure',
+			    'FuelTankCountNumeric',
+			    'FuelTankMaterialCode',
+			    'HoldingTankCapacityMeasure',
+			    'HoldingTankCountNumeric',
+			    'HoldingTankMaterialCode',
+			    'WaterTankCapacityMeasure',
+			    'WaterTankCountNumeric',
+			    'WaterTankMaterialCode',
+			    'TotalEngineHoursNumberic',
+			    'TotalEnginePowerQuantity'
+			];
 
-		foreach ($fields as $field) {
-		    if (isset($_POST[$field])) {
-		        update_post_meta($post_id, $field, $_POST[$field]);
-		    }
+			foreach ($fields as $field) {
+			    if (isset($_POST[$field])) {
+			        update_post_meta($post_id, $field, $_POST[$field]);
+			    }
+			}
 		}
 
 
