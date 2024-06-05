@@ -30,7 +30,29 @@
               'new_item_name' => __( 'New Code Class' ),
               'menu_name' => __( 'Boat Code Classes' ),
             )
-          ));
+        ));
+
+        register_taxonomy('membercategroy', 'rai_team', array(
+
+            'public' => false,
+            'publicly_queryable' => true,
+            'show_ui' => true,
+            'hierarchical' => false,
+
+            'labels' => array(
+              'name' => __( 'Team Member Category' ),
+              'singular_name' => __( 'Team Member Category' ),
+              'search_items' =>  __( 'Search Categories' ),
+              'all_items' => __( 'All Team Member Categories' ),
+              'parent_item' => __( 'Parent Category' ),
+              'parent_item_colon' => __( 'Parent Category:' ),
+              'edit_item' => __( 'Edit Team Member Category' ),
+              'update_item' => __( 'Update Team Member Category' ),
+              'add_new_item' => __( 'Add New Team Member Category' ),
+              'new_item_name' => __( 'New Team Member Category' ),
+              'menu_name' => __( 'Team Member Categories' ),
+            )
+        ));
     }
 
  }

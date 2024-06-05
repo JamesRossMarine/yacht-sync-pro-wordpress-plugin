@@ -19,7 +19,10 @@
 		public function register_setting() {
 			
 			register_setting( self::SLUG, self::SLUG . '_boats_com_api_global_key');
+			register_setting( self::SLUG, self::SLUG . '_boats_com_api_global_key_2');
+
 			register_setting( self::SLUG, self::SLUG . '_boats_com_api_brokerage_key');
+			register_setting( self::SLUG, self::SLUG . '_boats_com_api_brokerage_key_2');
 			
 			register_setting( self::SLUG, self::SLUG . '_yacht_broker_org_api_token');
 			
@@ -31,6 +34,8 @@
 			register_setting( self::SLUG, self::SLUG . '_alert_on_low_count');
 			register_setting( self::SLUG, self::SLUG . '_alert_emails');
 
+			register_setting( self::SLUG, self::SLUG . '_last_synced');
+
 			register_setting( self::SLUG, self::SLUG . '_color_one');
 			register_setting( self::SLUG, self::SLUG . '_color_two');
 			register_setting( self::SLUG, self::SLUG . '_color_three');
@@ -39,6 +44,7 @@
 			register_setting( self::SLUG, self::SLUG . '_send_lead_to_this_email');
 
 			register_setting( self::SLUG, self::SLUG . '_yacht_search_page_id');
+			register_setting( self::SLUG, self::SLUG . '_team_page_id');
 			
 			register_setting( self::SLUG, self::SLUG . '_company_name');
 			register_setting( self::SLUG, self::SLUG . '_company_number');

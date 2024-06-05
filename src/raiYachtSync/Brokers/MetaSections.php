@@ -18,7 +18,7 @@
                 'rai_broker_info_id', // Unique ID
                 'Broker Info', // Box title
                 [$this, 'broker_info_html'],  // Content callback, must be of type callable
-                ['rai_broker']  // Post type
+                ['rai_team']  // Post type
             );
 
         }
@@ -62,6 +62,7 @@
                     $_POST['broker_fname']
                 );
             }
+            
             if ( isset($_POST['broker_lname'])) {
                 update_post_meta(
                     $post_id,
@@ -69,6 +70,7 @@
                     $_POST['broker_lname']
                 );
             }
+            
             if ( isset($_POST['broker_email'])) {
                 update_post_meta(
                     $post_id,
@@ -76,6 +78,7 @@
                     $_POST['broker_email']
                 );
             }
+            
             if ( isset($_POST['broker_phone'])) {
                 update_post_meta(
                     $post_id,
@@ -83,8 +86,10 @@
                     $_POST['broker_phone']
                 );
             }
+
+            $main_broker = isset($_POST['main_broker']) ? '1' : '0';
             
-            // update_post_meta($post_id, 'rai_main_broker', $main_broker);
+            update_post_meta($post_id, 'rai_main_broker', $main_broker);
         }
 
     }

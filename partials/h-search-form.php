@@ -97,6 +97,16 @@
             </select>
         </div>
 
+        <div class="ys-h-row-item">
+            <label for="status">Status</label>
+
+            <select name="status">
+                <option value="">Any</option>
+                <option value="Active">Active</option>
+                <option value="Onorder">On-Order</option>
+            </select>
+        </div>
+
         <div class="ys-h-row-item submit-container">
             <label>Submit</label>
             

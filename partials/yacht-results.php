@@ -88,6 +88,8 @@
         <a href="" id="ysp_compare_linkout">
         </a>
 
+        <div id="ysp-compare-previews" class=" d-flex"></div>
+
     </div>
 </section>
 

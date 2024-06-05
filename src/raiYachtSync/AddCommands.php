@@ -11,6 +11,7 @@
 				WP_CLI::add_command( 'sync-yachts', 'raiYachtSync_CommandSync' );
 				WP_CLI::add_command( 'sync-brokerage-only', 'raiYachtSync_CommandSyncBrokerageOnly' );
 				WP_CLI::add_command( 'sitemap-generator', 'raiYachtSync_CommandSitemaps' );
+				WP_CLI::add_command( 'redo-yacht-meta-descriptions', 'raiYachtSync_CommandRedoYachtMetaDescriptions' );
 			}
 		}
 

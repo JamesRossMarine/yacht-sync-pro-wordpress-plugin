@@ -34,7 +34,9 @@
 
 				'public' => false,
 				'publicly_queryable' => false,
-				'can_export' => true
+				'can_export' => true,
+
+				'supports' => array('title', 'editor', 'thumbnail', 'custom-fields')
 
             ]);
             
@@ -81,19 +83,25 @@
 
            ]);
 */
-           register_post_type('rai_broker', [
+           register_post_type('rai_team', [
            		'labels' => array(
-					'name' => 'Ross Brokers',
-					'singular_name' => 'Broker',
+					'name' => 'Team Members',
+					'singular_name' => 'Team Member',
 				),
 				
 				'has_archive' => false,
 				//'query_var' => 'rai_broker_id',
 
+				
+				'rewrite' => array(
+			        'slug' => 'team',
+			        'with_front' => true
+			    ),
+
 				'public' => true,
 				'publicly_queryable' => true,
 				'can_export' => false,
-				'supports' => array('title', 'editor', 'thumbnail')
+				'supports' => array('title', 'editor', 'thumbnail', 'custom-fields')
            ]);
 
 		}

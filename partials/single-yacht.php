@@ -173,7 +173,7 @@ get_header();
 
                     foreach ($BrokerNames as $bName) {
                         $brokerQueryArgs['meta_query']['name'][]=[
-                            'key' => 'broker_fname',
+                            'key' => 'rai_broker_fname',
                             'compare' => 'LIKE',
                             'value' => $bName,
                         ];
@@ -181,7 +181,7 @@ get_header();
 
                     foreach ($BrokerNames as $bName) {
                         $brokerQueryArgs['meta_query']['name'][]=[
-                            'key' => 'broker_lname',
+                            'key' => 'rai_broker_lname',
                             'compare' => 'LIKE',
                             'value' => $bName,
                         ];
