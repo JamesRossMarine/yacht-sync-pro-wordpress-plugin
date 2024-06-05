@@ -691,7 +691,14 @@
 
 				$yacht_p = get_post($yacht_post_id);
 
-				$s3_url=get_post_meta($yacht_post_id, 'YSP_PDF_URL', true);
+				if (function_exists("get_field")) {
+					$s3_url=get_field('YSP_PDF_URL', $yacht_post_id);
+				}
+				else {
+					$s3_url=get_post_meta($yacht_post_id, 'YSP_PDF_URL', true);
+
+				}
+
 
 				$urlbox_public_key = $this->options->get('pdf_urlbox_api_token_public_key');
 
