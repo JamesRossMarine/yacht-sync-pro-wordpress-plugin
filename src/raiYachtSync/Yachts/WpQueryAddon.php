@@ -22,6 +22,7 @@
 			$vars[] = 'boatname';
 
 			$vars[] = 'condition';
+			$vars[] = 'status';
 			$vars[] = 'hull';
 			$vars[] = 'staterooms';
 			$vars[] = 'make';
@@ -291,6 +292,21 @@
 						'key' => 'SaleClassCode',
 						'compare' => "=",
 						'value' => 'New'
+					];
+				}
+
+				if ($this->if_query_var_check($query->get('status')) && strtolower($query->get('status')) == "onorder") {
+					$yacht_sync_meta_query[] = [
+						'key' => 'SalesStatus',
+						'compare' => '=',
+						'value' => "On-Order"
+					];
+				}
+				elseif ($this->if_query_var_check($query->get('status'))) {
+					$yacht_sync_meta_query[] = [
+						'key' => 'SalesStatus',
+						'compare' => '=',
+						'value' => $query->get('status')
 					];
 				}
 				

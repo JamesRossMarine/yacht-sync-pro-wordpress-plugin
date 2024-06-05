@@ -116,6 +116,15 @@
 						self::SLUG . '_admin_fields',
 						array( )
 					);
+
+					add_settings_field(
+						self::SLUG . '_last_synced',
+						"Alert Who?",
+						array( $this, 'last_synced_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
 					
 
 					add_settings_field(
@@ -488,6 +497,14 @@
 
 			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
 
+		}
+
+		public function last_synced_field() {
+
+			$nameOfField=self::SLUG.'_last_synced';
+			$val=get_option($nameOfField);
+
+			echo $val;
 		}
 
 		public function is_euro_field() {
