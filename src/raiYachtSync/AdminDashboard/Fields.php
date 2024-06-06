@@ -119,7 +119,7 @@
 
 					add_settings_field(
 						self::SLUG . '_last_synced',
-						"Alert Who?",
+						"Last Synced?",
 						array( $this, 'last_synced_field' ),
 						self::SLUG,
 						self::SLUG . '_admin_fields',
