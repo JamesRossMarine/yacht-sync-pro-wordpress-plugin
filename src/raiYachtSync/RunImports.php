@@ -279,19 +279,23 @@
 
 			if ($syncHadIssue == false) {
 				$cleaned_up=$this->clean_up();
-					
+				
+				var_dump($cleaned_up);
+
 				if ($cleaned_up) {
 					$this->move_over();				
-					$this->options->set('last_synced', date('Y-m-d h:i:sa'));
+					$this->options->update('last_synced', date('Y-m-d h:i:sa'));
 					$this->AlertOnLowCount->email();	
 					$this->AlertOnDiffCount->email();	
 				}
 				else {
 					// EMAIL - AS SYNC FAILED DUE TO NOT MEETING THE REQUIREMENTS OF COUNT PROBILLY
+					var_dump('Failed');
 					$this->emailSyncFailed();
 				}
 			} 
 			else {
+				var_dump('Failed');
 				$this->emailSyncFailed();
 			}
 		}
@@ -332,14 +336,18 @@
 
 			if ($syncHadIssue == false) {
 				$cleaned_up = $this->clean_up_brokerage_only();
+
+				var_dump($cleaned_up);
 			
 				if ($cleaned_up) {
-					$this->move_over();				
+					$this->move_over();
+					//$this->options->update('last_synced', date('Y-m-d h:i:sa'));				
 					$this->AlertOnLowCount->email();	
 					$this->AlertOnDiffCount->email();	
 				}
 			}
 			else {
+				var_dump('Failed');
 				$this->emailSyncFailed();
 			}
 

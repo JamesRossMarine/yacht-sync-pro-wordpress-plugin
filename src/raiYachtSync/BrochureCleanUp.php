@@ -59,7 +59,7 @@
 
 	    public function removeUseUrl($url) {
 	    	
-	    	if (! empty($url) && ! is_null($url)) {
+	    	if (! empty($url) && ! is_null($url) && !empty($this->pdf_s3_endpoint)) {
 		    	$filepath = parse_url($url, PHP_URL_PATH);
 
 		    	if ($filepath[0] == '/') {
