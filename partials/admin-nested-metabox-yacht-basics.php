@@ -1,6 +1,6 @@
 <?php
 
-    $yacht_ysp_general_boat_description = get_post_meta( $post->ID, 'GeneralBoatDescription', true );
+    $yacht_ysp_general_boat_description = get_post_meta( $post->ID, 'GeneralBoatDescription', true )[0];
 
     $sales_rep = get_post_meta( $post->ID, 'SalesRep', true );
 
@@ -33,33 +33,33 @@
 
     $images = get_post_meta( $post->ID, 'Images', true );
 
-    $yacht_ysp_image_1 = $images[0]->Uri;
-    $yacht_ysp_image_2 = $images[1]->Uri;
-    $yacht_ysp_image_3 = $images[2]->Uri;
-    $yacht_ysp_image_4 = $images[3]->Uri;
-    $yacht_ysp_image_5 = $images[4]->Uri;
-    $yacht_ysp_image_6 = $images[5]->Uri;
-    $yacht_ysp_image_7 = $images[6]->Uri;
-    $yacht_ysp_image_8 = $images[7]->Uri;
-    $yacht_ysp_image_9 = $images[8]->Uri;
-    $yacht_ysp_image_10 = $images[9]->Uri;
-    $yacht_ysp_image_11 = $images[10]->Uri;
-    $yacht_ysp_image_12 = $images[11]->Uri;
-    $yacht_ysp_image_13 = $images[12]->Uri;
-    $yacht_ysp_image_14 = $images[13]->Uri;
-    $yacht_ysp_image_15 = $images[14]->Uri;
-    $yacht_ysp_image_16 = $images[15]->Uri;
-    $yacht_ysp_image_17 = $images[16]->Uri;
-    $yacht_ysp_image_18 = $images[17]->Uri;
-    $yacht_ysp_image_19 = $images[18]->Uri;
-    $yacht_ysp_image_20 = $images[19]->Uri;
+    $yacht_ysp_image_1 = $images[0]['Uri'];
+    $yacht_ysp_image_2 = $images[1]['Uri'];
+    $yacht_ysp_image_3 = $images[2]['Uri'];
+    $yacht_ysp_image_4 = $images[3]['Uri'];
+    $yacht_ysp_image_5 = $images[4]['Uri'];
+    $yacht_ysp_image_6 = $images[5]['Uri'];
+    $yacht_ysp_image_7 = $images[6]['Uri'];
+    $yacht_ysp_image_8 = $images[7]['Uri'];
+    $yacht_ysp_image_9 = $images[8]['Uri'];
+    $yacht_ysp_image_10 = $images[9]['Uri'];
+    $yacht_ysp_image_11 = $images[10]['Uri'];
+    $yacht_ysp_image_12 = $images[11]['Uri'];
+    $yacht_ysp_image_13 = $images[12]['Uri'];
+    $yacht_ysp_image_14 = $images[13]['Uri'];
+    $yacht_ysp_image_15 = $images[14]['Uri'];
+    $yacht_ysp_image_16 = $images[15]['Uri'];
+    $yacht_ysp_image_17 = $images[16]['Uri'];
+    $yacht_ysp_image_18 = $images[17]['Uri'];
+    $yacht_ysp_image_19 = $images[18]['Uri'];
+    $yacht_ysp_image_20 = $images[19]['Uri'];
 ?>
 
 
 <div id="yacht-nested-metabox-basics">
     <div class="metafield">
         <label>General Boat Description</label>
-        <input type="text" name="General_Boat_Description" value="<?= $yacht_ysp_general_boat_description ?>">
+        <textarea name="General_Boat_Description" style="width: 100%; height: 300px;"><?= $yacht_ysp_general_boat_description ?></textarea>
     </div>
     <div class="metafield">
         <label>YSP Sales Rep Party ID</label>

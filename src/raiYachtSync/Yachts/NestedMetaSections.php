@@ -30,7 +30,7 @@
 
 			$general_boat_description = $_POST['General_Boat_Description'];
 
-			update_post_meta($post_id, 'GeneralBoatDescription', $general_boat_description);
+			update_post_meta($post_id, 'GeneralBoatDescription', [ $general_boat_description ]);
 
 			$sales_rep = [
 				'PartyId' => $_POST['YSP_Sales_Rep_Party_ID'],
