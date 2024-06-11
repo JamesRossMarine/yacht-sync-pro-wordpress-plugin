@@ -81,7 +81,14 @@
 
 				//var_dump($apiCallForWhile);
 
-				$apiCallForWhileBody = json_decode(wp_remote_retrieve_body($apiCallForWhile), true);	
+				$apiCallForWhileBody = json_decode(wp_remote_retrieve_body($apiCallForWhile), true);
+				$apiStatusCodeWhile = wp_remote_retrieve_response_code($apiCall);	
+
+				var_dump($apiStatusCodeWhile);
+
+				if ($apiStatusCodeWhile != 200) {
+					var_dump($apiCallForWhileBody);
+				}
 
 				if (! isset($apiCallForWhileBody['data']) && ! isset($apiCallForWhileBody['data']['results']) && ! is_array($apiCallForWhileBody['data']['results'])) {
 					break;
