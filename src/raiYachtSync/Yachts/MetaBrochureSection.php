@@ -11,7 +11,7 @@
 			add_action('admin_print_scripts', [$this, 'admin_scripts']);
 			add_action('admin_print_styles', [$this, 'admin_styles']);
 			add_action( 'add_meta_boxes', [$this, 'add_yacht_brochure_area'] );
-			add_action( 'save_post', [$this, 'rai_yacht_save_pdf']);
+			add_action( 'save_post_rai_yacht', [$this, 'rai_yacht_save_pdf']);
 		}
 
 		public function admin_scripts() {

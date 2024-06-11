@@ -9,7 +9,7 @@
 		public function add_actions_and_filters() {
 
 			add_action( 'add_meta_boxes', [ $this, 'yachts_meta_boxes' ]);
-			add_action( 'save_post', [$this, 'rai_yacht_data_save']);
+			add_action( 'save_post_rai_yacht', [$this, 'rai_yacht_data_save']);
 
 		}
 
