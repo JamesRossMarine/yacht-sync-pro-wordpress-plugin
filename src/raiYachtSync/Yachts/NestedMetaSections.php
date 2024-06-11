@@ -32,7 +32,7 @@
 
 			update_post_meta($post_id, 'GeneralBoatDescription', [ $general_boat_description ]);
 
-			$sales_rep = [
+			$sales_rep = (object) [
 				'PartyId' => $_POST['YSP_Sales_Rep_Party_ID'],
 				'Name' => $_POST['YSP_Sales_Rep_Name']
 			];
@@ -40,7 +40,7 @@
 			update_post_meta($post_id, 'SalesRep', $sales_rep);
 
 			$engines = [
-				[
+				(object) [
 					'Make' => $_POST['YSP_Engine_1_Make'],
 					'Model' => $_POST['YSP_Engine_1_Model'],
 					'Fuel' => $_POST['YSP_Engine_1_Fuel'],
@@ -50,7 +50,7 @@
 					'Hours' => $_POST['YSP_Engine_1_Hours'],
 					'BoatEngineLocationCode' => $_POST['YSP_Engine_1_Boat_Engine_Location_Code']
 				],
-				[
+				(object) [
 					'Make' => $_POST['YSP_Engine_2_Make'],
 					'Model' => $_POST['YSP_Engine_2_Model'],
 					'Fuel' => $_POST['YSP_Engine_2_Fuel'],
@@ -64,68 +64,13 @@
 
 			update_post_meta($post_id, 'Engines', $engines);
 
-			$images = [
-				0 => [
-					'Uri' => $_POST['YSP_Image_1'],
-				],
-				1 => [
-					'Uri' => $_POST['YSP_Image_2'],
-				],
-				2 => [
-					'Uri' => $_POST['YSP_Image_3'],
-				],
-				3 => [
-					'Uri' => $_POST['YSP_Image_4'],
-				],
-				4 => [
-					'Uri' => $_POST['YSP_Image_5'],
-				],
-				5 => [
-					'Uri' => $_POST['YSP_Image_6'],
-				],
-				6 => [
-					'Uri' => $_POST['YSP_Image_7'],
-				],
-				7 => [
-					'Uri' => $_POST['YSP_Image_8'],
-				],
-				8 => [
-					'Uri' => $_POST['YSP_Image_9'],
-				],
-				9 => [
-					'Uri' => $_POST['YSP_Image_10'],
-				],
-				10 => [
-					'Uri' => $_POST['YSP_Image_11'],
-				],
-				11 => [
-					'Uri' => $_POST['YSP_Image_12'],
-				],
-				12 => [
-					'Uri' => $_POST['YSP_Image_13'],
-				],
-				13 => [
-					'Uri' => $_POST['YSP_Image_14'],
-				],
-				14 => [
-					'Uri' => $_POST['YSP_Image_15'],
-				],
-				15 => [
-					'Uri' => $_POST['YSP_Image_16'],
-				],
-				16 => [
-					'Uri' => $_POST['YSP_Image_17'],
-				],
-				17 => [
-					'Uri' => $_POST['YSP_Image_18'],
-				],
-				18 => [
-					'Uri' => $_POST['YSP_Image_19'],
-				],
-				19 => [
-					'Uri' => $_POST['YSP_Image_20'],
-				]
-			];
+			$images = [];
+
+			for ($im=0; $im <= 19; $im++) {
+				$images[]=(object) [
+					'Uri' => $_POST['YSP_Image_'.$im],
+ 				];
+			}
 
 			update_post_meta($post_id, 'Images', $images);
 			

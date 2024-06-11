@@ -4,12 +4,12 @@
 
     $sales_rep = get_post_meta( $post->ID, 'SalesRep', true );
 
-    $yacht_ysp_sales_rep_party_id = $sales_rep['PartyId'];
-    $yacht_ysp_sales_rep_name = $sales_rep['Name'];
+    $yacht_ysp_sales_rep_party_id = $sales_rep->PartyId;
+    $yacht_ysp_sales_rep_name = $sales_rep->Name;
 
     $engines = get_post_meta( $post->ID, 'Engines', true );
 
-    if(isset($engines[0])) {
+    /*if(isset($engines[0])) {
         $yacht_ysp_engine_1_make = $engines[0]['Make'];
         $yacht_ysp_engine_1_model = $engines[0]['Model'];
         $yacht_ysp_engine_1_fuel = $engines[0]['Fuel'];
@@ -29,30 +29,53 @@
         $yacht_ysp_engine_2_year = $engines[1]['Year'];
         $yacht_ysp_engine_2_hours = $engines[1]['Hours'];
         $yacht_ysp_engine_2_boat_engine_location_code = $engines[1]['BoatEngineLocationCode'];
+    }*/
+
+    if(isset($engines[0])) {
+        $yacht_ysp_engine_1_make = $engines[0]->Make;
+        $yacht_ysp_engine_1_model = $engines[0]->Model;
+        $yacht_ysp_engine_1_fuel = $engines[0]->Fuel;
+        $yacht_ysp_engine_1_engine_power = $engines[0]->EnginePower;
+        $yacht_ysp_engine_1_type = $engines[0]->Type;
+        $yacht_ysp_engine_1_year = $engines[0]->Year;
+        $yacht_ysp_engine_1_hours = $engines[0]->Hours;
+        $yacht_ysp_engine_1_boat_engine_location_code = $engines[0]->BoatEngineLocationCode;
     }
+
+    if(isset($engines[1])) {
+        $yacht_ysp_engine_2_make = $engines[1]->Make;
+        $yacht_ysp_engine_2_model = $engines[1]->Model;
+        $yacht_ysp_engine_2_fuel = $engines[1]->Fuel;
+        $yacht_ysp_engine_2_engine_power = $engines[1]->EnginePower;
+        $yacht_ysp_engine_2_type = $engines[1]->Type;
+        $yacht_ysp_engine_2_year = $engines[1]->Year;
+        $yacht_ysp_engine_2_hours = $engines[1]->Hours;
+        $yacht_ysp_engine_2_boat_engine_location_code = $engines[1]->BoatEngineLocationCode;
+    }
+
 
     $images = get_post_meta( $post->ID, 'Images', true );
 
-    $yacht_ysp_image_1 = $images[0]['Uri'];
-    $yacht_ysp_image_2 = $images[1]['Uri'];
-    $yacht_ysp_image_3 = $images[2]['Uri'];
-    $yacht_ysp_image_4 = $images[3]['Uri'];
-    $yacht_ysp_image_5 = $images[4]['Uri'];
-    $yacht_ysp_image_6 = $images[5]['Uri'];
-    $yacht_ysp_image_7 = $images[6]['Uri'];
-    $yacht_ysp_image_8 = $images[7]['Uri'];
-    $yacht_ysp_image_9 = $images[8]['Uri'];
-    $yacht_ysp_image_10 = $images[9]['Uri'];
-    $yacht_ysp_image_11 = $images[10]['Uri'];
-    $yacht_ysp_image_12 = $images[11]['Uri'];
-    $yacht_ysp_image_13 = $images[12]['Uri'];
-    $yacht_ysp_image_14 = $images[13]['Uri'];
-    $yacht_ysp_image_15 = $images[14]['Uri'];
-    $yacht_ysp_image_16 = $images[15]['Uri'];
-    $yacht_ysp_image_17 = $images[16]['Uri'];
-    $yacht_ysp_image_18 = $images[17]['Uri'];
-    $yacht_ysp_image_19 = $images[18]['Uri'];
-    $yacht_ysp_image_20 = $images[19]['Uri'];
+    $yacht_ysp_image_1 = $images[0]->Uri;
+    $yacht_ysp_image_2 = $images[1]->Uri;
+    $yacht_ysp_image_3 = $images[2]->Uri;
+    $yacht_ysp_image_4 = $images[3]->Uri;
+    $yacht_ysp_image_5 = $images[4]->Uri;
+    $yacht_ysp_image_6 = $images[5]->Uri;
+    $yacht_ysp_image_7 = $images[6]->Uri;
+    $yacht_ysp_image_8 = $images[7]->Uri;
+    $yacht_ysp_image_9 = $images[8]->Uri;
+    $yacht_ysp_image_10 = $images[9]->Uri;
+    $yacht_ysp_image_11 = $images[10]->Uri;
+    $yacht_ysp_image_12 = $images[11]->Uri;
+    $yacht_ysp_image_13 = $images[12]->Uri;
+    $yacht_ysp_image_14 = $images[13]->Uri;
+    $yacht_ysp_image_15 = $images[14]->Uri;
+    $yacht_ysp_image_16 = $images[15]->Uri;
+    $yacht_ysp_image_17 = $images[16]->Uri;
+    $yacht_ysp_image_18 = $images[17]->Uri;
+    $yacht_ysp_image_19 = $images[18]->Uri;
+    $yacht_ysp_image_20 = $images[19]->Uri;
 ?>
 
 
