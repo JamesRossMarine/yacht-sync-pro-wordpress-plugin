@@ -667,11 +667,11 @@
 					}
 				}
 				elseif (! is_array($query->get('orderby')) && ! $this->if_query_var_check($query->get('orderby')) ) {
-				/*
+				
 					$query->set('orderby', 'meta_value_num');
 					$query->set('order', 'DESC');
 					$query->set('meta_key', 'NominalLength');
-*/
+
 				}
 
 				$this->apply_meta_query_to_query($query, $yacht_sync_meta_query, 'prop_meta');

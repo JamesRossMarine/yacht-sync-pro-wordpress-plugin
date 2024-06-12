@@ -120,8 +120,18 @@
 	        if ($count_of_synced > $this->low_count) {
 		       	$wpdb->query( 
 					$wpdb->prepare( 
-						"DELETE wp FROM $wpdb->posts wp
-						WHERE wp.post_type = %s",
+						"
+						DELETE wp FROM $wpdb->posts wp
+						WHERE 
+						wp.post_type = %s 
+						AND 
+						wp.ID NOT IN (
+							SELECT wp.ID FROM $wpdb->posts wp
+							LEFT JOIN $wpdb->postmeta pm ON pm.post_id = wp.ID 
+							WHERE wp.post_type = %s AND pm.meta_key = 'is_yacht_manual_entry' AND pm.meta_value = 'yes'
+						)
+						",
+						'rai_yacht',
 						'rai_yacht'
 					)
 				);
@@ -170,9 +180,17 @@
 					$wpdb->prepare( 
 						"DELETE wp FROM $wpdb->posts wp 
 						LEFT JOIN $wpdb->postmeta pm ON pm.post_id = wp.ID 
-						WHERE wp.post_type = %s AND pm.meta_key = %s AND pm.meta_value = '1'", 
+						WHERE 
+						wp.post_type = %s AND pm.meta_key = %s AND pm.meta_value = '1'
+						AND
+						wp.ID NOT IN (
+							SELECT wp.ID FROM $wpdb->posts wp
+							LEFT JOIN $wpdb->postmeta pm ON pm.post_id = wp.ID 
+							WHERE wp.post_type = %s AND pm.meta_key = 'is_yacht_manual_entry' AND pm.meta_value = 'yes'
+						)", 
 						'rai_yacht',
-						'CompanyBoat'
+						'CompanyBoat',
+						'rai_yacht'
 					)
 				);
 

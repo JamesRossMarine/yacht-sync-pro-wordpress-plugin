@@ -4,32 +4,16 @@
 
     $sales_rep = get_post_meta( $post->ID, 'SalesRep', true );
 
-    $yacht_ysp_sales_rep_party_id = $sales_rep->PartyId;
-    $yacht_ysp_sales_rep_name = $sales_rep->Name;
+    if (isset($sales_rep->Name)) {
+        $yacht_ysp_sales_rep_party_id = $sales_rep->PartyId;
+        $yacht_ysp_sales_rep_name = $sales_rep->Name;
+    }
+    else {
+        $yacht_ysp_sales_rep_party_id='';
+        $yacht_ysp_sales_rep_name='';
+    }
 
     $engines = get_post_meta( $post->ID, 'Engines', true );
-
-    /*if(isset($engines[0])) {
-        $yacht_ysp_engine_1_make = $engines[0]['Make'];
-        $yacht_ysp_engine_1_model = $engines[0]['Model'];
-        $yacht_ysp_engine_1_fuel = $engines[0]['Fuel'];
-        $yacht_ysp_engine_1_engine_power = $engines[0]['EnginePower'];
-        $yacht_ysp_engine_1_type = $engines[0]['Type'];
-        $yacht_ysp_engine_1_year = $engines[0]['Year'];
-        $yacht_ysp_engine_1_hours = $engines[0]['Hours'];
-        $yacht_ysp_engine_1_boat_engine_location_code = $engines[0]['BoatEngineLocationCode'];
-    }
-    
-    if(isset($engines[1])) {
-        $yacht_ysp_engine_2_make = $engines[1]['Make'];
-        $yacht_ysp_engine_2_model = $engines[1]['Model'];
-        $yacht_ysp_engine_2_fuel = $engines[1]['Fuel'];
-        $yacht_ysp_engine_2_engine_power = $engines[1]['EnginePower'];
-        $yacht_ysp_engine_2_type = $engines[1]['Type'];
-        $yacht_ysp_engine_2_year = $engines[1]['Year'];
-        $yacht_ysp_engine_2_hours = $engines[1]['Hours'];
-        $yacht_ysp_engine_2_boat_engine_location_code = $engines[1]['BoatEngineLocationCode'];
-    }*/
 
     if(isset($engines[0])) {
         $yacht_ysp_engine_1_make = $engines[0]->Make;
@@ -41,8 +25,18 @@
         $yacht_ysp_engine_1_hours = $engines[0]->Hours;
         $yacht_ysp_engine_1_boat_engine_location_code = $engines[0]->BoatEngineLocationCode;
     }
+    else {
+        $yacht_ysp_engine_1_make = "";
+        $yacht_ysp_engine_1_model = "";
+        $yacht_ysp_engine_1_fuel = "";
+        $yacht_ysp_engine_1_engine_power = "";
+        $yacht_ysp_engine_1_type = "";
+        $yacht_ysp_engine_1_year = "";
+        $yacht_ysp_engine_1_hours = "";
+        $yacht_ysp_engine_1_boat_engine_location_code = "";
+    }
 
-    if(isset($engines[1])) {
+    if (isset($engines[1])) {
         $yacht_ysp_engine_2_make = $engines[1]->Make;
         $yacht_ysp_engine_2_model = $engines[1]->Model;
         $yacht_ysp_engine_2_fuel = $engines[1]->Fuel;
@@ -52,9 +46,21 @@
         $yacht_ysp_engine_2_hours = $engines[1]->Hours;
         $yacht_ysp_engine_2_boat_engine_location_code = $engines[1]->BoatEngineLocationCode;
     }
+    else {
+        $yacht_ysp_engine_2_make = "";
+        $yacht_ysp_engine_2_model = "";
+        $yacht_ysp_engine_2_fuel = "";
+        $yacht_ysp_engine_2_engine_power = "";
+        $yacht_ysp_engine_2_type = "";
+        $yacht_ysp_engine_2_year = "";
+        $yacht_ysp_engine_2_hours = "";
+        $yacht_ysp_engine_2_boat_engine_location_code = "";
+    }
 
     $images = get_post_meta( $post->ID, 'Images', true );
 
+   // var_dump($images);
+/*
     $yacht_ysp_image_1 = $images[0]->Uri;
     $yacht_ysp_image_2 = $images[1]->Uri;
     $yacht_ysp_image_3 = $images[2]->Uri;
@@ -74,7 +80,7 @@
     $yacht_ysp_image_17 = $images[16]->Uri;
     $yacht_ysp_image_18 = $images[17]->Uri;
     $yacht_ysp_image_19 = $images[18]->Uri;
-    $yacht_ysp_image_20 = $images[19]->Uri;
+    $yacht_ysp_image_20 = $images[19]->Uri;*/
 
 ?>
 
@@ -82,7 +88,13 @@
 <div id="yacht-nested-metabox-basics">
     <div class="metafield">
         <label>General Boat Description</label>
-        <textarea name="General_Boat_Description" style="width: 100%; height: 300px;"><?= $yacht_ysp_general_boat_description[0] ?></textarea>
+        <textarea name="General_Boat_Description" style="width: 100%; height: 300px;">
+            <?php if (isset($yacht_ysp_general_boat_description[0])) : ?>
+                <?= $yacht_ysp_general_boat_description[0] ?>
+            <?php else: ?>
+
+            <?php endif; ?>
+        </textarea>
     </div>
     <div class="metafield">
         <label>YSP Sales Rep Party ID</label>
@@ -156,10 +168,19 @@
         <label>YSP Engine 2 Boat Engine Location Code</label>
         <input type="text" name="YSP_Engine_2_Boat_Engine_Location_Code" value="<?= $yacht_ysp_engine_2_boat_engine_location_code ?>">
     </div>
-    <?php for($x = 1; $x <= 20; $x++) { ?>
+
+    <?php for($x = 0; $x <= 19; $x++) { 
+        if (isset($images[ ($x) ]->Uri)) : 
+            $v = $images[ ($x) ]->Uri;
+        else:
+            $v = '';
+        endif;
+        ?>
         <div class="metafield">
             <label>YSP Image <?= $x ?></label>
-            <input type="text" name="YSP_Image_<?= $x ?>" value="<?= $images[$x-1]->Uri ?>">
+            
+            <input type="text" name="YSP_Image_<?= $x ?>" value="<?= $v ?>">
+
             <input type="button" value="Or Upload" data-name="YSP_Image_<?= $x ?>" class="ysp-manual-images-uploads">
         </div>
     <?php } ?>
@@ -175,6 +196,9 @@
 
             // Uploading files
             let file_frame;
+
+            let name = jQuery(this).data('name');
+
 
             // If the media frame already exists, reopen it.
             if (file_frame) {
@@ -192,15 +216,13 @@
             });
 
             // When a file is selected, run a callback.
-            file_frame.on('select', function(){
+            file_frame.on('select', function() {
                 // We set multiple to false so only get one image from the uploader
                 let attachment = file_frame.state().get('selection').first().toJSON();
 
                 let url = attachment.url;
 
-                let name = jQuery(this).data('name');
-
-                let field = document.querySelector('#yacht-nested-metabox-basics input[name="'+name+'"]');
+                let field = document.querySelector('#yacht-nested-metabox-basics input[name="'+ name +'"]');
 
                 field.value = url; //set which variable you want the field to have
             });

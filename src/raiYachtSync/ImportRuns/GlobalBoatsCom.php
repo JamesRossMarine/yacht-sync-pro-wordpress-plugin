@@ -86,8 +86,9 @@
 
 				var_dump($apiStatusCodeWhile);
 
-				if ($apiStatusCodeWhile != 200) {
-					var_dump($apiCallForWhileBody);
+				if ($apiStatusCodeWhile != 200 || ! isset($apiCallForWhileBody['data']['results'])) {
+//					var_dump($apiCallForWhileBody);
+					var_dump(wp_remote_retrieve_body($apiCallForWhile));
 				}
 
 				if (! isset($apiCallForWhileBody['data']) && ! isset($apiCallForWhileBody['data']['results']) && ! is_array($apiCallForWhileBody['data']['results'])) {
