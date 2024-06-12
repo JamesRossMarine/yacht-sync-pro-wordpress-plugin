@@ -13,9 +13,11 @@
 
 		}
 
-		public function nested_yachts_meta_boxes() { 
+		public function nested_yachts_meta_boxes() {
+
+			
 			add_meta_box(
-				'rai_yacht_sync_nested_meta_box',
+				'rai_yacht_sync_nested_meta_boxs',
 				'Other Yacht Info',
 				[ $this, 'nested_yacht_meta_box_html' ],
 				['rai_yacht']

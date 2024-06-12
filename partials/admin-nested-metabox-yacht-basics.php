@@ -156,106 +156,13 @@
         <label>YSP Engine 2 Boat Engine Location Code</label>
         <input type="text" name="YSP_Engine_2_Boat_Engine_Location_Code" value="<?= $yacht_ysp_engine_2_boat_engine_location_code ?>">
     </div>
-    <div class="metafield">
-        <label>YSP Image 1</label>
-        <input type="text" name="YSP_Image_1" value="<?= $yacht_ysp_image_1 ?>">
-        <input type="button" value="Or Upload" data-name="YSP_Image_1" class="ysp-manual-images-uploads">
-    </div>
-    <div class="metafield">
-        <label>YSP Image 2</label>
-        <input type="text" name="YSP_Image_2" value="<?= $yacht_ysp_image_2 ?>">
-        <input type="button" value="Or Upload" data-name="YSP_Image_2" class="ysp-manual-images-uploads">
-    </div>
-    <div class="metafield">
-        <label>YSP Image 3</label>
-        <input type="text" name="YSP_Image_3" value="<?= $yacht_ysp_image_3 ?>">
-        <input type="button" value="Or Upload" data-name="YSP_Image_3" class="ysp-manual-images-uploads">
-    </div>
-    <div class="metafield">
-        <label>YSP Image 4</label>
-        <input type="text" name="YSP_Image_4" value="<?= $yacht_ysp_image_4 ?>">
-        <input type="button" value="Or Upload" data-name="YSP_Image_4" class="ysp-manual-images-uploads">
-    </div>
-    <div class="metafield">
-        <label>YSP Image 5</label>
-        <input type="text" name="YSP_Image_5" value="<?= $yacht_ysp_image_5 ?>">
-        <input type="button" value="Or Upload" data-name="YSP_Image_5" class="ysp-manual-images-uploads">
-    </div>
-    <div class="metafield">
-        <label>YSP Image 6</label>
-        <input type="text" name="YSP_Image_6" value="<?= $yacht_ysp_image_6 ?>">
-        <input type="button" value="Or Upload" data-name="YSP_Image_6" class="ysp-manual-images-uploads">
-    </div>
-    <div class="metafield">
-        <label>YSP Image 7</label>
-        <input type="text" name="YSP_Image_7" value="<?= $yacht_ysp_image_7 ?>">
-        <input type="button" value="Or Upload" data-name="YSP_Image_7" class="ysp-manual-images-uploads">
-    </div>
-    <div class="metafield">
-        <label>YSP Image 8</label>
-        <input type="text" name="YSP_Image_8" value="<?= $yacht_ysp_image_8 ?>">
-        <input type="button" value="Or Upload" data-name="YSP_Image_8" class="ysp-manual-images-uploads">
-    </div>
-    <div class="metafield">
-        <label>YSP Image 9</label>
-        <input type="text" name="YSP_Image_9" value="<?= $yacht_ysp_image_9 ?>">
-        <input type="button" value="Or Upload" data-name="YSP_Image_9" class="ysp-manual-images-uploads">
-    </div>
-    <div class="metafield">
-        <label>YSP Image 10</label>
-        <input type="text" name="YSP_Image_10" value="<?= $yacht_ysp_image_10 ?>">
-        <input type="button" value="Or Upload" data-name="YSP_Image_10" class="ysp-manual-images-uploads">
-    </div>
-    <div class="metafield">
-        <label>YSP Image 11</label>
-        <input type="text" name="YSP_Image_11" value="<?= $yacht_ysp_image_11 ?>">
-        <input type="button" value="Or Upload" data-name="YSP_Image_11" class="ysp-manual-images-uploads">
-    </div>
-    <div class="metafield">
-        <label>YSP Image 12</label>
-        <input type="text" name="YSP_Image_12" value="<?= $yacht_ysp_image_12 ?>">
-        <input type="button" value="Or Upload" data-name="YSP_Image_12" class="ysp-manual-images-uploads">
-    </div>
-    <div class="metafield">
-        <label>YSP Image 13</label>
-        <input type="text" name="YSP_Image_13" value="<?= $yacht_ysp_image_13 ?>">
-        <input type="button" value="Or Upload" data-name="YSP_Image_13" class="ysp-manual-images-uploads">
-    </div>
-    <div class="metafield">
-        <label>YSP Image 14</label>
-        <input type="text" name="YSP_Image_14" value="<?= $yacht_ysp_image_14 ?>">
-        <input type="button" value="Or Upload" data-name="YSP_Image_14" class="ysp-manual-images-uploads">
-    </div>
-    <div class="metafield">
-        <label>YSP Image 15</label>
-        <input type="text" name="YSP_Image_15" value="<?= $yacht_ysp_image_15 ?>">
-        <input type="button" value="Or Upload" data-name="YSP_Image_15" class="ysp-manual-images-uploads">
-    </div>
-    <div class="metafield">
-        <label>YSP Image 16</label>
-        <input type="text" name="YSP_Image_16" value="<?= $yacht_ysp_image_16 ?>">
-        <input type="button" value="Or Upload" data-name="YSP_Image_16" class="ysp-manual-images-uploads">
-    </div>
-    <div class="metafield">
-        <label>YSP Image 17</label>
-        <input type="text" name="YSP_Image_17" value="<?= $yacht_ysp_image_17 ?>">
-        <input type="button" value="Or Upload" data-name="YSP_Image_17" class="ysp-manual-images-uploads">
-    </div>
-    <div class="metafield">
-        <label>YSP Image 18</label>
-        <input type="text" name="YSP_Image_18" value="<?= $yacht_ysp_image_18 ?>">
-        <input type="button" value="Or Upload" data-name="YSP_Image_18" class="ysp-manual-images-uploads">
-    </div>
-    <div class="metafield">
-        <label>YSP Image 19</label>
-        <input type="text" name="YSP_Image_19" value="<?= $yacht_ysp_image_19 ?>">
-        <input type="button" value="Or Upload" data-name="YSP_Image_19" class="ysp-manual-images-uploads">
-    </div>
-    <div class="metafield">
-        <label>YSP Image 20</label>
-        <input type="text" name="YSP_Image_20" value="<?= $yacht_ysp_image_20 ?>">
-        <input type="button" value="Or Upload" data-name="YSP_Image_20" class="ysp-manual-images-uploads">
-    </div>
+    <?php for($x = 1; $x <= 20; $x++) { ?>
+        <div class="metafield">
+            <label>YSP Image <?= $x ?></label>
+            <input type="text" name="YSP_Image_<?= $x ?>" value="<?= $images[$x-1]->Uri ?>">
+            <input type="button" value="Or Upload" data-name="YSP_Image_<?= $x ?>" class="ysp-manual-images-uploads">
+        </div>
+    <?php } ?>
 </div>
 
 <script type="text/javascript">
