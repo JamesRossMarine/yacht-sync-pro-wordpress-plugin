@@ -67,9 +67,13 @@
 			$images = [];
 
 			for ($im=0; $im <= 19; $im++) {
-				$images[]=(object) [
-					'Uri' => $_POST['YSP_Image_'.$im],
- 				];
+
+				if (isset($_POST['YSP_Image_'.$im])) {
+					$images[ $im ]=(object) [
+						'Uri' => $_POST['YSP_Image_'.$im],
+	 				];
+				}
+
 			}
 
 			update_post_meta($post_id, 'Images', $images);
