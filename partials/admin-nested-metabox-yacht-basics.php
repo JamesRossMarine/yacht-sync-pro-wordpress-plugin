@@ -53,7 +53,6 @@
         $yacht_ysp_engine_2_boat_engine_location_code = $engines[1]->BoatEngineLocationCode;
     }
 
-
     $images = get_post_meta( $post->ID, 'Images', true );
 
     $yacht_ysp_image_1 = $images[0]->Uri;
@@ -76,6 +75,7 @@
     $yacht_ysp_image_18 = $images[17]->Uri;
     $yacht_ysp_image_19 = $images[18]->Uri;
     $yacht_ysp_image_20 = $images[19]->Uri;
+
 ?>
 
 
@@ -106,7 +106,7 @@
     </div>
     <div class="metafield">
         <label>YSP Engine 1 Engine Power</label>
-        <input type="text" name="YSP_Engine_1_Engine_Power" value="<?= $yacht_ysp_engine_1_engine_power ?>">
+        <input type="text" name="YSP_Engine_1_EnginePower" value="<?= $yacht_ysp_engine_1_engine_power ?>">
     </div>
     <div class="metafield">
         <label>YSP Engine 1 Type</label>
@@ -138,7 +138,7 @@
     </div>
     <div class="metafield">
         <label>YSP Engine 2 Engine Power</label>
-        <input type="text" name="YSP_Engine_2_Engine_Power" value="<?= $yacht_ysp_engine_2_engine_power ?>">
+        <input type="text" name="YSP_Engine_2_EnginePower" value="<?= $yacht_ysp_engine_2_engine_power ?>">
     </div>
     <div class="metafield">
         <label>YSP Engine 2 Type</label>
