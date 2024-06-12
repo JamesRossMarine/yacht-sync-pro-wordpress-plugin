@@ -16,6 +16,7 @@
 	$yacht_ysp_loa_feet = get_post_meta( $post->ID, 'YSP_LOAFeet', true );
 	$yacht_ysp_loa_meter = get_post_meta( $post->ID, 'YSP_LOAMeter', true );
 	$yacht_ysp_length = get_post_meta( $post->ID, 'YSP_Length', true );
+	$yacht_ysp_NominalLength = get_post_meta( $post->ID, 'NominalLength', true );
 	$yacht_ysp_listing_date = get_post_meta( $post->ID, 'YSP_ListingDate', true );
 	$yacht_make_string = get_post_meta( $post->ID, 'MakeString', true );
 	$yacht_model = get_post_meta( $post->ID, 'Model', true );
@@ -106,6 +107,10 @@
 	<div class="metafield">
 		<label>Length</label>
 		<input type="text" name="YSP_Length" value="<?= $yacht_ysp_length ?>">
+	</div>
+	<div class="metafield">
+		<label>Nominal Length</label>
+		<input type="text" name="NominalLength" value="<?= $yacht_ysp_NominalLength ?>" required="">
 	</div>
 	<div class="metafield">
 		<label>Overall Length (ft)</label>

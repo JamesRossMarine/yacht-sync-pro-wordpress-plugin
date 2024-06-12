@@ -43,6 +43,7 @@
 			    'NormPrice',
 			    'YSP_EuroVal',
 			    'YSP_Length',
+			    'NominalLength',
 			    'YSP_LOAFeet',
 			    'YSP_LOAMeter',
 			    'YSP_ListingDate',
