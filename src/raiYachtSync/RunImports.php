@@ -126,9 +126,11 @@
 						wp.post_type = %s 
 						AND 
 						wp.ID NOT IN (
-							SELECT wp.ID FROM $wpdb->posts wp
-							LEFT JOIN $wpdb->postmeta pm ON pm.post_id = wp.ID 
-							WHERE wp.post_type = %s AND pm.meta_key = 'is_yacht_manual_entry' AND pm.meta_value = 'yes'
+							SELECT IDS FROM (
+								SELECT wp.ID FROM $wpdb->posts wp
+								LEFT JOIN $wpdb->postmeta pm ON pm.post_id = wp.ID 
+								WHERE wp.post_type = %s AND pm.meta_key = 'is_yacht_manual_entry' AND pm.meta_value = 'yes'
+							) IDS
 						)
 						",
 						'rai_yacht',
@@ -181,12 +183,14 @@
 						"DELETE wp FROM $wpdb->posts wp 
 						LEFT JOIN $wpdb->postmeta pm ON pm.post_id = wp.ID 
 						WHERE 
-						wp.post_type = %s AND pm.meta_key = %s AND pm.meta_value = '1'
-						AND
+						wp.post_type = %s AND pm.meta_key = %s AND pm.meta_value = '1' 
+						AND 
 						wp.ID NOT IN (
-							SELECT wp.ID FROM $wpdb->posts wp
-							LEFT JOIN $wpdb->postmeta pm ON pm.post_id = wp.ID 
-							WHERE wp.post_type = %s AND pm.meta_key = 'is_yacht_manual_entry' AND pm.meta_value = 'yes'
+							SELECT IDS FROM (
+								SELECT wp.ID FROM $wpdb->posts wp
+								LEFT JOIN $wpdb->postmeta pm ON pm.post_id = wp.ID 
+								WHERE wp.post_type = %s AND pm.meta_key = 'is_yacht_manual_entry' AND pm.meta_value = 'yes'
+							) IDS
 						)", 
 						'rai_yacht',
 						'CompanyBoat',
