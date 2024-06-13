@@ -85,6 +85,27 @@
 				        update_post_meta($post_id, $field, $_POST[$field]);
 				    }
 				}
+
+				$boatLocation=(object) [
+					"BoatCityName" => '',
+					"BoatCountryID" => '',
+					"BoatStateCode" => '',
+				];
+
+				if (isset($_POST['YSP_CountryID'])) {
+					$boatLocation->BoatCountryID = $_POST['YSP_CountryID'];
+				}
+				
+				if (isset($_POST['YSP_City'])) {
+					$boatLocation->BoatCityName = $_POST['YSP_City'];
+				}
+
+				if (isset($_POST['YSP_State'])) {
+					$boatLocation->BoatCityName = $_POST['YSP_State'];
+				}
+
+				update_post_meta($post_id, "BoatLocation", $boatLocation);
+
 			}
 		}
 
