@@ -163,10 +163,10 @@
 		<label>Yacht Category</label>
 		<input type="text" name="BoatCategoryCode" value="<?= $yacht_boat_category_code ?>">
 	</div>
-	<!-- <div class="metafield">
+	<div class="metafield">
 		<label>Yacht Class</label>
 		<input type="text" name="BoatClassCode" value="<?= $yacht_boat_class_code ?>">
-	</div> -->
+	</div> 
 	<div class="metafield">
 		<label>Has Hull ID</label>
 		<input type="text" name="HasHullID" value="<?= $yacht_has_boat_hull_id ?>">
