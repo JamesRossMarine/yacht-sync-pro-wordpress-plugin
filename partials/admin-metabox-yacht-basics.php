@@ -165,7 +165,7 @@
 	</div>
 	<div class="metafield">
 		<label>Yacht Class</label>
-		<input type="text" name="BoatClassCode" value="<?= $yacht_boat_class_code ?>">
+		<input type="text" name="BoatClassCode" value="<?= $yacht_boat_class_code[0] ?>">
 	</div> 
 	<div class="metafield">
 		<label>Has Hull ID</label>
