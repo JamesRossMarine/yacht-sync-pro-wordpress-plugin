@@ -35,6 +35,7 @@
 				    'YSP_City',
 				    'YSP_CountryID',
 				    'YSP_State',
+					'COUNTRY_WEIGHT',
 				    'YSP_EngineCount',
 				    'YSP_EngineFuel',
 				    'YSP_EngineHours',

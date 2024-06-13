@@ -5,6 +5,7 @@
 	$yacht_ysp_city = get_post_meta( $post->ID, 'YSP_City', true );
 	$yacht_ysp_country_id = get_post_meta( $post->ID, 'YSP_CountryID', true );
 	$yacht_ysp_state = get_post_meta( $post->ID, 'YSP_State', true );
+	$yacht_ysp_country_weight = get_post_meta( $post->ID, 'COUNTRY_WEIGHT', true );
 	$yacht_ysp_engine_count = get_post_meta( $post->ID, 'YSP_EngineCount', true );
 	$yacht_ysp_engine_fuel = get_post_meta( $post->ID, 'YSP_EngineFuel', true );
 	$yacht_ysp_engine_hours = get_post_meta( $post->ID, 'YSP_EngineHours', true );
@@ -73,6 +74,10 @@
 	<div class="metafield">
 		<label>Yacht State Name</label>
 		<input type="text" name="YSP_State" value="<?= $yacht_ysp_state ?>">
+	</div>
+	<div class="metafield">
+		<label>Country Weight</label>
+		<input type="number" name="COUNTRY_WEIGHT" value="<?= $yacht_ysp_country_weight ?>">
 	</div>
 	<div class="metafield">
 		<label>Engine Count</label>
