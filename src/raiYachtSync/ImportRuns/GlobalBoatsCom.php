@@ -86,7 +86,7 @@
 
 				var_dump($apiStatusCodeWhile);
 
-				if ($apiStatusCodeWhile != 200) {
+				if ($apiStatusCodeWhile != 200 || ! isset($apiCallForWhileBody['data']['results'])) {
 					var_dump($apiCallForWhileBody);
 				}
 
