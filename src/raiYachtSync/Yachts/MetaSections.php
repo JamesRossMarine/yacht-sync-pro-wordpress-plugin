@@ -42,6 +42,7 @@
 				    'YSP_EnginePower',
 				    'YSP_EngineType',
 				    'NormPrice',
+					'YSP_USDVal',
 				    'YSP_EuroVal',
 				    'YSP_Length',
 				    'NominalLength',

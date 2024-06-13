@@ -11,6 +11,7 @@
 	$yacht_ysp_engine_model = get_post_meta( $post->ID, 'YSP_EngineModel', true );
 	$yacht_ysp_engine_power = get_post_meta( $post->ID, 'YSP_EnginePower', true );
 	$yacht_ysp_engine_type = get_post_meta( $post->ID, 'YSP_EngineType', true );
+	$yacht_ysp_usd_val = get_post_meta( $post->ID, 'YSP_USDVal', true );
 	$yacht_norm_price = get_post_meta( $post->ID, 'NormPrice', true );
 	$yacht_ysp_euro_val = get_post_meta( $post->ID, 'YSP_EuroVal', true );
 	$yacht_ysp_loa_feet = get_post_meta( $post->ID, 'YSP_LOAFeet', true );
@@ -95,6 +96,10 @@
 	<div class="metafield">
 		<label>Engine Type</label>
 		<input type="text" name="YSP_EngineType" value="<?= $yacht_ysp_engine_type ?>">
+	</div>
+	<div class="metafield">
+		<label>YSP USD Value</label>
+		<input type="number" name="YSP_USDVal" value="<?= $yacht_ysp_usd_val ?>">
 	</div>
 	<div class="metafield">
 		<label>Price (USD)</label>
