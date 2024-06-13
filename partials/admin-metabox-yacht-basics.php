@@ -14,6 +14,7 @@
 	$yacht_ysp_usd_val = get_post_meta( $post->ID, 'YSP_USDVal', true );
 	$yacht_norm_price = get_post_meta( $post->ID, 'NormPrice', true );
 	$yacht_ysp_euro_val = get_post_meta( $post->ID, 'YSP_EuroVal', true );
+	$yacht_ysp_aud_val = get_post_meta( $post->ID, 'YSP_AUDVal', true );
 	$yacht_ysp_loa_feet = get_post_meta( $post->ID, 'YSP_LOAFeet', true );
 	$yacht_ysp_loa_meter = get_post_meta( $post->ID, 'YSP_LOAMeter', true );
 	$yacht_ysp_length = get_post_meta( $post->ID, 'YSP_Length', true );
@@ -108,6 +109,10 @@
 	<div class="metafield">
 		<label>Price (EUR)</label>
 		<input type="number" name="YSP_EuroVal" value="<?= $yacht_ysp_euro_val ?>">
+	</div>
+	<div class="metafield">
+		<label>Price (AUD)</label>
+		<input type="number" name="YSP_AUDVal" value="<?= $yacht_ysp_aud_val ?>">
 	</div>
 	<div class="metafield">
 		<label>Length</label>

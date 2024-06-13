@@ -44,6 +44,7 @@
 				    'NormPrice',
 					'YSP_USDVal',
 				    'YSP_EuroVal',
+					'YSP_AUDVal',
 				    'YSP_Length',
 				    'NominalLength',
 				    'YSP_LOAFeet',
