@@ -144,7 +144,7 @@
 
 				}
 	
-				if ($this->if_query_var_check( $query->get('page_index') )  && $query->get('page_index')  >= 2 ) {
+				if ($this->if_query_var_check( $query->get('page_index') ) && is_numeric($query->get('page_index')) && $query->get('page_index')  >= 2 ) {
 
 					$query->set('offset', 12 * ( $query->get('page_index') - 1));
 

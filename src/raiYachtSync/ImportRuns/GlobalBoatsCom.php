@@ -77,7 +77,7 @@
 				sleep(30);
  
 				// Sync broker inventory
-				$apiCallForWhile = wp_remote_get($apiUrl, ['timeout' => 120]);
+				$apiCallForWhile = wp_remote_get($apiUrl, ['timeout' => 180]);
 
 				//var_dump($apiCallForWhile);
 
@@ -87,7 +87,6 @@
 				var_dump($apiStatusCodeWhile);
 
 				if ($apiStatusCodeWhile != 200 || ! isset($apiCallForWhileBody['data']['results'])) {
-//					var_dump($apiCallForWhileBody);
 					var_dump(wp_remote_retrieve_body($apiCallForWhile));
 				}
 
@@ -243,7 +242,7 @@
 
 				  	$url = 'https://services.boats.com/pls/boats/details?id=' . $boat['DocumentID'] . '&key='.$this->key;
 					
-					$apiCall = wp_remote_get($url, ['timeout' => 120]);
+					$apiCall = wp_remote_get($url, ['timeout' => 180]);
 
 					$response = $apiCall['body'];
 
