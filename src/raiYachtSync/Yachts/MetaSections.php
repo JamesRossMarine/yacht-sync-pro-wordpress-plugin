@@ -77,7 +77,9 @@
 				    'WaterTankCountNumeric',
 				    'WaterTankMaterialCode',
 				    'TotalEngineHoursNumberic',
-				    'TotalEnginePowerQuantity'
+				    'TotalEnginePowerQuantity',
+				    'CompanyWeight',
+				    'MakeWeight'
 				];
 
 				foreach ($fields as $field) {
