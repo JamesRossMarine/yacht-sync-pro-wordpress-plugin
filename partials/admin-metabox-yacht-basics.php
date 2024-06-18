@@ -131,11 +131,11 @@
 	</div>
 	<div class="metafield">
 		<label>Overall Length (ft)</label>
-		<input type="number" name="YSP_LOAFeet" step="0.5" value="<?= $yacht_ysp_loa_feet ?>">
+		<input type="number" name="YSP_LOAFeet" step="0.1" value="<?= $yacht_ysp_loa_feet ?>">
 	</div>
 	<div class="metafield">
 		<label>Overall Length (m)</label>
-		<input type="number" name="YSP_LOAMeter" step="0.5" value="<?= $yacht_ysp_loa_meter ?>">
+		<input type="number" name="YSP_LOAMeter" step="0.1" value="<?= $yacht_ysp_loa_meter ?>">
 	</div>
 	<div class="metafield">
 		<label>Listing Date</label>
@@ -155,7 +155,7 @@
 	</div>
 	<div class="metafield">
 		<label>Make Weight</label>
-		<input type="number" name="MAKE_WEIGHT" value="<?= $yacht_ysp_make_weight ?>">
+		<input type="number" name="MakeWeight" value="<?= $yacht_ysp_make_weight ?>">
 	</div>
 	<div class="metafield">
 		<label>Sales Status</label>
