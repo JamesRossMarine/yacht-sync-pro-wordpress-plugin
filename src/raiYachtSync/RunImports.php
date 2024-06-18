@@ -48,32 +48,6 @@
 	      
 		}
 
-		public function newLifeCycle() {
-
-	        $wpdb->query( 
-				$wpdb->prepare( 
-					"UPDATE $wpdb->postmeta pm 
-					INNER JOIN $wpdb->posts AS p ON pm.post_id = p.ID
-					SET pm.meta_value = '0'
-					WHERE p.post_type = %s AND pm.meta_key = 'Touched_InSync'",
-					'rai_yacht'
-				)
-			);
-
-			// sync here
-
-			$wpdb->query( 
-				$wpdb->prepare( 
-					"DELETE p FROM $wpdb->posts p
-					INNER JOIN $wpdb->postmeta AS pm ON p.ID = pm.post_id 
-					WHERE p.post_type = %s AND pm.meta_key = 'Touched_InSync' AND pm.meta_value = '0'",
-					'rai_yacht'
-				)
-			);
-
-			
-		}
-
 		public function emailSyncFailed() {
 			$siteName = get_bloginfo('name');
     		$siteUrl = get_bloginfo('url');
@@ -120,8 +94,20 @@
 	        if ($count_of_synced > $this->low_count) {
 		       	$wpdb->query( 
 					$wpdb->prepare( 
-						"DELETE wp FROM $wpdb->posts wp
-						WHERE wp.post_type = %s",
+						"
+						DELETE wp FROM $wpdb->posts wp
+						WHERE 
+						wp.post_type = %s 
+						AND 
+						wp.ID NOT IN (
+							SELECT ID FROM (
+								SELECT wp.ID as ID FROM $wpdb->posts wp
+								LEFT JOIN $wpdb->postmeta pm ON pm.post_id = wp.ID 
+								WHERE wp.post_type = %s AND pm.meta_key = 'is_yacht_manual_entry' AND pm.meta_value = 'yes'
+							) manual_entered_yachts
+						)
+						",
+						'rai_yacht',
 						'rai_yacht'
 					)
 				);
@@ -170,9 +156,19 @@
 					$wpdb->prepare( 
 						"DELETE wp FROM $wpdb->posts wp 
 						LEFT JOIN $wpdb->postmeta pm ON pm.post_id = wp.ID 
-						WHERE wp.post_type = %s AND pm.meta_key = %s AND pm.meta_value = '1'", 
+						WHERE 
+						wp.post_type = %s AND pm.meta_key = %s AND pm.meta_value = '1' 
+						AND 
+						wp.ID NOT IN (
+							SELECT ID FROM (
+								SELECT wp.ID as ID FROM $wpdb->posts wp
+								LEFT JOIN $wpdb->postmeta pm ON pm.post_id = wp.ID 
+								WHERE wp.post_type = %s AND pm.meta_key = 'is_yacht_manual_entry' AND pm.meta_value = 'yes'
+							) manual_entered_yachts
+						)", 
 						'rai_yacht',
-						'CompanyBoat'
+						'CompanyBoat',
+						'rai_yacht'
 					)
 				);
 

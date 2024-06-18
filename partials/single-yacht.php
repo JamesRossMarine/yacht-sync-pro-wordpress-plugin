@@ -48,11 +48,11 @@ get_header();
                         </h1>
                         <h2 class="yacht-price">
                         <?php
-                        if ($YSP_Euro_Opt == "yes") {
-                            echo '€' . number_format($vessel->YSP_EuroVal) . ' ' . 'EUR';
-                        } else {
-                            echo '$' . number_format($vessel->YSP_USDVal);
-                        }
+                            if ($YSP_Euro_Opt == "yes") {
+                                echo '€' . number_format($vessel->YSP_EuroVal) . ' ' . 'EUR';
+                            } else {
+                                echo '$' . number_format($vessel->YSP_USDVal);
+                            }
                         ?>
                     </h2>
                     </div>

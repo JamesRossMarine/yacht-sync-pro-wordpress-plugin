@@ -31,6 +31,9 @@
 			$this->Yachts_RestrictManagePosts = new raiYachtSync_Yachts_RestrictManagePosts();
 
 			$this->Yachts_Meta_Brochure = new raiYachtSync_Yachts_MetaBrochureSection();
+			$this->Yachts_MetaFields = new raiYachtSync_Yachts_MetaSections();
+			$this->Yachts_NestedMetaFields = new raiYachtSync_Yachts_NestedMetaSections();
+			$this->Yachts_MetaIsManual = new raiYachtSync_Yachts_MetaIsManual();
 
 			$this->Brokers_DetailOverride = new raiYachtSync_Brokers_DetailsOverride();
 			$this->Brokers_MetaFields = new raiYachtSync_Brokers_MetaSections();
