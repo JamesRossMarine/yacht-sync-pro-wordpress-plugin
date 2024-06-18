@@ -5,7 +5,6 @@
 	$yacht_ysp_city = get_post_meta( $post->ID, 'YSP_City', true );
 	$yacht_ysp_country_id = get_post_meta( $post->ID, 'YSP_CountryID', true );
 	$yacht_ysp_state = get_post_meta( $post->ID, 'YSP_State', true );
-	$yacht_ysp_country_weight = get_post_meta( $post->ID, 'COUNTRY_WEIGHT', true );
 	$yacht_ysp_engine_count = get_post_meta( $post->ID, 'YSP_EngineCount', true );
 	$yacht_ysp_engine_fuel = get_post_meta( $post->ID, 'YSP_EngineFuel', true );
 	$yacht_ysp_engine_hours = get_post_meta( $post->ID, 'YSP_EngineHours', true );
@@ -49,6 +48,9 @@
 	$yacht_water_tank_material_code = get_post_meta( $post->ID, 'WaterTankMaterialCode', true );
 	$yacht_total_engine_hours_numeric = get_post_meta( $post->ID, 'TotalEngineHoursNumeric', true );
 	$yacht_total_engine_power_quantity = get_post_meta( $post->ID, 'TotalEnginePowerQuantity', true );
+
+	$yacht_ysp_country_weight = get_post_meta( $post->ID, 'COUNTRY_WEIGHT', true );
+	$yacht_ysp_make_weight = get_post_meta( $post->ID, 'MakeWeight', true );
 ?>
 <div id="yacht-metabox-basics">
 	<div class="metafield">
@@ -150,6 +152,10 @@
 	<div class="metafield">
 		<label>Year</label>
 		<input type="number" name="ModelYear" min="1900" max="<?= (string) date("Y") + 1 ?>" value="<?= $yacht_model_year ?>">
+	</div>
+	<div class="metafield">
+		<label>Make Weight</label>
+		<input type="number" name="MAKE_WEIGHT" value="<?= $yacht_ysp_make_weight ?>">
 	</div>
 	<div class="metafield">
 		<label>Sales Status</label>
