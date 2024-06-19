@@ -13,6 +13,8 @@
 			$this->AlertOnLowCount = new raiYachtSync_AlertOnLowCount();
 			$this->AlertOnDiffCount = new raiYachtSync_AlertOnDiffCount();
 
+			$this->ImportJsonBoats = new raiYachtSync_ImportRuns_JsonImport();
+
 			$this->ImportGlobalBoatsCom = new raiYachtSync_ImportRuns_GlobalBoatsCom();
 			$this->ImportGlobalBoatsCom2 = new raiYachtSync_ImportRuns_GlobalBoatsCom('boats_com_api_global_key_2');
 
@@ -239,6 +241,12 @@
 
 			// @ToDo For Loop the Runs  
 			// KEEP THIS IN THIS ORDER
+
+			if(file_exists(WP_CONTENT_DIR . '/ysp_json_data/ysp_yacht_data.json')) {
+				var_dump('Importing From JSON Data');
+				$resultsOfSync[]=$this->ImportJsonBoats->run();
+			}
+
 			if (! empty($boats_com_api_global_key)) {
 				$resultsOfSync[]=$this->ImportGlobalBoatsCom->run();
 			}
