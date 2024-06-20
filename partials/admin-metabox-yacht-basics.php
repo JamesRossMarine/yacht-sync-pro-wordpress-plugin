@@ -51,6 +51,7 @@
 
 	$yacht_ysp_country_weight = get_post_meta( $post->ID, 'COUNTRY_WEIGHT', true );
 	$yacht_ysp_make_weight = get_post_meta( $post->ID, 'MakeWeight', true );
+	$yacht_ysp_company_weight = get_post_meta( $post->ID, 'CompanyWeight', true );
 ?>
 <div id="yacht-metabox-basics">
 	<div class="metafield">
@@ -156,6 +157,11 @@
 	<div class="metafield">
 		<label>Make Weight</label>
 		<input type="number" name="MakeWeight" value="<?= $yacht_ysp_make_weight ?>">
+	</div>
+
+	<div class="metafield">
+		<label>Company Weight</label>
+		<input type="number" name="CompanyWeight" value="<?= $yacht_ysp_company_weight ?>">
 	</div>
 	<div class="metafield">
 		<label>Sales Status</label>
