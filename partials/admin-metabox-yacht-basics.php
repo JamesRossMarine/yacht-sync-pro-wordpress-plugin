@@ -52,6 +52,7 @@
 	$yacht_ysp_country_weight = get_post_meta( $post->ID, 'COUNTRY_WEIGHT', true );
 	$yacht_ysp_make_weight = get_post_meta( $post->ID, 'MakeWeight', true );
 	$yacht_ysp_company_weight = get_post_meta( $post->ID, 'CompanyWeight', true );
+	$yacht_ysp_sales_code_weight = get_post_meta( $post->ID, 'SalesCodeWeight', true );
 ?>
 <div id="yacht-metabox-basics">
 	<div class="metafield">
@@ -170,6 +171,10 @@
 			<option value="SalePending" <?php if ($yacht_sales_status == "SalePending") echo "selected"; ?>>Sale Pending</option>
 			<option value="Sold" <?php if ($yacht_sales_status == "Sold") echo "selected"; ?>>Sold</option>
 		</select>
+	</div>
+	<div class="metafield">
+		<label>Sales Code Weight</label>
+		<input type="number" name="SalesCodeWeight" value="<?= $yacht_ysp_sales_code_weight ?>">
 	</div>
 	<div class="metafield">
 		<label>Yacht Category</label>

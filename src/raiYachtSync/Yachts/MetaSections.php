@@ -79,7 +79,8 @@
 				    'TotalEngineHoursNumberic',
 				    'TotalEnginePowerQuantity',
 				    'CompanyWeight',
-				    'MakeWeight'
+				    'MakeWeight',
+					'SalesCodeWeight'
 				];
 
 				foreach ($fields as $field) {
