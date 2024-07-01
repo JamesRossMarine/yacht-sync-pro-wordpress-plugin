@@ -4,7 +4,7 @@
 	class raiYachtSync_ImportRuns_BrokerageOnlyBoatsCom {
    		protected $limit = 53;
 		
-		public $brokerageInventoryUrl = 'https://api.boats.com/inventory/search?SalesStatus=Active,On-Order&key=';
+		public $brokerageInventoryUrl = 'https://api.boats.com/inventory/search?key=';
 
 		public function __construct($metakey = 'boats_com_api_brokerage_key') {
 
@@ -17,14 +17,18 @@
 			$this->ChatGPTYachtDescriptionVersionTwo = new raiYachtSync_ChatGPTYachtDescriptionVersionTwo();
 
 			$this->key=$this->options->get($metakey);
-			$this->opt_prerender_brochures=$this->options->get('prerender_brochures');
-
+			$this->status_override = $this->options->get('boats_com_api_brokerage_status_override');
+			
 			$this->brokerageInventoryUrl .= $this->key;
+			$this->brokerageInventoryUrl .= (! empty($this->status_override))?'&SalesStatus='.$this->status_override:'&SalesStatus=Active,On-Order';
+			
+			$this->opt_prerender_brochures=$this->options->get('prerender_brochures');
 
 			$this->euro_c_c = floatval($this->options->get('euro_c_c'));
 			$this->usd_c_c = floatval($this->options->get('usd_c_c'));
 
 			$this->urlbox_secret_key = $this->options->get('pdf_urlbox_api_secret_key');
+
 
 			$this->CarryOverKeys = [
 				'_yoast_wpseo_title',

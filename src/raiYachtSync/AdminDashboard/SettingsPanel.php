@@ -23,6 +23,7 @@
 
 			register_setting( self::SLUG, self::SLUG . '_boats_com_api_brokerage_key');
 			register_setting( self::SLUG, self::SLUG . '_boats_com_api_brokerage_key_2');
+			register_setting( self::SLUG, self::SLUG . '_boats_com_api_brokerage_status_override');
 			
 			register_setting( self::SLUG, self::SLUG . '_yacht_broker_org_api_token');
 			
