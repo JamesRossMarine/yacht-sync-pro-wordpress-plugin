@@ -22,6 +22,8 @@ var global_script_files=[
     'js/threeP/jquery-pagination.js',
     'js/threeP/jquery-modal.js',
 
+    'js/fslightbox-basic.js',
+
     'js/whatever.js',
     'js/common.js',
     'js/api-client.js',
