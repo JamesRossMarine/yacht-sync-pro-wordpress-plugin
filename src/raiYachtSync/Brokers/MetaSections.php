@@ -50,10 +50,11 @@
                 <br>
                 <label>Main Broker</label>
                 <br>
-                <input type="checkbox" name="main_broker" value="1" <?php checked($main_broker, '1'); ?>><br>
+                <input type="checkbox" name="main_broker" value="1" <?php checked($main_broker, '1'); ?>>
+                <br>
                 <label>Broker Priority</label>
                 <br>
-                <input type="number" name="broker_priority" min="0" max="100">
+                <input type="number" name="broker_priority" min="0" max="100" value="<?= $broker_priority ?>">
 
             <?php 
 
