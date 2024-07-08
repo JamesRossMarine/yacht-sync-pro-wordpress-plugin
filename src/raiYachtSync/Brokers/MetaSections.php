@@ -28,7 +28,8 @@
             $broker_lname = get_post_meta( $post->ID, 'rai_broker_lname', true );     
             $broker_email = get_post_meta( $post->ID, 'rai_broker_email', true );     
             $broker_phone = get_post_meta( $post->ID, 'rai_broker_phone', true );  
-            $main_broker = get_post_meta($post->ID, 'rai_main_broker', true) ?: '0';      
+            $main_broker = get_post_meta($post->ID, 'rai_main_broker', true) ?: '0';
+            $broker_priority = get_post_meta($post->ID, 'rai_broker_priority', true);      
             ?>
 
                 <label>First Name</label>
@@ -47,8 +48,13 @@
                 <br>
                 <input style="margin-bottom: 5px" type="text" name="broker_phone" value="<?= $broker_phone ?>">
                 <br>
-                <label>Main Broker</label><br>
-                <input type="checkbox" name="main_broker" value="1" <?php checked($main_broker, '1'); ?>><br>
+                <label>Main Broker</label>
+                <br>
+                <input type="checkbox" name="main_broker" value="1" <?php checked($main_broker, '1'); ?>>
+                <br>
+                <label>Broker Priority</label>
+                <br>
+                <input type="number" name="broker_priority" min="0" max="100" value="<?= $broker_priority ?>">
 
             <?php 
 
@@ -88,6 +94,14 @@
             }
 
             $main_broker = isset($_POST['main_broker']) ? '1' : '0';
+
+            if ( isset($_POST['broker_priority'])) {
+                update_post_meta(
+                    $post_id,
+                    'rai_broker_priority',
+                    $_POST['broker_priority']
+                );
+            }
             
             update_post_meta($post_id, 'rai_main_broker', $main_broker);
         }
