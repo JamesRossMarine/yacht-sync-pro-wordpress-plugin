@@ -24,6 +24,7 @@
 	$yacht_model = get_post_meta( $post->ID, 'Model', true );
 	$yacht_model_year = get_post_meta( $post->ID, 'ModelYear', true );
 	$yacht_sales_status = get_post_meta( $post->ID, 'SalesStatus', true );
+	$yacht_sale_class_code = get_post_meta( $post->ID, 'SaleClassCode', true );
 
 	$yacht_additional_detail_description = get_post_meta( $post->ID, 'AdditionalDetailDescription', true );
 	$yacht_boat_category_code = get_post_meta( $post->ID, 'BoatCategoryCode', true );
@@ -170,6 +171,13 @@
 			<option value="Active" <?php if ($yacht_sales_status == "Active") echo "selected"; ?>>Active</option>
 			<option value="SalePending" <?php if ($yacht_sales_status == "SalePending") echo "selected"; ?>>Sale Pending</option>
 			<option value="Sold" <?php if ($yacht_sales_status == "Sold") echo "selected"; ?>>Sold</option>
+		</select>
+	</div>
+	<div class="metafield">
+		<label>Sale Status Code</label>
+		<select name="SaleClassCode">
+			<option value="New" <?php if ($yacht_sale_class_code == "New") echo "selected"; ?>>New</option>
+			<option value="Used" <?php if ($yacht_sale_class_code == "Used") echo "selected"; ?>>Used</option>
 		</select>
 	</div>
 	<div class="metafield">

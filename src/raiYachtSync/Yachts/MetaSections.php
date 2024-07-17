@@ -55,6 +55,7 @@
 				    'Model',
 				    'ModelYear',
 				    'SalesStatus',
+					'SaleClassCode',
 				    'BoatCategoryCode',
 				    //'BoatClassCode',
 				    'HasHullID',
