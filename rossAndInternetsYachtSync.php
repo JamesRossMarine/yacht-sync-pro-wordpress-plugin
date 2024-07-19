@@ -47,7 +47,7 @@ require __DIR__.'/src/plugin-update-checker/plugin-update-checker.php';
 use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
 
 $myUpdateChecker = PucFactory::buildUpdateChecker(
-    'https://github.com/RossAndInternets/yacht-sync-wp-plugin',
+    'https://github.com/JamesRossMarine/yacht-sync-pro-wordpress-plugin',
     __FILE__,
     'yacht-sync-wp-plugin'
 );
@@ -58,7 +58,7 @@ $myUpdateChecker = PucFactory::buildUpdateChecker(
 //creating the consumer to work around #134:
 // https://github.com/YahnisElsts/plugin-update-checker/issues/134
 
-$myUpdateChecker->setAuthentication('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');
+$myUpdateChecker->setAuthentication('git_hub_token_secret_something');
 
 //Optional: Set the branch that contains the stable release.
 $myUpdateChecker->setBranch('wp-admin-release');
