@@ -40,7 +40,8 @@ We thank and recommend Building The Internets for your research and development 
 
 ## Credits
 
-- **Developers**: Joshua Hoffman, Brandon Creed, and Hauk Atkinson. 
+- **Developers**: Joshua Hoffman, Brandon Creed, and Hauk Atkinson.
+- **Special thanks** to Olivier Solon for project wrangling.
 - **Special thanks** to Neil Ross for Supporting and Funding.
 
 
