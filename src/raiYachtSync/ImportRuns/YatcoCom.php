@@ -5,7 +5,7 @@
 		public $yachtBrokerAPIKey = '';
    		public $yachtClientId = '';
    		protected $url = '';
-   		protected $yachtBrokerLimit = 43;
+   		protected $yachtBrokerLimit = 143;
 
 		public function __construct() {
 
@@ -28,6 +28,10 @@
 
 	        $headers = [
 	        	'timeout' => 120,
+
+	        	'body' => json_encode([
+	        		"Records" => 12,
+	        	]),
 	        	
 	            'headers' => [
 	             	'Authorization' => 'Basic ' . $this->api_token,
@@ -38,11 +42,13 @@
 
 	        $apiUrlOne  = $this->yachts_feed;
 
-	        $apiCall = wp_remote_get($apiUrlOne, $headers);
+	        $apiCall = wp_remote_post($apiUrlOne, $headers);
 
 	        $api_status_code = wp_remote_retrieve_response_code($apiCall);
 
 	        $json = json_decode(wp_remote_retrieve_body($apiCall), true);
+
+	        //var_dump(wp_remote_retrieve_body($apiCall));
 
 	        if ($api_status_code == 200 && isset($json['Results'])) {
 				// return;
@@ -51,28 +57,28 @@
 				return ['error' => 'Error with auth'];
 			}
 			else {
-				var_dump('BALLS 2948');
 				return ['error' => 'Error http error '.$api_status_code];
 			}
 
 	        $total = $json['Count'];
 	        $yachtSynced = 0;
-	        $page = 1;
+	        $page = 0;
 
 	        while ($total > $yachtSynced) {
 
-
-	        	$apiUrl  = 'https://www.yatco.com/wp-json/yatco/yachts?page_size='.$this->yachtBrokerLimit;
-
-	        	$apiUrl .='&page_index='.$page;
-
-	        	var_dump($apiUrl);
+	        	$apiUrl  = $this->yachts_feed;
 
 	        	$page++;
 
 	        	sleep(15);
 
-		        $apiCallWhile = wp_remote_get($apiUrl, $headers);
+	        	$headers['body']=json_encode([
+	        		'Records' => $this->yachtBrokerLimit,
+	        		'Offset' => ($page*$this->yachtBrokerLimit)
+	        	]);
+
+		        $apiCallWhile = wp_remote_post($apiUrl, $headers);
+
 		        $apiBody = json_decode($apiCallWhile['body'], true);
 
 		        if (count($apiBody['Results']) == 0) {
@@ -82,7 +88,6 @@
 		        }
 
 		        if (! isset($apiBody['Results'])) {
-		        	var_dump($apiBody);
 		        	var_dump(wp_remote_retrieve_response_code($apiCallWhile));
 
 		        }
@@ -161,9 +166,19 @@
 
 		           	}
 
-		           	$detailsUrl = 'https://yatco.com/wp-json/yatco/yacht-detail?vessel_id=' . $row['MLSID'];
-					
-					$apiCallDetails = wp_remote_get($detailsUrl, ['timeout' => 120]);
+		           	$detailsUrl = $this->api_url_base.'/ForSale/Vessel/'. $row['VesselID'] .'/Details/fullSpecsAll';
+
+		           	$detail_headers = [
+			        	'timeout' => 120,
+	
+			            'headers' => [
+			             	'Authorization' => 'Basic ' . $this->api_token,
+							'Accept' => 'application/json',
+							'Content-Type' => 'application/json'
+			            ]
+			        ];
+
+					$apiCallDetails = wp_remote_get($detailsUrl, $detail_headers);
 
 					$response = $apiCallDetails['body'];
 
@@ -171,9 +186,11 @@
 
 					$data = $response;
 
+					var_dump($data);
+
 					if (isset($data['PhotoGallery']) && is_array($data['PhotoGallery'])) {
 	 
-						$reducedImages = array_slice($data['PhotoGallery'], 0, 100);
+						$reducedImages = array_slice($data['PhotoGallery'], 0, 50);
 
 	                    $reducedImages = array_map(
 	                    	function($img) {
@@ -213,9 +230,7 @@
 		                $wpdb->delete($wpdb->postmeta, ['post_id' => $find_post[0]->ID], ['%d']);
 		            }
 
-		            var_dump($theBoat);
-
-		            $y_post_id=wp_insert_post(
+		           	$y_post_id=wp_insert_post(
 		            	apply_filters('raiys_yacht_post', 
 			                [
 			                    'ID' => $post_id,

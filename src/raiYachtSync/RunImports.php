@@ -261,7 +261,7 @@
 				$resultsOfSync[]=$this->ImportBrokerageOnlyBoatsCom2->run();
 			}
 
-			if (! empty($yatco_api_token) && $yatco_api_token == 'fortheops') {
+			if (! empty($yatco_api_token)) {
 				$resultsOfSync[]=$this->ImportYatco->run();
 			}
 			

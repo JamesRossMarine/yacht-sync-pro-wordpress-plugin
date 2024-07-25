@@ -490,7 +490,7 @@
 		}
 
 		public function yatco_api_token_field() {
-			$nameOfField=self::SLUG.'_yatco_api_token_field';
+			$nameOfField=self::SLUG.'_yatco_api_token';
 			$valOfField=get_option($nameOfField);
 
 			?>
