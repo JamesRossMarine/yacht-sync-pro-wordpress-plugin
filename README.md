@@ -1,8 +1,54 @@
- # Post Types
+# Yacht Sync Pro
+
+## Description
+
+Yacht Sync Pro, our WordPress plugin, is a new way to integrate three major MLS feeds (YachtWorld, YachtBroker, and/or Yatco) natively into your WordPress site. Benefit from SEO tactics, easy-to-use shortcodes, and the ability to customize templates.
+
+## Top 5 Features
+
+- Imports Three Major MLS API Feeds Into Custom WordPress Post-Type
+- Clean URLs for detail and search pages
+- AI SEO For Yacht Detail Pages Meta Descriptions
+- Easy to use Gutenberg blocks and shortcodes for search elements
+- PDF Brochure Yacht Listings
+- Fast yacht search around and has great SEO compatibility 
+
+## More Features
+
+- ChatGPT is used for content generation
+- Currency exchange used for pricing conventions 
+- URLBox is used for PDF Rendering
+- Full Template Customization 
+- Basic Lead Forms
+- Broker Features
+- Detail pages
+
+## Featured Sites With The Plugin
+
+- [theitalianyachtgroup.com](https://theitalianyachtgroup.com)
+- [preowned.palmbeachmotoryachts.com](https://preowned.palmbeachmotoryachts.com)
+- [southjerseyyachtsales.com](https://southjerseyyachtsales.com)
+- [hbgyachts.com](https://hbgyachts.com)
+
+## Hosting Recommendation
+
+We recommend our excellent hosting partner, [Convesio.com](https://convesio.com); from their incredible prices on cloud hosting to their 24/7 support via Slack, we can genuinely recommend them, knowing they will provide great service.
+
+## Development Recommendations
+
+We thank and recommend Building The Internets for your research and development needs. 
+
+## Credits
+
+- **Developers**: Joshua Hoffman, Brandon Creed, and Hauk Atkinson. 
+- **Special thanks** to Neil Ross for Supporting and Funding.
+
+
+## Post Types
 <li>rai_yacht</li>
 <li>rai_broker</li>
 
-# Shortcodes
+## Shortcodes
 <li>ys-quick-search</li>
 <li>ys-h-quick-search</li>
 <li>ys-v-yacht-search-form</li>
@@ -11,7 +57,7 @@
 <li>ys-yacht-results</li>
 <li>ys-featured-listings</li>
 
-# Filters
+## Filters
 <li>rai_ys_v_yacht_search_template</li>
 <li>rai_ys_v_super_yacht_search_template</li>
 <li>rai_ys_h_yacht_search_template</li>
@@ -21,7 +67,7 @@
 <li>rai_ys_yacht_results_template</li>
 
 
-# WP REST API
+## WP REST API
 <li>/raiys/sync</li>
 <li>/raiys/yachts</li>
 <li>/raiys/list-options</li>
@@ -31,11 +77,11 @@
 <li>/raiys/yacht-lead</li>
 <li>/raiys/broker-lead</li>
 
-# Commands
+## Commands
 <li>wp sync-yachts</li>
 <li>wp sitemap-generator</li>
 
-# WP Query Vars
+## WP Query Vars
 <li>ys_offset - (int) - number at which to start retrieving boats for pagination</li>
 <li>ys_keyword - (string) - for keyword search ex. 2017 Viking 50 $NACK MONEY</li>
 <li>boatname - (string) - the name of the vessel given by the owner</li>
@@ -72,11 +118,11 @@
 <li>ys_company_only - (int) - to identify vessels of the company ex. 0 (False) or 1 (True)</li>
 <li>ys_show_only - (string) - to identify all the vessels not a part of the company</li>
 
-# Dropdown Fill Options
+## Dropdown Fill Options
 <li>Builders - (array) - list of makes from all the available vessels</li>
 <li>HullMaterials - (array) - list of hull materials from all the available vessels</li>
 
-# List Fill Options
+## List Fill Options
 <li>Keywords - (array) - list all the key words that are typed in the input from available vessels</li>
 <li>Cities - (array) - list of all the cities from all available vessels</li>
 <li>Displayed Location - (array) - list of locations from all available vessels</li>
