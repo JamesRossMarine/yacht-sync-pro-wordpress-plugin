@@ -29,6 +29,8 @@
 			
 			register_setting( self::SLUG, self::SLUG . '_yacht_broker_org_id');
 
+			register_setting( self::SLUG, self::SLUG . '_yatco_api_token');
+
 			register_setting( self::SLUG, self::SLUG . '_is_euro_site');
 			register_setting( self::SLUG, self::SLUG . '_prerender_brochures');
 

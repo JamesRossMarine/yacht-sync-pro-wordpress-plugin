@@ -233,6 +233,8 @@
 			
 			$yacht_broker_org_api_token = $this->options->get('yacht_broker_org_api_token');
 
+			$yatco_api_token = $this->options->get('yatco_api_token');
+
 			$this->pre_clean_up();
 
 			$resultsOfSync=[];

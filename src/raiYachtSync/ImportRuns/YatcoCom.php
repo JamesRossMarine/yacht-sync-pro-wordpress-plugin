@@ -14,6 +14,11 @@
 
 			$this->euro_c_c = floatval($this->options->get('euro_c_c'));
 			$this->usd_c_c = floatval($this->options->get('usd_c_c'));
+
+			$this->api_url_base = 'http://api.yatcoboss.com/API/V1';
+			$this->yachts_feed = $this->api_url_base .'/ForSale/Vessel/Search';
+
+			$this->api_token = $this->options->get('yatco_api_token');
 		}
 
 		public function run() {
@@ -25,11 +30,13 @@
 	        	'timeout' => 120,
 	        	
 	            'headers' => [
-	             
+	             	'Authorization' => 'Basic ' . $this->api_token,
+					'Accept' => 'application/json',
+					'Content-Type' => 'application/json'
 	            ]
 	        ];
 
-	        $apiUrlOne  = 'https://www.yatco.com/wp-json/yatco/yachts';
+	        $apiUrlOne  = $this->yachts_feed;
 
 	        $apiCall = wp_remote_get($apiUrlOne, $headers);
 
