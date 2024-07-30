@@ -70,7 +70,7 @@
 
 	        	$page++;
 
-	        	sleep(15);
+	        	sleep(5);
 
 	        	$headers['body']=json_encode([
 	        		'Records' => $this->yachtBrokerLimit,
@@ -177,6 +177,8 @@
 							'Content-Type' => 'application/json'
 			            ]
 			        ];
+
+			        sleep(2);
 
 					$apiCallDetails = wp_remote_get($detailsUrl, $detail_headers);
 

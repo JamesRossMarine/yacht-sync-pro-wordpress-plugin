@@ -13,16 +13,15 @@
 			$this->AlertOnLowCount = new raiYachtSync_AlertOnLowCount();
 			$this->AlertOnDiffCount = new raiYachtSync_AlertOnDiffCount();
 
-			$this->ImportGlobalBoatsCom = new raiYachtSync_ImportRuns_GlobalBoatsCom();
-			$this->ImportGlobalBoatsCom2 = new raiYachtSync_ImportRuns_GlobalBoatsCom('boats_com_api_global_key_2');
+			$this->ImportGlobalBoatsCom = new raiYachtSync_ImportRuns_BoatWizardGlobal();
+			$this->ImportGlobalBoatsCom2 = new raiYachtSync_ImportRuns_BoatWizardGlobal('boats_com_api_global_key_2');
 
-			$this->ImportBrokerageOnlyBoatsCom = new raiYachtSync_ImportRuns_BrokerageOnlyBoatsCom();
-			$this->ImportBrokerageOnlyBoatsCom2 = new raiYachtSync_ImportRuns_BrokerageOnlyBoatsCom('boats_com_api_brokerage_key_2');
+			$this->ImportBrokerageOnlyBoatsCom = new raiYachtSync_ImportRuns_BoatWizardBrokerageOnly();
+			$this->ImportBrokerageOnlyBoatsCom2 = new raiYachtSync_ImportRuns_BoatWizardBrokerageOnly('boats_com_api_brokerage_key_2');
 			
 			$this->ImportYachtBrokerOrg = new raiYachtSync_ImportRuns_YachtBrokerOrg();
 			
 			$this->ImportYatco = new raiYachtSync_ImportRuns_YatcoBoss();
-			$this->ImportYatcoDotCome = new raiYachtSync_ImportRuns_YatcoDotCom();
 			
 		}
 
