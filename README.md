@@ -30,20 +30,21 @@ Yacht Sync Pro, our WordPress plugin, is a new way to integrate three major MLS 
 - [southjerseyyachtsales.com](https://southjerseyyachtsales.com)
 - [hbgyachts.com](https://hbgyachts.com)
 
+## Credits
+
+- **Developers**: [Joshua Hoffman](https://joshuahoffman.me), Brandon Creed, and Hauk Atkinson.
+- **Special thanks** to Olivier Solon for project wrangling.
+- **Special thanks** to Neil Ross for Supporting and Funding.
+
 ## Hosting Recommendation
 
 We recommend our excellent hosting partner, [Convesio.com](https://convesio.com); from their incredible prices on cloud hosting to their 24/7 support via Slack, we can genuinely recommend them, knowing they will provide great service.
 
 ## Development Recommendations
 
-We thank and recommend Building The Internets for your research and development needs. 
+We thank and recommend [Build The Internets](https://buildtheinternets.com) for your research and development needs. 
 
-## Credits
-
-- **Developers**: Joshua Hoffman, Brandon Creed, and Hauk Atkinson.
-- **Special thanks** to Olivier Solon for project wrangling.
-- **Special thanks** to Neil Ross for Supporting and Funding.
-
+## Developer Note Below
 
 ## Post Types
 <li>rai_yacht</li>
@@ -80,7 +81,9 @@ We thank and recommend Building The Internets for your research and development 
 
 ## Commands
 <li>wp sync-yachts</li>
+<li>wp sync-brokerage-only</li>
 <li>wp sitemap-generator</li>
+<li>wp redo-yacht-meta-descriptions</li>
 
 ## WP Query Vars
 <li>ys_offset - (int) - number at which to start retrieving boats for pagination</li>
