@@ -1,7 +1,7 @@
 <?php
     #[AllowDynamicProperties]
 
-	class raiYachtSync_ImportRuns_YatcoCom {
+	class raiYachtSync_ImportRuns_YatcoBoss {
 		public $yachtBrokerAPIKey = '';
    		public $yachtClientId = '';
    		protected $url = '';
@@ -48,7 +48,7 @@
 
 	        $json = json_decode(wp_remote_retrieve_body($apiCall), true);
 
-	        //var_dump(wp_remote_retrieve_body($apiCall));
+	        var_dump(wp_remote_retrieve_body($apiCall));
 
 	        if ($api_status_code == 200 && isset($json['Results'])) {
 				// return;
@@ -186,7 +186,7 @@
 
 					$data = $response;
 
-					var_dump($data);
+					//var_dump($data);
 
 					if (isset($data['PhotoGallery']) && is_array($data['PhotoGallery'])) {
 	 

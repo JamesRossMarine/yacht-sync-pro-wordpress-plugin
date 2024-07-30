@@ -21,7 +21,8 @@
 			
 			$this->ImportYachtBrokerOrg = new raiYachtSync_ImportRuns_YachtBrokerOrg();
 			
-			$this->ImportYatco = new raiYachtSync_ImportRuns_YatcoCom();
+			$this->ImportYatco = new raiYachtSync_ImportRuns_YatcoBoss();
+			$this->ImportYatcoDotCome = new raiYachtSync_ImportRuns_YatcoDotCom();
 			
 		}
 
