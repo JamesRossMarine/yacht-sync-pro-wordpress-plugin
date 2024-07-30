@@ -32,7 +32,7 @@ Yacht Sync Pro, our WordPress plugin, is a new way to integrate three major MLS 
 
 ## Credits
 
-- **Developers**: [Joshua Hoffman](https://joshuahoffman.me), Brandon Creed, and Hauk Atkinson.
+- **Developers**: [Joshua Hoffman](https://joshuahoffman.me), [Brandon Creed](https://github.com/brcre001), and Hauk Atkinson.
 - **Special thanks** to Olivier Solon for project wrangling.
 - **Special thanks** to Neil Ross for Supporting and Funding.
 
