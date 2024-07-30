@@ -38,7 +38,7 @@ Yacht Sync Pro, our WordPress plugin, is a new way to integrate three major MLS 
 
 ## Hosting Recommendation
 
-We recommend our excellent hosting partner, [Convesio.com](https://convesio.com); from their incredible prices on cloud hosting to their 24/7 support via Slack, we can genuinely recommend them, knowing they will provide great service.
+We recommend our excellent hosting partner, [Convesio.com](https://convesio.com); from their incredible prices on cloud hosting to their 24/7 support via Slack, we can genuinely recommend them.
 
 ## Development Recommendations
 
