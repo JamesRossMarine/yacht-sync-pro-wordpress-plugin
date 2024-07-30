@@ -1,11 +1,11 @@
 <?php
 
 /*
- Plugin Name: Ross And Internets Yacht Sync
- Plugin URI: https://jamesrossadvertising.com
+ Plugin Name: Yacht Sync Pro
+ Plugin URI: https://jrmarineadvertising.com/yachtsyncpro/
  Version: 2.0.0
  Author: <a href="https://buildtheintnets.com">Build The Internets</a>
- Description: 
+ Description: Yacht Sync Pro, our WordPress plugin, is a new way to natively integrate three major MLS feeds (YachtWorld, YachtBroker, and/or Yatco) into your WordPress site. Benefit from savvy SEO tactics, easy-to-use shortcodes, fast native WordPress search features, and the ability to customize templates.
  Text Domain: 
  License: GPLv3
  GNU GPLv3 License Origin: http://www.gnu.org/licenses/gpl-3.0.html
