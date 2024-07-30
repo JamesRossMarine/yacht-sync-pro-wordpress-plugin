@@ -1,20 +1,20 @@
 {
-  "name": "IYG",
-  "version": "1.0.0",
-  "description": "Hi. I'm a starter theme called _s, or underscores, if you like. I'm a theme meant for hacking so don't use me as a Parent Theme. Instead try turning me into the next, most awesome, WordPress theme out there. That's what I'm here for.",
-  "author": "JamesRoss Theme Team",
+  "name": "Yacht Sync Pro",
+  "version": "2.0.0",
+  "description": "WordPrss Plugin - Yacht Sync Pro, our WordPress plugin, is a new way to natively integrate three major MLS feeds (YachtWorld, YachtBroker, and/or Yatco) into your WordPress site. Benefit from savvy SEO tactics, easy-to-use shortcodes, fast native WordPress search features, and the ability to customize templates.",
+  "author": "James Ross Marine Advertising",
   "license": "GPL-2.0-or-later",
   "keywords": [
     "WordPress",
-    "Theme"
+    "Plugin"
   ],
-  "homepage": "https://github.com/Automattic/_s#readme",
+  "homepage": "https://jrmarineadvertising.com/yachtsyncpro/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Automattic/_s.git"
+    "url": "git+https://github.com/JamesRossMarine/yacht-sync-pro-wordpress-plugin"
   },
   "bugs": {
-    "url": "https://github.com/Automattic/_s/issues"
+    "url": "https://github.com/JamesRossMarine/yacht-sync-pro-wordpress-plugin/issues"
   },
   "devDependencies": {
     "@babel/core": "^7.22.9",
