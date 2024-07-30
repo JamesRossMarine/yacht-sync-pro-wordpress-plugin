@@ -48,11 +48,11 @@ get_header();
                         </h1>
                         <h2 class="yacht-price">
                         <?php
-                        if ($YSP_Euro_Opt == "yes") {
-                            echo '€' . number_format($vessel->YSP_EuroVal) . ' ' . 'EUR';
-                        } else {
-                            echo '$' . number_format($vessel->YSP_USDVal);
-                        }
+                            if ($YSP_Euro_Opt == "yes") {
+                                echo '€' . number_format($vessel->YSP_EuroVal) . ' ' . 'EUR';
+                            } else {
+                                echo '$' . number_format($vessel->YSP_USDVal);
+                            }
                         ?>
                     </h2>
                     </div>
@@ -173,7 +173,7 @@ get_header();
 
                     foreach ($BrokerNames as $bName) {
                         $brokerQueryArgs['meta_query']['name'][]=[
-                            'key' => 'broker_fname',
+                            'key' => 'rai_broker_fname',
                             'compare' => 'LIKE',
                             'value' => $bName,
                         ];
@@ -181,7 +181,7 @@ get_header();
 
                     foreach ($BrokerNames as $bName) {
                         $brokerQueryArgs['meta_query']['name'][]=[
-                            'key' => 'broker_lname',
+                            'key' => 'rai_broker_lname',
                             'compare' => 'LIKE',
                             'value' => $bName,
                         ];

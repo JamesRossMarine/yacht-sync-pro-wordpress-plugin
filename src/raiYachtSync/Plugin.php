@@ -19,6 +19,8 @@
 			$this->YoastFun_Descriptions = new raiYachtSync_YoastFun_Descriptions();
 
 			$this->YoastFun_SchemaPieces = new raiYachtSync_YoastFun_SchemaPieces();
+			$this->YoastFun_Breadcrumbs = new raiYachtSync_YoastFun_Breadcrumbs();
+			$this->YoastFun_SitemapPriority = new raiYachtSync_YoastFun_SitemapPriority();
 
 			$this->Yachts_WpQueryAddon = new raiYachtSync_Yachts_WpQueryAddon();
 			$this->Yachts_WpQueryForSimilar = new raiYachtSync_Yachts_WpQueryForSimilar();
@@ -27,8 +29,12 @@
 			$this->Yachts_Shortcode = new raiYachtSync_Shortcodes_YachtSearch();
 			$this->Yachts_Search_Seo_ApplyToYoast = new raiYachtSync_YoastFun_SearchSEOApply();
 			$this->Yachts_Search_Seo_Shortcode = new raiYachtSync_Shortcodes_YachtSearchSeo();
+			$this->Yachts_RestrictManagePosts = new raiYachtSync_Yachts_RestrictManagePosts();
 
 			$this->Yachts_Meta_Brochure = new raiYachtSync_Yachts_MetaBrochureSection();
+			$this->Yachts_MetaFields = new raiYachtSync_Yachts_MetaSections();
+			$this->Yachts_NestedMetaFields = new raiYachtSync_Yachts_NestedMetaSections();
+			$this->Yachts_MetaIsManual = new raiYachtSync_Yachts_MetaIsManual();
 
 			$this->Brokers_DetailOverride = new raiYachtSync_Brokers_DetailsOverride();
 			$this->Brokers_MetaFields = new raiYachtSync_Brokers_MetaSections();

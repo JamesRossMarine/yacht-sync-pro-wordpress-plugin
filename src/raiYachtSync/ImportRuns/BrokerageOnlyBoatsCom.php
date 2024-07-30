@@ -4,9 +4,9 @@
 	class raiYachtSync_ImportRuns_BrokerageOnlyBoatsCom {
    		protected $limit = 53;
 		
-		public $brokerageInventoryUrl = 'https://api.boats.com/inventory/search?SalesStatus=Active,On-Order&key=';
+		public $brokerageInventoryUrl = 'https://api.boats.com/inventory/search?key=';
 
-		public function __construct() {
+		public function __construct($metakey = 'boats_com_api_brokerage_key') {
 
 			$this->options = new raiYachtSync_Options();
 
@@ -16,15 +16,19 @@
 
 			$this->ChatGPTYachtDescriptionVersionTwo = new raiYachtSync_ChatGPTYachtDescriptionVersionTwo();
 
-			$this->key=$this->options->get('boats_com_api_brokerage_key');
-			$this->opt_prerender_brochures=$this->options->get('prerender_brochures');
-
+			$this->key=$this->options->get($metakey);
+			$this->status_override = $this->options->get('boats_com_api_brokerage_status_override');
+			
 			$this->brokerageInventoryUrl .= $this->key;
+			$this->brokerageInventoryUrl .= (! empty($this->status_override))?'&SalesStatus='.$this->status_override:'&SalesStatus=Active,On-Order';
+			
+			$this->opt_prerender_brochures=$this->options->get('prerender_brochures');
 
 			$this->euro_c_c = floatval($this->options->get('euro_c_c'));
 			$this->usd_c_c = floatval($this->options->get('usd_c_c'));
 
 			$this->urlbox_secret_key = $this->options->get('pdf_urlbox_api_secret_key');
+
 
 			$this->CarryOverKeys = [
 				'_yoast_wpseo_title',
@@ -43,11 +47,11 @@
 			// Sync broker inventory
 			$apiCall = wp_remote_get($this->brokerageInventoryUrl, ['timeout' => 120]);
 
-				$apiCall['body']=json_decode($apiCall['body'], true);
+				$apiCallBody=json_decode(wp_remote_retrieve_body($apiCall), true);
 
 				$api_status_code = wp_remote_retrieve_response_code($apiCall);
 
-			if ($api_status_code == 200 && isset($apiCall['body']['numResults'])) {
+			if ($api_status_code == 200 && isset($apiCallBody['numResults'])) {
 				// return;
 			}
 			elseif ($api_status_code == 401) {
@@ -57,7 +61,7 @@
 				return ['error' => 'Error http error '.$api_status_code];
 			}
 
-	        $total = $apiCall['body']['numResults'];
+	        $total = $apiCallBody['numResults'];
 
 			//$apiCallInventory = $apiCall['body']['results'];
 
@@ -76,9 +80,13 @@
 
 				//var_dump($apiCallForWhile);
 
-				$apiCallForWhile['body']=json_decode($apiCallForWhile['body'], true);	
+				$apiCallForWhileBody = json_decode(wp_remote_retrieve_body($apiCallForWhile), true);
 
-				$apiCallInventory = $apiCallForWhile['body']['results'];
+				if (! isset($apiCallForWhileBody['results']) && ! is_array($apiCallForWhileBody['results'])) {
+					break;
+				}
+
+				$apiCallInventory = $apiCallForWhileBody['results'];
 
 				if (count( $apiCallInventory ) == 0) {
 					break;
@@ -318,12 +326,16 @@
 						if (str_contains($boat['OriginalPrice'], 'EUR')) {
 							$boatC->YSP_EuroVal = intval(str_replace(array(' EUR'), '', $boat['OriginalPrice']) );
 							$boatC->YSP_USDVal = $boatC->YSP_EuroVal * $this->usd_c_c;
-
-						} else {
+						} 
+						else {
 							$boatC->YSP_USDVal = intval(str_replace(array(' USD'), '', $boat['OriginalPrice']));
 							$boatC->YSP_EuroVal = $boatC->YSP_USDVal * $this->euro_c_c;
-							var_dump($this->euro_c_c);			
 						}
+					}
+					else {
+						$boatC->OriginalPrice = 0;
+						$boatC->YSP_USDVal = 0;
+						$boatC->YSP_EuroVal = 0;
 					}
 
 					//var_dump($boatC->_yoast_wpseo_metadesc);

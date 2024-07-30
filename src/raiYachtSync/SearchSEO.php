@@ -59,8 +59,8 @@
 			global $wp_query;
 
 			$order_of_params=[
-				'ys_company_only',
 				'condition',
+				'ys_company_only',
 				'ys_keyword',
 				// sail or motor
 				//'year',		
@@ -79,7 +79,7 @@
 					case 'ys_company_only':
 						if (isset($params['ys_company_only'])) {
 
-							$pVal = $this->options->get('company_name').'\'s';
+							$pVal = $this->options->get('company_name');
 						
 						}
 
@@ -264,15 +264,33 @@
 
 					case 'price':
 
-						if (isset($params[ 'pricelo' ]) && isset($params['pricehi'])) {
-							$pVal = 'With prices between $'.number_format($params['pricelo']).' - $'.number_format($params['pricehi']);
-						}
-						elseif (isset($params['pricelo'])) {
-							$pVal = 'with prices above $'. number_format($params['pricelo']);
+						if (isset($params['currency']) && $params['currency'] == 'Eur') {
+
+							if (isset($params[ 'pricelo' ]) && isset($params['pricehi'])) {
+								$pVal = 'With prices between €'.number_format($params['pricelo']).' - €'.number_format($params['pricehi']);
+							}
+							elseif (isset($params['pricelo'])) {
+								$pVal = 'with prices above €'. number_format($params['pricelo']);
+
+							}
+							elseif (isset($params['pricehi'])) {
+								$pVal = 'with prices under €'. number_format($params['pricehi']) .'';
+							}
 
 						}
-						elseif (isset($params['pricehi'])) {
-							$pVal = 'with prices under $'. number_format($params['pricehi']) .'';
+						else {
+
+							if (isset($params[ 'pricelo' ]) && isset($params['pricehi'])) {
+								$pVal = 'With prices between $'.number_format($params['pricelo']).' - $'.number_format($params['pricehi']);
+							}
+							elseif (isset($params['pricelo'])) {
+								$pVal = 'with prices above $'. number_format($params['pricelo']);
+
+							}
+							elseif (isset($params['pricehi'])) {
+								$pVal = 'with prices under $'. number_format($params['pricehi']) .'';
+							}
+
 						}
 
 						break;

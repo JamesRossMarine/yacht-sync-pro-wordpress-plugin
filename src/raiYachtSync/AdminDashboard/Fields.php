@@ -46,9 +46,36 @@
 					);
 
 					add_settings_field(
+						self::SLUG . '_boats_com_api_global_key_2',
+						"Boats.com Api Global Key #2",
+						array( $this, 'boats_com_api_global_key_2_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+
+					add_settings_field(
 						self::SLUG . '_boats_com_api_brokerage_key',
 						"Boats.com Api Brokerage Key",
 						array( $this, 'boats_com_api_brokerage_key_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+
+					add_settings_field(
+						self::SLUG . '_boats_com_api_brokerage_key_2',
+						"Boats.com Api Brokerage Key #2",
+						array( $this, 'boats_com_api_brokerage_key_2_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+					
+					add_settings_field(
+						self::SLUG . '_boats_com_api_brokerage_status_orverride',
+						"Boats.com Api Brokerage Extra Sale Statuses",
+						array( $this, 'boats_com_api_brokerage_status_override_field' ),
 						self::SLUG,
 						self::SLUG . '_admin_fields',
 						array( )
@@ -94,6 +121,15 @@
 						self::SLUG . '_alert_emails',
 						"Alert Who?",
 						array( $this, 'alert_emails_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+
+					add_settings_field(
+						self::SLUG . '_last_synced',
+						"Last Synced?",
+						array( $this, 'last_synced_field' ),
 						self::SLUG,
 						self::SLUG . '_admin_fields',
 						array( )
@@ -180,6 +216,15 @@
 						self::SLUG . '_admin_fields',
 						array( )
 					);
+
+					add_settings_field(
+						self::SLUG . '_team_page_id',
+						"Team Page",
+						array( $this, 'team_page_id_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
 					
 					add_settings_field(
 						self::SLUG . '_company_name',
@@ -230,6 +275,15 @@
 						self::SLUG . '_chatgpt_api_token',
 						"ChatGPT API Token",
 						array( $this, 'chatgpt_api_token_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
+
+					add_settings_field(
+						self::SLUG . '_chatgpt_api_model',
+						"ChatGPT API Model",
+						array( $this, 'chatgpt_api_model_field' ),
 						self::SLUG,
 						self::SLUG . '_admin_fields',
 						array( )
@@ -288,6 +342,15 @@
 						self::SLUG . '_admin_fields',
 						array( )
 					);
+
+					add_settings_field(
+						self::SLUG . '_youtube_data_api_key',
+						"Youtube Data API Key",
+						array( $this, 'youtube_data_api_key_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
 					
 					
 		}		
@@ -338,6 +401,10 @@
 
 					echo 'Dont shot the messagener, the api has '. $brokerageApiCall['body']['numResults'] . ' and wordpress has '. $wpBrokerageCount;
 
+					$EmailAlert = new raiYachtSync_AlertOnDiffCount();
+
+					$EmailAlert->email();
+
 				}
 				else {
 					echo 'ERROR... ERROR...';
@@ -357,9 +424,42 @@
 
 		}
 
+		public function boats_com_api_global_key_2_field() {
+
+			$nameOfField=self::SLUG.'_boats_com_api_global_key_2';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
+
 		public function boats_com_api_brokerage_key_field() {
 
 			$nameOfField=self::SLUG.'_boats_com_api_brokerage_key';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
+
+		public function boats_com_api_brokerage_key_2_field() {
+
+			$nameOfField=self::SLUG.'_boats_com_api_brokerage_key_2';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
+		
+		public function boats_com_api_brokerage_status_override_field() {
+
+			$nameOfField=self::SLUG.'_boats_com_api_brokerage_status_override';
 			$valOfField=get_option($nameOfField);
 
 			?>
@@ -390,7 +490,7 @@
 		}
 
 		public function yatco_api_token_field() {
-			$nameOfField=self::SLUG.'_yatco_api_token_field';
+			$nameOfField=self::SLUG.'_yatco_api_token';
 			$valOfField=get_option($nameOfField);
 
 			?>
@@ -417,6 +517,14 @@
 
 			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
 
+		}
+
+		public function last_synced_field() {
+
+			$nameOfField=self::SLUG.'_last_synced';
+			$val=get_option($nameOfField);
+
+			echo $val;
 		}
 
 		public function is_euro_field() {
@@ -561,6 +669,44 @@
 
 		}
 
+		public function team_page_id_field() {
+			$pages=get_posts([
+				'post_type' => 'page', 
+				'posts_per_page' => -1, 
+				'post_status' => ['draft', 'publish'], 
+				'orderby' => 'title',
+				'order' => 'ASC'
+			]);
+
+			$options=[
+				'' => '---- Not Picked Yet ----',
+			];
+
+			foreach ($pages as $pg) {
+				$options[$pg->ID]=$pg->post_title;
+			}
+
+			$nameOfField=self::SLUG.'_team_page_id';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<select name="<?= $nameOfField ?>"> 
+				<?php 
+					foreach ( $options as $opt_value => $opt_label ) {
+						$option = '<option value="' . $opt_value . '" '. selected($opt_value, $valOfField, false) .'>';
+
+						$option .= $opt_label;
+						
+						$option .= '</option>';
+
+						echo $option;
+					}
+				?>
+			</select><?php 
+
+		}
+
 		public function company_name() {
 			$nameOfField=self::SLUG.'_company_name';
 			$valOfField=get_option($nameOfField);
@@ -628,6 +774,15 @@
 
 		}
 
+		public function chatgpt_api_model_field() {
+			$nameOfField=self::SLUG.'_chatgpt_api_model';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php
+		}
+
 		public function pdf_urlbox_api_public_token_field() {
 			$nameOfField=self::SLUG.'_pdf_urlbox_api_token_public_key';
 			$valOfField=get_option($nameOfField);
@@ -688,6 +843,14 @@
 
 		}
 
+		public function youtube_data_api_key_field() {
+			$nameOfField=self::SLUG.'_youtube_data_api_key';
+			$valOfField=get_option($nameOfField);
 
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
 
 	}

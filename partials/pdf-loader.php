@@ -12,7 +12,7 @@
 
 	<body>
 		<div style='display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh;'>
-			<img src="<?php echo esc_url($company_logo_url); ?>" alt="Company Logo" style="height: 120px; width: 120px" />
+			<img src="<?php echo esc_url($company_logo_url); ?>" alt="Company Logo" style="height: 120px; width: 120px; object-fit: cover;" />
 		    
 		    <div style='margin-top: 20px; text-align: center;'>
 		        <b>LOADING PDF</b><br>

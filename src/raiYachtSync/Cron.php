@@ -128,6 +128,12 @@
 
 			$alertOnLow->email();
 
+			// -----------
+
+			$alertOnDiffCount = new raiYachtSync_AlertOnDiffCount();
+
+			$alertOnDiffCount->email();
+
 		}
 		
 		public function run_cron_yacht_search_sitemaps() {
