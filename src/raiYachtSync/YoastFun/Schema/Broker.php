@@ -9,7 +9,7 @@
         }
 
         public function is_needed() {
-            return is_singular('rai_broker');
+            return is_singular('rai_team');
         }
 
         public function generate() {
@@ -18,8 +18,8 @@
             $site_url = home_url();
             $current_post = $this->context->post;
             $permalink = get_permalink($current_post);
-            $rai_broker_email = get_post_meta($current_post->ID, 'rai_broker_email', true);
-            $rai_broker_phone = get_post_meta($current_post->ID, 'rai_broker_phone', true);
+            $rai_team_email = get_post_meta($current_post->ID, 'rai_team_email', true);
+            $rai_team_phone = get_post_meta($current_post->ID, 'rai_team_phone', true);
 
             $featured_image_data = wp_get_attachment_image_src(get_post_thumbnail_id($current_post), 'full');
 
@@ -34,8 +34,8 @@
                 "@id"           => $permalink . "#person",
                 "url"           => $permalink,
                 "name"          => $current_post->post_title,
-                "email"         => $rai_broker_email,
-                "telephone"     => $rai_broker_phone,
+                "email"         => $rai_team_email,
+                "telephone"     => $rai_team_phone,
                 "image"         => (object) array (
                     "@type"          => "ImageObject",
                     "url"            => $featured_image_url,

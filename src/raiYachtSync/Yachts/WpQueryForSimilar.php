@@ -63,7 +63,7 @@
                         'yearlo' => $year - 10,
                         'yearhi' => $year + 10,
 
-                        'boatclass' => [ $category[0] ],
+                        'boatclass' => $category,
                     ];
 
                     $similar_query_two = new WP_Query($similar_query_two_args);
@@ -76,7 +76,7 @@
                         $query->query_vars = array_merge($query->query_vars, [
                             
                             'post__not_in' => [ $similar_post_id ],
-                            'boatclass'  => [ $category[0] ]
+                            'boatclass'  => $category
                             
                         ]);
                     }

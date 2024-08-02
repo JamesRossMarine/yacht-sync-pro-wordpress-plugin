@@ -3,12 +3,12 @@ get_header();
 ?>
     <?php
         $brokerQueryArgs = array(
-            'post_type' => 'rai_broker',
+            'post_type' => 'rai_team',
             'posts_per_page' => 1,
         );
 
         $mainBrokerQueryArgs = array(
-            'post_type' => 'rai_broker',
+            'post_type' => 'rai_team',
             'meta_query' => array(
                 array(
                     'key' => 'rai_main_broker',
@@ -161,7 +161,7 @@ get_header();
                     }
                     
                     $brokerQueryArgs = array(
-                        'post_type' => 'rai_broker',
+                        'post_type' => 'rai_team',
                         'posts_per_page' => 1,
 
                         'meta_query' => [
@@ -173,7 +173,7 @@ get_header();
 
                     foreach ($BrokerNames as $bName) {
                         $brokerQueryArgs['meta_query']['name'][]=[
-                            'key' => 'rai_broker_fname',
+                            'key' => 'rai_team_fname',
                             'compare' => 'LIKE',
                             'value' => $bName,
                         ];
@@ -181,7 +181,7 @@ get_header();
 
                     foreach ($BrokerNames as $bName) {
                         $brokerQueryArgs['meta_query']['name'][]=[
-                            'key' => 'rai_broker_lname',
+                            'key' => 'rai_team_lname',
                             'compare' => 'LIKE',
                             'value' => $bName,
                         ];
@@ -194,7 +194,7 @@ get_header();
                     }
                     else {
                         $mainBrokerQueryArgs = array(
-                            'post_type' => 'rai_broker',
+                            'post_type' => 'rai_team',
                             'meta_query' => array(
                                 array(
                                     'key' => 'rai_main_broker',
@@ -214,10 +214,10 @@ get_header();
                         while ($brokerQuery->have_posts()) {
                             $brokerQuery->the_post();
 
-                            $broker_first_name = get_post_meta($post->ID, 'rai_broker_fname', true);
-                            $broker_last_name = get_post_meta($post->ID, 'rai_broker_lname', true);
-                            $broker_email = get_post_meta($post->ID, 'rai_broker_email', true);
-                            $broker_phone = get_post_meta($post->ID, 'rai_broker_phone', true);
+                            $broker_first_name = get_post_meta($post->ID, 'rai_team_fname', true);
+                            $broker_last_name = get_post_meta($post->ID, 'rai_team_lname', true);
+                            $broker_email = get_post_meta($post->ID, 'rai_team_email', true);
+                            $broker_phone = get_post_meta($post->ID, 'rai_team_phone', true);
                             ?>
                             <div class="yacht-mobile-broker-container">
                             <a class="broker-anchor" href="<?php the_permalink(); ?>">
@@ -290,7 +290,14 @@ get_header();
                         Description
                     </p>
                     <div class="yacht-description-value">
-                        <?php if (isset($vessel->GeneralBoatDescription)) { echo join(" ", $vessel->GeneralBoatDescription); } ?>
+                        <?php 
+                            if (isset($vessel->GeneralBoatDescription) && is_array($vessel->GeneralBoatDescription)) { 
+                                echo join(" ", $vessel->GeneralBoatDescription); 
+                            }
+                            elseif (isset($vessel->GeneralBoatDescription) && is_string($vessel->GeneralBoatDescription)) {
+                                echo $vessel->GeneralBoatDescription;
+                            } 
+                        ?>
                     </div>
                 </div>
                <!--  <div class="yacht-specs-container">
@@ -432,7 +439,7 @@ get_header();
                     }
 
                     $brokerQueryArgs = array(
-                        'post_type' => 'rai_broker',
+                        'post_type' => 'rai_team',
                         'posts_per_page' => 1,
 
                         'meta_query' => [
@@ -465,7 +472,7 @@ get_header();
                     }
                     else {
                         $mainBrokerQueryArgs = array(
-                            'post_type' => 'rai_broker',
+                            'post_type' => 'rai_team',
                             'meta_query' => array(
                                 array(
                                     'key' => 'rai_main_broker',
@@ -484,10 +491,10 @@ get_header();
                         while ($brokerQuery->have_posts()) {
                             $brokerQuery->the_post();
 
-                            $broker_first_name = get_post_meta($post->ID, 'rai_broker_fname', true);
-                            $broker_last_name = get_post_meta($post->ID, 'rai_broker_lname', true);
-                            $broker_email = get_post_meta($post->ID, 'rai_broker_email', true);
-                            $broker_phone = get_post_meta($post->ID, 'rai_broker_phone', true);
+                            $broker_first_name = get_post_meta($post->ID, 'rai_team_fname', true);
+                            $broker_last_name = get_post_meta($post->ID, 'rai_team_lname', true);
+                            $broker_email = get_post_meta($post->ID, 'rai_team_email', true);
+                            $broker_phone = get_post_meta($post->ID, 'rai_team_phone', true);
                             ?>
                             <div class="broker-info-container">
                                 <div class="broker-profile-image"><img src="<?php echo esc_url(get_the_post_thumbnail_url()); ?>" alt="" style="width:120px; height:120px;" /></div>

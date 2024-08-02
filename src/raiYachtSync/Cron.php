@@ -76,6 +76,8 @@
 
 		public function run_cron_euro_c_save() {
 
+			// EURO
+
 			$apiUrl = "http://api.exchangerate.host/live?access_key=$this->exchange_token&source=USD&symbols=EUR";
 		
 			$response = wp_remote_get($apiUrl, [
@@ -98,6 +100,8 @@
 			else {
 				$this->options->update('euro_c_c', 0.92);
 			}
+
+			// USD
 
 			$apiUrl = "http://api.exchangerate.host/live?access_key=$this->exchange_token&source=EUR&symbols=USD";
 		

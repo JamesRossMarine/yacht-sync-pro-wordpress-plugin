@@ -11,9 +11,12 @@
 
 			$this->options = new raiYachtSync_Options();
 			$this->LocationConvert = new raiYachtSync_LocationConvert();
+			$this->ChatGPTYachtDescriptionVersionTwo = new raiYachtSync_ChatGPTYachtDescriptionVersionTwo();
 
 			$this->euro_c_c = floatval($this->options->get('euro_c_c'));
 			$this->usd_c_c = floatval($this->options->get('usd_c_c'));
+
+			//var_dump($this->euro_c_c);
 
 			$this->api_url_base = 'http://api.yatcoboss.com/API/V1';
 			$this->yachts_feed = $this->api_url_base .'/ForSale/Vessel/Search';
@@ -48,9 +51,10 @@
 
 	        $json = json_decode(wp_remote_retrieve_body($apiCall), true);
 
-	        var_dump(wp_remote_retrieve_body($apiCall));
+	        //var_dump(wp_remote_retrieve_body($apiCall));
 
 	        if ($api_status_code == 200 && isset($json['Results'])) {
+				var_dump('Successfully Connect Made To YatcoBoss');
 				// return;
 			}
 			elseif ($api_status_code == 401) {
@@ -62,7 +66,7 @@
 
 	        $total = $json['Count'];
 	        $yachtSynced = 0;
-	        $page = 0;
+	        $page = -1;
 
 	        while ($total > $yachtSynced) {
 
@@ -70,7 +74,7 @@
 
 	        	$page++;
 
-	        	sleep(5);
+	        	sleep(3);
 
 	        	$headers['body']=json_encode([
 	        		'Records' => $this->yachtBrokerLimit,
@@ -89,7 +93,6 @@
 
 		        if (! isset($apiBody['Results'])) {
 		        	var_dump(wp_remote_retrieve_response_code($apiCallWhile));
-
 		        }
 
 				foreach ($apiBody['Results'] as $row) {
@@ -105,11 +108,12 @@
 		                'SaleClassCode' => 'VesselCondition',
 		                'CompanyName' => 'CompanyID' ,
 
-		                'GeneralBoatDescription' => 'BrokerTeaser' ,
+		                //'GeneralBoatDescription' => 'BrokerTeaser',
 		                
-		                'Price' => 'AskingPrice' ,
+		                'Price' => 'AskingPrice',
 
-		                //'NormPrice' => 'PriceUSD',
+		                'NormPrice' => 'AskingPrice',
+		                'OriginalPrice' => 'AskingPriceFormatted',
 		                
 		                'ModelYear' => 'Year',
 		                'Model' => 'Model',
@@ -141,7 +145,7 @@
 		                'BoatHullMaterialCode' => 'HullMaterial',
 		                //'BoatHullID' => 'HullIdentificationNumber',
 		                
-		                //'DisplayLengthFeet' => 'LOAFeet',
+		                'DisplayLengthFeet' => 'LOAFeet',
 		                //'TaxStatusCode' => 'TaxStatus',
 		                
 		                'NominalLength' => 'LOAFeet',
@@ -178,15 +182,23 @@
 			            ]
 			        ];
 
-			        sleep(2);
+			        //sleep(2);
 
 					$apiCallDetails = wp_remote_get($detailsUrl, $detail_headers);
 
-					$response = $apiCallDetails['body'];
+					$apiCallDetailsStatus = wp_remote_retrieve_response_code($apiCallDetails);
 
-						$response=json_decode($response, true);
-
-					$data = $response;
+					if ($apiCallDetailsStatus == 200) {
+						// return;
+					}
+					elseif ($apiCallDetailsStatus == 401) {
+						return ['error' => 'Error with auth'];
+					}
+					else {
+						return ['error' => 'Error http error '.$apiCallDetailsStatus];
+					}
+					
+					$data = json_decode($apiCallDetails['body'], true);
 
 					//var_dump($data);
 
@@ -211,6 +223,50 @@
 
 	                    $theBoat['Images'] = $reducedImages;
 	                    $theBoat['CompanyName'] = $data['Company']['CompanyName'];
+
+	                    $theBoat['CruisingSpeedMeasure'] = $data['SpeedWeight']['CruiseSpeed'];
+	                    $theBoat['MaximumSpeedMeasure'] = $data['SpeedWeight']['MaxSpeed'];
+
+	                    $theBoat['MaximumSpeedMeasure'] = $data['Accommodations']['HeadsValue'];
+
+	                    $theBoat['AdditionalDetailDescription'] = $data['Sections'];
+	                    $theBoat['GeneralBoatDescription'] = $data['VD']['VesselDescriptionShortDescriptionNoStyles'];
+
+	                    if (isset($theBoat['Price'])) {
+							if (str_contains($theBoat['OriginalPrice'], 'EUR')) {
+								$theBoat['YSP_EuroVal'] = $theBoat['Price'];
+								$theBoat['YSP_USDVal'] = $theBoat['YSP_EuroVal']*$this->usd_c_c;
+
+							} else {
+								$theBoat['YSP_USDVal'] = intval($theBoat['Price']);
+								$theBoat['YSP_EuroVal'] = $theBoat['YSP_USDVal']*$this->euro_c_c;
+							}
+						}
+						else {
+							$theBoat['OriginalPrice'] = 0;
+							$theBoat['YSP_USDVal'] = 0;
+							$theBoat['YSP_EuroVal'] = 0;
+						}
+					}
+
+					if (
+						( 
+							isset($theBoat['_yoast_wpseo_metadesc']) 
+							&& 
+							( 
+								empty($theBoat['_yoast_wpseo_metadesc']) 
+								|| 
+								is_null($theBoat['_yoast_wpseo_metadesc'])
+							) 
+						) 
+						|| 
+						! isset($theBoat['_yoast_wpseo_metadesc'])
+					) {
+
+						$theBoat['_yoast_wpseo_metadesc'] = $this->ChatGPTYachtDescriptionVersionTwo->make_description(
+							'Vessel Name - '.$theBoat['ModelYear'].' '.$theBoat['MakeString'].' '.$theBoat['Model'].' '.$theBoat['BoatName']. '. '.
+							'Vessel Description - '.join(' ', $theBoat['GeneralBoatDescription'])
+						);
 
 					}
 
@@ -243,7 +299,7 @@
 								'post_name' => sanitize_title(
 									$row['ModelYear'].'-'.$row['BuilderName'].'-'.$row['Model']
 								),
-								'post_content' => $row['BrokerTeaser'],
+								'post_content' => $data['VD']['VesselDescriptionShortDescriptionNoStyles'],
 								'post_status' => 'publish',
 								'meta_input' => apply_filters('raiys_yacht_meta_sync', (object) $theBoat)
 
@@ -252,12 +308,20 @@
 						)
 					);
 
-					//wp_set_post_terms($y_post_id, $theBoat['BoatClassCode'], 'boatclass', false);
+					wp_set_post_terms(
+						$y_post_id, 
+						[
+							$theBoat['MainCategoryText'],
+							$theBoat['SubCategoryText']
+						], 
+						'boatclass', 
+						false
+					);
 		        }
 
 	        }
 
-	        return ['success' => 'Successfully Sync Yatco.com Brokerage Only Feed'];
+	        return ['success' => 'Successfully Sync YatcoBoss'];
  
 	        // after for loop
 	    }

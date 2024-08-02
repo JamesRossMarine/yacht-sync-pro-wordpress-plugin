@@ -888,7 +888,7 @@
 		
 			$brokerID=$request->get_param('brokerID');
 			//$broker=get_post($request->get_param('brokerID'));
-			$broker_email = get_post_meta($brokerID, "rai_broker_email", true);
+			$broker_email = get_post_meta($brokerID, "rai_team_email", true);
 
 			$to = $broker_email;
 

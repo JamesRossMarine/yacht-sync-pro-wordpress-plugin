@@ -334,7 +334,6 @@
 						$boatC->YSP_ListingDate = $boat['Images'][0]['LastModifiedDateTime'];
 					}
 
-
 					if (isset($boat['OriginalPrice']) && isset($boat['Price'])){
 						if (str_contains($boat['OriginalPrice'], 'EUR')) {
 							$boatC->YSP_EuroVal = intval(str_replace(array(' EUR'), '', $boat['OriginalPrice']) );
@@ -350,8 +349,6 @@
 						$boatC->YSP_USDVal = 0;
 						$boatC->YSP_EuroVal = 0;
 					}
-
-
 
                     if (isset($boatC->AdditionalDetailDescription)) {
 						foreach ($boatC->AdditionalDetailDescription as $aIndex => $description) {

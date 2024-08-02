@@ -90,7 +90,7 @@
 				),
 				
 				'has_archive' => false,
-				//'query_var' => 'rai_broker_id',
+				//'query_var' => 'rai_team_id',
 
 				
 				'rewrite' => array(

@@ -1,6 +1,6 @@
 <?php
     $brokersQuery = new WP_Query(array(
-        'post_type' => 'rai_broker',
+        'post_type' => 'rai_team',
         'posts_per_page' => -1,
     ));
 ?>
@@ -13,10 +13,10 @@
             $brokersQuery->the_post();
             // var_dump($brokersQuery->post);
 
-            $broker_first_name = get_post_meta($brokersQuery->post->ID, 'rai_broker_fname', true);
-            $broker_last_name = get_post_meta($brokersQuery->post->ID, 'rai_broker_lname', true);
-            $broker_email = get_post_meta($brokersQuery->post->ID, 'rai_broker_email', true);
-            $broker_phone = get_post_meta($brokersQuery->post->ID, 'rai_broker_phone', true);
+            $broker_first_name = get_post_meta($brokersQuery->post->ID, 'rai_team_fname', true);
+            $broker_last_name = get_post_meta($brokersQuery->post->ID, 'rai_team_lname', true);
+            $broker_email = get_post_meta($brokersQuery->post->ID, 'rai_team_email', true);
+            $broker_phone = get_post_meta($brokersQuery->post->ID, 'rai_team_phone', true);
         ?>
             <div class="broker-card">
             <a class="broker-anchor" href="<?php the_permalink(); ?>">

@@ -47,11 +47,11 @@
 
 	    	$apiListingCount = $this->countFromApi();
 
-	        $already_scaned = get_transient('rai_brokerage_lcd');
+	        $already_scaned = get_transient('rai_teamage_lcd');
 
 	    	if (! $already_scaned && $apiListingCount > $liveListingCount) {
 
-	    		set_transient('rai_brokerage_lcd', 'yes', 4 * HOUR_IN_SECONDS);
+	    		set_transient('rai_teamage_lcd', 'yes', 4 * HOUR_IN_SECONDS);
 
 	    		$siteName = get_bloginfo('name');
 	    		$siteUrl = get_bloginfo('url');

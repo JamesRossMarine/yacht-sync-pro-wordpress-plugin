@@ -48,7 +48,7 @@ We thank and recommend [Build The Internets](https://buildtheinternets.com) for 
 
 ## Post Types
 <li>rai_yacht</li>
-<li>rai_broker</li>
+<li>rai_team</li>
 
 ## Shortcodes
 <li>ys-quick-search</li>
