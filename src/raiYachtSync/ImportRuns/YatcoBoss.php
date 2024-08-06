@@ -201,6 +201,9 @@
 					$data = json_decode($apiCallDetails['body'], true);
 
 					//var_dump($data);
+					$data = $response;
+
+					var_dump($data);
 
 					if (isset($data['PhotoGallery']) && is_array($data['PhotoGallery'])) {
 	 
@@ -247,6 +250,8 @@
 							$theBoat['YSP_USDVal'] = 0;
 							$theBoat['YSP_EuroVal'] = 0;
 						}
+	                    $theBoat['BoatHullID'] = $data['HullDeck']['HullID'];
+
 					}
 
 					if (
