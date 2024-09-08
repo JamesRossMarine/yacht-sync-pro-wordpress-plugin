@@ -256,6 +256,19 @@
             flex-wrap: wrap;
             gap: 20px;
 
+            .like-me{
+                margin: 0px;
+                position: absolute;
+                top: 15px;
+                right: 15px;
+                cursor: pointer;
+
+                &.loved path {
+                    stroke: #f38121;
+                    fill: #f38121;
+                }
+            }
+
             .yacht-result-grid-item {
                 flex: 0 0 calc((100% - 40px) / 3);
                 box-sizing: border-box;
