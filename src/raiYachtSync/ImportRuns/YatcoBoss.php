@@ -104,6 +104,7 @@
 
 		           	$MapToBoatOrg=[
 		           		'YTC_VESSEL_ID' => 'VesselID',
+		           		'DocumentID' => 'VesselID',
 		  				'SalesStatus' => 'VesselStatus',
 		                'SaleClassCode' => 'VesselCondition',
 		                'CompanyName' => 'CompanyID' ,
@@ -200,11 +201,6 @@
 					
 					$data = json_decode($apiCallDetails['body'], true);
 
-					//var_dump($data);
-					$data = $response;
-
-					var_dump($data);
-
 					if (isset($data['PhotoGallery']) && is_array($data['PhotoGallery'])) {
 	 
 						$reducedImages = array_slice($data['PhotoGallery'], 0, 50);
@@ -253,7 +249,7 @@
 	                    $theBoat['BoatHullID'] = $data['HullDeck']['HullID'];
 
 					}
-
+					
 					if (
 						( 
 							isset($theBoat['_yoast_wpseo_metadesc']) 
@@ -270,10 +266,12 @@
 
 						$theBoat['_yoast_wpseo_metadesc'] = $this->ChatGPTYachtDescriptionVersionTwo->make_description(
 							'Vessel Name - '.$theBoat['ModelYear'].' '.$theBoat['MakeString'].' '.$theBoat['Model'].' '.$theBoat['BoatName']. '. '.
-							'Vessel Description - '.join(' ', $theBoat['GeneralBoatDescription'])
+							'Vessel Description - '. $theBoat['GeneralBoatDescription']
 						);
 
 					}
+
+					$theBoat['ImportSource'] = "YATCO";
 
 	                $find_post=get_posts([
 	                    'post_type' => 'syncing_rai_yacht',

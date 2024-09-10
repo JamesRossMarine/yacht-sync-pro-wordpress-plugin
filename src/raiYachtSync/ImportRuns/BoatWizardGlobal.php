@@ -113,6 +113,11 @@
 	                           'key' => 'DocumentID',
 	                           'value' => $boat['DocumentID'],
 	                           'compare' => '=',
+	                       ),
+	                       array(
+	                           'key' => 'ImportSource',
+	                           'value' => 'BoatWizard',
+	                           'compare' => '=',
 	                       )
 	                    ],
 	                ]);                
@@ -142,6 +147,11 @@
 	                        array(
 	                           'key' => 'DocumentID',
 	                           'value' => $boat['DocumentID'],
+	                           'compare' => '=',
+	                       ),
+	                        array(
+	                           'key' => 'ImportSource',
+	                           'value' => 'BoatWizard',
 	                           'compare' => '=',
 	                       )
 	                    ],
@@ -384,6 +394,7 @@
 					}
 
 					$boatC->Touched_InSync=1;
+					$boatC->ImportSource = "BoatWizard";
 
 		            $y_post_id=wp_insert_post(
 		            	apply_filters('raiys_yacht_post', 

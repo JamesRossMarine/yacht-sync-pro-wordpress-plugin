@@ -110,6 +110,7 @@
 
 		           	$MapToBoatOrg=[
 		           		'YBDocumentID' => 'ID',
+		           		'DocumentID' => 'ID',
 		  				'SalesStatus' => 'Status',
 		                'SaleClassCode' => 'Condition',
 		                'CompanyName' => 'ListingOwnerBrokerageName' ,
@@ -402,6 +403,7 @@
 
 		            $theBoat['CompanyBoat'] = 1;
 		            $theBoat['Touched_InSync'] = 1;
+		            $theBoat['ImportSource'] = "IYBA";
 
 		            $y_post_id=wp_insert_post(
 		            	apply_filters('raiys_yacht_post', 

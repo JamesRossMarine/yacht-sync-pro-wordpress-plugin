@@ -56,10 +56,16 @@
 
 			$gpt_call = wp_remote_post($gpt_url, $gpt_headers);
 
+			$api_status_code = wp_remote_retrieve_response_code($gpt_call);
+
 			$gpt_body = json_decode(wp_remote_retrieve_body($gpt_call), true);
 
-			return ($gpt_body['choices'][0]['message']['content']);
-
+			if (isset($gpt_body['choices'][0]['message']['content'])) {
+				return ($gpt_body['choices'][0]['message']['content']);
+			}
+			else {
+				return "0";
+			}
 		}
 
 	}
