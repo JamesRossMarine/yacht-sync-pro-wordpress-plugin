@@ -23,7 +23,7 @@ function ysp_yacht_search_and_reader(data) {
 
         document.title = data_result.SEO.title;
         jQuery('#ysp-search-heading').text(data_result.SEO.heading);
-        jQuery('#ysp-search-paragraph').text(data_result.SEO.gpt_p);
+        jQuery('#ysp-search-paragraph').text(data_result.SEO.p);
 
         jQuery('#total-results').text(new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(data_result.total));
 

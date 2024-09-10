@@ -221,7 +221,8 @@ get_header();
                             ?>
                             <div class="yacht-mobile-broker-container">
                             <a class="broker-anchor" href="<?php the_permalink(); ?>">
-                                <div class="broker-profile-image"><img src="<?php echo esc_url(get_the_post_thumbnail_url()); ?>" alt="" style="width:120px; height:120px;" /></div>
+                                <div class="broker-profile-image"><img src="<?php echo esc_url(get_the_post_thumbnail_url()); ?>" alt="" style="width:120px; height:120px; object-fit: cover;" /></div>
+
                                 <div class="broker-info">
                                     <p class="broker-name"><?php echo ($broker_first_name . " " . $broker_last_name); ?></p>
                                      </a>
@@ -430,62 +431,6 @@ get_header();
             <div class="secondary-container">
                 <div class="secondary-sub-container">
                 <?php
-                    if (isset($vessel->SalesRep->Name)) {
-                        $brokerNameFromApi = $vessel->SalesRep->Name;
-                        $BrokerNames = explode(' ', $brokerNameFromApi);                        
-                    }
-                    else {
-                        $BrokerNames = [];
-                    }
-
-                    $brokerQueryArgs = array(
-                        'post_type' => 'rai_team',
-                        'posts_per_page' => 1,
-
-                        'meta_query' => [
-                            'name' => [
-                                'relation' => 'OR'
-                            ],
-                        ],
-                    );
-
-                    foreach ($BrokerNames as $bName) {
-                        $brokerQueryArgs['meta_query']['name'][]=[
-                            'key' => 'broker_fname',
-                            'compare' => 'LIKE',
-                            'value' => $bName,
-                        ];
-                    }
-
-                    foreach ($BrokerNames as $bName) {
-                        $brokerQueryArgs['meta_query']['name'][]=[
-                            'key' => 'broker_lname',
-                            'compare' => 'LIKE',
-                            'value' => $bName,
-                        ];
-                    }
-
-                    $brokerQuery = new WP_Query($brokerQueryArgs);
-
-                    if ($brokerQuery->have_posts()) {
-
-                    }
-                    else {
-                        $mainBrokerQueryArgs = array(
-                            'post_type' => 'rai_team',
-                            'meta_query' => array(
-                                array(
-                                    'key' => 'rai_main_broker',
-                                    'value' => '1',
-                                ),
-                            ),
-                            'posts_per_page' => 1,
-                        );
-
-                        $brokerQuery = new WP_Query($mainBrokerQueryArgs);
-
-
-                    }
 
                     if ($brokerQuery->have_posts()) {
                         while ($brokerQuery->have_posts()) {
@@ -497,7 +442,7 @@ get_header();
                             $broker_phone = get_post_meta($post->ID, 'rai_team_phone', true);
                             ?>
                             <div class="broker-info-container">
-                                <div class="broker-profile-image"><img src="<?php echo esc_url(get_the_post_thumbnail_url()); ?>" alt="" style="width:120px; height:120px;" /></div>
+                                <div class="broker-profile-image"><img src="<?php echo esc_url(get_the_post_thumbnail_url()); ?>" alt="" style="width:120px; height:120px; object-fit: cover;" /></div>
                                 <div class="broker-info">
                                     <p class="broker-name"><?php echo ($broker_first_name . " " . $broker_last_name); ?></p>
                                     <p class="broker-title">Broker</p>

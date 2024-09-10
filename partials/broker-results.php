@@ -19,14 +19,17 @@
             $broker_phone = get_post_meta($brokersQuery->post->ID, 'rai_team_phone', true);
         ?>
             <div class="broker-card">
-            <a class="broker-anchor" href="<?php the_permalink(); ?>">
-                <img class="broker-image" src="<?php echo esc_url(get_the_post_thumbnail_url()); ?>" alt="" />
+                <a class="broker-anchor" href="<?php the_permalink(); ?>">
+                    <img class="broker-image" src="<?php echo esc_url(get_the_post_thumbnail_url()); ?>" alt="" />
+                </a>
+
                 <div class="broker-info">
                     <div class="broker-name-container">
                         <p class="broker-name"><?php echo ($broker_first_name . " " . $broker_last_name); ?></p>
+                
                         <img class="arrow-right" src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/arrow-right.png" alt="bed-icon" />
                     </div>
-                    </a>
+                
                     <p class="broker-title">Broker</p>
                     <p class="broker-email"><a href="mailto:broker@gmail.com"><?php echo $broker_email; ?></a></p>
                     <p class="broker-phone"><a href="tel:6466465555"><?php echo $broker_phone; ?></a></p>

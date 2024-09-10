@@ -166,6 +166,7 @@ var ysp_templates={};
 						<div class="yacht-price-container">
 							<p class="yacht-price">${price}</p>
 						</div>
+						
 						<button class="yacht-download-button" type="button" data-modal="#single-share">Contact</button>
 					</div>
 				</div>
