@@ -728,18 +728,19 @@
 		}
 		public function company_logo_id_field() {
 			$image_id = get_option(self::SLUG . '_company_logo');
-			$image_url = wp_get_attachment_image_url($image_id, 'small');
+			$image_url = wp_get_attachment_image_url($image_id, 'full');
 			?>
-			<?php if ($image = wp_get_attachment_image_url($image_id, 'small')) : ?>
+			<?php if ($image = wp_get_attachment_image_url($image_id, 'full')) : ?>
 				<a href="#" class="rudr-upload">
 					<img src="<?php echo esc_url($image) ?>" />
 				</a>
 				<a href="#" class="rudr-remove">Remove image</a>
-				<input type="hidden" name="<?php echo self::SLUG; ?>_company_logo" value="<?php echo esc_url($image_url); ?>">
+
+				<input type="hidden" name="<?php echo self::SLUG; ?>_company_logo" value="<?php echo $image_id; ?>">
 			<?php else : ?>
 				<a href="#" class="button rudr-upload">Upload image</a>
 				<a href="#" class="rudr-remove" style="display:none">Remove image</a>
-				<input type="hidden" name="<?php echo self::SLUG; ?>_company_logo" value="">
+				<input type="hidden" name="<?php echo self::SLUG; ?>_company_logo" value="<?php echo $image_id; ?>">
 			<?php endif;
 		}
 		
