@@ -8,7 +8,7 @@ Yacht Sync Pro, our WordPress plugin, is a new way to integrate three major MLS 
 
 Review the array of features offered by Yacht Sync Pro.
 
-[https://yspdemo.yachtsforsale.dev/])(https://yspdemo.yachtsforsale.dev/ )
+[https://yspdemo.yachtsforsale.dev/](https://yspdemo.yachtsforsale.dev/ )
 
 ## Top Features
 
@@ -25,24 +25,24 @@ Review the array of features offered by Yacht Sync Pro.
 We merge the data via hull IDs  \
 
 2. Fast and feature-packed yacht search pages
-    5. Multi-Select Filtering
-    6. Mobile-friendly Search Overlay 
-    7. Amazing Keyword Search 
-    8. 300-500ms Return For Results 
+    1. Multi-Select Filtering
+    2. Mobile-friendly Search Overlay 
+    2. Amazing Keyword Search 
+    4. 300-500ms Return For Results 
 
 3. Clean URLs for detail and search pages 
-    10. An example of this in detail pages is no ID needed 
-    11. An example of this search would look like this /search/condition-used/brand-viking/ \
+    1. An example of this in detail pages is no ID needed 
+    2. An example of this search would look like this /search/condition-used/brand-viking/ \
 
 4. Using AI Generate to generate unique text points for metadata and short content
-    12. For Example - Yacht Detail Pages Meta Descriptions From Context Of MLS Data
-    13. For Example - Headings And Paragraphs about search results with backlinks to blog posts. \
+    1. For Example - Yacht Detail Pages Meta Descriptions From Context Of MLS Data
+    2. For Example - Headings And Paragraphs about search results with backlinks to blog posts. \
  
 5. Easy to use Gutenberg blocks and shortcodes for placing search elements on pages
-    14. Easy to use template filters for (child) themes to use. \
+    1. Easy to use template filters for (child) themes to use. \
 
 6. PDF Brochure For Yacht Details
-    15. Can generate multiple different gallery sizes (currently, when logged in)
+    1. Can generate multiple different gallery sizes (currently, when logged in)
 
 
 ## More Features
