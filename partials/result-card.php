@@ -4,11 +4,11 @@
 
     if ($YSP_Euro_Opt == "yes") {
         $length = $yacht["NominalLength"] ? number_format($meters, 2) . ' m' : 'N/A';
-        $price = $yacht["Price"] ?  '€ ' . number_format($yacht['YSP_EuroVal']) : 'Contact Us For Price';
+        $price = $yacht["Price"] ?  '€' . number_format($yacht['YSP_EuroVal']) : 'Contact Us For Price';
     } 
     else {
         $length = $yacht["NominalLength"] ? $yacht['NominalLength'] . ' / ' . number_format($meters, 2) . ' m' : 'N/A';
-        $price = $yacht["Price"] ? '$ ' . number_format($yacht['YSP_USDVal']) : 'Contact Us For Price'; 
+        $price = $yacht["Price"] ? '$' . number_format($yacht['YSP_USDVal']) : 'Contact Us For Price'; 
     }
 
 ?>

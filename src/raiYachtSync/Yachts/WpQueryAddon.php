@@ -66,9 +66,11 @@
 			$vars[] = 'sortby';
 
 			$vars[] = 'ys_only_these';
+			$vars[] = 'ys_show_all';
 
 			$vars[] = 'ys_company_only';
 			$vars[] = 'ys_show_only';
+			$vars[] = 'ys_broker_name';
 
 			$vars[] = 'ys_yachts_loved';
 			$vars[] = 'dont_push';
@@ -612,8 +614,9 @@
 
 				}
 
-				if ($this->if_query_var_check($query->get('ys_only_these'))){
+				if ($this->if_query_var_check($query->get('ys_only_these'))) {
 					$only_these = explode(',', $query->get('ys_only_these'));
+
 					$yacht_sync_meta_query[] = [
 						'relation' => "OR",
 						[
@@ -628,6 +631,20 @@
 							'value' => $only_these
 						],
 					];
+				}
+
+				if ( $this->if_query_var_check($query->get('ys_broker_name')) ) {
+
+					$yacht_sync_meta_query[]=[
+						'key' => 'SalesRep',
+						'compare' => 'LIKE',
+						'value' => $query->get('ys_broker_name')
+					];
+
+				}
+				
+				if ( $this->if_query_var_check($query->get('ys_show_all')) ) {
+					$query->set('posts_per_page', -1);
 				}
 
 				if ($this->if_query_var_check($query->get('sortby'))) {
