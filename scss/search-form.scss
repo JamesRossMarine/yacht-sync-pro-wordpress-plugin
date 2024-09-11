@@ -38,7 +38,8 @@
 }
 
 .Filters-Floating-Bar{
-	display: block;
+	display: flex;
+	justify-content: space-between;
 
 	position: fixed;
 
