@@ -5,7 +5,7 @@
 		public $yachtBrokerAPIKey = '';
    		public $yachtClientId = '';
    		protected $url = '';
-   		protected $yachtBrokerLimit = 143;
+   		protected $yachtBrokerLimit = 13;
 
 		public function __construct() {
 
@@ -30,7 +30,7 @@
 			var_dump('Started YATCO Import');
 
 	        $headers = [
-	        	'timeout' => 120,
+	        	'timeout' => 90,
 
 	        	'body' => json_encode([
 	        		"Records" => 12,
@@ -70,7 +70,7 @@
 
 	        while ($total > $yachtSynced) {
 
-	        	var_dump( intval((($yachtSynced / $total)*100)) ." Completed" );
+	        	var_dump( sprintf("%.2f%%", ((($yachtSynced / $total)*100)))." Completed" );
 
 	        	$apiUrl  = $this->yachts_feed;
 

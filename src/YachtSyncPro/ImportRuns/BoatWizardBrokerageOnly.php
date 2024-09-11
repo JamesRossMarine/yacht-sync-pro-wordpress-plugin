@@ -68,16 +68,16 @@
 			//var_dump($total);
 
 			while ($total > ($yachtsSynced)) {
-				var_dump( intval((($yachtSynced / $total)*100)) ." Completed" );
+				var_dump( sprintf("%.2f%%", intval((($yachtSynced / $total)*100)))." Completed" );
 
 				$apiUrl = $this->brokerageInventoryUrl;
 
 				$apiUrl = $apiUrl.'&start='. $offset .'&rows='. $this->limit;
 
-				sleep(30);
+				sleep(15);
 
 				// Sync broker inventory
-				$apiCallForWhile = wp_remote_get($apiUrl, ['timeout' => 120]);
+				$apiCallForWhile = wp_remote_get($apiUrl, ['timeout' => 180]);
 
 				//var_dump($apiCallForWhile);
 
