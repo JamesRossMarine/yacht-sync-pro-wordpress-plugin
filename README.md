@@ -21,8 +21,8 @@ Review the array of features offered by Yacht Sync Pro.
         2. If a sync is “successful” / false positive and the number of vessels drops below the allowed amount, you will be alerted. 
     4. Can run imports for multiple API tokens!
         3. Got two boat wizard API keys, no problem!
-        4. Got IYBA and Boat Wizard API keys, no problem.  \
-We merge the data via hull IDs  \
+        4. Got IYBA and Boat Wizard API keys, no problem.  
+We merge the data via hull IDs  
 
 2. Fast and feature-packed yacht search pages
     1. Multi-Select Filtering
@@ -32,14 +32,14 @@ We merge the data via hull IDs  \
 
 3. Clean URLs for detail and search pages 
     1. An example of this in detail pages is no ID needed 
-    2. An example of this search would look like this /search/condition-used/brand-viking/ \
+    2. An example of this search would look like this /search/condition-used/brand-viking/ 
 
 4. Using AI Generate to generate unique text points for metadata and short content
     1. For Example - Yacht Detail Pages Meta Descriptions From Context Of MLS Data
-    2. For Example - Headings And Paragraphs about search results with backlinks to blog posts. \
+    2. For Example - Headings And Paragraphs about search results with backlinks to blog posts. 
  
 5. Easy to use Gutenberg blocks and shortcodes for placing search elements on pages
-    1. Easy to use template filters for (child) themes to use. \
+    1. Easy to use template filters for (child) themes to use. 
 
 6. PDF Brochure For Yacht Details
     1. Can generate multiple different gallery sizes (currently, when logged in)
