@@ -134,6 +134,7 @@
         Filters
     </button>
 
+    <a href="" id="ysp_compare_linkout_mobile"></a>
 </div>
 
 <datalist id="ysp_keywords_list" data-fill-list='Keywords'></datalist>
