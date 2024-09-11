@@ -11,6 +11,10 @@ $main-background-color: var(--main-background-color);
 $secondary-text-color: var(--secondary-text-color);
 $secondary-background-color: var(--secondary-background-color);
 
+$button-text-color: var(--button-txt-color);
+$button-background-color: var(--button-bg-color);
+$button-bg-color: var(--button-bg-color);
+
 $white-color: var(--white);
 
 $divider-color: #CBD5E1;
@@ -32,4 +36,7 @@ $max-width: 1440px;
     --secondary-text-color: #334155;
     --secondary-background-color: #94A3B8;
     --white: #FFFFFF;
+
+    --button-bg-color: #94A3B8;
+    --button-txt-color: #fff;
 }

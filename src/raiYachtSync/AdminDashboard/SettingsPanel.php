@@ -44,6 +44,10 @@
 			register_setting( self::SLUG, self::SLUG . '_color_three');
 			register_setting( self::SLUG, self::SLUG . '_color_four');
 
+
+			register_setting( self::SLUG, self::SLUG . '_button_bg_color_one');
+			register_setting( self::SLUG, self::SLUG . '_button_txt_color_one');
+
 			register_setting( self::SLUG, self::SLUG . '_send_lead_to_this_email');
 
 			register_setting( self::SLUG, self::SLUG . '_yacht_search_page_id');

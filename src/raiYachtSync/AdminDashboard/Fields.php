@@ -155,36 +155,18 @@
 					);
 					
 					add_settings_field(
-						self::SLUG . '_color_one',
-						"Main Text Color",
-						array( $this, 'color_one_field' ),
+						self::SLUG . 'button_bg_color_one',
+						"Button BG Color",
+						array( $this, 'button_bg_color_one_field' ),
 						self::SLUG,
 						self::SLUG . '_admin_fields',
 						array( )
 					);
 					
 					add_settings_field(
-						self::SLUG . '_color_two',
-						"Main Background Color",
-						array( $this, 'color_two_field' ),
-						self::SLUG,
-						self::SLUG . '_admin_fields',
-						array( )
-					);
-
-					add_settings_field(
-						self::SLUG . '_color_three',
-						"Secondary Text Color",
-						array( $this, 'color_three_field' ),
-						self::SLUG,
-						self::SLUG . '_admin_fields',
-						array( )
-					);
-					
-					add_settings_field(
-						self::SLUG . '_color_four',
-						"Secondary Background Color",
-						array( $this, 'color_four_field' ),
+						self::SLUG . '_button_txt_color_one',
+						"Button Text Color",
+						array( $this, 'button_txt_color_one_field' ),
 						self::SLUG,
 						self::SLUG . '_admin_fields',
 						array( )
@@ -591,8 +573,8 @@
 
 		}
 
-		public function color_two_field() {
-			$nameOfField=self::SLUG.'_color_two';
+		public function button_bg_color_one_field() {
+			$nameOfField=self::SLUG.'_button_bg_color_one';
 			$valOfField=get_option($nameOfField);
 
 			?>
@@ -600,19 +582,8 @@
 			<input type="color" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
 
 		}
-
-		public function color_three_field() {
-			$nameOfField=self::SLUG.'_color_three';
-			$valOfField=get_option($nameOfField);
-
-			?>
-
-			<input type="color" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
-
-		}
-
-		public function color_four_field() {
-			$nameOfField=self::SLUG.'_color_four';
+		public function button_txt_color_one_field() {
+			$nameOfField=self::SLUG.'_button_txt_color_one';
 			$valOfField=get_option($nameOfField);
 
 			?>

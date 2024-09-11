@@ -133,12 +133,14 @@ get_header();
                         <?php 
                             if(isset($vessel->Videos)) {
                                 $videoUrls = $vessel->Videos->url;
-                                foreach($videoUrls as $aindex => $video) { 
-                        ?>
-                            <a data-src="<?php echo $video;?>">
-                                Open Video
-                            </a>
-                        <?php   
+                                
+                                foreach($videoUrls as $aindex => $video) { ?>
+                                    <a class="yacht-download-button" data-src="<?php echo $video;?>">
+                                        Open Video
+                                    </a>
+                                
+                                <?php   
+                                
                                 }
                             }
                         ?>

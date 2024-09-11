@@ -105,8 +105,7 @@
                         width: 100%;
                         border: 1px solid #CBD5E1;
                         resize: none;
-                        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-
+                        
                         &:focus {
                             border-radius: 0px;
                         }
@@ -128,16 +127,18 @@
                 }
 
                 .yacht-form-submit {
-                    background-color: $main-text-color;
+                    background-color: $button-bg-color;
+                    color: $button-text-color;
+
                     box-shadow: none;
                     border: 0;
                     width: 100%;
                     padding: 8px 12px;
                     margin: auto;
-                    color: $white-color;
 
                     &:hover {
-                        background-color: #a9a9a9;
+                        background-color: $button-bg-color;
+                        color: $button-text-color;
                     }
                 }
             }
@@ -267,6 +268,20 @@
                     stroke: #f38121;
                     fill: #f38121;
                 }
+            }
+
+            button{
+                background-color: $button-bg-color;
+                    color: $button-text-color;
+
+                    box-shadow: none;
+                    border: 0;
+                    padding: 8px 12px;
+
+                    &:hover {
+                        background-color: $button-bg-color;
+                        color: $button-text-color;
+                    }
             }
 
             .yacht-result-grid-item {

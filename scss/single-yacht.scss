@@ -283,9 +283,10 @@
             }
 
             .yacht-download-button {
-                background-color: $main-text-color;
+                background-color: $button-bg-color;
+                color: $button-text-color;
+
                 padding: 10px 16px;
-                color: #FFFFFF;
                 font-size: 18px;
                 display: flex;
                 align-items: center;
@@ -293,35 +294,15 @@
                 border: none;
 
                 &:hover {
-                    background-color: darkgray;
+                    background-color: $button-bg-color;
+                    color: $button-text-color;
                 }
 
                 img {
                     margin-right: 8px;
                 }
             }
-            #video-gallery {
 
-                a {
-                    background-color: $main-text-color;
-                    padding: 10px 16px;
-                    color: #FFFFFF;
-                    font-size: 18px;
-                    display: flex;
-                    align-items: center;
-                    box-shadow: none;
-                    border: none;
-                    text-decoration: none;
-                    line-height: normal;
-                    margin-left: 20px;
-                    text-align: center;
-
-                    &:hover {
-                        background-color: darkgray;
-                    }
-                }
-
-            }
         }
         .yacht-mobile-broker-container {
                 display: none;
@@ -339,6 +320,7 @@
                     width: 120px;
                     background-color: #D9D9D9;
                 }
+                
                 .broker-info {
                     margin-left: 19px;
 
@@ -475,16 +457,17 @@
                 }
 
                 .yacht-form-submit {
-                    background-color: $main-text-color;
+                    background-color: $button-bg-color;
                     box-shadow: none;
                     border: 0;
                     width: 100%;
                     padding: 8px 12px;
                     margin: auto;
-                    color: $white-color;
+                    color: $button-text-color;
 
                     &:hover {
-                        background-color: #a9a9a9;
+                        background-color: $button-bg-color;
+                        color: $button-text-color;
                     }
                 }
             }
@@ -792,16 +775,17 @@
                     }
 
                     .yacht-form-submit {
-                        background-color: $main-text-color;
+                        background-color: $button-bg-color;
                         box-shadow: none;
                         border: 0;
                         width: 100%;
                         padding: 8px 12px;
                         margin: auto;
-                        color: $white-color;
+                        color: $button-text-color;
 
                         &:hover {
-                            background-color: #a9a9a9;
+                            background-color: $button-bg-color;
+                            color: $button-text-color;
                         }
                     }
                 }

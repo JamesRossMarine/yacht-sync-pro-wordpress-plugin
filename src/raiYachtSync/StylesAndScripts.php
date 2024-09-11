@@ -31,17 +31,13 @@
 		
 		public function pickedColorsFromWpAdmin() {
 
-			$colorOne = $this->options->get('color_one');
-			$colorTwo = $this->options->get('color_two');
-			$colorThree = $this->options->get('color_three');
-			$colorFour = $this->options->get('color_four');
+			$button_bg = $this->options->get('button_bg_color_one');
+			$button_txt = $this->options->get('button_txt_color_one');
 
 			return "
 				:root {
-					--main-text-color: $colorOne;
-					--main-background-color: $colorTwo;
-					--secondary-text-color: $colorThree;
-					--secondary-background-color: $colorFour;
+					--button-bg-color: $button_bg !important;
+					--button-txt-color: $button_txt !important;
 				}
 			";
 
