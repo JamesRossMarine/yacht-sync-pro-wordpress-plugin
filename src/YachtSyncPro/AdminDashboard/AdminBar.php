@@ -33,7 +33,7 @@
 			        'id'    => 'some-more-pics',
 			        'parent' => 'yacht-brochure',
 			        'title' => 'Download A Borchure With 36 Image Of The Gallery',
-			        'href'  => get_rest_url() ."raiys/yacht-pdf-download?GalleryLimit=". 36 ."&yacht_post_id=". $post->ID,
+			        'href'  => get_rest_url() ."ysp/yacht-pdf-download?GalleryLimit=". 36 ."&yacht_post_id=". $post->ID,
 			        'meta'  => array(
 			            'title' => __('Download A Borchure With 36 Images Of Gallery'),
 			            'target' => '_blank',
@@ -45,7 +45,7 @@
 			        'id'    => 'half-pics',
 			        'parent' => 'yacht-brochure',
 			        'title' => 'Download A Borchure With Half Of Gallery',
-			        'href'  => get_rest_url() ."raiys/yacht-pdf-download?GalleryLimit=". 60 ."&yacht_post_id=". $post->ID,
+			        'href'  => get_rest_url() ."ysp/yacht-pdf-download?GalleryLimit=". 60 ."&yacht_post_id=". $post->ID,
 			        'meta'  => array(
 			            'title' => __('Download A Borchure With Half Of Gallery'),
 			            'target' => '_blank',
@@ -57,7 +57,7 @@
 			        'id'    => 'full-bro',
 			        'parent' => 'yacht-brochure',
 			        'title' => 'Download A Borchure With The Whole Gallery',
-			        'href'  => get_rest_url() ."raiys/yacht-pdf-download?GalleryLimit=". 120 ."&yacht_post_id=". $post->ID,
+			        'href'  => get_rest_url() ."ysp/yacht-pdf-download?GalleryLimit=". 120 ."&yacht_post_id=". $post->ID,
 			        'meta'  => array(
 			            'title' => __('Download A Borchure With The Whole Gallery'),
 			            'target' => '_blank',

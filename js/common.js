@@ -8,7 +8,7 @@ Object.defineProperty(String.prototype, 'eachWordCapitalize', {
   enumerable: false
 });
 
-function raiys_get_form_data(form_ele) {
+function ysp_get_form_data(form_ele) {
     let formData = new FormData( form_ele );
 
     let fd=Object.fromEntries(formData.entries());
@@ -29,7 +29,7 @@ function raiys_get_form_data(form_ele) {
     return fd;
 }
 
-function raiys_set_form_to_data(inputData) {
+function ysp_set_form_to_data(inputData) {
 
     let formA=document.querySelector('.ysp-yacht-search-form');
     let formB=document.querySelector('#ysp-mobile-yacht-search-form');
@@ -77,7 +77,7 @@ function raiys_set_form_to_data(inputData) {
     });
 }
 
-function raiys_push_history( data = {} ) {
+function ysp_push_history( data = {} ) {
     let searchParams = new URLSearchParams();
     let strpath='';
 

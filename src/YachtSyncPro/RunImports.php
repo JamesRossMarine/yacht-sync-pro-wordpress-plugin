@@ -42,7 +42,7 @@
 					INNER JOIN $wpdb->posts AS p ON pm.post_id = p.ID
 					SET pm.meta_value = '0'
 					WHERE p.post_type = %s AND pm.meta_key = 'Touched_InSync'",
-					'rai_yacht'
+					'ysp_yacht'
 				)
 			);*/
 	      
@@ -107,8 +107,8 @@
 							) manual_entered_yachts
 						)
 						",
-						'rai_yacht',
-						'rai_yacht'
+						'ysp_yacht',
+						'ysp_yacht'
 					)
 				);
 
@@ -117,7 +117,7 @@
 						"DELETE p FROM $wpdb->posts p
 						INNER JOIN $wpdb->postmeta AS pm ON p.ID = pm.post_id 
 						WHERE p.post_type = %s AND pm.meta_key = 'Touched_InSync' AND pm.meta_value = '0'",
-						'rai_yacht'
+						'ysp_yacht'
 					)
 				);*/
 
@@ -166,9 +166,9 @@
 								WHERE wp.post_type = %s AND pm.meta_key = 'is_yacht_manual_entry' AND pm.meta_value = 'yes'
 							) manual_entered_yachts
 						)", 
-						'rai_yacht',
+						'ysp_yacht',
 						'CompanyBoat',
-						'rai_yacht'
+						'ysp_yacht'
 					)
 				);
 
@@ -219,7 +219,7 @@
 		public function move_over() {
 	        global $wpdb;	        
 
-	        $wpdb->update($wpdb->posts, ['post_type'=>'rai_yacht'], ['post_type' => 'syncing_ysp_yacht'], ['%s'], ['%s'] );
+	        $wpdb->update($wpdb->posts, ['post_type'=>'ysp_yacht'], ['post_type' => 'syncing_ysp_yacht'], ['%s'], ['%s'] );
 
 		}
 

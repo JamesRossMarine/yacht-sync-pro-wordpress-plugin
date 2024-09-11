@@ -623,7 +623,7 @@ Object.defineProperty(String.prototype, 'eachWordCapitalize', {
   },
   enumerable: false
 });
-function raiys_get_form_data(form_ele) {
+function ysp_get_form_data(form_ele) {
   var formData = new FormData(form_ele);
   var fd = Object.fromEntries(formData.entries());
   for (var _i = 0, _Object$entries = Object.entries(fd); _i < _Object$entries.length; _i++) {
@@ -640,7 +640,7 @@ function raiys_get_form_data(form_ele) {
   }
   return fd;
 }
-function raiys_set_form_to_data(inputData) {
+function ysp_set_form_to_data(inputData) {
   var formA = document.querySelector('.ysp-yacht-search-form');
   var formB = document.querySelector('#ysp-mobile-yacht-search-form');
   formA.reset();
@@ -672,7 +672,7 @@ function raiys_set_form_to_data(inputData) {
     }
   });
 }
-function raiys_push_history() {
+function ysp_push_history() {
   var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var searchParams = new URLSearchParams();
   var strpath = '';
@@ -715,11 +715,11 @@ ysp_ysp_api.call_api = function (method, path, passing_data) {
           }
         }
         var _questionMark = searchParams.toString();
-        xhttp.open("GET", ysp_yacht_sync.wp_rest_url + "raiys/" + path + (_questionMark != '' ? '?' + searchParams.toString() : ''), true);
+        xhttp.open("GET", ysp_yacht_sync.wp_rest_url + "ysp/" + path + (_questionMark != '' ? '?' + searchParams.toString() : ''), true);
         xhttp.send();
         break;
       case 'POST':
-        xhttp.open("POST", ysp_yacht_sync.wp_rest_url + "raiys/" + path, true);
+        xhttp.open("POST", ysp_yacht_sync.wp_rest_url + "ysp/" + path, true);
         xhttp.setRequestHeader('Content-Type', 'application/json');
         xhttp.send(JSON.stringify(passing_data));
         break;
@@ -927,7 +927,7 @@ function ysp_markLovedVessel(ele_card) {
       ysp_addLovedVessel(yachtId);
     } else {
       ysp_removeLovedVessel(yachtId);
-      var params = raiys_get_form_data(document.querySelector('.ysp-yacht-search-form'));
+      var params = ysp_get_form_data(document.querySelector('.ysp-yacht-search-form'));
       if (typeof params.ys_yachts_loved != 'undefined') {
         ele_card.remove();
       }
@@ -1021,11 +1021,11 @@ function ysp_removeVesselToCompareList(yachtId) {
 function ysp_makeCompareLinkout() {
   if (YSP_VesselCompareList.length >= 2) {
     if (document.getElementById('ysp_compare_linkout')) {
-      document.getElementById('ysp_compare_linkout').href = ysp_yacht_sync.wp_rest_url + "raiys/compare/?postID=" + YSP_VesselCompareList.join(',');
+      document.getElementById('ysp_compare_linkout').href = ysp_yacht_sync.wp_rest_url + "ysp/compare/?postID=" + YSP_VesselCompareList.join(',');
       document.getElementById('ysp_compare_linkout').innerHTML = "<button type=\"button\">Compare ( ".concat(YSP_VesselCompareList.length, " )</button>");
     }
     if (document.getElementById('ysp_compare_linkout_mobile')) {
-      document.getElementById('ysp_compare_linkout_mobile').href = ysp_yacht_sync.wp_rest_url + "raiys/compare/?postID=" + YSP_VesselCompareList.join(',');
+      document.getElementById('ysp_compare_linkout_mobile').href = ysp_yacht_sync.wp_rest_url + "ysp/compare/?postID=" + YSP_VesselCompareList.join(',');
       document.getElementById('ysp_compare_linkout_mobile').innerHTML = "<button type=\"button\">Compare ( ".concat(YSP_VesselCompareList.length, " )</button>");
     }
     var params = {
@@ -1059,7 +1059,7 @@ function ysp_yacht_search_and_reader(data) {
   jQuery('#search-result-row').html('');
   document.querySelector('#search-result-section').classList.remove('loaded');
   document.querySelector('#search-result-section').classList.add('loading');
-  raiys_set_form_to_data(data);
+  ysp_set_form_to_data(data);
   ysp_makeSearchTags(data);
 
   // GET AND WRITE
@@ -1074,7 +1074,7 @@ function ysp_yacht_search_and_reader(data) {
     }).format(data_result.total));
     var currentURL = null;
     if (typeof data.dont_push == 'undefined') {
-      currentURL = raiys_push_history(data);
+      currentURL = ysp_push_history(data);
     } else {
       currentURL = location.href;
     }
@@ -1114,7 +1114,7 @@ function ysp_yacht_search_and_reader(data) {
         onPageClick: function onPageClick(pageNumber, event) {
           event.preventDefault();
           document.querySelector('.ysp-yacht-search-form input[name=page_index]').value = pageNumber;
-          var formDataObject = raiys_get_form_data(document.querySelector('.ysp-yacht-search-form'));
+          var formDataObject = ysp_get_form_data(document.querySelector('.ysp-yacht-search-form'));
           ysp_yacht_search_and_reader(formDataObject);
         }
       });
@@ -1208,7 +1208,7 @@ document.addEventListener("DOMContentLoaded", function () {
       e.preventDefault();
       e.target.dispatchEvent(yspBeforeYachtSearch);
       e.target.querySelector('input[name=page_index]').value = 1;
-      var params = raiys_get_form_data(e.target);
+      var params = ysp_get_form_data(e.target);
       ysp_yacht_search_and_reader(params).then(function (api_data) {
         e.target.dispatchEvent(yspAfterYachtSearch);
       });
@@ -1384,7 +1384,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }).then(function () {
       // Render Yachts For Page Load
-      var params = raiys_get_form_data(document.querySelector('.ysp-yacht-search-form'));
+      var params = ysp_get_form_data(document.querySelector('.ysp-yacht-search-form'));
       console.log(params);
 
       // Liked / Loved 
@@ -1405,7 +1405,7 @@ document.addEventListener("DOMContentLoaded", function () {
         e.target.querySelector('input[name=page_index]').value = 1;
         document.querySelector('#ysp-super-mobile-search').style.display = 'none';
         document.querySelector('body').style.overflowY = 'unset';
-        var params = raiys_get_form_data(e.target);
+        var params = ysp_get_form_data(e.target);
         ysp_yacht_search_and_reader(params);
       });
     }
@@ -1414,7 +1414,7 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener('DOMContentLoaded', function () {
   function handleSubmit(e, apiEndpoint) {
     e.preventDefault();
-    var formData = raiys_get_form_data(e.target);
+    var formData = ysp_get_form_data(e.target);
     var successMessage = e.target.parentElement.querySelector('.success-message');
     console.log(formData);
     ysp_ysp_api.call_api("POST", apiEndpoint, formData).then(function (data_result) {

@@ -11,7 +11,7 @@ function ysp_yacht_search_and_reader(data) {
     document.querySelector('#search-result-section').classList.remove('loaded');
     document.querySelector('#search-result-section').classList.add('loading');
 
-    raiys_set_form_to_data( data );
+    ysp_set_form_to_data( data );
 
     ysp_makeSearchTags( data );
 
@@ -30,7 +30,7 @@ function ysp_yacht_search_and_reader(data) {
         let currentURL=null;
 
         if (typeof data.dont_push == 'undefined') {
-            currentURL=raiys_push_history( data );
+            currentURL=ysp_push_history( data );
         }
         else {
             currentURL = location.href;
@@ -85,7 +85,7 @@ function ysp_yacht_search_and_reader(data) {
 
                     document.querySelector('.ysp-yacht-search-form input[name=page_index]').value=pageNumber;
 
-                    let formDataObject = raiys_get_form_data( document.querySelector('.ysp-yacht-search-form') );
+                    let formDataObject = ysp_get_form_data( document.querySelector('.ysp-yacht-search-form') );
 
                     ysp_yacht_search_and_reader(formDataObject);
                 }
@@ -221,7 +221,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             e.target.querySelector('input[name=page_index]').value=1;
 
-            let params = raiys_get_form_data(e.target);
+            let params = ysp_get_form_data(e.target);
 
             ysp_yacht_search_and_reader( params ).then(function(api_data) {
 
@@ -456,7 +456,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }).then(function () {
             // Render Yachts For Page Load
-            let params = raiys_get_form_data(document.querySelector('.ysp-yacht-search-form'));
+            let params = ysp_get_form_data(document.querySelector('.ysp-yacht-search-form'));
                 console.log(params);
 
             // Liked / Loved 
@@ -488,7 +488,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 document.querySelector('#ysp-super-mobile-search').style.display='none';
                 document.querySelector('body').style.overflowY='unset';
 
-                let params = raiys_get_form_data(e.target);               
+                let params = ysp_get_form_data(e.target);               
 
                 ysp_yacht_search_and_reader( params );
 

@@ -68,6 +68,7 @@
 			//var_dump($total);
 
 			while ($total > ($yachtsSynced)) {
+				var_dump( intval((($yachtSynced / $total)*100)) ." Completed" );
 
 				$apiUrl = $this->brokerageInventoryUrl;
 
@@ -376,7 +377,7 @@
 					$boatC->ImportSource = "BoatWizard";
 					
 		            $y_post_id=wp_insert_post(
-		            	apply_filters('raiys_yacht_post',
+		            	apply_filters('ysp_yacht_post',
 			                [
 			                    'ID' => $post_id,
 								'post_type' => 'syncing_ysp_yacht',
@@ -388,7 +389,7 @@
 								),
 								'post_content' => join(' ', $boatC->GeneralBoatDescription),
 								'post_status' => 'publish',
-								'meta_input' => apply_filters('raiys_yacht_meta_sync', $boatC),
+								'meta_input' => apply_filters('ysp_yacht_meta_sync', $boatC),
 
 							],
 
@@ -408,8 +409,8 @@
 									'Content-Type' => 'application/json'
 								],
 								'body' => json_encode([
-									'url' => get_rest_url() ."raiys/yacht-pdf?yacht_post_id=". $y_post_id,
-									'webhook_url' => get_rest_url() ."raiys/set-yacht-pdf?yacht_post_id=". $y_post_id,
+									'url' => get_rest_url() ."ysp/yacht-pdf?yacht_post_id=". $y_post_id,
+									'webhook_url' => get_rest_url() ."ysp/set-yacht-pdf?yacht_post_id=". $y_post_id,
 									'use_s3' => true,
 									'format' => 'pdf'
 								])

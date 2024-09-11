@@ -13,7 +13,7 @@ function ysp_markLovedVessel( ele_card ) {
         else {
             ysp_removeLovedVessel(yachtId);
 
-            let params = raiys_get_form_data(document.querySelector('.ysp-yacht-search-form'));
+            let params = ysp_get_form_data(document.querySelector('.ysp-yacht-search-form'));
 
             if (typeof params.ys_yachts_loved != 'undefined') {
                 ele_card.remove();

@@ -123,7 +123,7 @@ get_header();
                     </div>
                 </div>
                 <div class="yacht-download-brochure-container">
-                    <a rel="nofollow" href="<?php echo get_rest_url(); ?>raiys/yacht-pdf-loader?yacht_post_id=<?php echo get_the_ID(); ?>" target="_blank">
+                    <a rel="nofollow" href="<?php echo get_rest_url(); ?>ysp/yacht-pdf-loader?yacht_post_id=<?php echo get_the_ID(); ?>" target="_blank">
                         <button class="yacht-download-button">
                             <img src="<?php echo YSP_ASSETS; ?>images/download.png" alt="download-icon" />
                             Download Brochure

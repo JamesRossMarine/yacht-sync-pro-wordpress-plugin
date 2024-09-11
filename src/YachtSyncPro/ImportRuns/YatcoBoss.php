@@ -70,6 +70,8 @@
 
 	        while ($total > $yachtSynced) {
 
+	        	var_dump( intval((($yachtSynced / $total)*100)) ." Completed" );
+
 	        	$apiUrl  = $this->yachts_feed;
 
 	        	$page++;
@@ -292,7 +294,7 @@
 		            }
 
 		           	$y_post_id=wp_insert_post(
-		            	apply_filters('raiys_yacht_post', 
+		            	apply_filters('ysp_yacht_post', 
 			                [
 			                    'ID' => $post_id,
 								'post_type' => 'syncing_ysp_yacht',
@@ -304,7 +306,7 @@
 								),
 								'post_content' => $data['VD']['VesselDescriptionShortDescriptionNoStyles'],
 								'post_status' => 'publish',
-								'meta_input' => apply_filters('raiys_yacht_meta_sync', (object) $theBoat)
+								'meta_input' => apply_filters('ysp_yacht_meta_sync', (object) $theBoat)
 
 							],
 							$theBoat

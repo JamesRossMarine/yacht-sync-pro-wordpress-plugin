@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function handleSubmit(e, apiEndpoint) {
         e.preventDefault();
 
-        let formData = raiys_get_form_data(e.target);
+        let formData = ysp_get_form_data(e.target);
         let successMessage = e.target.parentElement.querySelector('.success-message');
         console.log(formData)
         ysp_api.call_api("POST", apiEndpoint, formData)

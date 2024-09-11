@@ -50,9 +50,9 @@
 
 			?>
 
-				<p>Reset: <a href="<?= get_rest_url() ."raiys/redo-yacht-pdf?yacht_post_id=". $y_post_id ?>">Click Here</a></p>
+				<p>Reset: <a href="<?= get_rest_url() ."ysp/redo-yacht-pdf?yacht_post_id=". $y_post_id ?>">Click Here</a></p>
 
-				<p>Delete: <a href="<?= get_rest_url() ."raiys/delete-yacht-pdf?yacht_post_id=". $y_post_id ?>">Click Here</a></p>
+				<p>Delete: <a href="<?= get_rest_url() ."ysp/delete-yacht-pdf?yacht_post_id=". $y_post_id ?>">Click Here</a></p>
 
 				<b>ENTER NEW PDF URL</b>
 				<input type="text" name="_YSP_PDF_URL_" value="" id="ysp_vessel_pdf_input" placeholder="PDF URL" />

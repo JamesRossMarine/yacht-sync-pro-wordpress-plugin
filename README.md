@@ -70,14 +70,14 @@ We thank and recommend [Build The Internets](https://buildtheinternets.com) for 
 
 
 ## WP REST API
-<li>/raiys/sync</li>
-<li>/raiys/yachts</li>
-<li>/raiys/list-options</li>
-<li>/raiys/yacht-pdf</li>
-<li>/raiys/yacht-pdf-loader</li>
-<li>/raiys/yacht-pdf-download</li>
-<li>/raiys/yacht-lead</li>
-<li>/raiys/broker-lead</li>
+<li>/ysp/sync</li>
+<li>/ysp/yachts</li>
+<li>/ysp/list-options</li>
+<li>/ysp/yacht-pdf</li>
+<li>/ysp/yacht-pdf-loader</li>
+<li>/ysp/yacht-pdf-download</li>
+<li>/ysp/yacht-lead</li>
+<li>/ysp/broker-lead</li>
 
 ## Commands
 <li>wp sync-yachts</li>
