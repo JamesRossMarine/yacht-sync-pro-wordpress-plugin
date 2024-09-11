@@ -20,8 +20,8 @@ Review the array of features offered by Yacht Sync Pro.
         1. If a sync fails, the past data stays up, and you are also alerted as to why the sync failed. 
         2. If a sync is “successful” / false positive and the number of vessels drops below the allowed amount, you will be alerted. 
     4. Can run imports for multiple API tokens!
-        3. Got two boat wizard API keys, no problem!
-        4. Got IYBA and Boat Wizard API keys, no problem.  
+        1. Got two boat wizard API keys, no problem!
+        2. Got IYBA and Boat Wizard API keys, no problem.  
 We merge the data via hull IDs  
 
 2. Fast and feature-packed yacht search pages
