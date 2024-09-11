@@ -407,6 +407,7 @@
         #ysp_compare_linkout {
             display: flex;
             justify-content: flex-end;
+            margin-bottom: 5px;
         }
 
         #ysp-compare-previews {
@@ -433,6 +434,7 @@
 
                     &:hover {
                         text-decoration: underline;
+                        text-decoration-color: #FFFFFF;
                     }
 
                     .yacht-title {
