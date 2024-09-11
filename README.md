@@ -81,7 +81,7 @@ We merge the data via hull IDs
 
 We recommend our excellent hosting partner, [Convesio.com](https://convesio.com); from their incredible prices on cloud hosting to their 24/7 support via Slack, we can genuinely recommend them.
 
-## Development Recommendations
+## Support And Development Recommendations
 
 We thank and recommend [Build The Internets](https://buildtheinternets.com) for your research and development needs. 
 
