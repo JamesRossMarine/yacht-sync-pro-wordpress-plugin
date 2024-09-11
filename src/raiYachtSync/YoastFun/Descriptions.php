@@ -4,7 +4,7 @@
 	class raiYachtSync_YoastFun_Descriptions {
 
 		public function __construct() {
-			$this->ChatGPT_YachtDescription = new raiYachtSync_ChatGPTYachtDescription();
+			$this->ChatGPT_YachtDescription = new raiYachtSync_ChatGPTYachtDescriptionVersionTwo();
 		}
 	
 		public function add_actions_and_filters() {
