@@ -68,7 +68,7 @@
 			//var_dump($total);
 
 			while ($total > ($yachtsSynced)) {
-				var_dump( sprintf("%.2f%%", intval((($yachtSynced / $total)*100)))." Completed" );
+				var_dump( sprintf("%.2f%%", intval((($yachtsSynced / $total)*100)))." Completed" );
 
 				$apiUrl = $this->brokerageInventoryUrl;
 

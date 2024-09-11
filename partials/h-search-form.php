@@ -5,7 +5,7 @@
         <div class="ys-h-row-item">
             <label for="ys_keyword">Keyword</label>
 
-            <input type="text" name="ys_keyword" placeholder="Search by Name" list="ysp_keywords_list" />
+            <input type="text" name="ys_keyword" placeholder="Boat Name, Location, Features" list="ysp_keywords_list" />
             <!-- <img src="" alt="magnifying-glass" /> -->
             <!-- <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="icon/search">
@@ -27,9 +27,9 @@
             <label>Year</label>
 
             <div class="min-max-container">
-                <input type="number" label="Year Above" name="yearlo" placeholder="Min"/>
+                <input type="number" label="Year Above" name="yearlo" placeholder="Min" min="1900" />
                 <span>-</span>
-                <input type="number" label="Year Below" name="yearhi" placeholder="Max"/>
+                <input type="number" label="Year Below" name="yearhi" placeholder="Max" max="<?= (date("Y")+3) ?>" />
             </div>
         </div>
 
@@ -37,9 +37,9 @@
             <label>Length</label>
             
             <div class="min-max-container">
-                <input type="number" label="Length Above" name="lengthlo" placeholder="Min"/>
+                <input type="number" label="Length Above" name="lengthlo" placeholder="Min" min=5 />
                 <span>-</span>
-                <input type="number" label="Length Below" name="lengthhi" placeholder="Max"/>
+                <input type="number" label="Length Below" name="lengthhi" placeholder="Max" max=500 />
             </div>
         </div>
 
@@ -47,12 +47,12 @@
             <label>Price</label>
 
             <div class="min-max-container">
-                <input type="number" label="Price Above" name="pricelo" placeholder="Min"/>
+                <input type="number" label="Price Above" name="pricelo" placeholder="Min" min=0 />
                 <span>-</span>
-                <input type="number" label="Price Below" name="pricehi" placeholder="Max"/>
+                <input type="number" label="Price Below" name="pricehi" placeholder="Max">
             </div>
         </div>
-
+        
         <div class="ys-h-row-item">
             <label for="staterooms">Staterooms</label>
 
@@ -110,7 +110,7 @@
         <div class="ys-h-row-item submit-container">
             <label>Submit</label>
             
-            <button class="ysp-general-button" type="submit">Submit</button>
+            <button class="ysp-general-button" type="submit">Search</button>
         </div>
     </form>
 
