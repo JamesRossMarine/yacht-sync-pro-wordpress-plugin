@@ -49,7 +49,7 @@
                 <?php 
                     echo "<label><input type='checkbox' name='make' value='' style='width: auto;'> All</label>";
                    
-                    $YSP_DBHelper = new raiYachtSync_DBHelper();
+                    $YSP_DBHelper = new YachtSyncPro_DBHelper();
 
                     $builders = $YSP_DBHelper->get_unique_yacht_meta_values('MakeString');
 
@@ -134,7 +134,7 @@
 <datalist id="ysp_keywords_list" data-fill-list='Keywords'></datalist>
 
 <button class="open-mobile-search">
-    <img src="<?= RAI_YS_PLUGIN_ASSETS ?>/icons/filters.png" alt="icon" style="vertical-align: middle;"/> 
+    <img src="<?= YSP_ASSETS ?>/icons/filters.png" alt="icon" style="vertical-align: middle;"/> 
     Filters
 </button>
 
@@ -198,7 +198,7 @@
 
             <div class="ys-h-row-item">
                 <?php 
-                    $YSP_Options = new raiYachtSync_Options();
+                    $YSP_Options = new YachtSyncPro_Options();
                     $YSP_Comapny_name = $YSP_Options->get('company_name');
                 ?>
 

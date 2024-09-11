@@ -14,13 +14,13 @@
         $vessel = (object) $vessel;
         $boats[$key]->yacht = $vessel;
     }
-    $YSP_Options = new raiYachtSync_Options();
+    $YSP_Options = new YachtSyncPro_Options();
     $YSP_logo = $YSP_Options->get('company_logo');
     $YSP_Comapny_logo = $YSP_Options->get('company_logo');;
     $company_logo_url = wp_get_attachment_image_url($YSP_Comapny_logo, 'full');
 ?>
 <div class="ysp-compare-yachts-container">
-    <a href="<?= get_site_url() . '/yacht-search/?restore_to_compare='. $_GET["postID"] ?>"><img src="<?= RAI_YS_PLUGIN_ASSETS ?>images/blue_arrow_left.svg" alt="Back" title="Back" width="22" height="22" /> Back</a>
+    <a href="<?= get_site_url() . '/yacht-search/?restore_to_compare='. $_GET["postID"] ?>"><img src="<?= YSP_ASSETS ?>images/blue_arrow_left.svg" alt="Back" title="Back" width="22" height="22" /> Back</a>
 
     <div class="ysp-compare-general-container">
         <div class="ysp-compare-logo-container">

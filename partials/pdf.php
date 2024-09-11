@@ -96,7 +96,7 @@ $post = get_post($yacht_post_id);
 $permalink = $post->guid;
 
 
-$YSP_Options = new raiYachtSync_Options();
+$YSP_Options = new YachtSyncPro_Options();
 
 $colorOne = $YSP_Options->get('color_one');
 $colorTwo = $YSP_Options->get('color_two');
@@ -397,7 +397,7 @@ $colorTwo = $YSP_Options->get('color_two');
         <div class="main-title-container">
             <div class="go-back-back">
                 <a class="go-back" href="<?php echo $permalink ?>">
-                 <img src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/back.svg" alt="" />
+                 <img src="<?php echo YSP_ASSETS; ?>images/back.svg" alt="" />
                  <div class="back-yacht">DETAIL'S PAGE</div>
                  </a>
             </div>
@@ -414,28 +414,28 @@ $colorTwo = $YSP_Options->get('color_two');
         </div>
         <div class="main-info-container"> 
             <div class="main-location-container">
-                <img width="50" height="50" src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/Compass.svg" alt="" />
+                <img width="50" height="50" src="<?php echo YSP_ASSETS; ?>images/Compass.svg" alt="" />
                 <div class="main-location">
                     <p class="location-name">LOCATION</p>
                     <p class="location-value"><?= $boatLocation ?></p>
                 </div>
             </div>
             <div class="main-builder-container">
-                <img width="50" height="50" src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/Vector.svg" alt="" />
+                <img width="50" height="50" src="<?php echo YSP_ASSETS; ?>images/Vector.svg" alt="" />
                 <div class="main-builder">
                     <p class="builder-name">BUILDER</p>
                     <p class="builder-value"><?= $make ?></p>
                 </div>
             </div>
             <div class="main-cabins-container">
-                <img width="50" height="50" src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/Bed.svg" alt="" />
+                <img width="50" height="50" src="<?php echo YSP_ASSETS; ?>images/Bed.svg" alt="" />
                 <div class="main-cabins">
                     <p class="cabins-name">CABINS</p>
                     <p class="cabins-value"><?= $cabinCount ?></p>
                 </div>
             </div>
             <div class="main-length-container">
-                <img width="90" height="50" src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/Length.svg" alt="" />
+                <img width="90" height="50" src="<?php echo YSP_ASSETS; ?>images/Length.svg" alt="" />
                 <div class="main-length">
                     <p class="length-name">LENGTH</p>
                     <p class="length-value"><?= $length ?> / <?= $lengthMeters ?> m</p>

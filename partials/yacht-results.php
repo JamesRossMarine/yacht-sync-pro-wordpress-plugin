@@ -1,5 +1,5 @@
 <?php
-        $YSP_Options = new raiYachtSync_Options();
+        $YSP_Options = new YachtSyncPro_Options();
         $YSP_name = $YSP_Options->get('company_name');
         $YSP_Comapny_name = $YSP_Options->get('company_name');
 		?>
@@ -70,7 +70,7 @@
     </div>
 
     <div class="loader-icon">
-        <img src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>/images/loading-icon.gif" alt="loading-gif" />
+        <img src="<?php echo YSP_ASSETS; ?>/images/loading-icon.gif" alt="loading-gif" />
     </div>
 
     <div class="search-result-grid">

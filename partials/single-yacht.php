@@ -18,7 +18,7 @@ get_header();
             'posts_per_page' => 1,
         );
 
-        $YSP_Options = new raiYachtSync_Options();
+        $YSP_Options = new YachtSyncPro_Options();
 
         $YSP_Euro_Opt = $YSP_Options->get('is_euro_site');
     ?>
@@ -86,7 +86,7 @@ get_header();
                     <div class="yacht-main-info">
                         <div class="yacht-length">
                             <div class="yacht-length-text">
-                                <img src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/arrow-left-right.png" alt="length-icon" />
+                                <img src="<?php echo YSP_ASSETS; ?>images/arrow-left-right.png" alt="length-icon" />
                                 <p>Length</p>
                             </div>
                             <div class="yacht-length-value">
@@ -95,7 +95,7 @@ get_header();
                         </div>
                         <div class="yacht-beam">
                             <div class="yacht-beam-text">
-                                <img src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/arrow-left-right.png" alt="beam-icon" />
+                                <img src="<?php echo YSP_ASSETS; ?>images/arrow-left-right.png" alt="beam-icon" />
                                 <p>Beam</p>
                             </div>
                             <div class="yacht-beam-value">
@@ -104,7 +104,7 @@ get_header();
                         </div>
                         <div class="yacht-cabins">
                             <div class="yacht-cabins-text">
-                                <img src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/bed-double.png" alt="bed-icon" />
+                                <img src="<?php echo YSP_ASSETS; ?>images/bed-double.png" alt="bed-icon" />
                                 <p>Cabins</p>
                             </div>
                             <div class="yacht-cabins-value">
@@ -113,7 +113,7 @@ get_header();
                         </div>
                         <div class="yacht-guests">
                             <div class="yacht-guests-text">
-                                <img src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/users.png" alt="beam-icon" />
+                                <img src="<?php echo YSP_ASSETS; ?>images/users.png" alt="beam-icon" />
                                 <p>Guests</p>
                             </div>
                             <div class="yacht-guests-value">
@@ -125,7 +125,7 @@ get_header();
                 <div class="yacht-download-brochure-container">
                     <a rel="nofollow" href="<?php echo get_rest_url(); ?>raiys/yacht-pdf-loader?yacht_post_id=<?php echo get_the_ID(); ?>" target="_blank">
                         <button class="yacht-download-button">
-                            <img src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/download.png" alt="download-icon" />
+                            <img src="<?php echo YSP_ASSETS; ?>images/download.png" alt="download-icon" />
                             Download Brochure
                         </button>
                     </a>
@@ -347,7 +347,7 @@ get_header();
                                 General Info
                             </p>
                             <p class="yacht-accordion-arrow">
-                                <img class="yacht-arrow" src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/chevron-down.png" alt="down-arrow-icon" />
+                                <img class="yacht-arrow" src="<?php echo YSP_ASSETS; ?>images/chevron-down.png" alt="down-arrow-icon" />
                             </p>
                         </div>
                         <div class="yacht-accordion-display">
@@ -364,7 +364,7 @@ get_header();
                                 Measurements
                             </p>
                             <p class="yacht-accordion-arrow">
-                                <img class="yacht-arrow" src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/chevron-down.png" alt="down-arrow-icon" />
+                                <img class="yacht-arrow" src="<?php echo YSP_ASSETS; ?>images/chevron-down.png" alt="down-arrow-icon" />
                             </p>
                         </div>
                         <div class="yacht-accordion-display">
@@ -378,7 +378,7 @@ get_header();
                                     Engine 1
                                 </p>
                                 <p class="yacht-accordion-arrow">
-                                    <img class="yacht-arrow" src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/chevron-down.png" alt="down-arrow-icon" />
+                                    <img class="yacht-arrow" src="<?php echo YSP_ASSETS; ?>images/chevron-down.png" alt="down-arrow-icon" />
                                 </p>
                             </div>
                             <div class="yacht-accordion-display">
@@ -396,7 +396,7 @@ get_header();
                                     Engine 2
                                 </p>
                                 <p class="yacht-accordion-arrow">
-                                    <img class="yacht-arrow" src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/chevron-down.png" alt="down-arrow-icon" />
+                                    <img class="yacht-arrow" src="<?php echo YSP_ASSETS; ?>images/chevron-down.png" alt="down-arrow-icon" />
                                 </p>
                             </div>
                             <div class="yacht-accordion-display">
@@ -414,7 +414,7 @@ get_header();
                                     Engine 3
                                 </p>
                                 <p class="yacht-accordion-arrow">
-                                    <img class="yacht-arrow" src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/chevron-down.png" alt="down-arrow-icon" />
+                                    <img class="yacht-arrow" src="<?php echo YSP_ASSETS; ?>images/chevron-down.png" alt="down-arrow-icon" />
                                 </p>
                             </div>
                             <div class="yacht-accordion-display">
@@ -585,19 +585,19 @@ $image = $vessel->Images[0];
 <div class="modal-socials">
     <div class="modal-social-icon">
         <a href="mailto:?subject=<?php echo urlencode($vessel->ModelYear . ' ' . $vessel->MakeString . ' ' . $vessel->BoatName); ?>&body=<?php echo get_the_permalink(); ?>" style="text-decoration: none; color: black;">
-            <img src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>/icons/send.svg" alt="Email" style="width: 20px; height: 20px;">
+            <img src="<?php echo YSP_ASSETS; ?>/icons/send.svg" alt="Email" style="width: 20px; height: 20px;">
             <p class="modal-social"> Email </p>
         </a>
     </div>
     <div class="modal-social-icon">
         <a class="yacht-brochure" onclick="window.open('http://www.facebook.com/sharer/sharer.php?u=<?php echo get_the_permalink(); ?>&t=<?php echo urlencode($vessel->ModelYear . ' ' . $vessel->MakeString . ' ' . $vessel->BoatName); ?>', '_blank');" target="_blank" style="text-decoration: none; color: black;">
-            <img src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>/icons/facebook.svg" alt="Facebook Icon" style="width: 20px; height: 20px;">
+            <img src="<?php echo YSP_ASSETS; ?>/icons/facebook.svg" alt="Facebook Icon" style="width: 20px; height: 20px;">
             <p class="modal-social"> Facebook </p>
         </a>
     </div>
     <div class="modal-social-icon">
         <a href="http://twitter.com/share?url=<?php echo get_the_permalink(); ?>&text=<?php echo urlencode($vessel->ModelYear . ' ' . $vessel->MakeString . ' ' . $vessel->BoatName); ?>" target="_blank" style="text-decoration: none; color: black;">
-            <img src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>/icons/twitter.svg" alt="Twitter Icon" style="width: 20px; height: 20px;">
+            <img src="<?php echo YSP_ASSETS; ?>/icons/twitter.svg" alt="Twitter Icon" style="width: 20px; height: 20px;">
             <p class="modal-social"> Twitter </p>
         </a>
     </div>

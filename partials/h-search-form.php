@@ -117,7 +117,7 @@
 </div>
 
 <button class="open-mobile-search">
-    <img src="<?= RAI_YS_PLUGIN_ASSETS ?>/icons/filters.png" alt="icon" style="vertical-align: middle;"/> 
+    <img src="<?= YSP_ASSETS ?>/icons/filters.png" alt="icon" style="vertical-align: middle;"/> 
     Filters
 </button>
 
@@ -183,7 +183,7 @@
 
             <div class="ys-h-row-item">
                 <?php 
-                    $YSP_Options = new raiYachtSync_Options();
+                    $YSP_Options = new YachtSyncPro_Options();
                     $YSP_Comapny_name = $YSP_Options->get('company_name');
                 ?>
 

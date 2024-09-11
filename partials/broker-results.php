@@ -27,7 +27,7 @@
                     <div class="broker-name-container">
                         <p class="broker-name"><?php echo ($broker_first_name . " " . $broker_last_name); ?></p>
                 
-                        <img class="arrow-right" src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/arrow-right.png" alt="bed-icon" />
+                        <img class="arrow-right" src="<?php echo YSP_ASSETS; ?>images/arrow-right.png" alt="bed-icon" />
                     </div>
                 
                     <p class="broker-title">Broker</p>
