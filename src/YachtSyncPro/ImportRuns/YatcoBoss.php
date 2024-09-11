@@ -5,7 +5,7 @@
 		public $yachtBrokerAPIKey = '';
    		public $yachtClientId = '';
    		protected $url = '';
-   		protected $yachtBrokerLimit = 13;
+   		protected $yachtBrokerLimit = 153;
 
 		public function __construct() {
 

@@ -3,7 +3,7 @@
 /*
  Plugin Name: Yacht Sync Pro
  Plugin URI: https://jrmarineadvertising.com/yachtsyncpro/
- Version: 2.0.0
+ Version: 2.5.0
  Author: <a href="https://buildtheintnets.com">Build The Internets</a>
  Description: Yacht Sync Pro, our WordPress plugin, is a new way to natively integrate three major MLS feeds (YachtWorld, YachtBroker, and/or Yatco) into your WordPress site. Benefit from savvy SEO tactics, easy-to-use shortcodes, fast native WordPress search features, and the ability to customize templates.
  Text Domain: 
