@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	        FillOptions.push(ele.getAttribute('data-fill-options'));
 	    });
 	    
-	    ysp_ysp_api.call_api('POST', 'dropdown-options', {labels: FillOptions}).then(function(rOptions) {
+	    ysp_api.call_api('POST', 'dropdown-options', {labels: FillOptions}).then(function(rOptions) {
 	        for (let label in rOptions) {
 
 	            let SelectorEle = document.querySelectorAll(".ysp-quick-search-form select[data-fill-options='"+ label +"']");

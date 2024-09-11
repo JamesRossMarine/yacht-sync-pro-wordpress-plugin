@@ -1,6 +1,6 @@
-var ysp_ysp_api={};
+var ysp_api={};
 
-    ysp_ysp_api.call_api=function(method, path, passing_data) {
+    ysp_api.call_api=function(method, path, passing_data) {
         var xhttp = new XMLHttpRequest();
 
         return new Promise(function(resolve, reject) {
@@ -28,7 +28,7 @@ var ysp_ysp_api={};
 
                     var _questionMark=searchParams.toString();
 
-                    xhttp.open("GET", ysp_yacht_sync.wp_rest_url+"raiys/"+ path + ((_questionMark != '')?'?'+searchParams.toString():''), true);
+                    xhttp.open("GET", ysp_yacht_sync.wp_rest_url+"ysp/"+ path + ((_questionMark != '')?'?'+searchParams.toString():''), true);
 
                     xhttp.send();
 
@@ -36,7 +36,7 @@ var ysp_ysp_api={};
 
                 case 'POST':
 
-                    xhttp.open("POST", ysp_yacht_sync.wp_rest_url+"raiys/"+ path, true);
+                    xhttp.open("POST", ysp_yacht_sync.wp_rest_url+"ysp/"+ path, true);
 
                     xhttp.setRequestHeader('Content-Type', 'application/json');
 

@@ -95,7 +95,7 @@ function ysp_makeCompareLinkout() {
             'post__in': YSP_VesselCompareList,
         };
 
-        return ysp_ysp_api.call_api("POST", "yachts", params).then(function(data_result) {
+        return ysp_api.call_api("POST", "yachts", params).then(function(data_result) {
 
             jQuery('#ysp-compare-previews').html('');
 

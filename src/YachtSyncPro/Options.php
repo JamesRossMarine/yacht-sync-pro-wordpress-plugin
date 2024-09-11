@@ -4,7 +4,7 @@
 
 	    const OPTION_INSTALLED = '_installed';
 	 
-	    const PREFIX = 'ysp_ys_';
+	    const PREFIX = 'rai_ys_';
 
 	    public $defaultOptionValues = [
 	        'euro_c_c' => .9,

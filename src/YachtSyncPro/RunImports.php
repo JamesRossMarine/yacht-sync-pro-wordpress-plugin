@@ -32,7 +32,7 @@
 				$wpdb->prepare( 
 					"DELETE wp FROM $wpdb->posts wp
 					WHERE wp.post_type = %s",
-					'syncing_rai_yacht'
+					'syncing_ysp_yacht'
 				)
 			);
 
@@ -87,7 +87,7 @@
 	        	$wpdb->prepare( 
 					"SELECT COUNT(*) FROM $wpdb->posts wp
 					WHERE wp.post_type = %s",
-					'syncing_rai_yacht'
+					'syncing_ysp_yacht'
 				)
 	        );
 
@@ -144,7 +144,7 @@
 	        	$wpdb->prepare( 
 					"SELECT COUNT(*) FROM $wpdb->posts wp
 					WHERE wp.post_type = %s",
-					'syncing_rai_yacht'
+					'syncing_ysp_yacht'
 				)
 	        );
 
@@ -206,7 +206,7 @@
 					SELECT pm.meta_value  
 					FROM {$wpdb->postmeta} pm
 					LEFT JOIN {$wpdb->posts} wp ON wp.ID = pm.post_id
-					WHERE wp.post_type = 'syncing_rai_yacht' AND pm.meta_key = 'YSP_PDF_URL' AND pm.meta_value = '{$file}'
+					WHERE wp.post_type = 'syncing_ysp_yacht' AND pm.meta_key = 'YSP_PDF_URL' AND pm.meta_value = '{$file}'
 				");
 
 				if ($urlIsStillNeeded == null) {
@@ -219,7 +219,7 @@
 		public function move_over() {
 	        global $wpdb;	        
 
-	        $wpdb->update($wpdb->posts, ['post_type'=>'rai_yacht'], ['post_type' => 'syncing_rai_yacht'], ['%s'], ['%s'] );
+	        $wpdb->update($wpdb->posts, ['post_type'=>'rai_yacht'], ['post_type' => 'syncing_ysp_yacht'], ['%s'], ['%s'] );
 
 		}
 

@@ -16,6 +16,8 @@
 
 			$this->BrochureCleanUp = new YachtSyncPro_BrochureCleanUp();
 
+			$this->rest_path="ysp";
+
 		}
 
 		public function add_actions_and_filters() {
@@ -27,7 +29,7 @@
 
 		public function register_rest_routes() {
 
-			register_rest_route( 'raiys', '/sync', array(
+			register_rest_route( $this->rest_path, '/sync', array(
 		        'callback' => [$this, 'sync_yachts'],
 		        'methods'  => [WP_REST_Server::READABLE],
 		        'permission_callback' => '__return_true',
@@ -36,7 +38,7 @@
 		        )
 		    ) );
 
-		    register_rest_route( 'raiys', '/yachts', array(
+		    register_rest_route( $this->rest_path, '/yachts', array(
 		        'callback' => [$this, 'yachts'],
 		        'methods'  => [WP_REST_Server::READABLE, WP_REST_Server::CREATABLE],
 		        'permission_callback' => '__return_true',
@@ -45,7 +47,7 @@
 		        )
 		    ) );
 
-			register_rest_route( 'raiys', '/compare', array(
+			register_rest_route( $this->rest_path, '/compare', array(
 		        'callback' => [$this, 'compare_yachts'],
 		        'methods'  => [WP_REST_Server::READABLE, WP_REST_Server::CREATABLE],
 		        'permission_callback' => '__return_true',
@@ -54,7 +56,7 @@
 		        )
 		    ) );
 
-			register_rest_route( 'raiys', '/dropdown-options', array(
+			register_rest_route( $this->rest_path, '/dropdown-options', array(
 		        'callback' => [$this, 'yacht_dropdown_options'],
 		        'methods'  => [WP_REST_Server::CREATABLE],
 		        'permission_callback' => '__return_true',
@@ -66,7 +68,7 @@
 		        )
 		    ) );
 
-		    register_rest_route( 'raiys', '/list-options', array(
+		    register_rest_route( $this->rest_path, '/list-options', array(
 		        'callback' => [$this, 'yacht_list_options'],
 		        'methods'  => [WP_REST_Server::CREATABLE],
 		        'permission_callback' => '__return_true',
@@ -78,7 +80,7 @@
 		        )
 		    ) );
 
-		    register_rest_route( 'raiys', '/list-options-with-value', array(
+		    register_rest_route( $this->rest_path, '/list-options-with-value', array(
 		        'callback' => [$this, 'yacht_list_options_with_value'],
 		        'methods'  => [WP_REST_Server::CREATABLE],
 		        'permission_callback' => '__return_true',
@@ -91,7 +93,7 @@
 		    ) );
 
 		    // PDF 
-		    register_rest_route( 'raiys', '/yacht-pdf', array(
+		    register_rest_route( $this->rest_path, '/yacht-pdf', array(
 		        'callback' => [$this, 'yacht_pdf'],
 		        'methods'  => [WP_REST_Server::READABLE, WP_REST_Server::CREATABLE],
 		        'permission_callback' => '__return_true',
@@ -100,7 +102,7 @@
 		        )
 		    ) );
 			
-			register_rest_route( 'raiys', '/set-yacht-pdf', array(
+			register_rest_route( $this->rest_path, '/set-yacht-pdf', array(
 		        'callback' => [$this, 'set_yacht_pdf'],
 		        'methods'  => [WP_REST_Server::READABLE, WP_REST_Server::CREATABLE],
 		        'permission_callback' => '__return_true',
@@ -109,7 +111,7 @@
 		        )
 		    ) );
 
-		    register_rest_route( 'raiys', '/checker-yacht-pdf', array(
+		    register_rest_route( $this->rest_path, '/checker-yacht-pdf', array(
 		        'callback' => [$this, 'checker_yacht_pdf'],
 		        'methods'  => [WP_REST_Server::READABLE, WP_REST_Server::CREATABLE],
 		        'permission_callback' => '__return_true',
@@ -118,7 +120,7 @@
 		        )
 		    ) );
 
-		    register_rest_route( 'raiys', '/yacht-pdf-loader', array(
+		    register_rest_route( $this->rest_path, '/yacht-pdf-loader', array(
 		        'callback' => [$this, 'yacht_pdf_loader'],
 		        'methods'  => [WP_REST_Server::READABLE, WP_REST_Server::CREATABLE],
 		        'permission_callback' => '__return_true',
@@ -127,7 +129,7 @@
 		        )
 		    ) );
 
-		    register_rest_route( 'raiys', '/yacht-pdf-download', array(
+		    register_rest_route( $this->rest_path, '/yacht-pdf-download', array(
 		        'callback' => [$this, 'yacht_pdf_download'],
 		        'methods'  => [WP_REST_Server::READABLE, WP_REST_Server::CREATABLE],
 		        'permission_callback' => '__return_true',
@@ -136,7 +138,7 @@
 		        )
 		    ) );
 
-    		register_rest_route( 'raiys', '/redo-yacht-pdf', array(
+    		register_rest_route( $this->rest_path, '/redo-yacht-pdf', array(
 		        'callback' => [$this, 'redo_yacht_pdf'],
 		        'methods'  => [WP_REST_Server::READABLE, WP_REST_Server::CREATABLE],
 		        'permission_callback' => '__return_true',
@@ -145,7 +147,7 @@
 		        )
 		    ) );
 		    
-    		register_rest_route( 'raiys', '/delete-yacht-pdf', array(
+    		register_rest_route( $this->rest_path, '/delete-yacht-pdf', array(
 		        'callback' => [$this, 'delete_yacht_pdf'],
 		        'methods'  => [WP_REST_Server::READABLE, WP_REST_Server::CREATABLE],
 		        'permission_callback' => '__return_true',
@@ -155,7 +157,7 @@
 		    ) );
 
     		// Leads 
-			register_rest_route( 'raiys', '/yacht-leads', array(
+			register_rest_route( $this->rest_path, '/yacht-leads', array(
 		        'callback' => [$this, 'yacht_leads'],
 		        'methods'  => [WP_REST_Server::READABLE, WP_REST_Server::CREATABLE],
 		        'permission_callback' => '__return_true',
@@ -164,7 +166,7 @@
 		        )
 		    ) );
 
-			register_rest_route( 'raiys', '/broker-leads', array(
+			register_rest_route( $this->rest_path, '/broker-leads', array(
 		        'callback' => [$this, 'broker_leads'],
 		        'methods'  => [WP_REST_Server::READABLE, WP_REST_Server::CREATABLE],
 		        'permission_callback' => '__return_true',

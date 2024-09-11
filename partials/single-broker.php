@@ -27,10 +27,10 @@ get_header();
                             <img src="<?php echo esc_url(get_the_post_thumbnail_url())?>" alt="profile-picture" />
                         </div>
                         <div class="broker-general-info">
-                            <p class="broker-name"><?php echo($meta["rai_team_fname"] . " " . $meta["rai_team_lname"]); ?></p>
+                            <p class="broker-name"><?php echo($meta["ysp_team_fname"] . " " . $meta["ysp_team_lname"]); ?></p>
                             <p class="broker-title">Broker</p>
-                            <p class="broker-email"><?php echo($meta["rai_team_email"]); ?></p>
-                            <p class="broker-phone"><?php echo($meta["rai_team_phone"]); ?></p>
+                            <p class="broker-email"><?php echo($meta["ysp_team_email"]); ?></p>
+                            <p class="broker-phone"><?php echo($meta["ysp_team_phone"]); ?></p>
                         </div>
                     </div>
                     <div class="broker-general-description-container">
@@ -39,10 +39,10 @@ get_header();
                 </div>
 
                 <h2 class="our-team">
-                    <?php echo($meta["rai_team_fname"] . " " . $meta["rai_team_lname"]); ?>'s Listings
+                    <?php echo($meta["ysp_team_fname"] . " " . $meta["ysp_team_lname"]); ?>'s Listings
                 </h2>
 
-                <?php echo do_shortcode('[ys-featured-listings ys_broker_name="'. $meta['rai_team_fname'] .' '. $meta['rai_team_lname'] .'"][/ys-featured-listings]'); ?>
+                <?php echo do_shortcode('[ys-featured-listings ys_broker_name="'. $meta['ysp_team_fname'] .' '. $meta['ysp_team_lname'] .'"][/ys-featured-listings]'); ?>
 
             </div>
             <div class="second-main-container">

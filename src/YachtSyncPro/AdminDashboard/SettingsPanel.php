@@ -2,7 +2,7 @@
 	#[AllowDynamicProperties]
 	class YachtSyncPro_AdminDashboard_SettingsPanel {
 
-		const SLUG = 'ysp_ys';
+		const SLUG = 'rai_ys';
 
 		public function __construct() {
 			$this->fields = new YachtSyncPro_AdminDashboard_Fields();

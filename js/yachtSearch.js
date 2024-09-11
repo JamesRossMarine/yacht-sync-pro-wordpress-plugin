@@ -16,7 +16,7 @@ function ysp_yacht_search_and_reader(data) {
     ysp_makeSearchTags( data );
 
     // GET AND WRITE
-    return ysp_ysp_api.call_api("POST", "yachts", data).then(function(data_result) {
+    return ysp_api.call_api("POST", "yachts", data).then(function(data_result) {
 
         document.querySelector('#search-result-section').classList.remove('loading');
         document.querySelector('#search-result-section').classList.add('loaded');
@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             if (event.target.value.length <= 3) {
 
-                ysp_ysp_api.call_api(
+                ysp_api.call_api(
                     'POST', 
                     'list-options-with-value', 
                     {
@@ -171,7 +171,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     })
     
-/*    ysp_ysp_api.call_api('POST', 'list-options', {labels: FillLists}).then(function(rOptions) {
+/*    ysp_api.call_api('POST', 'list-options', {labels: FillLists}).then(function(rOptions) {
         for (let label in rOptions) {
 
             let SelectorEle = document.querySelectorAll("datalist[data-fill-list='"+ label +"']");
@@ -377,7 +377,7 @@ document.addEventListener("DOMContentLoaded", function() {
             FillOptions.push(ele.getAttribute('data-fill-options'));
         });
         
-        ysp_ysp_api.call_api('POST', 'dropdown-options', {labels: FillOptions}).then(function(rOptions) {
+        ysp_api.call_api('POST', 'dropdown-options', {labels: FillOptions}).then(function(rOptions) {
             for (let label in rOptions) {
 
                 let SelectorEle = document.querySelectorAll("select[data-fill-options='"+ label +"']");
