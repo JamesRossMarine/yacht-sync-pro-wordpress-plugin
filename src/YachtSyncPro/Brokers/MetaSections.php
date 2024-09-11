@@ -15,21 +15,21 @@
 
         public function broker_meta_boxes() {
             add_meta_box(
-                'rai_team_info_id', // Unique ID
+                'ysp_team_info_id', // Unique ID
                 'Broker Info', // Box title
                 [$this, 'broker_info_html'],  // Content callback, must be of type callable
-                ['rai_team']  // Post type
+                ['ysp_team']  // Post type
             );
 
         }
 
         public function broker_info_html($post) {
-            $broker_fname = get_post_meta( $post->ID, 'rai_team_fname', true );     
-            $broker_lname = get_post_meta( $post->ID, 'rai_team_lname', true );     
-            $broker_email = get_post_meta( $post->ID, 'rai_team_email', true );     
-            $broker_phone = get_post_meta( $post->ID, 'rai_team_phone', true );  
-            $main_broker = get_post_meta($post->ID, 'rai_main_broker', true) ?: '0';
-            $broker_priority = get_post_meta($post->ID, 'rai_team_priority', true);      
+            $broker_fname = get_post_meta( $post->ID, 'ysp_team_fname', true );     
+            $broker_lname = get_post_meta( $post->ID, 'ysp_team_lname', true );     
+            $broker_email = get_post_meta( $post->ID, 'ysp_team_email', true );     
+            $broker_phone = get_post_meta( $post->ID, 'ysp_team_phone', true );  
+            $main_broker = get_post_meta($post->ID, 'ysp_main_broker', true) ?: '0';
+            $broker_priority = get_post_meta($post->ID, 'ysp_team_priority', true);      
             ?>
 
                 <label>First Name</label>
@@ -64,7 +64,7 @@
             if ( isset($_POST['broker_fname'])) {
                 update_post_meta(
                     $post_id,
-                    'rai_team_fname',
+                    'ysp_team_fname',
                     $_POST['broker_fname']
                 );
             }
@@ -72,7 +72,7 @@
             if ( isset($_POST['broker_lname'])) {
                 update_post_meta(
                     $post_id,
-                    'rai_team_lname',
+                    'ysp_team_lname',
                     $_POST['broker_lname']
                 );
             }
@@ -80,7 +80,7 @@
             if ( isset($_POST['broker_email'])) {
                 update_post_meta(
                     $post_id,
-                    'rai_team_email',
+                    'ysp_team_email',
                     $_POST['broker_email']
                 );
             }
@@ -88,7 +88,7 @@
             if ( isset($_POST['broker_phone'])) {
                 update_post_meta(
                     $post_id,
-                    'rai_team_phone',
+                    'ysp_team_phone',
                     $_POST['broker_phone']
                 );
             }
@@ -98,12 +98,12 @@
             if ( isset($_POST['broker_priority'])) {
                 update_post_meta(
                     $post_id,
-                    'rai_team_priority',
+                    'ysp_team_priority',
                     $_POST['broker_priority']
                 );
             }
             
-            update_post_meta($post_id, 'rai_main_broker', $main_broker);
+            update_post_meta($post_id, 'ysp_main_broker', $main_broker);
         }
 
     }

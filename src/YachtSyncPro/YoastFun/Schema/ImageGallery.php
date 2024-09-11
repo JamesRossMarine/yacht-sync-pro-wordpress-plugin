@@ -8,7 +8,7 @@
     }
 
     public function is_needed() {
-        return is_singular('rai_yacht');
+        return is_singular('ysp_yacht');
     }
 
     public function generate() {

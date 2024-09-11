@@ -23,7 +23,7 @@
 				AND pmm.meta_value != 'Sold' AND pmm.meta_value != 'Suspend' 
 				AND LENGTH(pm.meta_value) > 1
 				ORDER BY pm.meta_value ASC
-				", $key, 'publish', 'rai_yacht' ) );
+				", $key, 'publish', 'ysp_yacht' ) );
 
 			return $res;
 		}
@@ -45,7 +45,7 @@
 				AND pmm.meta_value != 'Sold' AND pmm.meta_value != 'Suspend' 
 				AND LENGTH(pm.meta_value) > 1
 				ORDER BY pm.meta_value ASC
-				", $key, 'publish', 'rai_yacht' ) );
+				", $key, 'publish', 'ysp_yacht' ) );
 
 			return $res;
 		}
@@ -68,7 +68,7 @@
 				AND pmm.meta_value != 'Sold' AND pmm.meta_value != 'Suspend' 
 				AND LENGTH(pm.meta_value) > 1
 				ORDER BY pm.meta_value ASC
-				", $key, $input_val.'%', 'publish', 'rai_yacht' ) );
+				", $key, $input_val.'%', 'publish', 'ysp_yacht' ) );
 
 			return $res;
 		}
@@ -91,7 +91,7 @@
 				AND pmm.meta_value != 'Sold'
 				AND LENGTH(pm.meta_value) > 1
 				ORDER BY pm.meta_value ASC
-				", 'publish', 'rai_yacht' ) );
+				", 'publish', 'ysp_yacht' ) );
 
 			return $res;
 		}

@@ -7,17 +7,17 @@
         }
         
         public function add_actions_and_filters() {
-            add_action( 'restrict_manage_posts', array($this, 'rai_yacht_filtering_by_boat_class'), 10, 1 );
-            add_action( 'restrict_manage_posts', array($this, 'rai_yacht_filtering_by_builder'), 10, 1 );
-            add_action( 'restrict_manage_posts', array($this, 'rai_yacht_filtering_by_condition'), 10, 1 );
-            add_action( 'restrict_manage_posts', array($this, 'rai_yacht_filtering_by_min_length'), 10, 1 );
-            add_action( 'restrict_manage_posts', array($this, 'rai_yacht_filtering_by_max_length'), 10, 1 );
-            add_action( 'restrict_manage_posts', array($this, 'rai_yacht_filtering_by_min_price'), 10, 1 );
-            add_action( 'restrict_manage_posts', array($this, 'rai_yacht_filtering_by_max_price'), 10, 1 );
+            add_action( 'restrict_manage_posts', array($this, 'ysp_yacht_filtering_by_boat_class'), 10, 1 );
+            add_action( 'restrict_manage_posts', array($this, 'ysp_yacht_filtering_by_builder'), 10, 1 );
+            add_action( 'restrict_manage_posts', array($this, 'ysp_yacht_filtering_by_condition'), 10, 1 );
+            add_action( 'restrict_manage_posts', array($this, 'ysp_yacht_filtering_by_min_length'), 10, 1 );
+            add_action( 'restrict_manage_posts', array($this, 'ysp_yacht_filtering_by_max_length'), 10, 1 );
+            add_action( 'restrict_manage_posts', array($this, 'ysp_yacht_filtering_by_min_price'), 10, 1 );
+            add_action( 'restrict_manage_posts', array($this, 'ysp_yacht_filtering_by_max_price'), 10, 1 );
         }
 
-        public function rai_yacht_filtering_by_boat_class($post_type) {
-            if ($post_type != 'rai_yacht') {
+        public function ysp_yacht_filtering_by_boat_class($post_type) {
+            if ($post_type != 'ysp_yacht') {
                 return;
             }
 
@@ -42,8 +42,8 @@
             }
         }
 
-        public function rai_yacht_filtering_by_builder($post_type) {
-            if($post_type != 'rai_yacht'){
+        public function ysp_yacht_filtering_by_builder($post_type) {
+            if($post_type != 'ysp_yacht'){
                 return;
             }
             
@@ -71,8 +71,8 @@
             echo '</select>';
         }
 
-        public function rai_yacht_filtering_by_condition($post_type) {
-            if($post_type != 'rai_yacht'){
+        public function ysp_yacht_filtering_by_condition($post_type) {
+            if($post_type != 'ysp_yacht'){
                 return;
             }
             
@@ -100,8 +100,8 @@
             echo '</select>';
         }
 
-        public function rai_yacht_filtering_by_min_length($post_type) {
-            if($post_type != 'rai_yacht'){
+        public function ysp_yacht_filtering_by_min_length($post_type) {
+            if($post_type != 'ysp_yacht'){
                 return;
             }
             
@@ -120,8 +120,8 @@
             echo '<input type="number" name="lengthlo" placeholder="Any minimum length (ft)" value="' . esc_attr($selected) . '" />';
         }
 
-        public function rai_yacht_filtering_by_max_length($post_type) {
-            if($post_type != 'rai_yacht'){
+        public function ysp_yacht_filtering_by_max_length($post_type) {
+            if($post_type != 'ysp_yacht'){
                 return;
             }
             
@@ -140,8 +140,8 @@
             echo '<input type="number" name="lengthhi" placeholder="Any maximum length (ft)" value="' . esc_attr($selected) . '" />';
         }
 
-        public function rai_yacht_filtering_by_min_price($post_type) {
-            if($post_type != 'rai_yacht'){
+        public function ysp_yacht_filtering_by_min_price($post_type) {
+            if($post_type != 'ysp_yacht'){
                 return;
             }
             
@@ -161,8 +161,8 @@
             echo '<input type="number" name="pricelo" placeholder="Any minimum price" value="' . esc_attr($selected) . '" />';
         }
 
-        public function rai_yacht_filtering_by_max_price($post_type) {
-            if($post_type != 'rai_yacht'){
+        public function ysp_yacht_filtering_by_max_price($post_type) {
+            if($post_type != 'ysp_yacht'){
                 return;
             }
             

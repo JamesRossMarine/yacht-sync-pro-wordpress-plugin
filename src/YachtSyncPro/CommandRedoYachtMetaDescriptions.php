@@ -17,12 +17,12 @@
 					"DELETE pm FROM $wpdb->postmeta pm
 					INNER JOIN $wpdb->posts AS p ON p.ID = pm.post_id 
 					WHERE p.post_type = %s AND pm.meta_key = '_yoast_wpseo_metadesc'",
-					'rai_yacht'
+					'ysp_yacht'
 				)
 			);
 
 			$yachts = get_posts([
-                'post_type' => 'rai_yacht',
+                'post_type' => 'ysp_yacht',
                 'posts_per_page' => -1,
             ]);
 

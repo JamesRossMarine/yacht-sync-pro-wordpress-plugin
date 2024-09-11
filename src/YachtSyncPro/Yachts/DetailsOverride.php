@@ -16,8 +16,8 @@
 
 			global $post, $wp_query;
 
-			if (is_singular('rai_yacht')) {
-				if ( ! file_exists(get_template_directory().'/single-rai_yacht.php')) {
+			if (is_singular('ysp_yacht')) {
+				if ( ! file_exists(get_template_directory().'/single-ysp_yacht.php')) {
 					$single_template = YSP_TEMPLATES_DIR.'/single-yacht.php';
 				}
 

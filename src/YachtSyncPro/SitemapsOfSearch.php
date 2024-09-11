@@ -24,7 +24,7 @@
 			}
 
 			$args=[
-				'post_type' => 'rai_yacht',
+				'post_type' => 'ysp_yacht',
 				'posts_per_page' => 1, 
 
 				'meta_query' => [

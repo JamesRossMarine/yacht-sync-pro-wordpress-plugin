@@ -23,7 +23,7 @@
 
                 $file_to_include=YSP_TEMPLATES_DIR.'/broker-results.php';
 
-                include apply_filters('rai_ys_broker_results_template', $file_to_include);
+                include apply_filters('ysp_ys_broker_results_template', $file_to_include);
             
             return ob_get_clean();
         }

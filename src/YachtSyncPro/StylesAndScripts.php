@@ -73,7 +73,7 @@
 				'euro_c_c' => $this->options->get('euro_c_c')
 			];
 
-			wp_localize_script('yacht-sync-script', 'rai_yacht_sync', $js_vars); 
+			wp_localize_script('yacht-sync-script', 'ysp_yacht_sync', $js_vars); 
 
 			wp_enqueue_script('yacht-sync-script');
 			
@@ -81,7 +81,7 @@
 
 			wp_add_inline_style('yacht-sync-styles', $this->pickedColorsFromWpAdmin());
 
-			if (is_singular('rai_yacht')) {
+			if (is_singular('ysp_yacht')) {
 				wp_enqueue_style("ysp-single-yacht-styles");
 				wp_enqueue_script("ysp-single-yacht-script");
 			}

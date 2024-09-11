@@ -26,7 +26,7 @@
             
             $similar_post_id = $query->get('similar_listings_to');
             
-            if ( $query->get('post_type') == "rai_yacht" && is_numeric( $similar_post_id )  ) {
+            if ( $query->get('post_type') == "ysp_yacht" && is_numeric( $similar_post_id )  ) {
                 $length = intval(get_post_meta($similar_post_id, 'YSP_Length', true));
 
                 $year = intval(get_post_meta($similar_post_id, 'ModelYear', true));
@@ -34,7 +34,7 @@
                 $category = wp_get_post_terms($similar_post_id, 'boatclass', array( 'fields' => 'slugs' ) );
                 
                 $similar_query_one_args = [
-                    'post_type' => 'rai_yacht',
+                    'post_type' => 'ysp_yacht',
                     'post__not_in' => [ $similar_post_id ],
                    
                     'lengthlo' => $length - 15,
@@ -54,7 +54,7 @@
                 }
                 else {
                     $similar_query_two_args = [
-                        'post_type' => 'rai_yacht',
+                        'post_type' => 'ysp_yacht',
                         'post__not_in' => [ $similar_post_id ],
                     
                         'lengthlo' => $length - 30,

@@ -35,7 +35,7 @@
 				"content" => "Write a meta description within 160 characters from the vessel description above. Please include the vessel name in the meta description. Do not return a response with quotation marks."
 			];
 			
-			$gpt_messages = apply_filters( 'rai_custom_gpt_for_yacht_details_v2', $gpt_messages, $context );
+			$gpt_messages = apply_filters( 'ysp_custom_gpt_for_yacht_details_v2', $gpt_messages, $context );
 
 			$gpt_headers = [
 				'headers' => [

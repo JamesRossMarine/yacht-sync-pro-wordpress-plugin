@@ -10,7 +10,7 @@
     }
 
     public function add_taxonomies() {
-        register_taxonomy('boatclass', 'rai_yacht', array(
+        register_taxonomy('boatclass', 'ysp_yacht', array(
 
             'public' => false,
             'publicly_queryable' => true,
@@ -32,7 +32,7 @@
             )
         ));
 
-        register_taxonomy('membercategroy', 'rai_team', array(
+        register_taxonomy('membercategroy', 'ysp_team', array(
 
             'public' => false,
             'publicly_queryable' => true,

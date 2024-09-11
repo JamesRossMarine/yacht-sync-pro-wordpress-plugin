@@ -11,7 +11,7 @@
 			add_action('admin_print_scripts', [$this, 'admin_scripts']);
 			add_action('admin_print_styles', [$this, 'admin_styles']);
 			add_action( 'add_meta_boxes', [$this, 'add_yacht_brochure_area'] );
-			add_action( 'save_post_rai_yacht', [$this, 'rai_yacht_save_pdf']);
+			add_action( 'save_post_ysp_yacht', [$this, 'ysp_yacht_save_pdf']);
 		}
 
 		public function admin_scripts() {
@@ -25,10 +25,10 @@
 
 		public function add_yacht_brochure_area() {
 		   add_meta_box(
-				'rai_yacht_brochure', // Unique ID
+				'ysp_yacht_brochure', // Unique ID
 				'Yacht Brochure Things', // Box title
 				[$this, 'brochure_area_html'],  // Content callback, must be of type callable
-				['rai_yacht'],  // Post type
+				['ysp_yacht'],  // Post type
 				'side'
 				);
 		}
@@ -104,7 +104,7 @@
 
 		}
 
-		public function rai_yacht_save_pdf($post_id) {
+		public function ysp_yacht_save_pdf($post_id) {
 			$field = "_YSP_PDF_URL_";
 
 			if (isset($_POST[$field]) && $_POST[$field] != '') {

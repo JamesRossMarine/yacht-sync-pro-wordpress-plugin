@@ -15,8 +15,8 @@
 
 			global $post, $wp_query;
 
-			if (is_singular('rai_team')) {
-				if ( ! file_exists(get_template_directory().'/single-rai_team.php')) {
+			if (is_singular('ysp_team')) {
+				if ( ! file_exists(get_template_directory().'/single-ysp_team.php')) {
 					$single_template = YSP_TEMPLATES_DIR.'/single-broker.php';
 				}
 

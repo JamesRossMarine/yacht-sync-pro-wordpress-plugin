@@ -16,7 +16,7 @@
 		public function yacht_description($description) {
 			global $wp_query, $post;
 
-				if (is_singular('rai_yacht')) {
+				if (is_singular('ysp_yacht')) {
 					$meta = get_post_meta($post->ID);
 
 			        foreach ($meta as $indexM => $valM) {
@@ -46,7 +46,7 @@
 		public function gpt_yacht_description($description) {
 			global $wp_query, $post;
 
-				if (is_singular('rai_yacht')) {
+				if (is_singular('ysp_yacht')) {
 					
 					$link = get_permalink($post);
 

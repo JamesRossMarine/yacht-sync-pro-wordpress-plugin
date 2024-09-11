@@ -9,7 +9,7 @@
 		public function add_actions_and_filters() {
 
 			add_action( 'add_meta_boxes', [ $this, 'nested_yachts_meta_boxes' ]);
-			add_action( 'save_post_rai_yacht', [$this, 'rai_yacht_nested_data_save']);
+			add_action( 'save_post_ysp_yacht', [$this, 'ysp_yacht_nested_data_save']);
 
 		}
 
@@ -17,10 +17,10 @@
 
 			
 			add_meta_box(
-				'rai_yacht_sync_nested_meta_boxs',
+				'ysp_yacht_sync_nested_meta_boxs',
 				'Other Yacht Info',
 				[ $this, 'nested_yacht_meta_box_html' ],
-				['rai_yacht']
+				['ysp_yacht']
 			);									
 		}
 
@@ -28,7 +28,7 @@
 			include YSP_TEMPLATES_DIR.'/admin-nested-metabox-yacht-basics.php';
 		}
 
-		public function rai_yacht_nested_data_save($post_id) {
+		public function ysp_yacht_nested_data_save($post_id) {
 			if ( isset($_POST['is_yacht_manual_entry']) && $_POST['is_yacht_manual_entry'] == 'yes') {
 
 				$general_boat_description = $_POST['General_Boat_Description'];

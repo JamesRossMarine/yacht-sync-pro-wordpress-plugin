@@ -129,7 +129,7 @@
 
 			$yacht_sync_meta_query=[];
 
-			if (is_page(6) || $query->get('post_type') == "rai_yacht") {
+			if (is_page(6) || $query->get('post_type') == "ysp_yacht") {
 
 				if (is_array($query->get('params_from_paths'))) {
 					$params = $query->get('params_from_paths');

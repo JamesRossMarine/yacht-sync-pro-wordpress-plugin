@@ -2,7 +2,7 @@
 	#[AllowDynamicProperties]
 	class YachtSyncPro_AdminDashboard_Fields {
 
-		const SLUG = 'rai_ys';
+		const SLUG = 'ysp_ys';
 
 		public function __construct() {
 
@@ -345,8 +345,8 @@
 		public function is_in_sync_field() {
 			global $wpdb;
 
-			$numberOfSyncing = $wpdb->get_var( "SELECT COUNT(*) FROM $wpdb->posts p WHERE p.post_type = 'syncing_rai_yacht'" );
-			$numberOfLastSynced = $wpdb->get_var( "SELECT COUNT(*) FROM $wpdb->posts p WHERE p.post_type = 'rai_yacht'" );
+			$numberOfSyncing = $wpdb->get_var( "SELECT COUNT(*) FROM $wpdb->posts p WHERE p.post_type = 'syncing_ysp_yacht'" );
+			$numberOfLastSynced = $wpdb->get_var( "SELECT COUNT(*) FROM $wpdb->posts p WHERE p.post_type = 'ysp_yacht'" );
 
 			if ($numberOfSyncing > 0) {
 				echo "Yes we syncing, current count is $numberOfSyncing ... last sync was ".$numberOfLastSynced;
@@ -364,7 +364,7 @@
 				SELECT COUNT(*) 
 				FROM $wpdb->posts p 
 				LEFT JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id
-				WHERE p.post_type = 'rai_yacht' AND pm.meta_key = 'CompanyBoat' AND pm.meta_value = '1' 
+				WHERE p.post_type = 'ysp_yacht' AND pm.meta_key = 'CompanyBoat' AND pm.meta_value = '1' 
 			" );
 
 			$brokerageInventoryUrl = 'https://api.boats.com/inventory/search?SalesStatus=Active,On-Order&key=';

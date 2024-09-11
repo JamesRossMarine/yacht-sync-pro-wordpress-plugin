@@ -10,7 +10,7 @@
 		}
 
 		public function xml_priority( $return, $type, $post) {
-		    if ($type == 'rai_yacht') {
+		    if ($type == 'ysp_yacht') {
 		   		$CompanyBoat = get_post_meta($post->ID, 'CompanyBoat', true);
 
 		   		if ($CompanyBoat === 1) {
@@ -20,7 +20,7 @@
 		    		$return = 0.7;
 		   		}		   
 		    }
-		    elseif ($type == 'rai_team') {
+		    elseif ($type == 'ysp_team') {
 		    	$return = 0.8;
 		    }
 

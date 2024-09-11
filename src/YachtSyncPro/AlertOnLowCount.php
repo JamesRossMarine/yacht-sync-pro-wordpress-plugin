@@ -19,15 +19,15 @@
 	        	$wpdb->prepare( 
 					"SELECT COUNT(*) FROM $wpdb->posts wp
 					WHERE wp.post_type = %s",
-					'rai_yacht'
+					'ysp_yacht'
 				)
 	        );
 
-	        $already_scaned = get_transient('rai_listing_fell_below');
+	        $already_scaned = get_transient('ysp_listing_fell_below');
 
 	    	if (! $already_scaned && $this->low_count > $liveListingCount) {
 
-	    		set_transient('rai_listing_fell_below', 'yes', 4 * HOUR_IN_SECONDS);
+	    		set_transient('ysp_listing_fell_below', 'yes', 4 * HOUR_IN_SECONDS);
 
 	    		$siteName = get_bloginfo('name');
 	    		$siteUrl = get_bloginfo('url');

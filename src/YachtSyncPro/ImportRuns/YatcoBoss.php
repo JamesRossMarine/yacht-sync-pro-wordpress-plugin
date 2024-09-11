@@ -274,7 +274,7 @@
 					$theBoat['ImportSource'] = "YATCO";
 
 	                $find_post=get_posts([
-	                    'post_type' => 'syncing_rai_yacht',
+	                    'post_type' => 'syncing_ysp_yacht',
 	                    'meta_query' => [
 	                        array(
 	                           'key' => 'YTC_VESSEL_ID',
@@ -295,7 +295,7 @@
 		            	apply_filters('raiys_yacht_post', 
 			                [
 			                    'ID' => $post_id,
-								'post_type' => 'syncing_rai_yacht',
+								'post_type' => 'syncing_ysp_yacht',
 								
 								'post_title' =>  addslashes( $row['ModelYear'].' '.$row['BuilderName'].' '.$theBoat['Model'].' '.$row['VesselName'] ),
 

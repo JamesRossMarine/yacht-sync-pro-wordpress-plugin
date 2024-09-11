@@ -101,9 +101,9 @@ function raiys_push_history( data = {} ) {
         }
     }
     
-    //history.pushState(data, '', rai_yacht_sync.yacht_search_url+'?'+searchParams.toString());
-    history.pushState(data, '', rai_yacht_sync.yacht_search_url+strpath);
+    //history.pushState(data, '', ysp_yacht_sync.yacht_search_url+'?'+searchParams.toString());
+    history.pushState(data, '', ysp_yacht_sync.yacht_search_url+strpath);
 
-    return rai_yacht_sync.yacht_search_url+strpath;    
+    return ysp_yacht_sync.yacht_search_url+strpath;    
 }
 

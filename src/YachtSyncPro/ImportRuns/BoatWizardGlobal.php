@@ -107,7 +107,7 @@
 					$boatC = json_decode(json_encode($boat));
 
 					$find_post=get_posts([
-	                    'post_type' => 'syncing_rai_yacht',
+	                    'post_type' => 'syncing_ysp_yacht',
 	                    'meta_query' => [
 	                        array(
 	                           'key' => 'DocumentID',
@@ -125,7 +125,7 @@
 		           	if (! isset($find_post[0]->ID)) {
 			            if (! empty($record['BoatHullID'])) {
 			                $find_post=get_posts([
-			                    'post_type' => 'syncing_rai_yacht',
+			                    'post_type' => 'syncing_ysp_yacht',
 			                    'meta_query' => [
 			                        array(
 			                           'key' => 'BoatHullID',
@@ -141,7 +141,7 @@
 		           	}
 
 		           	$find_post_from_synced=get_posts([
-	                    'post_type' => 'rai_yacht',
+	                    'post_type' => 'ysp_yacht',
 	                    'meta_query' => [
 
 	                        array(
@@ -160,7 +160,7 @@
 		           	if (! isset($find_post_from_synced[0]->ID)) {
 			            if (! empty($record['BoatHullID'])) {
 			                $find_post_from_synced=get_posts([
-			                    'post_type' => 'rai_yacht',
+			                    'post_type' => 'ysp_yacht',
 			                    'meta_query' => [
 
 			                        array(
@@ -400,7 +400,7 @@
 		            	apply_filters('raiys_yacht_post', 
 		            		[
 			                    'ID' => $post_id,
-								'post_type' => 'syncing_rai_yacht',
+								'post_type' => 'syncing_ysp_yacht',
 								'post_title' =>  addslashes( $boat['ModelYear'].' '.$boat['MakeString'].' '.$boat['Model'].' '.$boat['BoatName']),
 								
 								'post_name' => sanitize_title(

@@ -613,7 +613,7 @@ $colorTwo = $YSP_Options->get('color_two');
     $BrokerNames = explode(' ', $broker);
     
     $brokerQueryArgs = array(
-        'post_type' => 'rai_team',
+        'post_type' => 'ysp_team',
         'posts_per_page' => 1,
     
         'meta_query' => [
@@ -646,10 +646,10 @@ $colorTwo = $YSP_Options->get('color_two');
     }
     else {
         $mainBrokerQueryArgs = array(
-            'post_type' => 'rai_team',
+            'post_type' => 'ysp_team',
             'meta_query' => array(
                 array(
-                    'key' => 'rai_main_broker',
+                    'key' => 'ysp_main_broker',
                     'value' => '1',
                 ),
             ),
@@ -664,10 +664,10 @@ $colorTwo = $YSP_Options->get('color_two');
     if ($brokerQuery->have_posts()) {
         while ($brokerQuery->have_posts()) {
             $brokerQuery->the_post(); 
-            $broker_first_name = get_post_meta($brokerQuery->post->ID, 'rai_team_fname', true);
-            $broker_last_name = get_post_meta($brokerQuery->post->ID, 'rai_team_lname', true);
-            $broker_email = get_post_meta($brokerQuery->post->ID, 'rai_team_email', true);
-            $broker_phone = get_post_meta($brokerQuery->post->ID, 'rai_team_phone', true);
+            $broker_first_name = get_post_meta($brokerQuery->post->ID, 'ysp_team_fname', true);
+            $broker_last_name = get_post_meta($brokerQuery->post->ID, 'ysp_team_lname', true);
+            $broker_email = get_post_meta($brokerQuery->post->ID, 'ysp_team_email', true);
+            $broker_phone = get_post_meta($brokerQuery->post->ID, 'ysp_team_phone', true);
          ?>
             <div class="footer-container" style="page-break-after: always;">
                 <div class="footer-broker-info">

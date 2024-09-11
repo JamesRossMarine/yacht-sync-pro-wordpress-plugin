@@ -5,7 +5,7 @@ class YachtSyncPro_Stats {
         global $wpdb;
 
         $yArgs = [
-            'post_type'      => 'rai_yacht',
+            'post_type'      => 'ysp_yacht',
             'fields'         => 'ids',
             'posts_per_page' => -1,
         ];
@@ -26,7 +26,7 @@ class YachtSyncPro_Stats {
             AND pmm.meta_key = 'SalesStatus'
             AND pmm.meta_value NOT IN ('Sold', 'Suspend')
             AND LENGTH(pm.meta_value) > 1
-        ", 'publish', 'rai_yacht', 'ModelYear'));
+        ", 'publish', 'ysp_yacht', 'ModelYear'));
 
         $min_max_priceUSD = $wpdb->get_row($wpdb->prepare("
             SELECT 
@@ -42,7 +42,7 @@ class YachtSyncPro_Stats {
             AND pmm.meta_key = 'SalesStatus'
             AND pmm.meta_value NOT IN ('Sold', 'Suspend')
             AND LENGTH(pm.meta_value) > 1
-        ", 'publish', 'rai_yacht', 'YSP_USDVal'));
+        ", 'publish', 'ysp_yacht', 'YSP_USDVal'));
 
 
         $min_max_priceEUR = $wpdb->get_row($wpdb->prepare("
@@ -59,7 +59,7 @@ class YachtSyncPro_Stats {
             AND pmm.meta_key = 'SalesStatus'
             AND pmm.meta_value NOT IN ('Sold', 'Suspend')
             AND LENGTH(pm.meta_value) > 1
-        ", 'publish', 'rai_yacht', 'YSP_EuroVal'));
+        ", 'publish', 'ysp_yacht', 'YSP_EuroVal'));
 
         $min_max_length = $wpdb->get_row($wpdb->prepare("
             SELECT 
@@ -74,7 +74,7 @@ class YachtSyncPro_Stats {
             AND pmm.meta_key = 'SalesStatus'
             AND pmm.meta_value NOT IN ('Sold', 'Suspend')
             AND LENGTH(pm.meta_value) > 1
-        ", 'publish', 'rai_yacht', 'YSP_LOAFeet'));
+        ", 'publish', 'ysp_yacht', 'YSP_LOAFeet'));
 
         $min_max_length_meters = $wpdb->get_row($wpdb->prepare("
             SELECT 
@@ -89,7 +89,7 @@ class YachtSyncPro_Stats {
             AND pmm.meta_key = 'SalesStatus'
             AND pmm.meta_value NOT IN ('Sold', 'Suspend')
             AND LENGTH(pm.meta_value) > 1
-        ", 'publish', 'rai_yacht', 'YSP_LOAMeter'));
+        ", 'publish', 'ysp_yacht', 'YSP_LOAMeter'));
 
 
         return [

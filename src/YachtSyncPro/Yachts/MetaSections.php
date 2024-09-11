@@ -9,16 +9,16 @@
 		public function add_actions_and_filters() {
 
 			add_action( 'add_meta_boxes', [ $this, 'yachts_meta_boxes' ]);
-			add_action( 'save_post_rai_yacht', [$this, 'rai_yacht_data_save']);
+			add_action( 'save_post_ysp_yacht', [$this, 'ysp_yacht_data_save']);
 
 		}
 
 		public function yachts_meta_boxes() { 
 			add_meta_box(
-				'rai_yacht_sync_meta_box',
+				'ysp_yacht_sync_meta_box',
 				'Yacht Info',
 				[ $this, 'yacht_meta_box_html' ],
-				['rai_yacht']
+				['ysp_yacht']
 			);									
 		}
 
@@ -26,7 +26,7 @@
 			include YSP_TEMPLATES_DIR.'/admin-metabox-yacht-basics.php';		
 		}
 
-		public function rai_yacht_data_save($post_id) {
+		public function ysp_yacht_data_save($post_id) {
 			if ( isset($_POST['is_yacht_manual_entry']) && $_POST['is_yacht_manual_entry'] == 'yes') {
 	            $fields = [
 				    'YSP_BeamFeet',

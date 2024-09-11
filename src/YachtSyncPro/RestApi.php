@@ -187,7 +187,7 @@
 		public function yachts(WP_REST_Request $request) {
 
 			$yArgs = [
-				'post_type' => 'rai_yacht',
+				'post_type' => 'ysp_yacht',
 				'posts_per_page' => 12,
 			];
 
@@ -261,7 +261,7 @@
 		
 			$file_to_include = YSP_TEMPLATES_DIR.'/compare-yachts.php';
 		
-			include apply_filters('rai_ys_yacht_compare_yachts', $file_to_include);
+			include apply_filters('ysp_ys_yacht_compare_yachts', $file_to_include);
 
 		}
 		
@@ -275,7 +275,7 @@
 	   			"HullMaterials" => "BoatHullMaterialCode"
 	   		];
 
-	   		$return = get_transient('rai_yacht_dropdown_options_'.join('_', $labels));
+	   		$return = get_transient('ysp_yacht_dropdown_options_'.join('_', $labels));
 
 			if (! $return) {
 				$return = [];
@@ -284,7 +284,7 @@
 					$return[ $label ] = $this->db_helper->get_unique_yacht_meta_values( $labelsToMetaField[ $label ] );
 				}
 	
-				set_transient('rai_yacht_dropdown_options_'.join('_', $labels), $return, 4 * HOUR_IN_SECONDS);
+				set_transient('ysp_yacht_dropdown_options_'.join('_', $labels), $return, 4 * HOUR_IN_SECONDS);
 			}
 
 	   		return $return; 
@@ -299,7 +299,7 @@
 	   			'Keywords' => function() {
 	   				$makes=$this->db_helper->get_unique_yacht_meta_values('MakeString');
 
-	   				//$years=$this->get_unique_yacht_meta_values('ModelYear', 'rai_yacht');
+	   				//$years=$this->get_unique_yacht_meta_values('ModelYear', 'ysp_yacht');
 	   				
 	   				$models=$this->db_helper->get_unique_yacht_meta_values('Model');
 	   				$boat_names=$this->db_helper->get_unique_yacht_meta_values('BoatName');
@@ -307,7 +307,7 @@
 
 
 	   				
-	   				//$lengths=$this->get_unique_yacht_meta_values('LengthOverall', 'rai_yacht');
+	   				//$lengths=$this->get_unique_yacht_meta_values('LengthOverall', 'ysp_yacht');
 
 	   				$list = array_merge($makes, $models, $boat_names);
 
@@ -348,7 +348,7 @@
 						AND pmm.meta_value != 'Sold'
 						AND LENGTH(pm.meta_value) > 1
 						ORDER BY pm.meta_value ASC
-						", 'publish', 'rai_yacht' ) );
+						", 'publish', 'ysp_yacht' ) );
 
 					return $res;
 
@@ -356,7 +356,7 @@
 
 	   		];
 
-	   		$return = get_transient('rai_yacht_list_options_'.join('_', $labels));
+	   		$return = get_transient('ysp_yacht_list_options_'.join('_', $labels));
 
 			if (! $return){
 				foreach ($labels as $label) {
@@ -365,7 +365,7 @@
 					}
 				}
 				
-				set_transient('rai_yacht_list_options'.join('_', $labels), $return, 4 * HOUR_IN_SECONDS);
+				set_transient('ysp_yacht_list_options'.join('_', $labels), $return, 4 * HOUR_IN_SECONDS);
 			}
 
 	   		return $return;
@@ -382,7 +382,7 @@
 
 	   				$makes=$this->db_helper->get_unique_yacht_meta_values_based_input('MakeString', $input_val);
 
-	   				//$years=$this->get_unique_yacht_meta_values('ModelYear', 'rai_yacht');
+	   				//$years=$this->get_unique_yacht_meta_values('ModelYear', 'ysp_yacht');
 	   				
 	   				$models=$this->db_helper->get_unique_yacht_meta_values_based_input('Model', $input_val);
 	   				
@@ -405,7 +405,7 @@
 						AND pmm.meta_value != 'Sold'
 						AND LENGTH(pm.meta_value) > 1
 						ORDER BY pm.meta_value ASC
-						", $input_val.'%', 'publish', 'rai_yacht' ) );
+						", $input_val.'%', 'publish', 'ysp_yacht' ) );
 
 	   				$states=$wpdb->get_col( $wpdb->prepare( "
 						SELECT DISTINCT pm.meta_value 
@@ -423,7 +423,7 @@
 						AND pmm.meta_value != 'Sold'
 						AND LENGTH(pm.meta_value) > 1
 						ORDER BY pm.meta_value ASC
-						", $input_val.'%', 'publish', 'rai_yacht' ) );
+						", $input_val.'%', 'publish', 'ysp_yacht' ) );
 
 	   				$countries=$wpdb->get_col( $wpdb->prepare( "
 						SELECT DISTINCT pm.meta_value 
@@ -438,9 +438,9 @@
 						AND pmm.meta_value != 'Sold'
 						AND LENGTH(pm.meta_value) > 1
 						ORDER BY pm.meta_value ASC
-						", $input_val.'%', 'publish', 'rai_yacht' ) );;
+						", $input_val.'%', 'publish', 'ysp_yacht' ) );;
 	   				
-	   				//$lengths=$this->get_unique_yacht_meta_values('LengthOverall', 'rai_yacht');
+	   				//$lengths=$this->get_unique_yacht_meta_values('LengthOverall', 'ysp_yacht');
 
 	   				$list = array_merge($makes, $models, $boat_names, $locations, $states, $countries);
 
@@ -482,7 +482,7 @@
 						AND pmm.meta_value != 'Sold'
 						AND LENGTH(pm.meta_value) > 1
 						ORDER BY pm.meta_value ASC
-						", $input_val.'%s', 'publish', 'rai_yacht' ) );
+						", $input_val.'%s', 'publish', 'ysp_yacht' ) );
 
 					return $res;
 
@@ -517,7 +517,7 @@
 
 	   			$file_to_include=YSP_TEMPLATES_DIR.'/pdf-loader.php';
 
-		    	include apply_filters('rai_ys_yacht_pdf_loader_template', $file_to_include);
+		    	include apply_filters('ysp_ys_yacht_pdf_loader_template', $file_to_include);
 
 	   		}
 	   		else {
@@ -545,7 +545,7 @@
 
 				$file_to_include=YSP_TEMPLATES_DIR.'/pdf.php';
 
-		    	include apply_filters('rai_ys_yacht_pdf_template', $file_to_include);
+		    	include apply_filters('ysp_ys_yacht_pdf_template', $file_to_include);
 		    	
 			}
 			else {
@@ -888,7 +888,7 @@
 		
 			$brokerID=$request->get_param('brokerID');
 			//$broker=get_post($request->get_param('brokerID'));
-			$broker_email = get_post_meta($brokerID, "rai_team_email", true);
+			$broker_email = get_post_meta($brokerID, "ysp_team_email", true);
 
 			$to = $broker_email;
 

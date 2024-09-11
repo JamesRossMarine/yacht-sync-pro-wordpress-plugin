@@ -16,7 +16,7 @@ function ysp_yacht_search_and_reader(data) {
     ysp_makeSearchTags( data );
 
     // GET AND WRITE
-    return rai_ysp_api.call_api("POST", "yachts", data).then(function(data_result) {
+    return ysp_ysp_api.call_api("POST", "yachts", data).then(function(data_result) {
 
         document.querySelector('#search-result-section').classList.remove('loading');
         document.querySelector('#search-result-section').classList.add('loaded');
@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             if (event.target.value.length <= 3) {
 
-                rai_ysp_api.call_api(
+                ysp_ysp_api.call_api(
                     'POST', 
                     'list-options-with-value', 
                     {
@@ -171,7 +171,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     })
     
-/*    rai_ysp_api.call_api('POST', 'list-options', {labels: FillLists}).then(function(rOptions) {
+/*    ysp_ysp_api.call_api('POST', 'list-options', {labels: FillLists}).then(function(rOptions) {
         for (let label in rOptions) {
 
             let SelectorEle = document.querySelectorAll("datalist[data-fill-list='"+ label +"']");
@@ -272,7 +272,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // PRETTY URL
         let strpaths=window.location.href;
 
-        strpaths=strpaths.replace(rai_yacht_sync.yacht_search_page_id, '');
+        strpaths=strpaths.replace(ysp_yacht_sync.yacht_search_page_id, '');
 
         let paths = strpaths.split("/");
 
@@ -377,7 +377,7 @@ document.addEventListener("DOMContentLoaded", function() {
             FillOptions.push(ele.getAttribute('data-fill-options'));
         });
         
-        rai_ysp_api.call_api('POST', 'dropdown-options', {labels: FillOptions}).then(function(rOptions) {
+        ysp_ysp_api.call_api('POST', 'dropdown-options', {labels: FillOptions}).then(function(rOptions) {
             for (let label in rOptions) {
 
                 let SelectorEle = document.querySelectorAll("select[data-fill-options='"+ label +"']");
@@ -402,7 +402,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 let strpaths=window.location.href;
 
-                strpaths=strpaths.replace(rai_yacht_sync.yacht_search_page_id, '');
+                strpaths=strpaths.replace(ysp_yacht_sync.yacht_search_page_id, '');
 
                 let paths = strpaths.split("/");
 

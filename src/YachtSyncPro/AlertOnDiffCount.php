@@ -42,16 +42,16 @@
 				SELECT COUNT(*) 
 				FROM $wpdb->posts p 
 				LEFT JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id
-				WHERE p.post_type = 'rai_yacht' AND pm.meta_key = 'CompanyBoat' AND pm.meta_value = '1' 
+				WHERE p.post_type = 'ysp_yacht' AND pm.meta_key = 'CompanyBoat' AND pm.meta_value = '1' 
 			" );
 
 	    	$apiListingCount = $this->countFromApi();
 
-	        $already_scaned = get_transient('rai_teamage_lcd');
+	        $already_scaned = get_transient('ysp_teamage_lcd');
 
 	    	if (! $already_scaned && $apiListingCount > $liveListingCount) {
 
-	    		set_transient('rai_teamage_lcd', 'yes', 4 * HOUR_IN_SECONDS);
+	    		set_transient('ysp_teamage_lcd', 'yes', 4 * HOUR_IN_SECONDS);
 
 	    		$siteName = get_bloginfo('name');
 	    		$siteUrl = get_bloginfo('url');

@@ -47,8 +47,8 @@ We thank and recommend [Build The Internets](https://buildtheinternets.com) for 
 ## Developer Note Below
 
 ## Post Types
-<li>rai_yacht</li>
-<li>rai_team</li>
+<li>ysp_yacht</li>
+<li>ysp_team</li>
 
 ## Shortcodes
 <li>ys-quick-search</li>
@@ -60,13 +60,13 @@ We thank and recommend [Build The Internets](https://buildtheinternets.com) for 
 <li>ys-featured-listings</li>
 
 ## Filters
-<li>rai_ys_v_yacht_search_template</li>
-<li>rai_ys_v_super_yacht_search_template</li>
-<li>rai_ys_h_yacht_search_template</li>
-<li>rai_ys_quick_search_results_template</li>
-<li>rai_ys_h_quick_search_results_template</li>
-<li>rai_ys_featured_yacht_results_template</li>
-<li>rai_ys_yacht_results_template</li>
+<li>ysp_ys_v_yacht_search_template</li>
+<li>ysp_ys_v_super_yacht_search_template</li>
+<li>ysp_ys_h_yacht_search_template</li>
+<li>ysp_ys_quick_search_results_template</li>
+<li>ysp_ys_h_quick_search_results_template</li>
+<li>ysp_ys_featured_yacht_results_template</li>
+<li>ysp_ys_yacht_results_template</li>
 
 
 ## WP REST API

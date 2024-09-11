@@ -26,7 +26,7 @@
 
 			$params = (array) $wp_query->get('params_from_paths');
 
-			$yacht_query = get_posts(array_merge(['post_type' => 'rai_yacht', 'posts_per_page' => 12], $params, ['page_index' => 1]));
+			$yacht_query = get_posts(array_merge(['post_type' => 'ysp_yacht', 'posts_per_page' => 12], $params, ['page_index' => 1]));
 
 			foreach ($yacht_query as $y) {
 				$links[] = get_permalink($y);
@@ -151,7 +151,7 @@
 					
 					default:
 
-						if (isset($wp_query->query_vars['post_type']) && $wp_query->query_vars['post_type'] == 'rai_yacht') {
+						if (isset($wp_query->query_vars['post_type']) && $wp_query->query_vars['post_type'] == 'ysp_yacht') {
 							$pVal = $wp_query->query_vars[$param];
 						}
 						elseif (isset($params[ $param ])) {

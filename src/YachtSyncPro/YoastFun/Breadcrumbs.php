@@ -14,7 +14,7 @@
 		public function breadcrumbs($links) {
 			global $wp_query, $post;
 
-			if (is_singular('rai_yacht')) {
+			if (is_singular('ysp_yacht')) {
 				/*
 					$meta = get_post_meta($post->ID);
 
@@ -47,7 +47,7 @@
 			    ];
 			}
 
-			if (is_singular('rai_team')) {
+			if (is_singular('ysp_team')) {
 				/*
 					$meta = get_post_meta($post->ID);
 

@@ -11,7 +11,7 @@ class YachtSyncPro_YoastFun_Schema_Yacht
 
     public function is_needed()
     {
-        return is_singular('rai_yacht');
+        return is_singular('ysp_yacht');
     }
 
     public function generate()

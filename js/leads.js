@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let formData = raiys_get_form_data(e.target);
         let successMessage = e.target.parentElement.querySelector('.success-message');
         console.log(formData)
-        rai_ysp_api.call_api("POST", apiEndpoint, formData)
+        ysp_ysp_api.call_api("POST", apiEndpoint, formData)
             .then(function(data_result) {
                 successMessage.style.display = 'block';
                 e.target.style.display = 'none';

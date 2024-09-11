@@ -42,7 +42,7 @@ get_header();
                     <?php echo($meta["rai_team_fname"] . " " . $meta["rai_team_lname"]); ?>'s Listings
                 </h2>
 
-                <?php echo do_shortcode('[ys-featured-listings ys_show_all="1" ys_broker_name="'. $meta['rai_team_fname'] .' '. $meta['rai_team_lname'] .'"][/ys-featured-listings]'); ?>
+                <?php echo do_shortcode('[ys-featured-listings ys_broker_name="'. $meta['rai_team_fname'] .' '. $meta['rai_team_lname'] .'"][/ys-featured-listings]'); ?>
 
             </div>
             <div class="second-main-container">

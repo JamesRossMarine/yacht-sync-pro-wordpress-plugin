@@ -7,7 +7,7 @@ var ysp_templates={};
 		let price = '';
 		let length = '';
 
-		if (rai_yacht_sync.europe_option_picked == "yes") {
+		if (ysp_yacht_sync.europe_option_picked == "yes") {
 			length = vessel.NominalLength ? meters.toFixed(2) + ' m' : 'N/A';
 			price = (typeof vessel.YSP_EuroVal != 'undefined' && vessel.YSP_EuroVal > 0) ? `€${new Intl.NumberFormat('en-us', { minimumFractionDigits: 2}).format(vessel.YSP_EuroVal) }` : 'Contact Us For Price';
 		} 
@@ -27,7 +27,7 @@ var ysp_templates={};
 			<div class="yacht-result-grid-item" data-post-id="${ vessel._postID }" data-yacht-id="${ vessel.DocumentID }">
 				<div class="yacht-main-image-container">
 					<a class="yacht-details" href="${ vessel._link }">
-						<img class="yacht-main-image" src="${vessel.Images ? vessel.Images[0].Uri : rai_yacht_sync.assets_url + 'images/default-yacht-image.jpeg'}" alt="yacht-image" loading="lazy" />
+						<img class="yacht-main-image" src="${vessel.Images ? vessel.Images[0].Uri : ysp_yacht_sync.assets_url + 'images/default-yacht-image.jpeg'}" alt="yacht-image" loading="lazy" />
 						<svg class="like-me love" xmlns="http://www.w3.org/2000/svg" width="57" height="54" viewBox="0 0 57 54" fill="none"  data-yacht-id="${ vessel.DocumentID }">
 						  <g filter="url(#filter0_d_2888_4333)">
 						    <path d="M34.7028 11.5755C36.2094 11.5755 37.6251 12.1699 38.6898 13.2488L38.8223 13.383C41.0206 15.6116 41.0206 19.2375 38.8223 21.466L38.0992 22.199L27.4995 32.9442L18.4883 23.808L16.9011 22.199L16.178 21.466C13.9797 19.2375 13.9797 15.6116 16.178 13.383L16.3083 13.2509C17.3739 12.1708 18.79 11.5759 20.2962 11.5764C21.8023 11.5764 23.2176 12.1708 24.2819 13.2492L25.005 13.9822L27.4991 16.5101L29.9928 13.9818L30.7158 13.2488C31.7801 12.1699 33.1962 11.5755 34.7028 11.5755ZM34.7028 8C32.357 8 30.0112 8.9068 28.2222 10.7204L27.4991 11.4534L26.776 10.7204C24.9878 8.90723 22.642 8.00043 20.297 8C17.9508 8 15.605 8.90723 13.8147 10.7221L13.6844 10.8542C10.1046 14.4832 10.1046 20.3645 13.6844 23.9935L14.4074 24.7265L15.9946 26.3354L27.4995 38L40.5933 24.7265L41.3164 23.9935C44.8945 20.3663 44.8945 14.4814 41.3164 10.8542L41.1839 10.72C39.3945 8.9068 37.0486 8 34.7028 8Z" fill="white"></path>
@@ -45,7 +45,7 @@ var ysp_templates={};
 						    </filter>
 						  </defs>
 						</svg>
-						${vessel.CompanyName === rai_yacht_sync.company_name ? `<div class="company-banner"><img src="${rai_yacht_sync.company_logo}"></div>` : ''}
+						${vessel.CompanyName === ysp_yacht_sync.company_name ? `<div class="company-banner"><img src="${ysp_yacht_sync.company_logo}"></div>` : ''}
 					</a>	
 				</div>
 				<div class="yacht-general-info-container">
@@ -100,9 +100,9 @@ var ysp_templates={};
 		
 		let length = '';
 		
-		if(rai_yacht_sync.europe_option_picked == "yes"){
+		if(ysp_yacht_sync.europe_option_picked == "yes"){
 			length = vessel.NominalLength ? meters.toFixed(2) + ' m' : 'N/A';
-			price = vessel.Price ? `€ ${new Intl.NumberFormat('en-us', { minimumFractionDigits: 2}).format((parseInt(vessel.Price.slice(0, -3)) * rai_yacht_sync.euro_c_c))}` : 'Contact Us For Price';
+			price = vessel.Price ? `€ ${new Intl.NumberFormat('en-us', { minimumFractionDigits: 2}).format((parseInt(vessel.Price.slice(0, -3)) * ysp_yacht_sync.euro_c_c))}` : 'Contact Us For Price';
 		} else {
 			length = vessel.NominalLength ? vessel.NominalLength + " / " + meters.toFixed(2) + ' m' : 'N/A';
 			price = vessel.Price ? `$ ${new Intl.NumberFormat('en-us', { minimumFractionDigits: 2}).format(parseInt(vessel.Price.slice(0, -3)))}` : 'Contact Us For Price'
@@ -112,7 +112,7 @@ var ysp_templates={};
 			<div class="yacht-result-grid-item list-view" data-post-id="${ vessel._postID }" data-yacht-id="${ vessel.DocumentID }">
 				<div class="yacht-main-image-container">
 					<a class="yacht-details" href="${ vessel._link }">
-						<img class="yacht-main-image" src="${vessel.Images ? vessel.Images[0].Uri : vessel.Images ? vessel.Images[0].Uri : rai_yacht_sync.assets_url + 'images/default-yacht-image.jpeg'}" alt="yacht-image" loading="lazy" />
+						<img class="yacht-main-image" src="${vessel.Images ? vessel.Images[0].Uri : vessel.Images ? vessel.Images[0].Uri : ysp_yacht_sync.assets_url + 'images/default-yacht-image.jpeg'}" alt="yacht-image" loading="lazy" />
 						<svg class="like-me love" xmlns="http://www.w3.org/2000/svg" width="57" height="54" viewBox="0 0 57 54" fill="none"  data-yacht-id="${ vessel.DocumentID }">
 						  <g filter="url(#filter0_d_2888_4333)">
 						    <path d="M34.7028 11.5755C36.2094 11.5755 37.6251 12.1699 38.6898 13.2488L38.8223 13.383C41.0206 15.6116 41.0206 19.2375 38.8223 21.466L38.0992 22.199L27.4995 32.9442L18.4883 23.808L16.9011 22.199L16.178 21.466C13.9797 19.2375 13.9797 15.6116 16.178 13.383L16.3083 13.2509C17.3739 12.1708 18.79 11.5759 20.2962 11.5764C21.8023 11.5764 23.2176 12.1708 24.2819 13.2492L25.005 13.9822L27.4991 16.5101L29.9928 13.9818L30.7158 13.2488C31.7801 12.1699 33.1962 11.5755 34.7028 11.5755ZM34.7028 8C32.357 8 30.0112 8.9068 28.2222 10.7204L27.4991 11.4534L26.776 10.7204C24.9878 8.90723 22.642 8.00043 20.297 8C17.9508 8 15.605 8.90723 13.8147 10.7221L13.6844 10.8542C10.1046 14.4832 10.1046 20.3645 13.6844 23.9935L14.4074 24.7265L15.9946 26.3354L27.4995 38L40.5933 24.7265L41.3164 23.9935C44.8945 20.3663 44.8945 14.4814 41.3164 10.8542L41.1839 10.72C39.3945 8.9068 37.0486 8 34.7028 8Z" fill="white"></path>
@@ -188,7 +188,7 @@ var ysp_templates={};
 				</span>
 
 
-				<img class="yacht-main-image" src="${vessel.Images ? vessel.Images[0].Uri : rai_yacht_sync.assets_url + 'images/default-yacht-image.jpeg'}" alt="yacht-image" loading="lazy" />
+				<img class="yacht-main-image" src="${vessel.Images ? vessel.Images[0].Uri : ysp_yacht_sync.assets_url + 'images/default-yacht-image.jpeg'}" alt="yacht-image" loading="lazy" />
 				<a class="preview-link" href="${ vessel._link }">
 					<h6 class="yacht-title">${vessel.ModelYear ? vessel.ModelYear : ''} ${vessel.MakeString ? vessel.MakeString : ''} ${vessel.Model ? vessel.Model : ''} ${vessel.BoatName ? vessel.BoatName : ''}</h6>
 				</a>
@@ -216,7 +216,7 @@ var ysp_templates={};
     		<span>
 	    		${value}
 
-	    		<img src="${rai_yacht_sync.assets_url}/images/remove-tag.png">
+	    		<img src="${ysp_yacht_sync.assets_url}/images/remove-tag.png">
 			</span>
     	`;
     };

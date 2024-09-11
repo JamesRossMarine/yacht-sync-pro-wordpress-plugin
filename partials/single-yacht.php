@@ -3,15 +3,15 @@ get_header();
 ?>
     <?php
         $brokerQueryArgs = array(
-            'post_type' => 'rai_team',
+            'post_type' => 'ysp_team',
             'posts_per_page' => 1,
         );
 
         $mainBrokerQueryArgs = array(
-            'post_type' => 'rai_team',
+            'post_type' => 'ysp_team',
             'meta_query' => array(
                 array(
-                    'key' => 'rai_main_broker',
+                    'key' => 'ysp_main_broker',
                     'value' => '1',
                 ),
             ),
@@ -162,7 +162,7 @@ get_header();
                     }
                     
                     $brokerQueryArgs = array(
-                        'post_type' => 'rai_team',
+                        'post_type' => 'ysp_team',
                         'posts_per_page' => 1,
 
                         'meta_query' => [
@@ -174,7 +174,7 @@ get_header();
 
                     foreach ($BrokerNames as $bName) {
                         $brokerQueryArgs['meta_query']['name'][]=[
-                            'key' => 'rai_team_fname',
+                            'key' => 'ysp_team_fname',
                             'compare' => 'LIKE',
                             'value' => $bName,
                         ];
@@ -182,7 +182,7 @@ get_header();
 
                     foreach ($BrokerNames as $bName) {
                         $brokerQueryArgs['meta_query']['name'][]=[
-                            'key' => 'rai_team_lname',
+                            'key' => 'ysp_team_lname',
                             'compare' => 'LIKE',
                             'value' => $bName,
                         ];
@@ -195,10 +195,10 @@ get_header();
                     }
                     else {
                         $mainBrokerQueryArgs = array(
-                            'post_type' => 'rai_team',
+                            'post_type' => 'ysp_team',
                             'meta_query' => array(
                                 array(
-                                    'key' => 'rai_main_broker',
+                                    'key' => 'ysp_main_broker',
                                     'value' => '1',
                                 ),
                             ),
@@ -206,8 +206,6 @@ get_header();
                         );
 
                         $brokerQuery = new WP_Query($mainBrokerQueryArgs);
-
-
                     }
                     
 
@@ -215,18 +213,25 @@ get_header();
                         while ($brokerQuery->have_posts()) {
                             $brokerQuery->the_post();
 
-                            $broker_first_name = get_post_meta($post->ID, 'rai_team_fname', true);
-                            $broker_last_name = get_post_meta($post->ID, 'rai_team_lname', true);
-                            $broker_email = get_post_meta($post->ID, 'rai_team_email', true);
-                            $broker_phone = get_post_meta($post->ID, 'rai_team_phone', true);
+                            $broker_first_name = get_post_meta($post->ID, 'ysp_team_fname', true);
+                            $broker_last_name = get_post_meta($post->ID, 'ysp_team_lname', true);
+                            $broker_email = get_post_meta($post->ID, 'ysp_team_email', true);
+                            $broker_phone = get_post_meta($post->ID, 'ysp_team_phone', true);
                             ?>
                             <div class="yacht-mobile-broker-container">
-                            <a class="broker-anchor" href="<?php the_permalink(); ?>">
-                                <div class="broker-profile-image"><img src="<?php echo esc_url(get_the_post_thumbnail_url()); ?>" alt="" style="width:120px; height:120px; object-fit: cover;" /></div>
+                                <div class="broker-profile-image">
+                                    <a href="<?= get_the_permalink(); ?>">
+                                        <img src="<?php echo esc_url(get_the_post_thumbnail_url()); ?>" alt="" style="width:120px; height:120px; object-fit: cover;" />
+                                    </a>
+                                </div>
 
                                 <div class="broker-info">
-                                    <p class="broker-name"><?php echo ($broker_first_name . " " . $broker_last_name); ?></p>
-                                     </a>
+                                    <p class="broker-name">
+                                        <a href="<?= get_the_permalink(); ?>">
+                                            <?php echo ($broker_first_name . " " . $broker_last_name); ?>    
+                                        </a>
+                                    </p>
+                                     
                                     <p class="broker-title">Broker</p>
                                     <p class="broker-email"><a href="mailto:<?php echo $broker_email; ?>"><?php echo $broker_email; ?></a></p>
                                     <p class="broker-phone"><a href="tel:<?php echo $broker_phone; ?>"><?php echo $broker_phone; ?></a></p>
@@ -437,15 +442,24 @@ get_header();
                         while ($brokerQuery->have_posts()) {
                             $brokerQuery->the_post();
 
-                            $broker_first_name = get_post_meta($post->ID, 'rai_team_fname', true);
-                            $broker_last_name = get_post_meta($post->ID, 'rai_team_lname', true);
-                            $broker_email = get_post_meta($post->ID, 'rai_team_email', true);
-                            $broker_phone = get_post_meta($post->ID, 'rai_team_phone', true);
+                            $broker_first_name = get_post_meta($post->ID, 'ysp_team_fname', true);
+                            $broker_last_name = get_post_meta($post->ID, 'ysp_team_lname', true);
+                            $broker_email = get_post_meta($post->ID, 'ysp_team_email', true);
+                            $broker_phone = get_post_meta($post->ID, 'ysp_team_phone', true);
                             ?>
                             <div class="broker-info-container">
-                                <div class="broker-profile-image"><img src="<?php echo esc_url(get_the_post_thumbnail_url()); ?>" alt="" style="width:120px; height:120px; object-fit: cover;" /></div>
+                                <div class="broker-profile-image">
+                                    <a href="<?= get_the_permalink(); ?>">
+                                        <img src="<?php echo esc_url(get_the_post_thumbnail_url()); ?>" alt="" style="width:120px; height:120px; object-fit: cover;" />
+                                    </a>
+                                </div>
                                 <div class="broker-info">
-                                    <p class="broker-name"><?php echo ($broker_first_name . " " . $broker_last_name); ?></p>
+                                    <p class="broker-name">
+                                        <a href="<?= get_the_permalink(); ?>">
+                                            <?php echo ($broker_first_name . " " . $broker_last_name); ?>
+                                        </a>                                    
+                                    </p>
+
                                     <p class="broker-title">Broker</p>
                                     <p class="broker-email"><a href="mailto:<?php echo $broker_email; ?>"><?php echo $broker_email; ?></a></p>
                                     <p class="broker-phone"><a href="tel:<?php echo $broker_phone; ?>"><?php echo $broker_phone; ?></a></p>
@@ -517,7 +531,7 @@ get_header();
 
                 <?php
                     $yachtQuery = new WP_Query(array(
-                        'post_type' => 'rai_yacht',
+                        'post_type' => 'ysp_yacht',
                         'similar_listings_to' => get_the_ID(),
 
                         'posts_per_page' => 3,

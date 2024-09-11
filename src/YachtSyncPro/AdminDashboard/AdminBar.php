@@ -16,7 +16,7 @@
 
 		public function add_toolbar_for_brochures($admin_bar) {
 
-			if (is_singular('rai_yacht')) {
+			if (is_singular('ysp_yacht')) {
 
 				global $post;
 

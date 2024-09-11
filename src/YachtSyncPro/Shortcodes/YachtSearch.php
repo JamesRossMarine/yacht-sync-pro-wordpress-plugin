@@ -37,7 +37,7 @@
 		  		
 				$file_to_include=YSP_TEMPLATES_DIR.'/v-search-form.php'; 
 
-		    	include apply_filters('rai_ys_v_yacht_search_template', $file_to_include);
+		    	include apply_filters('ysp_ys_v_yacht_search_template', $file_to_include);
 
 		    return ob_get_clean();
 		    
@@ -56,7 +56,7 @@
 		  		
 				$file_to_include=YSP_TEMPLATES_DIR.'/v-super-search-form.php'; 
 
-		    	include apply_filters('rai_ys_v_super_yacht_search_template', $file_to_include);
+		    	include apply_filters('ysp_ys_v_super_yacht_search_template', $file_to_include);
 
 		    return ob_get_clean();
 		    
@@ -75,7 +75,7 @@
 		  		
 				$file_to_include=YSP_TEMPLATES_DIR.'/h-search-form.php'; 
 
-		    	include apply_filters('rai_ys_h_yacht_search_template', $file_to_include);
+		    	include apply_filters('ysp_ys_h_yacht_search_template', $file_to_include);
 
 		    return ob_get_clean();
         }
@@ -93,7 +93,7 @@
 		  		
 				$file_to_include=YSP_TEMPLATES_DIR.'/search-tags.php'; 
 
-		    	include apply_filters('rai_ys_yacht_search_tags_template', $file_to_include);
+		    	include apply_filters('ysp_ys_yacht_search_tags_template', $file_to_include);
 
 		    return ob_get_clean();
         }
@@ -111,7 +111,7 @@
 		  		
 				$file_to_include=YSP_TEMPLATES_DIR.'/yacht-results.php'; 
 
-		    	include apply_filters('rai_ys_yacht_results_template', $file_to_include);
+		    	include apply_filters('ysp_ys_yacht_results_template', $file_to_include);
 
 		    return ob_get_clean();
 
@@ -132,7 +132,7 @@
 		  		
 				$file_to_include=YSP_TEMPLATES_DIR.'/quick-search.php'; 
 
-		    	include apply_filters('rai_ys_quick_search_results_template', $file_to_include);
+		    	include apply_filters('ysp_ys_quick_search_results_template', $file_to_include);
 
 		    return ob_get_clean();
 
@@ -153,7 +153,7 @@
 		  		
 				$file_to_include=YSP_TEMPLATES_DIR.'/quick-h-search.php'; 
 
-		    	include apply_filters('rai_ys_h_quick_search_results_template', $file_to_include);
+		    	include apply_filters('ysp_ys_h_quick_search_results_template', $file_to_include);
 
 		    return ob_get_clean();
 
@@ -169,7 +169,7 @@
             ], $atts);
 
             $args = [
-	            'post_type' => 'rai_yacht',
+	            'post_type' => 'ysp_yacht',
 	            'posts_per_page' => -1,
 	        ];
 	        
@@ -177,11 +177,13 @@
 
 	        $yachtQuery = new WP_Query($args);
 
+	        $YSP_Euro_Opt = $this->options->get('is_euro_site');
+
 		    ob_start();
 		  		
 				$file_to_include=YSP_TEMPLATES_DIR.'/yacht-featured-listings.php'; 
 
-		    	include apply_filters('rai_ys_featured_yacht_results_template', $file_to_include);
+		    	include apply_filters('ysp_ys_featured_yacht_results_template', $file_to_include);
 
 		    return ob_get_clean();
 		    

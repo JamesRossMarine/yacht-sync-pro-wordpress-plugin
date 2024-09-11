@@ -14,7 +14,7 @@
 
 		public function addPostTypes() {
 	 
-			register_post_type('syncing_rai_yacht', [
+			register_post_type('syncing_ysp_yacht', [
 
            		'labels' => array(
 					'name' => 'Syncing Yachts',
@@ -22,7 +22,7 @@
 				),
 				
 				'has_archive' => false,
-				//'query_var' => 'rai_yacht_id',
+				//'query_var' => 'ysp_yacht_id',
 
 				'rewrite' => array(
 			        'slug' => 'yacht-listing',
@@ -40,7 +40,7 @@
 
             ]);
             
-			register_post_type('rai_yacht', [
+			register_post_type('ysp_yacht', [
 
            		'labels' => array(
 					'name' => 'Synced Yachts',
@@ -50,7 +50,7 @@
 				'supports' => array('title', 'editor', 'thumbnail'),
 				
 				'has_archive' => false,
-				//'query_var' => 'rai_yacht_id',
+				//'query_var' => 'ysp_yacht_id',
 
 				'rewrite' => array(
 			        'slug' => 'yacht-listing',
@@ -67,7 +67,7 @@
             ]);
 			
 
-			/*register_post_type('rai_soldyatch', [
+			/*register_post_type('ysp_soldyatch', [
 
            		'labels' => array(
 					'name' => 'Sold Yachts',
@@ -75,7 +75,7 @@
 				),
 				
 				'has_archive' => false,
-				//'query_var' => 'rai_yacht_id',
+				//'query_var' => 'ysp_yacht_id',
 
 				'public' => true,
 				'publicly_queryable' => true,
@@ -83,14 +83,14 @@
 
            ]);
 */
-           register_post_type('rai_team', [
+           register_post_type('ysp_team', [
            		'labels' => array(
 					'name' => 'Team Members',
 					'singular_name' => 'Team Member',
 				),
 				
 				'has_archive' => false,
-				//'query_var' => 'rai_team_id',
+				//'query_var' => 'ysp_team_id',
 
 				
 				'rewrite' => array(

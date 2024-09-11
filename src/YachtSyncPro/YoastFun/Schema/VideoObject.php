@@ -7,7 +7,7 @@
         $this->context = $context;
         $this->options = new YachtSyncPro_Options();
 
-        if (is_singular('rai_yacht') && isset($this->context->post)) {
+        if (is_singular('ysp_yacht') && isset($this->context->post)) {
             $this->context->video = get_post_meta($this->context->post->ID, 'Videos', true);
             $this->context->imagess = get_post_meta($this->context->post->ID, 'Images', true);
         }
@@ -18,7 +18,7 @@
     }
 
     public function is_needed() {
-        return is_singular('rai_yacht') && isset($this->context->video->url[0]);
+        return is_singular('ysp_yacht') && isset($this->context->video->url[0]);
     }
 
     public function generate() {
