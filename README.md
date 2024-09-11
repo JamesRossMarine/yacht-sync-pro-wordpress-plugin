@@ -4,24 +4,65 @@
 
 Yacht Sync Pro, our WordPress plugin, is a new way to integrate three major MLS feeds (YachtWorld, YachtBroker, and/or Yatco) natively into your WordPress site. Benefit from SEO tactics, easy-to-use shortcodes, and the ability to customize templates.
 
-## Top 5 Features
+## Demo Site
 
-- Imports Three Major MLS API Feeds Into Custom WordPress Post-Type
-- Clean URLs for detail and search pages
-- AI SEO For Yacht Detail Pages Meta Descriptions
-- Easy to use Gutenberg blocks and shortcodes for search elements
-- PDF Brochure Yacht Listings
-- Fast yacht search around and has great SEO compatibility 
+Review the array of features offered by Yacht Sync Pro.
+
+[https://yspdemo.yachtsforsale.dev/])(https://yspdemo.yachtsforsale.dev/ )
+
+## Top Features
+
+	
+1. Imports Three Major MLS API Feeds Into Custom WordPress Post-Type 
+    1. Compatible MLS API Feeds - Boat Wizard, IYBA, and/or Yatco
+    2. Since we import data, we don't rely on constant API connections to deliver search and detail pages. Meaning fewer outages for users. 
+    3. Fail Safes And Alerts
+        1. If a sync fails, the past data stays up, and you are also alerted as to why the sync failed. 
+        2. If a sync is “successful” / false positive and the number of vessels drops below the allowed amount, you will be alerted. 
+    4. Can run imports for multiple API tokens!
+        3. Got two boat wizard API keys, no problem!
+        4. Got IYBA and Boat Wizard API keys, no problem.  \
+We merge the data via hull IDs  \
+
+2. Fast and feature-packed yacht search pages
+    5. Multi-Select Filtering
+    6. Mobile-friendly Search Overlay 
+    7. Amazing Keyword Search 
+    8. 300-500ms Return For Results 
+
+3. Clean URLs for detail and search pages 
+    10. An example of this in detail pages is no ID needed 
+    11. An example of this search would look like this /search/condition-used/brand-viking/ \
+
+4. Using AI Generate to generate unique text points for metadata and short content
+    12. For Example - Yacht Detail Pages Meta Descriptions From Context Of MLS Data
+    13. For Example - Headings And Paragraphs about search results with backlinks to blog posts. \
+ 
+5. Easy to use Gutenberg blocks and shortcodes for placing search elements on pages
+    14. Easy to use template filters for (child) themes to use. \
+
+6. PDF Brochure For Yacht Details
+    15. Can generate multiple different gallery sizes (currently, when logged in)
+
 
 ## More Features
 
-- ChatGPT is used for content generation
-- Currency exchange used for pricing conventions 
+- ChatGPT is used for meta-description generation
+- Currency exchange used for pricing conversions 
 - URLBox is used for PDF Rendering
-- Full Template Customization 
+- S3 storage for PDFs
+- Compatibility with Divi and Elementor for basic yacht and broker detail pages 
+- Compatibility with Yoast. 
+- Full Template Customization
 - Basic Lead Forms
-- Broker Features
-- Detail pages
+- Akismet SPAM Protection For Lead Forms
+- Broker Post-Type With Meta Fields (Name, Email, Phone And Bio)
+- Manual Entry Of Vessels 
+- Similar Listings Section And Query
+- Mobile-friendly search
+- Like features
+- Compare tool
+
 
 ## Featured Sites With The Plugin
 
