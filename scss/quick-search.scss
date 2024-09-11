@@ -1,9 +1,7 @@
 #quick-search-container {
     //max-width: 300px;
     border: 1px solid $main-text-color;
-    padding: 10px;
-    background-color: $secondary-background-color;
-  
+    padding: 10px;  
   
   .ys-quick-row-item {
     display: flex;
@@ -41,8 +39,8 @@
   input[type="submit"] {
     width: auto;
     padding: 10px 20px;
-    background-color: $main-text-color;
-    color: $secondary-background-color;
+    background-color: $button-bg-color;
+    color: $button-text-color;
     border: none;
     cursor: pointer;
   }

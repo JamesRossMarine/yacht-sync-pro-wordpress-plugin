@@ -1,13 +1,15 @@
 #quick-h-search-container {
-    border: 1px solid $main-text-color;
+    border: 1px solid #000;
     padding: 10px;
-    background-color: $secondary-background-color;
+
     width: 100%;
+    
     max-width: 1200px;
     margin: auto;
 
     form#ysp-quick-h-search-form {
         display: flex;
+    
         @media  screen and (max-width: $breakpoint-med ) {
             flex-direction: column;
         }
@@ -39,6 +41,7 @@
             height: 30px;
             border: none;
         }
+        
         input[type="number"] {
             height: 30px;
         }
@@ -70,10 +73,15 @@
         input[type="submit"] {
             width: auto;
             padding: 10px 20px;
-            background-color: $main-text-color;
-            color: $secondary-background-color;
+            background-color: $button-bg-color;
+            color: $button-text-color;
             border: none;
             cursor: pointer;
+
+            &:hover{
+                background-color: $button-bg-color;
+                color: $button-text-color;
+            }
         }
     }
 }

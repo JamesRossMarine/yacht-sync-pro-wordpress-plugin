@@ -11,26 +11,26 @@ function ysp_yacht_search_and_reader(data) {
     document.querySelector('#search-result-section').classList.remove('loaded');
     document.querySelector('#search-result-section').classList.add('loading');
 
-    raiys_set_form_to_data( data );
+    ysp_set_form_to_data( data );
 
     ysp_makeSearchTags( data );
 
     // GET AND WRITE
-    return rai_ysp_api.call_api("POST", "yachts", data).then(function(data_result) {
+    return ysp_api.call_api("POST", "yachts", data).then(function(data_result) {
 
         document.querySelector('#search-result-section').classList.remove('loading');
         document.querySelector('#search-result-section').classList.add('loaded');
 
         document.title = data_result.SEO.title;
         jQuery('#ysp-search-heading').text(data_result.SEO.heading);
-        jQuery('#ysp-search-paragraph').text(data_result.SEO.gpt_p);
+        jQuery('#ysp-search-paragraph').text(data_result.SEO.p);
 
         jQuery('#total-results').text(new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(data_result.total));
 
         let currentURL=null;
 
         if (typeof data.dont_push == 'undefined') {
-            currentURL=raiys_push_history( data );
+            currentURL=ysp_push_history( data );
         }
         else {
             currentURL = location.href;
@@ -85,7 +85,7 @@ function ysp_yacht_search_and_reader(data) {
 
                     document.querySelector('.ysp-yacht-search-form input[name=page_index]').value=pageNumber;
 
-                    let formDataObject = raiys_get_form_data( document.querySelector('.ysp-yacht-search-form') );
+                    let formDataObject = ysp_get_form_data( document.querySelector('.ysp-yacht-search-form') );
 
                     ysp_yacht_search_and_reader(formDataObject);
                 }
@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             if (event.target.value.length <= 3) {
 
-                rai_ysp_api.call_api(
+                ysp_api.call_api(
                     'POST', 
                     'list-options-with-value', 
                     {
@@ -171,7 +171,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     })
     
-/*    rai_ysp_api.call_api('POST', 'list-options', {labels: FillLists}).then(function(rOptions) {
+/*    ysp_api.call_api('POST', 'list-options', {labels: FillLists}).then(function(rOptions) {
         for (let label in rOptions) {
 
             let SelectorEle = document.querySelectorAll("datalist[data-fill-list='"+ label +"']");
@@ -221,7 +221,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             e.target.querySelector('input[name=page_index]').value=1;
 
-            let params = raiys_get_form_data(e.target);
+            let params = ysp_get_form_data(e.target);
 
             ysp_yacht_search_and_reader( params ).then(function(api_data) {
 
@@ -272,7 +272,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // PRETTY URL
         let strpaths=window.location.href;
 
-        strpaths=strpaths.replace(rai_yacht_sync.yacht_search_page_id, '');
+        strpaths=strpaths.replace(ysp_yacht_sync.yacht_search_page_id, '');
 
         let paths = strpaths.split("/");
 
@@ -377,7 +377,7 @@ document.addEventListener("DOMContentLoaded", function() {
             FillOptions.push(ele.getAttribute('data-fill-options'));
         });
         
-        rai_ysp_api.call_api('POST', 'dropdown-options', {labels: FillOptions}).then(function(rOptions) {
+        ysp_api.call_api('POST', 'dropdown-options', {labels: FillOptions}).then(function(rOptions) {
             for (let label in rOptions) {
 
                 let SelectorEle = document.querySelectorAll("select[data-fill-options='"+ label +"']");
@@ -402,7 +402,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 let strpaths=window.location.href;
 
-                strpaths=strpaths.replace(rai_yacht_sync.yacht_search_page_id, '');
+                strpaths=strpaths.replace(ysp_yacht_sync.yacht_search_page_id, '');
 
                 let paths = strpaths.split("/");
 
@@ -456,7 +456,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }).then(function () {
             // Render Yachts For Page Load
-            let params = raiys_get_form_data(document.querySelector('.ysp-yacht-search-form'));
+            let params = ysp_get_form_data(document.querySelector('.ysp-yacht-search-form'));
                 console.log(params);
 
             // Liked / Loved 
@@ -488,7 +488,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 document.querySelector('#ysp-super-mobile-search').style.display='none';
                 document.querySelector('body').style.overflowY='unset';
 
-                let params = raiys_get_form_data(e.target);               
+                let params = ysp_get_form_data(e.target);               
 
                 ysp_yacht_search_and_reader( params );
 

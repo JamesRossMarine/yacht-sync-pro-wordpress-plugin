@@ -7,9 +7,16 @@ $h1-weight: 600;
 
 $main-text-color: var(--main-text-color);
 $main-background-color: var(--main-background-color);
+
 $secondary-text-color: var(--secondary-text-color);
 $secondary-background-color: var(--secondary-background-color);
+
+$button-text-color: var(--button-txt-color);
+$button-background-color: var(--button-bg-color);
+$button-bg-color: var(--button-bg-color);
+
 $white-color: var(--white);
+
 $divider-color: #CBD5E1;
 $border-color: #D9D9D9;
 
@@ -24,9 +31,12 @@ $broker-row-gap: 40px;
 $max-width: 1440px;
 
 :root {
-    --main-text-color: #334155;
-    --main-background-color: #94A3B8;
-    --secondary-text-color: #334155;
-    --secondary-background-color: #94A3B8;
+    --main-text-color: inherit;
+    --main-background-color: inhert;
+    --secondary-text-color: inherit;
+    --secondary-background-color: inherit;
     --white: #FFFFFF;
+
+    --button-bg-color: #94A3B8;
+    --button-txt-color: #fff;
 }

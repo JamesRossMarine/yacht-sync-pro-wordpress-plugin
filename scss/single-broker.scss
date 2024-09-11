@@ -170,16 +170,17 @@
                 }
 
                 .broker-form-submit {
-                    background-color: $main-text-color;
+                    background-color: $button-bg-color;
+                    color: $button-text-color;
+                    
                     box-shadow: none;
                     border: 0;
                     width: 100%;
                     padding: 8px 12px;
                     margin: auto;
-                    color: $main-background-color;
 
                     &:hover {
-                        background-color: #a9a9a9;
+                        background-color: $button-bg-color;
                     }
                 }
             }

@@ -4,11 +4,11 @@
 
     if ($YSP_Euro_Opt == "yes") {
         $length = $yacht["NominalLength"] ? number_format($meters, 2) . ' m' : 'N/A';
-        $price = $yacht["Price"] ?  '€ ' . number_format($yacht['YSP_EuroVal']) : 'Contact Us For Price';
+        $price = $yacht["Price"] ?  '€' . number_format($yacht['YSP_EuroVal']) : 'Contact Us For Price';
     } 
     else {
         $length = $yacht["NominalLength"] ? $yacht['NominalLength'] . ' / ' . number_format($meters, 2) . ' m' : 'N/A';
-        $price = $yacht["Price"] ? '$ ' . number_format($yacht['YSP_USDVal']) : 'Contact Us For Price'; 
+        $price = $yacht["Price"] ? '$' . number_format($yacht['YSP_USDVal']) : 'Contact Us For Price'; 
     }
 
 ?>
@@ -16,7 +16,7 @@
 <div class="yacht-main-image-container">
     <a class="yacht-details" href="<?php echo $yacht['_link']; ?>">
         <div class="image-wrapper">
-            <img class="yacht-main-image" src="<?php echo ($yacht['Images'] ? $yacht['Images'][0]->Uri : RAI_YS_PLUGIN_ASSETS . 'images/default-yacht-image.jpeg') ?>" alt="yacht-image" loading="lazy" />
+            <img class="yacht-main-image" src="<?php echo ($yacht['Images'] ? $yacht['Images'][0]->Uri : YSP_ASSETS . 'images/default-yacht-image.jpeg') ?>" alt="yacht-image" loading="lazy" />
         </div>
     </a>
 </div>

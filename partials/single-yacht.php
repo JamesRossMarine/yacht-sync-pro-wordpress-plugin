@@ -3,22 +3,22 @@ get_header();
 ?>
     <?php
         $brokerQueryArgs = array(
-            'post_type' => 'rai_broker',
+            'post_type' => 'ysp_team',
             'posts_per_page' => 1,
         );
 
         $mainBrokerQueryArgs = array(
-            'post_type' => 'rai_broker',
+            'post_type' => 'ysp_team',
             'meta_query' => array(
                 array(
-                    'key' => 'rai_main_broker',
+                    'key' => 'ysp_main_broker',
                     'value' => '1',
                 ),
             ),
             'posts_per_page' => 1,
         );
 
-        $YSP_Options = new raiYachtSync_Options();
+        $YSP_Options = new YachtSyncPro_Options();
 
         $YSP_Euro_Opt = $YSP_Options->get('is_euro_site');
     ?>
@@ -86,7 +86,7 @@ get_header();
                     <div class="yacht-main-info">
                         <div class="yacht-length">
                             <div class="yacht-length-text">
-                                <img src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/arrow-left-right.png" alt="length-icon" />
+                                <img src="<?php echo YSP_ASSETS; ?>images/arrow-left-right.png" alt="length-icon" />
                                 <p>Length</p>
                             </div>
                             <div class="yacht-length-value">
@@ -95,7 +95,7 @@ get_header();
                         </div>
                         <div class="yacht-beam">
                             <div class="yacht-beam-text">
-                                <img src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/arrow-left-right.png" alt="beam-icon" />
+                                <img src="<?php echo YSP_ASSETS; ?>images/arrow-left-right.png" alt="beam-icon" />
                                 <p>Beam</p>
                             </div>
                             <div class="yacht-beam-value">
@@ -104,7 +104,7 @@ get_header();
                         </div>
                         <div class="yacht-cabins">
                             <div class="yacht-cabins-text">
-                                <img src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/bed-double.png" alt="bed-icon" />
+                                <img src="<?php echo YSP_ASSETS; ?>images/bed-double.png" alt="bed-icon" />
                                 <p>Cabins</p>
                             </div>
                             <div class="yacht-cabins-value">
@@ -113,7 +113,7 @@ get_header();
                         </div>
                         <div class="yacht-guests">
                             <div class="yacht-guests-text">
-                                <img src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/users.png" alt="beam-icon" />
+                                <img src="<?php echo YSP_ASSETS; ?>images/users.png" alt="beam-icon" />
                                 <p>Guests</p>
                             </div>
                             <div class="yacht-guests-value">
@@ -123,31 +123,32 @@ get_header();
                     </div>
                 </div>
                 <div class="yacht-download-brochure-container">
-                    <a rel="nofollow" href="<?php echo get_rest_url(); ?>raiys/yacht-pdf-loader?yacht_post_id=<?php echo get_the_ID(); ?>" target="_blank">
+                    <a rel="nofollow" href="<?php echo get_rest_url(); ?>ysp/yacht-pdf-loader?yacht_post_id=<?php echo get_the_ID(); ?>" target="_blank">
                         <button class="yacht-download-button">
-                            <img src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/download.png" alt="download-icon" />
+                            <img src="<?php echo YSP_ASSETS; ?>images/download.png" alt="download-icon" />
                             Download Brochure
                         </button>
                     </a>
-                    <div id="video-gallery">
+
                         <?php 
                             if(isset($vessel->Videos)) {
                                 $videoUrls = $vessel->Videos->url;
-                                foreach($videoUrls as $aindex => $video) { 
-                        ?>
-                            <a data-src="<?php echo $video;?>">
-                                Open Video
-                            </a>
-                        <?php   
+                                
+                                foreach($videoUrls as $aindex => $video) { ?>
+                                    <a data-src="<?php echo $video;?>">
+                                        <button  class="yacht-download-button" type="button">
+                                            Open Video <?= ($aindex+1) ?>
+                                        </button>
+                                    </a>
+                                
+                                <?php   
+                                
                                 }
                             }
                         ?>
-                    </div>
-
-                    <div>
+                
                         <button class="yacht-download-button" type="button" data-modal="#single-share">Share </button>
 
-                    </div>
                 </div>
                 
                     
@@ -161,7 +162,7 @@ get_header();
                     }
                     
                     $brokerQueryArgs = array(
-                        'post_type' => 'rai_broker',
+                        'post_type' => 'ysp_team',
                         'posts_per_page' => 1,
 
                         'meta_query' => [
@@ -173,7 +174,7 @@ get_header();
 
                     foreach ($BrokerNames as $bName) {
                         $brokerQueryArgs['meta_query']['name'][]=[
-                            'key' => 'rai_broker_fname',
+                            'key' => 'ysp_team_fname',
                             'compare' => 'LIKE',
                             'value' => $bName,
                         ];
@@ -181,7 +182,7 @@ get_header();
 
                     foreach ($BrokerNames as $bName) {
                         $brokerQueryArgs['meta_query']['name'][]=[
-                            'key' => 'rai_broker_lname',
+                            'key' => 'ysp_team_lname',
                             'compare' => 'LIKE',
                             'value' => $bName,
                         ];
@@ -194,10 +195,10 @@ get_header();
                     }
                     else {
                         $mainBrokerQueryArgs = array(
-                            'post_type' => 'rai_broker',
+                            'post_type' => 'ysp_team',
                             'meta_query' => array(
                                 array(
-                                    'key' => 'rai_main_broker',
+                                    'key' => 'ysp_main_broker',
                                     'value' => '1',
                                 ),
                             ),
@@ -205,8 +206,6 @@ get_header();
                         );
 
                         $brokerQuery = new WP_Query($mainBrokerQueryArgs);
-
-
                     }
                     
 
@@ -214,17 +213,25 @@ get_header();
                         while ($brokerQuery->have_posts()) {
                             $brokerQuery->the_post();
 
-                            $broker_first_name = get_post_meta($post->ID, 'rai_broker_fname', true);
-                            $broker_last_name = get_post_meta($post->ID, 'rai_broker_lname', true);
-                            $broker_email = get_post_meta($post->ID, 'rai_broker_email', true);
-                            $broker_phone = get_post_meta($post->ID, 'rai_broker_phone', true);
+                            $broker_first_name = get_post_meta($post->ID, 'ysp_team_fname', true);
+                            $broker_last_name = get_post_meta($post->ID, 'ysp_team_lname', true);
+                            $broker_email = get_post_meta($post->ID, 'ysp_team_email', true);
+                            $broker_phone = get_post_meta($post->ID, 'ysp_team_phone', true);
                             ?>
                             <div class="yacht-mobile-broker-container">
-                            <a class="broker-anchor" href="<?php the_permalink(); ?>">
-                                <div class="broker-profile-image"><img src="<?php echo esc_url(get_the_post_thumbnail_url()); ?>" alt="" style="width:120px; height:120px;" /></div>
+                                <div class="broker-profile-image">
+                                    <a href="<?= get_the_permalink(); ?>">
+                                        <img src="<?php echo esc_url(get_the_post_thumbnail_url()); ?>" alt="" style="width:120px; height:120px; object-fit: cover;" />
+                                    </a>
+                                </div>
+
                                 <div class="broker-info">
-                                    <p class="broker-name"><?php echo ($broker_first_name . " " . $broker_last_name); ?></p>
-                                     </a>
+                                    <p class="broker-name">
+                                        <a href="<?= get_the_permalink(); ?>">
+                                            <?php echo ($broker_first_name . " " . $broker_last_name); ?>    
+                                        </a>
+                                    </p>
+                                     
                                     <p class="broker-title">Broker</p>
                                     <p class="broker-email"><a href="mailto:<?php echo $broker_email; ?>"><?php echo $broker_email; ?></a></p>
                                     <p class="broker-phone"><a href="tel:<?php echo $broker_phone; ?>"><?php echo $broker_phone; ?></a></p>
@@ -290,7 +297,14 @@ get_header();
                         Description
                     </p>
                     <div class="yacht-description-value">
-                        <?php if (isset($vessel->GeneralBoatDescription)) { echo join(" ", $vessel->GeneralBoatDescription); } ?>
+                        <?php 
+                            if (isset($vessel->GeneralBoatDescription) && is_array($vessel->GeneralBoatDescription)) { 
+                                echo join(" ", $vessel->GeneralBoatDescription); 
+                            }
+                            elseif (isset($vessel->GeneralBoatDescription) && is_string($vessel->GeneralBoatDescription)) {
+                                echo $vessel->GeneralBoatDescription;
+                            } 
+                        ?>
                     </div>
                 </div>
                <!--  <div class="yacht-specs-container">
@@ -338,7 +352,7 @@ get_header();
                                 General Info
                             </p>
                             <p class="yacht-accordion-arrow">
-                                <img class="yacht-arrow" src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/chevron-down.png" alt="down-arrow-icon" />
+                                <img class="yacht-arrow" src="<?php echo YSP_ASSETS; ?>images/chevron-down.png" alt="down-arrow-icon" />
                             </p>
                         </div>
                         <div class="yacht-accordion-display">
@@ -355,7 +369,7 @@ get_header();
                                 Measurements
                             </p>
                             <p class="yacht-accordion-arrow">
-                                <img class="yacht-arrow" src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/chevron-down.png" alt="down-arrow-icon" />
+                                <img class="yacht-arrow" src="<?php echo YSP_ASSETS; ?>images/chevron-down.png" alt="down-arrow-icon" />
                             </p>
                         </div>
                         <div class="yacht-accordion-display">
@@ -369,7 +383,7 @@ get_header();
                                     Engine 1
                                 </p>
                                 <p class="yacht-accordion-arrow">
-                                    <img class="yacht-arrow" src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/chevron-down.png" alt="down-arrow-icon" />
+                                    <img class="yacht-arrow" src="<?php echo YSP_ASSETS; ?>images/chevron-down.png" alt="down-arrow-icon" />
                                 </p>
                             </div>
                             <div class="yacht-accordion-display">
@@ -387,7 +401,7 @@ get_header();
                                     Engine 2
                                 </p>
                                 <p class="yacht-accordion-arrow">
-                                    <img class="yacht-arrow" src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/chevron-down.png" alt="down-arrow-icon" />
+                                    <img class="yacht-arrow" src="<?php echo YSP_ASSETS; ?>images/chevron-down.png" alt="down-arrow-icon" />
                                 </p>
                             </div>
                             <div class="yacht-accordion-display">
@@ -405,7 +419,7 @@ get_header();
                                     Engine 3
                                 </p>
                                 <p class="yacht-accordion-arrow">
-                                    <img class="yacht-arrow" src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>images/chevron-down.png" alt="down-arrow-icon" />
+                                    <img class="yacht-arrow" src="<?php echo YSP_ASSETS; ?>images/chevron-down.png" alt="down-arrow-icon" />
                                 </p>
                             </div>
                             <div class="yacht-accordion-display">
@@ -423,76 +437,29 @@ get_header();
             <div class="secondary-container">
                 <div class="secondary-sub-container">
                 <?php
-                    if (isset($vessel->SalesRep->Name)) {
-                        $brokerNameFromApi = $vessel->SalesRep->Name;
-                        $BrokerNames = explode(' ', $brokerNameFromApi);                        
-                    }
-                    else {
-                        $BrokerNames = [];
-                    }
-
-                    $brokerQueryArgs = array(
-                        'post_type' => 'rai_broker',
-                        'posts_per_page' => 1,
-
-                        'meta_query' => [
-                            'name' => [
-                                'relation' => 'OR'
-                            ],
-                        ],
-                    );
-
-                    foreach ($BrokerNames as $bName) {
-                        $brokerQueryArgs['meta_query']['name'][]=[
-                            'key' => 'broker_fname',
-                            'compare' => 'LIKE',
-                            'value' => $bName,
-                        ];
-                    }
-
-                    foreach ($BrokerNames as $bName) {
-                        $brokerQueryArgs['meta_query']['name'][]=[
-                            'key' => 'broker_lname',
-                            'compare' => 'LIKE',
-                            'value' => $bName,
-                        ];
-                    }
-
-                    $brokerQuery = new WP_Query($brokerQueryArgs);
-
-                    if ($brokerQuery->have_posts()) {
-
-                    }
-                    else {
-                        $mainBrokerQueryArgs = array(
-                            'post_type' => 'rai_broker',
-                            'meta_query' => array(
-                                array(
-                                    'key' => 'rai_main_broker',
-                                    'value' => '1',
-                                ),
-                            ),
-                            'posts_per_page' => 1,
-                        );
-
-                        $brokerQuery = new WP_Query($mainBrokerQueryArgs);
-
-
-                    }
 
                     if ($brokerQuery->have_posts()) {
                         while ($brokerQuery->have_posts()) {
                             $brokerQuery->the_post();
 
-                            $broker_first_name = get_post_meta($post->ID, 'rai_broker_fname', true);
-                            $broker_last_name = get_post_meta($post->ID, 'rai_broker_lname', true);
-                            $broker_email = get_post_meta($post->ID, 'rai_broker_email', true);
-                            $broker_phone = get_post_meta($post->ID, 'rai_broker_phone', true);
+                            $broker_first_name = get_post_meta($post->ID, 'ysp_team_fname', true);
+                            $broker_last_name = get_post_meta($post->ID, 'ysp_team_lname', true);
+                            $broker_email = get_post_meta($post->ID, 'ysp_team_email', true);
+                            $broker_phone = get_post_meta($post->ID, 'ysp_team_phone', true);
                             ?>
                             <div class="broker-info-container">
-                                <div class="broker-profile-image"><img src="<?php echo esc_url(get_the_post_thumbnail_url()); ?>" alt="" style="width:120px; height:120px;" /></div>
+                                <div class="broker-profile-image">
+                                    <a href="<?= get_the_permalink(); ?>">
+                                        <img src="<?php echo esc_url(get_the_post_thumbnail_url()); ?>" alt="" style="width:120px; height:120px; object-fit: cover;" />
+                                    </a>
+                                </div>
                                 <div class="broker-info">
-                                    <p class="broker-name"><?php echo ($broker_first_name . " " . $broker_last_name); ?></p>
+                                    <p class="broker-name">
+                                        <a href="<?= get_the_permalink(); ?>">
+                                            <?php echo ($broker_first_name . " " . $broker_last_name); ?>
+                                        </a>                                    
+                                    </p>
+
                                     <p class="broker-title">Broker</p>
                                     <p class="broker-email"><a href="mailto:<?php echo $broker_email; ?>"><?php echo $broker_email; ?></a></p>
                                     <p class="broker-phone"><a href="tel:<?php echo $broker_phone; ?>"><?php echo $broker_phone; ?></a></p>
@@ -564,7 +531,7 @@ get_header();
 
                 <?php
                     $yachtQuery = new WP_Query(array(
-                        'post_type' => 'rai_yacht',
+                        'post_type' => 'ysp_yacht',
                         'similar_listings_to' => get_the_ID(),
 
                         'posts_per_page' => 3,
@@ -632,19 +599,19 @@ $image = $vessel->Images[0];
 <div class="modal-socials">
     <div class="modal-social-icon">
         <a href="mailto:?subject=<?php echo urlencode($vessel->ModelYear . ' ' . $vessel->MakeString . ' ' . $vessel->BoatName); ?>&body=<?php echo get_the_permalink(); ?>" style="text-decoration: none; color: black;">
-            <img src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>/icons/send.svg" alt="Email" style="width: 20px; height: 20px;">
+            <img src="<?php echo YSP_ASSETS; ?>/icons/send.svg" alt="Email" style="width: 20px; height: 20px;">
             <p class="modal-social"> Email </p>
         </a>
     </div>
     <div class="modal-social-icon">
         <a class="yacht-brochure" onclick="window.open('http://www.facebook.com/sharer/sharer.php?u=<?php echo get_the_permalink(); ?>&t=<?php echo urlencode($vessel->ModelYear . ' ' . $vessel->MakeString . ' ' . $vessel->BoatName); ?>', '_blank');" target="_blank" style="text-decoration: none; color: black;">
-            <img src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>/icons/facebook.svg" alt="Facebook Icon" style="width: 20px; height: 20px;">
+            <img src="<?php echo YSP_ASSETS; ?>/icons/facebook.svg" alt="Facebook Icon" style="width: 20px; height: 20px;">
             <p class="modal-social"> Facebook </p>
         </a>
     </div>
     <div class="modal-social-icon">
         <a href="http://twitter.com/share?url=<?php echo get_the_permalink(); ?>&text=<?php echo urlencode($vessel->ModelYear . ' ' . $vessel->MakeString . ' ' . $vessel->BoatName); ?>" target="_blank" style="text-decoration: none; color: black;">
-            <img src="<?php echo RAI_YS_PLUGIN_ASSETS; ?>/icons/twitter.svg" alt="Twitter Icon" style="width: 20px; height: 20px;">
+            <img src="<?php echo YSP_ASSETS; ?>/icons/twitter.svg" alt="Twitter Icon" style="width: 20px; height: 20px;">
             <p class="modal-social"> Twitter </p>
         </a>
     </div>

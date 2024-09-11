@@ -7,7 +7,7 @@
 	function ct_yacht_details_title($title) {
 		global $wp_query, $post;
 
-		if (is_singular('rai_yacht')) {
+		if (is_singular('ysp_yacht')) {
 
 		}
 
@@ -18,7 +18,7 @@
 	function ct_yacht_details_description($desc) {
 		global $wp_query, $post;
 
-		if (is_singular('rai_yacht')) {
+		if (is_singular('ysp_yacht')) {
 
 			
 			
@@ -30,7 +30,7 @@
 	function ct_yacht_details_ogimage($object) {
 		global $wp_query, $post;
 
-		if (is_singular('rai_yacht')) {
+		if (is_singular('ysp_yacht')) {
 			$VesselImages=get_post_meta($post->ID, 'Images', true);
 
 			$image = ['url' => $VesselImages[3]->Uri];

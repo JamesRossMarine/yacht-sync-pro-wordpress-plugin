@@ -20,22 +20,30 @@ get_header();
         <div class="ysp-single-broker">
             <div class="broker-main-container">
                 <h2 class="our-team">Our Team</h2>
+                
                 <div class="broker-info-container">
                     <div class="broker-image-general-container">
                         <div class="broker-image">
                             <img src="<?php echo esc_url(get_the_post_thumbnail_url())?>" alt="profile-picture" />
                         </div>
                         <div class="broker-general-info">
-                            <p class="broker-name"><?php echo($meta["rai_broker_fname"] . " " . $meta["rai_broker_lname"]); ?></p>
+                            <p class="broker-name"><?php echo($meta["ysp_team_fname"] . " " . $meta["ysp_team_lname"]); ?></p>
                             <p class="broker-title">Broker</p>
-                            <p class="broker-email"><?php echo($meta["rai_broker_email"]); ?></p>
-                            <p class="broker-phone"><?php echo($meta["rai_broker_phone"]); ?></p>
+                            <p class="broker-email"><?php echo($meta["ysp_team_email"]); ?></p>
+                            <p class="broker-phone"><?php echo($meta["ysp_team_phone"]); ?></p>
                         </div>
                     </div>
                     <div class="broker-general-description-container">
                         <?php the_content(); ?>
                     </div>
                 </div>
+
+                <h2 class="our-team">
+                    <?php echo($meta["ysp_team_fname"] . " " . $meta["ysp_team_lname"]); ?>'s Listings
+                </h2>
+
+                <?php echo do_shortcode('[ys-featured-listings ys_broker_name="'. $meta['ysp_team_fname'] .' '. $meta['ysp_team_lname'] .'"][/ys-featured-listings]'); ?>
+
             </div>
             <div class="second-main-container">
                 <div class="broker-form-container">

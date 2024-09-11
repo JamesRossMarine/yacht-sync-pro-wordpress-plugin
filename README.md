@@ -4,24 +4,65 @@
 
 Yacht Sync Pro, our WordPress plugin, is a new way to integrate three major MLS feeds (YachtWorld, YachtBroker, and/or Yatco) natively into your WordPress site. Benefit from SEO tactics, easy-to-use shortcodes, and the ability to customize templates.
 
-## Top 5 Features
+## Demo Site
 
-- Imports Three Major MLS API Feeds Into Custom WordPress Post-Type
-- Clean URLs for detail and search pages
-- AI SEO For Yacht Detail Pages Meta Descriptions
-- Easy to use Gutenberg blocks and shortcodes for search elements
-- PDF Brochure Yacht Listings
-- Fast yacht search around and has great SEO compatibility 
+Review the array of features offered by Yacht Sync Pro.
+
+[https://yspdemo.yachtsforsale.dev/](https://yspdemo.yachtsforsale.dev/ )
+
+## Top Features
+
+	
+1. Imports Three Major MLS API Feeds Into Custom WordPress Post-Type 
+    1. Compatible MLS API Feeds - Boat Wizard, IYBA, and/or Yatco
+    2. Since we import data, we don't rely on constant API connections to deliver search and detail pages. Meaning fewer outages for users. 
+    3. Fail Safes And Alerts
+        1. If a sync fails, the past data stays up, and you are also alerted as to why the sync failed. 
+        2. If a sync is “successful” / false positive and the number of vessels drops below the allowed amount, you will be alerted. 
+    4. Can run imports for multiple API tokens!
+        3. Got two boat wizard API keys, no problem!
+        4. Got IYBA and Boat Wizard API keys, no problem.  
+We merge the data via hull IDs  
+
+2. Fast and feature-packed yacht search pages
+    1. Multi-Select Filtering
+    2. Mobile-friendly Search Overlay 
+    2. Amazing Keyword Search 
+    4. 300-500ms Return For Results 
+
+3. Clean URLs for detail and search pages 
+    1. An example of this in detail pages is no ID needed 
+    2. An example of this search would look like this /search/condition-used/brand-viking/ 
+
+4. Using AI Generate to generate unique text points for metadata and short content
+    1. For Example - Yacht Detail Pages Meta Descriptions From Context Of MLS Data
+    2. For Example - Headings And Paragraphs about search results with backlinks to blog posts. 
+ 
+5. Easy to use Gutenberg blocks and shortcodes for placing search elements on pages
+    1. Easy to use template filters for (child) themes to use. 
+
+6. PDF Brochure For Yacht Details
+    1. Can generate multiple different gallery sizes (currently, when logged in)
+
 
 ## More Features
 
-- ChatGPT is used for content generation
-- Currency exchange used for pricing conventions 
+- ChatGPT is used for meta-description generation
+- Currency exchange used for pricing conversions 
 - URLBox is used for PDF Rendering
-- Full Template Customization 
+- S3 storage for PDFs
+- Compatibility with Divi and Elementor for basic yacht and broker detail pages 
+- Compatibility with Yoast. 
+- Full Template Customization
 - Basic Lead Forms
-- Broker Features
-- Detail pages
+- Akismet SPAM Protection For Lead Forms
+- Broker Post-Type With Meta Fields (Name, Email, Phone And Bio)
+- Manual Entry Of Vessels 
+- Similar Listings Section And Query
+- Mobile-friendly search
+- Like features
+- Compare tool
+
 
 ## Featured Sites With The Plugin
 
@@ -32,13 +73,13 @@ Yacht Sync Pro, our WordPress plugin, is a new way to integrate three major MLS 
 
 ## Credits
 
-- **Developers**: [Joshua Hoffman](https://joshuahoffman.me), Brandon Creed, and Hauk Atkinson.
+- **Developers**: [Joshua Hoffman](https://joshuahoffman.me), [Brandon Creed](https://github.com/brcre001), and Hauk Atkinson.
 - **Special thanks** to Olivier Solon for project wrangling.
 - **Special thanks** to Neil Ross for Supporting and Funding.
 
 ## Hosting Recommendation
 
-We recommend our excellent hosting partner, [Convesio.com](https://convesio.com); from their incredible prices on cloud hosting to their 24/7 support via Slack, we can genuinely recommend them, knowing they will provide great service.
+We recommend our excellent hosting partner, [Convesio.com](https://convesio.com); from their incredible prices on cloud hosting to their 24/7 support via Slack, we can genuinely recommend them.
 
 ## Development Recommendations
 
@@ -47,8 +88,8 @@ We thank and recommend [Build The Internets](https://buildtheinternets.com) for 
 ## Developer Note Below
 
 ## Post Types
-<li>rai_yacht</li>
-<li>rai_broker</li>
+<li>ysp_yacht</li>
+<li>ysp_team</li>
 
 ## Shortcodes
 <li>ys-quick-search</li>
@@ -60,24 +101,24 @@ We thank and recommend [Build The Internets](https://buildtheinternets.com) for 
 <li>ys-featured-listings</li>
 
 ## Filters
-<li>rai_ys_v_yacht_search_template</li>
-<li>rai_ys_v_super_yacht_search_template</li>
-<li>rai_ys_h_yacht_search_template</li>
-<li>rai_ys_quick_search_results_template</li>
-<li>rai_ys_h_quick_search_results_template</li>
-<li>rai_ys_featured_yacht_results_template</li>
-<li>rai_ys_yacht_results_template</li>
+<li>ysp_ys_v_yacht_search_template</li>
+<li>ysp_ys_v_super_yacht_search_template</li>
+<li>ysp_ys_h_yacht_search_template</li>
+<li>ysp_ys_quick_search_results_template</li>
+<li>ysp_ys_h_quick_search_results_template</li>
+<li>ysp_ys_featured_yacht_results_template</li>
+<li>ysp_ys_yacht_results_template</li>
 
 
 ## WP REST API
-<li>/raiys/sync</li>
-<li>/raiys/yachts</li>
-<li>/raiys/list-options</li>
-<li>/raiys/yacht-pdf</li>
-<li>/raiys/yacht-pdf-loader</li>
-<li>/raiys/yacht-pdf-download</li>
-<li>/raiys/yacht-lead</li>
-<li>/raiys/broker-lead</li>
+<li>/ysp/sync</li>
+<li>/ysp/yachts</li>
+<li>/ysp/list-options</li>
+<li>/ysp/yacht-pdf</li>
+<li>/ysp/yacht-pdf-loader</li>
+<li>/ysp/yacht-pdf-download</li>
+<li>/ysp/yacht-lead</li>
+<li>/ysp/broker-lead</li>
 
 ## Commands
 <li>wp sync-yachts</li>

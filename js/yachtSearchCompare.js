@@ -81,15 +81,23 @@ function ysp_removeVesselToCompareList(yachtId) {
 function ysp_makeCompareLinkout() {
 
     if (YSP_VesselCompareList.length >= 2) {
-    	document.getElementById('ysp_compare_linkout').href=rai_yacht_sync.wp_rest_url+"raiys/compare/?postID="+YSP_VesselCompareList.join(',');
+        if (document.getElementById('ysp_compare_linkout')) {
+            document.getElementById('ysp_compare_linkout').href=ysp_yacht_sync.wp_rest_url+"ysp/compare/?postID="+YSP_VesselCompareList.join(',');
+    	    document.getElementById('ysp_compare_linkout').innerHTML=`<button type="button">Compare ( ${YSP_VesselCompareList.length} )</button>`;
+        }
 
-    	document.getElementById('ysp_compare_linkout').innerHTML=`<button type="button">Compare ( ${YSP_VesselCompareList.length} )</button>`;
+        if (document.getElementById('ysp_compare_linkout_mobile')) {
+            document.getElementById('ysp_compare_linkout_mobile').href=ysp_yacht_sync.wp_rest_url+"ysp/compare/?postID="+YSP_VesselCompareList.join(',');
+    	    document.getElementById('ysp_compare_linkout_mobile').innerHTML=`<button type="button">Compare ( ${YSP_VesselCompareList.length} )</button>`;
+        }
         
         let params = {
             'post__in': YSP_VesselCompareList,
         };
 
-        return rai_ysp_api.call_api("POST", "yachts", params).then(function(data_result) {
+        return ysp_api.call_api("POST", "yachts", params).then(function(data_result) {
+
+            jQuery('#ysp-compare-previews').html('');
 
             data_result.results.forEach(function(item) {
                 jQuery('#ysp-compare-previews').append( ysp_templates.yacht.compare_preview(item, params) );
@@ -117,6 +125,7 @@ function ysp_makeCompareLinkout() {
     else {
         jQuery('#ysp-compare-previews').html('');
         jQuery('#ysp_compare_linkout').html('');
+        jQuery('#ysp_compare_linkout_mobile').html('');
     }
 
 
