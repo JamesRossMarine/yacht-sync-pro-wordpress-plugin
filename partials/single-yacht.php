@@ -129,14 +129,16 @@ get_header();
                             Download Brochure
                         </button>
                     </a>
-                    <div id="video-gallery">
+
                         <?php 
                             if(isset($vessel->Videos)) {
                                 $videoUrls = $vessel->Videos->url;
                                 
                                 foreach($videoUrls as $aindex => $video) { ?>
-                                    <a class="yacht-download-button" data-src="<?php echo $video;?>">
-                                        Open Video
+                                    <a data-src="<?php echo $video;?>">
+                                        <button  class="yacht-download-button" type="button">
+                                            Open Video <?= ($aindex+1) ?>
+                                        </button>
                                     </a>
                                 
                                 <?php   
@@ -144,12 +146,9 @@ get_header();
                                 }
                             }
                         ?>
-                    </div>
-
-                    <div>
+                
                         <button class="yacht-download-button" type="button" data-modal="#single-share">Share </button>
 
-                    </div>
                 </div>
                 
                     

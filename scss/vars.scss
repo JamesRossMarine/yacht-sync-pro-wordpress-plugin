@@ -31,10 +31,10 @@ $broker-row-gap: 40px;
 $max-width: 1440px;
 
 :root {
-    --main-text-color: #334155;
-    --main-background-color: #94A3B8;
-    --secondary-text-color: #334155;
-    --secondary-background-color: #94A3B8;
+    --main-text-color: inherit;
+    --main-background-color: inhert;
+    --secondary-text-color: inherit;
+    --secondary-background-color: inherit;
     --white: #FFFFFF;
 
     --button-bg-color: #94A3B8;

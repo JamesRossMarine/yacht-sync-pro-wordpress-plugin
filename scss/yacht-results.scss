@@ -265,8 +265,8 @@
                 cursor: pointer;
 
                 &.loved path {
-                    stroke: #f38121;
-                    fill: #f38121;
+                    stroke: $button-bg-color;
+                    fill: $button-bg-color;
                 }
             }
 
