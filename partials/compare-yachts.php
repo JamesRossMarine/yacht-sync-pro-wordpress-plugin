@@ -18,12 +18,17 @@
     $YSP_logo = $YSP_Options->get('company_logo');
     $YSP_Comapny_logo = $YSP_Options->get('company_logo');;
     $company_logo_url = wp_get_attachment_image_url($YSP_Comapny_logo, 'full');
+
+    $search_page_url= get_permalink($YSP_Options->get('yacht_search_page_id'));
 ?>
 <div class="ysp-compare-yachts-container">
     <h1 style="text-align: center; margin: 20px 0px;">Compare Yachts</h1>
 
     <p style="text-align: center;">     
-        <a href="<?= get_site_url() . '/yacht-search/?restore_to_compare='. $_GET["postID"] ?>"><img src="<?= YSP_ASSETS ?>images/blue_arrow_left.svg" alt="Back" title="Back" width="22" height="22" /> Back To Search</a>
+        <a href="<?= $search_page_url ?>">
+            <img src="<?= YSP_ASSETS ?>images/blue_arrow_left.svg" alt="Back" title="Back" width="22" height="22" /> 
+            Back To Search
+        </a>
     </p>
 
     <!-- <div class="ysp-compare-logo-container">
@@ -189,9 +194,13 @@
             <tr>
                 <th>Action</th>
 
-                <?php foreach ($boats as $boat_post) : ?>
+                <?php foreach ($boats as $boat_post) : 
+                    $current_url = $actual_link = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                    $link=str_replace([$boat_post->ID.',', ','.$boat_post->ID, $boat_post->ID], ['', '', ''], $current_url);
+
+                    ?>
                     <td>
-                        <a class="ysp-remove-button" href="<?php echo remove_query_arg($boat_post->ID, false); ?>" class="button-link">
+                        <a class="ysp-remove-button" href="<?php echo $link; ?>" class="button-link">
                             Remove Yacht
                         </a>
                     </td>
@@ -200,5 +209,9 @@
 
         </tbody>
     </table>
+
+    <p style="text-align: center;">
+        <a href="javascript: window.print();">Print This Out</a>
+    </p>
 </div>
 <?php get_footer(); 
