@@ -62,57 +62,37 @@
 
     .ysp-yacht-compare-supporting-container {
         width: 100%;
-        display: flex;
-        padding-top: 381px;
-        border: 1px solid #FFFFFF;
+        border: 1px solid #D1D5DB;
 
-        .ysp-yacht-compare-keys {
-            width: 20%;
+        tbody tr{
+            width: 100%;
+            text-align: center;
+            padding: 10px 0px;
+            width: 100%;
+            margin: 0px;
 
-            p {
-                width: 100%;
-                text-align: center;
-                padding: 10px 0px;
-                width: 100%;
-                margin: 0px;
-    
-                &:nth-child(even) {
-                    background-color: #d8d8d8;
-                }
+            background: #fff;
+
+            td{
+
+            }
+
+            &:nth-child(even) {
+                background-color: #F0F5FA;
             }
         }
-    
-        .ysp-compare-info{
-            width: 80%;
-            display: flex;
 
-            .ysp-yacht-compare-info {
-                flex-grow: 1;
-                width: 100%;
+        .ysp-remove-button {
+            padding: 10px 15px;
+            color: $button-text-color;
+            background-color: $button-bg-color;
+            border-radius: 3px;
+            text-decoration: none;
+            margin: 0px auto;
 
-                p {
-                    width: 100%;
-                    padding: 10px 0px;
-                    margin: 0px;
-    
-                    &.compare-img {
-                        padding: 0px !important;
-                    }
-    
-                    &:nth-child(even) {
-                        background-color: #d8d8d8;
-            
-                    }
-                }
-
-                .ysp-remove-button {
-                    padding: 10px 15px;
-                    color: #FFFFFF;
-                    background-color: #EE4B2B;
-                    border-radius: 3px;
-                    text-decoration: none;
-                    margin: 0px auto;
-                }
+            &:hover{
+                color: $button-text-color;
+                background-color: $button-bg-color;
             }
         }
     }

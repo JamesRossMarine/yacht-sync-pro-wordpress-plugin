@@ -84,8 +84,9 @@
     </div>
 
     <div id="yachts-compare-bar">
-        <a href="" id="ysp_compare_linkout"></a>
         <div id="ysp-compare-previews" class="d-flex"></div>
+        <br />
+        <a href="" id="ysp_compare_linkout"></a>
     </div>
 </section>
 
