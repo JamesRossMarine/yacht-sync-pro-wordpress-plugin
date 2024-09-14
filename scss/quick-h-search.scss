@@ -1,86 +1,118 @@
-#quick-h-search-container {
-    border: 1px solid #000;
-    padding: 10px;
-
-    width: 100%;
-    
-    max-width: 1200px;
-    margin: auto;
-
-    form#ysp-quick-h-search-form {
-        display: flex;
-    
-        @media  screen and (max-width: $breakpoint-med ) {
-            flex-direction: column;
-        }
+#quick-h-search-container{
+    //max-width: $max-width;
+    margin-right: auto;
+    margin-left: auto;
+    @media  screen and (max-width: $breakpoint-x-large) {
+        margin-top: 30px;
     }
 
-    .ys-quick-row-item {
-        flex-direction: row;
-        margin-bottom: 10px;
-        padding: 10px;
-        border: none;
+    .ys-h-row {
+        display: flex !important;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 10px;
 
-        label {
-            order: 1;
-            width: 70px;
-            margin-right: 10px;
-            text-align: right;
-            color: $main-text-color;
-        }
-
-        .min-max-container {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-        }
-
-        #quick-h-search-container .ys-quick-row-item input[type=number], #quick-h-search-container .ys-quick-row-item select {
-            flex: 1;
-            margin-top: 5px;
-            height: 30px;
-            border: none;
-        }
-        
-        input[type="number"] {
-            height: 30px;
-        }
-        select {
-            height: 30px;
+        .ys-h-row-item {
+            position: relative;
+            flex: 0 0 calc(20% - 10px);
+            box-sizing: border-box;
             width: 100%;
-        }
-        .min-max-container input {
-            width: 45%;
-            border: 1px solid #d9d9d9;
-            @media  screen and (max-width: $breakpoint-med ) {
-                width: 50%;
+
+            @media screen and (max-width: $breakpoint-x-large) {
+                flex: 0 0 calc(25% - 10px);
             }
-        }
-       span {
-            color: $main-text-color;
-        }
-        
-    }
 
-    .submit-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: none;
-        height: 80px;
-        margin: auto;
+            @media screen and (max-width: $breakpoint-large) {
+                flex: 0 0 calc(33% - 10px);
+            }
 
-        input[type="submit"] {
-            width: auto;
-            padding: 10px 20px;
-            background-color: $button-bg-color;
-            color: $button-text-color;
-            border: none;
-            cursor: pointer;
+            @media screen and (max-width: $breakpoint-med) {
+                flex: 0 0 calc(50% - 10px);
+            }
 
-            &:hover{
+            @media screen and (max-width: $breakpoint-small) {
+                flex: 0 0 100%;
+            }
+
+            label {
+                display: block;
+                font-size: 12px;
+                font-weight: 400;
+                line-height: 11px;
+                margin-bottom: 10px;
+            }
+
+            select {
+                padding: 8px 12px;
+                width: 100%;
+                height: 40px;
+                border-radius: 0px;
+                border: 1px solid #D9D9D9;
+                -moz-appearance: none;
+                -webkit-appearance: none;
+            }
+
+            select::-ms-expand {
+                display: none;
+            }
+
+            input, select {
+                padding: 8px 12px;
+                width: 100%;
+                height: 40px;
+                border-radius: 0px;
+                border: 1px solid $button-bg-color;
+            }
+
+            svg.search-icon {
+                position: absolute;
+                right: 12px;
+                top: 33px;
+            }
+
+            svg.dropdown-icon {
+                position: absolute;
+                right: 6px;
+                top: 33px;
+            }
+
+            input[type="submit"] {
                 background-color: $button-bg-color;
                 color: $button-text-color;
+                width: 100%;
+                align-self: end !important;
+                padding: 8px 12px;
+                height: 40px;
+
+                &:hover{
+                    background-color: $button-bg-color;
+                    color: $button-text-color;
+                }
+            }
+            .min-max-container {
+                display: flex;
+                justify-content: space-between;
+                height: 40px;
+                
+                input {
+                    width: 46%;
+                    border: 1px solid $button-bg-color;
+                }
+
+                span {
+                    color: $border-color;
+                    margin-top: 5px;
+                }
+            }
+        }
+
+        .submit-container {
+            label {
+                color: transparent;
+            }
+
+            @media screen and (max-width: $breakpoint-med) {
+                flex: 0 0 100%;
             }
         }
     }
