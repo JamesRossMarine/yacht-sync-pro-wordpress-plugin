@@ -200,6 +200,10 @@
 
                     ?>
                     <td>
+                        <a class="ysp-remove-button" href="<?php echo get_the_permalink($boat_post->ID); ?>" class="button-link">
+                            Yacht Details
+                        </a>
+                        &nbsp;
                         <a class="ysp-remove-button" href="<?php echo $link; ?>" class="button-link">
                             Remove Yacht
                         </a>

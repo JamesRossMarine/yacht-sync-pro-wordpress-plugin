@@ -131,7 +131,7 @@
                 <div>
                     <p class="form-disclaimer">Your privacy is important to us; to learn about how we protect it, read our <a href="#">privacy policy.</a></p>
                 </div>
-                <input class="yacht-form-submit" type="submit" value="Send" />
+                <input class="yacht-form-submit ysp-general-button" type="submit" value="Send" />
             </form>
             <div class="success-message" style="display: none; background-color: #4CAF50; color: #fff; padding: 10px; text-align: center;">
                 <p class="success-messages">Thank you for getting in touch. We will be in touch shortly.</p>

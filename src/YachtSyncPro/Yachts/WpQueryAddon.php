@@ -614,23 +614,26 @@
 
 				}
 
-				if ($this->if_query_var_check($query->get('ys_only_these'))) {
+				if ($this->if_query_var_check($query->get('ys_only_these')) && is_string($query->get('ys_only_these'))) {
+
 					$only_these = explode(',', $query->get('ys_only_these'));
 
-					$yacht_sync_meta_query[] = [
-						'relation' => "OR",
-						[
-							'key' => 'YBDocumentID',
-							'compare' => "IN",
-							'value' => $only_these
-						],
-						
-						[	
-							'key' => 'DocumentID',
-							'compare' => "IN",
-							'value' => $only_these
-						],
-					];
+					if (is_array($only_these)) {
+						$yacht_sync_meta_query[] = [
+							'relation' => "OR",
+							[
+								'key' => 'YBDocumentID',
+								'compare' => "IN",
+								'value' => $only_these
+							],
+							
+							[	
+								'key' => 'DocumentID',
+								'compare' => "IN",
+								'value' => $only_these
+							],
+						];
+					}
 				}
 
 				if ( $this->if_query_var_check($query->get('ys_broker_name')) ) {
