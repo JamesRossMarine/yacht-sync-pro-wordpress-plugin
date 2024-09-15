@@ -24,7 +24,7 @@ var ysp_templates={};
 		}
 
 		return `
-			<div class="yacht-result-grid-item" data-post-id="${ vessel._postID }" data-yacht-id="${ vessel.DocumentID }">
+			<div class="yacht-result-grid-item grid-view" data-post-id="${ vessel._postID }" data-yacht-id="${ vessel.DocumentID }">
 				<div class="yacht-main-image-container">
 					<a class="yacht-details" href="${ vessel._link }">
 						<img class="yacht-main-image" src="${vessel.Images ? vessel.Images[0].Uri : ysp_yacht_sync.assets_url + 'images/default-yacht-image.jpeg'}" alt="yacht-image" loading="lazy" />
