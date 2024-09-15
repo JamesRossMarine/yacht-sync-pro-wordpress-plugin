@@ -192,7 +192,7 @@
             </tr>
 
             <tr>
-                <th>Action</th>
+                <th>Actions</th>
 
                 <?php foreach ($boats as $boat_post) : 
                     $current_url = $actual_link = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
