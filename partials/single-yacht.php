@@ -509,8 +509,9 @@ get_header();
         <div class="similar-listings-container">
             <h3 class="similar-listings-title">
                 Similar Listings
-                <hr/>
             </h3>
+            
+            <hr />
             
             <div class="yacht-similar-listing-row">
 
