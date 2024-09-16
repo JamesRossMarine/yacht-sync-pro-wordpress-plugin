@@ -59,13 +59,14 @@ get_header();
         </div>
 
         <div class="yacht-image-container">
-            <img class="yacht-image" src="<?php echo ($vessel->Images[0]->Uri); ?>" alt="yacht-image-carousel"/>
-            <img class="yacht-image" src="<?php echo ($vessel->Images[1]->Uri); ?>" alt="yacht-image-carousel"/>
-            <img class="yacht-image" src="<?php echo ($vessel->Images[2]->Uri); ?>" alt="yacht-image-carousel"/>
-            <img class="yacht-image" src="<?php echo ($vessel->Images[3]->Uri); ?>" alt="yacht-image-carousel"/>
-            <img class="yacht-image" src="<?php echo ($vessel->Images[4]->Uri); ?>" alt="yacht-image-carousel"/>
-            <img class="yacht-image" src="<?php echo ($vessel->Images[5]->Uri); ?>" alt="yacht-image-carousel"/>
+            <img class="big-image" src="<?php echo ($vessel->Images[0]->Uri); ?>" alt="yacht-image-carousel"/>
             
+            <div class="TwoXTwo">
+                <img class="yacht-image" src="<?php echo ($vessel->Images[1]->Uri); ?>" alt="yacht-image-carousel"/>
+                <img class="yacht-image" src="<?php echo ($vessel->Images[2]->Uri); ?>" alt="yacht-image-carousel"/>
+                <img class="yacht-image" src="<?php echo ($vessel->Images[3]->Uri); ?>" alt="yacht-image-carousel"/>
+                <img class="yacht-image" src="<?php echo ($vessel->Images[4]->Uri); ?>" alt="yacht-image-carousel"/>     
+            </div>
 
 <!-- 
             <div id="lightgallery" class="carousel carousel-main yacht-main-image-container">

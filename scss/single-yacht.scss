@@ -17,11 +17,36 @@
 
 body{ 
     .yacht-image-container {
-        .yacht-image{
-            width: 33%;
+        display: flex;
+        gap: 5px;
 
+        .big-image{
             object-fit: cover;
+            width: 50%;
+
+            border-top-left-radius: 15px;
+            border-bottom-left-radius: 15px;
         }    
+
+        .TwoXTwo{
+            display: flex;
+            flex-wrap: wrap;
+            
+            img{
+                display: block;
+                object-fit: cover;
+                width: 50%;
+                padding: 5px; 
+                
+                &:nth-child(2){
+                    border-top-right-radius: 15px;
+                }
+
+                &:nth-child(4){
+                    border-bottom-right-radius: 15px;
+                }
+            }
+        }
     }
         
         .yacht-main-info-container {
