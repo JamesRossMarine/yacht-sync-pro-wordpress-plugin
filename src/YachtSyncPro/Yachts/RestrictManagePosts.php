@@ -7,9 +7,11 @@
         }
         
         public function add_actions_and_filters() {
+            add_action( 'restrict_manage_posts', array($this, 'ysp_yacht_filtering_by_keyword'), 10, 1 );
             add_action( 'restrict_manage_posts', array($this, 'ysp_yacht_filtering_by_boat_class'), 10, 1 );
             add_action( 'restrict_manage_posts', array($this, 'ysp_yacht_filtering_by_builder'), 10, 1 );
             add_action( 'restrict_manage_posts', array($this, 'ysp_yacht_filtering_by_condition'), 10, 1 );
+            add_action( 'restrict_manage_posts', array($this, 'ysp_yacht_filtering_by_sales_status'), 10, 1 );
             add_action( 'restrict_manage_posts', array($this, 'ysp_yacht_filtering_by_min_length'), 10, 1 );
             add_action( 'restrict_manage_posts', array($this, 'ysp_yacht_filtering_by_max_length'), 10, 1 );
             add_action( 'restrict_manage_posts', array($this, 'ysp_yacht_filtering_by_min_price'), 10, 1 );
@@ -40,6 +42,24 @@
                     'hide_empty' => true,
                 ) );
             }
+        }
+
+        public function ysp_yacht_filtering_by_keyword($post_type) {
+            if($post_type != 'ysp_yacht'){
+                return;
+            }
+            
+            global $wpdb;
+
+            $selected = '';
+            $request_attr = 'ys_keyword';
+
+            if ( isset($_REQUEST[$request_attr]) ) {
+            
+                $selected = $_REQUEST[$request_attr];
+            }
+
+            echo '<input type="text" name="ys_keyword" placeholder="Keyword" value="' . esc_attr($selected) . '" />';
         }
 
         public function ysp_yacht_filtering_by_builder($post_type) {
@@ -100,6 +120,35 @@
             echo '</select>';
         }
 
+        Public function ysp_yacht_filtering_by_sales_status($post_type) {
+            if($post_type != 'ysp_yacht'){
+                return;
+            }
+            
+            global $wpdb;
+
+            $selected = '';
+            $request_attr = 'status';
+            $meta_key = 'SalesStatus';
+
+            if ( isset($_REQUEST[$request_attr]) ) {
+            
+                $selected = $_REQUEST[$request_attr];
+            }
+
+            $results = $this->DBHelper->get_unique_yacht_meta_values($meta_key);
+            
+            echo '<select name="salesstatus">';
+            echo '<option value="">' . __( 'Any Status', 'ysp.local' ) . ' </option>';
+
+            foreach($results as $condition){
+                $select = ($condition == $selected) ? ' selected="selected"':'';
+                echo '<option value="' . $condition . '"' . $select . '>' . $condition . ' </option>';
+            }
+
+            echo '</select>';
+        }
+
         public function ysp_yacht_filtering_by_min_length($post_type) {
             if($post_type != 'ysp_yacht'){
                 return;
@@ -116,7 +165,6 @@
                 $selected = $_REQUEST[$request_attr];
             }
 
-            $results = $this->DBHelper->get_unique_yacht_meta_values($meta_key);
             echo '<input type="number" name="lengthlo" placeholder="Any minimum length (ft)" value="' . esc_attr($selected) . '" />';
         }
 
@@ -136,7 +184,6 @@
                 $selected = $_REQUEST[$request_attr];
             }
 
-            $results = $this->DBHelper->get_unique_yacht_meta_values($meta_key);
             echo '<input type="number" name="lengthhi" placeholder="Any maximum length (ft)" value="' . esc_attr($selected) . '" />';
         }
 
@@ -155,8 +202,6 @@
             
                 $selected = $_REQUEST[$request_attr];
             }
-
-            $results = $this->DBHelper->get_unique_yacht_meta_values($meta_key);
 
             echo '<input type="number" name="pricelo" placeholder="Any minimum price" value="' . esc_attr($selected) . '" />';
         }
@@ -177,7 +222,6 @@
                 $selected = $_REQUEST[$request_attr];
             }
 
-            $results = $this->DBHelper->get_unique_yacht_meta_values($meta_key);
             echo '<input type="number" name="pricehi" placeholder="Any maximum price" value="' . esc_attr($selected) . '" />';
         }
     }

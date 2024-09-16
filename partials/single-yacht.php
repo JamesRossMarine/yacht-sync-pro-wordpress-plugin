@@ -39,89 +39,91 @@ get_header();
 
         $vessel = (object) $vessel; ?>
 
+        <div class="yacht-general-info">
+            <div class="yacht-name-price-info">
+                <h1 class="yacht-title" style="text-align: center;">
+                    <?php echo ($vessel->ModelYear . ' ' . $vessel->MakeString . ' ' . $vessel->BoatName) ?>
+                </h1>
+                <h2 class="yacht-price"  style="text-align: center;">
+                <?php
+                    if ($YSP_Euro_Opt == "yes") {
+                        echo '€' . number_format($vessel->YSP_EuroVal) . ' ' . 'EUR';
+                    } else {
+                        echo '$' . number_format($vessel->YSP_USDVal);
+                    }
+                ?>
+                | <?php echo ($vessel->MakeString); ?> | <?php echo ($vessel->ModelYear) ?>
+                </h2>
+                <br />
+            </div>
+        </div>
+
+        <div class="yacht-image-container">
+            <img class="big-image" src="<?php echo ($vessel->Images[0]->Uri); ?>" alt="yacht-image-carousel"/>
+            
+            <div class="TwoXTwo">
+                <img class="yacht-image" src="<?php echo ($vessel->Images[1]->Uri); ?>" alt="yacht-image-carousel"/>
+                <img class="yacht-image" src="<?php echo ($vessel->Images[2]->Uri); ?>" alt="yacht-image-carousel"/>
+                <img class="yacht-image" src="<?php echo ($vessel->Images[3]->Uri); ?>" alt="yacht-image-carousel"/>
+                <img class="yacht-image" src="<?php echo ($vessel->Images[4]->Uri); ?>" alt="yacht-image-carousel"/>     
+            </div>
+
+<!-- 
+            <div id="lightgallery" class="carousel carousel-main yacht-main-image-container">
+                <?php foreach($vessel->Images as $imageObject) { ?>
+                    <div class="carousel-cell" data-src="<?php echo ($imageObject->Uri); ?>">
+                        <img class="yacht-image" src="<?php echo ($imageObject->Uri); ?>" alt="yacht-image-carousel"/>
+                    </div>
+                <?php } ?>
+            </div> -->
+        </div>
+
+        <div class="yacht-main-info-container">
+            <div class="yacht-main-info">
+                <div class="yacht-length">
+                    <div class="yacht-length-text">
+                        <img src="<?php echo YSP_ASSETS; ?>images/arrow-left-right.png" alt="length-icon" />
+                        <p>Length</p>
+                    </div>
+                    <div class="yacht-length-value">
+                        <p><?php echo empty($vessel->YSP_LOAFeet) ? "N/A" : $vessel->YSP_LOAFeet . "ft / " . $vessel->YSP_LOAMeter . ' m'; ?></p>
+                    </div>
+                </div>
+                <div class="yacht-beam">
+                    <div class="yacht-beam-text">
+                        <img src="<?php echo YSP_ASSETS; ?>images/arrow-left-right.png" alt="beam-icon" />
+                        <p>Beam</p>
+                    </div>
+                    <div class="yacht-beam-value">
+                        <p><?php echo (empty($vessel->YSP_BeamFeet) ? 'N/A' : ($vessel->YSP_BeamFeet . 'ft /' . $vessel->YSP_BeamMeter . ' m')); ?></p>
+                    </div>
+                </div>
+                <div class="yacht-cabins">
+                    <div class="yacht-cabins-text">
+                        <img src="<?php echo YSP_ASSETS; ?>images/bed-double.png" alt="bed-icon" />
+                        <p>Cabins</p>
+                    </div>
+                    <div class="yacht-cabins-value">
+                        <p><?php echo (empty($vessel->CabinsCountNumeric) ? 'N/A' : $vessel->CabinsCountNumeric); ?></p>
+                    </div>
+                </div>
+                <div class="yacht-guests">
+                    <div class="yacht-guests-text">
+                        <img src="<?php echo YSP_ASSETS; ?>images/users.png" alt="beam-icon" />
+                        <p>Guests</p>
+                    </div>
+                    <div class="yacht-guests-value">
+                        <p>13</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <div id="ysp-yacht-details">
             <div class="yacht-main-container">
-                <div class="yacht-general-info">
-                    <div class="yacht-name-price-info">
-                        <h1 class="yacht-title">
-                            <?php echo ($vessel->ModelYear . ' ' . $vessel->MakeString . ' ' . $vessel->BoatName) ?>
-                        </h1>
-                        <h2 class="yacht-price">
-                        <?php
-                            if ($YSP_Euro_Opt == "yes") {
-                                echo '€' . number_format($vessel->YSP_EuroVal) . ' ' . 'EUR';
-                            } else {
-                                echo '$' . number_format($vessel->YSP_USDVal);
-                            }
-                        ?>
-                    </h2>
-                    </div>
-                    <div class="yacht-make-year-info">
-                        <h3 class="yacht-make"><?php echo ($vessel->MakeString); ?></h3>
-                        <p class="vertical-separator">|
-                        <p>
-                        <h3 class="yacht-year"><?php echo ($vessel->ModelYear) ?></h3>
-                    </div>
-                </div>
-                <div class="yacht-image-container">
-                    <div id="lightgallery" class="carousel carousel-main yacht-main-image-container">
-                        <?php foreach($vessel->Images as $imageObject) { ?>
-                            <div class="carousel-cell" data-src="<?php echo ($imageObject->Uri); ?>">
-                                <img class="yacht-image" src="<?php echo ($imageObject->Uri); ?>" alt="yacht-image-carousel"/>
-                            </div>
-                        <?php } ?>
-                    </div>
-                </div>
-                <div class="yacht-nav-image-container">
-                    <div class="carousel carousel-nav">
-                        <?php foreach($vessel->Images as $imageObject) { ?>
-                            <div class="carousel-cell">
-                                <div class="carousel-nav-overlay"></div>
-                                <img class="yacht-image" src="<?php echo ($imageObject->Uri); ?>" alt="yacht-image-nav"/>
-                            </div>
-                        <?php } ?>
-                    </div>
-                </div>
-                <div class="yacht-main-info-container">
-                    <div class="yacht-main-info">
-                        <div class="yacht-length">
-                            <div class="yacht-length-text">
-                                <img src="<?php echo YSP_ASSETS; ?>images/arrow-left-right.png" alt="length-icon" />
-                                <p>Length</p>
-                            </div>
-                            <div class="yacht-length-value">
-                                <p><?php echo empty($vessel->YSP_LOAFeet) ? "N/A" : $vessel->YSP_LOAFeet . "ft / " . $vessel->YSP_LOAMeter . ' m'; ?></p>
-                            </div>
-                        </div>
-                        <div class="yacht-beam">
-                            <div class="yacht-beam-text">
-                                <img src="<?php echo YSP_ASSETS; ?>images/arrow-left-right.png" alt="beam-icon" />
-                                <p>Beam</p>
-                            </div>
-                            <div class="yacht-beam-value">
-                                <p><?php echo (empty($vessel->YSP_BeamFeet) ? 'N/A' : ($vessel->YSP_BeamFeet . 'ft /' . $vessel->YSP_BeamMeter . ' m')); ?></p>
-                            </div>
-                        </div>
-                        <div class="yacht-cabins">
-                            <div class="yacht-cabins-text">
-                                <img src="<?php echo YSP_ASSETS; ?>images/bed-double.png" alt="bed-icon" />
-                                <p>Cabins</p>
-                            </div>
-                            <div class="yacht-cabins-value">
-                                <p><?php echo (empty($vessel->CabinsCountNumeric) ? 'N/A' : $vessel->CabinsCountNumeric); ?></p>
-                            </div>
-                        </div>
-                        <div class="yacht-guests">
-                            <div class="yacht-guests-text">
-                                <img src="<?php echo YSP_ASSETS; ?>images/users.png" alt="beam-icon" />
-                                <p>Guests</p>
-                            </div>
-                            <div class="yacht-guests-value">
-                                <p>13</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
+              
+                
                 <div class="yacht-download-brochure-container">
                     <a rel="nofollow" href="<?php echo get_rest_url(); ?>ysp/yacht-pdf-loader?yacht_post_id=<?php echo get_the_ID(); ?>" target="_blank">
                         <button class="yacht-download-button">
@@ -130,24 +132,24 @@ get_header();
                         </button>
                     </a>
 
-                        <?php 
-                            if(isset($vessel->Videos)) {
-                                $videoUrls = $vessel->Videos->url;
-                                
-                                foreach($videoUrls as $aindex => $video) { ?>
-                                    <a data-src="<?php echo $video;?>">
-                                        <button  class="yacht-download-button" type="button">
-                                            Open Video <?= ($aindex+1) ?>
-                                        </button>
-                                    </a>
-                                
-                                <?php   
-                                
-                                }
+                    <?php 
+                        if(isset($vessel->Videos)) {
+                            $videoUrls = $vessel->Videos->url;
+                            
+                            foreach($videoUrls as $aindex => $video) { ?>
+                                <a data-src="<?php echo $video;?>">
+                                    <button class="yacht-download-button" type="button">
+                                        Open Video <?= ($aindex+1) ?>
+                                    </button>
+                                </a>
+                            
+                            <?php   
+                            
                             }
-                        ?>
-                
-                        <button class="yacht-download-button" type="button" data-modal="#single-share">Share </button>
+                        }
+                    ?>
+            
+                    <button class="yacht-download-button" type="button" data-modal="#single-share">Share</button>
 
                 </div>
                 
@@ -283,7 +285,7 @@ get_header();
                         <div>
                             <p class="form-disclaimer">Your privacy is important to us; to learn about how we protect it, read our <a href="#">privacy policy.</a></p>
                         </div>
-                        <input class="yacht-form-submit" type="submit" value="Send" />
+                        <input class="yacht-form-submit" type="submit" value="Send Message" />
 
 
                     </form>
@@ -348,12 +350,12 @@ get_header();
                     </p>
                     <div class="yacht-details-value">
                         <div class="yacht-accordion-item">
-                            <p class="yacht-accordion-name">
+                            <span class="yacht-accordion-name">
                                 General Info
-                            </p>
-                            <p class="yacht-accordion-arrow">
+                            </span>
+                            <span class="yacht-accordion-arrow">
                                 <img class="yacht-arrow" src="<?php echo YSP_ASSETS; ?>images/chevron-down.png" alt="down-arrow-icon" />
-                            </p>
+                            </span>
                         </div>
                         <div class="yacht-accordion-display">
                             <p class="yacht-accordion-display-item">Make: <span class="yacht-accordion-display-value"><?php echo empty($vessel->MakeString) ? "N/A" : $vessel->MakeString; ?></span></p>
@@ -365,12 +367,12 @@ get_header();
                             <p class="yacht-accordion-display-item">Has Hull ID: <span class="yacht-accordion-display-value"><?php echo empty($vessel->HasBoatHullID) ? "No" : ($vessel->HasBoatHullID == '1' ? 'Yes' : "N/A");  ?></span></p>
                         </div>
                         <div class="yacht-accordion-item">
-                            <p class="yacht-accordion-name">
+                            <span class="yacht-accordion-name">
                                 Measurements
-                            </p>
-                            <p class="yacht-accordion-arrow">
+                            </span>
+                            <span class="yacht-accordion-arrow">
                                 <img class="yacht-arrow" src="<?php echo YSP_ASSETS; ?>images/chevron-down.png" alt="down-arrow-icon" />
-                            </p>
+                            </span>
                         </div>
                         <div class="yacht-accordion-display">
                             <p class="yacht-accordion-display-item">Length: <span class="yacht-accordion-display-value"><?php echo empty($vessel->NominalLength) ? "N/A" : $vessel->NominalLength . " / " . round((float)$vessel->NominalLength * 0.3048, 2) . ' m'; ?></span></p>
@@ -379,12 +381,12 @@ get_header();
                         </div>
                         <?php if (!empty($vessel->Engines[0])) { ?>
                             <div class="yacht-accordion-item">
-                                <p class="yacht-accordion-name">
+                                <span class="yacht-accordion-name">
                                     Engine 1
-                                </p>
-                                <p class="yacht-accordion-arrow">
+                                </span>
+                                <span class="yacht-accordion-arrow">
                                     <img class="yacht-arrow" src="<?php echo YSP_ASSETS; ?>images/chevron-down.png" alt="down-arrow-icon" />
-                                </p>
+                                </span>
                             </div>
                             <div class="yacht-accordion-display">
                                 <p class="yacht-accordion-display-item">Make: <span class="yacht-accordion-display-value"><?php echo empty($vessel->Engines[0]->Make) ? "N/A" : $vessel->Engines[0]->Make; ?></span></p>
@@ -397,12 +399,12 @@ get_header();
                         <?php }
                         if (!empty($vessel->Engines[1])) { ?>
                             <div class="yacht-accordion-item">
-                                <p class="yacht-accordion-name">
+                                <span class="yacht-accordion-name">
                                     Engine 2
-                                </p>
-                                <p class="yacht-accordion-arrow">
+                                </span>
+                                <span class="yacht-accordion-arrow">
                                     <img class="yacht-arrow" src="<?php echo YSP_ASSETS; ?>images/chevron-down.png" alt="down-arrow-icon" />
-                                </p>
+                                </>
                             </div>
                             <div class="yacht-accordion-display">
                                 <p class="yacht-accordion-display-item">Make: <span class="yacht-accordion-display-value"><?php echo empty($vessel->Engines[1]->Make) ? "N/A" : $vessel->Engines[1]->Make; ?></span></p>
@@ -412,25 +414,8 @@ get_header();
                                 <p class="yacht-accordion-display-item">Type: <span class="yacht-accordion-display-value"><?php echo empty($vessel->Engines[1]->Type) ? "N/A" : $vessel->Engines[1]->Type; ?></span></p>
                                 <p class="yacht-accordion-display-item">Engine Hours: <span class="yacht-accordion-display-value"><?php echo empty($vessel->Engines[1]->Hours) ? "N/A" : $vessel->Engines[1]->Hours; ?></span></p>
                             </div>
-                        <?php }
-                        if (!empty($vessel->Engines[2])) { ?>
-                            <div class="yacht-accordion-item">
-                                <p class="yacht-accordion-name">
-                                    Engine 3
-                                </p>
-                                <p class="yacht-accordion-arrow">
-                                    <img class="yacht-arrow" src="<?php echo YSP_ASSETS; ?>images/chevron-down.png" alt="down-arrow-icon" />
-                                </p>
-                            </div>
-                            <div class="yacht-accordion-display">
-                                <p class="yacht-accordion-display-item">Make: <span class="yacht-accordion-display-value"><?php echo empty($vessel->Engines[2]->Make) ? "N/A" : $vessel->Engines[2]->Make; ?></span></p>
-                                <p class="yacht-accordion-display-item">Model: <span class="yacht-accordion-display-value"><?php echo empty($vessel->Engines[2]->Model) ? "N/A" : $vessel->Engines[2]->Model; ?></span></p>
-                                <p class="yacht-accordion-display-item">Fuel: <span class="yacht-accordion-display-value"><?php echo empty($vessel->Engines[2]->Fuel) ? "N/A" : $vessel->Engines[2]->Fuel; ?></span></p>
-                                <p class="yacht-accordion-display-item">Engine Power: <span class="yacht-accordion-display-value"><?php echo empty($vessel->Engines[2]->EnginePower) ? "N/A" : $vessel->Engines[2]->EnginePower; ?></span></p>
-                                <p class="yacht-accordion-display-item">Type: <span class="yacht-accordion-display-value"><?php echo empty($vessel->Engines[2]->Type) ? "N/A" : $vessel->Engines[2]->Type; ?></span></p>
-                                <p class="yacht-accordion-display-item">Engine Hours: <span class="yacht-accordion-display-value"><?php echo empty($vessel->Engines[2]->Hours) ? "N/A" : $vessel->Engines[2]->Hours; ?></span></p>
-                            </div>
                         <?php } ?>
+                       
                     </div>
                 </div>
             </div>
@@ -511,7 +496,7 @@ get_header();
                             <div>
                                 <p class="form-disclaimer">Your privacy is important to us; to learn about how we protect it, read our <a href="#">privacy policy.</a></p>
                             </div>
-                            <input class="yacht-form-submit" type="submit" value="Send" />
+                            <input class="yacht-form-submit" type="submit" value="Send Message" />
                         </form>
                         <div class="success-message" style="display: none; background-color: #4CAF50; color: #fff; padding: 10px; text-align: center;">
                         <p class="success-messages">Thank you for getting in touch. We will be in touch shortly.</p>

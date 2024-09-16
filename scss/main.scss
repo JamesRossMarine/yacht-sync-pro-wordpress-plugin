@@ -72,14 +72,27 @@
 }
 
 .ysp-general-button {
+    display: inline-block;
+
     background-color: $button-bg-color !important;
     color: $button-text-color !important;
-    width: 100%;
     padding: 8px 12px !important;
     border: none !important;
+
+    width: 100%;
 
     &:hover{
         background-color: $button-bg-color !important;
         color: $button-text-color !important;
+    }
+
+    a{
+        background-color: $button-bg-color !important;
+        color: $button-text-color !important;
+
+        &:hover{
+            background-color: $button-bg-color !important;
+            color: $button-text-color !important;
+        }
     }
 }

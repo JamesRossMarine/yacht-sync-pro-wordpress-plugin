@@ -83,12 +83,12 @@ function ysp_makeCompareLinkout() {
     if (YSP_VesselCompareList.length >= 2) {
         if (document.getElementById('ysp_compare_linkout')) {
             document.getElementById('ysp_compare_linkout').href=ysp_yacht_sync.wp_rest_url+"ysp/compare/?postID="+YSP_VesselCompareList.join(',');
-    	    document.getElementById('ysp_compare_linkout').innerHTML=`<button type="button">Compare ( ${YSP_VesselCompareList.length} )</button>`;
+    	    document.getElementById('ysp_compare_linkout').innerHTML=`<button type="button" class="ysp-general-button">Compare ( ${YSP_VesselCompareList.length} )</button>`;
         }
 
         if (document.getElementById('ysp_compare_linkout_mobile')) {
             document.getElementById('ysp_compare_linkout_mobile').href=ysp_yacht_sync.wp_rest_url+"ysp/compare/?postID="+YSP_VesselCompareList.join(',');
-    	    document.getElementById('ysp_compare_linkout_mobile').innerHTML=`<button type="button">Compare ( ${YSP_VesselCompareList.length} )</button>`;
+    	    document.getElementById('ysp_compare_linkout_mobile').innerHTML=`<button type="button" class="ysp-general-button">Compare ( ${YSP_VesselCompareList.length} )</button>`;
         }
         
         let params = {
