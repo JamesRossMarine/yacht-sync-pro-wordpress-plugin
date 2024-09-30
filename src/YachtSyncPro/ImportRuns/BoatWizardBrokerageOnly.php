@@ -268,7 +268,9 @@
                     }
 
 					if (isset($boat['NominalLength'])) {
-						$boatC->YSP_Length = floatval(str_replace(array(' ft'), '', $boat['NominalLength']));
+						$boatC->YSP_Length = floatval(str_replace(' ft', '', $boat['NominalLength']));
+						$boatC->YSP_Length_Feet_Measurement = intval($boatC->YSP_Length);
+						$boatC->YSP_Length_Inch_Measurement = round(($boatC->YSP_Length - $boatC->YSP_Length_Feet_Measurement) * 12);
 
 						$boatC->YSP_LOAFeet = $boatC->YSP_Length;
 						$boatC->YSP_LOAMeter = round(($boatC->YSP_Length * 0.3048), 2);
@@ -276,7 +278,16 @@
 
 					if (isset($boat['BeamMeasure'])) {
 						$boatC->YSP_BeamFeet = floatval(str_replace(array(' ft'), '', $boat['BeamMeasure']));
+						$boatC->YSP_Beam_Feet_Measurement = intval($boatC->YSP_BeamFeet);
+						$boatC->YSP_Beam_Inch_Measurement = round(($boatC->YSP_BeamFeet - $boatC->YSP_Beam_Feet_Measurement) * 12);
+
 						$boatC->YSP_BeamMeter = round(($boatC->YSP_BeamFeet * 0.3048), 2);
+					}
+
+					if (isset($boat['MaxDraft'])) {
+						$boatC->YSP_Max_Draft = floatval(str_replace(array(' ft'), '', $boat['MaxDraft']));
+						$boatC->YSP_Max_Draft_Feet_Measurement = intval($boatC->YSP_Max_Draft);
+						$boatC->YSP_Max_Draft_Inch_Measurement = round(($boatC->YSP_Max_Draft - $boatC->YSP_Max_Draft_Feet_Measurement) * 12);
 					}
 
 		            if (isset($boat['BoatLocation'])) {

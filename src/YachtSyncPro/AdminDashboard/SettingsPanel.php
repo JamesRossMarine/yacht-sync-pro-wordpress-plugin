@@ -28,6 +28,7 @@
 			register_setting( self::SLUG, self::SLUG . '_yacht_broker_org_api_token');
 			
 			register_setting( self::SLUG, self::SLUG . '_yacht_broker_org_id');
+			register_setting( self::SLUG, self::SLUG . '_yacht_broker_org_limit');
 
 			register_setting( self::SLUG, self::SLUG . '_yatco_api_token');
 

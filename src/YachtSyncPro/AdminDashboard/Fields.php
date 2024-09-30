@@ -98,6 +98,15 @@
 						self::SLUG . '_admin_fields',
 						array( )
 					);
+
+					add_settings_field(
+						self::SLUG . '_yacht_broker_org_limit',
+						"YachtBroker.org Limit",
+						array( $this, 'yacht_broker_org_limit_field' ),
+						self::SLUG,
+						self::SLUG . '_admin_fields',
+						array( )
+					);
 					
 					add_settings_field(
 						self::SLUG . '_yatco_api_token',
@@ -463,6 +472,16 @@
 
 		public function yacht_broker_org_id_field() {
 			$nameOfField=self::SLUG.'_yacht_broker_org_id';
+			$valOfField=get_option($nameOfField);
+
+			?>
+
+			<input type="text" name="<?= $nameOfField ?>" value="<?= $valOfField ?>" autocomplete="off"><?php 
+
+		}
+
+		public function yacht_broker_org_limit_field() {
+			$nameOfField=self::SLUG.'_yacht_broker_org_limit';
 			$valOfField=get_option($nameOfField);
 
 			?>
