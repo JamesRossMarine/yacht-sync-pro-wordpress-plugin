@@ -18,6 +18,8 @@ define( 'YSP_TEMPLATES_DIR', dirname(__FILE__).'/partials' );
 
 define( 'YSP_ASSETS', plugin_dir_url(__FILE__) . '');
 
+define( 'YSP_VERSION', '2.5.1');
+
 // class auto loader
 
 spl_autoload_register( 'YachtSyncPro_autoloader' );
